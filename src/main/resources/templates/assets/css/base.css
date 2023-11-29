@@ -19,6 +19,59 @@
     --yellow-color: #ffc107;
 }
 
+/* Slick Slider */
+.slick-dots{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    color: var(--white-color);
+}
+
+.slick-dots li button {
+    color: var(--white-color);
+    background-color: var(--btn-color);
+    padding: 4px 10px;
+    border: none;
+    margin-top:2rem;
+    margin-right: 0.5rem;
+
+}
+
+.slick-dots li.slick-active button {
+    opacity: 0.8;
+}
+
+.slick-prev {
+    margin-left: 10rem;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.slick-next{
+    margin-left: 10rem;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+/* Animation */
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+.form-control{
+    border: 1px solid var(--black-color)!important;
+}
+
+.form-control {
+    border: 1px solid var(--black-color) !important;
+}
+
 /* Modal */
 .modal_{
     position: fixed;
@@ -27,6 +80,7 @@
     left: 0;
     bottom: 0;
     display: flex;
+    animation: fadeIn ease-in-out 0.2s;
 }
 
 .modal__overlay {
@@ -38,6 +92,7 @@
 
 .modal__body {
     background-color: var(--white-color);
+    position: relative;
     margin: 1rem auto 1rem;
 }
 
@@ -75,7 +130,6 @@
 
 .member-evaluate:hover{
     cursor: pointer !important;
-    opacity: 0.9!important;
 }
 
 .btn-evaluate:hover{
@@ -187,7 +241,7 @@
 }
 
 .form-evaluate{
-    z-index: 1;
+    z-index: 1 !important;
 }
 
 .white-light-color{
@@ -303,6 +357,10 @@
     width: 60%!important;
 }
 
+.w-70 {
+    width: 70% !important;
+}
+
 .w-30{
     width: 30% !important;
 }
@@ -324,6 +382,10 @@
     border-bottom: 2rem!important;
 }
 
+.my-6 {
+    margin-top: 4rem !important;
+    margin-bottom: 4rem !important;
+}
 .ml--3{
     margin-left: -3rem !important;
 }
@@ -340,8 +402,16 @@
     margin-left: 0.1rem;
 }
 
+.ml--0_2{
+    margin-left: -0.2rem;
+}
+
 .ml-3{
     margin-left: 3rem;
+}
+
+.ml-4 {
+    margin-left: 0rem;
 }
 
 .px-4_5{
@@ -375,6 +445,10 @@
     flex:5;
 }
 
+.flex-6{
+    flex: 6;
+}
+
 .flex-16 {
     flex: 16;
 }
@@ -404,12 +478,17 @@
 .mx--2{
     margin-left: -0.5rem !important;
 }
-.ml-1{
-    margin-left:0.5rem !important;
-}
 
 .ml-3 {
     margin-left: 3rem!important;
+}
+
+.ml-0_9 {
+    margin-left: 0.9rem !important;
+}
+
+.ml-1_4 {
+    margin-left: 1.4rem !important;
 }
 
 .ml-2_5{
@@ -420,12 +499,20 @@
     padding-left: 6rem !important;
 }
 
+.w-1_8 {
+    width: 1.8rem !important;
+}
+
+.mt-2_8 {
+    margin-top: 2.8rem !important;
+}
+
 .w-2_5{
     width: 2.5rem!important;
 }
 
-.w-3{
-    width: 3rem !important;
+.h-1_8{
+    height: 1.8rem !important;
 }
 
 .w-45{
@@ -447,9 +534,7 @@
 .w-15{
     width: 15% !important;
 }
-.w-19r{
-    width:18rem !important;
-}
+
 .h-1{
     height: 1rem !important;
 }

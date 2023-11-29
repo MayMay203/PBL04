@@ -46,39 +46,26 @@ for (var btn of btn_close) {
 //Evalutate members
 const member_evaluate = document.getElementsByClassName("member-evaluate")
 var btn_eva_exit = document.getElementsByClassName("btn-exit")
-
-// for (var member of member_evaluate) {
-//     member.addEventListener("click", function(e) {
-//         const target = e.target;
-//         const childForm = target.closest(".member-evaluate").querySelector(".form-evaluate");
-//         childForm.classList.add("display-block");
-//     });
 for (var member of member_evaluate) {
     member.addEventListener("click", function(e) {
         const target = e.target;
         const container = target.closest(".member-evaluate");
-
-        // Lặp qua tất cả các .form-evaluate và xóa class "display-block"
         var allForms = document.querySelectorAll(".form-evaluate");
         for (var form of allForms) {
             form.classList.remove("display-block");
         }
-
-        // Thêm class "display-block" cho .form-evaluate của thành viên được nhấn
         const childForm = container.querySelector(".form-evaluate");
         childForm.classList.add("display-block");
     });
 }
-//}
 
-var btn_eva_exit = document.getElementsByClassName("btn-exit");
-for (var btn of btn_eva_exit) {
+//Chưa được
+var btn_exit = document.getElementsByClassName("button-exit");
+for (var btn of btn_exit) {
     btn.addEventListener("click", function (e) {
-        const target = e.target;
-        const parent = target.closest(".form-evaluate");
-
-        if (parent) {
-            parent.classList.remove("display-block");
+        var allForms = document.querySelectorAll(".form-evaluate");
+        for (var form of allForms) {
+            form.classList.remove("display-block");
         }
     })
 }
@@ -90,11 +77,11 @@ for (var btn of btn_eva_exit) {
 const btn_view_evaluation = document.querySelector(".btn-view-evaluation");
 const btn_evaluate_mb = document.querySelector(".btn-evaluate-member");
 btn_view_evaluation.addEventListener("click", function (e) {
-     btn_view_evaluation.classList.add("green")
-      btn_evaluate_mb.classList.remove("green")
+    btn_view_evaluation.classList.add("green")
+    btn_evaluate_mb.classList.remove("green")
     evaluation.classList.add("no-display")
     view_comment.classList.remove('no-display')
-})  
+})
 btn_evaluate_mb.addEventListener("click", function (e) {
     btn_view_evaluation.classList.remove("green")
     btn_evaluate_mb.classList.add("green")
