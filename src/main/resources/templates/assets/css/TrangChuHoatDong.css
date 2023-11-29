@@ -1,0 +1,148 @@
+:root{
+    --dire: #EB5858;
+    --sliderback: #0e5416;
+    --slider-img: rgba(14, 84, 22, 0.50);
+    --sear: #174407;
+    --colorse:rgba(166, 246, 175, 0.50);
+    --green-light:rgba(166, 246, 175, 0.30);
+    --maincolor:rgba(14, 84, 22, 0.80);
+    --grey-light: rgba(0, 0, 0, 0.50);
+    --btn:#4CAF4F;
+    --border:rgba(222, 213, 213, 0.50);
+    --back: rgba(219,250,220,0.7);
+    --grey-back: #F5F7FA;
+    --grey-phase:#90A4AE;
+    --colorback:rgba(255, 251, 251, 0.5);
+    --white:white;
+    --backgr: rgba(219,250,220,1);
+    --activity:#449A4E;
+    --size1:1.2rem;
+    --size2:0.9rem;
+    --backright:rgba(14, 84, 22, 0.50);
+    --green-back: rgba(219,250,220,0.5);
+    --green-phase: rgba(166,246,175,0.3);
+    --rectangle: rgba(14, 84, 22, 0.20);
+    --phase-1: #019255;
+    --phase-2:#325B34;
+    --phase-3:#8BFF44;
+    --red:#CC0000;
+    --yellow-start:#FFC700;
+}
+.slick-dots{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    color:white;
+
+}
+.slick-dots li button{
+    color:white;
+    background-color:var(--btn) ;
+    padding: 4px 10px;
+    border: none;
+    margin-top: 2rem;
+    margin-right: 0.5rem;
+}
+.slick-dots li.slick-active button{
+    opacity: 0.8;
+}
+.act-slider{
+    max-height: 50rem;
+}
+.slick-prev{
+    margin-left: 0rem;
+    font-size: 2rem;
+    cursor: pointer;
+}
+.slick-next{
+    margin-left: 0rem;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.position-abs{
+    position: absolute !important;
+    top: calc(100% + 0.31rem)!important;
+    left: 0 !important;
+    right: 0 !important;
+}
+.box-shadow{
+    box-shadow: 0rem 0rem 0.5rem var(--dark-grey) !important;
+}
+
+.z-index-1{
+    z-index: 1!important;
+}
+
+.bg-white{
+    background-color: var(--white);
+}
+
+.radius-1{
+    border-radius: 1rem !important;
+}
+.no-display{
+    display: none;
+}
+.overflow-auto{
+    overflow: auto !important;
+}
+.max_height-20rem {
+    max-height: 20rem !important;
+}
+.mb--1 {
+    margin-bottom: 0.8rem !important;
+}
+.search-info-item:hover{
+    background-color: var(--light-color);
+}
+.w-3{
+    width: 3rem !important;
+}
+.h-2_5{
+    height: 2.5rem !important;
+}
+.flex-1{
+    flex: 1.5;
+}
+.fs-7{
+    font-size: 0.7rem!important;
+}
+
+.flex-16 {
+    flex: 16;
+}
+
+.border-search{
+    border: 0.2rem solid var(--btn) !important;
+    border-radius:20px !important;
+}
+.width-25rem{
+    width: 18rem !important;
+}
+.grey-color{
+    color: var(--grey-color) !important;
+}
+.green-color{
+    color:var(--sear) !important;
+}
+.no-outline{
+    outline: none !important;
+}
+.w-85{
+    width: 85%!important;
+}
+.mr-5{
+    margin-right: 5rem;
+    margin-top:2rem;
+    margin-bottom: 3rem;
+
+}
+
+.display-block{
+    display: block!important;
+}
+.black-color{
+    color:black !important;
+}
