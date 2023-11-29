@@ -70,7 +70,7 @@
 }
 
 .search-info-item:hover{
- background-color: var(--light-color);
+    background-color: var(--light-color);
 }
 
 .member-evaluate:hover{
@@ -147,11 +147,11 @@
 }
 
 .radius-0{
-border-radius: 0rem !important;
+    border-radius: 0rem !important;
 }
 
 .radius-lghalf{
-border-radius: 0.4rem !important;
+    border-radius: 0.4rem !important;
 }
 
 .radius-half {
@@ -187,7 +187,7 @@ border-radius: 0.4rem !important;
 }
 
 .form-evaluate{
-  z-index: 1;
+    z-index: 1;
 }
 
 .white-light-color{
@@ -304,7 +304,7 @@ border-radius: 0.4rem !important;
 }
 
 .w-30{
-    width: 30% !important;    
+    width: 30% !important;
 }
 
 .w-2{
@@ -506,7 +506,7 @@ border-radius: 0.4rem !important;
         margin-top: 0rem !important;
         text-align: center !important;
     }
-     
+
     .mt-9{
         margin-top: 2rem!important;
     }
@@ -514,13 +514,13 @@ border-radius: 0.4rem !important;
 
 @media(min-width: 1075px){
     .max-line-2{
-            max-height: 40px;
-            overflow: hidden;
+        max-height: 40px;
+        overflow: hidden;
     }
 
     .max-line-1{
-            max-height: 17.5px;
-            overflow: hidden;
+        max-height: 17.5px;
+        overflow: hidden;
     }
 
     .max-line-3{
