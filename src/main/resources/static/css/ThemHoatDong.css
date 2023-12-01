@@ -130,3 +130,109 @@ ul li, ol li{
 ul.tongket_attach_view li input{
     display: none;
 }
+/* --------------Thêm hoạt động---------- */
+
+.modal-header-themhd{
+    /* background-color: var(--activity) !important; */
+    /* color:var(--white) !important; */
+    background-color: white;
+    color:var(--sear);
+    text-align: center;
+
+}
+.btnClose{
+    color:white !important;
+}
+/* #defaultImage{
+    display: block;
+    width: 33rem;
+    height: 20rem;
+} */
+#userImage{
+    display: block;
+    width: 33rem;
+    height: 20rem;
+}
+.lbHD{
+    color:var(--sear) !important;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+.textfieldHD{
+    width: 33rem ;
+    height: 2.2rem ;
+    outline:none;
+}
+.modal-body-detail{
+    padding:0.5rem;
+}
+.modal-title-themhd{
+    /* margin-left: 20rem !important; */
+    font-weight: bold;
+}
+.modal-body-detail input{
+    background-color: white;
+    border: 1px solid var(--sear);
+    border-radius: 20px;
+}
+.modal-body-detail i{
+    margin-right: 0.2rem;
+    color:var(--sear);
+}
+.txt-tnv{
+    width: 9.5rem;
+    height: 2rem;
+    outline: none;
+}
+#txt_mota{
+    background-color: white;
+    border: 1px solid var(--sear);
+    border-radius: 20px;
+    outline: none;
+}
+.txt_dateBD .txt_dateKT{
+    outline:none;
+}
+.modal-footer-themhd{
+    margin-right: 10rem;
+}
+.btnSave{
+    background-color: var(--btn);
+    color:white;
+    border: none;
+    padding:0.5rem;
+    margin-right: 1rem !important;
+}
+.btnCancel{
+    background-color: var(--btn);
+    color:white;
+    border: none;
+    padding:0.5rem;
+}
+/* Thêm một tổng kết hoạt động */
+#txt_tongket{
+    background-color: white;
+    border: 1px solid var(--sear);
+    border-radius: 20px;
+    outline: none;
+}
+
+
+#defaultImageTK{
+    display: block;
+    width: 15rem;
+    height: 8rem;
+}
+#userImageTK{
+    display: none;
+    width: 33rem;
+    height: 20rem;
+}
+.modal-header-tongket{
+    background-color:white;
+    color:var(--sear) !important;
+}
+.modal-title-tongket{
+    font-weight: bold;
+    /* margin-left: 17rem; */
+}
