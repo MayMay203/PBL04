@@ -1,3 +1,9 @@
+$(document).ready(function() {
+  $('#btnDangNhap').on('click', function() {
+    $('#DangNhapModal').modal('show');
+  });
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("imageInput").addEventListener("change", function (event) {
     previewImage(event);
@@ -44,3 +50,4 @@ document.addEventListener("DOMContentLoaded", function () {
       // }
       document.getElementById("userImage").src = "../assets/images/default.webp";
     }
+

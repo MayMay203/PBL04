@@ -1,31 +1,7 @@
-.header__navlogo{
-    height: 86px;
+#iframe-container{
+    /*height: 138px;*/
+    top: -87px;
 }
-.header__navbar {
-    background-color: var(--main-color);
-    text-transform: uppercase;
-    padding-left: 128px !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-}
-.navbar-expand-sm .navbar-nav .nav-link {
-    padding-right: 1.25rem !important;
-    padding-left: 1.25rem !important;
-}
-.header__navbar a{
-    color: var(--white-color);
-    text-decoration: none;
-    font-size: 1rem;
-    line-height: 3.25rem;
-    display: inline-block;
-    padding: 0;
-}
-.header__navbar a:hover{
-    background-color: #fff;
-    color: var(--main-color);
-    border-radius: 3px;
-}
-
 .container-fluid{
     padding: 0 !important;
 }

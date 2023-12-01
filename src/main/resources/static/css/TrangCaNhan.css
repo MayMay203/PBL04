@@ -1,6 +1,10 @@
+
 .container-fluid {
     padding: 0 300px !important;
     margin: 0 !important;
+}
+#iframe-container .container-fluid {
+    padding: 0 !important;
 }
 .sectionAvatar{
     height: 460px;
@@ -152,7 +156,7 @@ img.dimmed{
     margin: 0.5rem 0;
     background-color: rgba(217, 249, 249, 0.6);
 }
-.container__section label{
+.container__section>label{
     color: var(--main-color);
     font-weight: 500;
     font-size: var(--heading-size);
