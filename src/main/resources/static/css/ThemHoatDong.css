@@ -33,7 +33,7 @@
 }
 .tongket-reviews .form_upload label span{
     display: inline-block;
-    background: url(templates/assets/images/av3.png) no-repeat;
+    /*background: url(../images/av3.png) no-repeat;*/
     background-size: 5rem 3rem;
     /* margin: 0.5rem 0 0 0.9rem; */
 }
