@@ -1,0 +1,119 @@
+/* -----------Đăng nhập--------------- */
+
+.modal-dialog-dangnhap{
+    max-width: 25rem !important;
+}
+.modal-content-dangnhap{
+    background-image: url("../images/login.png");
+    background-size: cover;
+    width:25rem;
+    height: 35rem;
+}
+.modal-body-dangnhap{
+    position: relative;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:25rem;
+    height: 35rem;
+}
+.header_login{
+    position: absolute;
+    top:2rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+#title-top{
+    color:var(--sear);
+    font-weight: bold;
+    font-size: 25px;
+}
+
+
+.body_login{
+    position: absolute;
+    top:7rem;
+    left: 0;
+    right: 0;
+    text-align: center;
+
+}
+.body_login-content{
+    margin-bottom: 1.8rem;
+}
+.body_login-content input {
+    width: 15rem;
+    height: 2.5rem;
+    border-radius: 20px;
+    background: none;
+    border: 0.5px solid var(--sear);
+    outline: none;
+}
+
+#btnLogin{
+    width: 15rem;
+    height: 2.5rem;
+    background: linear-gradient(91deg, #0E5416 8.46%, #48E56B 114.48%);
+    color: white;
+    border-radius: 20px;
+    margin-top:7px;
+    border: 0.5px solid var(--sear);
+
+}
+::placeholder{
+    color:var(--sear);
+    font-weight: 400;
+}
+.footer_login-status{
+    width: 15rem;
+    font-size: 0.6rem;
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    color:var(--sear);
+    font-weight:480;
+    margin-left: 5rem;
+}
+.login_or{
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    color:var(--sear);
+    font-weight: 480;
+}
+.login_another img{
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    margin-top: 0.7rem;
+}
+.footer_login-another {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login_another img {
+    margin-left: 0.35rem;
+    margin-bottom: 2rem; /* Add margin between the images */
+}
+.regis{
+    /* margin-top: 2rem; */
+    margin-left: 2rem;
+}
+.regis-not{
+    font-size: 0.8rem;
+    color:rgba(56, 142, 59, 0.60);
+    font-weight: 400;
+}
+.regis-done{
+    font-size: 0.9rem;
+    color:var(--sear);
+    font-weight: 400;
+}
+/* Theme Anhr */
+
+.form-control{
+    border: 1px solid black !important;
+}
