@@ -309,52 +309,51 @@
                             </div>
                         </div>
 
-                        <div class="list_card">
-                            <div class="card custom-margin" style="width: 13rem;">
+                        <div class="list_card" th:each="activity : ${actiList}">
+                            <div class="card custom-margin" style="width: 13rem;" >
                                 <img class="card-img-top" src="../static/images/a5.jpg" alt="Card image cap">
                                 <div class="card-img-overlay">
-                                    <h5 class="card-title truncate-text"><a href="">Mang con chữ đến với trẻ vùng cao</a></h5>
-                                    <p class="card-text">Dù ở những điểm trường cách xa trung tâm xã, đường sá đi lại khó
-                                        khăn, nhưng với lòng yêu nghề,...</p>
+                                    <h5 class="card-title truncate-text"><a href="" th:text="${activity.getTenHD()}"></a></h5>
+                                    <p class="card-text" th:text="${activity.getMoTa()}"></p>
                                     <h6 class="card-more_info"><a href="ChiTietHoatDong.html">Xem tiếp</a></h6>
                                 </div>
                             </div>
-                            <div class="card custom-margin " style="width: 13rem;">
-                                <img class="card-img-top" src="../static/images/a7.png" alt="Card image cap">
-                                <div class="card-img-overlay">
-                                    <h5 class="card-title truncate-text"><a href="">Xuân tình nguyện 2022</a></h5>
-                                    <p class="card-text">Dù ở những điểm trường cách xa trung tâm xã, đường sá đi lại khó
-                                        khăn, nhưng với lòng yêu nghề,...</p>
-                                    <h6 class="card-more_info"><a href="">Xem tiếp</a></h6>
-                                </div>
-                            </div>
-                            <div class="card custom-margin " style="width: 13rem;">
-                                <img class="card-img-top" src="../static/images/a7.png" alt="Card image cap">
-                                <div class="card-img-overlay">
-                                    <h5 class="card-title truncate-text"><a href="">Xuân tình nguyện 2022</a></h5>
-                                    <p class="card-text">Dù ở những điểm trường cách xa trung tâm xã, đường sá đi lại khó
-                                        khăn, nhưng với lòng yêu nghề,...</p>
-                                    <h6 class="card-more_info"><a href="">Xem tiếp</a></h6>
-                                </div>
-                            </div>
-                            <div class="card custom-margin " style="width: 13rem;">
-                                <img class="card-img-top" src="../static/images/a7.png" alt="Card image cap">
-                                <div class="card-img-overlay">
-                                    <h5 class="card-title truncate-text"><a href="">Xuân tình nguyện 2022</a></h5>
-                                    <p class="card-text">Dù ở những điểm trường cách xa trung tâm xã, đường sá đi lại khó
-                                        khăn, nhưng với lòng yêu nghề,...</p>
-                                    <h6 class="card-more_info"><a href="">Xem tiếp</a></h6>
-                                </div>
-                            </div>
-                            <div class="card custom-margin " style="width: 13rem;">
-                                <img class="card-img-top" src="../static/images/a7.png" alt="Card image cap">
-                                <div class="card-img-overlay">
-                                    <h5 class="card-title truncate-text"><a href="">Xuân tình nguyện 2022</a></h5>
-                                    <p class="card-text">Dù ở những điểm trường cách xa trung tâm xã, đường sá đi lại khó
-                                        khăn, nhưng với lòng yêu nghề,...</p>
-                                    <h6 class="card-more_info"><a href="">Xem tiếp</a></h6>
-                                </div>
-                            </div>
+<!--                            <div class="card custom-margin " style="width: 13rem;">-->
+<!--                                <img class="card-img-top" src="../static/images/a7.png" alt="Card image cap">-->
+<!--                                <div class="card-img-overlay">-->
+<!--                                    <h5 class="card-title truncate-text"><a href="">Xuân tình nguyện 2022</a></h5>-->
+<!--                                    <p class="card-text">Dù ở những điểm trường cách xa trung tâm xã, đường sá đi lại khó-->
+<!--                                        khăn, nhưng với lòng yêu nghề,...</p>-->
+<!--                                    <h6 class="card-more_info"><a href="">Xem tiếp</a></h6>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="card custom-margin " style="width: 13rem;">-->
+<!--                                <img class="card-img-top" src="../static/images/a7.png" alt="Card image cap">-->
+<!--                                <div class="card-img-overlay">-->
+<!--                                    <h5 class="card-title truncate-text"><a href="">Xuân tình nguyện 2022</a></h5>-->
+<!--                                    <p class="card-text">Dù ở những điểm trường cách xa trung tâm xã, đường sá đi lại khó-->
+<!--                                        khăn, nhưng với lòng yêu nghề,...</p>-->
+<!--                                    <h6 class="card-more_info"><a href="">Xem tiếp</a></h6>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="card custom-margin " style="width: 13rem;">-->
+<!--                                <img class="card-img-top" src="../static/images/a7.png" alt="Card image cap">-->
+<!--                                <div class="card-img-overlay">-->
+<!--                                    <h5 class="card-title truncate-text"><a href="">Xuân tình nguyện 2022</a></h5>-->
+<!--                                    <p class="card-text">Dù ở những điểm trường cách xa trung tâm xã, đường sá đi lại khó-->
+<!--                                        khăn, nhưng với lòng yêu nghề,...</p>-->
+<!--                                    <h6 class="card-more_info"><a href="">Xem tiếp</a></h6>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="card custom-margin " style="width: 13rem;">-->
+<!--                                <img class="card-img-top" src="../static/images/a7.png" alt="Card image cap">-->
+<!--                                <div class="card-img-overlay">-->
+<!--                                    <h5 class="card-title truncate-text"><a href="">Xuân tình nguyện 2022</a></h5>-->
+<!--                                    <p class="card-text">Dù ở những điểm trường cách xa trung tâm xã, đường sá đi lại khó-->
+<!--                                        khăn, nhưng với lòng yêu nghề,...</p>-->
+<!--                                    <h6 class="card-more_info"><a href="">Xem tiếp</a></h6>-->
+<!--                                </div>-->
+<!--                            </div>-->
                         </div>
                     </div>
                 </div>
