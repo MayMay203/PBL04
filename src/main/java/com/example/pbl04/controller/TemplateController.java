@@ -11,4 +11,27 @@ public class TemplateController {
         return "Header";
     }
 
+    @GetMapping("/trang-chu")
+    public String getHome()
+    {
+        return "TrangChu";
+    }
+
+    @GetMapping("/trang-chu-hoat-dong")
+    public String getActivityHome()
+    {
+        return "TrangChuHoatDong";
+    }
+
+    @GetMapping("/trang-chu-danh-gia")
+    public String getEvaluationHome()
+    {
+        return "TrangChuDanhGia";
+    }
+
+    @GetMapping("/trang-chu-tong-ket")
+    public String getSummaryHome()
+    {
+        return "TrangChuTongKet";
+    }
 }
