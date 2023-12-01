@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -7,8 +7,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css "/>
-    <link rel="stylesheet" href="../static/css/base.css" />
-    <script src="../static/js/Header.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}">
+    <script defer th:src="@{/js/header.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer th:src="@{/js/base.js}"></script>
+    <script defer th:src="@{/js/DeXuat.js}"></script>
 </head>
 
 <body>
@@ -25,19 +28,19 @@
             <h2 class="fs-6 pb-1 p-1">Tìm kiếm gần đây</h2>
             <div class="container overflow-auto max_height-20rem">
                 <div class="container d-flex align-items-center mb--1 p-0 btn btn-group search-info-item">
-                    <img class="w-3 h-2_5 flex-1" src="../static/images/anh2.jpg" alt="" />
+                    <img class="w-3 h-2_5 flex-1" th:src="@{/images/anh2.jpg}" alt="" />
                     <p class="m-1 fs-7 ml--3 flex-16">Mang con chữ đến trẻ vùng cao</p>
                     <i class="flex-1 btn btn-close p-0 fs-7"></i>
                 </div>
 
                 <div class="container d-flex align-items-center mb--1 p-0 btn btn-group search-info-item">
-                    <img class="w-3 h-2_5 flex-1" src="../static/images/anh2.jpg" alt="" />
+                    <img class="w-3 h-2_5 flex-1" th:src="@{/images/anh2.jpg}" alt="" />
                     <p class="m-1 fs-7 ml--3 flex-16">Mang con chữ đến trẻ vùng cao</p>
                     <i class="flex-1 btn btn-close p-0 fs-7"></i>
                 </div>
 
                 <div class="container d-flex align-items-center mb--1 p-0 btn btn-group search-info-item">
-                    <img class="w-3 h-2_5 flex-1" src="../static/images/anh1.jpg" alt="" />
+                    <img class="w-3 h-2_5 flex-1" th:src="@{/images/anh1.jpg}" alt="" />
                     <p class="m-1 fs-7 ml--3 flex-16">Mang con chữ đến trẻ vùng cao</p>
                     <i class="flex-1 btn btn-close p-0 fs-7"></i>
                 </div>
@@ -45,14 +48,16 @@
         </div>
     </div>
     <!-- Content -->
-    <div class="container px-5">
-        <div class="container d-flex align-items-center p-3 border_bottom-solid">
-            <div class="container flex-5">
-                <h3 class="green-color fs-4">Xuân Tình Nguyện</h3>
-                <p class="mb-0 fs-6">Xây đựng đường xá, trồng cây, xây nhà tình thương</p>
-                <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green px-1"></i>Nóc Tu Gia, xã Trà Tập,
-                    huyện Nam Trà My, tỉnh Quảng Nam</p>
+    <div class="container px-5" th:each="suggest:${suggestList}">
+        <div class="container px-5">
+            <div class="container d-flex align-items-center p-3 border_bottom-solid">
+                <div class="container flex-5">
+                    <h3 class="green-color fs-4" th:text="${suggest.getChuDe()}"></h3>
+                    <p class="mb-0 fs-6" th:text="${suggest.getMoTa()}"></p>
+                    <p class="fs-7 fst-italic my-1" th:text="${suggest.getViTri()}"><i class="bi bi-geo-alt-fill green px-1"></i></p>
+                </div>
             </div>
+        </div>
             <!-- icon -->
             <div class="container d-flex flex-1 justify-content-end align-items-center">
                 <p class="pt-1_2 px-1 fw-bold green-color">5</p>
@@ -76,97 +81,95 @@
             </div>
         </div>
 
-        <div class="container d-flex align-items-center p-3 border_bottom-solid">
-            <div class="container flex-5">
-                <h3 class="green-color fs-4">Hiến Máu Nhân Đạo</h3>
-                <p class="mb-0 fs-6">Tình nguyện viên hỗ trợ quá trình hiến máu và có thể hiến trực tiếp</p>
-                <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green px-1"></i>Bệnh viên Ung Bướu Đà
-                    Nẵng</p>
-            </div>
-            <div class="container d-flex flex-1 justify-content-end align-items-center">
-                <p class="pt-1_2 px-1 fw-bold green-color">5</p>
-                <i class="bi bi-calendar4-week position-relative mb-1 h-1 green-color calendar cursor-pointer me-4">
-                    <p
-                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display">
-                        Lượt đề xuất</p>
-                </i>
-                <p class="pt-1_2 px-1 fw-bold green-color">2</p>
-                <i class="bi bi-check-circle position-relative mb-1 h-1 green-color me-4 cursor-pointer check">
-                    <p
-                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-check no-display">
-                        Lượt tổ chức</p>
-                </i>
-                <p class="pt-1_2 px-1 fw-bold green-color">2</p>
-                <i class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast me-4 cursor-pointer">
-                    <p
-                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">
-                        Tổ chức tại đây</p>
-                </i>
-            </div>
-        </div>
+<!--        <div class="container d-flex align-items-center p-3 border_bottom-solid">-->
+<!--            <div class="container flex-5">-->
+<!--                <h3 class="green-color fs-4">Hiến Máu Nhân Đạo</h3>-->
+<!--                <p class="mb-0 fs-6">Tình nguyện viên hỗ trợ quá trình hiến máu và có thể hiến trực tiếp</p>-->
+<!--                <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green px-1"></i>Bệnh viên Ung Bướu Đà-->
+<!--                    Nẵng</p>-->
+<!--            </div>-->
+<!--            <div class="container d-flex flex-1 justify-content-end align-items-center">-->
+<!--                <p class="pt-1_2 px-1 fw-bold green-color">5</p>-->
+<!--                <i class="bi bi-calendar4-week position-relative mb-1 h-1 green-color calendar cursor-pointer me-4">-->
+<!--                    <p-->
+<!--                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display">-->
+<!--                        Lượt đề xuất</p>-->
+<!--                </i>-->
+<!--                <p class="pt-1_2 px-1 fw-bold green-color">2</p>-->
+<!--                <i class="bi bi-check-circle position-relative mb-1 h-1 green-color me-4 cursor-pointer check">-->
+<!--                    <p-->
+<!--                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-check no-display">-->
+<!--                        Lượt tổ chức</p>-->
+<!--                </i>-->
+<!--                <p class="pt-1_2 px-1 fw-bold green-color">2</p>-->
+<!--                <i class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast me-4 cursor-pointer">-->
+<!--                    <p-->
+<!--                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">-->
+<!--                        Tổ chức tại đây</p>-->
+<!--                </i>-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <div class="container d-flex align-items-center p-3 border_bottom-solid">
-            <div class="container flex-5">
-                <h3 class="green-color fs-4">Hè Yêu Thương</h3>
-                <p class="mb-0 fs-6">Xây nhà tình thương, hỗ trợ dọn dẹp vệ sinh đường xá, đổ bê tông xây đường,
-                    hàng rào, sân trường...</p>
-                <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green px-1"></i>Thôn 2, xã Trà Dơn,
-                    huyện Nam Trà My tỉnh Quảng Nam</p>
-            </div>
-            <div class="container d-flex flex-1 justify-content-end align-items-center">
-                <p class="pt-1_2 px-1 fw-bold green-color">5</p>
-                <i class="bi bi-calendar4-week position-relative mb-1 h-1 green-color calendar cursor-pointer me-4">
-                    <p
-                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display">
-                        Lượt đề xuất</p>
-                </i>
-                <p class="pt-1_2 px-1 fw-bold green-color">2</p>
-                <i class="bi bi-check-circle position-relative mb-1 h-1 green-color me-4 cursor-pointer check">
-                    <p
-                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-check no-display">
-                        Lượt tổ chức</p>
-                </i>
-                <p class="pt-1_2 px-1 fw-bold green-color">2</p>
-                <i class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast me-4 cursor-pointer">
-                    <p
-                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">
-                        Tổ chức tại đây</p>
-                </i>
-            </div>
-        </div>
+<!--        <div class="container d-flex align-items-center p-3 border_bottom-solid">-->
+<!--            <div class="container flex-5">-->
+<!--                <h3 class="green-color fs-4">Hè Yêu Thương</h3>-->
+<!--                <p class="mb-0 fs-6">Xây nhà tình thương, hỗ trợ dọn dẹp vệ sinh đường xá, đổ bê tông xây đường,-->
+<!--                    hàng rào, sân trường...</p>-->
+<!--                <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green px-1"></i>Thôn 2, xã Trà Dơn,-->
+<!--                    huyện Nam Trà My tỉnh Quảng Nam</p>-->
+<!--            </div>-->
+<!--            <div class="container d-flex flex-1 justify-content-end align-items-center">-->
+<!--                <p class="pt-1_2 px-1 fw-bold green-color">5</p>-->
+<!--                <i class="bi bi-calendar4-week position-relative mb-1 h-1 green-color calendar cursor-pointer me-4">-->
+<!--                    <p-->
+<!--                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display">-->
+<!--                        Lượt đề xuất</p>-->
+<!--                </i>-->
+<!--                <p class="pt-1_2 px-1 fw-bold green-color">2</p>-->
+<!--                <i class="bi bi-check-circle position-relative mb-1 h-1 green-color me-4 cursor-pointer check">-->
+<!--                    <p-->
+<!--                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-check no-display">-->
+<!--                        Lượt tổ chức</p>-->
+<!--                </i>-->
+<!--                <p class="pt-1_2 px-1 fw-bold green-color">2</p>-->
+<!--                <i class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast me-4 cursor-pointer">-->
+<!--                    <p-->
+<!--                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">-->
+<!--                        Tổ chức tại đây</p>-->
+<!--                </i>-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <div class="container d-flex align-items-center p-3 border_bottom-solid">
-            <div class="container flex-5">
-                <h3 class="green-color fs-4">Hiến Máu Nhân Đạo</h3>
-                <p class="mb-0 fs-6">Tình nguyện viên hỗ trợ quá trình hiến máu và có thể hiến trực tiếp</p>
-                <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green px-1"></i>Bệnh viên Ung Bướu Đà
-                    Nẵng</p>
-            </div>
-            <div class="container d-flex flex-1 justify-content-end align-items-center">
-                <p class="pt-1_2 px-1 fw-bold green-color">5</p>
-                <i class="bi bi-calendar4-week position-relative mb-1 h-1 green-color calendar cursor-pointer me-4">
-                    <p
-                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display">
-                        Lượt đề xuất</p>
-                </i>
-                <p class="pt-1_2 px-1 fw-bold green-color">2</p>
-                <i class="bi bi-check-circle position-relative mb-1 h-1 green-color me-4 cursor-pointer check">
-                    <p
-                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-check no-display">
-                        Lượt tổ chức</p>
-                </i>
-                <p class="pt-1_2 px-1 fw-bold green-color">2</p>
-                <i class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast me-4 cursor-pointer">
-                    <p
-                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">
-                        Tổ chức tại đây</p>
-                </i>
-            </div>
-        </div>
+<!--        <div class="container d-flex align-items-center p-3 border_bottom-solid">-->
+<!--            <div class="container flex-5">-->
+<!--                <h3 class="green-color fs-4">Hiến Máu Nhân Đạo</h3>-->
+<!--                <p class="mb-0 fs-6">Tình nguyện viên hỗ trợ quá trình hiến máu và có thể hiến trực tiếp</p>-->
+<!--                <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green px-1"></i>Bệnh viên Ung Bướu Đà-->
+<!--                    Nẵng</p>-->
+<!--            </div>-->
+<!--            <div class="container d-flex flex-1 justify-content-end align-items-center">-->
+<!--                <p class="pt-1_2 px-1 fw-bold green-color">5</p>-->
+<!--                <i class="bi bi-calendar4-week position-relative mb-1 h-1 green-color calendar cursor-pointer me-4">-->
+<!--                    <p-->
+<!--                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display">-->
+<!--                        Lượt đề xuất</p>-->
+<!--                </i>-->
+<!--                <p class="pt-1_2 px-1 fw-bold green-color">2</p>-->
+<!--                <i class="bi bi-check-circle position-relative mb-1 h-1 green-color me-4 cursor-pointer check">-->
+<!--                    <p-->
+<!--                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-check no-display">-->
+<!--                        Lượt tổ chức</p>-->
+<!--                </i>-->
+<!--                <p class="pt-1_2 px-1 fw-bold green-color">2</p>-->
+<!--                <i class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast me-4 cursor-pointer">-->
+<!--                    <p-->
+<!--                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">-->
+<!--                        Tổ chức tại đây</p>-->
+<!--                </i>-->
+<!--            </div>-->
+<!--        </div>-->
     </div>
     <button class="btn bg-btn white-color px-4 mt-5 float-end btn-add-suggest mb-5"><i class="bi bi-plus-square me-2"></i>Thêm đề xuất</button>
-</div>
-
 <!-- Modal -->
 <div class="modal_ box-shadow no-display">
     <div class="modal__overlay">
@@ -260,7 +263,4 @@
 </div>
     </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../static/js/base.js"></script>
-<script src="../static/js/DeXuat.js"></script>
 </html>
