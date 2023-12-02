@@ -17,18 +17,6 @@ public class TemplateController {
         return "TrangChu";
     }
 
-    @GetMapping("/trang-chu-hoat-dong")
-    public String getActivityHome()
-    {
-        return "TrangChuHoatDong";
-    }
-
-    @GetMapping("/trang-chu-danh-gia")
-    public String getEvaluationHome()
-    {
-        return "TrangChuDanhGia";
-    }
-
     @GetMapping("/trang-chu-tong-ket")
     public String getSummaryHome()
     {
@@ -39,5 +27,11 @@ public class TemplateController {
     public String getPersonality()
     {
         return "TrangCaNhan";
+    }
+
+    @GetMapping("/danh-gia")
+    public String getEvaluation()
+    {
+        return "DanhGia";
     }
 }

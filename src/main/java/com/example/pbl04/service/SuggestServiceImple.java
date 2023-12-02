@@ -8,14 +8,28 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SuggestServiceImple implements SuggestService{
+public class SuggestServiceImple implements SuggestService {
     public SuggestionRepository suggestionRepo;
+
     @Autowired
-    private SuggestServiceImple(SuggestionRepository suggestionRepo){
+    private SuggestServiceImple(SuggestionRepository suggestionRepo) {
         this.suggestionRepo = suggestionRepo;
     }
+
     @Override
     public List<Dexuat> getAllSuggest() {
         return suggestionRepo.findAll();
     }
+
+    @Override
+    public int CountSuggest(String position, String title) {
+        int count = 0;
+        List<Dexuat> sugesstionList = suggestionRepo.findAll();
+        for(Dexuat sug : sugesstionList){
+            if(sug.getViTri().equals(position) && sug.getChuDe().equals(title))
+                count++;
+        }
+        return count;
+    }
 }
+

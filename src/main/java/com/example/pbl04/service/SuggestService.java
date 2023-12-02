@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface SuggestService{
     List<Dexuat> getAllSuggest();
+    int CountSuggest(String position, String title);
 }

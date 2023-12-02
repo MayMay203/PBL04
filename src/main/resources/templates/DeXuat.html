@@ -59,22 +59,13 @@
         </div>
             <!-- icon -->
             <div class="container d-flex flex-1 justify-content-end align-items-center">
-                <p class="pt-1_2 px-1 fw-bold green-color">5</p>
+<!--                <p class="pt-1_2 px-1 fw-bold green-color">5</p>-->
                 <i class="bi bi-calendar4-week position-relative mb-1 h-1 green-color calendar cursor-pointer me-4">
-                    <p
-                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display">
-                        Lượt đề xuất</p>
+                    <p class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display" th:text="${count} + 'lượt đề xuất'">
+                    </p>
                 </i>
-                <p class="pt-1_2 px-1 fw-bold green-color">2</p>
-                <i class="bi bi-check-circle position-relative mb-1 h-1 green-color me-4 cursor-pointer check">
-                    <p
-                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-check no-display">
-                        Lượt tổ chức</p>
-                </i>
-                <p class="pt-1_2 px-1 fw-bold green-color">2</p>
                 <i class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast me-4 cursor-pointer">
-                    <p
-                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">
+                    <p class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">
                         Tổ chức tại đây</p>
                 </i>
             </div>
