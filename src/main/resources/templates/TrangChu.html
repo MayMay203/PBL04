@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang chủ</title>
 
-    <link rel="stylesheet" href="../static/css/base2.css">
-    <link rel="stylesheet" href="../static/css/TrangChu.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base2.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/TrangChu.css}">
 <!--    <link rel="stylesheet" href="assets/framework/bootstrap-5.3.2-dist/css/bootstrap.min.css">-->
 <!--    <script src="assets/framework/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js"></script>-->
 <!--    <link rel="stylesheet" href="assets/icons/bootstrap-icons-1.11.1/bootstrap-icons.css">-->
@@ -27,8 +27,8 @@
 
     <!-- javascript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../static/js/TrangChu.js"></script>
-    <script src="../static/js/Header.js"></script>
+    <script defer th:src="@{/js/TrangChu.js}"></script>
+    <script defer th:src="@{/js/Header.js}"></script>
     <!-- slide slider -->
     <link
         rel="stylesheet"

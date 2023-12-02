@@ -20,7 +20,6 @@ public class SuggestController {
     public String showSuggest(Model model){
         List<Dexuat> suggestList = suggestService.getAllSuggest();
         model.addAttribute("suggestList", suggestList);
-
         // In thông tin suggestList ra console
         return "DeXuat";
     }

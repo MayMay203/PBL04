@@ -48,13 +48,13 @@
         </div>
     </div>
     <!-- Content -->
-    <div class="container px-5" th:each="suggest:${suggestList}">
+    <div class="fs-9 display-flex" th:each="suggest:${suggestList}">
         <div class="container px-5">
             <div class="container d-flex align-items-center p-3 border_bottom-solid">
                 <div class="container flex-5">
                     <h3 class="green-color fs-4" th:text="${suggest.getChuDe()}"></h3>
                     <p class="mb-0 fs-6" th:text="${suggest.getMoTa()}"></p>
-                    <p class="fs-7 fst-italic my-1" th:text="${suggest.getViTri()}"><i class="bi bi-geo-alt-fill green px-1"></i></p>
+                    <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green px-1" th:text="${suggest.getViTri()}"></i></p>
                 </div>
             </div>
         </div>
