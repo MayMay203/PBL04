@@ -81,6 +81,7 @@
     bottom: 0;
     display: flex;
     animation: fadeIn ease-in-out 0.2s;
+    z-index: 1050;
 }
 
 .modal__overlay {
@@ -88,12 +89,14 @@
     background-color: rgba(0, 0, 0, 0.6);
     width: 100%;
     height: 100%;
+    /*z-index: 1000!important;*/
 }
 
 .modal__body {
     background-color: var(--white-color);
     position: relative;
     margin: 1rem auto 1rem;
+    /*z-index: 2000!important;*/
 }
 
 .no-border{

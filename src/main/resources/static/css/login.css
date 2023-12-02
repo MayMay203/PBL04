@@ -17,6 +17,7 @@
     align-items: center;
     width:25rem;
     height: 35rem;
+    z-index: 5000!important;
 }
 .header_login{
     position: absolute;
