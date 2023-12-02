@@ -16,6 +16,11 @@ public class TemplateController {
     {
         return "TrangChu";
     }
+    @GetMapping("/trang-ca-nhan")
+    public String getPersonality()
+    {
+        return "TrangCaNhan";
+    }
 
     @GetMapping("/trang-chu-hoat-dong")
     public String getActivityHome()
