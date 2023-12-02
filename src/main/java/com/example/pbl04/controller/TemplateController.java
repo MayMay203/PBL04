@@ -35,10 +35,12 @@ public class TemplateController {
         return "TrangChuTongKet";
     }
 
+
     @GetMapping("/trang-ca-nhan")
     public String getPersonality()
     {
         return "TrangCaNhan";
     }
+
 
 }
