@@ -9,4 +9,8 @@ public interface ActivityService {
     List<Hoatdong> getAllActivity();
     Hoatdong getActivityByID(Integer id);
     List<Hoatdong> getActivityOccured();
+    List<Hoatdong> getActivityUpcomming();
+
+    Integer getNumActivity();
+    Integer getParticipants();
 }

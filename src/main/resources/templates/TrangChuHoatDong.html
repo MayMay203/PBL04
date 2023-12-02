@@ -86,193 +86,32 @@
                     <div class="col-md-9 bg-var(--white) m-0" style="max-height: 90rem;">
                         <h3 class="Content_left-title my-5">HOẠT ĐỘNG</h3>
                         <div class="Content_left-item">
-                            <div class="act-slider">
+                            <div class="act-slider" th:each="activity : ${actiListUpcomming}">
                                 <div class="container-item">
                                     <div class="card mb-5">
                                         <div class="row g-0">
                                             <div class="col-md-3">
-                                                <img src="../static/images/anh1.jpg" class="img-fluid rounded-start" alt="...">
+                                                <img src="../static/images/anhchitiet.jpg"
+                                                     class="img-fluid rounded-start" alt="...">
                                             </div>
                                             <div class="col-md-9">
                                                 <div class="card-body">
-                                                    <h5 class="card-title"><a class="card-title-a" href="">Mang con chữ đến với trẻ vùng cao</a>
+                                                    <h5 class="card-title"><a class="card-title-a" href="" th:text="${activity.getTenHD()}"></a>
                                                     </h5>
-                                                    <p class="card-text"><a class="card-text-a" href="">Dù ở những điểm trường cách xa trung tâm
-                                                        xã,
-                                                        đường sá đi lại khó
-                                                        khăn, nhưng với lòng yêu nghề, các thầy cô giáo ở vùng cao vẫn kiên trì
-                                                        bám bản để mang kiến thức đến với học sinh vùng cao...</a></p>
+                                                    <p class="card-text"><a class="card-text-a" href="" th:text="${activity.getMoTa()}"></a></p>
                                                     <p class="card-text"><small class="text-body-secondary">
-                                                        <span class="bi bi-calendar-date"></span>5/11/2023
-                                                        <button type="button" class="btn btn-success btn-join-acti">Tham gia</button>
+                                                        <span class="bi bi-calendar-date"></span><span th:text="${activity.getThoiGianBD()}"></span>
+                                                        <button type="button" class="btn btn-success btn-join-acti">Tham
+                                                            gia
+                                                        </button>
                                                     </small></p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card mb-5">
-                                        <div class="row g-0">
-                                            <div class="col-md-3">
-                                                <img src="../static/images/anh2.jpg" class="img-fluid rounded-start" alt="...">
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div class="card-body">
-                                                    <h5 class="card-title"><a class="card-title-a href=">Cặp lồng yêu thương và những thiên thần
-                                                        nhí
-                                                        Việt Nam</a></h5>
-                                                    <p class="card-text"><a class="card-text-a" href="">Dù ở những điểm trường cách xa trung tâm
-                                                        xã,
-                                                        đường sá đi lại khó
-                                                        khăn, nhưng với lòng yêu nghề, các thầy cô giáo ở vùng cao vẫn kiên trì
-                                                        bám bản để mang kiến thức đến với học sinh vùng cao...</a></p>
-                                                    <p class="card-text"><small class="text-body-secondary">
-                                                        <span class="bi bi-calendar-date"></span>5/11/2023
-                                                        <button type="button" class="btn btn-success btn-join-acti">Tham gia</button>
-                                                    </small></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card mb-5">
-                                        <div class="row g-0">
-                                            <div class="col-md-3">
-                                                <img src="../static/images/anh3.jpg" class="img-fluid rounded-start" alt="...">
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div class="card-body">
-                                                    <h5 class="card-title"><a class="card-title-a" href="">Cặp lồng yêu thương và những thiên
-                                                        thần
-                                                        nhí Việt Nam</a></h5>
-                                                    <p class=" card-text"><a class="card-text-a" href="">Dù ở những điểm trường cách xa trung
-                                                        tâm
-                                                        xã, đường sá đi lại khó
-                                                        khăn, nhưng với lòng yêu nghề, các thầy cô giáo ở vùng cao vẫn kiên trì
-                                                        bám bản để mang kiến thức đến với học sinh vùng cao...</a></p>
-                                                    <p class="card-text"><small class="text-body-secondary">
-                                                        <span class="bi bi-calendar-date"></span>5/11/2023
-                                                        <button type="button" class="btn btn-success btn-join-acti">Tham gia</button>
-                                                    </small></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card mb-5">
-                                        <div class="row g-0">
-                                            <div class="col-md-3">
-                                                <img src="../static/images/a4.jpg" class="img-fluid rounded-start" alt="...">
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div class="card-body">
-                                                    <h5 class="card-title"><a class="card-title-a" href="">Cặp lồng yêu thương và những thiên
-                                                        thần
-                                                        nhí Việt Nam</a></h5>
-                                                    <p class="card-text"><a class="card-text-a" href="">Dù ở những điểm trường cách xa trung tâm
-                                                        xã,
-                                                        đường sá đi lại khó
-                                                        khăn, nhưng với lòng yêu nghề, các thầy cô giáo ở vùng cao vẫn kiên trì
-                                                        bám bản để mang kiến thức đến với học sinh vùng cao...</a></p>
-                                                    <p class="card-text"><small class="text-body-secondary">
-                                                        <span class="bi bi-calendar-date"></span>5/11/2023
-                                                        <button type="button" class="btn btn-success btn-join-acti">Tham gia</button>
-                                                    </small></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
-                                <div class="container-item">
-                                    <div class="card mb-5">
-                                        <div class="row g-0">
-                                            <div class="col-md-3">
-                                                <img src="../static/images/anhchitiet.jpg" class="img-fluid rounded-start" alt="...">
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div class="card-body">
-                                                    <h5 class="card-title"><a class="card-title-a" href="">Mang con chữ đến với trẻ vùng cao</a>
-                                                    </h5>
-                                                    <p class="card-text"><a class="card-text-a" href="">Dù ở những điểm trường cách xa trung tâm
-                                                        xã,
-                                                        đường sá đi lại khó
-                                                        khăn, nhưng với lòng yêu nghề, các thầy cô giáo ở vùng cao vẫn kiên trì
-                                                        bám bản để mang kiến thức đến với học sinh vùng cao...</a></p>
-                                                    <p class="card-text"><small class="text-body-secondary">
-                                                        <span class="bi bi-calendar-date"></span>5/11/2023
-                                                        <button type="button" class="btn btn-success btn-join-acti">Tham gia</button>
-                                                    </small></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card mb-5">
-                                        <div class="row g-0">
-                                            <div class="col-md-3">
-                                                <img src="../static/images/anh2.jpg" class="img-fluid rounded-start" alt="...">
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div class="card-body">
-                                                    <h5 class="card-title"><a class="card-title-a href=">Cặp lồng yêu thương và những thiên thần
-                                                        nhí
-                                                        Việt Nam</a></h5>
-                                                    <p class="card-text"><a class="card-text-a" href="">Dù ở những điểm trường cách xa trung tâm
-                                                        xã,
-                                                        đường sá đi lại khó
-                                                        khăn, nhưng với lòng yêu nghề, các thầy cô giáo ở vùng cao vẫn kiên trì
-                                                        bám bản để mang kiến thức đến với học sinh vùng cao...</a></p>
-                                                    <p class="card-text"><small class="text-body-secondary">
-                                                        <span class="bi bi-calendar-date"></span>5/11/2023
-                                                        <button type="button" class="btn btn-success btn-join-acti">Tham gia</button>
-                                                    </small></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card mb-5">
-                                        <div class="row g-0">
-                                            <div class="col-md-3">
-                                                <img src="../static/images/anh3.jpg" class="img-fluid rounded-start" alt="...">
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div class="card-body">
-                                                    <h5 class="card-title"><a class="card-title-a" href="">Cặp lồng yêu thương và những thiên
-                                                        thần
-                                                        nhí Việt Nam</a></h5>
-                                                    <p class=" card-text"><a class="card-text-a" href="">Dù ở những điểm trường cách xa trung
-                                                        tâm
-                                                        xã, đường sá đi lại khó
-                                                        khăn, nhưng với lòng yêu nghề, các thầy cô giáo ở vùng cao vẫn kiên trì
-                                                        bám bản để mang kiến thức đến với học sinh vùng cao...</a></p>
-                                                    <p class="card-text"><small class="text-body-secondary">
-                                                        <span class="bi bi-calendar-date"></span>5/11/2023
-                                                        <button type="button" class="btn btn-success btn-join-acti">Tham gia</button>
-                                                    </small></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card mb-5">
-                                        <div class="row g-0">
-                                            <div class="col-md-3">
-                                                <img src="../static/images/a4.jpg" class="img-fluid rounded-start" alt="...">
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div class="card-body">
-                                                    <h5 class="card-title"><a class="card-title-a" href="">Cặp lồng yêu thương và những thiên
-                                                        thần
-                                                        nhí Việt Nam</a></h5>
-                                                    <p class="card-text"><a class="card-text-a" href="">Dù ở những điểm trường cách xa trung tâm
-                                                        xã,
-                                                        đường sá đi lại khó
-                                                        khăn, nhưng với lòng yêu nghề, các thầy cô giáo ở vùng cao vẫn kiên trì
-                                                        bám bản để mang kiến thức đến với học sinh vùng cao...</a></p>
-                                                    <p class="card-text"><small class="text-body-secondary">
-                                                        <span class="bi bi-calendar-date"></span>5/11/2023
-                                                        <button type="button" class="btn btn-success btn-join-acti">Tham gia</button>
-                                                    </small></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -310,50 +149,16 @@
                         </div>
 
                         <div class="list_card" th:each="activity : ${actiList}">
-                            <div class="card custom-margin" style="width: 13rem;" >
+                            <div class="card custom-margin" style="width: 13rem;">
                                 <img class="card-img-top" src="../static/images/a5.jpg" alt="Card image cap">
                                 <div class="card-img-overlay">
-                                    <h5 class="card-title truncate-text"><a href="" th:text="${activity.getTenHD()}"></a></h5>
-                                    <p class="card-text" th:text="${activity.getMoTa()}"></p>
+                                    <h5 class="card-title truncate-text"><a href=""
+                                                                            th:text="${activity.getTenHD()}"></a>
+                                    </h5>
+                                    <p class="card-text" th:text="${#strings.length(activity.getMoTa()) > 100 ? activity.getMoTa().substring(0, 100) + '...' : activity.getMoTa()}"></p>
                                     <h6 class="card-more_info"><a href="ChiTietHoatDong.html">Xem tiếp</a></h6>
                                 </div>
                             </div>
-<!--                            <div class="card custom-margin " style="width: 13rem;">-->
-<!--                                <img class="card-img-top" src="../static/images/a7.png" alt="Card image cap">-->
-<!--                                <div class="card-img-overlay">-->
-<!--                                    <h5 class="card-title truncate-text"><a href="">Xuân tình nguyện 2022</a></h5>-->
-<!--                                    <p class="card-text">Dù ở những điểm trường cách xa trung tâm xã, đường sá đi lại khó-->
-<!--                                        khăn, nhưng với lòng yêu nghề,...</p>-->
-<!--                                    <h6 class="card-more_info"><a href="">Xem tiếp</a></h6>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="card custom-margin " style="width: 13rem;">-->
-<!--                                <img class="card-img-top" src="../static/images/a7.png" alt="Card image cap">-->
-<!--                                <div class="card-img-overlay">-->
-<!--                                    <h5 class="card-title truncate-text"><a href="">Xuân tình nguyện 2022</a></h5>-->
-<!--                                    <p class="card-text">Dù ở những điểm trường cách xa trung tâm xã, đường sá đi lại khó-->
-<!--                                        khăn, nhưng với lòng yêu nghề,...</p>-->
-<!--                                    <h6 class="card-more_info"><a href="">Xem tiếp</a></h6>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="card custom-margin " style="width: 13rem;">-->
-<!--                                <img class="card-img-top" src="../static/images/a7.png" alt="Card image cap">-->
-<!--                                <div class="card-img-overlay">-->
-<!--                                    <h5 class="card-title truncate-text"><a href="">Xuân tình nguyện 2022</a></h5>-->
-<!--                                    <p class="card-text">Dù ở những điểm trường cách xa trung tâm xã, đường sá đi lại khó-->
-<!--                                        khăn, nhưng với lòng yêu nghề,...</p>-->
-<!--                                    <h6 class="card-more_info"><a href="">Xem tiếp</a></h6>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="card custom-margin " style="width: 13rem;">-->
-<!--                                <img class="card-img-top" src="../static/images/a7.png" alt="Card image cap">-->
-<!--                                <div class="card-img-overlay">-->
-<!--                                    <h5 class="card-title truncate-text"><a href="">Xuân tình nguyện 2022</a></h5>-->
-<!--                                    <p class="card-text">Dù ở những điểm trường cách xa trung tâm xã, đường sá đi lại khó-->
-<!--                                        khăn, nhưng với lòng yêu nghề,...</p>-->
-<!--                                    <h6 class="card-more_info"><a href="">Xem tiếp</a></h6>-->
-<!--                                </div>-->
-<!--                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -363,9 +168,9 @@
     <div class="banner bg-green px-3 text-white pl-3 ">
         <div class="container-fluid">
             <div class="row custom-banner-1  text-center">
-                <div class="col-md-4 ">14</div>
+                <div class="col-md-4 " th:text="${numberActivitys}"></div>
                 <div class="col-md-4">1</div>
-                <div class="col-md-4">200+</div>
+                <div class="col-md-4" th:text="${numberParticipants}">+</div>
             </div>
             <div class="row custom-banner-2 text-center">
                 <div class="col-md-4">HOẠT ĐỘNG</div>

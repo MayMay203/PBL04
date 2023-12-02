@@ -12,23 +12,23 @@ import java.util.List;
 
 @Controller
 public class ActivityController {
-    private ActivityService activityService;
+    private final ActivityService activityService;
     @Autowired
     public ActivityController(ActivityService activityService){
         this.activityService=activityService;
     }
 
-    public String showActivity(Model model)
-    {
-        List<Hoatdong> actiList= activityService.getAllActivity();
-        model.addAttribute("actiList",actiList);
-        return "TrangChuHoatDong";
-    }
-    @GetMapping("/hoat-dong-3")
+   @GetMapping("/trang-chu-hoat-dong")
     public String showActivityOccured(Model model)
     {
+        Integer numberParticipants= activityService.getParticipants();
+        Integer numberActivitys= activityService.getNumActivity();
+        List<Hoatdong> actiListUpcomming =activityService.getActivityUpcomming();
         List<Hoatdong> actiList = activityService.getActivityOccured();
+        model.addAttribute("numberActivitys",numberActivitys);
         model.addAttribute("actiList",actiList);
+        model.addAttribute(("actiListUpcomming"),actiListUpcomming);
+        model.addAttribute("numberParticipants",numberParticipants);
         return "TrangChuHoatDong";
     }
     public String showActivityByID(Model model,   @PathVariable Integer id)

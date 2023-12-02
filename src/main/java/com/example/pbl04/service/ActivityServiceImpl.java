@@ -31,4 +31,8 @@ public class ActivityServiceImpl implements ActivityService {
     {
         return activityRepository.getActivityOccured();
     }
+    public List<Hoatdong> getActivityUpcomming(){return activityRepository.getActivityUpcomming();}
+    public Integer getNumActivity(){return activityRepository.getNumActivity();}
+
+    public Integer getParticipants() {return activityRepository.getParticipants();}
 }
