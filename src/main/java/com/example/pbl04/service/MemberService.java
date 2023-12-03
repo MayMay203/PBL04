@@ -5,7 +5,7 @@ import com.example.pbl04.entity.Thanhvien;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
+
 public interface MemberService {
     List<Thanhvien> getAllMember();
 }
