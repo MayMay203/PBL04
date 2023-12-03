@@ -1,9 +1,9 @@
 package com.example.pbl04.dao;
 
 import com.example.pbl04.entity.Danhgia;
+import com.example.pbl04.entity.Thanhvien;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
 
-public interface EvaluateRepository extends JpaRepository<Danhgia,Integer> {
+public interface MemberRepository extends JpaRepository<Thanhvien,Integer> {
 }

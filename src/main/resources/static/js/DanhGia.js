@@ -104,3 +104,22 @@ for (var btn of btn_star) {
         }
     });
 }
+
+$(document).ready(function(){
+    $('.act-slider').slick({
+        dots: true,
+        slidesToShow: 1,
+        arrows: false,
+        vertical: false,
+        speed: 100
+    });
+});
+$(document).ready(function () {
+    $('.origanized-slider').slick({
+        infinite: false,
+        slidesToShow: 3,
+        vertical: true,
+        prevArrow: '<div class="slick-prev"><i class="bi bi-chevron-compact-up"></i></div>',
+        nextArrow: '<div class="slick-next"><i class="bi bi-chevron-compact-down"></i></div>',
+    })
+});

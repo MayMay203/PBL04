@@ -11,22 +11,15 @@ public class TemplateController {
         return "Header";
     }
 
-    @GetMapping("/trang-chu")
-    public String getHome()
-    {
-        return "TrangChu";
-    }
-
-//    @GetMapping("/trang-chu-hoat-dong")
-//    public String getActivityHome()
+//    @GetMapping("/trang-chu")
+//    public String getHome()
 //    {
-//        return "TrangChuHoatDong";
+//        return "TrangChu";
 //    }
-
-    @GetMapping("/trang-chu-danh-gia")
-    public String getEvaluationHome()
+    @GetMapping("/trang-ca-nhan")
+    public String getPersonality()
     {
-        return "TrangChuDanhGia";
+        return "TrangCaNhan";
     }
 
     @GetMapping("/trang-chu-tong-ket")
@@ -34,13 +27,5 @@ public class TemplateController {
     {
         return "TrangChuTongKet";
     }
-
-
-    @GetMapping("/trang-ca-nhan")
-    public String getPersonality()
-    {
-        return "TrangCaNhan";
-    }
-
 
 }
