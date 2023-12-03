@@ -1,12 +1,14 @@
 package com.example.pbl04.controller;
 
+import com.example.pbl04.entity.Dangky;
 import com.example.pbl04.entity.Hoatdong;
+import com.example.pbl04.entity.Taikhoan;
+import com.example.pbl04.entity.Thanhvien;
 import com.example.pbl04.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,16 +27,25 @@ public class ActivityController {
         Integer numberActivitys= activityService.getNumActivity();
         List<Hoatdong> actiListUpcomming =activityService.getActivityUpcomming();
         List<Hoatdong> actiList = activityService.getActivityOccured();
+        List<Hoatdong> actiListHappening= activityService.getActivityHappening();
         model.addAttribute("numberActivitys",numberActivitys);
         model.addAttribute("actiList",actiList);
+        model.addAttribute("actiListHappening",actiListHappening);
         model.addAttribute(("actiListUpcomming"),actiListUpcomming);
         model.addAttribute("numberParticipants",numberParticipants);
         return "TrangChuHoatDong";
     }
-    public String showActivityByID(Model model,   @PathVariable Integer id)
+    @RequestMapping(value ="/Join", method = RequestMethod.GET)
+    public String showActivityByID(Model model, @ModelAttribute Hoatdong hd)
     {
-        Hoatdong hoatdong = activityService.getActivityByID(id);
+        Taikhoan taikhoan =activityService.getOrganizator(hd.getId());
+        List<Thanhvien> thanhvienList =activityService.getMemberList(hd.getId());
+        Thanhvien thanhvien=activityService.getMemberByID(taikhoan.getId());
+        Hoatdong hoatdong = activityService.getActivityByID(hd.getId());
         model.addAttribute("hoatdong",hoatdong);
+        model.addAttribute("taikhoan",taikhoan);
+        model.addAttribute("thanhvien",thanhvien);
+        model.addAttribute("thanhvienList",thanhvienList);
         return "ChiTietHoatDong";
     }
 }
