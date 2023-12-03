@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SuggestionServiceImple implements SuggestionService {
@@ -21,6 +22,14 @@ public class SuggestionServiceImple implements SuggestionService {
         return suggestionRepo.getAllSuggestion();
     }
 
+//    @Override
+//    public List<Dexuat> getSuggestionByTitle(Optional<String> title) {
+//        return suggestionDAO;
+//    }
+    @Override
+    public List<Dexuat> getSuggestionByTitle(Optional<String> title){
+      return suggestionRepo.getSuggestionByTitle(title);
+    }
     @Override
     public List<Integer> CountSuggestion() {
         return suggestionRepo.countSuggestion();

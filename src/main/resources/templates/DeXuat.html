@@ -60,26 +60,32 @@
             <!-- icon -->
             <div class="container d-flex flex-1 justify-content-end align-items-center">
 <!--                <p class="pt-1_2 px-1 fw-bold green-color">5</p>-->
-                <i class="bi bi-calendar4-week position-relative mb-1 h-1 green-color calendar cursor-pointer me-4">
-                    <p class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display"
-                       th:text="${countSugg[index.index] + ' lượt đề xuất'}">
-                    </p>
-                </i>
-                <i class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast me-4 cursor-pointer">
-                    <p class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">
-                        Tổ chức tại đây</p>
-                </i>
+                <button  class="no-border bg-white p-0 btn-suggestion-detail mx-4 cursor-pointer btn-suggestion-detail">
+                    <i th:attr="data-value=${suggestion.getChuDe()}" class="bi bi-calendar4-week position-relative mb-1 h-1 green-color calendar cursor-pointer fs-5">
+                        <p class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display"
+                           th:text="${countSugg[index.index] + ' lượt đề xuất'}">
+                        </p>
+                    </i>
+                </button>
+
+                <button th:attr="name=${suggestion.getChuDe()}" class="no-border bg-white p-0 btn-suggestion-detail mx-3 cursor-pointer">
+                    <i class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast cursor-pointer fs-5">
+                        <p class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">
+                            Tổ chức tại đây</p>
+                    </i>
+                </button>
             </div>
         </div>
     </div>
-    <button class="btn bg-btn white-color px-4 mt-5 float-end btn-add-suggest mb-5"><i class="bi bi-plus-square me-2"></i>Thêm đề xuất</button>
+    <button class="btn bg-btn white-color px-4 mt-5 float-end btn-add-suggest mb-5 me-5"><i class="bi bi-plus-square me-2"></i>Thêm đề xuất</button>
 <!-- Modal -->
 <div class="modal_ box-shadow no-display">
     <div class="modal__overlay">
 
     </div>
     <div class="modal__body w-40">
-        <form action="" class="was-validated">
+        <!-- Form de xuat-->
+        <form action="" class="was-validated no-display">
             <div class="container d-flex align-items-center justify-content-between p-1">
                 <h3 class="fs-4 green-color fw-bold p-2 ml-0_9 text-center">ĐỀ XUẤT VỊ TRÍ TÌNH NGUYỆN</h3>
                 <div class="btn btn-close no-outline p-1 mb-2 me-3 btn-close-suggest"></div>
@@ -124,6 +130,35 @@
                 </div>
             </div>
     </form>
+        <!-- Form chi tiet de xuat-->
+        <div class="suggestion-detail no-display">
+            <div class="container d-flex align-items-center justify-content-between p-1">
+                <h3 class="fs-4 green-color fw-bold p-2 text-center">CHI TIẾT ĐỀ XUẤT</h3>
+                <div class="btn btn-close no-outline p-1 mb-2 me-3 btn-close-detail"></div>
+            </div>
+            <div class="fs-9 display-flex" th:each="sugg,index: ${suggestionTitle}">
+                <div class="container px-5">
+                    <div class="container d-flex align-items-center p-3 border_bottom-solid">
+                        <div class="container flex-5">
+                            <h3 class="green-color fs-4" th:text="${sugg.getChuDe()}"></h3>
+                            <p class="mb-0 fs-6" th:text="${sugg.getMoTa()}"></p>
+                            <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green px-1" th:text="${sugg.getViTri()}"></i></p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+            <!-- icon -->
+<!--            <div class="container d-flex flex-1 justify-content-end align-items-center">-->
+<!--                &lt;!&ndash;                <p class="pt-1_2 px-1 fw-bold green-color">5</p>&ndash;&gt;-->
+<!--                <i class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast me-4 cursor-pointer fs-5">-->
+<!--                    <p class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">-->
+<!--                        Tổ chức tại đây</p>-->
+<!--                </i>-->
+<!--            </div>-->
+        </div>
+    </div>
+
+
 </div>
     </div>
 </body>
