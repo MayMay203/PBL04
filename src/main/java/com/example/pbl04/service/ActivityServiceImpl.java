@@ -1,6 +1,7 @@
 package com.example.pbl04.service;
 
 import com.example.pbl04.dao.ActivityRepository;
+import com.example.pbl04.entity.Dangky;
 import com.example.pbl04.entity.Hoatdong;
 import com.example.pbl04.entity.Taikhoan;
 import com.example.pbl04.entity.Thanhvien;
@@ -31,7 +32,7 @@ public class ActivityServiceImpl implements ActivityService {
     public List<Hoatdong> getActivityUpcomming(){return activityRepository.getActivityUpcomming();}
     public List<Hoatdong> getActivityHappening() {return activityRepository.getActivityHappening();}
     public Integer getNumActivity(){return activityRepository.getNumActivity();}
-
+    public Dangky getDateRegis(Integer mahd){return activityRepository.getDateRegis();}
     public Integer getParticipants() {return activityRepository.getParticipants();}
     public Taikhoan getOrganizator(Integer id){ return activityRepository.getOrganizator(id);}
     public Thanhvien getMemberByID(Integer id){return activityRepository.getMemberByID(id);}

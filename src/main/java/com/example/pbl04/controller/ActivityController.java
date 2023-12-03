@@ -1,5 +1,6 @@
 package com.example.pbl04.controller;
 
+import com.example.pbl04.entity.Dangky;
 import com.example.pbl04.entity.Hoatdong;
 import com.example.pbl04.entity.Taikhoan;
 import com.example.pbl04.entity.Thanhvien;
@@ -7,8 +8,7 @@ import com.example.pbl04.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,13 +35,13 @@ public class ActivityController {
         model.addAttribute("numberParticipants",numberParticipants);
         return "TrangChuHoatDong";
     }
-    @GetMapping("/chi-tiet-hoat-dong/{id}")
-    public String showActivityByID(Model model,   @PathVariable Integer id)
+    @RequestMapping(value ="/Join", method = RequestMethod.GET)
+    public String showActivityByID(Model model, @ModelAttribute Hoatdong hd)
     {
-        Taikhoan taikhoan =activityService.getOrganizator(id);
-        List<Thanhvien> thanhvienList =activityService.getMemberList(id);
+        Taikhoan taikhoan =activityService.getOrganizator(hd.getId());
+        List<Thanhvien> thanhvienList =activityService.getMemberList(hd.getId());
         Thanhvien thanhvien=activityService.getMemberByID(taikhoan.getId());
-        Hoatdong hoatdong = activityService.getActivityByID(id);
+        Hoatdong hoatdong = activityService.getActivityByID(hd.getId());
         model.addAttribute("hoatdong",hoatdong);
         model.addAttribute("taikhoan",taikhoan);
         model.addAttribute("thanhvien",thanhvien);

@@ -1,10 +1,12 @@
 package com.example.pbl04.service;
 
 
+import com.example.pbl04.entity.Dangky;
 import com.example.pbl04.entity.Hoatdong;
 import com.example.pbl04.entity.Taikhoan;
 import com.example.pbl04.entity.Thanhvien;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ActivityService {
@@ -12,7 +14,7 @@ public interface ActivityService {
     List<Hoatdong> getActivityOccured();
     List<Hoatdong> getActivityUpcomming();
     List<Hoatdong> getActivityHappening();
-
+    Dangky getDateRegis(Integer mahd);
     Integer getNumActivity();
     Integer getParticipants();
     Taikhoan getOrganizator(Integer id);
