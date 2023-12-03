@@ -47,13 +47,13 @@
         </div>
     </div>
     <!-- Content -->
-    <div class="fs-9 display-flex" th:each="suggest:${suggestList}">
+    <div class="fs-9 display-flex" th:each="suggestion,index: ${suggestionList}">
         <div class="container px-5">
             <div class="container d-flex align-items-center p-3 border_bottom-solid">
                 <div class="container flex-5">
-                    <h3 class="green-color fs-4" th:text="${suggest.getChuDe()}"></h3>
-                    <p class="mb-0 fs-6" th:text="${suggest.getMoTa()}"></p>
-                    <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green px-1" th:text="${suggest.getViTri()}"></i></p>
+                    <h3 class="green-color fs-4" th:text="${suggestion.getChuDe()}"></h3>
+                    <p class="mb-0 fs-6" th:text="${suggestion.getMoTa()}"></p>
+                    <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green px-1" th:text="${suggestion.getViTri()}"></i></p>
                 </div>
             </div>
         </div>
@@ -61,7 +61,8 @@
             <div class="container d-flex flex-1 justify-content-end align-items-center">
 <!--                <p class="pt-1_2 px-1 fw-bold green-color">5</p>-->
                 <i class="bi bi-calendar4-week position-relative mb-1 h-1 green-color calendar cursor-pointer me-4">
-                    <p class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display" th:text="${count} + 'lượt đề xuất'">
+                    <p class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display"
+                       th:text="${countSugg[index.index] + ' lượt đề xuất'}">
                     </p>
                 </i>
                 <i class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast me-4 cursor-pointer">

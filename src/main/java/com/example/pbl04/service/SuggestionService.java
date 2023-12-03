@@ -4,7 +4,7 @@ import com.example.pbl04.entity.Dexuat;
 
 import java.util.List;
 
-public interface SuggestService{
+public interface SuggestionService {
     List<Dexuat> getAllSuggest();
-    int CountSuggest(String position, String title);
+    List<Integer> CountSuggestion();
 }
