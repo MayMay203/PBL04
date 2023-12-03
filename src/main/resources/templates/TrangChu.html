@@ -113,73 +113,29 @@
             <div id="container__sectionMember" >
                 <h2 class="section__heading">TÌNH NGUYỆN VIÊN</h2>
                 <div class="sectionMember__aboutContent"  >
-                    <div class="member-item" th:each="member: ${memberList}">
+<!--                    <div class="member-item" th:each="member: ${memberList}">-->
+<!--                        <img src="#" alt="" class="member-img">-->
+<!--&lt;!&ndash;                        //th:src="@{'/member/image/' + ${member.id}}"&ndash;&gt;-->
+<!--                        <p class="member-name" th:text="${member.hoTen}"></p>-->
+<!--                        <p class="member-age" th:text="${T(java.time.LocalDate).now().getYear() - member.getNgaySinh().getYear()} + ' tuổi'"></p>-->
+<!--                        <div class="member-rate">-->
+<!--                            <span class="text-rate">Đánh giá:</span>-->
+<!--                            <span class="num-rate"></span>-->
+<!--                            <i class="bi bi-star-fill star-rate"></i>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="member-item" th:each="member, id: ${memberList}">
                         <img src="#" alt="" class="member-img">
-<!--                        //th:src="@{'/member/image/' + ${member.id}}"-->
+                        <!--                        //th:src="@{'/member/image/' + ${member.id}}"-->
                         <p class="member-name" th:text="${member.hoTen}"></p>
                         <p class="member-age" th:text="${T(java.time.LocalDate).now().getYear() - member.getNgaySinh().getYear()} + ' tuổi'"></p>
                         <div class="member-rate">
                             <span class="text-rate">Đánh giá:</span>
-                            <span class="num-rate" ></span>
+                            <span class="num-rate" th:text="${totalRates[id.index]}"></span>
                             <i class="bi bi-star-fill star-rate"></i>
                         </div>
                     </div>
 
-
-
-
-
-
-                    <!--                    <div class="member-item">-->
-<!--                        <img src="../static/images/Rectangle 289.png" alt="" class="member-img">-->
-<!--                        <p class="member-name">Bùi Quốc Bảo</p>-->
-<!--                        <p class="member-age">30 tuổi</p>-->
-<!--                        <div class="member-rate">-->
-<!--                            <span class="text-rate">Đánh giá:</span>-->
-<!--                            <span class="num-rate">4.5</span>-->
-<!--                            <i class="bi bi-star-fill star-rate"></i>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="member-item">-->
-<!--                        <img src="../static/images/Rectangle 289 (1).png" alt="" class="member-img">-->
-<!--                        <p class="member-name">Nguyễn Thị Như Na</p>-->
-<!--                        <p class="member-age">30 tuổi</p>-->
-<!--                        <div class="member-rate">-->
-<!--                            <span class="text-rate">Đánh giá:</span>-->
-<!--                            <span class="num-rate">4.5</span>-->
-<!--                            <i class="bi bi-star-fill star-rate"></i>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="member-item">-->
-<!--                        <img src="../static/images/stock-photo-selective-focus-pretty-asian-volunteer.jpg" alt="" class="member-img">-->
-<!--                        <p class="member-name">Đoàn Thị Lan</p>-->
-<!--                        <p class="member-age">30 tuổi</p>-->
-<!--                        <div class="member-rate">-->
-<!--                            <span class="text-rate">Đánh giá:</span>-->
-<!--                            <span class="num-rate">4.5</span>-->
-<!--                            <i class="bi bi-star-fill star-rate"></i>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="member-item">-->
-<!--                        <img src="../static/images/images (3).jpg" alt="" class="member-img">-->
-<!--                        <p class="member-name">Nguyễn Ái Lam</p>-->
-<!--                        <p class="member-age">30 tuổi</p>-->
-<!--                        <div class="member-rate">-->
-<!--                            <span class="text-rate">Đánh giá:</span>-->
-<!--                            <span class="num-rate">4.5</span>-->
-<!--                            <i class="bi bi-star-fill star-rate"></i>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="member-item">-->
-<!--                        <img src="../static/images/images.jpg" alt="" class="member-img">-->
-<!--                        <p class="member-name">Lê Mạnh Hải</p>-->
-<!--                        <p class="member-age">30 tuổi</p>-->
-<!--                        <div class="member-rate">-->
-<!--                            <span class="text-rate">Đánh giá:</span>-->
-<!--                            <span class="num-rate">4.5</span>-->
-<!--                            <i class="bi bi-star-fill star-rate"></i>-->
-<!--                        </div>-->
-<!--                    </div>-->
                     
                     <div class="clear"></div>
                 </div>

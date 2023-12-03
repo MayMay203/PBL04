@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface EvaluationService {
 
-    public List<Danhgia> getAllEvaluate();
+     List<Danhgia> getAllEvaluate();
 
-
+     List<Integer> getTotalRateOfMember();
 }
