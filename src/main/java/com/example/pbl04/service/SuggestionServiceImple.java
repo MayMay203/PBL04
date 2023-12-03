@@ -8,14 +8,22 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SuggestServiceImple implements SuggestService{
+public class SuggestionServiceImple implements SuggestionService {
     public SuggestionRepository suggestionRepo;
+
     @Autowired
-    private SuggestServiceImple(SuggestionRepository suggestionRepo){
+    private SuggestionServiceImple(SuggestionRepository suggestionRepo) {
         this.suggestionRepo = suggestionRepo;
     }
+
     @Override
     public List<Dexuat> getAllSuggest() {
-        return suggestionRepo.findAll();
+        return suggestionRepo.getAllSuggestion();
+    }
+
+    @Override
+    public List<Integer> CountSuggestion() {
+        return suggestionRepo.countSuggestion();
     }
 }
+

@@ -8,6 +8,7 @@
     background-size: cover;
     width:25rem;
     height: 35rem;
+    /*z-index: 2000!important;*/
 }
 .modal-body-dangnhap{
     position: relative;

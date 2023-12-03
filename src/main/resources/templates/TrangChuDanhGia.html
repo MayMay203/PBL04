@@ -212,11 +212,11 @@
         <!--Right-->
 
         <div class="container w-25 mt-2_8 p-0">
-            <div class="container cmt-slider">
+            <div class="container cmt-slider" th:each="evaluate:${evaluationList}">
                 <div class="container bg-grey radius-1 p-2 my-6">
                     <div class="container d-flex my-1">
                         <img src="../static/images/av3.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">
-                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>
+                        <h7 class="green-color fs-9 fst-italic fw-medium" th:text="">Huỳnh Ngọc Hiệp</h7>
                     </div>
                     <div class="container d-flex align-items-center mx-1">
                         <p class="fs-10 fst-italic m-0">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải nghiệm
@@ -225,53 +225,53 @@
                     <p class="green_light-color fst-italic fs-10 my-0 mx-3">20 ngày trước</p>
                 </div>
 
-                <div class="container bg-grey radius-1 p-2 my-6">
-                    <div class="container d-flex my-1">
-                        <img src="../static/images/av5.jpg" class="radius-1 me-1 w-1_8 h-1_8" alt="">
-                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>
-                    </div>
-                    <div class="container d-flex align-items-center mx-1">
-                        <p class="fs-10 fst-italic m-0">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải nghiệm
-                            thật khó quên. Cảm ơn ban tổ chức!</p>
-                    </div>
-                    <p class="green_light-color fst-italic fs-10 my-0 mx-3">20 ngày trước</p>
-                </div>
+<!--                <div class="container bg-grey radius-1 p-2 my-6">-->
+<!--                    <div class="container d-flex my-1">-->
+<!--                        <img src="../static/images/av5.jpg" class="radius-1 me-1 w-1_8 h-1_8" alt="">-->
+<!--                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>-->
+<!--                    </div>-->
+<!--                    <div class="container d-flex align-items-center mx-1">-->
+<!--                        <p class="fs-10 fst-italic m-0">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải nghiệm-->
+<!--                            thật khó quên. Cảm ơn ban tổ chức!</p>-->
+<!--                    </div>-->
+<!--                    <p class="green_light-color fst-italic fs-10 my-0 mx-3">20 ngày trước</p>-->
+<!--                </div>-->
 
-                <div class="container bg-grey radius-1 p-2 my-6">
-                    <div class="container d-flex my-1">
-                        <img src="../static/images/av4.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">
-                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>
-                    </div>
-                    <div class="container d-flex align-items-center mx-1">
-                        <p class="fs-10 fst-italic m-0">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải nghiệm
-                            thật khó quên. Cảm ơn ban tổ chức!</p>
-                    </div>
-                    <p class="green_light-color fst-italic fs-10 my-0 mx-3">20 ngày trước</p>
-                </div>
+<!--                <div class="container bg-grey radius-1 p-2 my-6">-->
+<!--                    <div class="container d-flex my-1">-->
+<!--                        <img src="../static/images/av4.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">-->
+<!--                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>-->
+<!--                    </div>-->
+<!--                    <div class="container d-flex align-items-center mx-1">-->
+<!--                        <p class="fs-10 fst-italic m-0">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải nghiệm-->
+<!--                            thật khó quên. Cảm ơn ban tổ chức!</p>-->
+<!--                    </div>-->
+<!--                    <p class="green_light-color fst-italic fs-10 my-0 mx-3">20 ngày trước</p>-->
+<!--                </div>-->
 
-                <div class="container bg-grey radius-1 p-2 my-6">
-                    <div class="container d-flex my-1">
-                        <img src="../static/images/av4.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">
-                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>
-                    </div>
-                    <div class="container d-flex align-items-center mx-1">
-                        <p class="fs-10 fst-italic m-0">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải nghiệm
-                            thật khó quên. Cảm ơn ban tổ chức!</p>
-                    </div>
-                    <p class="green_light-color fst-italic fs-10 my-0 mx-3">20 ngày trước</p>
-                </div>
+<!--                <div class="container bg-grey radius-1 p-2 my-6">-->
+<!--                    <div class="container d-flex my-1">-->
+<!--                        <img src="../static/images/av4.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">-->
+<!--                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>-->
+<!--                    </div>-->
+<!--                    <div class="container d-flex align-items-center mx-1">-->
+<!--                        <p class="fs-10 fst-italic m-0">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải nghiệm-->
+<!--                            thật khó quên. Cảm ơn ban tổ chức!</p>-->
+<!--                    </div>-->
+<!--                    <p class="green_light-color fst-italic fs-10 my-0 mx-3">20 ngày trước</p>-->
+<!--                </div>-->
 
-                <div class="container bg-grey radius-1 p-2 my-6">
-                    <div class="container d-flex my-1">
-                        <img src="../static/images/av3.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">
-                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>
-                    </div>
-                    <div class="container d-flex align-items-center mx-1">
-                        <p class="fs-10 fst-italic m-0">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải nghiệm
-                            thật khó quên. Cảm ơn ban tổ chức!</p>
-                    </div>
-                    <p class="green_light-color fst-italic fs-10 my-0 mx-3">20 ngày trước</p>
-                </div>
+<!--                <div class="container bg-grey radius-1 p-2 my-6">-->
+<!--                    <div class="container d-flex my-1">-->
+<!--                        <img src="../static/images/av3.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">-->
+<!--                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>-->
+<!--                    </div>-->
+<!--                    <div class="container d-flex align-items-center mx-1">-->
+<!--                        <p class="fs-10 fst-italic m-0">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải nghiệm-->
+<!--                            thật khó quên. Cảm ơn ban tổ chức!</p>-->
+<!--                    </div>-->
+<!--                    <p class="green_light-color fst-italic fs-10 my-0 mx-3">20 ngày trước</p>-->
+<!--                </div>-->
 
 
             </div>
@@ -388,8 +388,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script src="../static/js/base.js"></script>
-<script src="../static/js/TrangChuDanhGia.js"></script>
-<script src="../static/js/SlickSlider.js"></script>
+<script defer th:src="@{/js/base.js}"></script>
+<script defer th:src="@{/js/TrangChuDanhGia.js}"></script>
 
 </html>

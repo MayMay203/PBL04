@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,126 +47,30 @@
         </div>
     </div>
     <!-- Content -->
-    <div class="fs-9 display-flex" th:each="suggest:${suggestList}">
+    <div class="fs-9 display-flex" th:each="suggestion,index: ${suggestionList}">
         <div class="container px-5">
             <div class="container d-flex align-items-center p-3 border_bottom-solid">
                 <div class="container flex-5">
-                    <h3 class="green-color fs-4" th:text="${suggest.getChuDe()}"></h3>
-                    <p class="mb-0 fs-6" th:text="${suggest.getMoTa()}"></p>
-                    <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green px-1" th:text="${suggest.getViTri()}"></i></p>
+                    <h3 class="green-color fs-4" th:text="${suggestion.getChuDe()}"></h3>
+                    <p class="mb-0 fs-6" th:text="${suggestion.getMoTa()}"></p>
+                    <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green px-1" th:text="${suggestion.getViTri()}"></i></p>
                 </div>
             </div>
         </div>
             <!-- icon -->
             <div class="container d-flex flex-1 justify-content-end align-items-center">
-                <p class="pt-1_2 px-1 fw-bold green-color">5</p>
+<!--                <p class="pt-1_2 px-1 fw-bold green-color">5</p>-->
                 <i class="bi bi-calendar4-week position-relative mb-1 h-1 green-color calendar cursor-pointer me-4">
-                    <p
-                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display">
-                        Lượt đề xuất</p>
+                    <p class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display"
+                       th:text="${countSugg[index.index] + ' lượt đề xuất'}">
+                    </p>
                 </i>
-                <p class="pt-1_2 px-1 fw-bold green-color">2</p>
-                <i class="bi bi-check-circle position-relative mb-1 h-1 green-color me-4 cursor-pointer check">
-                    <p
-                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-check no-display">
-                        Lượt tổ chức</p>
-                </i>
-                <p class="pt-1_2 px-1 fw-bold green-color">2</p>
                 <i class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast me-4 cursor-pointer">
-                    <p
-                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">
+                    <p class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">
                         Tổ chức tại đây</p>
                 </i>
             </div>
         </div>
-
-<!--        <div class="container d-flex align-items-center p-3 border_bottom-solid">-->
-<!--            <div class="container flex-5">-->
-<!--                <h3 class="green-color fs-4">Hiến Máu Nhân Đạo</h3>-->
-<!--                <p class="mb-0 fs-6">Tình nguyện viên hỗ trợ quá trình hiến máu và có thể hiến trực tiếp</p>-->
-<!--                <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green px-1"></i>Bệnh viên Ung Bướu Đà-->
-<!--                    Nẵng</p>-->
-<!--            </div>-->
-<!--            <div class="container d-flex flex-1 justify-content-end align-items-center">-->
-<!--                <p class="pt-1_2 px-1 fw-bold green-color">5</p>-->
-<!--                <i class="bi bi-calendar4-week position-relative mb-1 h-1 green-color calendar cursor-pointer me-4">-->
-<!--                    <p-->
-<!--                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display">-->
-<!--                        Lượt đề xuất</p>-->
-<!--                </i>-->
-<!--                <p class="pt-1_2 px-1 fw-bold green-color">2</p>-->
-<!--                <i class="bi bi-check-circle position-relative mb-1 h-1 green-color me-4 cursor-pointer check">-->
-<!--                    <p-->
-<!--                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-check no-display">-->
-<!--                        Lượt tổ chức</p>-->
-<!--                </i>-->
-<!--                <p class="pt-1_2 px-1 fw-bold green-color">2</p>-->
-<!--                <i class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast me-4 cursor-pointer">-->
-<!--                    <p-->
-<!--                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">-->
-<!--                        Tổ chức tại đây</p>-->
-<!--                </i>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="container d-flex align-items-center p-3 border_bottom-solid">-->
-<!--            <div class="container flex-5">-->
-<!--                <h3 class="green-color fs-4">Hè Yêu Thương</h3>-->
-<!--                <p class="mb-0 fs-6">Xây nhà tình thương, hỗ trợ dọn dẹp vệ sinh đường xá, đổ bê tông xây đường,-->
-<!--                    hàng rào, sân trường...</p>-->
-<!--                <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green px-1"></i>Thôn 2, xã Trà Dơn,-->
-<!--                    huyện Nam Trà My tỉnh Quảng Nam</p>-->
-<!--            </div>-->
-<!--            <div class="container d-flex flex-1 justify-content-end align-items-center">-->
-<!--                <p class="pt-1_2 px-1 fw-bold green-color">5</p>-->
-<!--                <i class="bi bi-calendar4-week position-relative mb-1 h-1 green-color calendar cursor-pointer me-4">-->
-<!--                    <p-->
-<!--                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display">-->
-<!--                        Lượt đề xuất</p>-->
-<!--                </i>-->
-<!--                <p class="pt-1_2 px-1 fw-bold green-color">2</p>-->
-<!--                <i class="bi bi-check-circle position-relative mb-1 h-1 green-color me-4 cursor-pointer check">-->
-<!--                    <p-->
-<!--                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-check no-display">-->
-<!--                        Lượt tổ chức</p>-->
-<!--                </i>-->
-<!--                <p class="pt-1_2 px-1 fw-bold green-color">2</p>-->
-<!--                <i class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast me-4 cursor-pointer">-->
-<!--                    <p-->
-<!--                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">-->
-<!--                        Tổ chức tại đây</p>-->
-<!--                </i>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="container d-flex align-items-center p-3 border_bottom-solid">-->
-<!--            <div class="container flex-5">-->
-<!--                <h3 class="green-color fs-4">Hiến Máu Nhân Đạo</h3>-->
-<!--                <p class="mb-0 fs-6">Tình nguyện viên hỗ trợ quá trình hiến máu và có thể hiến trực tiếp</p>-->
-<!--                <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green px-1"></i>Bệnh viên Ung Bướu Đà-->
-<!--                    Nẵng</p>-->
-<!--            </div>-->
-<!--            <div class="container d-flex flex-1 justify-content-end align-items-center">-->
-<!--                <p class="pt-1_2 px-1 fw-bold green-color">5</p>-->
-<!--                <i class="bi bi-calendar4-week position-relative mb-1 h-1 green-color calendar cursor-pointer me-4">-->
-<!--                    <p-->
-<!--                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display">-->
-<!--                        Lượt đề xuất</p>-->
-<!--                </i>-->
-<!--                <p class="pt-1_2 px-1 fw-bold green-color">2</p>-->
-<!--                <i class="bi bi-check-circle position-relative mb-1 h-1 green-color me-4 cursor-pointer check">-->
-<!--                    <p-->
-<!--                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-check no-display">-->
-<!--                        Lượt tổ chức</p>-->
-<!--                </i>-->
-<!--                <p class="pt-1_2 px-1 fw-bold green-color">2</p>-->
-<!--                <i class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast me-4 cursor-pointer">-->
-<!--                    <p-->
-<!--                            class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">-->
-<!--                        Tổ chức tại đây</p>-->
-<!--                </i>-->
-<!--            </div>-->
-<!--        </div>-->
     </div>
     <button class="btn bg-btn white-color px-4 mt-5 float-end btn-add-suggest mb-5"><i class="bi bi-plus-square me-2"></i>Thêm đề xuất</button>
 <!-- Modal -->
@@ -176,44 +79,6 @@
 
     </div>
     <div class="modal__body w-40">
-        <!-- <div class="container d-flex align-items-center justify-content-between p-1">
-            <h3 class="fs-4 green-color fw-bold p-2 ml-0_9 text-center">ĐỀ XUẤT VỊ TRÍ TÌNH NGUYỆN</h3>
-            <div class="btn btn-close no-outline p-1 mb-2 me-3 btn-close-suggest"></div>
-        </div>
-        <div class="container p-3">
-            <div class="container d-flex">
-                <h5 class="flex-1 fs-5">CHỦ ĐỀ</h5>
-                <input class="flex-5 w-90 radius-half no-outline" type="text">
-            </div>
-            <h5 class="mb-1 py-3 ml-0_7">ĐỊA ĐIỂM</h5>
-            <div class="container px-3">
-                <div class="container d-flex mb-3">
-                    <h5 class="flex-1 fs-7">Thôn -Phường</h5>
-                    <input class="flex-5 w-90 radius-half no-outline" type="text">
-                </div>
-                <div class="container d-flex mb-4">
-                    <h5 class="flex-1 fs-7">Quận - Huyện</h5>
-                    <input class="flex-5 w-90 radius-half no-outline" type="text">
-                </div>
-                <div class="container d-flex mb-4">
-                    <h5 class="flex-1 fs-7">Tỉnh - Thành Phố</h5>
-                    <input class="flex-5 w-90 radius-half no-outline" type="text">
-                </div>
-            </div>
-            <div class="container d-flex mb-4">
-                <h5 class="flex-1">MÔ TẢ</h5>
-                <textarea class="flex-5 w-90 radius-half" name="" id="" cols="30" rows="8   "></textarea>
-            </div>
-            <div class="container d-flex justify-content-center p-3 ml-3">
-                <button class="btn bg-btn white-color me-3 px-5">Đề xuất</button>
-                <button class="btn bg-btn white-color px-5 ml-3">Hủy</button>
-            </div>
-
-
-
-        </div>
-    </div> -->
-
         <form action="" class="was-validated">
             <div class="container d-flex align-items-center justify-content-between p-1">
                 <h3 class="fs-4 green-color fw-bold p-2 ml-0_9 text-center">ĐỀ XUẤT VỊ TRÍ TÌNH NGUYỆN</h3>
@@ -259,7 +124,6 @@
                 </div>
             </div>
     </form>
-
 </div>
     </div>
 </body>

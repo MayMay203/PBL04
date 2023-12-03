@@ -24,5 +24,27 @@ for (var btn of btn_close) {
     });
 }
 
+$(document).ready(function(){
+    $('.act-slider').slick({
+        dots: true,
+        slidesToShow: 1,
+        arrows: false,
+        vertical: false,
+        speed: 100
+    });
+});
+
+$(document).ready(function () {
+    $('.cmt-slider').slick({
+        autoplay: true,
+        autoplaySpeed: 2500,
+        vertical: true,
+        slidesToShow: 3,
+        arrows: false,
+        pauseOnHover: true,
+    })
+})
+
+
 
 
