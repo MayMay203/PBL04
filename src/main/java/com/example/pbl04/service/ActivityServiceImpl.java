@@ -2,6 +2,8 @@ package com.example.pbl04.service;
 
 import com.example.pbl04.dao.ActivityRepository;
 import com.example.pbl04.entity.Hoatdong;
+import com.example.pbl04.entity.Taikhoan;
+import com.example.pbl04.entity.Thanhvien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +17,6 @@ public class ActivityServiceImpl implements ActivityService {
     public ActivityServiceImpl(ActivityRepository activityRepository) {
         this.activityRepository = activityRepository;
     }
-    @Override
-    public List<Hoatdong> getAllActivity()
-    {
-        return activityRepository.findAll();
-    }
 
     @Override
     public Hoatdong getActivityByID(Integer id)
@@ -32,7 +29,11 @@ public class ActivityServiceImpl implements ActivityService {
         return activityRepository.getActivityOccured();
     }
     public List<Hoatdong> getActivityUpcomming(){return activityRepository.getActivityUpcomming();}
+    public List<Hoatdong> getActivityHappening() {return activityRepository.getActivityHappening();}
     public Integer getNumActivity(){return activityRepository.getNumActivity();}
 
     public Integer getParticipants() {return activityRepository.getParticipants();}
+    public Taikhoan getOrganizator(Integer id){ return activityRepository.getOrganizator(id);}
+    public Thanhvien getMemberByID(Integer id){return activityRepository.getMemberByID(id);}
+    public List<Thanhvien> getMemberList(Integer id){return activityRepository.getMemberList(id);}
 }

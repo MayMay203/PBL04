@@ -1,6 +1,8 @@
 package com.example.pbl04.controller;
 
 import com.example.pbl04.entity.Hoatdong;
+import com.example.pbl04.entity.Taikhoan;
+import com.example.pbl04.entity.Thanhvien;
 import com.example.pbl04.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,16 +27,25 @@ public class ActivityController {
         Integer numberActivitys= activityService.getNumActivity();
         List<Hoatdong> actiListUpcomming =activityService.getActivityUpcomming();
         List<Hoatdong> actiList = activityService.getActivityOccured();
+        List<Hoatdong> actiListHappening= activityService.getActivityHappening();
         model.addAttribute("numberActivitys",numberActivitys);
         model.addAttribute("actiList",actiList);
+        model.addAttribute("actiListHappening",actiListHappening);
         model.addAttribute(("actiListUpcomming"),actiListUpcomming);
         model.addAttribute("numberParticipants",numberParticipants);
         return "TrangChuHoatDong";
     }
+    @GetMapping("/chi-tiet-hoat-dong/{id}")
     public String showActivityByID(Model model,   @PathVariable Integer id)
     {
+        Taikhoan taikhoan =activityService.getOrganizator(id);
+        List<Thanhvien> thanhvienList =activityService.getMemberList(id);
+        Thanhvien thanhvien=activityService.getMemberByID(taikhoan.getId());
         Hoatdong hoatdong = activityService.getActivityByID(id);
         model.addAttribute("hoatdong",hoatdong);
+        model.addAttribute("taikhoan",taikhoan);
+        model.addAttribute("thanhvien",thanhvien);
+        model.addAttribute("thanhvienList",thanhvienList);
         return "ChiTietHoatDong";
     }
 }

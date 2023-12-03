@@ -19,14 +19,14 @@
   <div class="row p-5">
     <div class="col-md-8 p-8 ">
       <div class="name_detail">
-        <p class="detail_title">PHÁT ĐỘNG CHIẾN DỊCH XUÂN TÌNH NGUYỆN 2023 - HÀNH TRÌNH NGÀN DẶM</p>
-        <div class="date-range"> <i class="bi bi-calendar2-range"></i>1/1/2023-3/1/2023</div>
+        <p class="detail_title" th:text="${hoatdong.getTenHD()}"></p>
+        <div class="date-range"> <i class="bi bi-calendar2-range"></i><span th:text="' ' + ${hoatdong.startDate} + '-' + ${hoatdong.endDate}"></span></div>
         <hr>
       </div>
     </div>
     <div class="col-md-4 detail_topic  text-center mx-auto">
       <i class="bi bi-cloud icon_cloud"></i>
-      <span class="topic">TRẺ EM</span>
+      <span class="topic" th:text="${hoatdong.getChuDe()}"></span>
     </div>
   </div>
   <div class="row px-5">
@@ -76,20 +76,20 @@
   <div class="row bg-green-light" >
     <div class="col-md-8">
       <div class="content_detail_body ">
-        <div class="text-content">
-          ” Đón xuân về với mai đào trước sân
-          Nghe hương xuân đưa lâng lâng
-          ….
-          Quà nào bằng gia đình sum vầy
-          Tết nào vui bằng tết đoàn viên”
-          Vậy là ánh nắng cuối đông cũng sắp nhường chỗ cho những tia nắng xuân rộn ràng ấm áp
-          Và cũng như hằng năm, chiến dịch “XUÂN TÌNH NGUYỆN” của Đội Công tác Xã hội - Đại Học Bách Khoa - Đại học Đà Nẵng sắp sửa diễn ra nhằm tạo thêm không khí rộn ràng của mùa xuân. Chiến dịch mang tên “Hành Trình Ngàn Dặm”
-          Với mong muốn kết nối, giúp đỡ cộng đồng bằng những hành động và việc làm thiết thực nhất, Đội Công tác Xã hội tổ chức chiến dịch “XUÂN TÌNH NGUYỆN 2023 - HÀNH TRÌNH NGÀN DẶM” với thông điệp “ÓNG ÁNH GIỌT MỒ HÔI - ĐEM SỨC TRẺ CHO ĐỜI”, nhằm mang đến những tia nắng ấm áp đến với các em nhỏ và người dân ở những nơi khó khăn cần giúp đỡ. Kết nối mọi người cùng hoà vào không khí Tết Việt đầy tình yêu thương
-          Đây cũng sẽ là cơ hội để các thành viên của đại gia đình Công Tác Xã Hội thể hiện một tinh thần đầy nhiệt huyết và sức trẻ trên mỗi người khi đến với chiến dịch Xuân Tình Nguyện 2023 Là dịp để chúng ta có thể ngồi xuống và kể cho nhau nghe những hành trình chia sẻ yêu thương đến với các hoàn cảnh khó khăn ngoài kia hay những niềm vui, điều hạnh phúc trong lòng của mỗi người khi cùng nhau đồng hành đi qua những chương trình hết sức ý nghĩa của Đội mang tên Công Tác Xã Hội
-          Với chuyến đi chiến dịch lần này, hứa hẹn sẽ mang đến cho các thành viên một trải nghiệm
-          tuyệt
-          vời và đầy ý nghĩa. Mong rằng các thành viên sẽ cùng nối tay nhau làm nên những điều ý nghĩa
-          hơn "Một hành động nhỏ cho đi, tạo nên hạnh phúc lớn"
+        <div class="text-content" th:text="${hoatdong.getMoTa()}">
+<!--          ” Đón xuân về với mai đào trước sân-->
+<!--          Nghe hương xuân đưa lâng lâng-->
+<!--          ….-->
+<!--          Quà nào bằng gia đình sum vầy-->
+<!--          Tết nào vui bằng tết đoàn viên”-->
+<!--          Vậy là ánh nắng cuối đông cũng sắp nhường chỗ cho những tia nắng xuân rộn ràng ấm áp-->
+<!--          Và cũng như hằng năm, chiến dịch “XUÂN TÌNH NGUYỆN” của Đội Công tác Xã hội - Đại Học Bách Khoa - Đại học Đà Nẵng sắp sửa diễn ra nhằm tạo thêm không khí rộn ràng của mùa xuân. Chiến dịch mang tên “Hành Trình Ngàn Dặm”-->
+<!--          Với mong muốn kết nối, giúp đỡ cộng đồng bằng những hành động và việc làm thiết thực nhất, Đội Công tác Xã hội tổ chức chiến dịch “XUÂN TÌNH NGUYỆN 2023 - HÀNH TRÌNH NGÀN DẶM” với thông điệp “ÓNG ÁNH GIỌT MỒ HÔI - ĐEM SỨC TRẺ CHO ĐỜI”, nhằm mang đến những tia nắng ấm áp đến với các em nhỏ và người dân ở những nơi khó khăn cần giúp đỡ. Kết nối mọi người cùng hoà vào không khí Tết Việt đầy tình yêu thương-->
+<!--          Đây cũng sẽ là cơ hội để các thành viên của đại gia đình Công Tác Xã Hội thể hiện một tinh thần đầy nhiệt huyết và sức trẻ trên mỗi người khi đến với chiến dịch Xuân Tình Nguyện 2023 Là dịp để chúng ta có thể ngồi xuống và kể cho nhau nghe những hành trình chia sẻ yêu thương đến với các hoàn cảnh khó khăn ngoài kia hay những niềm vui, điều hạnh phúc trong lòng của mỗi người khi cùng nhau đồng hành đi qua những chương trình hết sức ý nghĩa của Đội mang tên Công Tác Xã Hội-->
+<!--          Với chuyến đi chiến dịch lần này, hứa hẹn sẽ mang đến cho các thành viên một trải nghiệm-->
+<!--          tuyệt-->
+<!--          vời và đầy ý nghĩa. Mong rằng các thành viên sẽ cùng nối tay nhau làm nên những điều ý nghĩa-->
+<!--          hơn "Một hành động nhỏ cho đi, tạo nên hạnh phúc lớn"-->
         </div>
 
       </div>
@@ -97,19 +97,19 @@
     <div class="col-md-4 group_member_main" >
       <div class="group_member">
         <h3 class="group_member-organize">NHÀ TỔ CHỨC</h3>
-        <h6 class="name-organize">Nguyễn Lan Anh</h6>
+        <h6 class="name-organize" th:text="${thanhvien.getHoTen()}"></h6>
         <img src="../static/images/ava.jpg" alt="" class="images-organize">
         <hr class="dash_organize"  />
         <h3 class="group_member-parti">THÀNH VIÊN</h3>
         <div class="group_member-list">
-          <div class="member">
+          <div class="member" th:each="thanhvien: ${thanhvienList}">
             <img class="member-ava" src="../static/images/ava1.jpg" alt="">
-            <span class="member-name">Nguyễn Thị Kim Chi</span>
+            <span class="member-name" th:text="${thanhvien.getHoTen()}"></span>
           </div>
-          <div class="member">
-            <img class="member-ava" src="../static/images/anh2.jpg" alt="">
-            <span class="member-name">Nguyễn Trung Thành</span>
-          </div>
+<!--          <div class="member">-->
+<!--            <img class="member-ava" src="../static/images/anh2.jpg" alt="">-->
+<!--            <span class="member-name">Nguyễn Trung Thành</span>-->
+<!--          </div>-->
         </div>
         <h6 class="member_more" data-bs-toggle="modal" data-bs-target="#MemberModal">XEM THÊM</h6>
       </div>
@@ -122,13 +122,13 @@
   <div class="col-md-8 ">
     <hr>
     <h2 class="content_plus_title">ĐỊA ĐIỂM TỔ CHỨC</h2>
-    <div class="plus_detail"><i class="bi bi-geo-alt-fill"></i><span> Địa điểm: </span><span class="plus_detail_address">Nóc Ông Súp, thôn 2, xã Trà Dơn, huyện Nam Trà My, tỉnh Quảng Nam.</span></div>
+    <div class="plus_detail"><i class="bi bi-geo-alt-fill"></i><span> Địa điểm: </span><span class="plus_detail_address" th:text="${hoatdong.getDiaDiem()}"></span></div>
     <br>
     <h2 class="content_plus_title">THỜI GIAN</h2>
-    <div class="plus_detail"><i class="bi bi-calendar3-week"></i><span> Thời gian: </span><span class="plus_detail_date">01-01-2023 - 03-01-2023</span></div>
+    <div class="plus_detail"><i class="bi bi-calendar3-week"></i><span> Thời gian: </span><span class="plus_detail_date" th:text="' ' + ${hoatdong.startDate} + '-' + ${hoatdong.endDate}"></span></div>
     <br>
     <h2 class="content_plus_title">SỐ TÌNH NGUYỆN VIÊN</h2>
-    <div class="plus_detail"><i class="bi bi-people-fill"></i><span> Số tình nguyện viên: </span><span class="plus_detail_date">50</span></div>
+    <div class="plus_detail"><i class="bi bi-people-fill"></i><span> Số tình nguyện viên: </span><span class="plus_detail_date" th:text="${hoatdong.getSoTNVToiDa()}"></span></div>
   </div>
 </div>
 <div class="modal fade" id="MemberModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -138,66 +138,66 @@
         <h5 class="modal-title modal-title-member" id="exampleModalLabel">TÌNH NGUYỆN VIÊN</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body modal-body-member">
+      <div class="modal-body modal-body-member" th:each="thanhvien : ${thanhvienList}">
         <div class="modal-member">
                         <span>
                             <img class="modal-member-ava" src="../static/images/ava1.jpg" alt="">
-                            <span class="modal-member-name">Nguyễn Thị Kim Chi</span>
+                            <span class="modal-member-name" th:text="${thanhvien.getHoTen()}"></span>
                         </span>
           <span class="modal-member-rate">
-                            <i class="rate-detail">5</i>
+                            <i class="rate-detail" >5</i>
                             <i class="bi bi-star-fill icon-star"></i>
                         </span>
         </div>
-        <div class="modal-member">
-                        <span>
-                            <img class="modal-member-ava" src="../static/images/ava2.png" alt="">
-                            <span class="modal-member-name">Nguyễn Trung Thành</span>
-                        </span>
-          <span class="modal-member-rate">
-                            <i class="rate-detail">5</i>
-                            <i class="bi bi-star-fill icon-star"></i>
-                        </span>
-        </div>
-        <div class="modal-member">
-                        <span>
-                            <img class="modal-member-ava" src="../static/images/ava3.jpg" alt="">
-                            <span class="modal-member-name">Phan Thị Mỹ Anh</span>
-                        </span>
-          <span class="modal-member-rate">
-                            <i class="rate-detail">5</i>
-                            <i class="bi bi-star-fill icon-star"></i>
-                        </span>
-        </div>
-        <div class="modal-member">
-                        <span>
-                            <img class="modal-member-ava" src="../static/images/ava4.jpg" alt="">
-                            <span class="modal-member-name">Phạm Hồng Ngọc</span>
-                        </span>
-          <span class="modal-member-rate">
-                            <i class="rate-detail">5</i>
-                            <i class="bi bi-star-fill icon-star"></i>
-                        </span>
-        </div>
-        <div class="modal-member">
-                        <span>
-                            <img class="modal-member-ava" src="../static/images/av5.jpg" alt="">
-                            <span class="modal-member-name">Lê Phan</span>
-                        </span>
-          <span class="modal-member-rate">
-                            <i class="rate-detail">5</i>
-                            <i class="bi bi-star-fill icon-star"></i>
-                        </span>
-        </div>
-        <div class="modal-member">
-                        <span>
-                            <img class="modal-member-ava" src="../static/images/av7.jpg" alt="">
-                            <span class="modal-member-name">Huỳnh Ngọc Minh</span>
-                        </span>
-          <span class="modal-member-rate">
-                            <i class="rate-detail">5</i>
-                            <i class="bi bi-star-fill icon-star"></i>
-                        </span>
+<!--        <div class="modal-member">-->
+<!--                        <span>-->
+<!--                            <img class="modal-member-ava" src="../static/images/ava2.png" alt="">-->
+<!--                            <span class="modal-member-name">Nguyễn Trung Thành</span>-->
+<!--                        </span>-->
+<!--          <span class="modal-member-rate">-->
+<!--                            <i class="rate-detail">5</i>-->
+<!--                            <i class="bi bi-star-fill icon-star"></i>-->
+<!--                        </span>-->
+<!--        </div>-->
+<!--        <div class="modal-member">-->
+<!--                        <span>-->
+<!--                            <img class="modal-member-ava" src="../static/images/ava3.jpg" alt="">-->
+<!--                            <span class="modal-member-name">Phan Thị Mỹ Anh</span>-->
+<!--                        </span>-->
+<!--          <span class="modal-member-rate">-->
+<!--                            <i class="rate-detail">5</i>-->
+<!--                            <i class="bi bi-star-fill icon-star"></i>-->
+<!--                        </span>-->
+<!--        </div>-->
+<!--        <div class="modal-member">-->
+<!--                        <span>-->
+<!--                            <img class="modal-member-ava" src="../static/images/ava4.jpg" alt="">-->
+<!--                            <span class="modal-member-name">Phạm Hồng Ngọc</span>-->
+<!--                        </span>-->
+<!--          <span class="modal-member-rate">-->
+<!--                            <i class="rate-detail">5</i>-->
+<!--                            <i class="bi bi-star-fill icon-star"></i>-->
+<!--                        </span>-->
+<!--        </div>-->
+<!--        <div class="modal-member">-->
+<!--                        <span>-->
+<!--                            <img class="modal-member-ava" src="../static/images/av5.jpg" alt="">-->
+<!--                            <span class="modal-member-name">Lê Phan</span>-->
+<!--                        </span>-->
+<!--          <span class="modal-member-rate">-->
+<!--                            <i class="rate-detail">5</i>-->
+<!--                            <i class="bi bi-star-fill icon-star"></i>-->
+<!--                        </span>-->
+<!--        </div>-->
+<!--        <div class="modal-member">-->
+<!--                        <span>-->
+<!--                            <img class="modal-member-ava" src="../static/images/av7.jpg" alt="">-->
+<!--                            <span class="modal-member-name">Huỳnh Ngọc Minh</span>-->
+<!--                        </span>-->
+<!--          <span class="modal-member-rate">-->
+<!--                            <i class="rate-detail">5</i>-->
+<!--                            <i class="bi bi-star-fill icon-star"></i>-->
+<!--                        </span>-->
         </div>
       </div>
     </div>
