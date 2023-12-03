@@ -26,44 +26,16 @@
     <div class="slider">
         <div class="container-fluid">
             <div id="carouselExampleCaptions" class="carousel slide">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
+                <form method="POST" class="carousel-inner" th:each="activity, iterStat : ${actiListHappening}">
+                    <div class="carousel-item" th:classappend="${iterStat.index == 0} ? 'active' : ''">
                         <img src="../static/images/slider1.jpg" class="d-block w-100" alt="Image">
                         <i class="bi bi-broadcast icon_broad_cast"></i><span class="broad_cast"> ĐANG DIỄN RA</span>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h2><a href="">HÈ YÊU THƯƠNG 2023</a></h2><br><br>
-                            <p><a href="">Chiến dịch Hè Yêu Thương 2023 là một trong những chiến dịch
-                                lớn của Đội Công tác Xã hội. Với chủ đề " Sống như những đoá hoa ", Đội mong muốn sẽ đem nhiều hoạt
-                                động, yêu thương
-                                đến cho các em nhỏ, người dân tại Nóc Tu Gia, Nóc Tắk Pổ, thôn 1 xã Trà Tập, huyện Nam Trà My, tỉnh
-                                Quảng Nam....</a></p>
+                        <div class="carousel-caption d-none d-md-block"  >
+                            <h2><a href="" th:text="${activity.getTenHD()}" th:href="@{/Join(id=${activity.getId()})}"></a></h2><br><br>
+                            <p><a href="" th:text="${#strings.length(activity.getMoTa()) > 500 ? activity.getMoTa().substring(0, 500) + '...' : activity.getMoTa()}"></a></p>
                         </div>
                     </div>
-                    <div class="carousel-item">
-                        <img src="../static/images/slider1.jpg" class="d-block w-100" alt="...">
-                        <i class="bi bi-broadcast icon_broad_cast"></i><span class="broad_cast"> ĐANG DIỄN RA</span>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h2>Xuân tình nguyện 2022</h2>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="../static/images/slider1.jpg" class="d-block w-100" alt="...">
-                        <i class="bi bi-broadcast icon_broad_cast"></i><span class="broad_cast"> ĐANG DIỄN RA</span>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h2>Hiến máu nhân đạo</h2>
-                            <p>Some representative placeholder content for the third slide.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="../static/images/slider1.jpg" class="d-block w-100" alt="...">
-                        <i class="bi bi-broadcast icon_broad_cast"></i><span class="broad_cast"> ĐANG DIỄN RA</span>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h2>Fourth slide label</h2>
-                            <p>Some representative placeholder content for the third slide.</p>
-                        </div>
-                    </div>
-                </div>
+                </form>
 
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
                         data-bs-slide="prev">
@@ -85,8 +57,9 @@
                     <div class="col-md-9 bg-var(--white) m-0" style="max-height: 90rem;">
                         <h3 class="Content_left-title my-5">HOẠT ĐỘNG</h3>
                         <div class="Content_left-item">
-                            <div class="act-slider" th:each="activity : ${actiListUpcomming}">
-                                <div class="container-item">
+                            <div class="act-slider" >
+                                <div class="container-item" >
+                                    <form th:action="@{/Join}"  th:method="GET" th:each="activity : ${actiListUpcomming}">
                                     <div class="card mb-5">
                                         <div class="row g-0">
                                             <div class="col-md-3">
@@ -97,15 +70,17 @@
                                                 <div class="card-body">
                                                     <h5 class="card-title"><a class="card-title-a" href="" th:text="${activity.getTenHD()}"></a>
                                                     </h5>
-                                                    <p class="card-text"><a class="card-text-a" href="" th:text="${activity.getMoTa()}"></a></p>
+                                                    <p class="card-text"><a class="card-text-a" href=""  th:text="${#strings.length(activity.getMoTa()) > 200 ? activity.getMoTa().substring(0, 200) + '...' : activity.getMoTa()}"></a></p>
                                                     <p class="card-text"><small class="text-body-secondary">
                                                         <span class="bi bi-calendar-date"></span><span th:text="${activity.getThoiGianBD()}"></span>
-                                                        <button type="button" class="btn btn-success btn-join-acti">Tham gia</button>
+                                                        <button type="submit" class="btn btn-success btn-join-acti" ><a class="btn-Join-detail" th:href="@{/Join(id=${activity.id})}">Tham gia</a></button>
+<!--                                                        <input type="hidden" name="id" th:value="${activity.getId()}" th:id="'activityForm_' + ${activity.getId()}"/>-->
                                                     </small></p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    </form>
                                 </div>
 
                             </div>
@@ -144,18 +119,18 @@
                             </div>
                         </div>
 
-                        <div class="list_card" th:each="activity : ${actiList}">
+                        <form method="POST" class="list_card" th:each="activity : ${actiList}">
                             <div class="card custom-margin" style="width: 13rem;">
                                 <img class="card-img-top" src="../static/images/a5.jpg" alt="Card image cap">
                                 <div class="card-img-overlay">
-                                    <h5 class="card-title truncate-text"><a href=""
-                                                                            th:text="${activity.getTenHD()}"></a>
+                                    <h5 class="card-title truncate-text"><a href=""  th:text="${activity.getTenHD()}"></a>
                                     </h5>
                                     <p class="card-text" th:text="${#strings.length(activity.getMoTa()) > 100 ? activity.getMoTa().substring(0, 100) + '...' : activity.getMoTa()}"></p>
-                                    <h6 class="card-more_info"><a href="ChiTietHoatDong.html">Xem tiếp</a></h6>
+                                    <a th:href="@{/Join(id=${activity.id})}" class="xemttiep">Xem tiếp</a>
+                                    <input type="hidden" name="id" th:value="${activity.getId()}" th:id="'activityForm_' + ${activity.getId()}"/>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
