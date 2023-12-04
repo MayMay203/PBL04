@@ -33,9 +33,9 @@ public class HomePageController {
         List<Thanhvien> memberList = memberService.getAllMember();
         model.addAttribute("memberList", memberList);
 
-        List<Integer> totalRates = evaluationService.getTotalRateOfMember();
+//        List<Integer> totalRates = evaluationService.getTotalRateOfMember();
 
-        model.addAttribute(("totalRates"),totalRates);
+//        model.addAttribute(("totalRates"),totalRates);
         return "TrangChu";
     }
 }
