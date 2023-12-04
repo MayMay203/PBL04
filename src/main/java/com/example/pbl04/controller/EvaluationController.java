@@ -35,6 +35,7 @@ public class EvaluationController {
             model.addAttribute("evaluationList",evaluationList);
             model.addAttribute("activityList",activityList);
             System.out.println(activityList.size());
-            return "TrangChuDanhGia";
+//            return "TrangChuDanhGia";
+        return "TrangChuDanhGia";
     }
 }

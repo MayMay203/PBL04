@@ -2,19 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css "/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}">
-    <script defer th:src="@{/js/Header.js}"></script>
 </head>
 
 <body>
-<div id="iframe-container" class="sticky-top" style="top: -87px">
-</div>
+<div th:include="Header :: html"></div>
 <div class="container p-5">
     <!--Search-->
     <div class="fs-6 p-1 border-search width-25rem m-5 position-relative">
@@ -57,7 +55,7 @@
     <div class="container d-flex">
         <!--Left-->
         <div class="container p-5 pt-0 fs-6 mx--2 w-75 act-slider">
-        <div class="container-item" th:each="i : ${#numbers.sequence(0, activityList.size() div 4 + ((activityList.size()%4 > 0) ? 1 : 0) - 1)}">
+            <div class="container-item" th:each="i : ${#numbers.sequence(0, activityList.size() div 4 + ((activityList.size()%4 > 0) ? 1 : 0) - 1)}">
                 <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<activityList.size()}">
                     <img src="" class="float-start w-10 h-80" alt="" />
                     <div class="card border-0">
@@ -82,25 +80,25 @@
         </div>
         <!--Right-->
 
-        <div class="container w-25 mt-2_8 p-0">
-            <div class="container cmt-slider">
+        <!--        <div class="container w-25 mt-2_8 p-0">-->
+        <!--            <div class="container cmt-slider">-->
 
-                <div class="container bg-grey radius-1 p-2 my-6" th:each="index:${#numbers.sequence(1,6)}">
-                    <div class="container d-flex my-1">
-                        <img src="../static/images/av3.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">
-                        <h7 class="green-color fs-9 fst-italic fw-medium" th:text="${evaluationList.get(index).getMaTK().getTenDN()}"></h7>
-                    </div>
-                    <div class="container d-flex align-items-center mx-1">
-                        <p class="fs-10 fst-italic m-0" th:text="${evaluationList.get(index).getBinhLuan()}">
-                        </p>
-                    </div>
-                    <p class="green_light-color fst-italic fs-10 my-0 mx-3" th:text="${#dates.format(evaluationList.get(index).getThoiGianBL(),'dd/MM/yyyy')}"></p>
-                </div>
+        <!--                <div class="container bg-grey radius-1 p-2 my-6" th:each="index:${#numbers.sequence(1,6)}">-->
+        <!--                    <div class="container d-flex my-1">-->
+        <!--                        <img src="../static/images/av3.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">-->
+        <!--                        <h7 class="green-color fs-9 fst-italic fw-medium" th:text="${evaluationList.get(index).getMaTK().getTenDN()}"></h7>-->
+        <!--                    </div>-->
+        <!--                    <div class="container d-flex align-items-center mx-1">-->
+        <!--                        <p class="fs-10 fst-italic m-0" th:text="${evaluationList.get(index).getBinhLuan()}">-->
+        <!--                        </p>-->
+        <!--                    </div>-->
+        <!--                    <p class="green_light-color fst-italic fs-10 my-0 mx-3" th:text="${#dates.format(evaluationList.get(index).getThoiGianBL(),'dd/MM/yyyy')}"></p>-->
+        <!--                </div>-->
 
 
 
-            </div>
-        </div>
+        <!--            </div>-->
+        <!--        </div>-->
     </div>
 
     <!-- Chuyển trang -->
@@ -203,10 +201,12 @@
 
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!--<script defer th:src="@{/js/base.js}"></script>-->
+<!--<script defer th:src="@{/js/TCDG.js}"></script>-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script defer th:src="@{/js/base.js}"></script>
 <script defer th:src="@{/js/TrangChuDanhGia.js}"></script>
-
 </html>

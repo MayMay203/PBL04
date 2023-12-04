@@ -9,4 +9,5 @@ import java.util.List;
 public interface EvaluationService {
     public List<Danhgia> getAllEvaluation();
 
+    List<Integer> getTotalRateOfMember();
 }

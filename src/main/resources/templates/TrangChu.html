@@ -71,7 +71,7 @@
 <body>
     <div class="wrapper">
         <!-- Header -->
-        <div class="sticky-top" style="top: -87px"  th:replace="Header :: html"></div>
+        <div th:include="Header :: html"></div>
 <!--        <script src="duongdan/loadContent.js"></script>-->
         <!-- Container -->
         <div class="container-fluid">
@@ -313,7 +313,6 @@
 
     <!-- Your custom JavaScript -->
     <script defer th:src="@{/js/TrangChu.js}"></script>
-    <script defer th:src="@{/js/Header.js}"></script>
 
     <!-- Slick Carousel JS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

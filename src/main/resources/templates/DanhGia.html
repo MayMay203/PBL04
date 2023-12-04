@@ -14,12 +14,10 @@
             type="text/css"
             href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
     />
-    <script defer th:src="@{/js/Header.js}"></script>
 </head>
 
 <body>
-<div id="iframe-container" class="sticky-top" style="top: -87px">
-</div>
+<div th:include="Header :: html"></div>
 <div class="container p-5">
     <!-- Search -->
     <div class="fs-6 p-1 border-search width-25rem m-5 position-relative">
