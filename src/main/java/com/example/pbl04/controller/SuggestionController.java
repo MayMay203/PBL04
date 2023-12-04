@@ -2,7 +2,6 @@ package com.example.pbl04.controller;
 
 import com.example.pbl04.entity.Dexuat;
 import com.example.pbl04.service.SuggestionService;
-import org.apache.commons.text.WordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

@@ -10,16 +10,18 @@ import java.util.List;
 
 @Service
 public class EvaluationServiceImple implements EvaluationService {
-    private final EvaluationRepository evaluateRepo;
+    private final EvaluationRepository evaluationRepo;
 
     @Autowired
-    public EvaluationServiceImple(EvaluationRepository evaluateRepo){
-        this.evaluateRepo = evaluateRepo;
+    public EvaluationServiceImple(EvaluationRepository evaluationRepo){
+        this.evaluationRepo = evaluationRepo;
     }
     @Override
     public List<Danhgia> getAllEvaluate() {
-        return evaluateRepo.findAll();
+        return evaluationRepo.findAll();
     }
+
+
 
 
 }
