@@ -22,10 +22,5 @@ public class TemplateController {
         return "TrangCaNhan";
     }
 
-    @GetMapping("/trang-chu-tong-ket")
-    public String getSummaryHome()
-    {
-        return "TrangChuTongKet";
-    }
 
 }

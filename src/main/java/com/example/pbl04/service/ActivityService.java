@@ -12,7 +12,7 @@ import java.util.List;
 public interface ActivityService {
     Hoatdong getActivityByID(Integer id);
     List<Hoatdong> getActivityOccured();
-    List<Hoatdong> getActivityUpcomming();
+    List<Dangky> getActivityUpcomming();
     List<Hoatdong> getActivityHappening();
     Dangky getDateRegis(Integer mahd);
     Integer getNumActivity();

@@ -85,7 +85,11 @@
 .btn-evaluate-member:hover{
     opacity: 0.9!important;
 }
+.btn-summary{
+    width: 100% !important;
+    border: none;
 
+}
 .btn-view-evaluation:hover{
     opacity: 0.9!important;
 }

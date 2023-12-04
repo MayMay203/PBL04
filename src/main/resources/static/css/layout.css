@@ -382,6 +382,15 @@
     margin-right: -11rem !important;
     border: none;
 }
+.btn-KetThuc{
+    background-color: var(--btn) !important;
+    color: white !important;
+    width:10rem;
+    height: 3rem;
+    margin-top: 7rem;
+    margin-right: -11rem !important;
+    border: none;
+}
 .phase_base_title{
     font-weight: 400;
     font-style: italic;
@@ -672,11 +681,13 @@
     background-color: var(--green-light);
     border-radius: 20px;
     font-style: italic;
+    white-space: pre-wrap;
 }
 .tongket-end{
     padding: 1rem;
     font-style: italic;
     color:var(--sear);
+    white-space: pre-wrap;
 }
 .image-container {
     display: flex;

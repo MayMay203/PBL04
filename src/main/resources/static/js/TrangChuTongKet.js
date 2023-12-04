@@ -8,7 +8,4 @@ search_input.addEventListener("blur", function (e) {
 });
 
 
-function XemTongKet() {
-    window.location.href = 'TongKetHoatDong.html';
-}
 
