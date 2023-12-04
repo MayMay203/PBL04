@@ -57,221 +57,46 @@
     <div class="container d-flex">
         <!--Left-->
         <div class="container p-5 pt-0 fs-6 mx--2 w-75 act-slider">
-
-            <div class="container-item">
-                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid">
-                    <img src="../static/images/anh3.jpg" class="float-start w-15 h-80" alt="" />
+        <div class="container-item" th:each="i : ${#numbers.sequence(0, activityList.size() div 4 + ((activityList.size()%4 > 0) ? 1 : 0) - 1)}">
+                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<activityList.size()}">
+                    <img src="" class="float-start w-10 h-80" alt="" />
                     <div class="card border-0">
                         <div class="card-body fs-7">
-                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
-                                vùng cao.</div>
-                            <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh
-                                khó
-                                khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
-                            <div class="card-text">
-                                <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
+                            <div class="card-title fs-6 fw-bolder green-color" th:text="${activityList.get((4*i)+j).getTenHD()}"></div>
+                            <div class="card-text my-0" th:text="${#strings.length(activityList.get(4*i+j).getMoTa()) > 150 ? activityList.get(4*i+j).getMoTa().substring(0, 150) + '...' : activityList.get(4*i+j).getMoTa()}"></div>
+                            <div class="card-text mx-2 my-1">
+                                <i class="bi bi-calendar2 m-1  green-color" th:text="'   ' + ${activityList.get(4*i+j).getThoiGianBD() + '  -  ' + activityList.get(4*i+j).getThoiGianKT()}"></i>
                             </div>
-                            <div class="card-link">
+                            <div class="card-link p-0">
                                 <button
-                                        class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 view-detail no-border fs-7">Xem
+                                        class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 view-detail no-border fs-7">Xem
                                     chi tiết...</button>
                             </div>
                             <div
-                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9">
-                                Lượt đánh giá(145)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid">
-                    <img src="../static/images/anh3.jpg" class="float-start w-15 h-80" alt="" />
-                    <div class="card border-0">
-                        <div class="card-body fs-7">
-                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
-                                vùng cao.</div>
-                            <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh
-                                khó
-                                khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
-                            <div class="card-text">
-                                <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
-                            </div>
-                            <div class="card-link">
-                                <button
-                                        class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 view-detail no-border fs-7">Xem
-                                    chi tiết...</button>
-                            </div>
-                            <div
-                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9">
-                                Lượt đánh giá(145)</div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid">
-                    <img src="../static/images/anh3.jpg" class="float-start w-15 h-80" alt="" />
-                    <div class="card border-0">
-                        <div class="card-body fs-7">
-                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
-                                vùng cao.</div>
-                            <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh
-                                khó
-                                khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
-                            <div class="card-text">
-                                <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
-                            </div>
-                            <div class="card-link">
-                                <button
-                                        class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 view-detail no-border fs-7">Xem
-                                    chi tiết...</button>
-                            </div>
-                            <div
-                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9">
-                                Lượt đánh giá(145)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid">
-                    <img src="../static/images/anh3.jpg" class="float-start w-15 h-80" alt="" />
-                    <div class="card border-0">
-                        <div class="card-body fs-7">
-                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
-                                vùng cao.</div>
-                            <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh
-                                khó
-                                khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
-                            <div class="card-text">
-                                <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
-                            </div>
-                            <div class="card-link">
-                                <button
-                                        class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 view-detail no-border fs-7">Xem
-                                    chi tiết...</button>
-                            </div>
-                            <div
-                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9">
+                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 p-1 pleft-6 fs-8 mt-9 text_align-center">
                                 Lượt đánh giá(145)</div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="container-item">
-                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid">
-                    <img src="../static/images/anh3.jpg" class="float-start w-15 h-80" alt="" />
-                    <div class="card border-0">
-                        <div class="card-body fs-7">
-                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
-                                vùng cao.</div>
-                            <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh
-                                khó
-                                khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
-                            <div class="card-text">
-                                <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
-                            </div>
-                            <div class="card-link">
-                                <button
-                                        class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 view-detail no-border fs-7">Xem
-                                    chi tiết...</button>
-                            </div>
-                            <div
-                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9">
-                                Lượt đánh giá(145)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid">
-                    <img src="../static/images/anh3.jpg" class="float-start w-15 h-80" alt="" />
-                    <div class="card border-0">
-                        <div class="card-body fs-7">
-                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
-                                vùng cao.</div>
-                            <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh
-                                khó
-                                khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
-                            <div class="card-text">
-                                <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
-                            </div>
-                            <div class="card-link">
-                                <button
-                                        class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 view-detail no-border fs-7">Xem
-                                    chi tiết...</button>
-                            </div>
-                            <div
-                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9">
-                                Lượt đánh giá(145)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
         </div>
         <!--Right-->
 
         <div class="container w-25 mt-2_8 p-0">
             <div class="container cmt-slider">
-                <div class="container bg-grey radius-1 p-2 my-6">
+
+                <div class="container bg-grey radius-1 p-2 my-6" th:each="index:${#numbers.sequence(1,6)}">
                     <div class="container d-flex my-1">
                         <img src="../static/images/av3.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">
-                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>
+                        <h7 class="green-color fs-9 fst-italic fw-medium" th:text="${evaluationList.get(index).getMaTK().getTenDN()}"></h7>
                     </div>
                     <div class="container d-flex align-items-center mx-1">
-                        <p class="fs-10 fst-italic m-0">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải nghiệm
-                            thật khó quên. Cảm ơn ban tổ chức!</p>
+                        <p class="fs-10 fst-italic m-0" th:text="${evaluationList.get(index).getBinhLuan()}">
+                        </p>
                     </div>
-                    <p class="green_light-color fst-italic fs-10 my-0 mx-3">20 ngày trước</p>
+                    <p class="green_light-color fst-italic fs-10 my-0 mx-3" th:text="${#dates.format(evaluationList.get(index).getThoiGianBL(),'dd/MM/yyyy')}"></p>
                 </div>
 
-                <div class="container bg-grey radius-1 p-2 my-6">
-                    <div class="container d-flex my-1">
-                        <img src="../static/images/av5.jpg" class="radius-1 me-1 w-1_8 h-1_8" alt="">
-                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>
-                    </div>
-                    <div class="container d-flex align-items-center mx-1">
-                        <p class="fs-10 fst-italic m-0">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải nghiệm
-                            thật khó quên. Cảm ơn ban tổ chức!</p>
-                    </div>
-                    <p class="green_light-color fst-italic fs-10 my-0 mx-3">20 ngày trước</p>
-                </div>
-
-                <div class="container bg-grey radius-1 p-2 my-6">
-                    <div class="container d-flex my-1">
-                        <img src="../static/images/av4.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">
-                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>
-                    </div>
-                    <div class="container d-flex align-items-center mx-1">
-                        <p class="fs-10 fst-italic m-0">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải nghiệm
-                            thật khó quên. Cảm ơn ban tổ chức!</p>
-                    </div>
-                    <p class="green_light-color fst-italic fs-10 my-0 mx-3">20 ngày trước</p>
-                </div>
-
-                <div class="container bg-grey radius-1 p-2 my-6">
-                    <div class="container d-flex my-1">
-                        <img src="../static/images/av4.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">
-                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>
-                    </div>
-                    <div class="container d-flex align-items-center mx-1">
-                        <p class="fs-10 fst-italic m-0">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải nghiệm
-                            thật khó quên. Cảm ơn ban tổ chức!</p>
-                    </div>
-                    <p class="green_light-color fst-italic fs-10 my-0 mx-3">20 ngày trước</p>
-                </div>
-
-                <div class="container bg-grey radius-1 p-2 my-6">
-                    <div class="container d-flex my-1">
-                        <img src="../static/images/av3.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">
-                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>
-                    </div>
-                    <div class="container d-flex align-items-center mx-1">
-                        <p class="fs-10 fst-italic m-0">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải nghiệm
-                            thật khó quên. Cảm ơn ban tổ chức!</p>
-                    </div>
-                    <p class="green_light-color fst-italic fs-10 my-0 mx-3">20 ngày trước</p>
-                </div>
 
 
             </div>
@@ -279,7 +104,7 @@
     </div>
 
     <!-- Chuyển trang -->
-    <a class="green_light-color no-text-decoration fw-semibold fst-italic fs-5 float-end" href="DanhGia.html">Đánh giá
+    <a class="green_light-color no-text-decoration fw-semibold fst-italic fs-5 float-end" href="/danh-gia">Đánh giá
         hoạt
         động...</a>
 </div>
@@ -370,15 +195,8 @@
                             <i class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i>
                         </div>
                     </div>
-
-
-
                 </div>
-
             </div>
-
-
-
         </div>
     </div>
 </div>
