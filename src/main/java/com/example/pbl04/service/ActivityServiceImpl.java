@@ -34,7 +34,7 @@ public class ActivityServiceImpl implements ActivityService {
     {
         return activityRepository.getActivityOccured();
     }
-    public List<Hoatdong> getActivityUpcomming(){return activityRepository.getActivityUpcomming();}
+    public List<Dangky> getActivityUpcomming(){return activityRepository.getActivityUpcomming();}
     public List<Hoatdong> getActivityHappening() {return activityRepository.getActivityHappening();}
     public Integer getNumActivity(){return activityRepository.getNumActivity();}
     public Dangky getDateRegis(Integer mahd){return activityRepository.getDateRegis();}

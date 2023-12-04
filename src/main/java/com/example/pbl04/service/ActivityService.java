@@ -13,7 +13,7 @@ public interface ActivityService {
     List<Hoatdong> getAllActivity();
     Hoatdong getActivityByID(Integer id);
     List<Hoatdong> getActivityOccured();
-    List<Hoatdong> getActivityUpcomming();
+    List<Dangky> getActivityUpcomming();
     List<Hoatdong> getActivityHappening();
     Dangky getDateRegis(Integer mahd);
     Integer getNumActivity();

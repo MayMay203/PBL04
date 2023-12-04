@@ -26,10 +26,12 @@ public class ActivityController {
 
         Integer numberParticipants= activityService.getParticipants();
         Integer numberActivitys= activityService.getNumActivity();
-        List<Hoatdong> actiListUpcomming =activityService.getActivityUpcomming();
+//        List<Hoatdong> actiListUpcomming1 =activityService.getActivityUpcomming();
+        List<Dangky> actiListUpcomming =activityService.getActivityUpcomming();
         List<Hoatdong> actiList = activityService.getActivityOccured();
         List<Hoatdong> actiListHappening= activityService.getActivityHappening();
         model.addAttribute("numberActivitys",numberActivitys);
+        model.addAttribute("Anh",new Anh());
         model.addAttribute("actiList",actiList);
         model.addAttribute("actiListHappening",actiListHappening);
         model.addAttribute(("actiListUpcomming"),actiListUpcomming);
@@ -43,6 +45,7 @@ public class ActivityController {
         List<Thanhvien> thanhvienList =activityService.getMemberList(hd.getId());
         Thanhvien thanhvien=activityService.getMemberByID(taikhoan.getId());
         Hoatdong hoatdong = activityService.getActivityByID(hd.getId());
+        model.addAttribute("Anh",new Anh());
         model.addAttribute("hoatdong",hoatdong);
         model.addAttribute("taikhoan",taikhoan);
         model.addAttribute("thanhvien",thanhvien);

@@ -8,7 +8,16 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/base1.css}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/TrangChuHoatDong.css}">
     <script defer th:src="@{/js/Header.js}"></script>
+    <script defer th:src="@{/js/TrangChuHoatDong.js}"></script>
 </head>
 
 <body>
@@ -49,86 +58,27 @@
     <div class="container d-flex content">
         <!-- Left -->
         <div class="container p-5 pt-0 fs-6 mx--2 flex-3 mh-90">
-            <h2 class="mx-0 fs-4 mb-sm-3 green-color">TỔNG KẾT HOẠT ĐỘNG</h2>
-
-            <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer">
+            <h2 class="mx-0 fs-4 mb-sm-3 green-color" >TỔNG KẾT HOẠT ĐỘNG</h2>
+            <div class="act-slider">
+             <div class="container-item">
+              <form th:action="@{/View-Summary}" th:method="GET" th:each="summary:${summaryList}">
+               <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer">
                 <img src="../static/images/anh2.jpg" class="float-start w-15 h-80 act-image" alt="" />
                 <div class="card border-0">
                     <div class="card-body fs-7">
-                        <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
-                            vùng cao.</div>
-                        <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh khó
-                            khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
+                        <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1" th:text="${summary.getMaHD().getTenHD()}"></div>
+                        <div class="card-text" th:text="${#strings.length(summary.getLoiKet()) > 100 ? summary.getLoiKet().substring(0, 100) + '...' : summary.getLoiKet()}"></div>
                         <div class="card-text">
-                            <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
+                            <i class="bi bi-calendar2 m-1 green-color"></i><span th:text="' ' + ${summary.getMaHD().getThoiGianBD()} + '-' + ${summary.getMaHD().getThoiGianKT()}"></span>
                         </div>
-
-                        <div
-                                class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-evaluate" onclick="XemTongKet()">
-                            Xem tổng kết
-                        </div>
+                        <button type="submit" class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-summmary" th:href="@{/View-Summary(id=${summary.id})}"> Xem tổng kết</button>
+                        <input type="hidden" name="id" th:value="${summary.getId()}" th:id="'activityForm_' + ${summary.getId()}"/>
                     </div>
                 </div>
             </div>
-
-            <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer">
-                <img src="../static/images/anh2.jpg" class="float-start w-15 h-80 act-image" alt="" />
-                <div class="card border-0">
-                    <div class="card-body fs-7">
-                        <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
-                            vùng cao.</div>
-                        <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh khó
-                            khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
-                        <div class="card-text">
-                            <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
-                        </div>
-
-                        <div
-                                class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-evaluate" onclick="XemTongKet()">
-                            Xem tổng kết
-                        </div>
-                    </div>
-                </div>
+              </form>
             </div>
-
-            <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer">
-                <img src="../static/images/anh2.jpg" class="float-start w-15 h-80 act-image" alt="" />
-                <div class="card border-0">
-                    <div class="card-body fs-7">
-                        <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
-                            vùng cao</div>
-                        <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh khó
-                            khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
-                        <div class="card-text">
-                            <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
-                        </div>
-
-                        <div
-                                class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-evaluate" onclick="XemTongKet()">
-                            Xem tổng kết</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer">
-                <img src="../static/images/anh2.jpg" class="float-start w-15 h-80 act-image" alt="" />
-                <div class="card border-0">
-                    <div class="card-body fs-7">
-                        <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
-                            vùng cao.</div>
-                        <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh khó
-                            khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
-                        <div class="card-text">
-                            <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
-                        </div>
-
-                        <div
-                                class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-evaluate" onclick="XemTongKet()">
-                            Xem tổng kết
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
         </div>
         <!-- Right -->
         <div class="container flex-1 bg-green radius-lghalf">

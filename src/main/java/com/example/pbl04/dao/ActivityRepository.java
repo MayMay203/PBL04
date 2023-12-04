@@ -17,8 +17,8 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
 
      @Query("SELECT h from Hoatdong h where h.tinhTrangHD = 3")
     List<Hoatdong> getActivityOccured();
-     @Query("select h from Hoatdong h where h.tinhTrangHD = 1")
-     List<Hoatdong> getActivityUpcomming();
+     @Query("select dk from Hoatdong h,Dangky dk where h.tinhTrangHD = 1 and h = dk.maHD and dk.phanQuyen=true")
+     List<Dangky> getActivityUpcomming();
      @Query("select dk from Hoatdong h , Dangky dk where h= dk.maHD and dk.phanQuyen=true")
      Dangky getDateRegis();
     @Query("select h from Hoatdong h where h.tinhTrangHD = 2")

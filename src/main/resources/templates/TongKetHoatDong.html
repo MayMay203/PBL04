@@ -8,9 +8,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/layout.css}">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-<!--    <script defer th:src="@{/js/Header.js}"></script>-->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script defer th:src="@{/js/Header.js}"></script>
 </head>
 
 <body>
@@ -21,14 +19,14 @@
     <div class="row p-5">
         <div class="col-md-8 p-8 ">
             <div class="name_detail">
-                <p class="detail_title">PHÁT ĐỘNG CHIẾN DỊCH XUÂN TÌNH NGUYỆN 2023 - HÀNH TRÌNH NGÀN DẶM</p>
-                <div class="date-range"> <i class="bi bi-calendar2-range"></i>1/1/2023-3/1/2023</div>
+                <p class="detail_title" th:text="${summary.getMaHD().getTenHD()}"></p>
+                <div class="date-range"> <i class="bi bi-calendar2-range"></i><span  th:text="' ' + ${summary.getMaHD().getThoiGianBD()} + '-' + ${summary.getMaHD().getThoiGianKT()}"></span></div>
                 <hr>
             </div>
         </div>
         <div class="col-md-4 detail_topic  text-center mx-auto">
             <i class="bi bi-cloud icon_cloud"></i>
-            <span class="topic">TRẺ EM</span>
+            <span class="topic" th:text="${summary.getMaHD().getChuDe()}"></span>
         </div>
     </div>
 
@@ -102,67 +100,23 @@
                 <div class="tab-pane active">
                     <h2 class="tongket-title">ĐỊA ĐIỂM</h2>
                     <div class="tongket-title-info"><i class="bi bi-geo-alt-fill"></i><span> Địa điểm: </span><span
-                            class="plus_detail_address">Nóc Ông Súp, thôn 2, xã Trà Dơn, huyện Nam Trà My, tỉnh
-                                Quảng Nam.</span></div>
+                            class="plus_detail_address" th:text="${summary.getMaHD().getDiaDiem()}"></span></div>
                     <h2 class="tongket-title">THỜI GIAN</h2>
                     <div class="tongket-title-info"><i class="bi bi-calendar3-week"></i><span> Thời gian:
-                            </span><span class="plus_detail_date">01-01-2023 - 03-01-2023</span></div>
+                            </span><span class="plus_detail_date" th:text="' ' + ${summary.getMaHD().getThoiGianBD()} + '-' + ${summary.getMaHD().getThoiGianKT()}"></span></div>
                     <h2 class="tongket-title">TÌNH NGUYỆN VIÊN</h2>
                     <div class="tongket-title-info"><i class="bi bi-people-fill"></i><span> Số tình nguyện viên:
                             </span><span class="plus_detail_date">50</span></div>
                     <h2 class="tongket-title-1">TỔNG KẾT</h2>
-                    <p class="tongket-board"> Với phương châm “Sống như những đoá hoa” Chúng tôi cảm ơn về sự ủng hộ
-                        giúp đỡ của các mạnh thường
-                        quân, nhà tài trợ đến từ nhiều cơ sở khác nhau. Đã cùng Đội chung tay xây nên những giá trị
-                        ý nghĩa cho cuộc
-                        sống này.Chúng tôi đã dùng số tiền đó vào việc các công việc thiết thực cho người dân ở Nóc
-                        Tu Gia, nóc Tắk
-                        Pổ, thôn 1, xã Trà Tập, huyện Nam Trà My, tỉnh Quảng Nam như: <br>
-                        Bê tông hoá sân chơi cho Nóc Tu Gia <br>
-                        Làm lại hàng trụ rào cho trường mẫu giáo <br>
-                        Mua 10 suất quà cho người dân. <br>
-                        Mỗi suất quà trị giá 500.000đ song mỗi suất gồm: <br>
-                        + 10 ký gạo.<br>
-                        + 1 chai nước mắm.<br>
-                        + 1 chai dầu ăn.<br>
-                        + 1 chai xì đâu<br>
-                        + 3 bịch hạt nêm.<br>
-                        + 200.000đ tiền mặt.<br>
-                        Tặng 10 suất khuyến học cho trẻ em.<br>
-                        Mỗi suất quà trị giá 500.000đ, mỗi suất bao gồm:<br>
-                        + 1 thùng sữa<br>
-                        + 10 cuốn vở ghi.<br>
-                        + 1 hộp bút.<br>
-                        + 1 bộ dụng cụ học tập.<br>
-                        + 1 đôi dép.</p>
+                    <p class="tongket-board" th:text="${summary.getBangTongKet()}"></p>
                     <h2 class="tongket-title">LỜI KẾT</h2>
-                    <p class="tongket-end">Cảm ơn tất cả mọi người đã cùng đồng hành trên chuyến xe mang tên “Sống
-                        Như Những Đóa Hoa” để mang đến
-                        một mùa hè đầy nhiệt huyết và ý nghĩa đến với Nóc Tu Gia. Tất cả chúng ta đã tạo nên một
-                        hành trình thật rực rỡ
-                        và nhận được nhiều tình cảm yêu thương, quý mến của những người dân nơi nơi này. Bên cạnh đó
-                        chiến dịch cũng
-                        đã tạo sự kết nối giữa các thành viên trong Đội thêm gần gũi, gắn bó, cùng nhau hỗ trợ để
-                        hoàn thành thật tốt các
-                        nhiệm vụChiến dịch đã diễn ra đầy trọn vẹn và để lại nhiều niềm vui, hạnh phúc và những kỉ
-                        niệm đáng quý cho tất
-                        cả các thành viên. Mong rằng, các bạn hãy cùng Đội tiếp tục nỗ lực, cố gắng để tạo nên nhiều
-                        điều tốt đẹp , mang
-                        yêu thương bay xa đến mọi nhà</p>
+                    <p class="tongket-end" th:text="${summary.getLoiKet()}"></p>
                 </div>
                 <!-- Hình ảnh hoạt động -->
                 <div class="tab-pane">
                     <h2 class="tongket-title">HÌNH ẢNH HOẠT ĐỘNG</h2>
                     <div class="image-container">
-                        <img src="../static/images/anh1.jpg" alt="Image 1">
-                        <img src="../static/images/anh2.jpg" alt="Image 2">
-                        <img src="../static/images/anh3.jpg" alt="Image 3">
-                        <img src="../static/images/anh1.jpg" alt="Image 1">
-                        <img src="../static/images/anh2.jpg" alt="Image 2">
-                        <img src="../static/images/anh3.jpg" alt="Image 3">
-                        <img src="../static/images/anh1.jpg" alt="Image 1">
-                        <img src="../static/images/anh2.jpg" alt="Image 2">
-                        <img src="../static/images/anh3.jpg" alt="Image 3">
+                        <img th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(summary.getMaHD().getAnh())}" alt="Image 1">
                         <!-- Thêm các hình ảnh khác nếu cần -->
                     </div>
                 </div>
@@ -177,18 +131,14 @@
             <button type="button" class="btn-judge">Đánh giá</button>
             <div class="group_member_tongket">
                 <h3 class="group_member-organize">NHÀ TỔ CHỨC</h3>
-                <h6 class="name-organize">Nguyễn Lan Anh</h6>
+                <h6 class="name-organize" th:text="${thanhvien.getHoTen()}"></h6>
                 <img src="../static/images/ava.jpg" alt="" class="images-organize">
                 <hr class="dash_organize" />
                 <h3 class="group_member-parti">THÀNH VIÊN</h3>
                 <div class="group_member-list">
-                    <div class="member">
+                    <div class="member" th:each="thanhvien: ${thanhvienList}">
                         <img class="member-ava" src="../static/images/ava1.jpg" alt="">
-                        <span class="member-name">Nguyễn Thị Kim Chi</span>
-                    </div>
-                    <div class="member">
-                        <img class="member-ava" src="../static/images/anh2.jpg" alt="">
-                        <span class="member-name">Nguyễn Trung Thành</span>
+                        <span class="member-name" th:text="${thanhvien.getHoTen()}">Nguyễn Thị Kim Chi</span>
                     </div>
                 </div>
                 <h6 class="member_more" data-bs-toggle="modal" data-bs-target="#MemberModal">XEM THÊM</h6>
@@ -206,61 +156,11 @@
                 <h5 class="modal-title modal-title-member" id="exampleModalLabel">TÌNH NGUYỆN VIÊN</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body modal-body-member">
+            <div class="modal-body modal-body-member" th:each="thanhvien: ${thanhvienList}">
                 <div class="modal-member">
                         <span>
                             <img class="modal-member-ava" src="../static/images/ava1.jpg" alt="">
-                            <span class="modal-member-name">Nguyễn Thị Kim Chi</span>
-                        </span>
-                    <span class="modal-member-rate">
-                            <i class="rate-detail">5</i>
-                            <i class="bi bi-star-fill icon-star"></i>
-                        </span>
-                </div>
-                <div class="modal-member">
-                        <span>
-                            <img class="modal-member-ava" src="../static/images/ava2.png" alt="">
-                            <span class="modal-member-name">Nguyễn Trung Thành</span>
-                        </span>
-                    <span class="modal-member-rate">
-                            <i class="rate-detail">5</i>
-                            <i class="bi bi-star-fill icon-star"></i>
-                        </span>
-                </div>
-                <div class="modal-member">
-                        <span>
-                            <img class="modal-member-ava" src="../static/images/ava3.jpg" alt="">
-                            <span class="modal-member-name">Phan Thị Mỹ Anh</span>
-                        </span>
-                    <span class="modal-member-rate">
-                            <i class="rate-detail">5</i>
-                            <i class="bi bi-star-fill icon-star"></i>
-                        </span>
-                </div>
-                <div class="modal-member">
-                        <span>
-                            <img class="modal-member-ava" src="../static/images/ava4.jpg" alt="">
-                            <span class="modal-member-name">Phạm Hồng Ngọc</span>
-                        </span>
-                    <span class="modal-member-rate">
-                            <i class="rate-detail">5</i>
-                            <i class="bi bi-star-fill icon-star"></i>
-                        </span>
-                </div>
-                <div class="modal-member">
-                        <span>
-                            <img class="modal-member-ava" src="../static/images/av5.jpg" alt="">
-                            <span class="modal-member-name">Lê Phan</span>
-                        </span>
-                    <span class="modal-member-rate">
-                            <i class="rate-detail">5</i>
-                            <i class="bi bi-star-fill icon-star"></i>
-                        </span>
-                </div>
-                <div class="modal-member">
-                        <span>
-                            <img class="modal-member-ava" src="../static/images/av7.jpg" alt="">
-                            <span class="modal-member-name">Huỳnh Ngọc Minh</span>
+                            <span class="modal-member-name" th:text="${thanhvien.getHoTen()}"></span>
                         </span>
                     <span class="modal-member-rate">
                             <i class="rate-detail">5</i>
@@ -271,7 +171,8 @@
         </div>
     </div>
 </div>
-<script src="../static/js/TongketHoatDong.js"></script>
-
+<script defer th:src="@{/js/TongKetHoatDong.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>
 </html>

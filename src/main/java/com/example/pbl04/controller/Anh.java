@@ -18,6 +18,8 @@ public class Anh {
         }
     }
 
+        public String getimgdata(byte[] bytedata)
+        { return Base64.getMimeEncoder().encodeToString(bytedata); }
     private String encodeImageToBase64(InputStream inputStream) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         byte[] buffer = new byte[1024];
