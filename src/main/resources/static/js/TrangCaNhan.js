@@ -10,6 +10,7 @@ $(document).ready(function() {
         $('#modalChangeInform').modal('hide');
     });
 });
+
 $(document).ready(function() {
     $('#btnFilter').on('click', function() {
         $('#modalFilter').modal('show');
@@ -20,6 +21,14 @@ $(document).ready(function() {
         $('#modalFilter').modal('hide');
     });
 });
+// $('#modalFilter').on('hidden.bs.modal', function () {
+//     // Loại bỏ backdrop khi modal đóng
+//     $('.modal-backdrop').remove();
+// });
+// $('#modalChangeInform').on('hidden.bs.modal', function () {
+//     // Loại bỏ backdrop khi modal đóng
+//     $('.modal-backdrop').remove();
+// });
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('input-file').addEventListener('change', function (event) {
         var file = event.target.files[0]; // Lấy file từ input
@@ -32,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('formChangeInform').addEventListener('submit', function (event) {
         if (!this.checkValidity()) {

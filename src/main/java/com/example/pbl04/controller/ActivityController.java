@@ -23,6 +23,7 @@ public class ActivityController {
    @GetMapping("/trang-chu-hoat-dong")
     public String showActivityOccured(Model model)
     {
+
         Integer numberParticipants= activityService.getParticipants();
         Integer numberActivitys= activityService.getNumActivity();
         List<Hoatdong> actiListUpcomming =activityService.getActivityUpcomming();

@@ -20,6 +20,11 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    public List<Hoatdong> getAllActivity() {
+        return activityRepository.findAll();
+    }
+
+    @Override
     public Hoatdong getActivityByID(Integer id)
     {
         return activityRepository.findActivityByID(id);

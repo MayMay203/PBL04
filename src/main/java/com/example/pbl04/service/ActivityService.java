@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface ActivityService {
+    List<Hoatdong> getAllActivity();
     Hoatdong getActivityByID(Integer id);
     List<Hoatdong> getActivityOccured();
     List<Hoatdong> getActivityUpcomming();

@@ -10,6 +10,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
+    @Query("SELECT h FROM Hoatdong h")
+    List<Hoatdong> getALlActivity();
     @Query("SELECT h FROM Hoatdong h WHERE h.id = :id")
     Hoatdong findActivityByID(int id);
 

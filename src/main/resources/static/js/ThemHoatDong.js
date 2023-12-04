@@ -1,8 +1,8 @@
-$(document).ready(function() {
-  $('#btnDangNhap').on('click', function() {
-    $('#DangNhapModal').modal('show');
-  });
-});
+// $(document).ready(function() {
+//   $('#btnDangNhap').on('click', function() {
+//     $('#DangNhapModal').modal('show');
+//   });
+// });
 
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("imageInput").addEventListener("change", function (event) {
