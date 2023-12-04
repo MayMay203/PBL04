@@ -85,65 +85,18 @@
         <div class="container w-25 mt-2_8 p-0">
             <div class="container cmt-slider">
 
-                <div class="container bg-grey radius-1 p-2 my-6" th:each="evaluation,index:${evaluationList}">
+                <div class="container bg-grey radius-1 p-2 my-6" th:each="index:${#numbers.sequence(1,6)}">
                     <div class="container d-flex my-1">
                         <img src="../static/images/av3.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">
-                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>
+                        <h7 class="green-color fs-9 fst-italic fw-medium" th:text="${evaluationList.get(index).getMaTK().getTenDN()}"></h7>
                     </div>
                     <div class="container d-flex align-items-center mx-1">
-                        <p class="fs-10 fst-italic m-0" th:text="${evaluation.getBinhLuan()}">
+                        <p class="fs-10 fst-italic m-0" th:text="${evaluationList.get(index).getBinhLuan()}">
                         </p>
                     </div>
-                    <p class="green_light-color fst-italic fs-10 my-0 mx-3" th:text="${evaluation.getThoiGianBL()}"></p>
+                    <p class="green_light-color fst-italic fs-10 my-0 mx-3" th:text="${#dates.format(evaluationList.get(index).getThoiGianBL(),'dd/MM/yyyy')}"></p>
                 </div>
 
-                <div class="container bg-grey radius-1 p-2 my-6">
-                    <div class="container d-flex my-1">
-                        <img src="../static/images/av5.jpg" class="radius-1 me-1 w-1_8 h-1_8" alt="">
-                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>
-                    </div>
-                    <div class="container d-flex align-items-center mx-1">
-                        <p class="fs-10 fst-italic m-0">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải nghiệm
-                            thật khó quên. Cảm ơn ban tổ chức!</p>
-                    </div>
-                    <p class="green_light-color fst-italic fs-10 my-0 mx-3">20 ngày trước</p>
-                </div>
-
-                <div class="container bg-grey radius-1 p-2 my-6">
-                    <div class="container d-flex my-1">
-                        <img src="../static/images/av4.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">
-                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>
-                    </div>
-                    <div class="container d-flex align-items-center mx-1">
-                        <p class="fs-10 fst-italic m-0">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải nghiệm
-                            thật khó quên. Cảm ơn ban tổ chức!</p>
-                    </div>
-                    <p class="green_light-color fst-italic fs-10 my-0 mx-3">20 ngày trước</p>
-                </div>
-
-                <div class="container bg-grey radius-1 p-2 my-6">
-                    <div class="container d-flex my-1">
-                        <img src="../static/images/av4.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">
-                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>
-                    </div>
-                    <div class="container d-flex align-items-center mx-1">
-                        <p class="fs-10 fst-italic m-0">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải nghiệm
-                            thật khó quên. Cảm ơn ban tổ chức!</p>
-                    </div>
-                    <p class="green_light-color fst-italic fs-10 my-0 mx-3">20 ngày trước</p>
-                </div>
-
-                <div class="container bg-grey radius-1 p-2 my-6">
-                    <div class="container d-flex my-1">
-                        <img src="../static/images/av3.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">
-                        <h7 class="green-color fs-9 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>
-                    </div>
-                    <div class="container d-flex align-items-center mx-1">
-                        <p class="fs-10 fst-italic m-0">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải nghiệm
-                            thật khó quên. Cảm ơn ban tổ chức!</p>
-                    </div>
-                    <p class="green_light-color fst-italic fs-10 my-0 mx-3">20 ngày trước</p>
-                </div>
 
 
             </div>
@@ -151,7 +104,7 @@
     </div>
 
     <!-- Chuyển trang -->
-    <a class="green_light-color no-text-decoration fw-semibold fst-italic fs-5 float-end" href="DanhGia.html">Đánh giá
+    <a class="green_light-color no-text-decoration fw-semibold fst-italic fs-5 float-end" href="/danh-gia">Đánh giá
         hoạt
         động...</a>
 </div>
@@ -242,15 +195,8 @@
                             <i class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i>
                         </div>
                     </div>
-
-
-
                 </div>
-
             </div>
-
-
-
         </div>
     </div>
 </div>

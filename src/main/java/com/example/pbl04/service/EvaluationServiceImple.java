@@ -17,7 +17,7 @@ public class EvaluationServiceImple implements EvaluationService {
         this.evaluationRepo = evaluationRepo;
     }
     @Override
-    public List<Danhgia> getAllEvaluate() {
+    public List<Danhgia> getAllEvaluation() {
         return evaluationRepo.findAll();
     }
 

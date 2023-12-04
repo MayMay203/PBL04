@@ -7,6 +7,6 @@ import java.lang.reflect.Member;
 import java.util.List;
 
 public interface EvaluationService {
-    public List<Danhgia> getAllEvaluate();
+    public List<Danhgia> getAllEvaluation();
 
 }
