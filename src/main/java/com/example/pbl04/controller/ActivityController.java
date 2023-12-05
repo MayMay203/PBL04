@@ -38,13 +38,13 @@ public class ActivityController {
         model.addAttribute("numberParticipants",numberParticipants);
         return "TrangChuHoatDong";
     }
-    @RequestMapping(value ="/Join", method = RequestMethod.GET)
-    public String showActivityByID(Model model, @ModelAttribute Hoatdong hd)
+    @RequestMapping(value ="/Join")
+    public String showActivityByID(Model model,@RequestParam("id") Integer id)
     {
-        Taikhoan taikhoan =activityService.getOrganizator(hd.getId());
-        List<Thanhvien> thanhvienList =activityService.getMemberList(hd.getId());
+        Taikhoan taikhoan =activityService.getOrganizator(id);
+        List<Thanhvien> thanhvienList =activityService.getMemberList(id);
         Thanhvien thanhvien=activityService.getMemberByID(taikhoan.getId());
-        Hoatdong hoatdong = activityService.getActivityByID(hd.getId());
+        Hoatdong hoatdong = activityService.getActivityByID(id);
         model.addAttribute("Anh",new Anh());
         model.addAttribute("hoatdong",hoatdong);
         model.addAttribute("taikhoan",taikhoan);

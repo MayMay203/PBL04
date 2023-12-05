@@ -21,5 +21,6 @@ public interface ActivityService {
     Taikhoan getOrganizator(Integer id);
     Thanhvien getMemberByID(Integer id);
     List<Thanhvien> getMemberList(Integer id);
+    List<Hoatdong> getActivityByMyID(Integer myID);
 
 }

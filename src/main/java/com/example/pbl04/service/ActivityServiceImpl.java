@@ -42,4 +42,5 @@ public class ActivityServiceImpl implements ActivityService {
     public Taikhoan getOrganizator(Integer id){ return activityRepository.getOrganizator(id);}
     public Thanhvien getMemberByID(Integer id){return activityRepository.getMemberByID(id);}
     public List<Thanhvien> getMemberList(Integer id){return activityRepository.getMemberList(id);}
+    public List<Hoatdong> getActivityByMyID(Integer myID) {return activityRepository.getActivityByMyID(myID);}
 }
