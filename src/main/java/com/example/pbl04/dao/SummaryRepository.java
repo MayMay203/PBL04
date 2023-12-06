@@ -1,6 +1,9 @@
 package com.example.pbl04.dao;
 
-import com.example.pbl04.entity.*;
+import com.example.pbl04.entity.Anhtongket;
+import com.example.pbl04.entity.Taikhoan;
+import com.example.pbl04.entity.Thanhvien;
+import com.example.pbl04.entity.Tongket;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,4 +23,5 @@ public interface SummaryRepository extends JpaRepository<Tongket,Integer> {
     @Query("select a from Anhtongket a where a.maTongKet.id=:id")
     List<Anhtongket> getimgSummaryList(@Param("id") Integer id);
 
+    
 }
