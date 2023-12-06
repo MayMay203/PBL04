@@ -39,6 +39,7 @@ public class EvaluationController {
             model.addAttribute("activityList",activityList);
             List<Integer> countEvaList = evaluationService.countEvaluation(activityList);
             model.addAttribute("countEvaList",countEvaList);
+        model.addAttribute("account", new Taikhoan());
             return "TrangChuDanhGia";
     }
 
@@ -52,6 +53,7 @@ public class EvaluationController {
         model.addAttribute("actListOfHost",actListOfHost);
         System.out.println(actListOfMember.size());
         System.out.println(actListOfHost.size());
+        model.addAttribute("account", new Taikhoan());
         return "DanhGia";
     }
 
