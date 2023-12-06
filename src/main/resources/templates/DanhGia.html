@@ -14,10 +14,11 @@
             type="text/css"
             href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
     />
+    <script  defer th:src="@{/js/Header.js}"></script>
 </head>
 
 <body>
-<div th:include="Header :: html"></div>
+<div id="myHeader" style="top: -87px" th:include="Header :: html"></div>
 <div class="container p-5">
     <!-- Search -->
     <div class="fs-6 p-1 border-search width-25rem m-5 position-relative">
@@ -51,157 +52,31 @@
 
     <!-- Content -->
     <div class="container d-flex justify-content-between">
-        <h2 class="mx-0 fs-4 mb-sm-3 ms-5">HOẠT ĐỘNG GẦN ĐÂY</h2>
+        <h2 class="mx-0 fs-4 mb-sm-3 ms-5">HOẠT ĐỘNG ĐÃ THAM GIA</h2>
         <h2 class="fs-4 pt-sm-3 text-center me-5">HOẠT ĐỘNG ĐÃ TỔ CHỨC</h2>
     </div>
     <div class="container d-flex content">
         <!-- Left -->
         <div class="container p-5 pt-0 fs-6 mx--2 w-70 act-slider">
-            <div class="container-item">
-                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer">
+            <div class="container-item" th:if="${actListOfMember.size()!=0}" th:each="i : ${#numbers.sequence(0, actListOfMember.size() div 4 + ((actListOfMember.size()%4 > 0) ? 1 : 0) - 1)}">
+                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<actListOfMember.size()}">
                     <img src="../static/images/anh3.jpg" class="float-start w-15 h-80 act-image" alt="" />
                     <div class="card border-0">
                         <div class="card-body fs-7">
-                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
-                                vùng cao.</div>
-                            <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh
-                                khó
-                                khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
+                            <div class="card-title fs-6 fw-bolder green-color" th:text="${actListOfMember.get((4*i)+j).getTenHD()}">
+                            </div>
+                            <div class="card-text fs-8" th:text="${#strings.length(actListOfMember.get(4*i+j).getMoTa()) > 150 ? actListOfMember.get(4*i+j).getMoTa().substring(0, 150) + '...' : actListOfMember.get(4*i+j).getMoTa()}"></div>
                             <div class="card-text">
-                                <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
+                                <i class="bi bi-calendar2 m-1 green-color" th:text="'   ' + ${actListOfMember.get(4*i+j).getThoiGianBD() + '  -  ' + actListOfMember.get(4*i+j).getThoiGianKT()}"></i>
                             </div>
                             <div class="card-link">
-                                <a href=""
-                                   class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 no-border fs-7 view-summary">Xem
-                                    tổng kết...</a>
+                                <a
+                                   class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 no-border fs-7 view-summary" th:href="@{/View-Summary(id=${actListOfMember.get(4*i+j).getId()})}">
+                                    Xem tổng kết...</a>
                             </div>
-                            <div
-                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-evaluate">
+                            <div class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-evaluate" th:attr="data-value=${actListOfMember.get(4*i+j).getId()}">
                                 Đánh giá
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer">
-                    <img src="../static/images/anh3.jpg" class="float-start w-15 h-80 act-image" alt="" />
-                    <div class="card border-0">
-                        <div class="card-body fs-7">
-                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
-                                vùng cao.</div>
-                            <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh
-                                khó
-                                khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
-                            <div class="card-text">
-                                <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
-                            </div>
-                            <div class="card-link">
-                                <a href=""
-                                   class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 no-border fs-7 view-summary">Xem
-                                    tổng kết...</a>
-                            </div>
-                            <div
-                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-evaluate">
-                                Đánh giá
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer">
-                    <img src="../static/images/anh3.jpg" class="float-start w-15 h-80 act-image" alt="" />
-                    <div class="card border-0">
-                        <div class="card-body fs-7">
-                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
-                                vùng cao</div>
-                            <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh
-                                khó
-                                khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
-                            <div class="card-text">
-                                <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
-                            </div>
-                            <div class="card-link">
-                                <a href=""
-                                   class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 fs-9 ">
-                                    Xem tổng kết...</a>
-                            </div>
-                            <div
-                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-evaluate">
-                                Đánh giá</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer">
-                    <img src="../static/images/anh3.jpg" class="float-start w-15 h-80 act-image" alt="" />
-                    <div class="card border-0">
-                        <div class="card-body fs-7">
-                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
-                                vùng cao</div>
-                            <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh
-                                khó
-                                khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
-                            <div class="card-text">
-                                <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
-                            </div>
-                            <div class="card-link">
-                                <a href=""
-                                   class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 fs-9 ">
-                                    Xem tổng kết...</a>
-                            </div>
-                            <div
-                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-evaluate">
-                                Đánh giá</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container-item">
-                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer">
-                    <img src="../static/images/anh3.jpg" class="float-start w-15 h-80 act-image" alt="" />
-                    <div class="card border-0">
-                        <div class="card-body fs-7">
-                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
-                                vùng cao</div>
-                            <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh
-                                khó
-                                khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
-                            <div class="card-text">
-                                <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
-                            </div>
-                            <div class="card-link">
-                                <a href=""
-                                   class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 fs-9 ">
-                                    Xem tổng kết...</a>
-                            </div>
-                            <div
-                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-evaluate">
-                                Đánh giá</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer">
-                    <img src="../static/images/anh3.jpg" class="float-start w-15 h-80 act-image" alt="" />
-                    <div class="card border-0">
-                        <div class="card-body fs-7">
-                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
-                                vùng cao</div>
-                            <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh
-                                khó
-                                khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
-                            <div class="card-text">
-                                <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
-                            </div>
-                            <div class="card-link">
-                                <a href=""
-                                   class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 fs-9 ">
-                                    Xem tổng kết...</a>
-                            </div>
-                            <div
-                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-evaluate">
-                                Đánh giá</div>
                         </div>
                     </div>
                 </div>
@@ -209,108 +84,22 @@
         </div>
         <!-- Right -->
         <div class="container flex-1 bg-green radius-lghalf p-0">
-            <div class="container mh-100 overflow-y-auto origanized-slider">
-                <div class="container mh-12 w-90 position-relative cursor-pointer content-right my-4 ml-0_5 origanize-act-item">
-                    <img class="top-0 start-0 end-0" src="../static/images/bg1.png" alt="" />
+            <div class="container mh-100 overflow-y-auto origanized-slider" th:if="${actListOfHost.size()!=0}">
+                <div class="container mh-12 w-90 position-relative cursor-pointer content-right my-4 ml-0_5 origanize-act-item" th:each="activity:${actListOfHost}">
+                    <img class="top-0 start-0 end-0" th:src="@{/images/bg1.png}"  alt="" />
                     <div class="container position-absolute bottom-0 start-1_5 end-0 bg-white radius-1 mh-60 w-90">
-                        <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic m-0 max-line-3">Kế hoạch phối hợp tổ chức
-                            Chiến dịch
-                            tình nguyện
-                            "Mùa hè xanh" năm 2020</h3>
-                        <p class="card-text fs-11 text-center fst-italic px-3 m-0 max-line-4">Nhằm
-                            phát huy sức trẻ, sự nhiệt huyết của tuổi
-                            trẻ tạo ra
-                            những giá trị to lớn cho cộng đồng
+                        <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic fs-6 green-color" th:text="${activity.getTenHD()}"></h3>
+                        <p class="card-text fs-9 text-center fst-italic px-3" th:text="${#strings.length(activity.getMoTa()) > 120 ? activity.getMoTa().substring(0, 120) + '...' : activity.getMoTa()}">
                         </p>
-                        <div href=""
-                             class="fs-11 p-2 text-decoration-none green_light-color fw-medium fst-italic px-6 btn_eva_member">Đánh
+                        <div
+                             class="fs-7 p-0 text-decoration-none green_light-color fw-medium fst-italic px-2 mb-3 mx-5 btn_eva_member" th:attr="data-value=${activity.getId()}">Đánh
                             giá
                             thành
                             viên</div>
                     </div>
                 </div>
-
-                <div class="container mh-12 w-90 position-relative cursor-pointer content-right my-4 ml-0_5 origanize-act-item">
-                    <img class="top-0 start-0 end-0" src="../static/images/bg1.png" alt="" />
-                    <div class="container position-absolute bottom-0 start-1_5 end-0 bg-white radius-1 mh-60 w-90">
-                        <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic m-0 max-line-3">Kế hoạch phối hợp tổ chức
-                            Chiến dịch
-                            tình nguyện
-                            "Mùa hè xanh" năm 2020</h3>
-                        <p class="card-text fs-11 text-center fst-italic px-3 m-0 max-line-4">Nhằm
-                            phát huy sức trẻ, sự nhiệt huyết của tuổi
-                            trẻ tạo ra
-                            những giá trị to lớn cho cộng đồng
-                        </p>
-                        <div href=""
-                             class="fs-11 p-2 text-decoration-none green_light-color fw-medium fst-italic px-6 btn_eva_member">Đánh
-                            giá
-                            thành
-                            viên</div>
-                    </div>
-                </div>
-
-                <div class="container mh-12 w-90 position-relative cursor-pointer content-right my-4 ml-0_5 origanize-act-item">
-                    <img class="top-0 start-0 end-0" src="../static/images/bg1.png" alt="" />
-                    <div class="container position-absolute bottom-0 start-1_5 end-0 bg-white radius-1 mh-60 w-90">
-                        <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic m-0 max-line-3">Kế hoạch phối hợp tổ chức
-                            Chiến dịch
-                            tình nguyện
-                            "Mùa hè xanh" năm 2020</h3>
-                        <p class="card-text fs-11 text-center fst-italic px-3 m-0 max-line-4">Nhằm
-                            phát huy sức trẻ, sự nhiệt huyết của tuổi
-                            trẻ tạo ra
-                            những giá trị to lớn cho cộng đồng
-                        </p>
-                        <div href=""
-                             class="fs-11 p-2 text-decoration-none green_light-color fw-medium fst-italic px-6 btn_eva_member">Đánh
-                            giá
-                            thành
-                            viên</div>
-                    </div>
-                </div>
-
-                <div class="container mh-12 w-90 position-relative cursor-pointer content-right my-4 ml-0_5 origanize-act-item">
-                    <img class="top-0 start-0 end-0" src="../static/images/bg1.png" alt="" />
-                    <div class="container position-absolute bottom-0 start-1_5 end-0 bg-white radius-1 mh-60 w-90">
-                        <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic m-0 max-line-3">Kế hoạch phối hợp tổ chức
-                            Chiến dịch
-                            tình nguyện
-                            "Mùa hè xanh" năm 2020</h3>
-                        <p class="card-text fs-11 text-center fst-italic px-3 m-0 max-line-4">Nhằm
-                            phát huy sức trẻ, sự nhiệt huyết của tuổi
-                            trẻ tạo ra
-                            những giá trị to lớn cho cộng đồng
-                        </p>
-                        <div href="" class="fs-11 p-2 text-decoration-none green_light-color fw-medium fst-italic px-6 btn_eva_member">Đánh
-                            giá
-                            thành
-                            viên</div>
-                    </div>
-                </div>
-
-                <div class="container mh-12 w-90 position-relative cursor-pointer content-right my-4 ml-0_5 origanize-act-item">
-                    <img class="top-0 start-0 end-0" src="../static/images/bg1.png" alt="" />
-                    <div class="container position-absolute bottom-0 start-1_5 end-0 bg-white radius-1 mh-60 w-90">
-                        <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic m-0 max-line-3">Kế hoạch phối hợp tổ chức
-                            Chiến dịch
-                            tình nguyện
-                            "Mùa hè xanh" năm 2020</h3>
-                        <p class="card-text fs-11 text-center fst-italic px-3 m-0 max-line-4">Nhằm
-                            phát huy sức trẻ, sự nhiệt huyết của tuổi
-                            trẻ tạo ra
-                            những giá trị to lớn cho cộng đồng
-                        </p>
-                        <div href="" class="fs-11 p-2 text-decoration-none green_light-color fw-medium fst-italic px-6 btn_eva_member">Đánh
-                            giá
-                            thành
-                            viên</div>
-                    </div>
-                </div>
-
             </div>
         </div>
-    </div>
 </div>
 
 <!-- Modal -->
@@ -322,30 +111,22 @@
         <!--Form chi tiet danh gia-->
         <div class="container w-45 p-0">
             <div class="container w-100 h-2_7 bg-green-dark d-flex justify-content-between align-items-center btr-radius">
-                <h3 class="fs-5 white-color text-center m-0 flex-3">Mang con chữ đến với trẻ vùng cao</h3>
+                <!--                Ten hoat dong-->
+                <h3 class="fs-5 white-color text-center m-0 flex-3 modal-nameAct"></h3>
                 <div class="btn btn-close btn-close-detail"></div>
             </div>
             <!-- Content -->
-            <div class="container max_height-37rem overflow-y-auto overflow-x-hidden content-evaluate ">
+            <div class="container max_height-36rem overflow-y-auto overflow-x-hidden content-evaluate ">
                 <div class="container d-flex align-items-center mt-2">
-                    <img class="w-2_5 h-2_5 ml-0_1 radius-1_8" src="../static/images/avt2.jpn" alt="">
+                    <img class="w-2_5 h-2_5 ml-0_1 radius-1_8" src="../static/images/av5.jpg" alt="">
                     <div class="container ml-0_1">
-                        <h4 class="green-color fs-6 my-1 mt-1">Nguyễn Trung Thành</h4>
-                        <p class="m-0 fs-10 fst-italic green-color">3 tháng trước</p>
+                        <h4 class="green-color fs-6 my-1 mt-1 name-host-act"></h4>
+                        <!--                        Thời gian xét duyệt-->
+                        <p class="m-0 fs-10 fst-italic green-color time-post-act"></p>
                     </div>
                 </div>
-
-                <p class="m-0 p-3 fs-7"> Dù ở những điểm trường cách xa trung tâm xã, đường sá đi lại khó khăn
-                    nhưng với lòng yêu nghề, các thầy cô giáo ở vùng
-                    cao vẫn kiên trì bám bản để mang kiến thức đến với học sinh vùng cao...Hoạt động đã đem đến những suất quà,
-                    xây dựng
-                    đường đi, vệ sinh khu vực vườn trường, xây sân trước để giúp đỡ phần nào khó khăn cho các em. Không những
-                    thế
-                    các bạn
-                    tình nguyện viên tham gia hoạt động cũng hết sức hăng hái và nhiệt huyết trong việc truyền dạy và giúp các
-                    em
-                    hướng
-                    đến một tương lai tốt đẹp hơn.</p>
+<!--                Mo ta-->
+                <p class="m-0 p-3 fs-7 modal-Description"></p>
 
                 <div class="container d-flex m-1 justify-content-center border_top-solid">
                     <img src="../static/images/anh2.jpn" alt="" class="height-10rem flex-1 p-1">
@@ -354,10 +135,8 @@
                     <!-- <img src="assets/images/anh2.jpn" alt="" class="view__content-img">
                     <img src="assets/images/anh3.jpn" alt="" class="view__content-img"> -->
                 </div>
-
                 <div class="container border_top-solid border_bottom-solid d-flex">
-                    <div class="container p-2 fs-9 fst-italic juheader-comment">150 lượt đánh
-                        giá</div>
+                    <div class="container border_top-solid border_bottom-solid p-2 fs-9 fst-italic modal-number-evaluation"></div>
                     <div class="container p-0 no-display view-organized">
                         <div class="container d-flex justify-content-end">
                             <div class="container p-2 fs-9 fst-italic green cursor-pointer fw-medium btn-view-evaluation">Xem lượt
@@ -370,49 +149,49 @@
 
                 <!-- Content comment -->
                 <div class="container no-display view-comment">
-                    <div class="container d-flex justify-content-sm-end p-0 mt-3">
-                        <h4 class="fs-9 fw-normal fst-italic me-4 text-center">Hoạt động<br>hữu ích</h4>
-                        <h4 class="fs-9 fw-normal fst-italic me-4 text-center">Cần tổ chức<br>thường xuyên</h4>
-                        <h4 class="fs-9 fw-normal fst-italic me-4 text-center">Cần tổ chức<br>rộng rãi</h4>
-                    </div>
+<!--                    <div class="container d-flex justify-content-sm-end p-0 mt-3">-->
+<!--                        <h4 class="fs-9 fw-normal fst-italic me-4 text-center">Hoạt động<br>hữu ích</h4>-->
+<!--                        <h4 class="fs-9 fw-normal fst-italic me-4 text-center">Cần tổ chức<br>thường xuyên</h4>-->
+<!--                        <h4 class="fs-9 fw-normal fst-italic me-4 text-center">Cần tổ chức<br>rộng rãi</h4>-->
+<!--                    </div>-->
 
                     <!-- Comment -->
-                    <div class="container d-flex mb-3 show-comment">
-                        <!-- Text comment -->
-                        <div class="container radius-1 bg-green">
-                            <div class="container p-0">
-                                <img src="../static/images/avt1.jpn" class="w-2_5 h-2_5 p-1 radius-1_8" alt="">
-                                <h7 class="green-color fs-11 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>
-                            </div>
-                            <p class="fs-10 fst-italic m-0 ml-2_5">Một trải nghiệm tuyệt vời. Love youuu!</p>
-                            <p class="green_light-color fst-italic fs-10 ml-2_5">20 ngày trước</p>
-                        </div>
-                        <!-- Check comment -->
-                        <div class="container d-flex align-items-center justify-content-center">
-                            <i class="bi bi-check-lg green_light-color flex-1 px-4 fs-3 fw-bold"></i>
-                            <i class="bi bi-x-lg green_light-color flex-1 px-4 fs-5 fw-bold"></i>
-                            <i class="bi bi-check-lg green_light-color flex-1 px-4 fs-3 fw-bold"></i>
-                        </div>
-                    </div>
+<!--                    <div class="container d-flex mb-3 show-comment">-->
+<!--                        &lt;!&ndash; Text comment &ndash;&gt;-->
+<!--                        <div class="container radius-1 bg-green">-->
+<!--                            <div class="container p-0">-->
+<!--                                <img src="../static/images/avt1.jpn" class="w-2_5 h-2_5 p-1 radius-1_8" alt="">-->
+<!--                                <h7 class="green-color fs-11 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>-->
+<!--                            </div>-->
+<!--                            <p class="fs-10 fst-italic m-0 ml-2_5">Một trải nghiệm tuyệt vời. Love youuu!</p>-->
+<!--                            <p class="green_light-color fst-italic fs-10 ml-2_5">20 ngày trước</p>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Check comment &ndash;&gt;-->
+<!--                        <div class="container d-flex align-items-center justify-content-center">-->
+<!--                            <i class="bi bi-check-lg green_light-color flex-1 px-4 fs-3 fw-bold"></i>-->
+<!--                            <i class="bi bi-x-lg green_light-color flex-1 px-4 fs-5 fw-bold"></i>-->
+<!--                            <i class="bi bi-check-lg green_light-color flex-1 px-4 fs-3 fw-bold"></i>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <div class="container d-flex mb-3">
-                        <!-- Text comment -->
-                        <div class="container radius-1 bg-green">
-                            <div class="container p-0">
-                                <img src="../static/images/avt2.jpn" class="w-2_5 h-2_5 p-1 radius-1_8" alt="">
-                                <h7 class="green-color fs-11 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>
-                            </div>
-                            <p class="fs-10 fst-italic m-0 ml-2_5">Thật may mắn khi được tham gia hoạt động ý nghĩa như vậy. Cảm ơn
-                                ban tổ chức!</p>
-                            <p class="green_light-color fst-italic fs-10 ml-2_5">20 ngày trước</p>
-                        </div>
-                        <!-- Check comment -->
-                        <div class="container d-flex align-items-center justify-content-center">
-                            <i class="bi bi-check-lg green_light-color flex-1 px-4 fs-3 fw-bold"></i>
-                            <i class="bi bi-check-lg green_light-color flex-1 px-4 fs-3 fw-bold"></i><i
-                                class="bi bi-check-lg green_light-color flex-1 px-4 fs-3 fw-bold"></i>
-                        </div>
-                    </div>
+<!--                    <div class="container d-flex mb-3">-->
+<!--                        &lt;!&ndash; Text comment &ndash;&gt;-->
+<!--                        <div class="container radius-1 bg-green">-->
+<!--                            <div class="container p-0">-->
+<!--                                <img src="../static/images/avt2.jpn" class="w-2_5 h-2_5 p-1 radius-1_8" alt="">-->
+<!--                                <h7 class="green-color fs-11 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>-->
+<!--                            </div>-->
+<!--                            <p class="fs-10 fst-italic m-0 ml-2_5">Thật may mắn khi được tham gia hoạt động ý nghĩa như vậy. Cảm ơn-->
+<!--                                ban tổ chức!</p>-->
+<!--                            <p class="green_light-color fst-italic fs-10 ml-2_5">20 ngày trước</p>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Check comment &ndash;&gt;-->
+<!--                        <div class="container d-flex align-items-center justify-content-center">-->
+<!--                            <i class="bi bi-check-lg green_light-color flex-1 px-4 fs-3 fw-bold"></i>-->
+<!--                            <i class="bi bi-check-lg green_light-color flex-1 px-4 fs-3 fw-bold"></i><i-->
+<!--                                class="bi bi-check-lg green_light-color flex-1 px-4 fs-3 fw-bold"></i>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
 
                 <!-- Evaluate -->
@@ -591,7 +370,7 @@
             </div>
             <!-- Write comment -->
             <div class="container position-absolute bottom-0 start-0 end-0 p-0 m-0 no-display write-comment">
-                <div class="container  start-0 end-0 w-100 bg-white box-shadow p-2 d-flex">
+                <div class="container  start-0 end-0 w-100 bg-white box-shadow p-2 d-flex bdr-radius">
                     <img src="../static/images/avt4.jpn" class="w-2_5 h-2_5 p-1 radius-1_8" alt="">
                     <div class="container bg-grey radius-1_8 p-2">
                         <div class="container px-2 m-0">

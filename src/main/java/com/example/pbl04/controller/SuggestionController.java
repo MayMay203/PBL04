@@ -1,6 +1,7 @@
 package com.example.pbl04.controller;
 
 import com.example.pbl04.entity.Dexuat;
+import com.example.pbl04.entity.Taikhoan;
 import com.example.pbl04.service.SuggestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,7 @@ public class SuggestionController {
         List<Integer> countSugg = suggestionService.CountSuggestion();
         model.addAttribute("suggestionList",suggestionList);
         model.addAttribute("countSugg",countSugg);
+        model.addAttribute("account", new Taikhoan());
         return "DeXuat";
     }
 

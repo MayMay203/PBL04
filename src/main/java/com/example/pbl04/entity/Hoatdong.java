@@ -16,7 +16,7 @@ public class Hoatdong {
     @Column(name = "tenhd", nullable = false)
     private String tenhd;
 
-    @ManyToOne(fetch = FetchType.EAGER,optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "maChuDe", nullable = false)
     private Chude maChuDe;
 
@@ -50,8 +50,8 @@ public class Hoatdong {
     @Column(name = "liDoHuy")
     private String liDoHuy;
 
-    @Column(name = "anh", length = 50)
-    private String anh;
+    @Column(name = "anh", nullable = false)
+    private byte[] anh;
 
     public Integer getId() {
         return id;
@@ -65,7 +65,7 @@ public class Hoatdong {
         return tenhd;
     }
 
-    public void setTenhd(String tenhd) {
+    public void setTenHD(String tenhd) {
         this.tenhd = tenhd;
     }
 
@@ -149,11 +149,11 @@ public class Hoatdong {
         this.liDoHuy = liDoHuy;
     }
 
-    public String getAnh() {
+    public byte[] getAnh() {
         return anh;
     }
 
-    public void setAnh(String anh) {
+    public void setAnh(byte[] anh) {
         this.anh = anh;
     }
 
