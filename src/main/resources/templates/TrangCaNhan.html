@@ -240,8 +240,7 @@
                                         <div class="col-md-9">
                                             <label for="imageInput" id="imagePreviewLabel">
                                                 <div id="imagePreview" class="image-preview">
-                                                    <input type="file" id="imageInput" accept="image/jpeg, image/png, image/gif" style="display: none"
-
+                                                    <input type="file" id="imageInput" accept="image/jpeg, image/png, image/gif" style="display: none" th:field="*{anh}"
                                                            onchange="previewImage(Event)">
                                                     <img id="userImage" th:src="@{/images/default.webp}" alt="Hình ảnh người dùng" >
                                                 </div>
