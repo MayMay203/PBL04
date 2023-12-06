@@ -44,5 +44,4 @@ public class EvaluationServiceImple implements EvaluationService {
         return totalRates;
     }
 
-
 }

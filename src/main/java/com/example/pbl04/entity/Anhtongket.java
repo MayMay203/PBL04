@@ -14,8 +14,8 @@ public class Anhtongket {
     @JoinColumn(name = "maTongKet", nullable = false)
     private Tongket maTongKet;
 
-    @Column(name = "anh", nullable = false)
-    private byte[] anh;
+    @Column(name = "anh", length = 50)
+    private String anh;
 
     public Integer getId() {
         return id;
@@ -33,11 +33,11 @@ public class Anhtongket {
         this.maTongKet = maTongKet;
     }
 
-    public byte[] getAnh() {
+    public String getAnh() {
         return anh;
     }
 
-    public void setAnh(byte[] anh) {
+    public void setAnh(String anh) {
         this.anh = anh;
     }
 

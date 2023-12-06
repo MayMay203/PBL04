@@ -11,11 +11,11 @@ public class TemplateController {
         return "Header";
     }
 
-    @GetMapping("/trang-ca-nhan")
-    public String getPersonality()
-    {
-        return "TrangCaNhan";
-    }
+//    @GetMapping("/trang-ca-nhan")
+//    public String getPersonality()
+//    {
+//        return "TrangCaNhan";
+//    }
 
 
 }

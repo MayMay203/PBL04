@@ -1,3 +1,9 @@
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
 .header__navlogo{
     height: 86px;
 }
@@ -37,4 +43,14 @@
     background-color: #174407!important;
     color: var(--main-color);
 }
+#btn_userProfile{
+    border:none;
+    background-color: #fff;
+}
 
+.img-avartar-login {
+    border-radius: 50%;
+    border: 0.2rem solid #fff;
+    width: 3rem;
+    height: 3rem;
+}

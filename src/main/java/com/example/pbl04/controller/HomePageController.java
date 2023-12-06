@@ -1,12 +1,7 @@
 package com.example.pbl04.controller;
 
-import com.example.pbl04.entity.Hoatdong;
-import com.example.pbl04.entity.Thanhvien;
-import com.example.pbl04.entity.Vetrangweb;
-import com.example.pbl04.service.AboutUsService;
-import com.example.pbl04.service.ActivityService;
-import com.example.pbl04.service.EvaluationService;
-import com.example.pbl04.service.MemberService;
+import com.example.pbl04.entity.*;
+import com.example.pbl04.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,12 +15,14 @@ public class HomePageController {
     private final EvaluationService evaluationService;
     private final ActivityService activityService;
     private final AboutUsService aboutUsService;
+    private final SummaryService summaryService;
     @Autowired
-    public HomePageController(MemberService memberService, EvaluationService evaluationService, ActivityService activityService, AboutUsService aboutUsService){
+    public HomePageController(MemberService memberService, EvaluationService evaluationService, ActivityService activityService, AboutUsService aboutUsService, SummaryService summaryService){
         this.memberService = memberService;
         this.evaluationService = evaluationService;
         this.activityService = activityService;
         this.aboutUsService = aboutUsService;
+        this.summaryService = summaryService;
     }
 //    @GetMapping("/trang-chu")
 //    public String showMember(Model model){
@@ -48,6 +45,12 @@ public class HomePageController {
 
         List<Vetrangweb> aboutUs = aboutUsService.getAllAboutUs();
         model.addAttribute("aboutUs",aboutUs);
+
+        List<Tongket> summaryList = summaryService.getSummaryList();
+        model.addAttribute("summaryList",summaryList);
+
+        model.addAttribute("account", new Taikhoan());
+
         return "TrangChu";
     }
 }

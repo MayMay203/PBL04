@@ -4,41 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang chủ</title>
-
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/base2.css}">-->
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/TrangChu.css}">-->
-
-<!--    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />-->
-<!--    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>-->
-<!--    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>-->
-<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>-->
-<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>-->
-<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">-->
-
-<!--    &lt;!&ndash; javascript &ndash;&gt;-->
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-<!--    <script defer th:src="@{/js/TrangChu.js}"></script>-->
-<!--    <script defer th:src="@{/js/Header.js}"></script>-->
-<!--    &lt;!&ndash; slide slider &ndash;&gt;-->
-<!--    <link-->
-<!--        rel="stylesheet"-->
-<!--        type="text/css"-->
-<!--        href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"-->
-<!--    />-->
-<!--    <script-->
-<!--    type="text/javascript"-->
-<!--    src="https://code.jquery.com/jquery-1.11.0.min.js"-->
-<!--    ></script>-->
-<!--    <script-->
-<!--    type="text/javascript"-->
-<!--    src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"-->
-<!--    ></script>-->
-<!--    <script-->
-<!--    type="text/javascript"-->
-<!--    src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"-->
-<!--    ></script>-->
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 
@@ -49,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 
     <!-- Your custom CSS, if any -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/base2.css}">
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/base2.css}">-->
     <link rel="stylesheet" type="text/css" th:href="@{/css/TrangChu.css}">
 
     <!-- jQuery -->
@@ -64,14 +29,14 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
-
+    <script  defer th:src="@{/js/Header.js}"></script>
 
 
 </head>
 <body>
     <div class="wrapper">
         <!-- Header -->
-        <div th:include="Header :: html"></div>
+        <div id="myHeader" style="top: -87px" th:include="Header :: html"></div>
 <!--        <script src="duongdan/loadContent.js"></script>-->
         <!-- Container -->
         <div class="container-fluid">
@@ -133,7 +98,7 @@
                 <h2 class="section__heading">HOẠT ĐỘNG TÌNH NGUYỆN</h2> 
                 <div class="sectionActivity__aboutContent container p-150">
                     <div class="row align-items-center">
-                        <div class="activity-item .col-6 col-md-4 col-lg-3 d-blocky" th:each="activity: ${activitiesList}">
+                        <div class="activity-item col-6 col-md-4 col-lg-3 d-blocky" th:each="activity,iterStat: ${activitiesList}" th:if="${iterStat.index >= activitiesList.size() - 8}">
                             <div class="activity-img_title">
                                 <img src="../static/images/Rectangle 292 (2).png" alt="" class="activity-img">
                                 <div class="activity-name" th:text="${activity.getTenHD()}"></div>
@@ -144,11 +109,12 @@
                             </div>
                             <div class="activity-content">
                                 <div class="text-content" th:text="${activity.getMoTa()}"> </div>
-                                <div class="text-end"><a href="#" class="linkMore">Xem thêm...</a></div>
+                                <div class="text-end"><a href="" class="linkMore">Xem thêm...</a></div>
                             </div>
                         </div>
                         <div class="clear"></div>
                     </div>
+
                 </div>
                 <a href="/trang-chu-hoat-dong" class="section__linkMore">XEM THÊM</a>
 
@@ -157,18 +123,17 @@
             <div class="container__sectionSummary">
                 <h2 class="section__heading">TỔNG KẾT HOẠT ĐỘNG</h2>
                 <div class="sectionSummary__aboutContent container">
-                    <div class="summary-item">
+                    <div class="summary-item" th:each="summary, iterStat:${summaryList}" th:if="${iterStat.last}">
                         <div class="summary-title">
                             <!-- icon -->
                             <img class="float-start img-title" src="../static/images/Rectangle 253.png" alt="">
-                            <h4 class="text-title">Ngày Hội hiến máu nhân đạo: Kết nối trái tim-kết nối sự sống</h4>
+                            <h4 class="text-title" th:text="${summary.getMaHD().tenHD}"></h4>
                         </div>
                         <div class="summary-content container">
                             <div class="row align-items-center">
                                 <div class="summary-content__inform col-3">
                                     <span class="head-inform">Nội dung</span>
-                                    <div class="body-inform">-Tổ chức trong 2 ngày, mùng 2 - 3/11/2023 tại Trung tâm Văn hoá, Thông tin, Thể thao và Du lịch thành phố.
-                                                            -Toàn thành phố có 1.245 người đăng ký tham gia hiến máu tình nguyện; tổng số đơn vị máu thu được là 1037 đơn vị, đạt 207% chỉ tiêu tỉnh giao  đạt 207% chỉ tiêu tỉnh giao đạt 207% chỉ tiêu tỉnh giao đạt 207% chỉ tiêu tỉnh giao</div>
+                                    <div class="body-inform" th:text="${summary.getLoiKet()}"></div>
                                     <div class="text-end">      <span class="linkMore">Xem thêm...</span></div>
                                 </div>
                                 <div class="summary-content__comment col-4">
@@ -200,11 +165,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="summary-item">
+                    <div class="summary-item" th:each="summary, iterStat:${summaryList}" th:if="${iterStat.index==summaryList.size()-2}">
                         <div class="summary-title">
                             <!-- icon -->
                             <img class="float-start img-title" src="../static/images/Rectangle 253.png" alt="">
-                            <h4 class="text-title">Ngày Hội hiến máu nhân đạo: Kết nối trái tim-kết nối sự sống</h4>
+                            <h4 class="text-title" th:text="${summary.getMaHD().tenHD}"></h4>
                         </div>
                         <div class="summary-content container">
                             <div class="row align-items-center">
@@ -214,8 +179,7 @@
                                 </div>
                                 <div class="summary-content__inform col-3">
                                     <span class="head-inform">Nội dung</span>
-                                    <div class="body-inform">-Tổ chức trong 2 ngày, mùng 2 - 3/11/2023 tại Trung tâm Văn hoá, Thông tin, Thể thao và Du lịch thành phố.
-                                                            -Toàn thành phố có 1.245 người đăng ký tham gia hiến máu tình nguyện; tổng số đơn vị máu thu được là 1037 đơn vị, đạt 207% chỉ tiêu tỉnh giao-Toàn thành phố có 1.245 người đăng ký tham gia hiến máu tình nguyện;</div>
+                                    <div class="body-inform" th:text="${summary.getLoiKet()}"></div>
                                     <div class="text-end"><span class="linkMore">Xem thêm...</span></div>
                                 </div>
                                 <div class="summary-content__comment col-4">
@@ -243,45 +207,44 @@
                             </div>
                         </div>
                     </div>
-                    <div class="summary-item">
+                    <div class="summary-item" th:each="summary, iterStat:${summaryList}" th:if="${iterStat.index==summaryList.size()-3}">
                         <div class="summary-title">
                             <!-- icon -->
                             <img class="float-start img-title" src="../static/images/Rectangle 253.png" alt="">
-                            <h4 class="text-title">Ngày Hội hiến máu nhân đạo: Kết nối trái tim-kết nối sự sống</h4>
+                            <h4 class="text-title" th:text="${summary.getMaHD().tenHD}"></h4>
                         </div>
                         <div class="summary-content container">
                             <div class="row align-items-center">
                                 <div class="summary-content__inform col-3">
                                     <span class="head-inform">Nội dung</span>
-                                    <div class="body-inform">-Tổ chức trong 2 ngày, mùng 2 - 3/11/2023 tại Trung tâm Văn hoá, Thông tin, Thể thao và Du lịch thành phố.
-                                                            -Toàn thành phố có 1.245 người đăng ký tham gia hiến máu tình nguyện; tổng số đơn vị máu thu được là 1037 đơn vị, đạt 207% chỉ tiêu tỉnh giao</div>
+                                    <div class="body-inform" th:text="${summary.getLoiKet()}"></div>
                                     <div class="text-end">      <span class="linkMore">Xem thêm...</span></div>
                                 </div>
                                 <div class="summary-content__comment col-4">
                                     <span class="head-comment">Đánh giá</span>
                                     <div class="body-comment">
-                                        <div class="body-comment__item">
+                                        <div class="body-comment__item ">
                                             <img src="../static/images/images (3).jpg" alt="">
-                                            <div>Cảm ơn vì đã tạo ra một chưa trình ý nghĩa nhưu vậy</div>
+                                            <div>Cảm ơn vì đã tạo ra một chưa trình ý nghĩa như vậy. Cảm ơn ban tổ chức rất nhiều ạ.</div>
                                         </div>
-                                        <div class="body-comment__item">
+                                        <div class="body-comment__item ">
                                             <img src="../static/images/images (3).jpg" alt="">
-                                            <div>Lần đầu tiên mình được trải nghiêm một hoạt động ý nghĩ với mọi người </div>
+                                            <div>Lần đầu tiên mình được trải nghiêm một hoạt động ý nghĩa với mọi người </div>
                                         </div>
-                                        <div class="body-comment__item">
+                                        <div class="body-comment__item ">
                                             <img src="../static/images/images (3).jpg" alt="">
-                                            <div>Chương trình thật sự cho tôi một cảm xúc vô cùng đặc biệt</div>
+                                            <div>Chương trình thật sự cho tôi một cảm xúc vô cùg đặc biệt</div>
                                         </div>
-                                        <div class="body-comment__item">
+                                        <div class="body-comment__item ">
                                             <img src="../static/images/images (3).jpg" alt="">
-                                            <div>Tôi sẽ không bao giờ quên kỉ niệm này-một kỉ niệm theo tôi mãi về sau</div>
+                                            <div>Tôi sẽ không bao giờ quên kỉ niệm này-một kỉ niệm t. Cảm ơn ban tổ chức rất nhiều ạ.heo tôi mãi về sau</div>
                                         </div>
-                                        <div class="text-end"><span class="linkMore">Xem thêm...</span></div>
                                     </div>
+                                    <div class="text-end"><span class="linkMore">Xem thêm...</span></div>
                                 </div>
                                 <div class="summary-content__image col-5 justify-content-end">
-                                    <img class="img-rightback float-end dimmed" src="../static/images/Rectangle 256 (2).png" alt="">
-                                    <img class="img-rightfront" src="../static/images/Rectangle 256 (2).png" alt="">
+                                    <img class="img-rightback float-end dimmed" src="../static/images/Rectangle 256.png" alt="">
+                                    <img class="img-rightfront " src="../static/images/Rectangle 256.png" alt="">
                                 </div>
                             </div>
                         </div>

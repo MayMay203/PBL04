@@ -8,17 +8,16 @@ import java.time.LocalDate;
 @Table(name = "hoatdong")
 public class Hoatdong {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "maHD", nullable = false)
     private Integer id;
 
     @Lob
-    @Column(name = "tenHD", nullable = false)
-    private String tenHD;
+    @Column(name = "tenhd", nullable = false)
+    private String tenhd;
 
-    @Lob
-    @Column(name = "chuDe", nullable = false)
-    private String chuDe;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "maChuDe", nullable = false)
+    private Chude maChuDe;
 
     @Lob
     @Column(name = "moTa", nullable = false)
@@ -50,8 +49,8 @@ public class Hoatdong {
     @Column(name = "liDoHuy")
     private String liDoHuy;
 
-    @Column(name = "anh", nullable = false)
-    private byte[] anh;
+    @Column(name = "anh", length = 50)
+    private String anh;
 
     public Integer getId() {
         return id;
@@ -61,20 +60,20 @@ public class Hoatdong {
         this.id = id;
     }
 
-    public String getTenHD() {
-        return tenHD;
+    public String getTenhd() {
+        return tenhd;
     }
 
-    public void setTenHD(String tenHD) {
-        this.tenHD = tenHD;
+    public void setTenhd(String tenhd) {
+        this.tenhd = tenhd;
     }
 
-    public String getChuDe() {
-        return chuDe;
+    public Chude getMaChuDe() {
+        return maChuDe;
     }
 
-    public void setChuDe(String chuDe) {
-        this.chuDe = chuDe;
+    public void setMaChuDe(Chude maChuDe) {
+        this.maChuDe = maChuDe;
     }
 
     public String getMoTa() {
@@ -149,11 +148,11 @@ public class Hoatdong {
         this.liDoHuy = liDoHuy;
     }
 
-    public byte[] getAnh() {
+    public String getAnh() {
         return anh;
     }
 
-    public void setAnh(byte[] anh) {
+    public void setAnh(String anh) {
         this.anh = anh;
     }
 

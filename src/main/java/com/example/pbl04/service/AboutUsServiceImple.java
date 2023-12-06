@@ -9,7 +9,12 @@ import java.util.List;
 @Service
 public class AboutUsServiceImple implements AboutUsService {
     @Autowired
-    private AboutUsRepository aboutUsRepository;
+    private final AboutUsRepository aboutUsRepository;
+
+    public AboutUsServiceImple(AboutUsRepository aboutUsRepository) {
+        this.aboutUsRepository = aboutUsRepository;
+    }
+
     @Override
     public List<Vetrangweb> getAllAboutUs() {
         return aboutUsRepository.findAll();
