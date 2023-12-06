@@ -6,21 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trang chủ tổng kết</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/base1.css}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <script  defer th:src="@{/js/Header.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/TrangChuHoatDong.css}">
     <script defer th:src="@{/js/TrangChuHoatDong.js}"></script>
 </head>
 
 <body>
-<div  class="sticky-top" style="top: -87px" th:include="Header :: html"></div>
+<div id="myHeader" style="top: -87px" th:include="Header :: html"></div>
 <div class="container p-5">
     <!-- Search -->
     <div class="fs-6 p-1 border-search width-25rem m-5 position-relative">
@@ -58,90 +58,50 @@
         <div class="container p-5 pt-0 fs-6 mx--2 flex-3 mh-90">
             <h2 class="mx-0 fs-4 mb-sm-3 green-color" >TỔNG KẾT HOẠT ĐỘNG</h2>
             <div class="act-slider">
-             <div class="container-item">
-              <form th:action="@{/View-Summary}" th:method="GET" th:each="summary:${summaryList}">
-               <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer">
-                <img src="../static/images/anh2.jpg" class="float-start w-15 h-80 act-image" alt="" />
+             <div class="container-item" th:each="i : ${#numbers.sequence(0, summaryList.size() div 4 + ((summaryList.size()%4 > 0) ? 1 : 0) - 1)}">
+               <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<summaryList.size()}">
+                <img th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(summaryList.get((4*i)+j).getMaHD().getAnh())}" alt="" class="float-start w-15 h-80 act-image"/>
                 <div class="card border-0">
                     <div class="card-body fs-7">
-                        <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1" th:text="${summary.getMaHD().getTenHD()}"></div>
-                        <div class="card-text" th:text="${#strings.length(summary.getLoiKet()) > 100 ? summary.getLoiKet().substring(0, 100) + '...' : summary.getLoiKet()}"></div>
+                        <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1" th:text="${summaryList.get((4*i)+j).getMaHD().getTenHD()}"></div>
+                        <div class="card-text" th:text="${#strings.length(summaryList.get((4*i)+j).getLoiKet()) > 300 ? summaryList.get((4*i)+j).getLoiKet().substring(0, 300) + '...' : summaryList.get((4*i)+j).getLoiKet()}"></div>
                         <div class="card-text">
-                            <i class="bi bi-calendar2 m-1 green-color"></i><span th:text="' ' + ${summary.getMaHD().getThoiGianBD()} + '-' + ${summary.getMaHD().getThoiGianKT()}"></span>
+                            <i class="bi bi-calendar2 m-1 green-color"></i><span th:text="${#temporals.format(summaryList.get((4*i)+j).getMaHD().getThoiGianBD(), 'dd/MM/yyyy')} + ' - ' + ${#temporals.format(summaryList.get((4*i)+j).getMaHD().getThoiGianKT(), 'dd/MM/yyyy')}"></span>
                         </div>
-                        <button type="submit" class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-summmary" th:href="@{/View-Summary(id=${summary.id})}"> Xem tổng kết</button>
-                        <input type="hidden" name="id" th:value="${summary.getId()}" th:id="'activityForm_' + ${summary.getId()}"/>
+                        <br>
+                        <div class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 p-1 pleft-6 fs-8 mt-9 text_align-center "><a class="btn-summary" th:href="@{/View-Summary(id=${summaryList.get((4*i)+j).getMaHD().getId()})}">Xem tổng kết</a></div>
                     </div>
                 </div>
             </div>
-              </form>
             </div>
         </div>
         </div>
         <!-- Right -->
         <div class="container flex-1 bg-green radius-lghalf">
             <h2 class="fs-4 pt-sm-3 text-center">HOẠT ĐỘNG ĐÃ THAM GIA</h2>
-
-            <div class="container mh-100 overflow-y-auto">
-
-                <div class="container mh-12 w-90 position-relative cursor-pointer content-right my-4 ml-0_5">
-                    <img class="top-0 start-0 end-0 w-19r h-80 ml-1" src="../static/images/anh1.jpg" alt="" />
-                    <div class="container position-absolute bottom-0 start-1_5 end-0 bg-white radius-1 mh-60 w-90">
-                        <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic m-0 max-line-3">Kế hoạch phối hợp tổ chức
-                            Chiến dịch
-                            tình nguyện
-                            "Mùa hè xanh" năm 2020</h3>
-                        <p class="card-text fs-11 text-center fst-italic px-3 m-0 max-line-4">Nhằm
-                            phát huy sức trẻ, sự nhiệt huyết của tuổi
-                            trẻ tạo ra
-                            những giá trị to lớn cho cộng đồng
-                        </p>
-                        <div href=""
-                             class="fs-11 p-2 text-decoration-none green_light-color fw-medium fst-italic px-6 btn_eva_member" onclick="XemTongKet()">Xem
-                            tổng kết</div>
-                    </div>
-                </div>
+            <div class="list_card">
+            <div class="container mh-100 overflow-y-auto " th:each="myActiviy : ${myActivities}">
 
                 <div class="container mh-12 w-90 position-relative cursor-pointer content-right my-4 ml-0_5">
-                    <img class="top-0 start-0 end-0 w-19r h-80 ml-1" src="../static/images/anh1.jpg" alt="" />
+                    <img class="top-0 start-0 end-0 w-19r h-80 ml-1 img-myActivity" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(myActiviy.getAnh())}" alt="" />
                     <div class="container position-absolute bottom-0 start-1_5 end-0 bg-white radius-1 mh-60 w-90">
-                        <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic m-0 max-line-3">Kế hoạch phối hợp tổ chức
-                            Chiến dịch
-                            tình nguyện
-                            "Mùa hè xanh" năm 2020</h3>
-                        <p class="card-text fs-11 text-center fst-italic px-3 m-0 max-line-4">Nhằm
-                            phát huy sức trẻ, sự nhiệt huyết của tuổi
-                            trẻ tạo ra
-                            những giá trị to lớn cho cộng đồng
+                        <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic m-0 max-line-3" th:text="${myActiviy.getTenHD()}"></h3>
+                        <p class="card-text fs-11 text-center fst-italic px-3 m-0 max-line-4" th:text="${#strings.length(myActiviy.getMoTa()) > 100 ? myActiviy.getMoTa().substring(0, 100) + '...' : myActiviy.getMoTa()}">
                         </p>
-                        <div href=""
-                             class="fs-11 p-2 text-decoration-none green_light-color fw-medium fst-italic px-6 btn_eva_member" onclick="XemTongKet()">Xem
-                            tổng kết</div>
+                        <div  th:each="summ: ${summaryList}">
+                           <div  th:if="${myActiviy.getId()==summ.getMaHD().getId()}" >
+                            <div class="fs-11 p-2 text-decoration-none green_dark-color fw-medium fst-italic px-6">
+                               <a class="btn-myacti-summary" th:href="@{/View-Summary(id=${myActiviy.getId()})}" >Xem tổng kết</a>
+                            </div>
+                           </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="container mh-12 w-90 position-relative cursor-pointer content-right my-4 ml-0_5">
-                    <img class="top-0 start-0 end-0 w-19r h-80 ml-1" src="../static/images/anh2.jpg" alt="" />
-                    <div class="container position-absolute bottom-0 start-1_5 end-0 bg-white radius-1 mh-60 w-90">
-                        <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic m-0 max-line-3">Kế hoạch phối hợp tổ chức
-                            Chiến dịch
-                            tình nguyện
-                            "Mùa hè xanh" năm 2020</h3>
-                        <p class="card-text fs-11 text-center fst-italic px-3 m-0 max-line-4">Nhằm
-                            phát huy sức trẻ, sự nhiệt huyết của tuổi
-                            trẻ tạo ra
-                            những giá trị to lớn cho cộng đồng
-                        </p>
-                        <div href=""
-                             class="fs-11 p-2 text-decoration-none green_light-color fw-medium fst-italic px-6 btn_eva_member" onclick="XemTongKet()">Xem
-                            tổng kết</div>
-                    </div>
-                </div>
+            </div>
             </div>
         </div>
     </div>
 </div>
-<!--<script src="../static/js/TrangChuTongKet.js"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 <script defer th:src="@{/js/TrangChuTongKet.js}"></script>

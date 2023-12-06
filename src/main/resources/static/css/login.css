@@ -7,6 +7,7 @@
     background-size: cover;
     width:25rem;
     height: 35rem;
+    align-content: center;
 }
 .modal-body-dangnhap{
     position: relative;
@@ -14,7 +15,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width:25rem;
     height: 35rem;
     margin: 0!important;
 }
@@ -32,6 +32,10 @@
     font-size: 25px;
 }
 
+.showPass{
+    font-size: 13px;
+    margin-left: 0.8rem;
+}
 
 .body_login{
     position: absolute;
@@ -43,18 +47,36 @@
 }
 .body_login-content{
     margin-bottom: 1.8rem;
+    position: relative;
 }
 .body_login-content input {
-    width: 15rem;
+    width: 17rem;
     height: 2.5rem;
     border-radius: 20px;
     background: none;
     border: 0.5px solid #174407;
     outline: none;
+    padding: 0 1.3rem;
 }
-
+.btndelete_input{
+    position: absolute;
+    top: 50%;
+    right: 5rem;
+    transform: translateY(-50%);
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+.btndelete_input:hover{
+    color: #0E5416;
+    font-weight: bold;
+}
+.notify-error{
+    color: #CC0000;
+    font-size: 13px;
+}
 #btnLogin{
-    width: 15rem;
+    width: 17rem;
     height: 2.5rem;
     background: linear-gradient(91deg, #0E5416 8.46%, #48E56B 114.48%);
     color: white;

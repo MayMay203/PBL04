@@ -33,6 +33,9 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     Thanhvien getMemberByID(Integer id);
     @Query("select tv from Taikhoan tk,Thanhvien tv, Dangky dk where dk.maHD.id =:id and dk.maTK =tk and tk= tv.maTK and dk.phanQuyen=false")
     List<Thanhvien> getMemberList(Integer id);
+   //Lấy List hoạt động đã tham gia bằng id tài khoản
+    @Query("select hd from Hoatdong hd, Dangky dk where dk.maTK.id= :myID and hd.id = dk.maHD.id and hd.tinhTrangHD=3 and dk.phanQuyen=false")
+    List<Hoatdong> getActivityByMyID(Integer myID);
 
     //Danh gia
     @Query("select h from Hoatdong h,Dangky dk where dk.phanQuyen=false and h.id = dk.maHD.id and dk.maTK.id=:id")
