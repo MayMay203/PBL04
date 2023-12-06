@@ -31,6 +31,7 @@ public class EvaluationController {
     public String getEvaluationHome(Model model){
             List<Hoatdong> activityList = activityService.getActivityOccured();
             List<Danhgia> evaluationList =  evaluationService.getAllEvaluation();
+            model.addAttribute("Anh",new Anh());
             model.addAttribute("evaluationList",evaluationList);
             model.addAttribute("activityList",activityList);
             List<Integer> countEvaList = evaluationService.countEvaluation(activityList);

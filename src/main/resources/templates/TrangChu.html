@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/TrangChu.css}">
 
     <!-- jQuery -->
+    <script  defer th:src="@{/js/Header.js}"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 
     <!-- jQuery Migrate -->
@@ -37,7 +38,7 @@
 <body>
     <div class="wrapper">
         <!-- Header -->
-        <div  class="sticky-top" style="top: -87px" th:include="Header :: html"></div>
+        <div id="myHeader" style="top: -87px" th:include="Header :: html"></div>
 <!--        <script src="duongdan/loadContent.js"></script>-->
         <!-- Container -->
         <div class="container-fluid">
