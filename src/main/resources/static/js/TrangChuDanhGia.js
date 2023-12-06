@@ -22,7 +22,7 @@ for( let view of view_link){
             document.querySelector(".modal-number-evaluation").innerText = responseData.numberEvaluation + " lượt đánh giá"
             //Generate comment
             const evaluationOfAct = responseData.evaluationOfAct;
-             console.log(evaluationOfAct);
+        //    console.log(evaluationOfAct);
             const evaluationContainer = document.querySelector(".modal-comment");
             if (evaluationOfAct.length > 0) {
                 const criteriaDiv = document.createElement("div");
@@ -48,11 +48,8 @@ for( let view of view_link){
             </div>
             <!-- Check comment -->
             <div class="container d-flex align-items-center justify-content-center">
-<!--                <i class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i>-->
-<!--                <i class="bi bi-x-lg green_light-color flex-1 p-5 fs-6 fw-bold"></i>-->
-<!--                <i class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i>-->
-                     <input type="checkbox" disabled class="flex-1 p-4 fs-3" value="${eval.tieuChi1}" ${eval.tieuChi1?'checked':''}>
-                     <input type="checkbox" disabled class="flex-1 p-4 fs-3" value="${eval.tieuChi2}" ${eval.tieuChi2?'checked':''}>
+                     <input type="checkbox" disabled class="flex-1 p-4 fs-2" value="${eval.tieuChi1}" ${eval.tieuChi1?'checked':''}>
+                     <input type="checkbox" disabled class="flex-1 p-4 fs-2" value="${eval.tieuChi2}" ${eval.tieuChi2?'checked':''}>
                      <input type="checkbox" disabled class="flex-1 p-4 fs-3" value="${eval.tieuChi3}" ${eval.tieuChi3?'checked':''}>
             </div>
         `
