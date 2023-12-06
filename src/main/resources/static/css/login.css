@@ -1,6 +1,7 @@
 /* -----------Đăng nhập--------------- */
 .modal-dialog-dangnhap{
     /*max-width: 25rem !important;*/
+    width: fit-content;
 }
 .modal-content-dangnhap{
     background-image: url("../images/login.png");

@@ -47,7 +47,6 @@ public class HeaderController {
 
         Taikhoan account = accountService.CheckLogin(tenDN, matKhau);
         if (account != null) {
-            response.put("error", "Tên đăng nhập hoặc mật khẩu đúng");
             response.put("account", account);
             response.put("loginState", true);
         } else {

@@ -60,7 +60,7 @@ public class Hoatdong {
         this.id = id;
     }
 
-    public String getTenhd() {
+    public String getTenHD() {
         return tenhd;
     }
 

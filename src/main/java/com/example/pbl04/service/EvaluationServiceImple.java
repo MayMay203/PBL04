@@ -36,9 +36,6 @@ public class EvaluationServiceImple implements EvaluationService {
                     countRate += rate;
                 }
             }
-            else{
-                countRate = 0;
-            }
             totalRates.add(countRate);
         }
         return totalRates;

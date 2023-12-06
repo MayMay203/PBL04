@@ -81,8 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Lấy giá trị từ form
         var username = $('#username').val();
         var password = $('#password').val();
-        console.log('username :', username);
-        console.log('password :', password);
         // Gọi AJAX đến endpoint xử lý đăng nhập
         $.ajax({
             type: 'POST',
@@ -91,21 +89,17 @@ document.addEventListener('DOMContentLoaded', function() {
             data: { 'tenDN': username, 'matKhau': password },
             success: function (data) {
                 console.log('data:', data);
-                if (data.error) {
-                    console.log('ko looix:', data.error);
+                if (!data.error) {
                     // Đăng nhập thành công
                     $('#DangNhapModal').modal('hide');
                     $('#btnLoginModal').hide();
                     $('#btn_userProfile').show();
                     $('body').removeClass('modal-open');
                     $('.modal-backdrop').remove();
-                    console.log('2');
                 } else {
-                    console.log('looi:', data.error);
                     // Đăng nhập thất bại, hiển thị thông báo lỗi
-                    $('#error-message').text(data.message);
+                    $('#error-message').text(data.error);
                     $('#DangNhapModal').modal('show');
-                    console.log('3');
                 }
             },
             error: function (error) {

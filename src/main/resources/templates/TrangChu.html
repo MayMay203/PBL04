@@ -80,11 +80,11 @@
                     <div class="member-item" th:each="member, id: ${memberList}">
                         <img src="#" alt="" class="member-img">
                         <!--                        //th:src="@{'/member/image/' + ${member.id}}"-->
-                        <p class="member-name" th:text="${member.hoTen}"></p>
+                        <p class="member-name" th:text="${member.getHoTen()}"></p>
                         <p class="member-age" th:text="${T(java.time.LocalDate).now().getYear() - member.getNgaySinh().getYear()} + ' tuổi'"></p>
                         <div class="member-rate">
                             <span class="text-rate">Đánh giá:</span>
-                            <span class="num-rate" th:text="${totalRates[id.index]}"></span>
+<!--                            <span class="num-rate" th:text="${totalRates[id.index]}"></span>-->
                             <i class="bi bi-star-fill star-rate"></i>
                         </div>
                     </div>
@@ -127,7 +127,7 @@
                         <div class="summary-title">
                             <!-- icon -->
                             <img class="float-start img-title" src="../static/images/Rectangle 253.png" alt="">
-                            <h4 class="text-title" th:text="${summary.getMaHD().tenHD}"></h4>
+                            <h4 class="text-title" th:text="${summary.getMaHD().getTenHD()}"></h4>
                         </div>
                         <div class="summary-content container">
                             <div class="row align-items-center">
@@ -169,7 +169,7 @@
                         <div class="summary-title">
                             <!-- icon -->
                             <img class="float-start img-title" src="../static/images/Rectangle 253.png" alt="">
-                            <h4 class="text-title" th:text="${summary.getMaHD().tenHD}"></h4>
+                            <h4 class="text-title" th:text="${summary.getMaHD().getTenHD()}"></h4>
                         </div>
                         <div class="summary-content container">
                             <div class="row align-items-center">
@@ -211,7 +211,7 @@
                         <div class="summary-title">
                             <!-- icon -->
                             <img class="float-start img-title" src="../static/images/Rectangle 253.png" alt="">
-                            <h4 class="text-title" th:text="${summary.getMaHD().tenHD}"></h4>
+                            <h4 class="text-title" th:text="${summary.getMaHD().getTenHD()}"></h4>
                         </div>
                         <div class="summary-content container">
                             <div class="row align-items-center">
