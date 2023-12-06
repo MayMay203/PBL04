@@ -341,8 +341,8 @@
     max-height: 29.5rem !important;
 }
 
-.max_height-28_5rem {
-    max-height: 28.5rem !important;
+.max_height-27rem {
+    max-height: 27rem !important;
 }
 
 .height-2rem{
@@ -390,6 +390,11 @@
 .btr-radius{
     border-radius: 0.5rem 0.5rem 0 0!important;
 }
+
+.bdr-radius{
+    border-radius: 0 0 0.5rem 0.5rem!important;
+}
+
 
 .border_bottom-2{
     border-bottom: 2rem!important;
