@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 @Table(name = "vetrangweb")
 public class Vetrangweb {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Ma", nullable = false)
     private Integer id;
 
@@ -18,8 +17,8 @@ public class Vetrangweb {
     @Column(name = "NoiDung", nullable = false)
     private String noiDung;
 
-    @Column(name = "Anh", nullable = false)
-    private byte[] anh;
+    @Column(name = "Anh", length = 50)
+    private String anh;
 
     public Integer getId() {
         return id;
@@ -45,11 +44,11 @@ public class Vetrangweb {
         this.noiDung = noiDung;
     }
 
-    public byte[] getAnh() {
+    public String getAnh() {
         return anh;
     }
 
-    public void setAnh(byte[] anh) {
+    public void setAnh(String anh) {
         this.anh = anh;
     }
 

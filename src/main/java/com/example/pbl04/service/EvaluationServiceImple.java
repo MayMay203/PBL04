@@ -15,14 +15,20 @@ public class EvaluationServiceImple implements EvaluationService {
     private final EvaluationRepository evaluationRepo;
     private final MemberService memberService;
 
+
     @Autowired
-    public EvaluationServiceImple(EvaluationRepository evaluationRepo, MemberService memberService){
+    public EvaluationServiceImple(EvaluationRepository evaluationRepo, MemberService memberService,ActivityService activityService){
         this.evaluationRepo = evaluationRepo;
         this.memberService = memberService;
     }
+
     @Override
     public List<Danhgia> getAllEvaluation() {
         return evaluationRepo.findAll();
+    }
+    @Override
+    public List<Danhgia> getEvaluationByIdAct(Integer IdAct) {
+        return evaluationRepo.getEvaluationByIdAct(IdAct);
     }
 
     @Override
@@ -55,9 +61,10 @@ public class EvaluationServiceImple implements EvaluationService {
     }
 
     @Override
-    public Integer countEvaByIDHD(Integer IDHD) {
-       return evaluationRepo.countEvaluation(IDHD);
+    public Integer countEvaByIdAct(Integer IdAct) {
+       return evaluationRepo.countEvaluation(IdAct);
     }
+
 
 
 }

@@ -25,6 +25,9 @@ public class Dexuat {
     @Column(name = "moTa", nullable = false)
     private String moTa;
 
+    @Column(name = "trangThai", nullable = false)
+    private Byte trangThai;
+
     public Integer getId() {
         return id;
     }
@@ -65,6 +68,12 @@ public class Dexuat {
         this.moTa = moTa;
     }
 
+    public Byte getTrangThai() {
+        return trangThai;
+    }
 
+    public void setTrangThai(Byte trangThai) {
+        this.trangThai = trangThai;
+    }
 
 }

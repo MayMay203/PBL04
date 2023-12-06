@@ -6,7 +6,6 @@ import com.example.pbl04.entity.Hoatdong;
 import com.example.pbl04.entity.Taikhoan;
 import com.example.pbl04.entity.Thanhvien;
 
-import java.util.Date;
 import java.util.List;
 
 public interface ActivityService {
@@ -19,10 +18,14 @@ public interface ActivityService {
     Integer getNumActivity();
     Integer getParticipants();
     Taikhoan getOrganizator(Integer id);
-    Thanhvien getMemberByID(Integer id);
+    Thanhvien
+    getMemberByID(Integer id);
     List<Thanhvien> getMemberList(Integer id);
     //Danh gia
     List<Hoatdong> getActivityByMember(Integer id);
     List<Hoatdong> getActivityByHost(Integer id);
+
+    Dangky getRegisterInfo(Integer IdAct);
+//    Instant getTimeResgister(Integer IdAct);
 
 }

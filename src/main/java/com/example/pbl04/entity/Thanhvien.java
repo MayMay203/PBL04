@@ -35,8 +35,8 @@ public class Thanhvien {
     @Column(name = "email", nullable = false, length = 50)
     private String email;
 
-    @Column(name = "anh", nullable = false)
-    private byte[] anh;
+    @Column(name = "anh", length = 50)
+    private String anh;
 
     public Integer getId() {
         return id;
@@ -102,11 +102,11 @@ public class Thanhvien {
         this.email = email;
     }
 
-    public byte[] getAnh() {
+    public String getAnh() {
         return anh;
     }
 
-    public void setAnh(byte[] anh) {
+    public void setAnh(String anh) {
         this.anh = anh;
     }
 
