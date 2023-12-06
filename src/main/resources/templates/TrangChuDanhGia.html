@@ -83,7 +83,7 @@
                 <div class="container w-25 mt-2_8 p-0">
                     <div class="container cmt-slider">
 
-                        <div class="container bg-grey radius-1 p-2 my-6" th:each="index:${#numbers.sequence(1,6)}" th:if="${index<=evaluationList.size()}">
+                        <div class="container bg-grey radius-1 p-2 my-6" th:each="index:${#numbers.sequence(0,5)}" th:if="${index<evaluationList.size()}">
                             <div class="container d-flex my-1">
                                 <img src="../static/images/av3.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">
                                 <h7 class="green-color fs-9 fst-italic fw-medium" th:text="${evaluationList.get(index).getMaTK().getTenDN()}"></h7>
