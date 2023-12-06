@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ActivityController {
@@ -52,10 +54,17 @@ public class ActivityController {
         model.addAttribute("thanhvienList",thanhvienList);
         return "ChiTietHoatDong";
     }
-    @RequestMapping(value="/add")
-   public String ModalThemHoatDong(Model model)
+    @GetMapping("/them-hoat-dong")
+    public String showModalThemHoatDong(Model model){
+        model.addAttribute("activity", new Hoatdong());
+        return  "TrangCaNhan";
+    }
+    @PostMapping(value="/addActivity")
+    @ResponseBody
+    public Map<String, Object> addActivity( @RequestParam String tenChuDe, @RequestParam String tenhd)
     {
-       model.addAttribute("Activity", new Hoatdong());
-        return "addActivity";
+        Map<String, Object> response = new HashMap<>();
+//       model.addAttribute("activity", new Hoatdong());
+        return response;
     }
 }
