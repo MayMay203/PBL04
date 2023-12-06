@@ -86,10 +86,12 @@
     opacity: 0.9!important;
 }
 .btn-summary{
-    width: 100% !important;
+    color: white;
     border: none;
-
+    text-decoration: none;
+    margin-top: 2rem !important;
 }
+
 .btn-view-evaluation:hover{
     opacity: 0.9!important;
 }
@@ -202,12 +204,16 @@
     color: var(--yellow-color) !important;
 }
 
+
 .white-color{
     color: var(--white-color) !important;
 }
 
 .green_light-color{
     color: var(--green-light)!important;
+}
+.green_dark-color{
+    color: var(--sear) !important;
 }
 
 .green-color {
@@ -502,6 +508,14 @@
 .pt-1_2{
     padding-top: 1.2rem;
 }
+.btn-myacti-summary{
+    text-decoration: none;
+    color: var(--sear);
+    margin-left: 5rem !important;
+}
+.img-myActivity{
+    height: 12rem !important;
+}
 
 @media (min-width: 463px) and (max-width: 997px) {
     .fs-8{
@@ -536,4 +550,5 @@
         max-height: 57.6px;
         overflow: hidden;
     }
+
 }

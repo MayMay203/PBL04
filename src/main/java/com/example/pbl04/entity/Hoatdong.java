@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Table(name = "hoatdong")
 public class Hoatdong {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "maHD", nullable = false)
     private Integer id;
 
@@ -49,8 +50,8 @@ public class Hoatdong {
     @Column(name = "liDoHuy")
     private String liDoHuy;
 
-    @Column(name = "anh", length = 50)
-    private String anh;
+    @Column(name = "anh", nullable = false)
+    private byte[] anh;
 
     public Integer getId() {
         return id;
@@ -60,11 +61,11 @@ public class Hoatdong {
         this.id = id;
     }
 
-    public String getTenhd() {
+    public String getTenHD() {
         return tenhd;
     }
 
-    public void setTenhd(String tenhd) {
+    public void setTenHD(String tenhd) {
         this.tenhd = tenhd;
     }
 
@@ -148,11 +149,11 @@ public class Hoatdong {
         this.liDoHuy = liDoHuy;
     }
 
-    public String getAnh() {
+    public byte[] getAnh() {
         return anh;
     }
 
-    public void setAnh(String anh) {
+    public void setAnh(byte[] anh) {
         this.anh = anh;
     }
 

@@ -1,5 +1,7 @@
 package com.example.pbl04.entity;
 
+import com.example.pbl04.entity.Hoatdong;
+import com.example.pbl04.entity.Taikhoan;
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -8,6 +10,7 @@ import java.time.Instant;
 @Table(name = "danhgia")
 public class Danhgia {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "maDG", nullable = false)
     private Integer id;
 
