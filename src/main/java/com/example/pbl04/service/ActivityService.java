@@ -6,7 +6,6 @@ import com.example.pbl04.entity.Hoatdong;
 import com.example.pbl04.entity.Taikhoan;
 import com.example.pbl04.entity.Thanhvien;
 
-import java.util.Date;
 import java.util.List;
 
 public interface ActivityService {

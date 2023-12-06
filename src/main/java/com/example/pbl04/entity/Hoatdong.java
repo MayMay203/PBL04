@@ -13,12 +13,12 @@ public class Hoatdong {
     private Integer id;
 
     @Lob
-    @Column(name = "tenHD", nullable = false)
-    private String tenHD;
+    @Column(name = "tenhd", nullable = false)
+    private String tenhd;
 
-    @Lob
-    @Column(name = "chuDe", nullable = false)
-    private String chuDe;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "maChuDe", nullable = false)
+    private Chude maChuDe;
 
     @Lob
     @Column(name = "moTa", nullable = false)
@@ -62,19 +62,19 @@ public class Hoatdong {
     }
 
     public String getTenHD() {
-        return tenHD;
+        return tenhd;
     }
 
-    public void setTenHD(String tenHD) {
-        this.tenHD = tenHD;
+    public void setTenHD(String tenhd) {
+        this.tenhd = tenhd;
     }
 
-    public String getChuDe() {
-        return chuDe;
+    public Chude getMaChuDe() {
+        return maChuDe;
     }
 
-    public void setChuDe(String chuDe) {
-        this.chuDe = chuDe;
+    public void setMaChuDe(Chude maChuDe) {
+        this.maChuDe = maChuDe;
     }
 
     public String getMoTa() {

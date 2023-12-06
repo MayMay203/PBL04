@@ -52,4 +52,10 @@ public class ActivityController {
         model.addAttribute("thanhvienList",thanhvienList);
         return "ChiTietHoatDong";
     }
+    @RequestMapping(value="/add")
+   public String ModalThemHoatDong(Model model)
+    {
+       model.addAttribute("Activity", new Hoatdong());
+        return "addActivity";
+    }
 }

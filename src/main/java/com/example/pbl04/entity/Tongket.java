@@ -1,5 +1,6 @@
 package com.example.pbl04.entity;
 
+import com.example.pbl04.entity.Hoatdong;
 import jakarta.persistence.*;
 
 @Entity
