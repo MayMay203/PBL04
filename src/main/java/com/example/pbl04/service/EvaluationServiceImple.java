@@ -2,7 +2,6 @@ package com.example.pbl04.service;
 
 import com.example.pbl04.dao.EvaluationRepository;
 import com.example.pbl04.entity.Danhgia;
-import com.example.pbl04.entity.Hoatdong;
 import com.example.pbl04.entity.Thanhvien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,20 +43,5 @@ public class EvaluationServiceImple implements EvaluationService {
         }
         return totalRates;
     }
-
-    @Override
-    public List<Integer> countEvaluation(List<Hoatdong> ActList) {
-        List<Integer> countEvaList = new ArrayList<>();
-        for(Hoatdong act : ActList){
-            countEvaList.add(evaluationRepo.countEvaluation(act.getId()));
-        }
-        return countEvaList;
-    }
-
-    @Override
-    public Integer countEvaByIDHD(Integer IDHD) {
-       return evaluationRepo.countEvaluation(IDHD);
-    }
-
 
 }

@@ -19,12 +19,12 @@
 </head>
 
 <body>
-<div  class="sticky-top" style="top: -87px" th:include="Header :: html"></div>
+<div th:include="Header :: html"></div>
 <div class="HoatDongContent">
     <div class="slider">
         <div class="container-fluid">
             <div id="carouselExampleCaptions" class="carousel slide">
-                <div class="carousel-inner" th:each="activity, iterStat : ${actiListHappening}">
+                <form th:method="GET" class="carousel-inner" th:each="activity, iterStat : ${actiListHappening}">
                     <div class="carousel-item" th:classappend="${iterStat.index == 0} ? 'active' : ''">
                         <img th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(activity.getAnh())}" class="d-block w-100" alt="Image">
                         <i class="bi bi-broadcast icon_broad_cast"></i><span class="broad_cast"> ĐANG DIỄN RA</span>
@@ -33,7 +33,7 @@
                             <p><a href="" th:text="${#strings.length(activity.getMoTa()) > 500 ? activity.getMoTa().substring(0, 500) + '...' : activity.getMoTa()}"></a></p>
                         </div>
                     </div>
-                </div>
+                </form>
 
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
                         data-bs-slide="prev">
@@ -56,21 +56,23 @@
                         <h3 class="Content_left-title my-5">HOẠT ĐỘNG</h3>
                         <div class="Content_left-item">
                             <div class="act-slider" >
-                                <div class="container-item" th:each="i : ${#numbers.sequence(0, actiListUpcomming.size() div 4 + ((actiListUpcomming.size()%4 > 0) ? 1 : 0) - 1)}">
-                                    <div class="card mb-5"  th:each="j:${#numbers.sequence(0,4)}" th:if="${(4*i+j)<actiListUpcomming.size()}">
+                                <div class="container-item" >
+                                    <form th:action="@{/Join}"  th:method="GET" th:each="activity : ${actiListUpcomming}">
+                                    <div class="card mb-5">
                                         <div class="row g-0">
                                             <div class="col-md-3">
-                                                <img th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(actiListUpcomming.get((4*i)+j).getMaHD().getAnh())}"
+                                                <img th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(activity.getMaHD().getAnh())}"
                                                      class="img-fluid rounded-start" alt="...">
                                             </div>
                                             <div class="col-md-9">
                                                 <div class="card-body">
-                                                    <h5 class="card-title"><a class="card-title-a" href="" th:text="${actiListUpcomming.get((4*i)+j).getMaHD().getTenHD()}"></a>
+                                                    <h5 class="card-title"><a class="card-title-a" href="" th:text="${activity.getMaHD().getTenHD()}"></a>
                                                     </h5>
-                                                    <p class="card-text"><a class="card-text-a" href=""  th:text="${#strings.length(actiListUpcomming.get((4*i)+j).getMaHD().getMoTa()) > 210 ? actiListUpcomming.get((4*i)+j).getMaHD().getMoTa().substring(0, 210) + '...' : actiListUpcomming.get((4*i)+j).getMaHD().getMoTa()}"></a></p>
+                                                    <p class="card-text"><a class="card-text-a" href=""  th:text="${#strings.length(activity.getMaHD().getMoTa()) > 200 ? activity.getMaHD().getMoTa().substring(0, 200) + '...' : activity.getMaHD().getMoTa()}"></a></p>
                                                     <p class="card-text"><small class="text-body-secondary">
-                                                        <span class="bi bi-calendar-date"></span><span th:text="${#temporals.format(actiListUpcomming.get((4*i)+j).getThoiGianDK(), 'dd-MM-yyyy')}"></span>
-                                                        <button type="submit" class="btn btn-success btn-join-acti" ><a class="btn-Join-detail" th:href="@{/Join(id=${actiListUpcomming.get((4*i)+j).getMaHD().id})}">Tham gia</a></button>
+                                                        <span class="bi bi-calendar-date"></span><span th:text="${#temporals.format(activity.getThoiGianDK(), 'dd-MM-yyyy')}"></span>
+                                                        <button type="submit" class="btn btn-success btn-join-acti" ><a class="btn-Join-detail" th:href="@{/Join(id=${activity.getMaHD().id})}">Tham gia</a></button>
+<!--                                                        <input type="hidden" name="id" th:value="${activity.getId()}" th:id="'activityForm_' + ${activity.getId()}"/>-->
                                                     </small></p>
                                                 </div>
                                             </div>
@@ -116,8 +118,7 @@
                             </div>
                         </div>
 
-                        <div class="list_card">
-                            <div th:each="activity : ${actiList}">
+                        <form method="POST" class="list_card" th:each="activity : ${actiList}">
                             <div class="card custom-margin" style="width: 13rem;">
                                 <img class="card-img-top" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(activity.getAnh())}" alt="Card image cap">
                                 <div class="card-img-overlay">
@@ -125,11 +126,10 @@
                                     </h5>
                                     <p class="card-text" th:text="${#strings.length(activity.getMoTa()) > 100 ? activity.getMoTa().substring(0, 100) + '...' : activity.getMoTa()}"></p>
                                     <a th:href="@{/Join(id=${activity.id})}" class="xemttiep">Xem tiếp</a>
+                                    <input type="hidden" name="id" th:value="${activity.getId()}" th:id="'activityForm_' + ${activity.getId()}"/>
                                 </div>
                             </div>
-                                <br>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

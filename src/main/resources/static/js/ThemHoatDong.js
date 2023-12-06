@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // var formElements = document.getElementById("myForm").elements;
       // for (var i = 0; i < formElements.length; i++) {
       //   formElements[i].setCustomValidity('');
-      // }th:src="@{/images/default.webp}"
-      document.getElementById("userImage").src = "@{/images/default.webp}";
+      // }
+      document.getElementById("userImage").src = "../assets/images/default.webp";
     }
 

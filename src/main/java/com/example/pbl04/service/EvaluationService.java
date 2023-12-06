@@ -8,9 +8,4 @@ public interface EvaluationService {
     public List<Danhgia> getAllEvaluation();
 
     List<Integer> getTotalRateOfMember();
-
-    List<Integer> countEvaluation(List<Hoatdong> actList);
-
-    Integer countEvaByIDHD(Integer IDHD);
-
 }

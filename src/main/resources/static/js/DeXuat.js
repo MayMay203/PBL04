@@ -40,7 +40,7 @@ for(btn of btn_suggestionDetail){
         try{
             const encode = convertToSlug(title);
             const response = await fetch(`/de-xuat/${encode}`);
-            // console.log(encode);
+            console.log(encode);
             if(!response.ok){
                 throw new Error(`Lỗi HTTP! Trạng thái: ${response.status}`);
             }

@@ -17,7 +17,7 @@
 </head>
 
 <body>
-<div  class="sticky-top" style="top: -87px" th:include="Header :: html"></div>
+<div th:include="Header :: html"></div>
 <div class="container p-5">
     <!-- Search -->
     <div class="fs-6 p-1 border-search width-25rem m-5 position-relative">
@@ -51,27 +51,29 @@
 
     <!-- Content -->
     <div class="container d-flex justify-content-between">
-        <h2 class="mx-0 fs-4 mb-sm-3 ms-5">HOẠT ĐỘNG ĐÃ THAM GIA</h2>
+        <h2 class="mx-0 fs-4 mb-sm-3 ms-5">HOẠT ĐỘNG GẦN ĐÂY</h2>
         <h2 class="fs-4 pt-sm-3 text-center me-5">HOẠT ĐỘNG ĐÃ TỔ CHỨC</h2>
     </div>
     <div class="container d-flex content">
         <!-- Left -->
         <div class="container p-5 pt-0 fs-6 mx--2 w-70 act-slider">
-            <div class="container-item" th:if="${actListOfMember.size()!=0}" th:each="i : ${#numbers.sequence(0, actListOfMember.size() div 4 + ((actListOfMember.size()%4 > 0) ? 1 : 0) - 1)}">
-                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<actListOfMember.size()}">
+            <div class="container-item">
+                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer">
                     <img src="../static/images/anh3.jpg" class="float-start w-15 h-80 act-image" alt="" />
                     <div class="card border-0">
                         <div class="card-body fs-7">
-                            <div class="card-title fs-6 fw-bolder green-color" th:text="${actListOfMember.get((4*i)+j).getTenHD()}">
-                            </div>
-                            <div class="card-text fs-8" th:text="${#strings.length(actListOfMember.get(4*i+j).getMoTa()) > 150 ? actListOfMember.get(4*i+j).getMoTa().substring(0, 150) + '...' : actListOfMember.get(4*i+j).getMoTa()}"></div>
+                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
+                                vùng cao.</div>
+                            <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh
+                                khó
+                                khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
                             <div class="card-text">
-                                <i class="bi bi-calendar2 m-1 green-color" th:text="'   ' + ${actListOfMember.get(4*i+j).getThoiGianBD() + '  -  ' + actListOfMember.get(4*i+j).getThoiGianKT()}"></i>
+                                <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
                             </div>
                             <div class="card-link">
-                                <a
-                                   class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 no-border fs-7 view-summary" th:href="@{/View-Summary(id=${actListOfMember.get(4*i+j).getId()})}">
-                                    Xem tổng kết...</a>
+                                <a href=""
+                                   class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 no-border fs-7 view-summary">Xem
+                                    tổng kết...</a>
                             </div>
                             <div
                                     class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-evaluate">
@@ -80,26 +82,235 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer">
+                    <img src="../static/images/anh3.jpg" class="float-start w-15 h-80 act-image" alt="" />
+                    <div class="card border-0">
+                        <div class="card-body fs-7">
+                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
+                                vùng cao.</div>
+                            <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh
+                                khó
+                                khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
+                            <div class="card-text">
+                                <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
+                            </div>
+                            <div class="card-link">
+                                <a href=""
+                                   class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 no-border fs-7 view-summary">Xem
+                                    tổng kết...</a>
+                            </div>
+                            <div
+                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-evaluate">
+                                Đánh giá
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer">
+                    <img src="../static/images/anh3.jpg" class="float-start w-15 h-80 act-image" alt="" />
+                    <div class="card border-0">
+                        <div class="card-body fs-7">
+                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
+                                vùng cao</div>
+                            <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh
+                                khó
+                                khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
+                            <div class="card-text">
+                                <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
+                            </div>
+                            <div class="card-link">
+                                <a href=""
+                                   class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 fs-9 ">
+                                    Xem tổng kết...</a>
+                            </div>
+                            <div
+                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-evaluate">
+                                Đánh giá</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer">
+                    <img src="../static/images/anh3.jpg" class="float-start w-15 h-80 act-image" alt="" />
+                    <div class="card border-0">
+                        <div class="card-body fs-7">
+                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
+                                vùng cao</div>
+                            <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh
+                                khó
+                                khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
+                            <div class="card-text">
+                                <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
+                            </div>
+                            <div class="card-link">
+                                <a href=""
+                                   class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 fs-9 ">
+                                    Xem tổng kết...</a>
+                            </div>
+                            <div
+                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-evaluate">
+                                Đánh giá</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-item">
+                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer">
+                    <img src="../static/images/anh3.jpg" class="float-start w-15 h-80 act-image" alt="" />
+                    <div class="card border-0">
+                        <div class="card-body fs-7">
+                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
+                                vùng cao</div>
+                            <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh
+                                khó
+                                khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
+                            <div class="card-text">
+                                <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
+                            </div>
+                            <div class="card-link">
+                                <a href=""
+                                   class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 fs-9 ">
+                                    Xem tổng kết...</a>
+                            </div>
+                            <div
+                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-evaluate">
+                                Đánh giá</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer">
+                    <img src="../static/images/anh3.jpg" class="float-start w-15 h-80 act-image" alt="" />
+                    <div class="card border-0">
+                        <div class="card-body fs-7">
+                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1">Mang niềm vui đến với học sinh nghèo
+                                vùng cao</div>
+                            <div class="card-text">Với tâm nguyện hướng về vùng cao, sẻ chia khó khăn với những người có hoàn cảnh
+                                khó
+                                khăn, kém may mắn đem đến cho họ niềm hi vọng về một tương lai tốt đẹp hơn.</div>
+                            <div class="card-text">
+                                <i class="bi bi-calendar2 m-1 green-color"></i>18/08/2023-28/08/2023
+                            </div>
+                            <div class="card-link">
+                                <a href=""
+                                   class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 fs-9 ">
+                                    Xem tổng kết...</a>
+                            </div>
+                            <div
+                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-evaluate">
+                                Đánh giá</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- Right -->
         <div class="container flex-1 bg-green radius-lghalf p-0">
-            <div class="container mh-100 overflow-y-auto origanized-slider" th:if="${actListOfHost.size()!=0}">
-                <div class="container mh-12 w-90 position-relative cursor-pointer content-right my-4 ml-0_5 origanize-act-item" th:each="activity:${actListOfHost}">
-                    <img class="top-0 start-0 end-0" th:src="@{/images/bg1.png}"  alt="" />
+            <div class="container mh-100 overflow-y-auto origanized-slider">
+                <div class="container mh-12 w-90 position-relative cursor-pointer content-right my-4 ml-0_5 origanize-act-item">
+                    <img class="top-0 start-0 end-0" src="../static/images/bg1.png" alt="" />
                     <div class="container position-absolute bottom-0 start-1_5 end-0 bg-white radius-1 mh-60 w-90">
-                        <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic fs-6 green-color" th:text="${activity.getTenHD()}"></h3>
-                        <p class="card-text fs-9 text-center fst-italic px-3" th:text="${#strings.length(activity.getMoTa()) > 120 ? activity.getMoTa().substring(0, 120) + '...' : activity.getMoTa()}">
+                        <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic m-0 max-line-3">Kế hoạch phối hợp tổ chức
+                            Chiến dịch
+                            tình nguyện
+                            "Mùa hè xanh" năm 2020</h3>
+                        <p class="card-text fs-11 text-center fst-italic px-3 m-0 max-line-4">Nhằm
+                            phát huy sức trẻ, sự nhiệt huyết của tuổi
+                            trẻ tạo ra
+                            những giá trị to lớn cho cộng đồng
                         </p>
                         <div href=""
-                             class="fs-7 p-0 text-decoration-none green_light-color fw-medium fst-italic px-2 mb-3 mx-5 btn_eva_member">Đánh
+                             class="fs-11 p-2 text-decoration-none green_light-color fw-medium fst-italic px-6 btn_eva_member">Đánh
                             giá
                             thành
                             viên</div>
                     </div>
                 </div>
+
+                <div class="container mh-12 w-90 position-relative cursor-pointer content-right my-4 ml-0_5 origanize-act-item">
+                    <img class="top-0 start-0 end-0" src="../static/images/bg1.png" alt="" />
+                    <div class="container position-absolute bottom-0 start-1_5 end-0 bg-white radius-1 mh-60 w-90">
+                        <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic m-0 max-line-3">Kế hoạch phối hợp tổ chức
+                            Chiến dịch
+                            tình nguyện
+                            "Mùa hè xanh" năm 2020</h3>
+                        <p class="card-text fs-11 text-center fst-italic px-3 m-0 max-line-4">Nhằm
+                            phát huy sức trẻ, sự nhiệt huyết của tuổi
+                            trẻ tạo ra
+                            những giá trị to lớn cho cộng đồng
+                        </p>
+                        <div href=""
+                             class="fs-11 p-2 text-decoration-none green_light-color fw-medium fst-italic px-6 btn_eva_member">Đánh
+                            giá
+                            thành
+                            viên</div>
+                    </div>
+                </div>
+
+                <div class="container mh-12 w-90 position-relative cursor-pointer content-right my-4 ml-0_5 origanize-act-item">
+                    <img class="top-0 start-0 end-0" src="../static/images/bg1.png" alt="" />
+                    <div class="container position-absolute bottom-0 start-1_5 end-0 bg-white radius-1 mh-60 w-90">
+                        <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic m-0 max-line-3">Kế hoạch phối hợp tổ chức
+                            Chiến dịch
+                            tình nguyện
+                            "Mùa hè xanh" năm 2020</h3>
+                        <p class="card-text fs-11 text-center fst-italic px-3 m-0 max-line-4">Nhằm
+                            phát huy sức trẻ, sự nhiệt huyết của tuổi
+                            trẻ tạo ra
+                            những giá trị to lớn cho cộng đồng
+                        </p>
+                        <div href=""
+                             class="fs-11 p-2 text-decoration-none green_light-color fw-medium fst-italic px-6 btn_eva_member">Đánh
+                            giá
+                            thành
+                            viên</div>
+                    </div>
+                </div>
+
+                <div class="container mh-12 w-90 position-relative cursor-pointer content-right my-4 ml-0_5 origanize-act-item">
+                    <img class="top-0 start-0 end-0" src="../static/images/bg1.png" alt="" />
+                    <div class="container position-absolute bottom-0 start-1_5 end-0 bg-white radius-1 mh-60 w-90">
+                        <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic m-0 max-line-3">Kế hoạch phối hợp tổ chức
+                            Chiến dịch
+                            tình nguyện
+                            "Mùa hè xanh" năm 2020</h3>
+                        <p class="card-text fs-11 text-center fst-italic px-3 m-0 max-line-4">Nhằm
+                            phát huy sức trẻ, sự nhiệt huyết của tuổi
+                            trẻ tạo ra
+                            những giá trị to lớn cho cộng đồng
+                        </p>
+                        <div href="" class="fs-11 p-2 text-decoration-none green_light-color fw-medium fst-italic px-6 btn_eva_member">Đánh
+                            giá
+                            thành
+                            viên</div>
+                    </div>
+                </div>
+
+                <div class="container mh-12 w-90 position-relative cursor-pointer content-right my-4 ml-0_5 origanize-act-item">
+                    <img class="top-0 start-0 end-0" src="../static/images/bg1.png" alt="" />
+                    <div class="container position-absolute bottom-0 start-1_5 end-0 bg-white radius-1 mh-60 w-90">
+                        <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic m-0 max-line-3">Kế hoạch phối hợp tổ chức
+                            Chiến dịch
+                            tình nguyện
+                            "Mùa hè xanh" năm 2020</h3>
+                        <p class="card-text fs-11 text-center fst-italic px-3 m-0 max-line-4">Nhằm
+                            phát huy sức trẻ, sự nhiệt huyết của tuổi
+                            trẻ tạo ra
+                            những giá trị to lớn cho cộng đồng
+                        </p>
+                        <div href="" class="fs-11 p-2 text-decoration-none green_light-color fw-medium fst-italic px-6 btn_eva_member">Đánh
+                            giá
+                            thành
+                            viên</div>
+                    </div>
+                </div>
+
             </div>
         </div>
+    </div>
 </div>
 
 <!-- Modal -->

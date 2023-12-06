@@ -271,7 +271,7 @@
 }
 
 .icon_cloud{
-    font-size: 10rem !important;
+    font-size: 8.5rem !important;
     position: absolute;
     margin-top: -3rem !important;
     top:0 !important;
@@ -281,8 +281,8 @@
 }
 .topic{
     position: absolute;
-    font-size: 1.1rem !important;
-    margin-top: 4.3rem !important;
+    font-size: 1.2rem !important;
+    margin-top: 3rem !important;
     top:0 !important;
     left: 70% !important;
     transform: translateX(-50%) !important;
@@ -302,14 +302,14 @@
 }
 
 .content_detail_title{
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: var(--white);
     font-weight: bold;
     /* padding-top: 2rem; */
     margin-left: 8rem !important;
     background-color: var(--sear);
     border-radius: 20px;
-    width: 19rem !important;
+    width: 23rem !important;
     padding: 1.5rem;
 
 
@@ -322,11 +322,11 @@
 }
 .content_plus_title{
 
-    font-size: 1.2rem !important;
+    font-size: 1.5rem;
     color: white;
     font-weight: bold;
     padding: 1.8rem;
-    width: 19rem;
+    width: 23rem;
     background-color: var(--sear);
     border-radius: 20px;
     z-index: 1 !important;
@@ -382,10 +382,6 @@
     margin-right: -11rem !important;
     border: none;
 }
-.btn-summary{
-    color:white;
-    text-decoration: none;
-}
 .btn-KetThuc{
     background-color: var(--btn) !important;
     color: white !important;
@@ -408,12 +404,6 @@
     fill: var(--phase-1);
     margin-left: -0.8rem !important;
     z-index: 0 !important;
-}
-.color--frame{
-    opacity: 0.5;
-}
-.color_black-light{
-    color: rgba(0, 0, 0, 0.5) !important;
 }
 .frame1-text{
     position: absolute;
@@ -583,7 +573,6 @@
 
 .image-left-tongket{
     width: 25rem !important;
-    height: 16.5rem !important;
 }
 .image-right-tongket{
     width: 25rem;
@@ -594,12 +583,8 @@
     display: block;
     margin-bottom: 5px;
     width: 12.2rem !important;
-    height: 8rem !important;
 }
-.img-summary{
-    width: 15.2rem !important;
-    height: 10rem !important;
-}
+
 .row-img {
     display: flex;
     justify-content: space-between;
@@ -757,13 +742,7 @@
     margin-right: 1rem;
     padding:0.2rem 0.2rem 0.2rem 0.4rem;
 }
-#MemberModal .modal-dialog {
-    max-height: 500px; /* Đặt giá trị chiều cao tùy ý */
-}
 
-#MemberModal .modal-content {
-    overflow-y: auto; /* Cho phép cuộn nếu nội dung vượt qua chiều cao */
-}
 .modal-member-name{
     font-weight: 450;
     font-style: italic ;

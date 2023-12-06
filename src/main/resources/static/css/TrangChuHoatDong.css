@@ -51,12 +51,12 @@
     max-height: 50rem;
 }
 .slick-prev{
-    margin-left: 10rem;
+    margin-left: 0rem;
     font-size: 2rem;
     cursor: pointer;
 }
 .slick-next{
-    margin-left: 10rem;
+    margin-left: 0rem;
     font-size: 2rem;
     cursor: pointer;
 }
@@ -115,7 +115,7 @@
 }
 
 .border-search{
-    border: 0.2rem solid var(--grey-phase) !important;
+    border: 0.2rem solid var(--btn) !important;
     border-radius:20px !important;
 }
 .width-25rem{

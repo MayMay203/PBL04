@@ -11,20 +11,20 @@
 </head>
 
 <body>
-<div  class="sticky-top" style="top: -87px" th:include="Header :: html"></div>
+<div th:include="Header :: html"></div>
 <div class="container">
     <!-- titel hoạt động -->
     <div class="row p-5">
         <div class="col-md-8 p-8 ">
             <div class="name_detail">
                 <p class="detail_title" th:text="${summary.getMaHD().getTenHD()}"></p>
-                <div class="date-range"> <i class="bi bi-calendar2-range"></i><span  th:text="' '+${#temporals.format(summary.getMaHD().getThoiGianBD(), 'dd/MM/yyyy')} + ' - ' + ${#temporals.format(summary.getMaHD().getThoiGianKT(), 'dd/MM/yyyy')}"></span></div>
+                <div class="date-range"> <i class="bi bi-calendar2-range"></i><span  th:text="' ' + ${summary.getMaHD().getThoiGianBD()} + '-' + ${summary.getMaHD().getThoiGianKT()}"></span></div>
                 <hr>
             </div>
         </div>
         <div class="col-md-4 detail_topic  text-center mx-auto">
             <i class="bi bi-cloud icon_cloud"></i>
-            <span class="topic" th:text="${summary.getMaHD().getMaChuDe().getTenChuDe()}"></span>
+            <span class="topic" th:text="${summary.getMaHD().getChuDe()}"></span>
         </div>
     </div>
 
@@ -32,21 +32,20 @@
         <div class="col-md-8">
             <div class="row">
                 <div class="col-md-6">
-                    <img th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(summary.getMaHD().getAnh())}" alt="" class="image-left-tongket">
+                    <img src="../static/images/anhchitiet.jpg" alt="" class="image-left-tongket">
                 </div>
                 <div class="col-md-6">
                     <div class="row row-img">
-                        <div class="col-6 col-img" th:each="image, iterStat : ${imgSummaryList}" th:if="${iterStat.index < 2}">
-                            <img th:if="${image.getAnh() !=null}" class="image-sub" alt="" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(image.getAnh())}"/>
+                        <div class="col-6 col-img">
+                            <img class="image-sub" src="../static/images/anhchitiet.jpg" alt="">
+                            <img class="image-sub" src="../static/images/anhchitiet.jpg" alt="">
                         </div>
-                    </div>
-                    <div class="row row-img" >
-                        <div class="col-6 col-img" th:each="image, iterStat : ${imgSummaryList}" th:if="${iterStat.index >= 2} and ${iterStat.index <4} ">
-                            <img th:if="${image.getAnh() !=null}" class="image-sub" alt="" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(image.getAnh())}"/>
+                        <div class="col-6 col-img">
+                            <img class="image-sub" src="../static/images/anhchitiet.jpg" alt="">
+                            <img class="image-sub" src="../static/images/anhchitiet.jpg" alt="">
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="col-md-4 main_phase">
@@ -56,16 +55,17 @@
                 <div class="row">
                     <div class="col-md-2">
                         <div class="rectangle">
-                            <i class="bi bi-circle-fill circle-1 color-gd2" ></i>
-                            <i class="bi bi-circle-fill circle-2 color-gd2"></i>
-                            <i class="bi bi-circle-fill circle-3 color-gd2"></i>
+                            <i class="bi bi-circle-fill circle-1" style="color:var(--sliderback);"></i>
+                            <i class="bi bi-circle-fill circle-2" style="color:var(--sliderback);"></i>
+                            <i class="bi bi-circle-fill circle-3"></i>
                         </div>
                     </div>
                     <div class="col-md-10">
                         <svg viewBox="0 0 73 31" class="frame1">
                             <path
                                     d="M69.4563 31H19.1359C17.3641 31 15.5922 30.38 14.1748 29.14L1.06311 17.67C-0.354369 16.43 -0.354369 14.57 1.06311 13.33L14.1748 1.86C15.5922 0.62 17.3641 0 19.1359 0H69.4563C71.5825 0 73 1.24 73 3.1V27.9C73 29.76 71.5825 31 69.4563 31Z" />
-
+                            <text x="37" y="20" font-size="16px" font-family="sans-serif" color="white"
+                                  visibility="visible" z-index = "1">Chưa diễn ra</text>
                         </svg>
                         <svg viewBox="0 0 90 31" class="frame2">
                             <path
@@ -101,7 +101,7 @@
                             class="plus_detail_address" th:text="${summary.getMaHD().getDiaDiem()}"></span></div>
                     <h2 class="tongket-title">THỜI GIAN</h2>
                     <div class="tongket-title-info"><i class="bi bi-calendar3-week"></i><span> Thời gian:
-                            </span><span class="plus_detail_date" th:text="${#temporals.format(summary.getMaHD().getThoiGianBD(), 'dd/MM/yyyy')} + ' - ' + ${#temporals.format(summary.getMaHD().getThoiGianKT(), 'dd/MM/yyyy')}"></span></div>
+                            </span><span class="plus_detail_date" th:text="' ' + ${summary.getMaHD().getThoiGianBD()} + '-' + ${summary.getMaHD().getThoiGianKT()}"></span></div>
                     <h2 class="tongket-title">TÌNH NGUYỆN VIÊN</h2>
                     <div class="tongket-title-info"><i class="bi bi-people-fill"></i><span> Số tình nguyện viên:
                             </span><span class="plus_detail_date">50</span></div>
@@ -114,10 +114,8 @@
                 <div class="tab-pane">
                     <h2 class="tongket-title">HÌNH ẢNH HOẠT ĐỘNG</h2>
                     <div class="image-container">
-                        <img class="img-summary" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(summary.getMaHD().getAnh())}" alt="Image 1">
-                        <div  th:each="image : ${imgSummaryList}">
-                            <img class="img-summary" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(image.getAnh())}" alt="Image 1">
-                        </div>
+                        <img th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(summary.getMaHD().getAnh())}" alt="Image 1">
+                        <!-- Thêm các hình ảnh khác nếu cần -->
                     </div>
                 </div>
                 <!-- Đánh giá hoạt động -->
@@ -128,17 +126,17 @@
             </div>
         </div>
         <div class="col-md-4 text-center">
-<!--            <button type="button" class="btn-judge">Đánh giá</button>-->
+            <button type="button" class="btn-judge">Đánh giá</button>
             <div class="group_member_tongket">
                 <h3 class="group_member-organize">NHÀ TỔ CHỨC</h3>
-                <h6 class="name-organize" th:text="${member.getHoTen()}"></h6>
-                <img th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(member.getAnh())}" alt="" class="images-organize">
+                <h6 class="name-organize" th:text="${thanhvien.getHoTen()}"></h6>
+                <img src="../static/images/ava.jpg" alt="" class="images-organize">
                 <hr class="dash_organize" />
                 <h3 class="group_member-parti">THÀNH VIÊN</h3>
                 <div class="group_member-list">
-                    <div class="member" th:each="member: ${memberList}">
-                        <img class="member-ava" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(member.getAnh())}" alt="">
-                        <span class="member-name" th:text="${member.getHoTen()}"></span>
+                    <div class="member" th:each="thanhvien: ${thanhvienList}">
+                        <img class="member-ava" src="../static/images/ava1.jpg" alt="">
+                        <span class="member-name" th:text="${thanhvien.getHoTen()}">Nguyễn Thị Kim Chi</span>
                     </div>
                 </div>
                 <h6 class="member_more" data-bs-toggle="modal" data-bs-target="#MemberModal">XEM THÊM</h6>
@@ -156,11 +154,11 @@
                 <h5 class="modal-title modal-title-member" id="exampleModalLabel">TÌNH NGUYỆN VIÊN</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body modal-body-member" th:each="member: ${memberList}">
+            <div class="modal-body modal-body-member" th:each="thanhvien: ${thanhvienList}">
                 <div class="modal-member">
                         <span>
                             <img class="modal-member-ava" src="../static/images/ava1.jpg" alt="">
-                            <span class="modal-member-name" th:text="${member.getHoTen()}"></span>
+                            <span class="modal-member-name" th:text="${thanhvien.getHoTen()}"></span>
                         </span>
                     <span class="modal-member-rate">
                             <i class="rate-detail">5</i>
