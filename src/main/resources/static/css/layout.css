@@ -382,6 +382,10 @@
     margin-right: -11rem !important;
     border: none;
 }
+.btn-summary{
+    color:white;
+    text-decoration: none;
+}
 .btn-KetThuc{
     background-color: var(--btn) !important;
     color: white !important;

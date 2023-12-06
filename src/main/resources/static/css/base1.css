@@ -86,9 +86,10 @@
     opacity: 0.9!important;
 }
 .btn-summary{
-    width: 100% !important;
+    color: white;
     border: none;
-
+    text-decoration: none;
+    margin-top: 2rem !important;
 }
 .btn-view-evaluation:hover{
     opacity: 0.9!important;

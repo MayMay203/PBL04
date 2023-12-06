@@ -38,6 +38,7 @@ public class ActivityController {
         model.addAttribute("actiListHappening",actiListHappening);
         model.addAttribute(("actiListUpcomming"),actiListUpcomming);
         model.addAttribute("numberParticipants",numberParticipants);
+        model.addAttribute("account", new Taikhoan());
         return "TrangChuHoatDong";
     }
     @RequestMapping(value ="/Join")
@@ -52,11 +53,13 @@ public class ActivityController {
         model.addAttribute("taikhoan",taikhoan);
         model.addAttribute("thanhvien",thanhvien);
         model.addAttribute("thanhvienList",thanhvienList);
+        model.addAttribute("account", new Taikhoan());
         return "ChiTietHoatDong";
     }
     @GetMapping("/them-hoat-dong")
     public String showModalThemHoatDong(Model model){
         model.addAttribute("activity", new Hoatdong());
+        model.addAttribute("account", new Taikhoan());
         return  "TrangCaNhan";
     }
     @PostMapping(value="/addActivity")
