@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ActivityController {
@@ -38,18 +40,31 @@ public class ActivityController {
         model.addAttribute("numberParticipants",numberParticipants);
         return "TrangChuHoatDong";
     }
-    @RequestMapping(value ="/Join", method = RequestMethod.GET)
-    public String showActivityByID(Model model, @ModelAttribute Hoatdong hd)
+    @RequestMapping(value ="/Join")
+    public String showActivityByID(Model model,@RequestParam("id") Integer id)
     {
-        Taikhoan taikhoan =activityService.getOrganizator(hd.getId());
-        List<Thanhvien> thanhvienList =activityService.getMemberList(hd.getId());
+        Taikhoan taikhoan =activityService.getOrganizator(id);
+        List<Thanhvien> thanhvienList =activityService.getMemberList(id);
         Thanhvien thanhvien=activityService.getMemberByID(taikhoan.getId());
-        Hoatdong hoatdong = activityService.getActivityByID(hd.getId());
+        Hoatdong hoatdong = activityService.getActivityByID(id);
         model.addAttribute("Anh",new Anh());
         model.addAttribute("hoatdong",hoatdong);
         model.addAttribute("taikhoan",taikhoan);
         model.addAttribute("thanhvien",thanhvien);
         model.addAttribute("thanhvienList",thanhvienList);
         return "ChiTietHoatDong";
+    }
+    @GetMapping("/them-hoat-dong")
+    public String showModalThemHoatDong(Model model){
+        model.addAttribute("activity", new Hoatdong());
+        return  "TrangCaNhan";
+    }
+    @PostMapping(value="/addActivity")
+    @ResponseBody
+    public Map<String, Object> addActivity( @RequestParam String tenChuDe, @RequestParam String tenhd)
+    {
+        Map<String, Object> response = new HashMap<>();
+//       model.addAttribute("activity", new Hoatdong());
+        return response;
     }
 }

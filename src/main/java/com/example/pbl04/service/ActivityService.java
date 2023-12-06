@@ -18,7 +18,11 @@ public interface ActivityService {
     Integer getNumActivity();
     Integer getParticipants();
     Taikhoan getOrganizator(Integer id);
-    Thanhvien getMemberByID(Integer id);
+    Thanhvien
+    getMemberByID(Integer id);
     List<Thanhvien> getMemberList(Integer id);
+
+    Dangky getRegisterInfo(Integer IdAct);
+//    Instant getTimeResgister(Integer IdAct);
 
 }

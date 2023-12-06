@@ -15,7 +15,7 @@ public class Hoatdong {
     @Column(name = "tenhd", nullable = false)
     private String tenhd;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER,optional = false)
     @JoinColumn(name = "maChuDe", nullable = false)
     private Chude maChuDe;
 

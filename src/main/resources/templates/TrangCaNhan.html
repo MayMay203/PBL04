@@ -13,18 +13,15 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/ThemHoatDong.css}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-    <script defer th:src="@{/js/Header.js}"></script>
-<!--    <script  defer th:src="@{/js/TrangCaNhan.js}"></script>-->
+<!--    <script defer th:src="@{/js/Header.js}"></script>-->
+    <script  defer th:src="@{/js/TrangCaNhan.js}"></script>
+    <script  defer th:src="@{/js/ThemHoatDong.js}"></script>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </head>
 <body>
 <!--    <div id="iframe-container" class="sticky-top" style="top: -87px">-->
 <!--    </div>-->
-<!--<div id="myHeader" style="top: -87px" th:include="Header :: html"></div>-->
-<div id="myHeader" style="top: -87px" th:include="Header :: html"></div>
+<div  class="sticky-top" style="top: -87px" th:include="Header :: html"></div>
     <div class="container-fluid">
         <div class="sectionAvatar">
             <img class="sectionAvatar__img-back dimmed" src="../static/images/Rectangle 292.png" alt="">
@@ -168,7 +165,7 @@
             <div class="modal fade" id="ThemHoatDongModal" tabindex="-1" aria-labelledby="modalAddActivity" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-themhd">
                     <div class="modal-content modal-content-themhd">
-                        <form class="needs-validation" id="myForm" novalidate>
+                        <form th:action="@{/addActivity}" th:object="${activity}" th:method="POST" class="needs-validation" id="myForm" novalidate>
                             <div class="modal-header  modal-header-themhd ">
                                 <h5 class="modal-title modal-title-themhd " id="exampleModalLabel">THÊM HOẠT ĐỘNG</h5>
                                 <button type="button" class="btn-close btnClose" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -180,7 +177,7 @@
                                         <div class="col-md-3"><label class="lbHD" for="txt_NameTopic"><i class="bi bi-pencil-square"></i>CHỦ
                                             ĐỀ</label></div>
                                         <div class="col-md-9"><input class="textfieldHD form-control" type="text" name="txt_NameTopic"
-                                                                     id="txt_NameTopic" value="" required></div>
+                                                                     id="txt_NameTopic"  th:field="*{maChuDe.tenChuDe}" required></div>
                                         <div class="invalid-feedback">Vui lòng nhập tên chủ đề</div>
                                     </div>
                                     <br>
@@ -188,7 +185,7 @@
                                         <div class="col-md-3"><label class="lbHD" for="txt_NameActi"><i class="bi bi-fire"></i>TÊN HOẠT
                                             ĐỘNG</label></div>
                                         <div class="col-md-9"> <input class="textfieldHD form-control" type="text" name="txt_NameActi"
-                                                                      id="txt_NameActi" value="" required></div>
+                                                                      id="txt_NameActi" th:field="*{tenHD}" required></div>
                                         <div class="invalid-feedback">Vui lòng nhập tên hoạt động</div>
                                     </div>
                                     <br>
@@ -196,7 +193,7 @@
                                         <div class="col-md-3"> <label class="lbHD" for="txt_Location"><i class="bi bi-geo-alt-fill"></i>ĐỊA
                                             ĐIỂM</label></div>
                                         <div class="col-md-9"><input class="textfieldHD form-control" type="text" name="txt_Location"
-                                                                     id="txt_Location" value="" required></div>
+                                                                     id="txt_Location" th:field="*{diaDiem}" required></div>
                                         <div class="invalid-feedback">Vui lòng nhập địa điểm</div>
                                     </div>
                                     <br>
@@ -205,31 +202,35 @@
                                             <label class="lbHD" for="txt_dateBD"><i class="bi bi-calendar-minus"></i>THỜI GIAN BẮT ĐẦU</label>
                                         </div>
                                         <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="txt_dateBD" id="txt_dateBD"
+                                                                     th:date="*{thoiGianBD}"
                                                                      required></div>
                                         <div class="invalid-feedback">Vui lòng chọn thời gian bắt đầu</div>
                                         <div class="col-md-3">
                                             <label class="lbHD" for="txt_dateKT"><i class="bi bi-calendar-minus"></i>THỜI GIAN KẾT THÚC</label>
                                         </div>
                                         <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="txt_dateKT" id="txt_dateKT"
+                                                                     th:date="*{thoiGianKT}"
                                                                      required></div>
                                         <div class="invalid-feedback">Vui lòng chọn thời gian kết thúc</div>
                                     </div>
                                     <br>
                                     <div class="row">
-                                        <div class="col-md-3 lbHD"><i class="bi bi-people-fill"></i>SỐ TÌNH NGUYỆN VIÊN</div>
+                                        <div class="col-md-3 lbHD"><i class="bi bi-people-fill"></i>SỐ TNV TỐI THIỂU</div>
                                         <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnv" id="txt_tnv"
+                                                                     th:field="*{soTNVToiThieu}"
                                                                      required></div>
-                                        <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên</div>
-                                        <div class="col-md-3 lbHD"><i class="bi bi-person-dash"></i>SỐ TNV TỐI THIỂU</div>
+                                        <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>
+                                        <div class="col-md-3 lbHD"><i class="bi bi-person-dash"></i>SỐ TNV TỐI ĐA</div>
                                         <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnvTT" id="txt_tnvTT"
+                                                                     th:field="*{soTNVToiDa}"
                                                                      required></div>
-                                        <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối thiểu</div>
+                                        <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>
                                     </div>
                                     <br>
                                     <div class="row">
                                         <div class="col-md-3 lbHD"><i class="bi bi-menu-up"></i>MÔ TẢ</div>
                                         <div class="col-md-9">
-                                            <textarea name="txt_mota" id="txt_mota" class="form-control" cols="71" rows="20" required></textarea>
+                                            <textarea name="txt_mota" id="txt_mota" class="form-control" cols="71" rows="20" th:field="*{moTa}" required></textarea>
                                         </div>
                                         <div class="invalid-feedback">Vui lòng nhập mô tả hoạt động</div>
                                     </div>
@@ -240,8 +241,9 @@
                                             <label for="imageInput" id="imagePreviewLabel">
                                                 <div id="imagePreview" class="image-preview">
                                                     <input type="file" id="imageInput" accept="image/jpeg, image/png, image/gif" style="display: none"
+
                                                            onchange="previewImage(Event)">
-                                                    <img id="userImage" src="../static/images/default.webp" alt="Hình ảnh người dùng">
+                                                    <img id="userImage" th:src="@{/images/default.webp}" alt="Hình ảnh người dùng" >
                                                 </div>
                                             </label>
                                         </div>
@@ -368,7 +370,7 @@
                         <span>12-07-2003</span>
                     </div>
                 </div>
-
+                
                 <div class="dropdown ms-auto">
                     <i class="bi bi-three-dots icon-more" data-bs-toggle="dropdown"></i>
                     <ul class="dropdown-menu">
@@ -401,7 +403,7 @@
                     <img class="img-activity" src="../static/images/Rectangle 270.png" alt="">
                 </div>
                 <div class="lineHorizontal"></div>
-
+    
                 <div class="row progress-activity">
                     <div class="col-sm-3">Chờ duyệt</div>
                     <div class="col-sm-3">Chưa diễn ra</div>
@@ -426,6 +428,5 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js" ></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script  defer th:src="@{/js/ThemHoatDong.js}"></script>
 </body>
 </html>
