@@ -96,6 +96,8 @@
     background-color: var(--white-color);
     position: relative;
     margin: 1rem auto 1rem;
+    border-radius: 0.5rem;
+
     /*z-index: 2000!important;*/
 }
 
@@ -323,6 +325,10 @@
     max-height: 35rem !important;
 }
 
+.max_height-36rem{
+    max-height: 36.5rem !important;
+}
+
 .max_height-33rem{
     max-height: 33rem !important;
 }
@@ -379,6 +385,10 @@
 .border-search{
     border: 0.2rem solid var(--grey-color) !important;
     border-radius:1.8rem !important;
+}
+
+.btr-radius{
+    border-radius: 0.5rem 0.5rem 0 0!important;
 }
 
 .border_bottom-2{

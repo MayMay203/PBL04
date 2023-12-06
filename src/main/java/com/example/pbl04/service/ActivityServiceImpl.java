@@ -49,4 +49,13 @@ public class ActivityServiceImpl implements ActivityService {
     public List<Hoatdong> getActivityByHost(Integer id) {
         return activityRepository.getActivityByHost(id);
     }
+
+    public Dangky getRegisterInfo(Integer IdAct) {
+        return activityRepository.registerInfor(IdAct);
+    }
+
+//    @Override
+//    public Instant getTimeResgister(Integer IdAct) {
+//        return activityRepository.getTimeRegister(IdAct);
+//    }
 }

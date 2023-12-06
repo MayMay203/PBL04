@@ -44,4 +44,10 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     @Query("select h from Hoatdong h, Dangky dk where dk.phanQuyen=true and h.id = dk.maHD.id and dk.maTK.id = :id")
     List<Hoatdong> getActivityByHost(Integer id);
 
+    @Query("select dk from Dangky dk where dk.maHD.id = :IdAct and dk.phanQuyen=true")
+    Dangky registerInfor(Integer IdAct);
+
+//    @Query("select dk.thoiGianDK from Dangky dk where dk.maHD.id = :IdAct")
+//    Instant getTimeRegister(Integer IdAct);
+
 }

@@ -8,7 +8,6 @@ import java.time.LocalDate;
 @Table(name = "hoatdong")
 public class Hoatdong {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "maHD", nullable = false)
     private Integer id;
 
@@ -16,7 +15,7 @@ public class Hoatdong {
     @Column(name = "tenhd", nullable = false)
     private String tenhd;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER,optional = false)
     @JoinColumn(name = "maChuDe", nullable = false)
     private Chude maChuDe;
 
@@ -50,8 +49,8 @@ public class Hoatdong {
     @Column(name = "liDoHuy")
     private String liDoHuy;
 
-    @Column(name = "anh", nullable = false)
-    private byte[] anh;
+    @Column(name = "anh", length = 50)
+    private String anh;
 
     public Integer getId() {
         return id;
@@ -65,7 +64,7 @@ public class Hoatdong {
         return tenhd;
     }
 
-    public void setTenHD(String tenhd) {
+    public void setTenhd(String tenhd) {
         this.tenhd = tenhd;
     }
 
@@ -149,11 +148,11 @@ public class Hoatdong {
         this.liDoHuy = liDoHuy;
     }
 
-    public byte[] getAnh() {
+    public String getAnh() {
         return anh;
     }
 
-    public void setAnh(byte[] anh) {
+    public void setAnh(String anh) {
         this.anh = anh;
     }
 
