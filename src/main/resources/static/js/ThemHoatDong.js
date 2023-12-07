@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
    
 
-    (function () {
+(function () {
       'use strict'
       var forms = document.querySelectorAll('.needs-validation')
 
@@ -49,5 +49,61 @@ document.addEventListener("DOMContentLoaded", function () {
       //   formElements[i].setCustomValidity('');
       // }
       document.getElementById("userImage").src = "../assets/images/default.webp";
-    }
+}
+// Thêm hoạt động
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('formLogin').addEventListener('submit', function (e) {
+    console.log('handleLogin called with loginSuccess:');
+    e.preventDefault();
 
+    // Lấy giá trị từ form
+    var tenChuDe = $('#txt_NameTopic').val();
+    var tenHD = $('#txt_NameActi').val();
+
+    // Gọi AJAX đến endpoint xử lý đăng nhập
+    $.ajax({
+      type: 'POST',
+      url: '/check-login',
+
+      data: { 'tenDN': username, 'matKhau': password },
+      success: function (data) {
+        console.log('data:', data);
+        if (!data.error) {
+          // Đăng nhập thành công
+          $('#DangNhapModal').modal('hide');
+          $('#btnLoginModal').hide();
+          $('#btn_userProfile').show();
+          $('body').removeClass('modal-open');
+          $('.modal-backdrop').remove();
+        } else {
+          // Đăng nhập thất bại, hiển thị thông báo lỗi
+          $('#error-message').text(data.error);
+          $('#DangNhapModal').modal('show');
+        }
+      },
+      error: function (error) {
+        console.error('Đã có lỗi xảy ra:', error);
+      }
+    });
+  });
+});
+function handleLogin(loginSuccess) {
+  // Xử lý đăng nhập ở đây. Nếu đăng nhập thành công, ẩn modal và trả về true.
+  // loginSuccess = true;
+  console.log('handleLogin called with loginSuccess:', loginSuccess);
+
+  // return false; // Ngăn chặn gửi form nếu đăng nhập không thành công
+}
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('checkShowPass').addEventListener('click', function (event) {
+    var password = document.getElementById("password");
+    var checkBox = document.getElementById("checkShowPass");
+    password.type = checkBox.checked ? "text" : "password";
+  });
+});
+function userLoggedIn() {
+  // Thay đổi giao diện header khi người dùng đã đăng nhập
+  document.getElementById('btnLoginModal').style.display = 'none';
+  document.getElementById('btn_userProfile').style.display = 'inline-block';
+  // Thêm các thay đổi khác nếu cần
+}

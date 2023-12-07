@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class SuggestionController {
@@ -24,18 +23,21 @@ public class SuggestionController {
     @GetMapping("/de-xuat")
     public String showSuggest(Model model) {
         List<Dexuat> suggestionList = suggestionService.getAllSuggest();
-        List<Integer> countSugg = suggestionService.CountSuggestion();
+        List<Integer> countSugg = suggestionService.CountSuggestion(suggestionList);
         model.addAttribute("suggestionList",suggestionList);
         model.addAttribute("countSugg",countSugg);
         model.addAttribute("account", new Taikhoan());
         return "DeXuat";
     }
 
-    @GetMapping("/de-xuat/{title}")
+    @GetMapping("/de-xuat/{IdTitle}")
     @ResponseBody
-    public ResponseEntity<List<Dexuat>> showSuggestionByTitle(@PathVariable(name = "title", required = false) Optional<String> title) {
-        List<Dexuat> suggestionList = suggestionService.getSuggestionByTitle(title);
+    public ResponseEntity<List<Dexuat>> showSuggestionByTitle(@PathVariable(name = "IdTitle", required = false) String IdTitle) {
+       // String str = title.replaceAll("-"," ");
+       // System.out.println(str);
+        List<Dexuat> suggestionList = suggestionService.getSuggestionByTitle(IdTitle);
         return ResponseEntity.ok(suggestionList);
     }
+
 }
 
