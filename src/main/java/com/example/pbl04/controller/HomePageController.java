@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 public class HomePageController {
@@ -18,13 +17,15 @@ public class HomePageController {
     private final ActivityService activityService;
     private final AboutUsService aboutUsService;
     private final SummaryService summaryService;
+    private final SessionService sessionService;
     @Autowired
-    public HomePageController(MemberService memberService, EvaluationService evaluationService, ActivityService activityService, AboutUsService aboutUsService, SummaryService summaryService){
+    public HomePageController(MemberService memberService, EvaluationService evaluationService, ActivityService activityService, AboutUsService aboutUsService, SummaryService summaryService, SessionService sessionService){
         this.memberService = memberService;
         this.evaluationService = evaluationService;
         this.activityService = activityService;
         this.aboutUsService = aboutUsService;
         this.summaryService = summaryService;
+        this.sessionService = sessionService;
     }
 //    @GetMapping("/trang-chu")
 //    public String showMember(Model model){
@@ -51,22 +52,11 @@ public class HomePageController {
         List<Tongket> summaryList = summaryService.getSummaryList();
         model.addAttribute("summaryList",summaryList);
 
-//        model.addAttribute("account", new Taikhoan());
-//        model.addAttribute("accountUser")
-        // Kiểm tra xem người dùng đã đăng nhập chưa
-        Taikhoan account = (Taikhoan) session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT);
-        if (account == null) {
-            // Người dùng chưa đăng nhập, có thể xử lý một số nội dung cho người dùng chưa đăng nhập ở đây
-            model.addAttribute("account", new Taikhoan());
-            model.addAttribute("isLogin",false);
-//            model.addAttribute("reloadPage", false);
-        } else {
-            // Người dùng đã đăng nhập, lưu thông tin tài khoản vào model (nếu cần)
+//        List<Danhgia> evaluateListByID = evaluationService.getEvaluationByIdAct(Integer id);
+//        model.addAttribute("s",)
 
-            model.addAttribute("account", account);
-            model.addAttribute("isLogin",true);
-//            model.addAttribute("reloadPage", true);
-        }
+
+        sessionService.createSessionModel(model, session);
 
         return "TrangChu";
     }

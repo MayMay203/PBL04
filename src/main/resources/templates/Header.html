@@ -15,12 +15,15 @@
 <body>
 <div  th:fragment="headerFragment">
 
-    <div class="header__navlogo" style="position: relative;">
-        <div class="logo">
-            HOPEFULLY
+    <div class="header__navlogo row" style="position: relative;">
+        <div col>
+            <label class="logo">
+                HOPEFULLY
+                <!--            <h2 th:text="${user.getHoTen()}"></h2>-->
+            </label>
         </div>
-        <div class="personal">
-        </div>
+<!--        <div class="personal">-->
+<!--        </div>-->
         <!-- Đăng nhập -->
         <!--    <button type="button" id="btnLoginModal" class="btn btnDangNhap float-end"  >-->
         <!--        Đăng nhập-->
@@ -31,14 +34,17 @@
         </button>
 <!--        <div id="userProfile" class="float-end"> &lt;!&ndash; Hiển thị khi đã đăng nhập &ndash;&gt;-->
             <!-- Thông tin người dùng và các chức năng khác -->
-        <div class="dropdown ms-auto">
+        <div class="dropdown dropstart user-profile col">
             <button id="btnLogout" th:href="@{/logout}" class="float-end" th:if="${isLogin}"><i class="bi bi-box-arrow-right"></i></button>
             <button id="btn_userProfile" class="float-end" data-bs-toggle="dropdown"><img class="img-avartar-login" th:src="@{/images/avatar.png}" alt="ảnh đại diện" th:if="${isLogin}"
             ></button>
-            <ul class="dropdown-menu">
-<!--                <p th:text="${account.getTenDN()}"> </p>-->
-                <li><a class="dropdown-item" href="#">Link 1</a></li>
-                <li><a class="dropdown-item" href="#">Link 2</a></li>
+            <ul class="p-3 dropdown-menu">
+              <div>
+                  <img class="img-avatar-small" th:src="@{/images/avatar.png}" alt="">
+                  <label class="user-name" th:text="${user.getHoTen()}"></label>
+              </div>
+                <li><a class="dropdown-item" th:href="@{/trang-ca-nhan}">Cập nhật thông tin cá nhân</a></li>
+                <li><a class="dropdown-item" href="#">Thay đổi mật khẩu</a></li>
                 <li><a class="dropdown-item" href="#">Link 3</a></li>
             </ul>
 

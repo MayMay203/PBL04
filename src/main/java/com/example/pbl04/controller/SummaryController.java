@@ -2,6 +2,7 @@ package com.example.pbl04.controller;
 
 import com.example.pbl04.entity.*;
 import com.example.pbl04.service.ActivityService;
+import com.example.pbl04.service.SessionService;
 import com.example.pbl04.service.SummaryService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -14,9 +15,11 @@ import java.util.List;
 public class SummaryController {
     private final SummaryService summaryService;
     private final ActivityService activityService;
-    public SummaryController(SummaryService summaryService,ActivityService activityService) {
+    private final SessionService sessionService;
+    public SummaryController(SummaryService summaryService, ActivityService activityService, SessionService sessionService) {
         this.summaryService=summaryService;
         this.activityService=activityService;
+        this.sessionService = sessionService;
     }
     @GetMapping("/trang-chu-tong-ket")
     public String showSummaryList(Model model, HttpSession session)
@@ -27,14 +30,7 @@ public class SummaryController {
         List<Tongket> summaryList = summaryService.getSummaryList();
         model.addAttribute("summaryList",summaryList);
         model.addAttribute("myActivities",myActivities);
-        Taikhoan account = (Taikhoan) session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT);
-        if (account == null) {
-            model.addAttribute("account", new Taikhoan());
-            model.addAttribute("isLogin",false);
-        } else {
-            model.addAttribute("account", account);
-            model.addAttribute("isLogin",true);
-        }
+        sessionService.createSessionModel(model, session);
         return "TrangChuTongKet";
     }
     @RequestMapping(value ="/View-Summary")
@@ -53,14 +49,7 @@ public class SummaryController {
             model.addAttribute("member", member);
             model.addAttribute("imgSummaryList",imgSummaryList);
             model.addAttribute("summaryList",summaryList);
-            Taikhoan account = (Taikhoan) session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT);
-            if (account == null) {
-                model.addAttribute("account", new Taikhoan());
-                model.addAttribute("isLogin",false);
-            } else {
-                model.addAttribute("account", account);
-                model.addAttribute("isLogin",true);
-            }
+            sessionService.createSessionModel(model, session);
             return "TongKetHoatDong";
         } else {
             return "errorPage";

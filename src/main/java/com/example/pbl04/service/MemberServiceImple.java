@@ -16,4 +16,9 @@ public class MemberServiceImple implements MemberService{
     public List<Thanhvien> getAllMember() {
         return memberRepository.findAll();
     }
+
+    @Override
+    public Thanhvien findMemberByID(int maTK) {
+        return memberRepository.findMemberByID(maTK);
+    }
 }

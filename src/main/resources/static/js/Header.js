@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 //load lại trang
 // Trong mã JavaScript
-document.addEventListener('DOMContentLoaded', function () {
+// document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('btnLogout').addEventListener('click', function (e) {
     $.ajax({
         type: 'GET',
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
     });
-});
+// });
 
 
 

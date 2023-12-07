@@ -40,7 +40,7 @@
     <div class="wrapper">
         <div id="placeholder" style="height: 87px; display: none;"></div>
         <!-- Header -->
-        <div id="myHeader" style="top: -87px" th:include="Header :: html"></div>
+        <div id="myHeader" style="top: -87px" th:include="Header :: html" ></div>
 <!--        <script src="duongdan/loadContent.js"></script>-->
         <!-- Container -->
         <div class="container-fluid">
@@ -113,7 +113,7 @@
                             </div>
                             <div class="activity-content">
                                 <div class="text-content" th:text="${activity.getMoTa()}"> </div>
-                                <div class="text-end"><a href="" class="linkMore">Xem thêm...</a></div>
+                                <div class="text-end"><a th:href="@{/Join(id=${activity.getId()})}" class="linkMore">Xem thêm...</a></div>
                             </div>
                         </div>
                         <div class="clear"></div>
@@ -138,7 +138,7 @@
                                 <div class="summary-content__inform col-3">
                                     <span class="head-inform">Nội dung</span>
                                     <div class="body-inform" th:text="${summary.getLoiKet()}"></div>
-                                    <div class="text-end">      <span class="linkMore">Xem thêm...</span></div>
+                                    <div class="text-end">      <a class="linkMore" th:href="@{/View-Summary(id=${summary.getMaHD().getId()})}">Xem thêm...</a></div>
                                 </div>
                                 <div class="summary-content__comment col-4">
                                     <span class="head-comment">Đánh giá</span>

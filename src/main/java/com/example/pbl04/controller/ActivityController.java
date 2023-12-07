@@ -5,6 +5,7 @@ import com.example.pbl04.entity.Hoatdong;
 import com.example.pbl04.entity.Taikhoan;
 import com.example.pbl04.entity.Thanhvien;
 import com.example.pbl04.service.ActivityService;
+import com.example.pbl04.service.SessionService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,9 +19,11 @@ import java.util.Map;
 @Controller
 public class ActivityController {
     private final ActivityService activityService;
+    private final SessionService sessionService;
     @Autowired
-    public ActivityController(ActivityService activityService){
+    public ActivityController(ActivityService activityService, SessionService sessionService){
         this.activityService=activityService;
+        this.sessionService = sessionService;
     }
 
    @GetMapping("/trang-chu-hoat-dong")
@@ -40,14 +43,7 @@ public class ActivityController {
         model.addAttribute(("actiListUpcomming"),actiListUpcomming);
         model.addAttribute("numberParticipants",numberParticipants);
         // Kiểm tra xem người dùng đã đăng nhập chưa
-        Taikhoan account = (Taikhoan) session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT);
-        if (account == null) {
-            model.addAttribute("account", new Taikhoan());
-            model.addAttribute("isLogin",false);
-        } else {
-            model.addAttribute("account", account);
-            model.addAttribute("isLogin",true);
-        }
+        sessionService.createSessionModel(model, session);
         return "TrangChuHoatDong";
     }
     @RequestMapping(value ="/Join")
@@ -62,27 +58,13 @@ public class ActivityController {
         model.addAttribute("taikhoan",taikhoan);
         model.addAttribute("thanhvien",thanhvien);
         model.addAttribute("thanhvienList",thanhvienList);
-        Taikhoan account = (Taikhoan) session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT);
-        if (account == null) {
-            model.addAttribute("account", new Taikhoan());
-            model.addAttribute("isLogin",false);
-        } else {
-            model.addAttribute("account", account);
-            model.addAttribute("isLogin",true);
-        }
+        sessionService.createSessionModel(model, session);
         return "ChiTietHoatDong";
     }
     @GetMapping("/them-hoat-dong")
     public String showModalThemHoatDong(Model model, HttpSession session){
         model.addAttribute("activity", new Hoatdong());
-        Taikhoan account = (Taikhoan) session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT);
-        if (account == null) {
-            model.addAttribute("account", new Taikhoan());
-            model.addAttribute("isLogin",false);
-        } else {
-            model.addAttribute("account", account);
-            model.addAttribute("isLogin",true);
-        }
+        sessionService.createSessionModel(model, session);
         return  "TrangCaNhan";
     }
     @PostMapping(value="/addActivity")

@@ -2,6 +2,8 @@ package com.example.pbl04.controller;
 
 import com.example.pbl04.entity.Taikhoan;
 import com.example.pbl04.service.AccountService;
+import com.example.pbl04.service.MemberService;
+import com.example.pbl04.service.SessionService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +18,14 @@ public class HeaderController {
     public static final String SESSION_ATTR_ACCOUNT = "account";
 
     private final AccountService accountService;
+    private final MemberService memberService;
+    private final SessionService sessionService;
     @Autowired
-    public HeaderController (AccountService accountService) {
+    public HeaderController (AccountService accountService,
+                             MemberService memberService, SessionService sessionService) {
         this.accountService = accountService;
+        this.memberService = memberService;
+        this.sessionService = sessionService;
     }
 //    @GetMapping("/login")
 //    public String showFormLogin(Model model){
@@ -106,21 +113,9 @@ public Map<String, Object> login(@RequestParam String tenDN, @RequestParam Strin
     return response;
 }
 
-    @GetMapping("/")
+    @GetMapping("/header")
     public String createSession(Model model, HttpSession session){
-        if (session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT) == null) {
-            // Người dùng chưa đăng nhập, có thể xử lý một số nội dung cho người dùng chưa đăng nhập ở đây
-            model.addAttribute("account", new Taikhoan());
-//            model.addAttribute("isLogin",false);
-//            model.addAttribute("reloadPage", false);
-        } else {
-            // Người dùng đã đăng nhập, lưu thông tin tài khoản vào model (nếu cần)
-            Taikhoan account = (Taikhoan) session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT);
-            model.addAttribute("account", account);
-//            model.addAttribute("isLogin",true);
-//            model.addAttribute("reloadPage", true);
-        }
-//        model.addAttribute("isLogin", session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT) != null);
+        sessionService.createSessionModel(model, session);
         return "Header";
     }
 

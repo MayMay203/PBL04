@@ -1,7 +1,7 @@
 package com.example.pbl04.controller;
 
 import com.example.pbl04.entity.Dexuat;
-import com.example.pbl04.entity.Taikhoan;
+import com.example.pbl04.service.SessionService;
 import com.example.pbl04.service.SuggestionService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +15,12 @@ import java.util.List;
 @Controller
 public class SuggestionController {
     private final SuggestionService suggestionService;
+    private final SessionService sessionService;
 
     @Autowired
-    public SuggestionController(SuggestionService suggestionService) {
+    public SuggestionController(SuggestionService suggestionService, SessionService sessionService) {
         this.suggestionService = suggestionService;
+        this.sessionService = sessionService;
     }
 
     @GetMapping("/de-xuat")
@@ -28,14 +30,7 @@ public class SuggestionController {
         model.addAttribute("suggestionList",suggestionList);
         model.addAttribute("countSugg",countSugg);
         // Kiểm tra xem người dùng đã đăng nhập chưa
-        Taikhoan account = (Taikhoan) session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT);
-        if (account == null) {
-            model.addAttribute("account", new Taikhoan());
-            model.addAttribute("isLogin",false);
-        } else {
-            model.addAttribute("account", account);
-            model.addAttribute("isLogin",true);
-        }
+        sessionService.createSessionModel(model, session);
         return "DeXuat";
     }
 

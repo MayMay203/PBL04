@@ -161,7 +161,7 @@ img.dimmed{
     font-weight: 500;
     font-size: var(--heading-size);
 }
-.img-avartar-small{
+.img-avatar-small{
     border-radius: 50%;
     border: 0.2rem solid #fff;
     width: 3rem;

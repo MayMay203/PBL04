@@ -1,3 +1,10 @@
+.logo{
+    font-size: 3rem;
+    font-weight: bold;
+    background: linear-gradient(to bottom, #1a4d51, #0E5416, #8BFF44);
+    -webkit-background-clip: text; /* Cho trình duyệt WebKit (Chrome, Safari) */
+    color: transparent;
+}
 .sticky {
     position: fixed;
     top: 0;
@@ -11,6 +18,8 @@
 }
 .header__navlogo{
     height: 86px;
+    align-items: center;
+    justify-items: center;
 }
 .header__navbar {
     background-color: var(--main-color);
@@ -48,6 +57,9 @@
     background-color: #174407!important;
     color: var(--main-color);
 }
+.user-profile{
+    margin-right: 5rem;
+}
 #btn_userProfile{
     border:none;
     background-color: #fff;
@@ -58,4 +70,22 @@
     border: 0.2rem solid #fff;
     width: 3rem;
     height: 3rem;
+}
+.img-avatar-small{
+    border-radius: 50%;
+    border: 0.2rem solid #fff;
+    width: 3rem;
+    height: 3rem;
+}
+.user-name{
+    font-weight: bold;
+    color: var(--main-color);
+}
+.user-profile .dropdown-item{
+    padding: 1rem;
+    border-radius: 3px;
+}
+.user-profile .dropdown-item:hover{
+    background-color: var(--main-color);
+    color: #fff;
 }
