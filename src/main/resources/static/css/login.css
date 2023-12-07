@@ -34,7 +34,10 @@
 }
 
 .showPass{
-    font-size: 13px;
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+}
+#checkShowPass{
     margin-left: 0.8rem;
 }
 
@@ -46,8 +49,8 @@
     text-align: center;
 
 }
-.body_login-content{
-    margin-bottom: 1.8rem;
+.body_login-content {
+    margin: 1.8rem 0 0.8rem;
     position: relative;
 }
 .body_login-content input {
@@ -67,12 +70,14 @@
     cursor: pointer;
     border: none;
     background: none;
+    font-size: 1.3rem;
+    color: #ccc;
 }
 .btndelete_input:hover{
     color: #0E5416;
     font-weight: bold;
 }
-.notify-error{
+#error-message{
     color: #CC0000;
     font-size: 13px;
 }
@@ -92,7 +97,7 @@
 }
 .footer_login-status{
     width: 15rem;
-    font-size: 0.6rem;
+    font-size: 0.8rem;
     margin-top: 1.5rem;
     display: flex;
     justify-content: space-between;
@@ -139,4 +144,14 @@
 
 .form-control{
     border: 1px solid black !important;
+}
+
+
+/*Logout*/
+#btnLogout{
+    border: none;
+
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    background-color: #fff;
 }

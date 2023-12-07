@@ -2,6 +2,7 @@ package com.example.pbl04.controller;
 
 import com.example.pbl04.entity.Taikhoan;
 import com.example.pbl04.service.AccountService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,62 +13,140 @@ import java.util.Map;
 
 @Controller
 public class HeaderController {
+    public static final String SESSION_ATTR_ACCOUNT = "account";
 
     private final AccountService accountService;
     @Autowired
     public HeaderController (AccountService accountService) {
         this.accountService = accountService;
     }
-    @GetMapping("/login")
-    public String showFormLogin(Model model){
-        model.addAttribute("account", new Taikhoan());
-        return  "Header";
-    }
-
-//    @RequestMapping(value = "/check-login", method = {RequestMethod.GET, RequestMethod.POST})
-    @PostMapping("/check-login")
-//    public String login(Model model, @RequestParam String tenDN, @RequestParam String matKhau)
-//    {
+//    @GetMapping("/login")
+//    public String showFormLogin(Model model){
+//        model.addAttribute("account", new Taikhoan());
+//        return  "Header";
+//    }
+//    @PostMapping("/check-login")
+//    @ResponseBody
+//    public Map<String, Object> login(@RequestParam String tenDN, @RequestParam String matKhau, HttpSession session) {
+//        Map<String, Object> response = new HashMap<>();
+//
 //        Taikhoan account = accountService.CheckLogin(tenDN, matKhau);
 //        if (account != null) {
-//            model.addAttribute("error", "Tên đăng nhập hoặc mật khẩu đúng");
-//            model.addAttribute("account", account);
-//            model.addAttribute("loginState", true);
-//            return "TrangChu";
+//            session.setAttribute("accountUser", account);
+//            response.put("account", account);
+//            response.put("loginState", true);
 //        } else {
-//            model.addAttribute("error", "Tên đăng nhập hoặc mật khẩu không đúng");
-//            model.addAttribute("account", new Taikhoan());
-//            model.addAttribute("loginState", false);
-//            return  "TrangChu";
+//            response.put("error", "Tên đăng nhập hoặc mật khẩu không đúng");
+//            session.setAttribute("accountUser",  new Taikhoan());
+//            response.put("account", new Taikhoan());
+//            response.put("loginState", false);
 //        }
+//
+//        return response;
 //    }
-    @ResponseBody
-    public Map<String, Object> login(@RequestParam String tenDN, @RequestParam String matKhau) {
-        Map<String, Object> response = new HashMap<>();
 
-        Taikhoan account = accountService.CheckLogin(tenDN, matKhau);
-        if (account != null) {
-            response.put("account", account);
-            response.put("loginState", true);
+
+//    @GetMapping("/")
+//    public String trangChu(HttpSession session, Model model) {
+//        // Kiểm tra xem người dùng đã đăng nhập chưa
+//        if (session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT) == null) {
+//            // Người dùng chưa đăng nhập, có thể xử lý một số nội dung cho người dùng chưa đăng nhập ở đây
+//        } else {
+//            // Người dùng đã đăng nhập, lưu thông tin tài khoản vào model (nếu cần)
+//            Taikhoan account = (Taikhoan) session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT);
+//            model.addAttribute("account", account);
+//        }
+//
+//        // Hiển thị trang chủ
+//        return "Header";
+//    }
+
+//    @PostMapping("/check-login")
+//@ResponseBody
+//public Map<String, Object> login(@RequestParam String tenDN, @RequestParam String matKhau, HttpSession session) {
+//    Map<String, Object> response = new HashMap<>();
+//
+//    Taikhoan account = accountService.CheckLogin(tenDN, matKhau);
+//    if (account != null) {
+//        // Đăng nhập thành công, lưu thông tin tài khoản vào session
+//        session.setAttribute(SESSION_ATTR_ACCOUNT, account);
+//        response.put("account", account);
+//        response.put("loginState", true);
+//    } else {
+//        response.put("error", "Tên đăng nhập hoặc mật khẩu không đúng");
+//        session.setAttribute(SESSION_ATTR_ACCOUNT, new Taikhoan());
+//        response.put("account", new Taikhoan());
+//        response.put("loginState", false);
+//    }
+//
+//    return response;
+//}
+@PostMapping("/check-login")
+@ResponseBody
+public Map<String, Object> login(@RequestParam String tenDN, @RequestParam String matKhau, HttpSession session) {
+    Map<String, Object> response = new HashMap<>();
+
+    Taikhoan account = accountService.CheckLogin(tenDN, matKhau);
+    if (account != null) {
+        // Đăng nhập thành công, lưu thông tin tài khoản vào session
+        session.setAttribute(SESSION_ATTR_ACCOUNT, account);
+        response.put("account", account);
+        response.put("loginState", true);
+        response.put("isLogin", true);
+        // Thêm mã JavaScript để load lại trang sau khi đăng nhập
+        response.put("reloadPage", true);
+    } else {
+        response.put("error", "Tên đăng nhập hoặc mật khẩu không đúng");
+        session.setAttribute(SESSION_ATTR_ACCOUNT, new Taikhoan());
+        response.put("account", new Taikhoan());
+        response.put("loginState", false);
+        response.put("isLogin", false);
+    }
+
+    return response;
+}
+
+    @GetMapping("/")
+    public String createSession(Model model, HttpSession session){
+        if (session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT) == null) {
+            // Người dùng chưa đăng nhập, có thể xử lý một số nội dung cho người dùng chưa đăng nhập ở đây
+            model.addAttribute("account", new Taikhoan());
+//            model.addAttribute("isLogin",false);
+//            model.addAttribute("reloadPage", false);
         } else {
-            response.put("error", "Tên đăng nhập hoặc mật khẩu không đúng");
-            response.put("account", new Taikhoan());
-            response.put("loginState", false);
+            // Người dùng đã đăng nhập, lưu thông tin tài khoản vào model (nếu cần)
+            Taikhoan account = (Taikhoan) session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT);
+            model.addAttribute("account", account);
+//            model.addAttribute("isLogin",true);
+//            model.addAttribute("reloadPage", true);
         }
+//        model.addAttribute("isLogin", session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT) != null);
+        return "Header";
+    }
 
+//    @PostMapping("/")
+//    @ResponseBody
+//    public Map<String, Object> islogin(@RequestBody Map<String, Boolean> requestBody, HttpSession session) {
+//        Map<String, Object> response = new HashMap<>();
+//        Boolean isLogin = requestBody.get("isLogin");
+//        if (isLogin != null && isLogin) {
+//            response.put("loginState", true);  // Thay đổi key thành "loginState"
+//        } else {
+//            response.put("loginState", false);  // Thay đổi key thành "loginState"
+//        }
+//        return response;
+//    }
+
+    @GetMapping("/logout")
+    public @ResponseBody Map<String, Object> logout(HttpSession session) {
+        Map<String, Object> response = new HashMap<>();
+        // Đăng xuất và làm sạch session
+        session.invalidate();
+        // Gửi JSON response
+        response.put("success", true);
         return response;
     }
-//    @GetMapping
-//        @PostMapping("/check-login")
-//    public String login(Model model, @RequestParam String username, @RequestParam String password) {
-//        if(accountService.CheckLogin(username,password) != null){
-//            model.addAttribute("account", new Taikhoan());
-//            return "Header";
-//        }
-//        else{
-//            model.addAttribute("error", "Tên đăng nhập hoặc mật khẩu không đúng");
-//            model.addAttribute("account", new Taikhoan());
-//            return "Header";
-//        }
-//    }
+
+
+
 }

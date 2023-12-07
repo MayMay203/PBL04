@@ -3,6 +3,11 @@
     top: 0;
     width: 100%;
     z-index: 1000;
+    transition: all 3s ease;
+}
+
+#myHeader {
+    transition: all 3s ease;
 }
 .header__navlogo{
     height: 86px;

@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class TemplateController {
-    @GetMapping("/header")
-    public String getHeader()
-    {
-        return "Header";
-    }
+//    @GetMapping("/header")
+//    public String getHeader()
+//    {
+//        return "Header";
+//    }
 
 //    @GetMapping("/trang-ca-nhan")
 //    public String getPersonality()
