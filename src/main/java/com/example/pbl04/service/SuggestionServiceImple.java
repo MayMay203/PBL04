@@ -1,12 +1,12 @@
 package com.example.pbl04.service;
 
-import com.example.pbl04.dao.SuggestionRepository;
 import com.example.pbl04.entity.Dexuat;
+import com.example.pbl04.dao.SuggestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SuggestionServiceImple implements SuggestionService {
@@ -27,12 +27,16 @@ public class SuggestionServiceImple implements SuggestionService {
 //        return suggestionDAO;
 //    }
     @Override
-    public List<Dexuat> getSuggestionByTitle(Optional<String> title){
-      return suggestionRepo.getSuggestionByTitle(title);
+    public List<Dexuat> getSuggestionByTitle(String IdTitle){
+      return suggestionRepo.getSuggestionByTitle(IdTitle);
     }
     @Override
-    public List<Integer> CountSuggestion() {
-        return suggestionRepo.countSuggestion();
+    public List<Integer> CountSuggestion(List<Dexuat> suggestionList) {
+        List<Integer> count = new ArrayList<>();
+        for(Dexuat sugg : suggestionList){
+            count.add(suggestionRepo.countSuggestion(sugg.getMaChuDe().getId()).get(0));
+        }
+        return count;
     }
 }
 

@@ -1,5 +1,7 @@
 package com.example.pbl04.entity;
 
+import com.example.pbl04.entity.Chude;
+import com.example.pbl04.entity.Taikhoan;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,7 +12,7 @@ public class Dexuat {
     @Column(name = "maDX", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "maTK", nullable = false)
     private Taikhoan maTK;
 
@@ -18,16 +20,13 @@ public class Dexuat {
     @Column(name = "viTri", nullable = false)
     private String viTri;
 
-    @Lob
-    @Column(name = "chuDe", nullable = false)
-    private String chuDe;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "maChuDe", nullable = false)
+    private Chude maChuDe;
 
     @Lob
     @Column(name = "moTa", nullable = false)
     private String moTa;
-
-    @Column(name = "trangThai", nullable = false)
-    private Byte trangThai;
 
     public Integer getId() {
         return id;
@@ -53,12 +52,12 @@ public class Dexuat {
         this.viTri = viTri;
     }
 
-    public String getChuDe() {
-        return chuDe;
+    public Chude getMaChuDe() {
+        return maChuDe;
     }
 
-    public void setChuDe(String chuDe) {
-        this.chuDe = chuDe;
+    public void setMaChuDe(Chude maChuDe) {
+        this.maChuDe = maChuDe;
     }
 
     public String getMoTa() {
@@ -67,14 +66,6 @@ public class Dexuat {
 
     public void setMoTa(String moTa) {
         this.moTa = moTa;
-    }
-
-    public Byte getTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(Byte trangThai) {
-        this.trangThai = trangThai;
     }
 
 }
