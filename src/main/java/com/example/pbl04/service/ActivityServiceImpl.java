@@ -54,8 +54,13 @@ public class ActivityServiceImpl implements ActivityService {
         return activityRepository.registerInfor(IdAct);
     }
 
-//    @Override
-//    public Instant getTimeResgister(Integer IdAct) {
-//        return activityRepository.getTimeRegister(IdAct);
-//    }
+    public List<Hoatdong> getActOccuredByName(String nameAct){
+        return activityRepository.getActOccuredByName(nameAct);
+    }
+
+    @Override
+    public List<Hoatdong> getActOfMemberByName(Integer idAcc, String nameAct) {
+        return activityRepository.getActOfMemberByName(idAcc,nameAct);
+    }
+
 }

@@ -8,43 +8,42 @@ const btn_evaluate_member = document.getElementsByClassName("btn_eva_member");
 const btn_evaluate = document.getElementsByClassName("btn-evaluate")
 const edit_content = document.querySelector(".content-evaluate");
 const view_organized = document.querySelector(".view-organized");
-for (var btn of btn_evaluate) {
-    btn.addEventListener("click", async e => {
-        try{
-            const IdAct =+e.target.dataset.value;
-            const response =await fetch(`/hoat-dong/xem-chi-tiet/${IdAct}`);
-            if(!response.ok){
-                throw new Error(`Lỗi HTTP. Trạng thái: ${response.status}`)
-            }
-            const responseData = await response.json();
-            // console.log(responseData);
-            modal.classList.add('display-flex')
-            view_comment.classList.remove('no-display')
-            body.classList.add('overflow-hidden')
-            edit_content.classList.add('max_height-27rem')
-            write_comment.classList.remove('no-display')
-           document.querySelector(".modal-nameAct").innerText = responseData.activity.tenHD;
-            document.querySelector(".modal-Description").innerText = responseData.activity.moTa;
-            document.querySelector(".name-host-act").innerText = responseData.registerInfor.maTK.tenDN;
-            document.querySelector(".time-post-act").innerText= responseData.registerInfor.thoiGianDK;
-            //     ẢNH
-            document.querySelector(".modal-number-evaluation").innerText = responseData.numberEvaluation + " lượt đánh giá"
-            const evaluationOfAct = responseData.evaluationOfAct;
-            //    console.log(evaluationOfAct);
-            const evaluationContainer = document.querySelector(".view-comment");
-            if (evaluationOfAct.length > 0) {
-                const criteriaDiv = document.createElement("div");
-                criteriaDiv.classList.add("container", "d-flex", "justify-content-sm-end","p-2", "criteria-evaluation")
-                criteriaDiv.innerHTML=
-                    `    <h4 class="fs-9 green-color fst-italic me-4 text-center">Hoạt động<br>hữu ích</h4>
+async function Evaluation(e)  {
+    try{
+        const IdAct =+e.target.dataset.value;
+        const response =await fetch(`/hoat-dong/xem-chi-tiet/${IdAct}`);
+        if(!response.ok){
+            throw new Error(`Lỗi HTTP. Trạng thái: ${response.status}`)
+        }
+        const responseData = await response.json();
+        // console.log(responseData);
+        modal.classList.add('display-flex')
+        view_comment.classList.remove('no-display')
+        body.classList.add('overflow-hidden')
+        edit_content.classList.add('max_height-27rem')
+        write_comment.classList.remove('no-display')
+        document.querySelector(".modal-nameAct").innerText = responseData.activity.tenHD;
+        document.querySelector(".modal-Description").innerText = responseData.activity.moTa;
+        document.querySelector(".name-host-act").innerText = responseData.registerInfor.maTK.tenDN;
+        document.querySelector(".time-post-act").innerText= responseData.registerInfor.thoiGianDK;
+        //     ẢNH
+        document.querySelector(".modal-number-evaluation").innerText = responseData.numberEvaluation + " lượt đánh giá"
+        const evaluationOfAct = responseData.evaluationOfAct;
+        //    console.log(evaluationOfAct);
+        const evaluationContainer = document.querySelector(".view-comment");
+        if (evaluationOfAct.length > 0) {
+            const criteriaDiv = document.createElement("div");
+            criteriaDiv.classList.add("container", "d-flex", "justify-content-sm-end","p-2", "criteria-evaluation")
+            criteriaDiv.innerHTML=
+                `    <h4 class="fs-9 green-color fst-italic me-4 text-center">Hoạt động<br>hữu ích</h4>
                     <h4 class="fs-9 green-color fst-italic me-4 text-center">Cần tổ chức<br>thường xuyên</h4>
                     <h4 class="fs-9 green-color fst-italic me-4 text-center">Cần tổ chức<br>rộng rãi</h4>
                 `
-                evaluationContainer.appendChild(criteriaDiv)
-                evaluationOfAct.forEach(eval => {
-                    const newEvaluationDiv = document.createElement("div");
-                    newEvaluationDiv.classList.add("container", "d-flex", "mb-3", "comment-member");
-                    newEvaluationDiv.innerHTML = `
+            evaluationContainer.appendChild(criteriaDiv)
+            evaluationOfAct.forEach(eval => {
+                const newEvaluationDiv = document.createElement("div");
+                newEvaluationDiv.classList.add("container", "d-flex", "mb-3", "comment-member");
+                newEvaluationDiv.innerHTML = `
             <!-- Text comment -->
             <div class="container radius-1 bg-green">
                 <div class="container p-1">
@@ -61,54 +60,55 @@ for (var btn of btn_evaluate) {
                      <input type="checkbox" disabled class="flex-1 p-4 fs-3" value="${eval.tieuChi3}" ${eval.tieuChi3?'checked':''}>
             </div>
         `
-                    evaluationContainer.appendChild(newEvaluationDiv);
-                });
-            }
-        }catch(Error){
-            console.error(Error);
+                evaluationContainer.appendChild(newEvaluationDiv);
+            });
         }
-    })
+    }catch(Error){
+        console.error(Error);
+    }
+}
+for (var btn of btn_evaluate) {
+    btn.addEventListener("click", Evaluation)
 }
 
-for (var btn of btn_evaluate_member) {
-    btn.addEventListener("click",async e => {
+async function EvaluationMember(e) {
 
-        try{
-            const IdAct =+e.target.dataset.value;
-            const response =await fetch(`/hoat-dong/xem-chi-tiet/${IdAct}`);
-            if(!response.ok){
-                throw new Error(`Lỗi HTTP. Trạng thái: ${response.status}`)
-            }
-            const responseData = await response.json();
-            // console.log(responseData);
-            modal.classList.add('display-flex')
-            edit_content.classList.remove('max_height-27rem')
-            view_comment.classList.remove('no-display')
-            body.classList.add('overflow-hidden')
-            view_organized.classList.remove('no-display')
+    try{
+        const IdAct =+e.target.dataset.value;
+        const response =await fetch(`/hoat-dong/xem-chi-tiet/${IdAct}`);
+        if(!response.ok){
+            throw new Error(`Lỗi HTTP. Trạng thái: ${response.status}`)
+        }
+        const responseData = await response.json();
+        // console.log(responseData);
+        modal.classList.add('display-flex')
+        edit_content.classList.remove('max_height-27rem')
+        view_comment.classList.remove('no-display')
+        body.classList.add('overflow-hidden')
+        view_organized.classList.remove('no-display')
 
-            document.querySelector(".modal-nameAct").innerText = responseData.activity.tenHD;
-            document.querySelector(".modal-Description").innerText = responseData.activity.moTa;
-            document.querySelector(".name-host-act").innerText = responseData.registerInfor.maTK.tenDN;
-            document.querySelector(".time-post-act").innerText= responseData.registerInfor.thoiGianDK;
-            //     ẢNH
-            document.querySelector(".modal-number-evaluation").innerText = responseData.numberEvaluation + " lượt đánh giá"
-            const evaluationOfAct = responseData.evaluationOfAct;
-            //    console.log(evaluationOfAct);
-            const evaluationContainer = document.querySelector(".view-comment");
-            if (evaluationOfAct.length > 0) {
-                const criteriaDiv = document.createElement("div");
-                criteriaDiv.classList.add("container", "d-flex", "justify-content-sm-end","p-2", "criteria-evaluation")
-                criteriaDiv.innerHTML=
-                    `    <h4 class="fs-9 green-color fst-italic me-4 text-center">Hoạt động<br>hữu ích</h4>
+        document.querySelector(".modal-nameAct").innerText = responseData.activity.tenHD;
+        document.querySelector(".modal-Description").innerText = responseData.activity.moTa;
+        document.querySelector(".name-host-act").innerText = responseData.registerInfor.maTK.tenDN;
+        document.querySelector(".time-post-act").innerText= responseData.registerInfor.thoiGianDK;
+        //     ẢNH
+        document.querySelector(".modal-number-evaluation").innerText = responseData.numberEvaluation + " lượt đánh giá"
+        const evaluationOfAct = responseData.evaluationOfAct;
+        //    console.log(evaluationOfAct);
+        const evaluationContainer = document.querySelector(".view-comment");
+        if (evaluationOfAct.length > 0) {
+            const criteriaDiv = document.createElement("div");
+            criteriaDiv.classList.add("container", "d-flex", "justify-content-sm-end","p-2", "criteria-evaluation")
+            criteriaDiv.innerHTML=
+                `    <h4 class="fs-9 green-color fst-italic me-4 text-center">Hoạt động<br>hữu ích</h4>
                     <h4 class="fs-9 green-color fst-italic me-4 text-center">Cần tổ chức<br>thường xuyên</h4>
                     <h4 class="fs-9 green-color fst-italic me-4 text-center">Cần tổ chức<br>rộng rãi</h4>
                 `
-                evaluationContainer.appendChild(criteriaDiv)
-                evaluationOfAct.forEach(eval => {
-                    const newEvaluationDiv = document.createElement("div");
-                    newEvaluationDiv.classList.add("container", "d-flex", "mb-3", "comment-member");
-                    newEvaluationDiv.innerHTML = `
+            evaluationContainer.appendChild(criteriaDiv)
+            evaluationOfAct.forEach(eval => {
+                const newEvaluationDiv = document.createElement("div");
+                newEvaluationDiv.classList.add("container", "d-flex", "mb-3", "comment-member");
+                newEvaluationDiv.innerHTML = `
             <!-- Text comment -->
             <div class="container radius-1 bg-green">
                 <div class="container p-1">
@@ -125,32 +125,32 @@ for (var btn of btn_evaluate_member) {
                      <input type="checkbox" disabled class="flex-1 p-4 fs-3" value="${eval.tieuChi3}" ${eval.tieuChi3?'checked':''}>
             </div>
         `
-                    evaluationContainer.appendChild(newEvaluationDiv);
-                });
-            }
-        }catch(Error){
-            console.error(Error);
+                evaluationContainer.appendChild(newEvaluationDiv);
+            });
         }
-
-
-
-    })
+    }catch(Error){
+        console.error(Error);
+    }
+}
+for (var btn of btn_evaluate_member) {
+    btn.addEventListener("click",EvaluationMember)
 }
 
 // Close form evaluation
 const btn_close = document.getElementsByClassName("btn-close-detail")
+function closeFormEvaluation(e) {
+    const modal_comment = document.querySelector('.view-comment');
+    modal_comment.innerHTML='';
+    modal.classList.remove('display-flex')
+    body.classList.remove('overflow-hidden')
+    view_comment.classList.add('no-display')
+    write_comment.classList.add('no-display')
+    evaluation.classList.add('no-display')
+    edit_content.classList.remove('max_height-27rem')
+    view_organized.classList.add('no-display')
+}
 for (var btn of btn_close) {
-    btn.addEventListener("click", function (e) {
-        const modal_comment = document.querySelector('.view-comment');
-        modal_comment.innerHTML='';
-        modal.classList.remove('display-flex')
-        body.classList.remove('overflow-hidden')
-        view_comment.classList.add('no-display')
-        write_comment.classList.add('no-display')
-        evaluation.classList.add('no-display')
-        edit_content.classList.remove('max_height-27rem')
-        view_organized.classList.add('no-display')
-    });
+    btn.addEventListener("click",closeFormEvaluation);
 }
 
 

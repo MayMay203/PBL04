@@ -281,6 +281,10 @@
     background-color: var(--white-color) !important;
 }
 
+.ml-10rem{
+    margin-left: 10.1rem!important;
+}
+
 .bg-green-dark{
     background-color: var(--green-color) !important;
 }
