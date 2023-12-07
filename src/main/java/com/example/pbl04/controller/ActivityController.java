@@ -5,6 +5,7 @@ import com.example.pbl04.entity.Hoatdong;
 import com.example.pbl04.entity.Taikhoan;
 import com.example.pbl04.entity.Thanhvien;
 import com.example.pbl04.service.ActivityService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +24,7 @@ public class ActivityController {
     }
 
    @GetMapping("/trang-chu-hoat-dong")
-    public String showActivityOccured(Model model)
+    public String showActivityOccured(Model model, HttpSession session)
     {
 
         Integer numberParticipants= activityService.getParticipants();
@@ -38,11 +39,19 @@ public class ActivityController {
         model.addAttribute("actiListHappening",actiListHappening);
         model.addAttribute(("actiListUpcomming"),actiListUpcomming);
         model.addAttribute("numberParticipants",numberParticipants);
-        model.addAttribute("account", new Taikhoan());
+        // Kiểm tra xem người dùng đã đăng nhập chưa
+        Taikhoan account = (Taikhoan) session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT);
+        if (account == null) {
+            model.addAttribute("account", new Taikhoan());
+            model.addAttribute("isLogin",false);
+        } else {
+            model.addAttribute("account", account);
+            model.addAttribute("isLogin",true);
+        }
         return "TrangChuHoatDong";
     }
     @RequestMapping(value ="/Join")
-    public String showActivityByID(Model model,@RequestParam("id") Integer id)
+    public String showActivityByID(Model model,@RequestParam("id") Integer id, HttpSession session)
     {
         Taikhoan taikhoan =activityService.getOrganizator(id);
         List<Thanhvien> thanhvienList =activityService.getMemberList(id);
@@ -53,13 +62,27 @@ public class ActivityController {
         model.addAttribute("taikhoan",taikhoan);
         model.addAttribute("thanhvien",thanhvien);
         model.addAttribute("thanhvienList",thanhvienList);
-        model.addAttribute("account", new Taikhoan());
+        Taikhoan account = (Taikhoan) session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT);
+        if (account == null) {
+            model.addAttribute("account", new Taikhoan());
+            model.addAttribute("isLogin",false);
+        } else {
+            model.addAttribute("account", account);
+            model.addAttribute("isLogin",true);
+        }
         return "ChiTietHoatDong";
     }
     @GetMapping("/them-hoat-dong")
-    public String showModalThemHoatDong(Model model){
+    public String showModalThemHoatDong(Model model, HttpSession session){
         model.addAttribute("activity", new Hoatdong());
-        model.addAttribute("account", new Taikhoan());
+        Taikhoan account = (Taikhoan) session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT);
+        if (account == null) {
+            model.addAttribute("account", new Taikhoan());
+            model.addAttribute("isLogin",false);
+        } else {
+            model.addAttribute("account", account);
+            model.addAttribute("isLogin",true);
+        }
         return  "TrangCaNhan";
     }
     @PostMapping(value="/addActivity")

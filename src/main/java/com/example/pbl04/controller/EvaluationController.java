@@ -4,6 +4,7 @@ import com.example.pbl04.entity.*;
 import com.example.pbl04.service.ActivityService;
 import com.example.pbl04.service.EvaluationService;
 import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.http.ResponseEntity;
@@ -32,19 +33,27 @@ public class EvaluationController {
     }
 
     @GetMapping("/trang-chu-danh-gia")
-    public String getEvaluationHome(Model model){
-            List<Hoatdong> activityList = activityService.getActivityOccured();
-            List<Danhgia> evaluationList =  evaluationService.getAllEvaluation();
-            model.addAttribute("evaluationList",evaluationList);
-            model.addAttribute("activityList",activityList);
-            List<Integer> countEvaList = evaluationService.countEvaluation(activityList);
-            model.addAttribute("countEvaList",countEvaList);
-        model.addAttribute("account", new Taikhoan());
+    public String getEvaluationHome(Model model, HttpSession session){
+        List<Hoatdong> activityList = activityService.getActivityOccured();
+        List<Danhgia> evaluationList =  evaluationService.getAllEvaluation();
+        model.addAttribute("evaluationList",evaluationList);
+        model.addAttribute("activityList",activityList);
+        List<Integer> countEvaList = evaluationService.countEvaluation(activityList);
+        model.addAttribute("countEvaList",countEvaList);
+        // Kiểm tra xem người dùng đã đăng nhập chưa
+        Taikhoan account = (Taikhoan) session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT);
+        if (account == null) {
+            model.addAttribute("account", new Taikhoan());
+            model.addAttribute("isLogin",false);
+        } else {
+            model.addAttribute("account", account);
+            model.addAttribute("isLogin",true);
+        }
             return "TrangChuDanhGia";
     }
 
     @GetMapping("/danh-gia")
-    public String getAllEvaluation(Model model, @RequestParam("id") Integer id){
+    public String getAllEvaluation(Model model, @RequestParam("id") Integer id, HttpSession session){
         List<Danhgia> evaluationList = evaluationService.getAllEvaluation();
         model.addAttribute("evaluationList",evaluationList);
         List<Hoatdong> actListOfMember = activityService.getActivityByMember(id);
@@ -53,7 +62,15 @@ public class EvaluationController {
         model.addAttribute("actListOfHost",actListOfHost);
         System.out.println(actListOfMember.size());
         System.out.println(actListOfHost.size());
-        model.addAttribute("account", new Taikhoan());
+        // Kiểm tra xem người dùng đã đăng nhập chưa
+        Taikhoan account = (Taikhoan) session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT);
+        if (account == null) {
+            model.addAttribute("account", new Taikhoan());
+            model.addAttribute("isLogin",false);
+        } else {
+            model.addAttribute("account", account);
+            model.addAttribute("isLogin",true);
+        }
         return "DanhGia";
     }
 

@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}">
     <script  defer th:src="@{/js/Header.js}"></script>
 </head>
-
+<div id="placeholder" style="height: 87px; display: none;"></div>
 <div id="myHeader" style="top: -87px" th:include="Header :: html"></div>
 <div class="container p-5">
     <!--Search-->
@@ -67,7 +67,7 @@
                             </div>
                             <div class="card-link p-0">
                                 <button
-                                        class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail" th:attr="data-value=${activityList.get(4*i+j).getId()}">Xem
+                                        class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail" th:attr="data-value=${activityList.get(4*i+j).getId()}" >Xem
                                     chi tiết...</button>
                             </div>
                             <div
