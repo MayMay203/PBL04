@@ -28,10 +28,12 @@
         <!--    <button type="button" id="btnLoginModal" class="btn btnDangNhap float-end"  >-->
         <!--        Đăng nhập-->
         <!--    </button>-->
-        <button type="button" id="btnLoginModal" class="btn btnDangNhap float-end" data-bs-toggle="modal" data-bs-target="#DangNhapModal"  th:href="@{/login}" th:if="${isLogin == false}">
-<!--            <button type="button" id="btnLoginModal" class="btn btnDangNhap float-end" data-bs-toggle="modal" data-bs-target="#DangNhapModal" th:href="@{/login}">-->
-            Đăng nhập
-        </button>
+       <div>
+           <button type="button" id="btnLoginModal" class="btn btnDangNhap float-end" data-bs-toggle="modal" data-bs-target="#DangNhapModal"  th:href="@{/login}" th:if="${isLogin == false}">
+               <!--            <button type="button" id="btnLoginModal" class="btn btnDangNhap float-end" data-bs-toggle="modal" data-bs-target="#DangNhapModal" th:href="@{/login}">-->
+               Đăng nhập
+           </button>
+       </div>
 <!--        <div id="userProfile" class="float-end"> &lt;!&ndash; Hiển thị khi đã đăng nhập &ndash;&gt;-->
             <!-- Thông tin người dùng và các chức năng khác -->
         <div class="dropdown dropstart user-profile col">
