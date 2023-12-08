@@ -65,6 +65,16 @@ public class EvaluationServiceImple implements EvaluationService {
        return evaluationRepo.countEvaluation(IdAct);
     }
 
+    @Override
+    public List<Danhgia> getEvaluationByIdActList(List<Hoatdong> activities) {
+        List<Danhgia> evaluations = new ArrayList<>();
+        Danhgia evaluation;
+        for(Hoatdong activity : activities){
+            evaluation = (Danhgia) evaluationRepo.getEvaluationByIdAct(activity.getId());
+            evaluations.add(evaluation);
+        }
+        return evaluations;
+    }
 
 
 }

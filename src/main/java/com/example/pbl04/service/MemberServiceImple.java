@@ -9,8 +9,12 @@ import java.util.List;
 
 @Service
 public class MemberServiceImple implements MemberService{
-    @Autowired
+
     private MemberRepository memberRepository;
+    @Autowired
+    public MemberServiceImple(MemberRepository  memberRepository){
+        this.memberRepository = memberRepository;
+    }
 
     @Override
     public List<Thanhvien> getAllMember() {

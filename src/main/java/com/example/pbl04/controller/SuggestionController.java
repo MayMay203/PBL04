@@ -36,10 +36,10 @@ public class SuggestionController {
 
     @GetMapping("/de-xuat/{IdTitle}")
     @ResponseBody
-    public ResponseEntity<List<Dexuat>> showSuggestionByTitle(@PathVariable(name = "IdTitle", required = false) String IdTitle) {
+    public ResponseEntity<List<Dexuat>> showSuggestionByTitle(@PathVariable(name = "IdTitle", required = false) Integer IdTitle) {
        // String str = title.replaceAll("-"," ");
        // System.out.println(str);
-        List<Dexuat> suggestionList = suggestionService.getSuggestionByTitle(IdTitle);
+        List<Dexuat> suggestionList = suggestionService.getSuggestionByIdTitle(IdTitle);
         return ResponseEntity.ok(suggestionList);
     }
 
