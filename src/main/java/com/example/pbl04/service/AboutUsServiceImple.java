@@ -19,4 +19,6 @@ public class AboutUsServiceImple implements AboutUsService {
     public List<Vetrangweb> getAllAboutUs() {
         return aboutUsRepository.findAll();
     }
+
+
 }

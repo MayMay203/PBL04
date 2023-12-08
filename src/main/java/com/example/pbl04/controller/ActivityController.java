@@ -1,11 +1,10 @@
 package com.example.pbl04.controller;
 
-import com.example.pbl04.entity.Dangky;
-import com.example.pbl04.entity.Hoatdong;
-import com.example.pbl04.entity.Taikhoan;
-import com.example.pbl04.entity.Thanhvien;
+import com.example.pbl04.entity.*;
 import com.example.pbl04.service.ActivityService;
+import com.example.pbl04.service.RegisterService;
 import com.example.pbl04.service.SessionService;
+import com.example.pbl04.service.TopicService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,10 +19,14 @@ import java.util.Map;
 public class ActivityController {
     private final ActivityService activityService;
     private final SessionService sessionService;
+    private final TopicService topicService;
+    private final RegisterService registerService;
     @Autowired
-    public ActivityController(ActivityService activityService, SessionService sessionService){
+    public ActivityController(ActivityService activityService, TopicService topicService, SessionService sessionService, RegisterService registerService){
         this.activityService=activityService;
+        this.topicService = topicService;
         this.sessionService = sessionService;
+        this.registerService = registerService;
     }
 
    @GetMapping("/trang-chu-hoat-dong")
@@ -65,14 +68,45 @@ public class ActivityController {
     public String showModalThemHoatDong(Model model, HttpSession session){
         model.addAttribute("activity", new Hoatdong());
         sessionService.createSessionModel(model, session);
-        return  "TrangCaNhan";
+        return  "ThemHoatDong";
     }
+
     @PostMapping(value="/addActivity")
     @ResponseBody
-    public Map<String, Object> addActivity( @RequestParam String tenChuDe, @RequestParam String tenhd)
+    public Map<String, Object> addActivity(@RequestParam("tenChuDe") String tenChuDe,
+                                           @RequestParam("tenHD") String tenHD,
+                                           @RequestParam("diaDiem") String diaDiem,
+                                           @RequestParam("thoiGianBD") String thoiGianBD,
+                                           @RequestParam("thoiGianKT") String thoiGianKT,
+                                           @RequestParam("sotnvtt") String sotnvtt,
+                                           @RequestParam("sotnvtd") String sotnvtd,
+                                           @RequestParam("moTa") String moTa,
+                                           @RequestParam("anh") String anh,
+                                           Model model)
     {
+
         Map<String, Object> response = new HashMap<>();
-//       model.addAttribute("activity", new Hoatdong());
+        Chude chude = topicService.getChuDeByTen(tenChuDe);
+        if(chude.getTenChuDe() !=null  )
+        {
+            Integer machude = chude.getId();
+            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh);
+        }else {
+            topicService.addChude(chude);
+            Integer machude = topicService.getMaChuDeByTen(tenChuDe);
+            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh);
+        }
+
+        response.put("message", "Hoạt động đã được thêm mới thành công");
+        response.put("success", true);
         return response;
+    }
+    @RequestMapping(value="/Join-Acti")
+    public String JoinActivity(@RequestParam Integer maHD,Model model, HttpSession session)
+    {
+        sessionService.createSessionModel(model, session);
+        Taikhoan taikhoan = (Taikhoan) model.getAttribute("account");
+        registerService.joinActivity(maHD,taikhoan.getId());
+        return null;
     }
 }

@@ -9,5 +9,6 @@ public interface AccountRepository extends JpaRepository<Taikhoan,Integer>{
     @Query("select tk from Taikhoan tk where tk.tenDN = :tenDN and tk.matKhau = :matKhau")
     Taikhoan checkLogin(String tenDN, String matKhau);
 
-
+    @Query("select tk from Taikhoan tk where tk.id = :id")
+    Taikhoan getAccountByID(Integer id);
 }
