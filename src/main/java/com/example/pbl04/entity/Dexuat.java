@@ -1,18 +1,15 @@
 package com.example.pbl04.entity;
 
-import com.example.pbl04.entity.Chude;
-import com.example.pbl04.entity.Taikhoan;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "dexuat")
 public class Dexuat {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "maDX", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "maTK", nullable = false)
     private Taikhoan maTK;
 
@@ -20,7 +17,7 @@ public class Dexuat {
     @Column(name = "viTri", nullable = false)
     private String viTri;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "maChuDe", nullable = false)
     private Chude maChuDe;
 

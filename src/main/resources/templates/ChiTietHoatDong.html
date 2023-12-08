@@ -35,7 +35,7 @@
   </div>
   <div class="row px-5">
     <div class="col-md-8">
-      <img class="img_activity" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(hoatdong.anh)}" />
+      <img class="img_activity" src="" />
     </div>
     <div class="col-md-4 main_phase">
       <!--  Code giai đoạn và button tham gia -->
@@ -84,11 +84,38 @@
 
       </div>
 
-      <button th:if="${hoatdong.getTinhTrangHD() == 1}"
+      <button th:if="${hoatdong.getTinhTrangHD() == 1} and ${checkDangky==null}"
               type="button"
-              class="btn-Join" id="btnJoin"
-             th:attr="data-hoatdong-id=${hoatdong.id}, data-account-id=${account.id}"
+              class="btn-Join" id="thamgiaButton"
               >Tham gia</button>
+      <button th:if="${hoatdong.getTinhTrangHD() == 1} and ${checkDangky != null} and ${checkDangky.getTrangThai()==false}"
+              type="button"
+              class="btn-Join" id="thamgiaButton1">Chờ xét duyệt</button>
+      <button th:if="${hoatdong.getTinhTrangHD() == 1} and ${checkDangky != null} and ${checkDangky.getTrangThai()==true} and ${checkDangky.getPhanQuyen()==false}"
+              type="button"
+              class="btn-Join" id="thamgiaButton2">Đã xét duyệt</button>
+      <button th:if="${hoatdong.getTinhTrangHD() == 1} and ${checkDangky != null} and ${checkDangky.getTrangThai()==true} and ${checkDangky.getPhanQuyen()==true}"
+              type="button"
+              class="btn-Join" id="thamgiaButton3" style="display: none">Đã xét duyệt</button>
+              <div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="joinconfirmModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="joinconfirmModalLabel">Bạn có muốn tham gia</h5>
+                      <button type="button" class="closeModalLogout" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body"  id="modalBodyContent">
+                      Bạn có chắc chắn muốn tham gia ?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-danger"  id="btnJoin"   th:attr="data-hoatdong-id=${hoatdong.id}, data-account-id=${account.id}" >Tham gia</button>
+                      <button type="button" class="close closeModalLogout btn btn-secondary" data-dismiss="modal" >Hủy</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
       <button th:if="${hoatdong.getTinhTrangHD() == 2}"
               type="button"
               class="btn-Join"
@@ -117,13 +144,13 @@
       <div class="group_member">
         <h3 class="group_member-organize">NHÀ TỔ CHỨC</h3>
         <h6 class="name-organize" th:text="${thanhvien.getHoTen()}"></h6>
-        <img th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(thanhvien.anh)}"  alt="" class="images-organize">
+        <img src=""  alt="" class="images-organize">
         <hr class="dash_organize"  />
         <h3 class="group_member-parti">THÀNH VIÊN</h3>
         <div class="group_member-list">
           <div class="member" th:each="thanhvien: ${thanhvienList}">
 
-            <img class="member-ava" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(thanhvien.getAnh())}"  alt="">
+            <img class="member-ava"  alt="">
             <span class="member-name" th:text="${thanhvien.getHoTen()}"></span>
           </div>
         </div>

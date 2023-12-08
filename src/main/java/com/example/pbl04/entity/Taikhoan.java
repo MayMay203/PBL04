@@ -1,12 +1,14 @@
 package com.example.pbl04.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "taikhoan")
 public class Taikhoan {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "maTK", nullable = false)
     private Integer id;
 
@@ -18,6 +20,9 @@ public class Taikhoan {
 
     @Column(name = "loaiTK", nullable = false)
     private Boolean loaiTK = false;
+
+    @Column(name = "anhDaiDien", length = 50)
+    private String anhDaiDien;
 
     public Integer getId() {
         return id;
@@ -49,6 +54,14 @@ public class Taikhoan {
 
     public void setLoaiTK(Boolean loaiTK) {
         this.loaiTK = loaiTK;
+    }
+
+    public String getAnhDaiDien() {
+        return anhDaiDien;
+    }
+
+    public void setAnhDaiDien(String anhDaiDien) {
+        this.anhDaiDien = anhDaiDien;
     }
 
 }

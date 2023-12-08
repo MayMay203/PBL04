@@ -8,11 +8,10 @@ import java.time.LocalDate;
 @Table(name = "thanhvien")
 public class Thanhvien {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdTV", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "maTK", nullable = false)
     private Taikhoan maTK;
 
@@ -35,9 +34,6 @@ public class Thanhvien {
 
     @Column(name = "email", nullable = false, length = 50)
     private String email;
-
-    @Column(name = "anh", length = 50)
-    private String anh;
 
     public Integer getId() {
         return id;
@@ -101,14 +97,6 @@ public class Thanhvien {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getAnh() {
-        return anh;
-    }
-
-    public void setAnh(String anh) {
-        this.anh = anh;
     }
 
 }

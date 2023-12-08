@@ -21,6 +21,7 @@ public class ActivityController {
     private final SessionService sessionService;
     private final TopicService topicService;
     private final RegisterService registerService;
+
     @Autowired
     public ActivityController(ActivityService activityService, TopicService topicService, SessionService sessionService, RegisterService registerService){
         this.activityService=activityService;
@@ -32,7 +33,6 @@ public class ActivityController {
    @GetMapping("/trang-chu-hoat-dong")
     public String showActivityOccured(Model model, HttpSession session)
     {
-
         Integer numberParticipants= activityService.getParticipants();
         Integer numberActivitys= activityService.getNumActivity();
 //        List<Hoatdong> actiListUpcomming1 =activityService.getActivityUpcomming();
@@ -40,7 +40,6 @@ public class ActivityController {
         List<Hoatdong> actiList = activityService.getActivityOccured();
         List<Hoatdong> actiListHappening= activityService.getActivityHappening();
         model.addAttribute("numberActivitys",numberActivitys);
-        model.addAttribute("Anh",new Anh());
         model.addAttribute("actiList",actiList);
         model.addAttribute("actiListHappening",actiListHappening);
         model.addAttribute(("actiListUpcomming"),actiListUpcomming);
@@ -52,23 +51,25 @@ public class ActivityController {
     @RequestMapping(value ="/Join")
     public String showActivityByID(Model model,@RequestParam("id") Integer id, HttpSession session)
     {
+        sessionService.createSessionModel(model, session);
+        Taikhoan myaccount = (Taikhoan) model.getAttribute("account");
+        Dangky checkDangky = registerService.getDangKyByHDTK(myaccount.getId(), id);
         Taikhoan taikhoan =activityService.getOrganizator(id);
         List<Thanhvien> thanhvienList =activityService.getMemberList(id);
         Thanhvien thanhvien=activityService.getMemberByID(taikhoan.getId());
         Hoatdong hoatdong = activityService.getActivityByID(id);
-        model.addAttribute("Anh",new Anh());
         model.addAttribute("hoatdong",hoatdong);
         model.addAttribute("taikhoan",taikhoan);
         model.addAttribute("thanhvien",thanhvien);
         model.addAttribute("thanhvienList",thanhvienList);
-        sessionService.createSessionModel(model, session);
+        model.addAttribute("checkDangky",checkDangky);
         return "ChiTietHoatDong";
     }
 //    @GetMapping("/them-hoat-dong")
 //    public String showModalThemHoatDong(Model model, HttpSession session){
 //        model.addAttribute("activity", new Hoatdong());
 //        sessionService.createSessionModel(model, session);
-//        return  "ThemHOa";
+//        return  "ThemHoatDong";
 //    }
 
     @PostMapping(value="/addActivity")
