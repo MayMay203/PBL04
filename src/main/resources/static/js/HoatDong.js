@@ -1,7 +1,7 @@
 
 // Thêm hoạt động
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('myFormActivity').addEventListener('submit', function (e) {
+    document.getElementById('ThemHoatDongModal').addEventListener('submit', function (e) {
         console.log('Form submission started');
 
         e.preventDefault();
@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var sotnvtd= $('#txt_tnvtd').val();
         var moTa= $('#txt_mota').val();
         var hinhanh =$('#imageInput').val();
+        var maTK = $(this).data('account-id');
         console.log("Lay du lieu");
         // Gọi AJAX đến endpoint xử lý đăng nhập
         $.ajax({
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             data: { 'tenChuDe': tenChuDe, 'tenHD': tenHD, 'diaDiem': diaDiem,
                 'thoiGianBD': thoigianBD, 'thoiGianKT':thoigianKT, 'sotnvtt': sotnvtt, 'sotnvtd':sotnvtd,
-                'moTa':moTa,'anh': hinhanh  },
+                'moTa':moTa,'anh': hinhanh,'maTK': maTK  },
             success: function (data) {
                 console.log('data:', data);
                 if (!data.error) {

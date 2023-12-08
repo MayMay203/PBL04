@@ -64,12 +64,12 @@ public class ActivityController {
         sessionService.createSessionModel(model, session);
         return "ChiTietHoatDong";
     }
-    @GetMapping("/them-hoat-dong")
-    public String showModalThemHoatDong(Model model, HttpSession session){
-        model.addAttribute("activity", new Hoatdong());
-        sessionService.createSessionModel(model, session);
-        return  "ThemHoatDong";
-    }
+//    @GetMapping("/them-hoat-dong")
+//    public String showModalThemHoatDong(Model model, HttpSession session){
+//        model.addAttribute("activity", new Hoatdong());
+//        sessionService.createSessionModel(model, session);
+//        return  "ThemHOa";
+//    }
 
     @PostMapping(value="/addActivity")
     @ResponseBody
@@ -82,6 +82,7 @@ public class ActivityController {
                                            @RequestParam("sotnvtd") String sotnvtd,
                                            @RequestParam("moTa") String moTa,
                                            @RequestParam("anh") String anh,
+                                           @RequestParam("maTK") String maTK,
                                            Model model)
     {
 
@@ -90,23 +91,26 @@ public class ActivityController {
         if(chude.getTenChuDe() !=null  )
         {
             Integer machude = chude.getId();
-            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh);
+            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh,maTK);
         }else {
             topicService.addChude(chude);
             Integer machude = topicService.getMaChuDeByTen(tenChuDe);
-            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh);
+            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh,maTK);
         }
 
         response.put("message", "Hoạt động đã được thêm mới thành công");
         response.put("success", true);
         return response;
     }
-    @RequestMapping(value="/Join-Acti")
-    public String JoinActivity(@RequestParam Integer maHD,Model model, HttpSession session)
+    @PostMapping(value="/Regis-activity")
+    @ResponseBody
+    public String JoinActivity(@RequestParam("maHD") String maHD,
+                               @RequestParam("maTK") String maTK
+                               )
     {
-        sessionService.createSessionModel(model, session);
-        Taikhoan taikhoan = (Taikhoan) model.getAttribute("account");
-        registerService.joinActivity(maHD,taikhoan.getId());
-        return null;
+        System.out.println(maHD);
+        System.out.println(maTK);
+        registerService.joinActivity(maHD,maTK);
+        return "ChiTietHoatDong";
     }
 }

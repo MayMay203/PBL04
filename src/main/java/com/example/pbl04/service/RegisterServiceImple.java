@@ -27,14 +27,17 @@ public class RegisterServiceImple implements RegisterService {
     public void saveDK(Dangky dangky) {
         regisRepository.save(dangky);
     }
-    public void joinActivity(Integer maHD, Integer maTK) {
+    public void joinActivity(String maHD, String maTK) {
         Dangky dangky = new Dangky();
-        Taikhoan taikhoan = accountRepository.getAccountByID(maTK);
-        Hoatdong hoatdong = activityRepository.getActivityByID(maHD);
+        Integer idtk = Integer.parseInt(maTK);
+        Integer idhd = Integer.parseInt(maHD);
+        Taikhoan taikhoan = accountRepository.getAccountByID(idtk);
+        Hoatdong hoatdong = activityRepository.getActivityByID(idhd);
         dangky.setMaTK(taikhoan);
         dangky.setMaHD(hoatdong);
         dangky.setPhanQuyen(false);
         dangky.setTrangThai(false);
         dangky.setThoiGianDK(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        regisRepository.save(dangky);
     }
 }
