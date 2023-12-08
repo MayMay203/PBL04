@@ -57,7 +57,7 @@ search_input.addEventListener("keydown",  async e => {
                                     chi tiết...</button>
                             </div>
                             <div
-                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 p-1 pleft-6 fs-8 mt-9 text_align-center">${countEvaList[index]} lượt đánh giá
+                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 p-1 pleft-6 fs-8 mt-9 text_align-center"><p class="ml-7_5rem">${countEvaList[index]} lượt đánh giá</p>
                                </div>
                         </div>
                     </div>

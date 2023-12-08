@@ -16,7 +16,7 @@
 <div class="container p-5">
     <!--Search-->
 <!--    <div class="fs-6 p-1 border-search width-25rem m-5 position-relative">-->
-    <div class="fs-6 p-1 border-search width-25rem m-5 position-relative">
+    <div class="fs-6 p-1 border-search width-25rem m-2 position-relative">
         <i class="bi bi-search p-2 grey-color"></i>
         <input type="text" class="border-0 grey-color p-md-1 no-outline w-85 search-input"
                placeholder="Tìm kiếm hoạt động" />
@@ -52,16 +52,16 @@
     </div>
 
     <!--Content-->
-    <h2 class="mx-0 fs-4 mb-sm-3 ms-5">HOẠT ĐỘNG GẦN ĐÂY</h2>
+    <h2 class="fs-3 mb-sm-3 mlt-8rem">HOẠT ĐỘNG GẦN ĐÂY</h2>
     <div class="container d-flex">
         <!--Left-->
         <div class="container p-5 pt-0 fs-6 mx--2 w-75 act-slider">
             <div class="container-item" th:each="i : ${#numbers.sequence(0, activityList.size() div 4 + ((activityList.size()%4 > 0) ? 1 : 0) - 1)}">
                 <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<activityList.size()}">
-                    <img src="" class="float-start w-10 h-80" alt="" />
+                    <img th:src="@{${activityList.get(4*i+j).getAnh()}}" class="float-start w-10 h-80" alt="" />
                     <div class="card border-0">
                         <div class="card-body fs-7">
-                            <div class="card-title fs-6 fw-bolder green-color" th:text="${activityList.get((4*i)+j).getTenHD()}"></div>
+                            <div class="card-title fs-6 fw-bolder green-color" th:text="${activityList.get((4*i)+j).getTenhd()}"></div>
                             <div class="card-text my-0" th:text="${#strings.length(activityList.get(4*i+j).getMoTa()) > 150 ? activityList.get(4*i+j).getMoTa().substring(0, 150) + '...' : activityList.get(4*i+j).getMoTa()}"></div>
                             <div class="card-text mx-2 my-1">
                                 <i class="bi bi-calendar2 m-1  green-color" th:text="'   ' + ${activityList.get(4*i+j).getThoiGianBD() + '  -  ' + activityList.get(4*i+j).getThoiGianKT()}"></i>
@@ -72,7 +72,7 @@
                                     chi tiết...</button>
                             </div>
                             <div
-                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 p-1 pleft-6 fs-8 mt-9 text_align-center" th:text="'Lượt đánh giá ' + '(' + ${countEvaList.get(4*i+j)} + ')'">
+                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 p-1 pleft-6 fs-8 mt-9 text_align-center"> <p class="ml-20p" th:text="'Lượt đánh giá ' + '(' + ${countEvaList.get(4*i+j)} + ')'"></p>
                                </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
 
                         <div class="container bg-grey radius-1 p-2 my-6" th:each="index:${#numbers.sequence(0,5)}" th:if="${index<evaluationList.size()}">
                             <div class="container d-flex my-1">
-                                <img src="../static/images/av3.png" class="radius-1 me-1 w-1_8 h-1_8" alt="">
+                                <img th:src="@{${evaluationList.get(index).getMaTK().getAnhDaiDien()}}" class="radius-1 me-1 w-1_8 h-1_8" alt="">
                                 <h7 class="green-color fs-9 fst-italic fw-medium" th:text="${evaluationList.get(index).getMaTK().getTenDN()}"></h7>
                             </div>
                             <div class="container d-flex align-items-center mx-1">
@@ -100,7 +100,7 @@
         </div>
 
     <!-- Chuyển trang -->
-    <a class="green_light-color no-text-decoration fw-semibold fst-italic fs-5 float-end" href="/danh-gia?id=7">
+    <a class="green_light-color no-text-decoration fw-semibold fst-italic fs-4 float-end mtrb-4rem" href="/danh-gia?id=7">
         Đánh giá hoạt động...</a>
 </div>
 
@@ -120,7 +120,7 @@
 
             <div class="container max_height-36rem overflow-y-auto overflow-x-hidden">
                 <div class="container d-flex align-items-center mt-2">
-                    <img class="w-2_5 h-2_5 ml-0_1 radius-1_8" src="../static/images/av5.jpg" alt="">
+                    <img class="w-2_5 h-2_5 ml-0_1 radius-1_8 avatar" src="" alt="">
                     <div class="container ml-0_1">
                         <h4 class="green-color fs-6 my-1 mt-1 name-host-act"></h4>
 <!--                        Thời gian xét duyệt-->

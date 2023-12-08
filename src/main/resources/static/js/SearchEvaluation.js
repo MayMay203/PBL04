@@ -57,9 +57,9 @@ search_input.addEventListener("keydown",  async e => {
                                    class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-4 no-border fs-7 view-summary" href="/View-Summary/id=7">
                                     Xem tổng kết...</a>
                             </div>
-                           <div class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 text_align-center p-1 pleft-6 fs-8 mt-9 btn-evaluate" data-value="${actListOfMember[index].id}">
-                                Đánh giá
-                            </div>
+                           <button class="card-text bg-btn height-2rem radius-lghalf white-color fs-9 p-1 pleft-6 fs-8 btn-evaluate w-100 no-border" data-value="${actListOfMember[index].id}">
+                                 Đánh giá
+                            </button>
                         </div>
                     </div>
                    </div>

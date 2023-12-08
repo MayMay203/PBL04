@@ -281,8 +281,17 @@
     background-color: var(--white-color) !important;
 }
 
-.ml-10rem{
-    margin-left: 10.1rem!important;
+.ml-20p{
+    margin-left: 18%!important;
+}
+
+.mlt-8rem{
+    margin-left: 6rem!important;
+    margin-bottom: 1rem!important;
+}
+
+.mtrb-4rem{
+    margin: 4rem 6rem 2rem 0!important;
 }
 
 .bg-green-dark{

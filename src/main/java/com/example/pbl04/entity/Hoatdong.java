@@ -15,7 +15,7 @@ public class Hoatdong {
     @Column(name = "tenhd", nullable = false)
     private String tenhd;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "maChuDe", nullable = false)
     private Chude maChuDe;
 
@@ -60,7 +60,11 @@ public class Hoatdong {
         this.id = id;
     }
 
-    public String getTenHD() {
+    public String getTenhd() {
+        return tenhd;
+    }
+
+    public String getTenHD(){
         return tenhd;
     }
 

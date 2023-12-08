@@ -10,7 +10,7 @@ public class Anhtongket {
     @Column(name = "IDAnhTK", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "maTongKet", nullable = false)
     private Tongket maTongKet;
 
