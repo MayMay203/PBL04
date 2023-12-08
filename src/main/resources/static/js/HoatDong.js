@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         e.preventDefault();
 
+
         // Lấy giá trị từ form
         var tenChuDe = $('#txt_NameTopic').val();
         var tenHD = $('#txt_NameActi').val();
@@ -16,6 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
         var sotnvtd= $('#txt_tnvtd').val();
         var moTa= $('#txt_mota').val();
         var hinhanh =$('#imageInput').val();
+        // var userID = 3;
+        // var userID =$('#userID').val();
+        // var userID = $('[data-maTK]').data('maTK');
+        var userID = $(this).data('account-id');
         console.log("Lay du lieu");
         // Gọi AJAX đến endpoint xử lý đăng nhập
         $.ajax({
@@ -24,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             data: { 'tenChuDe': tenChuDe, 'tenHD': tenHD, 'diaDiem': diaDiem,
                 'thoiGianBD': thoigianBD, 'thoiGianKT':thoigianKT, 'sotnvtt': sotnvtt, 'sotnvtd':sotnvtd,
-                'moTa':moTa,'anh': hinhanh  },
+                'moTa':moTa,'anh': hinhanh, 'maTK': userID},
             success: function (data) {
                 console.log('data:', data);
                 if (!data.error) {

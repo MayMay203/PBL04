@@ -66,8 +66,8 @@
                 <h2 class="section__heading">TÌNH NGUYỆN VIÊN</h2>
                 <div class="sectionMember__aboutContent"  >
                     <div class="member-item" th:each="member, id: ${memberList}">
-                        <img src="#" alt="" class="member-img">
-                        <!--                        //th:src="@{'/member/image/' + ${member.id}}"-->
+                        <img th:src="@{/images/av5.jpg}" alt="" class="member-img">
+
                         <p class="member-name" th:text="${member.getHoTen()}"></p>
                         <p class="member-age" th:text="${T(java.time.LocalDate).now().getYear() - member.getNgaySinh().getYear()} + ' tuổi'"></p>
                         <div class="member-rate">
@@ -88,8 +88,8 @@
                     <div class="row align-items-center">
                         <div class="activity-item col-6 col-md-4 col-lg-3 d-blocky" th:each="activity,iterStat: ${activitiesList}" th:if="${iterStat.index >= activitiesList.size() - 8}">
                             <div class="activity-img_title">
-                                <img src="../static/images/Rectangle 292 (2).png" alt="" class="activity-img">
-                                <div class="activity-name" th:text="${activity.getTenhd()}"></div>
+                                <img th:src="@{/images/activity.png}" alt="" class="activity-img">
+                                <div class="activity-name" th:text="${activity.getTenHD()}"></div>
                             </div>
                             <div class="activity-address text-start">
                                 <i class="bi bi-geo-alt icon-address"></i>
@@ -115,7 +115,7 @@
                         <div class="summary-title">
                             <!-- icon -->
                             <img class="float-start img-title" src="../static/images/Rectangle 253.png" alt="">
-                            <h4 class="text-title" th:text="${summary.getMaHD().getTenhd()}"></h4>
+                            <h4 class="text-title" th:text="${summary.getMaHD().getTenHD()}"></h4>
                         </div>
                         <div class="summary-content container">
                             <div class="row align-items-center">
@@ -128,27 +128,27 @@
                                     <span class="head-comment">Đánh giá</span>
                                     <div class="body-comment">
                                         <div class="body-comment__item ">
-                                            <img src="../static/images/images (3).jpg" alt="">
+                                            <img th:src="@{/images/ava3.jpg}" alt="">
                                             <div>Cảm ơn vì đã tạo ra một chưa trình ý nghĩa như vậy. Cảm ơn ban tổ chức rất nhiều ạ.</div>
                                         </div>
                                         <div class="body-comment__item ">
-                                            <img src="../static/images/images (3).jpg" alt="">
+                                            <img th:src="@{/images/ava3.jpg}" alt="">
                                             <div>Lần đầu tiên mình được trải nghiêm một hoạt động ý nghĩa với mọi người </div>
                                         </div>
                                         <div class="body-comment__item ">
-                                            <img src="../static/images/images (3).jpg" alt="">
+                                            <img th:src="@{/images/ava3.jpg}" alt="">
                                             <div>Chương trình thật sự cho tôi một cảm xúc vô cùg đặc biệt</div>
                                         </div>
                                         <div class="body-comment__item ">
-                                            <img src="../static/images/images (3).jpg" alt="">
+                                            <img th:src="@{/images/ava3.jpg}" alt="">
                                             <div>Tôi sẽ không bao giờ quên kỉ niệm này-một kỉ niệm t. Cảm ơn ban tổ chức rất nhiều ạ.heo tôi mãi về sau</div>
                                         </div>
                                     </div>
                                     <div class="text-end"><a class="linkMore">Xem thêm...</a></div>
                                 </div>
                                 <div class="summary-content__image col-5 justify-content-end">
-                                    <img class="img-rightback float-end dimmed" src="../static/images/Rectangle 256.png" alt="">
-                                    <img class="img-rightfront " src="../static/images/Rectangle 256.png" alt="">
+                                    <img class="img-rightback float-end dimmed" th:src="@{/images/activity1.png}" alt="">
+                                    <img class="img-rightfront " th:src="@{/images/activity1.png}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -157,36 +157,36 @@
                         <div class="summary-title">
                             <!-- icon -->
                             <img class="float-start img-title" src="../static/images/Rectangle 253.png" alt="">
-                            <h4 class="text-title" th:text="${summary.getMaHD().getTenhd()}"></h4>
+                            <h4 class="text-title" th:text="${summary.getMaHD().getTenHD()}"></h4>
                         </div>
                         <div class="summary-content container">
                             <div class="row align-items-center">
                                 <div class="summary-content__image col-5 justify-content-start">
-                                    <img class="img-leftback float-start dimmed" src="../static/images/Rectangle 256 (1).png" alt="">
-                                    <img class="img-leftfront" src="../static/images/Rectangle 256 (1).png" alt="">
+                                    <img class="img-leftback float-start dimmed" th:src="@{/images/activity1.png}" alt="">
+                                    <img class="img-leftfront" th:src="@{/images/activity1.png}" alt="">
                                 </div>
                                 <div class="summary-content__inform col-3">
                                     <span class="head-inform">Nội dung</span>
                                     <div class="body-inform" th:text="${summary.getLoiKet()}"></div>
-                                    <div class="text-end"><span class="linkMore">Xem thêm...</span></div>
+                                    <div class="text-end"><a th:href="@{/View-Summary(id=${summary.getMaHD().getId()})}" class="linkMore">Xem thêm...</a></div>
                                 </div>
                                 <div class="summary-content__comment col-4">
                                     <span class="head-comment">Đánh giá</span>
                                     <div class="body-comment">
                                         <div class="body-comment__item">
-                                            <img src="../static/images/images (3).jpg" alt="">
+                                            <img th:src="@{/images/ava3.jpg}" alt="">
                                             <div>Cảm ơn vì đã tạo ra một chưa trình ý nghĩa nhưu vậy</div>
                                         </div>
                                         <div class="body-comment__item">
-                                            <img src="../static/images/images (3).jpg" alt="">
+                                            <img th:src="@{/images/ava3.jpg}" alt="">
                                             <div>Lần đầu tiên mình được trải nghiêm một hoạt động ý nghĩ với mọi người </div>
                                         </div>
                                         <div class="body-comment__item">
-                                            <img src="../static/images/images (3).jpg" alt="">
+                                            <img th:src="@{/images/ava3.jpg}" alt="">
                                             <div>Chương trình thật sự cho tôi một cảm xúc vô cùng đặc biệt</div>
                                         </div>
                                         <div class="body-comment__item">
-                                            <img src="../static/images/images (3).jpg" alt="">
+                                            <img th:src="@{/images/ava3.jpg}" alt="">
                                             <div>Tôi sẽ không bao giờ quên kỉ niệm này-một kỉ niệm theo tôi mãi về sau</div>
                                         </div>
                                     </div>
@@ -199,40 +199,40 @@
                         <div class="summary-title">
                             <!-- icon -->
                             <img class="float-start img-title" src="../static/images/Rectangle 253.png" alt="">
-                            <h4 class="text-title" th:text="${summary.getMaHD().getTenhd()}"></h4>
+                            <h4 class="text-title" th:text="${summary.getMaHD().getTenHD()}"></h4>
                         </div>
                         <div class="summary-content container">
                             <div class="row align-items-center">
                                 <div class="summary-content__inform col-3">
                                     <span class="head-inform">Nội dung</span>
                                     <div class="body-inform" th:text="${summary.getLoiKet()}"></div>
-                                    <div class="text-end">      <span class="linkMore">Xem thêm...</span></div>
+                                    <div class="text-end">      <a th:href="@{/View-Summary(id=${summary.getMaHD().getId()})}" class="linkMore">Xem thêm...</a></div>
                                 </div>
                                 <div class="summary-content__comment col-4">
                                     <span class="head-comment">Đánh giá</span>
                                     <div class="body-comment">
                                         <div class="body-comment__item ">
-                                            <img src="../static/images/images (3).jpg" alt="">
+                                            <img th:src="@{/images/ava3.jpg}" alt="">
                                             <div>Cảm ơn vì đã tạo ra một chưa trình ý nghĩa như vậy. Cảm ơn ban tổ chức rất nhiều ạ.</div>
                                         </div>
                                         <div class="body-comment__item ">
-                                            <img src="../static/images/images (3).jpg" alt="">
+                                            <img th:src="@{/images/ava3.jpg}" alt="">
                                             <div>Lần đầu tiên mình được trải nghiêm một hoạt động ý nghĩa với mọi người </div>
                                         </div>
                                         <div class="body-comment__item ">
-                                            <img src="../static/images/images (3).jpg" alt="">
+                                            <img th:src="@{/images/ava3.jpg}" alt="">
                                             <div>Chương trình thật sự cho tôi một cảm xúc vô cùg đặc biệt</div>
                                         </div>
                                         <div class="body-comment__item ">
-                                            <img src="../static/images/images (3).jpg" alt="">
+                                            <img th:src="@{/images/ava3.jpg}" alt="">
                                             <div>Tôi sẽ không bao giờ quên kỉ niệm này-một kỉ niệm t. Cảm ơn ban tổ chức rất nhiều ạ.heo tôi mãi về sau</div>
                                         </div>
                                     </div>
                                     <div class="text-end"><span class="linkMore">Xem thêm...</span></div>
                                 </div>
                                 <div class="summary-content__image col-5 justify-content-end">
-                                    <img class="img-rightback float-end dimmed" src="../static/images/Rectangle 256.png" alt="">
-                                    <img class="img-rightfront " src="../static/images/Rectangle 256.png" alt="">
+                                    <img class="img-rightback float-end dimmed" th:src="@{/images/activity1.png}" alt="">
+                                    <img class="img-rightfront " th:src="@{/images/activity1.png}" alt="">
                                 </div>
                             </div>
                         </div>

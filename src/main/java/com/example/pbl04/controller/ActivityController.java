@@ -64,14 +64,14 @@ public class ActivityController {
         sessionService.createSessionModel(model, session);
         return "ChiTietHoatDong";
     }
-    @GetMapping("/them-hoat-dong")
-    public String showModalThemHoatDong(Model model, HttpSession session){
-        model.addAttribute("activity", new Hoatdong());
-        sessionService.createSessionModel(model, session);
-        return  "ThemHoatDong";
-    }
+//    @GetMapping("/trang-ca-nhan")
+//    public String showModalThemHoatDong(Model model, HttpSession session){
+//        model.addAttribute("activity", new Hoatdong());
+//        sessionService.createSessionModel(model, session);
+//        return  "TrangCaNhan";
+//    }
 
-    @PostMapping(value="/addActivity")
+    @PostMapping("/addActivity")
     @ResponseBody
     public Map<String, Object> addActivity(@RequestParam("tenChuDe") String tenChuDe,
                                            @RequestParam("tenHD") String tenHD,
@@ -82,7 +82,8 @@ public class ActivityController {
                                            @RequestParam("sotnvtd") String sotnvtd,
                                            @RequestParam("moTa") String moTa,
                                            @RequestParam("anh") String anh,
-                                           Model model)
+                                           @RequestParam("maTK") Integer userID, HttpSession session, Model model)
+//            , HttpSession session)
     {
 
         Map<String, Object> response = new HashMap<>();
@@ -90,15 +91,18 @@ public class ActivityController {
         if(chude.getTenChuDe() !=null  )
         {
             Integer machude = chude.getId();
-            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh);
+            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh, userID);
+            System.out.println("chạy 1");
         }else {
             topicService.addChude(chude);
             Integer machude = topicService.getMaChuDeByTen(tenChuDe);
-            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh);
+            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh, userID);
+            System.out.println("chạy 2");
         }
-
+        sessionService.createSessionModel(model, session);
         response.put("message", "Hoạt động đã được thêm mới thành công");
         response.put("success", true);
+        System.out.println("chạy 3");
         return response;
     }
     @RequestMapping(value="/Join-Acti")

@@ -35,6 +35,6 @@ public interface ActivityService {
     List<Hoatdong> getActOfMemberByName(Integer idAcc,String nameAct);
 
     void addActivity(Integer maChuDe, String tenHD, String diaDiem, String thoiGianBD, String thoiGianKT,
-                     String sotnvtt, String sotnvtd, String moTa, String anh);
+                     String sotnvtt, String sotnvtd, String moTa, String anh, Integer userID);
 
 }

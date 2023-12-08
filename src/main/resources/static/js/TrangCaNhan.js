@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Gán sự kiện click cho txtCreateActivity khi nó được focus
     $('.txtCreateActivity').focus(function() {
         // Mô phỏng sự kiện click trên nút
-        $('.btn.btn-primary').trigger('click');
+        $('#btnAddAct').trigger('click');
     });
 });
 //định dạng ngày

@@ -53,8 +53,8 @@ public class HomePageController {
         List<Tongket> summaryList = summaryService.getSummaryList();
         model.addAttribute("summaryList",summaryList);
 
-//        List<Danhgia> evaluateListByID = evaluationService.getEvaluationByIdAct(Integer id);
-//        model.addAttribute("s",)
+//        List<Danhgia> evaluateListByIDList = evaluationService.getEvaluationByIdActList(activitiesList);
+//        model.addAttribute("evaluateListByIDList",evaluateListByIDList);
 
 
         sessionService.createSessionModel(model, session);

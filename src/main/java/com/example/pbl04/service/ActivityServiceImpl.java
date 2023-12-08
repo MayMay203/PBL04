@@ -74,7 +74,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     public void addActivity(Integer maChuDe, String tenHD, String diaDiem, String thoiGianBD, String thoiGianKT,
-                            String sotnvtt, String sotnvtd, String moTa, String anh) {
+                            String sotnvtt, String sotnvtd, String moTa, String anh, Integer userID) {
         try {
             Hoatdong hoatDong = new Hoatdong();
             hoatDong.setMaChuDe(topicRepository.getChudeByID(maChuDe));
@@ -89,7 +89,7 @@ public class ActivityServiceImpl implements ActivityService {
             hoatDong.setTinhTrangDuyet((byte) 1);
 //            hoatDong.setAnh(anh.getBytes());
             activityRepository.save(hoatDong);
-            Taikhoan taikhoan = accountService.getTaiKhoanByID(4);
+            Taikhoan taikhoan = accountService.getTaiKhoanByID(userID);
             Dangky dangky = new Dangky();
             dangky.setPhanQuyen(true);
             dangky.setMaHD(hoatDong);
@@ -97,7 +97,7 @@ public class ActivityServiceImpl implements ActivityService {
             dangky.setThoiGianDK(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
             dangky.setMaTK(taikhoan);
             registerService.saveDK(dangky);
-
+            System.out.println("chạy service");
 
         } catch (Exception e) {
             // Handle exception appropriately (log or throw a custom exception)
