@@ -97,7 +97,7 @@ public class ActivityServiceImpl implements ActivityService {
             dangky.setThoiGianDK(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
             dangky.setMaTK(taikhoan);
             registerService.saveDK(dangky);
-
+            System.out.println("chạy service");
 
         } catch (Exception e) {
             // Handle exception appropriately (log or throw a custom exception)

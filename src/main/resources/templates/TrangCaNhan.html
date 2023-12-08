@@ -170,107 +170,107 @@
             <img class="img-avatar-small" th:src="@{images/avatar.png}" alt="">
             <input type="text" class="txtCreateActivity" placeholder="Tạo mới hoạt động....." >
 
-<!--            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ThemHoatDongModal" style="display: none;">-->
-<!--                Thêm-->
-<!--            </button>-->
+            <button type="button" id="btnAddAct" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ThemHoatDongModal" style="display: none;">
+                Thêm
+            </button>
 
-<!--            <div class="modal fade" id="ThemHoatDongModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--                <div class="modal-dialog modal-lg modal-dialog-themhd">-->
-<!--                    <div class="modal-content modal-content-themhd">-->
-<!--                        <form  th:action="@{/addActivity}" th:object="${activity}, ${account.getId()}" th:method="POST" class="needs-validation" id="myFormActivity" novalidate>-->
+            <div class="modal fade" id="ThemHoatDongModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-themhd">
+                    <div class="modal-content modal-content-themhd">
+                        <form  th:action="@{/addActivity}" th:object="${activity}" method="POST" class="needs-validation" id="myFormActivity" novalidate>
 <!--                            <input type="hidden" id="userID" name="id" th:value="${account.getId()}" />-->
-<!--                            <div class="modal-header  modal-header-themhd ">-->
-<!--                                <h5 class="modal-title modal-title-themhd "id="exampleModalLabel" >THÊM HOẠT ĐỘNG</h5>-->
-<!--                                <button type="button" class="btn-close btnClose" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                            </div>-->
-<!--                            <div class="modal-body modal-body-themhd">-->
-<!--                                <div class="container modal-body-detail">-->
+                            <div class="modal-header  modal-header-themhd ">
+                                <h5 class="modal-title modal-title-themhd "id="exampleModalLabel" >THÊM HOẠT ĐỘNG</h5>
+                                <button type="button" class="btn-close btnClose" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body modal-body-themhd">
+                                <div class="container modal-body-detail">
 
-<!--                                    <div class="row">-->
-<!--                                        <div class="col-md-3"><label class="lbHD" for="txt_NameTopic"><i class="bi bi-pencil-square"></i>CHỦ-->
-<!--                                            ĐỀ</label></div>-->
-<!--                                        <div class="col-md-9"><input class="textfieldHD form-control" type="text" name="txt_NameTopic"-->
-<!--                                                                     id="txt_NameTopic"  th:field="*{maChuDe.tenChuDe}" required></div>-->
-<!--                                        <div class="invalid-feedback">Vui lòng nhập tên chủ đề</div>-->
-<!--                                    </div>-->
-<!--                                    <br>-->
-<!--                                    <div class="row">-->
-<!--                                        <div class="col-md-3"><label class="lbHD" for="txt_NameActi"><i class="bi bi-fire"></i>TÊN HOẠT-->
-<!--                                            ĐỘNG</label></div>-->
-<!--                                        <div class="col-md-9"> <input class="textfieldHD form-control" type="text" name="txt_NameActi"-->
-<!--                                                                      id="txt_NameActi" th:field="*{tenHD}" required></div>-->
-<!--                                        <div class="invalid-feedback">Vui lòng nhập tên hoạt động</div>-->
-<!--                                    </div>-->
-<!--                                    <br>-->
-<!--                                    <div class="row">-->
-<!--                                        <div class="col-md-3"> <label class="lbHD" for="txt_Location"><i class="bi bi-geo-alt-fill"></i>ĐỊA-->
-<!--                                            ĐIỂM</label></div>-->
-<!--                                        <div class="col-md-9"><input class="textfieldHD form-control" type="text" name="txt_Location"-->
-<!--                                                                     id="txt_Location" th:field="*{diaDiem}" required></div>-->
-<!--                                        <div class="invalid-feedback">Vui lòng nhập địa điểm</div>-->
-<!--                                    </div>-->
-<!--                                    <br>-->
-<!--                                    <div class="row">-->
-<!--                                        <div class="col-md-3">-->
-<!--                                            <label class="lbHD" for="txt_dateBD"><i class="bi bi-calendar-minus"></i>THỜI GIAN BẮT ĐẦU</label>-->
-<!--                                        </div>-->
-<!--                                        <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="txt_dateBD" id="txt_dateBD"-->
-<!--                                                                     th:date="*{thoiGianBD}"-->
-<!--                                                                     required></div>-->
-<!--                                        <div class="invalid-feedback">Vui lòng chọn thời gian bắt đầu</div>-->
-<!--                                        <div class="col-md-3">-->
-<!--                                            <label class="lbHD" for="txt_dateKT"><i class="bi bi-calendar-minus"></i>THỜI GIAN KẾT THÚC</label>-->
-<!--                                        </div>-->
-<!--                                        <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="txt_dateKT" id="txt_dateKT"-->
-<!--                                                                     th:date="*{thoiGianKT}"-->
-<!--                                                                     required></div>-->
-<!--                                        <div class="invalid-feedback">Vui lòng chọn thời gian kết thúc</div>-->
-<!--                                    </div>-->
-<!--                                    <br>-->
-<!--                                    <div class="row">-->
-<!--                                        <div class="col-md-3 lbHD"><i class="bi bi-people-fill"></i>SỐ TNV TỐI THIỂU</div>-->
-<!--                                        <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnv" id="txt_tnvtt"-->
-<!--                                                                     th:field="*{soTNVToiThieu}"-->
-<!--                                                                     required></div>-->
-<!--                                        <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>-->
-<!--                                        <div class="col-md-3 lbHD"><i class="bi bi-person-dash"></i>SỐ TNV TỐI ĐA</div>-->
-<!--                                        <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnvTT" id="txt_tnvtd"-->
-<!--                                                                     th:field="*{soTNVToiDa}"-->
-<!--                                                                     required></div>-->
-<!--                                        <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>-->
-<!--                                    </div>-->
-<!--                                    <br>-->
-<!--                                    <div class="row">-->
-<!--                                        <div class="col-md-3 lbHD"><i class="bi bi-menu-up"></i>MÔ TẢ</div>-->
-<!--                                        <div class="col-md-9">-->
-<!--                                            <textarea name="txt_mota" id="txt_mota" class="form-control" cols="71" rows="20" th:field="*{moTa}" required></textarea>-->
-<!--                                        </div>-->
-<!--                                        <div class="invalid-feedback">Vui lòng nhập mô tả hoạt động</div>-->
-<!--                                    </div>-->
-<!--                                    <br>-->
-<!--                                    <div class="row">-->
-<!--                                        <div class="col-md-3 lbHD"><i class="bi bi-card-image"></i>HÌNH ẢNH</div>-->
-<!--                                        <div class="col-md-9">-->
-<!--                                            <label for="imageInput" id="imagePreviewLabel">-->
-<!--                                                <div id="imagePreview" class="image-preview">-->
-<!--                                                    <input type="file" id="imageInput" accept="image/jpeg, image/png, image/gif" style="display: none" th:field="*{anh}"-->
-<!--                                                           onchange="previewImage(Event)">-->
-<!--                                                    <img id="userImage" th:src="@{/images/default.webp}" alt="Hình ảnh người dùng" >-->
-<!--                                                </div>-->
-<!--                                            </label>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="modal-footer modal-footer-themhd">-->
-<!--                                <button type="submit" class="btnSave"><i class="bi bi-floppy2"></i> Lưu thay đổi</button>-->
-<!--                                <button type="button" class="btnCancel" onclick="resetFormFields()"><i class="bi bi-x-circle-fill"></i> Hủy thay-->
-<!--                                    đổi</button>-->
-<!--                            </div>-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+                                    <div class="row">
+                                        <div class="col-md-3"><label class="lbHD" for="txt_NameTopic"><i class="bi bi-pencil-square"></i>CHỦ
+                                            ĐỀ</label></div>
+                                        <div class="col-md-9"><input class="textfieldHD form-control" type="text" name="txt_NameTopic"
+                                                                     id="txt_NameTopic"  th:field="*{maChuDe.tenChuDe}" required></div>
+                                        <div class="invalid-feedback">Vui lòng nhập tên chủ đề</div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-3"><label class="lbHD" for="txt_NameActi"><i class="bi bi-fire"></i>TÊN HOẠT
+                                            ĐỘNG</label></div>
+                                        <div class="col-md-9"> <input class="textfieldHD form-control" type="text" name="txt_NameActi"
+                                                                      id="txt_NameActi" th:field="*{tenHD}" required></div>
+                                        <div class="invalid-feedback">Vui lòng nhập tên hoạt động</div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-3"> <label class="lbHD" for="txt_Location"><i class="bi bi-geo-alt-fill"></i>ĐỊA
+                                            ĐIỂM</label></div>
+                                        <div class="col-md-9"><input class="textfieldHD form-control" type="text" name="txt_Location"
+                                                                     id="txt_Location" th:field="*{diaDiem}" required></div>
+                                        <div class="invalid-feedback">Vui lòng nhập địa điểm</div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label class="lbHD" for="txt_dateBD"><i class="bi bi-calendar-minus"></i>THỜI GIAN BẮT ĐẦU</label>
+                                        </div>
+                                        <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="txt_dateBD" id="txt_dateBD"
+                                                                     th:date="*{thoiGianBD}"
+                                                                     required></div>
+                                        <div class="invalid-feedback">Vui lòng chọn thời gian bắt đầu</div>
+                                        <div class="col-md-3">
+                                            <label class="lbHD" for="txt_dateKT"><i class="bi bi-calendar-minus"></i>THỜI GIAN KẾT THÚC</label>
+                                        </div>
+                                        <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="txt_dateKT" id="txt_dateKT"
+                                                                     th:date="*{thoiGianKT}"
+                                                                     required></div>
+                                        <div class="invalid-feedback">Vui lòng chọn thời gian kết thúc</div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-3 lbHD"><i class="bi bi-people-fill"></i>SỐ TNV TỐI THIỂU</div>
+                                        <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnv" id="txt_tnvtt"
+                                                                     th:field="*{soTNVToiThieu}"
+                                                                     required></div>
+                                        <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>
+                                        <div class="col-md-3 lbHD"><i class="bi bi-person-dash"></i>SỐ TNV TỐI ĐA</div>
+                                        <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnvTT" id="txt_tnvtd"
+                                                                     th:field="*{soTNVToiDa}"
+                                                                     required></div>
+                                        <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-3 lbHD"><i class="bi bi-menu-up"></i>MÔ TẢ</div>
+                                        <div class="col-md-9">
+                                            <textarea name="txt_mota" id="txt_mota" class="form-control" cols="71" rows="20" th:field="*{moTa}" required></textarea>
+                                        </div>
+                                        <div class="invalid-feedback">Vui lòng nhập mô tả hoạt động</div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-3 lbHD"><i class="bi bi-card-image"></i>HÌNH ẢNH</div>
+                                        <div class="col-md-9">
+                                            <label for="imageInput" id="imagePreviewLabel">
+                                                <div id="imagePreview" class="image-preview">
+                                                    <input type="file" id="imageInput" accept="image/jpeg, image/png, image/gif" style="display: none" th:field="*{anh}"
+                                                           onchange="previewImage(Event)">
+                                                    <img id="userImage" th:src="@{/images/default.webp}" alt="Hình ảnh người dùng" >
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer modal-footer-themhd">
+                                <button type="submit" class="btnSave" th:attr="data-account-id=${account.id}"><i class="bi bi-floppy2"></i> Lưu thay đổi</button>
+                                <button type="button" class="btnCancel" onclick="resetFormFields()"><i class="bi bi-x-circle-fill"></i> Hủy thay
+                                    đổi</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
             <div class="text-end"><input class="btnPost" type="button" value="Đăng bài" name="btnPost"></div>
         </div>

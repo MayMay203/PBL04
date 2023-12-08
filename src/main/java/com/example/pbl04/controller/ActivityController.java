@@ -82,7 +82,7 @@ public class ActivityController {
                                            @RequestParam("sotnvtd") String sotnvtd,
                                            @RequestParam("moTa") String moTa,
                                            @RequestParam("anh") String anh,
-                                           @RequestParam Integer userID, HttpSession session, Model model)
+                                           @RequestParam("maTK") Integer userID, HttpSession session, Model model)
 //            , HttpSession session)
     {
 
@@ -92,14 +92,17 @@ public class ActivityController {
         {
             Integer machude = chude.getId();
             activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh, userID);
+            System.out.println("chạy 1");
         }else {
             topicService.addChude(chude);
             Integer machude = topicService.getMaChuDeByTen(tenChuDe);
             activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh, userID);
+            System.out.println("chạy 2");
         }
         sessionService.createSessionModel(model, session);
         response.put("message", "Hoạt động đã được thêm mới thành công");
         response.put("success", true);
+        System.out.println("chạy 3");
         return response;
     }
     @RequestMapping(value="/Join-Acti")
