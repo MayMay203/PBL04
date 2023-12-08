@@ -29,4 +29,8 @@ public interface ActivityService {
     Dangky getRegisterInfo(Integer IdAct);
 //    Instant getTimeResgister(Integer IdAct);
 
+    List<Hoatdong> getActOccuredByName(String nameAct);
+
+    List<Hoatdong> getActOfMemberByName(Integer idAcc,String nameAct);
+
 }

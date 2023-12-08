@@ -15,39 +15,40 @@
 <div id="myHeader" style="top: -87px" th:include="Header :: html"></div>
 <div class="container p-5">
     <!--Search-->
+<!--    <div class="fs-6 p-1 border-search width-25rem m-5 position-relative">-->
     <div class="fs-6 p-1 border-search width-25rem m-5 position-relative">
         <i class="bi bi-search p-2 grey-color"></i>
         <input type="text" class="border-0 grey-color p-md-1 no-outline w-85 search-input"
                placeholder="Tìm kiếm hoạt động" />
         <!--Infor search-->
-        <div class="container position-abs box-shadow z-index-1 bg-white p-2 radius-1 search-info no-display">
-            <h2 class="fs-6 pb-1 p-1">Tìm kiếm gần đây</h2>
-            <div class="container overflow-auto max_height-20rem">
-                <div class="container d-flex align-items-center mb--1 p-0 btn btn-group search-info-item">
-                    <img class="w-3 h-2_5 flex-1" src="../static/images/anh1.png" alt="" />
-                    <p class="m-1 fs-7 ml--3 flex-16">
-                        Mang con chữ đến trẻ vùng cao
-                    </p>
-                    <i class="flex-1 btn btn-close p-0 fs-7"></i>
-                </div>
+<!--        <div class="container position-abs box-shadow z-index-1 bg-white p-2 radius-1 search-info no-display">-->
+<!--            <h2 class="fs-6 pb-1 p-1">Tìm kiếm gần đây</h2>-->
+<!--            <div class="container overflow-auto max_height-20rem">-->
+<!--                <div class="container d-flex align-items-center mb&#45;&#45;1 p-0 btn btn-group search-info-item">-->
+<!--                    <img class="w-3 h-2_5 flex-1" src="../static/images/anh1.png" alt="" />-->
+<!--                    <p class="m-1 fs-7 ml&#45;&#45;3 flex-16">-->
+<!--                        Mang con chữ đến trẻ vùng cao-->
+<!--                    </p>-->
+<!--                    <i class="flex-1 btn btn-close p-0 fs-7"></i>-->
+<!--                </div>-->
 
-                <div class="container d-flex align-items-center mb--1 p-0 btn btn-group search-info-item">
-                    <img class="w-3 h-2_5 flex-1" src="../static/images/anh1.png" alt="" />
-                    <p class="m-1 fs-7 ml--3 flex-16">
-                        Mang con chữ đến trẻ vùng cao
-                    </p>
-                    <i class="flex-1 btn btn-close p-0 fs-7"></i>
-                </div>
+<!--                <div class="container d-flex align-items-center mb&#45;&#45;1 p-0 btn btn-group search-info-item">-->
+<!--                    <img class="w-3 h-2_5 flex-1" src="../static/images/anh1.png" alt="" />-->
+<!--                    <p class="m-1 fs-7 ml&#45;&#45;3 flex-16">-->
+<!--                        Mang con chữ đến trẻ vùng cao-->
+<!--                    </p>-->
+<!--                    <i class="flex-1 btn btn-close p-0 fs-7"></i>-->
+<!--                </div>-->
 
-                <div class="container d-flex align-items-center mb--1 p-0 btn btn-group search-info-item">
-                    <img class="w-3 h-2_5 flex-1" src="../static/images/anh1.png" alt="" />
-                    <p class="m-1 fs-7 ml--3 flex-16">
-                        Mang con chữ đến trẻ vùng cao
-                    </p>
-                    <i class="flex-1 btn btn-close p-0 fs-7"></i>
-                </div>
-            </div>
-        </div>
+<!--&lt;!&ndash;                <div class="container d-flex align-items-center mb&#45;&#45;1 p-0 btn btn-group search-info-item">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <img class="w-3 h-2_5 flex-1" src="../static/images/anh1.png" alt="" />&ndash;&gt;-->
+<!--&lt;!&ndash;                    <p class="m-1 fs-7 ml&#45;&#45;3 flex-16">&ndash;&gt;-->
+<!--&lt;!&ndash;                        Mang con chữ đến trẻ vùng cao&ndash;&gt;-->
+<!--&lt;!&ndash;                    </p>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <i class="flex-1 btn btn-close p-0 fs-7"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--            </div>-->
+ </div>
     </div>
 
     <!--Content-->
@@ -192,11 +193,12 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script defer th:src="@{/js/base.js}"></script>
-<script defer th:src="@{/js/TrangChuDanhGia.js}"></script>
+<script th:src="@{/js/TrangChuDanhGia.js}" defer="defer"></script>
+<script th:src="@{/js/SearchEvaluationHome.js}" defer="defer"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 <script>
-    // console.log("evaluationOfAct in HTML: ", evaluationOfAct);
+
 </script>
 </html>

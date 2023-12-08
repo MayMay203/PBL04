@@ -57,8 +57,8 @@ for(btn of btn_suggestionDetail){
                     const div = document.createElement("div")
                     div.classList.add("fs-9", "display-flex")
                     div.innerHTML = `
-                <div class="container px-5">
-                    <div class="container d-flex align-items-center p-3 border_bottom-solid">
+                <div class="container px-2">
+                    <div class="container d-flex align-items-center p-1 border_bottom-solid">
                         <div class="container flex-5">
                             <h3 class="green-color fs-4">${sugg.maChuDe.tenChuDe}</h3>
                             <p class="mb-0 fs-6">${sugg.moTa}</p>

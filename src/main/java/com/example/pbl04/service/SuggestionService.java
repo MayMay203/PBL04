@@ -8,4 +8,5 @@ public interface SuggestionService {
     List<Dexuat> getAllSuggest();
     List<Dexuat> getSuggestionByTitle(String IdTitle);
     List<Integer> CountSuggestion(List<Dexuat> suggestionList);
+
 }

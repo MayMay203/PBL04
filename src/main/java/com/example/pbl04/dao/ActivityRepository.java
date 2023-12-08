@@ -38,16 +38,19 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     List<Hoatdong> getActivityByMyID(Integer myID);
 
     //Danh gia
-    @Query("select h from Hoatdong h,Dangky dk where dk.phanQuyen=false and h.id = dk.maHD.id and dk.maTK.id=:id")
+    @Query("select h from Hoatdong h,Dangky dk where dk.phanQuyen=false and h.id = dk.maHD.id and dk.maTK.id=:id and h.tinhTrangHD=3")
     List<Hoatdong> getActivityByMember(Integer id);
 
-    @Query("select h from Hoatdong h, Dangky dk where dk.phanQuyen=true and h.id = dk.maHD.id and dk.maTK.id = :id")
+    @Query("select h from Hoatdong h, Dangky dk where dk.phanQuyen=true and h.id = dk.maHD.id and dk.maTK.id = :id and h.tinhTrangHD=3")
     List<Hoatdong> getActivityByHost(Integer id);
 
     @Query("select dk from Dangky dk where dk.maHD.id = :IdAct and dk.phanQuyen=true")
     Dangky registerInfor(Integer IdAct);
 
-//    @Query("select dk.thoiGianDK from Dangky dk where dk.maHD.id = :IdAct")
-//    Instant getTimeRegister(Integer IdAct);
+    @Query("select hd from Hoatdong hd where hd.tenhd like %:nameAct% and hd.tinhTrangHD=3")
+    List<Hoatdong> getActOccuredByName(String nameAct);
+
+    @Query("select h from Hoatdong h,Dangky dk where dk.phanQuyen=false and h.id = dk.maHD.id and dk.maTK.id=:idAcc and h.tinhTrangHD=3 and h.tenhd like %:nameAct%")
+    List<Hoatdong> getActOfMemberByName(Integer idAcc, String nameAct);
 
 }
