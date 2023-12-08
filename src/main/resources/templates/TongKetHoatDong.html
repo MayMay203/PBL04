@@ -21,7 +21,7 @@
     <div class="row p-5">
         <div class="col-md-8 p-8 ">
             <div class="name_detail">
-                <p class="detail_title" th:text="${summary.getMaHD().getTenHD()}"></p>
+                <p class="detail_title" th:text="${summary.getMaHD().getTenhd()}"></p>
                 <div class="date-range"> <i class="bi bi-calendar2-range"></i><span  th:text="' '+${#temporals.format(summary.getMaHD().getThoiGianBD(), 'dd/MM/yyyy')} + ' - ' + ${#temporals.format(summary.getMaHD().getThoiGianKT(), 'dd/MM/yyyy')}"></span></div>
                 <hr>
             </div>
@@ -36,17 +36,17 @@
         <div class="col-md-8">
             <div class="row">
                 <div class="col-md-6">
-                    <img th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(summary.getMaHD().getAnh())}" alt="" class="image-left-tongket">
+<!--                    <img th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(summary.getMaHD().getAnh())}" alt="" class="image-left-tongket">-->
                 </div>
                 <div class="col-md-6">
                     <div class="row row-img">
-                        <div class="col-6 col-img" th:each="image, iterStat : ${imgSummaryList}" th:if="${iterStat.index < 2}">
-                            <img th:if="${image.getAnh() !=null}" class="image-sub" alt="" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(image.getAnh())}"/>
+<!--                        <div class="col-6 col-img" th:each="image, iterStat : ${imgSummaryList}" th:if="${iterStat.index < 2}">-->
+<!--                            <img th:if="${image.getAnh() !=null}" class="image-sub" alt="" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(image.getAnh())}"/>-->
                         </div>
                     </div>
                     <div class="row row-img" >
-                        <div class="col-6 col-img" th:each="image, iterStat : ${imgSummaryList}" th:if="${iterStat.index >= 2} and ${iterStat.index <4} ">
-                            <img th:if="${image.getAnh() !=null}" class="image-sub" alt="" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(image.getAnh())}"/>
+<!--                        <div class="col-6 col-img" th:each="image, iterStat : ${imgSummaryList}" th:if="${iterStat.index >= 2} and ${iterStat.index <4} ">-->
+<!--                            <img th:if="${image.getAnh() !=null}" class="image-sub" alt="" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(image.getAnh())}"/>-->
                         </div>
                     </div>
                 </div>
@@ -118,9 +118,9 @@
                 <div class="tab-pane">
                     <h2 class="tongket-title">HÌNH ẢNH HOẠT ĐỘNG</h2>
                     <div class="image-container">
-                        <img class="img-summary" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(summary.getMaHD().getAnh())}" alt="Image 1">
+<!--                        <img class="img-summary" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(summary.getMaHD().getAnh())}" alt="Image 1">-->
                         <div  th:each="image : ${imgSummaryList}">
-                            <img class="img-summary" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(image.getAnh())}" alt="Image 1">
+<!--                            <img class="img-summary" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(image.getAnh())}" alt="Image 1">-->
                         </div>
                     </div>
                 </div>
@@ -136,12 +136,12 @@
             <div class="group_member_tongket">
                 <h3 class="group_member-organize">NHÀ TỔ CHỨC</h3>
                 <h6 class="name-organize" th:text="${member.getHoTen()}"></h6>
-                <img th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(member.getAnh())}" alt="" class="images-organize">
+<!--                <img th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(member.getAnh())}" alt="" class="images-organize">-->
                 <hr class="dash_organize" />
                 <h3 class="group_member-parti">THÀNH VIÊN</h3>
                 <div class="group_member-list">
                     <div class="member" th:each="member: ${memberList}">
-                        <img class="member-ava" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(member.getAnh())}" alt="">
+<!--                        <img class="member-ava" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(member.getAnh())}" alt="">-->
                         <span class="member-name" th:text="${member.getHoTen()}"></span>
                     </div>
                 </div>

@@ -15,8 +15,9 @@ async function handleViewDetail(e){
         // console.log(responseData);
         modal.classList.add('display-flex')
         body.classList.add('overflow-hidden')
-        document.querySelector(".modal-nameAct").innerText = responseData.activity.tenHD;
+        document.querySelector(".modal-nameAct").innerText = responseData.activity.tenhd;
         document.querySelector(".modal-Description").innerText = responseData.activity.moTa;
+        document.querySelector(".avatar").src = responseData.registerInfor.maTK.anhDaiDien;
         document.querySelector(".name-host-act").innerText = responseData.registerInfor.maTK.tenDN;
         document.querySelector(".time-post-act").innerText= responseData.registerInfor.thoiGianDK;
         //     ẢNH
@@ -41,7 +42,7 @@ async function handleViewDetail(e){
             <!-- Text comment -->
             <div class="container radius-1 bg-green">
                 <div class="container p-1">
-                    <img src="../static/images/av3.png" class="w-2_5 h-2_5 p-1 radius-1_8 modal-avatar" alt="">
+                    <img src="${eva.maTK.anhDaiDien}" class="w-2_5 h-2_5 p-1 radius-1_8 modal-avatar" alt="">
                     <h7 class="green-color fs-11 fst-italic fw-medium">${eva.maTK.tenDN}</h7>
                 </div>
                 <p class="fs-10 fst-italic m-0 px-3">${eva.binhLuan}</p>

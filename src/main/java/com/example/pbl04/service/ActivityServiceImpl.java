@@ -78,7 +78,7 @@ public class ActivityServiceImpl implements ActivityService {
         try {
             Hoatdong hoatDong = new Hoatdong();
             hoatDong.setMaChuDe(topicRepository.getChudeByID(maChuDe));
-            hoatDong.setTenHD(tenHD);
+            hoatDong.setTenhd(tenHD);
             hoatDong.setDiaDiem(diaDiem);
             hoatDong.setThoiGianBD(LocalDate.parse(thoiGianBD));
             hoatDong.setThoiGianKT(LocalDate.parse(thoiGianKT));
@@ -87,7 +87,7 @@ public class ActivityServiceImpl implements ActivityService {
             hoatDong.setMoTa(moTa);
             hoatDong.setTinhTrangHD((byte) 0);
             hoatDong.setTinhTrangDuyet((byte) 1);
-            hoatDong.setAnh(anh.getBytes());
+//            hoatDong.setAnh(anh.getBytes());
             activityRepository.save(hoatDong);
             Taikhoan taikhoan = accountService.getTaiKhoanByID(4);
             Dangky dangky = new Dangky();

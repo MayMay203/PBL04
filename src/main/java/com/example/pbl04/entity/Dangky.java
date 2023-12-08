@@ -8,15 +8,14 @@ import java.time.Instant;
 @Table(name = "dangky")
 public class Dangky {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IDDangKy", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER,optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "maTK", nullable = false)
     private Taikhoan maTK;
 
-    @ManyToOne(fetch = FetchType.EAGER,optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "maHD", nullable = false)
     private Hoatdong maHD;
 

@@ -1,7 +1,5 @@
 package com.example.pbl04.controller;
 
-import com.example.pbl04.dao.ActivityRepository;
-import com.example.pbl04.dao.EvaluationRepository;
 import com.example.pbl04.entity.Dexuat;
 import com.example.pbl04.entity.Hoatdong;
 import com.example.pbl04.service.ActivityService;

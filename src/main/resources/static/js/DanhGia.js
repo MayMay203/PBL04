@@ -22,9 +22,10 @@ async function Evaluation(e)  {
         body.classList.add('overflow-hidden')
         edit_content.classList.add('max_height-27rem')
         write_comment.classList.remove('no-display')
-        document.querySelector(".modal-nameAct").innerText = responseData.activity.tenHD;
+        document.querySelector(".modal-nameAct").innerText = responseData.activity.tenhd;
         document.querySelector(".modal-Description").innerText = responseData.activity.moTa;
         document.querySelector(".name-host-act").innerText = responseData.registerInfor.maTK.tenDN;
+        document.querySelector(".avatar-host").src = responseData.registerInfor.maTK.anhDaiDien;
         document.querySelector(".time-post-act").innerText= responseData.registerInfor.thoiGianDK;
         //     ẢNH
         document.querySelector(".modal-number-evaluation").innerText = responseData.numberEvaluation + " lượt đánh giá"
@@ -47,7 +48,7 @@ async function Evaluation(e)  {
             <!-- Text comment -->
             <div class="container radius-1 bg-green">
                 <div class="container p-1">
-                    <img src="../static/images/av3.png" class="w-2_5 h-2_5 p-1 radius-1_8 modal-avatar" alt="">
+                    <img src="${eval.maTK.anhDaiDien}" class="w-2_5 h-2_5 p-1 radius-1_8 modal-avatar" alt="">
                     <h7 class="green-color fs-11 fst-italic fw-medium">${eval.maTK.tenDN}</h7>
                 </div>
                 <p class="fs-10 fst-italic m-0 px-3">${eval.binhLuan}</p>
@@ -87,9 +88,9 @@ async function EvaluationMember(e) {
         body.classList.add('overflow-hidden')
         view_organized.classList.remove('no-display')
 
-        document.querySelector(".modal-nameAct").innerText = responseData.activity.tenHD;
+        document.querySelector(".modal-nameAct").innerText = responseData.activity.tenhd;
         document.querySelector(".modal-Description").innerText = responseData.activity.moTa;
-        document.querySelector(".name-host-act").innerText = responseData.registerInfor.maTK.tenDN;
+        document.querySelector(".avatar").src = responseData.registerInfor.maTK.anhDaiDien;
         document.querySelector(".time-post-act").innerText= responseData.registerInfor.thoiGianDK;
         //     ẢNH
         document.querySelector(".modal-number-evaluation").innerText = responseData.numberEvaluation + " lượt đánh giá"
@@ -112,7 +113,7 @@ async function EvaluationMember(e) {
             <!-- Text comment -->
             <div class="container radius-1 bg-green">
                 <div class="container p-1">
-                    <img src="../static/images/av3.png" class="w-2_5 h-2_5 p-1 radius-1_8 modal-avatar" alt="">
+                    <img src="${eval.maTK.anhDaiDien}" class="w-2_5 h-2_5 p-1 radius-1_8 modal-avatar" alt="">
                     <h7 class="green-color fs-11 fst-italic fw-medium">${eval.maTK.tenDN}</h7>
                 </div>
                 <p class="fs-10 fst-italic m-0 px-3">${eval.binhLuan}</p>

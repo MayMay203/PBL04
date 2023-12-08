@@ -19,6 +19,9 @@ public class Taikhoan {
     @Column(name = "loaiTK", nullable = false)
     private Boolean loaiTK = false;
 
+    @Column(name = "anhDaiDien", length = 50)
+    private String anhDaiDien;
+
     public Integer getId() {
         return id;
     }
@@ -49,6 +52,14 @@ public class Taikhoan {
 
     public void setLoaiTK(Boolean loaiTK) {
         this.loaiTK = loaiTK;
+    }
+
+    public String getAnhDaiDien() {
+        return anhDaiDien;
+    }
+
+    public void setAnhDaiDien(String anhDaiDien) {
+        this.anhDaiDien = anhDaiDien;
     }
 
 }

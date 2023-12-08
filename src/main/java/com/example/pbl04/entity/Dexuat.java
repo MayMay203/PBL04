@@ -1,14 +1,11 @@
 package com.example.pbl04.entity;
 
-import com.example.pbl04.entity.Chude;
-import com.example.pbl04.entity.Taikhoan;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "dexuat")
 public class Dexuat {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "maDX", nullable = false)
     private Integer id;
 

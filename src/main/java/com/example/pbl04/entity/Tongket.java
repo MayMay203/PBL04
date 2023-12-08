@@ -1,17 +1,15 @@
 package com.example.pbl04.entity;
 
-import com.example.pbl04.entity.Hoatdong;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tongket")
 public class Tongket {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "maTongKet", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "maHD", nullable = false)
     private Hoatdong maHD;
 
