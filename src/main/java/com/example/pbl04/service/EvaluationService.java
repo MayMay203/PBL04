@@ -16,5 +16,5 @@ public interface EvaluationService {
     Integer countEvaByIdAct(Integer IdAct);
 
 
-
+    List<Danhgia> getEvaluationByIdActList(List<Hoatdong> activities);
 }

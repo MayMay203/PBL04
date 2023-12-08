@@ -21,6 +21,7 @@
     <script defer th:src="@{/js/Header.js}"></script>
     <script  defer th:src="@{/js/TrangCaNhan.js}"></script>
     <script  defer th:src="@{/js/ThemHoatDong.js}"></script>
+    <script  defer th:src="@{/js/HoatDong.js}"></script>
 
 </head>
 <body>
@@ -167,17 +168,19 @@
         </div>
         <div class="container__section">
             <img class="img-avatar-small" th:src="@{images/avatar.png}" alt="">
-            <input type="text" class="txtCreateActivity" placeholder="Tạo mới hoạt động.....">
+            <input type="text" class="txtCreateActivity" placeholder="Tạo mới hoạt động....." >
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ThemHoatDongModal" style="display: none;">
-                Thêm
-            </button>
-<!--            <div class="modal fade" id="ThemHoatDongModal" tabindex="-1" aria-labelledby="modalAddActivity" aria-hidden="true">-->
+<!--            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ThemHoatDongModal" style="display: none;">-->
+<!--                Thêm-->
+<!--            </button>-->
+
+<!--            <div class="modal fade" id="ThemHoatDongModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
 <!--                <div class="modal-dialog modal-lg modal-dialog-themhd">-->
 <!--                    <div class="modal-content modal-content-themhd">-->
-<!--                        <form th:action="@{/addActivity}" th:object="${activity}" th:method="POST" class="needs-validation" id="myForm" novalidate>-->
+<!--                        <form  th:action="@{/addActivity}" th:object="${activity}, ${account.getId()}" th:method="POST" class="needs-validation" id="myFormActivity" novalidate>-->
+<!--                            <input type="hidden" id="userID" name="id" th:value="${account.getId()}" />-->
 <!--                            <div class="modal-header  modal-header-themhd ">-->
-<!--                                <h5 class="modal-title modal-title-themhd " id="exampleModalLabel">THÊM HOẠT ĐỘNG</h5>-->
+<!--                                <h5 class="modal-title modal-title-themhd "id="exampleModalLabel" >THÊM HOẠT ĐỘNG</h5>-->
 <!--                                <button type="button" class="btn-close btnClose" data-bs-dismiss="modal" aria-label="Close"></button>-->
 <!--                            </div>-->
 <!--                            <div class="modal-body modal-body-themhd">-->
@@ -226,12 +229,12 @@
 <!--                                    <br>-->
 <!--                                    <div class="row">-->
 <!--                                        <div class="col-md-3 lbHD"><i class="bi bi-people-fill"></i>SỐ TNV TỐI THIỂU</div>-->
-<!--                                        <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnv" id="txt_tnv"-->
+<!--                                        <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnv" id="txt_tnvtt"-->
 <!--                                                                     th:field="*{soTNVToiThieu}"-->
 <!--                                                                     required></div>-->
 <!--                                        <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>-->
 <!--                                        <div class="col-md-3 lbHD"><i class="bi bi-person-dash"></i>SỐ TNV TỐI ĐA</div>-->
-<!--                                        <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnvTT" id="txt_tnvTT"-->
+<!--                                        <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnvTT" id="txt_tnvtd"-->
 <!--                                                                     th:field="*{soTNVToiDa}"-->
 <!--                                                                     required></div>-->
 <!--                                        <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>-->
