@@ -46,6 +46,7 @@ public class HomePageController {
         List<Hoatdong> activitiesList = activityService.getAllActivity();
         model.addAttribute("activitiesList",activitiesList);
 
+
         List<Vetrangweb> aboutUs = aboutUsService.getAllAboutUs();
         model.addAttribute("aboutUs",aboutUs);
 

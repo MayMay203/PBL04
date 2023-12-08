@@ -30,6 +30,12 @@ public class SuggestionServiceImple implements SuggestionService {
     public List<Dexuat> getSuggestionByTitle(String IdTitle){
       return suggestionRepo.getSuggestionByTitle(IdTitle);
     }
+
+    @Override
+    public List<Dexuat> getSuggestionByIdTitle(Integer IdTitle) {
+        return suggestionRepo.getSuggestionByIdTitle(IdTitle);
+    }
+
     @Override
     public List<Integer> CountSuggestion(List<Dexuat> suggestionList) {
         List<Integer> count = new ArrayList<>();

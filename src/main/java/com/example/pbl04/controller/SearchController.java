@@ -2,9 +2,12 @@ package com.example.pbl04.controller;
 
 import com.example.pbl04.dao.ActivityRepository;
 import com.example.pbl04.dao.EvaluationRepository;
+import com.example.pbl04.entity.Dexuat;
 import com.example.pbl04.entity.Hoatdong;
 import com.example.pbl04.service.ActivityService;
 import com.example.pbl04.service.EvaluationService;
+import com.example.pbl04.service.SuggestionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +24,13 @@ public class SearchController {
 
     private final ActivityService activityService;
     private final EvaluationService evaluationService;
+    private final SuggestionService suggestionService;
+    @Autowired
 
-    public SearchController(ActivityService activityService,EvaluationService evaluationService) {
+    public SearchController(ActivityService activityService, EvaluationService evaluationService, SuggestionService suggestionService) {
         this.activityService = activityService;
         this.evaluationService = evaluationService;
+        this.suggestionService = suggestionService;
     }
 
     @GetMapping("search/evalatuation-home/{nameAct}")
@@ -65,5 +71,27 @@ public class SearchController {
 //        rs.put("actListOfMember",actListOfMember);
 //        rs.put("countEvaList",countEvaList);
         return ResponseEntity.ok(actListOfMember);
+    }
+
+
+    @GetMapping("search/suggestion/{nameTitle}")
+    @ResponseBody
+    public ResponseEntity<Map<String,Object>> searchSuggestion(@PathVariable(name="nameTitle",required = false) String nameTitle){
+       Map<String,Object> result = new HashMap<>();
+        List<Dexuat> suggestionList = new ArrayList<>();
+        List<Integer> countSugg = new ArrayList<>();
+        System.out.println(nameTitle);
+        if(nameTitle.isEmpty()){
+            suggestionList = suggestionService.getSuggestionByTitle(nameTitle);
+            countSugg = suggestionService.CountSuggestion(suggestionList);
+        }
+        else{
+            String name = nameTitle.replaceAll("-"," ");
+            suggestionList = suggestionService.getSuggestionByTitle(name);
+            countSugg = suggestionService.CountSuggestion(suggestionList);
+        }
+        result.put("suggestionList",suggestionList);
+        result.put("countSugg",countSugg);
+        return ResponseEntity.ok(result);
     }
 }
