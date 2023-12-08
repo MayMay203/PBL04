@@ -27,6 +27,7 @@ public class PersonalityController {
     public String show(Model model, @RequestParam("id") Integer id, HttpSession session){
         List<Hoatdong> actListByHost = activityService.getActivityByHost(id);
         model.addAttribute("actListByHost",actListByHost);
+//        model.addAttribute("activity", new Hoatdong());
 
 //        Dangky getRegisterInfo = activityService.getRegisterInfo(id)
 

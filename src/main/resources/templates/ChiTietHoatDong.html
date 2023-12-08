@@ -81,7 +81,7 @@
       </div>
       <button th:if="${hoatdong.getTinhTrangHD() == 1}"
               type="button"
-              class="btn-Join"
+              class="btn-Join" th:href="@{/Join-Acti}"
               >Tham gia</button>
       <button th:if="${hoatdong.getTinhTrangHD() == 2}"
               type="button"

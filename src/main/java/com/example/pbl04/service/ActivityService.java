@@ -21,7 +21,8 @@ public interface ActivityService {
     Thanhvien
     getMemberByID(Integer id);
     List<Thanhvien> getMemberList(Integer id);
-    List<Hoatdong> getActivityByMyID(Integer myID);
+//    List<Hoatdong> getActivityByMyID(Integer myID);
+    List<Hoatdong> getListActivityByMyID(Integer myID);
     //Danh gia
     List<Hoatdong> getActivityByMember(Integer id);
     List<Hoatdong> getActivityByHost(Integer id);
@@ -32,5 +33,8 @@ public interface ActivityService {
     List<Hoatdong> getActOccuredByName(String nameAct);
 
     List<Hoatdong> getActOfMemberByName(Integer idAcc,String nameAct);
+
+    void addActivity(Integer maChuDe, String tenHD, String diaDiem, String thoiGianBD, String thoiGianKT,
+                     String sotnvtt, String sotnvtd, String moTa, String anh);
 
 }

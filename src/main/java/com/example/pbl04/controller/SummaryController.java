@@ -25,7 +25,7 @@ public class SummaryController {
     public String showSummaryList(Model model, HttpSession session)
     {
         Integer myID=4;
-        List<Hoatdong> myActivities = activityService.getActivityByMyID(myID);
+        List<Hoatdong> myActivities = activityService.getListActivityByMyID(myID);
         model.addAttribute("Anh",new Anh());
         List<Tongket> summaryList = summaryService.getSummaryList();
         model.addAttribute("summaryList",summaryList);
