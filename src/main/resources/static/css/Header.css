@@ -1,5 +1,5 @@
 .logo{
-    margin-left: 5rem;
+    margin-left: 15rem;
     font-size: 3rem;
     font-weight: bold;
     background: linear-gradient(to bottom, #1a4d51, #0E5416, #8BFF44);
@@ -17,6 +17,11 @@
 #myHeader {
     transition: all 3s ease;
 }
+.header__navbar .navbar-nav .nav-item a:active {
+    color: var(--main-color);
+    background-color: white;
+}
+
 .header__navlogo{
     height: 86px;
     align-items: center;
@@ -46,11 +51,16 @@
     color: var(--main-color);
     border-radius: 3px;
 }
+.header__navbar a:active{
+    color: var(--main-color);
+    background-color: #fff;
+}
 /*.header__navbar a.active{*/
 /*    color: var(--main-color);*/
 /*}*/
 .btnDangNhap{
-    margin-right: 4rem;
+    margin-top: -3.3rem;
+    margin-right: 10rem;
     background-color: var(--main-color) !important;
     color: #fff !important;
 }
@@ -59,7 +69,8 @@
     color: var(--main-color);
 }
 .user-profile{
-    margin-right: 5rem;
+    margin-right: 8rem;
+    margin-top: -4.5rem;
 }
 #btn_userProfile{
     border:none;
@@ -86,7 +97,21 @@
     padding: 1rem;
     border-radius: 3px;
 }
-.user-profile .dropdown-item:hover{
+.user-profile a.dropdown-item:hover{
     background-color: var(--main-color);
     color: #fff;
+}
+#btnLogout{
+    margin-left: 2rem;
+    margin-top: 0.5rem;
+}
+.modal-header button.closeModalLogout{
+    border: none;
+    font-size: 2rem;
+    background-color: #fff;
+}
+.modal-footer button.closeModalLogout, #confirmLogout{
+    background-color: var(--main-color);
+    border: none;
+    width: 6rem;
 }

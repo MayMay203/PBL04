@@ -74,10 +74,10 @@ img.dimmed{
     background-color: #2c832b;
 }
 /*---- ảnh đại diện---- */
-.div__avartar, .div__inform, .div__contact{
+.div__avatar, .div__inform, .div__contact{
     margin: 0 3.7rem 2.5rem;
 }
-#img-avartar{
+#img-avatar{
     border-radius: 50%;
     border: 0.2rem solid var(--main-color);
     width: 13rem;
@@ -143,6 +143,9 @@ img.dimmed{
     display: block;
     margin-bottom: 0.625rem; /* Tùy chỉnh khoảng cách giữa các dòng nếu cần */
     margin-left: 7%;
+}
+.form-address .form-group{
+    margin-top: 1rem;
 }
 .form-address label{
     min-width: 7.5rem;
@@ -228,6 +231,7 @@ img.dimmed{
     /* padding: 1.5rem 4rem 0; */
     /* margin: 0.5rem 0; */
     background-color: rgba(217, 249, 249, 0.6);
+    margin-bottom: 0.6rem;
     /* opacity: 0.7;  */
 }
 .section__padding{
@@ -277,12 +281,15 @@ img.dimmed{
 .title-activity{
     font-weight: bold;
     color: var(--main-color);
-    font-size: large;
+    font-size: 18px;
     margin: 0 !important;
 }
+.container__sectionAct .icon-address{
+    margin-left: 6rem;
+}
 .address-activity{
-    margin-left: 2rem;
-    font-size: 1rem;
+    margin-left: 1rem;
+    font-size: 14px;
     font-weight: 500;
     margin-bottom: 0 !important;
 }
@@ -336,7 +343,6 @@ img.dimmed{
     color: var(--main-color);
     padding: 0.5rem 5rem;
     margin: 0 0.3rem;
-    background-color: rgb(166, 246, 175,1);
 }
 #btnEvaluate:hover, #btnSummary:hover{
     background-color: rgb(166, 246, 175,1);

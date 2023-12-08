@@ -14,6 +14,35 @@ function stickyHeader() {
         placeholder.style.display = "none";
     }
 }
+document.addEventListener('DOMContentLoaded', function () {
+    var currentPage = window.location.pathname;
+
+    var navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(function (link) {
+        var linkPage = link.getAttribute('data-page');
+        if (linkPage && linkPage === currentPage) {
+            link.style.color = 'var(--main-color)';
+            link.style.backgroundColor = 'white';
+        }
+    });
+});
+// document.addEventListener('DOMContentLoaded', function () {
+//     var buttons = document.querySelectorAll('.header__navbar .navbar-nav .nav-item a');
+//
+//     buttons.forEach(function (button) {
+//         button.addEventListener('click', function () {
+//             // Xoá lớp 'active' từ tất cả các nút
+//             buttons.forEach(function (btn) {
+//                 btn.classList.remove('active');
+//             });
+//             // Thêm lớp 'active' vào nút được nhấp
+//             this.classList.add('active');
+//         });
+//     });
+// });
+
+//xóa input của trang login
 function clearInput(inputId) {
     var inputElement = document.getElementById(inputId);
     if (inputElement) {
@@ -73,10 +102,10 @@ $(document).ready(function() {
 });
 
 //Sử dụng sự kiện hidden.bs.modal của Bootstrap để xử lý việc xóa các thuộc tính style khi modal được ẩn đi:
-$('#DangNhapModal').on('hidden.bs.modal', function () {
-    $('body').removeClass('modal-open');
-    $('.modal-backdrop').remove();
-});
+// $('#DangNhapModal').on('hidden.bs.modal', function () {
+//     $('body').removeClass('modal-open');
+//     $('.modal-backdrop').remove();
+// });
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('checkShowPass').addEventListener('change', function (event) {
         var password = document.getElementById("password");
@@ -87,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //load lại trang
 // Trong mã JavaScript
 // document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('btnLogout').addEventListener('click', function (e) {
+    document.getElementById('confirmLogout').addEventListener('click', function (e) {
     $.ajax({
         type: 'GET',
         url: '/logout',
@@ -95,12 +124,37 @@ document.addEventListener('DOMContentLoaded', function() {
             // Xử lý JSON response
             if (data.success) {
                 // Chuyển hướng đến trang đăng nhập hoặc trang chính
-                location.reload();
+                if(location.pathname=="/trang-ca-nhan"){
+                    location.href="/trang-chu";
+                }
+                else location.reload();
+
             }
         }
     });
     });
 // });
+// custom.js
+
+
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl);
+});
+
+
+$('#btnLogout').click(function() {
+    $('#logoutModal').modal('show');
+});
+$('#confirmLogout').click(function() {
+    $('#logoutModal').modal('hide');
+});
+$(document).ready(function() {
+    $('.closeModalLogout').on('click', function() {
+        $('#logoutModal').modal('hide');
+    });
+});
+
 
 
 

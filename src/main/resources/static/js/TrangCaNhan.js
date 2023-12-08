@@ -79,3 +79,15 @@ document.addEventListener("DOMContentLoaded", function() {
         $('.btn.btn-primary').trigger('click');
     });
 });
+//định dạng ngày
+$(document).ready(function () {
+    $('.datepicker').datepicker({
+        format: 'dd-mm-yyyy',
+        autoclose: true,
+        todayHighlight: true
+    });
+});
+//sửa thông tin cá nhân:
+document.getElementById('btnSave').addEventListener('click', function() {
+    // Gọi phương thức submit cho formChangeInform
+    document.getElementById('formChangeInform').submit();});

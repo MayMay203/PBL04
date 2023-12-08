@@ -37,17 +37,38 @@
 <!--        <div id="userProfile" class="float-end"> &lt;!&ndash; Hiển thị khi đã đăng nhập &ndash;&gt;-->
             <!-- Thông tin người dùng và các chức năng khác -->
         <div class="dropdown dropstart user-profile col">
-            <button id="btnLogout" th:href="@{/logout}" class="float-end" th:if="${isLogin}"><i class="bi bi-box-arrow-right"></i></button>
-            <button id="btn_userProfile" class="float-end" data-bs-toggle="dropdown"><img class="img-avartar-login" th:src="@{/images/avatar.png}" alt="ảnh đại diện" th:if="${isLogin}"
+            <button id="btnLogout"  class="float-end" th:if="${isLogin}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Đăng xuất"><i class="bi bi-box-arrow-right"></i></button>
+            <!-- Modal Thông báo -->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="logoutModalLabel">Xác nhận đăng xuất</h5>
+                            <button type="button" class="closeModalLogout" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Bạn có chắc chắn muốn đăng xuất không?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="close closeModalLogout btn btn-secondary" data-dismiss="modal" >Hủy</button>
+                            <button type="submit" class="btn btn-danger" id="confirmLogout" >Đồng ý</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button id="btn_userProfile" class="float-end" data-bs-toggle="dropdown"  aria-haspopup="true" aria-expanded="false"  data-bs-placement="bottom" title="Tài khoản"><img class="img-avartar-login" th:src="@{/images/avatar.png}" alt="ảnh đại diện" th:if="${isLogin}"
             ></button>
             <ul class="p-3 dropdown-menu">
               <div>
                   <img class="img-avatar-small" th:src="@{/images/avatar.png}" alt="">
                   <label class="user-name" th:text="${user.getHoTen()}"></label>
               </div>
-                <li><a class="dropdown-item" th:href="@{/trang-ca-nhan}">Cập nhật thông tin cá nhân</a></li>
+                <li><a class="dropdown-item" th:href="@{/trang-ca-nhan(id=${account.getId()})}">Xem trang cá nhân</a></li>
                 <li><a class="dropdown-item" href="#">Thay đổi mật khẩu</a></li>
-                <li><a class="dropdown-item" href="#">Link 3</a></li>
+                <li><a class="dropdown-item" href="#">Cài đặt</a></li>
             </ul>
 
         </div>
@@ -130,22 +151,22 @@
         <div class="container-fluid">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/trang-chu">Trang chủ</a>
+                    <a class="nav-link" th:href="@{/trang-chu}">Trang chủ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/trang-chu-hoat-dong">Hoạt động</a>
+                    <a class="nav-link" th:href="@{/trang-chu-hoat-dong}">Hoạt động</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/trang-chu-danh-gia">Đánh giá</a>
+                    <a class="nav-link" th:href="@{/trang-chu-danh-gia}">Đánh giá</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/trang-chu-tong-ket">Tổng kết</a>
+                    <a class="nav-link" th:href="@{/trang-chu-tong-ket}">Tổng kết</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Xét duyệt</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/de-xuat">Đề xuất</a>
+                    <a class="nav-link" th:href="@{/de-xuat}">Đề xuất</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Liên hệ</a>
