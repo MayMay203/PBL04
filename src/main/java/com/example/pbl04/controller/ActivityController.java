@@ -41,7 +41,7 @@ public class ActivityController {
         List<Hoatdong> actiList = activityService.getActivityOccured();
         List<Hoatdong> actiListHappening= activityService.getActivityHappening();
         model.addAttribute("numberActivitys",numberActivitys);
-        model.addAttribute("Anh",new Anh());
+//        model.addAttribute("Anh",new Anh());
         model.addAttribute("actiList",actiList);
         model.addAttribute("actiListHappening",actiListHappening);
         model.addAttribute(("actiListUpcomming"),actiListUpcomming);
@@ -57,7 +57,7 @@ public class ActivityController {
         List<Thanhvien> thanhvienList =activityService.getMemberList(id);
         Thanhvien thanhvien=activityService.getMemberByID(taikhoan.getId());
         Hoatdong hoatdong = activityService.getActivityByID(id);
-        model.addAttribute("Anh",new Anh());
+//        model.addAttribute("Anh",new Anh());
         model.addAttribute("hoatdong",hoatdong);
         model.addAttribute("taikhoan",taikhoan);
         model.addAttribute("thanhvien",thanhvien);
@@ -92,11 +92,11 @@ public class ActivityController {
         if(chude.getTenChuDe() !=null  )
         {
             Integer machude = chude.getId();
-            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh, userID);
+//            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh, userID);
         }else {
             topicService.addChude(chude);
             Integer machude = topicService.getMaChuDeByTen(tenChuDe);
-            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh, userID);
+//            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh, userID);
         }
         sessionService.createSessionModel(model, session);
         response.put("message", "Hoạt động đã được thêm mới thành công");

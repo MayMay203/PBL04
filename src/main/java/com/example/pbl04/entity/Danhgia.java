@@ -10,7 +10,6 @@ public class Danhgia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "maDG", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)

@@ -8,7 +8,6 @@ public class Dexuat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "maDX", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -19,7 +18,7 @@ public class Dexuat {
     @Column(name = "viTri", nullable = false)
     private String viTri;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "maChuDe", nullable = false)
     private Chude maChuDe;
 
