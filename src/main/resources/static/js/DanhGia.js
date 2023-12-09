@@ -235,3 +235,33 @@ $(document).ready(function () {
         nextArrow: '<div class="slick-next"><i class="bi bi-chevron-compact-down"></i></div>',
     })
 });
+
+
+$(document).ready(function () {
+
+    $('#btnSummary').on('click', function () {
+        var maHD = $(this).data('hoatdong-id');
+        console.log("maHD:",maHD);
+        // Gửi AJAX request để kiểm tra tổng kết hoạt động
+        $.ajax({
+            type: 'GET',
+            url: '/Check-Summary',
+            data: { 'maHD': maHD},
+
+            success: function (data) {
+                if (data.summaryExists) {
+                    window.location.href = '/View-Summary?id=' +maHD;
+                } else {
+                    $('#noSummaryModal').modal('show');
+                }
+            },
+
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+    $('.closeModalLogout').on('click', function () {
+        $('#noSummaryModal').modal('hide');
+    });
+});

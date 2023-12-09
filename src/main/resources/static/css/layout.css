@@ -788,3 +788,54 @@
         width: 6rem;
     }
 
+/* Container for the button and notification */
+
+/* Button with notification */
+
+
+/* Notification */
+.notification-container {
+    /*position: relative;*/
+}
+.notification {
+    display: none;
+    position: absolute;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    height: 7.5rem;
+    width: 11rem;
+    z-index: 1;
+   margin-left: 12rem !important;
+    margin-top: 1rem;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 5px 0 black;
+}
+
+/* Arrow above the notification pointing to the button */
+.notification::before {
+    content: '';
+    position: absolute;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent var(--grey-phase) transparent; /* Đặt màu trong suốt */
+   top:-1rem;  /* Adjust the position to align with the button */
+    left: 50%;
+    transform: translateX(-50%);
+}
+.notification p{
+    color: var(--sear) !important;
+    font-size: 0.7rem;
+}
+.notification button{
+    background-color: var(--btn) ;
+    color: white;
+    padding: 0.2rem;
+    /*border-radius:;*/
+    font-size: 0.8rem;
+    border:none;
+}
+#cancel{
+    width: 4rem !important;
+
+}

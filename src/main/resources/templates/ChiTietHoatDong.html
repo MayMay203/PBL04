@@ -83,12 +83,18 @@
         </div>
 
       </div>
-
+      <div class="notification-container">
       <button th:if="${hoatdong.getTinhTrangHD() == 1} and ${checkDangky==null}"
               type="button"
-              class="btn-Join" id="thamgiaButton"
+              class="btn-Join" id="thamgiaButton" th:attr="data-account-id=${account.id}"
               >Tham gia</button>
      </button>
+        <div id="notification" class="notification">
+          <p>Vui lòng đăng nhập với username và password của bạn hoặc đăng ký tại Hopefully</p>
+          <button id="login">Đăng nhập</button>
+          <button id="cancel">Hủy</button>
+        </div>
+      </div>
       <button th:if="${hoatdong.getTinhTrangHD() == 1} and ${checkDangky != null} and ${checkDangky.getTrangThai()==false}"
               type="button"
               class="btn-Join" id="thamgiaButton1">Chờ xét duyệt</button>
@@ -124,7 +130,24 @@
 
       <button th:if="${hoatdong.getTinhTrangHD() == 3}"
               type="button"
-              class="btn-KetThuc" ><a class="btn-summary" th:href="@{/View-Summary(id=${hoatdong.getId()})}">Tổng kết</a></button>
+              class="btn-KetThuc" ><a class="btn-summary" id="btnSummary"  th:attr="data-hoatdong-id=${hoatdong.id}" >Tổng kết</a></button>
+
+
+      <div class="modal fade" id="noSummaryModal" tabindex="-1" role="dialog" aria-labelledby="joinconfirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="confirmModalLabel">Thông báo</h5>
+              <button type="button" class="closeModalLogout" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body"  id="modalBodyContentNoti">
+               Hoạt động này chưa có tổng kết
+            </div>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>
