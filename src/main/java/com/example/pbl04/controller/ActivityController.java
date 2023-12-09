@@ -105,13 +105,13 @@ public class ActivityController {
     }
     @PostMapping(value="/Regis-activity")
     @ResponseBody
-    public String JoinActivity(@RequestParam("maHD") String maHD,
-                               @RequestParam("maTK") String maTK
+    public String JoinActivity(@RequestParam("maHD") Integer maHD,
+                               @RequestParam("maTK") Integer maTK
                                )
     {
         System.out.println(maHD);
         System.out.println(maTK);
         registerService.joinActivity(maHD,maTK);
-        return "ChiTietHoatDong";
+        return "redirect:/ChiTietHoatDong";
     }
 }

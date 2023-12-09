@@ -35,7 +35,7 @@
   </div>
   <div class="row px-5">
     <div class="col-md-8">
-      <img class="img_activity" src="" />
+      <img class="img_activity" th:src="@{${hoatdong.getAnh()}}" />
     </div>
     <div class="col-md-4 main_phase">
       <!--  Code giai đoạn và button tham gia -->
@@ -88,6 +88,7 @@
               type="button"
               class="btn-Join" id="thamgiaButton"
               >Tham gia</button>
+     </button>
       <button th:if="${hoatdong.getTinhTrangHD() == 1} and ${checkDangky != null} and ${checkDangky.getTrangThai()==false}"
               type="button"
               class="btn-Join" id="thamgiaButton1">Chờ xét duyệt</button>
@@ -119,7 +120,7 @@
       <button th:if="${hoatdong.getTinhTrangHD() == 2}"
               type="button"
               class="btn-Join"
-              style="display:none;">Tham gia</button>
+              style="display: none">Tham gia</button>
 
       <button th:if="${hoatdong.getTinhTrangHD() == 3}"
               type="button"
@@ -144,13 +145,13 @@
       <div class="group_member">
         <h3 class="group_member-organize">NHÀ TỔ CHỨC</h3>
         <h6 class="name-organize" th:text="${thanhvien.getHoTen()}"></h6>
-        <img src=""  alt="" class="images-organize">
+        <img th:src="@{${thanhvien.getMaTK().getAnhDaiDien()}}"  alt="" class="images-organize">
         <hr class="dash_organize"  />
         <h3 class="group_member-parti">THÀNH VIÊN</h3>
         <div class="group_member-list">
           <div class="member" th:each="thanhvien: ${thanhvienList}">
 
-            <img class="member-ava"  alt="">
+            <img class="member-ava" th:src="@{${thanhvien.getMaTK().getAnhDaiDien()}}" alt="">
             <span class="member-name" th:text="${thanhvien.getHoTen()}"></span>
           </div>
         </div>

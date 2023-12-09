@@ -28,7 +28,7 @@
             <div id="carouselExampleCaptions" class="carousel slide">
                 <div class="carousel-inner" th:each="activity, iterStat : ${actiListHappening}">
                     <div class="carousel-item" th:classappend="${iterStat.index == 0} ? 'active' : ''">
-                        <img src="" class="d-block w-100" alt="Image">
+                        <img th:src="@{${activity.getAnh()}}" class="d-block w-100" alt="Image">
                         <i class="bi bi-broadcast icon_broad_cast"></i><span class="broad_cast"> ĐANG DIỄN RA</span>
                         <div class="carousel-caption d-none d-md-block"  >
                             <h2><a href="" th:text="${activity.getTenHD()}" th:href="@{/Join(id=${activity.getId()})}"></a></h2><br><br>
@@ -62,8 +62,7 @@
                                     <div class="card mb-5"  th:each="j:${#numbers.sequence(0,4)}" th:if="${(4*i+j)<actiListUpcomming.size()}">
                                         <div class="row g-0">
                                             <div class="col-md-3">
-                                                <img src=""
-                                                     class="img-fluid rounded-start" alt="...">
+                                                <img th:src="@{${actiListUpcomming.get((4*i)+j).getMaHD().getAnh()}}" class="img-fluid rounded-start" alt="...">
                                             </div>
                                             <div class="col-md-9">
                                                 <div class="card-body">
@@ -121,7 +120,7 @@
                         <div class="list_card">
                             <div th:each="activity : ${actiList}">
                             <div class="card custom-margin" style="width: 13rem;">
-                                <img class="card-img-top" src="" alt="Card image cap">
+                                <img class="card-img-top" th:src="@{${activity.getAnh()}}" alt="Card image cap">
                                 <div class="card-img-overlay">
                                     <h5 class="card-title truncate-text"><a href=""  th:text="${activity.getTenHD()}"></a>
                                     </h5>

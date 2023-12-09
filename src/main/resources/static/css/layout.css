@@ -451,6 +451,10 @@
     fill: var(--phase-3);
     fill-opacity:0.8;
 }
+.color--frame{
+    opacity:0.5;
+}
+
 .phase-1{
     font-size: 1rem;
     font-family:sans-serif;

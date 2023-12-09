@@ -12,8 +12,9 @@ $(document).ready(function () {
         console.log("maTK:", maTK);
         joinActivity(maHD, maTK);
     });
-
+    var modalContentUpdated = false;
     function joinActivity(maHD, maTK) {
+
         // Gửi AJAX request đến controller
         $.ajax({
             type: 'POST',
@@ -25,7 +26,8 @@ $(document).ready(function () {
                 // Assuming the submission is successful, update modal content and hide buttons
                 updateModalContent("Yêu cầu của bạn đang được xét duyệt.");
                 hideButtons();
-                location.reload();
+                modalContentUpdated =true;
+                // location.reload();
             },
             error: function (error) {
                 console.error('Error:', error);
@@ -41,10 +43,14 @@ $(document).ready(function () {
     function hideButtons() {
         // Hide the buttons in the modal footer
         $('#joinModal .modal-footer').hide();
+
     }
 
     // Add a click event listener to the "Đóng" button inside the modal header
     $('.closeModalLogout').on('click', function () {
         $('#joinModal').modal('hide');
+        if(modalContentUpdated ===true){
+            location.reload();
+        }
     });
 });
