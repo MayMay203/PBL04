@@ -10,5 +10,6 @@ public interface SuggestionService {
     List<Dexuat> getSuggestionByIdTitle(Integer NameTitle);
     List<Integer> CountSuggestion(List<Dexuat> suggestionList);
 
+    void Save(Dexuat dexuat);
 
 }

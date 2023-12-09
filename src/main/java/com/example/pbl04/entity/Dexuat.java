@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class Dexuat {
     @Id
     @Column(name = "maDX", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)

@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class Tongket {
     @Id
     @Column(name = "maTongKet", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)

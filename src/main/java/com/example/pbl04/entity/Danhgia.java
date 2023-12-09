@@ -9,6 +9,7 @@ import java.time.Instant;
 public class Danhgia {
     @Id
     @Column(name = "maDG", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)

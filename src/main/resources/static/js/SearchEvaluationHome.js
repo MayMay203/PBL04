@@ -43,7 +43,7 @@ search_input.addEventListener("keydown",  async e => {
                       innerContainer.className = "container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid";
                       innerContainer.innerHTML =
                           `
-                    <img src="" class="float-start w-10 h-80" alt="" />
+                    <img src="${activityList[index].anh}" class="float-start w-10 h-80" alt="" />
                     <div class="card border-0">
                         <div class="card-body fs-7">
                             <div class="card-title fs-6 fw-bolder green-color">${activityList[index].tenHD}</div>
@@ -57,7 +57,7 @@ search_input.addEventListener("keydown",  async e => {
                                     chi tiết...</button>
                             </div>
                             <div
-                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 p-1 pleft-6 fs-8 mt-9 text_align-center"><p class="ml-7_5rem">${countEvaList[index]} lượt đánh giá</p>
+                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 p-1 pleft-6 fs-8 mt-9 text_align-center"><p class="ml-20p">${countEvaList[index]} lượt đánh giá</p>
                                </div>
                         </div>
                     </div>

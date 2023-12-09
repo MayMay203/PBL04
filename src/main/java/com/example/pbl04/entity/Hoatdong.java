@@ -9,6 +9,7 @@ import java.time.LocalDate;
 public class Hoatdong {
     @Id
     @Column(name = "maHD", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Lob

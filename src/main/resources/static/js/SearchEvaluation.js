@@ -44,7 +44,7 @@ search_input.addEventListener("keydown",  async e => {
                         innerContainer.className = "container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid";
                         innerContainer.innerHTML =
                             `
-                    <img src="" class="float-start w-10 h-80" alt="" />
+                    <img src="${actListOfMember[index].anh}" class="float-start w-10 h-80" alt="" />
                     <div class="card border-0">
                         <div class="card-body fs-7">
                             <div class="card-title fs-6 fw-bolder green-color">${actListOfMember[index].tenHD}</div>

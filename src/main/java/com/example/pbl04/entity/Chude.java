@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class Chude {
     @Id
     @Column(name = "maChuDe", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Lob

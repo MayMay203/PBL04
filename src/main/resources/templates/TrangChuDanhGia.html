@@ -100,9 +100,9 @@
         </div>
 
     <!-- Chuyển trang -->
-    <a class="green_light-color no-text-decoration fw-semibold fst-italic fs-4 float-end mtrb-4rem" href="/danh-gia?id=7">
+<a class="green_light-color no-text-decoration fw-semibold fst-italic fs-4 float-end mtrb-4rem" th:if="${account!=null}" th:href="@{/danh-gia(id = ${account.getId()})}">
         Đánh giá hoạt động...</a>
-</div>
+
 
 <!-- Modal -->
 <div class="modal_ no-display">

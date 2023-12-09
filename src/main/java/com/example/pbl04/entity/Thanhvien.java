@@ -9,6 +9,7 @@ import java.time.LocalDate;
 public class Thanhvien {
     @Id
     @Column(name = "IdTV", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
