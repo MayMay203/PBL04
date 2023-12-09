@@ -21,6 +21,7 @@ public class ActivityController {
     private final SessionService sessionService;
     private final TopicService topicService;
     private final RegisterService registerService;
+
     @Autowired
     public ActivityController(ActivityService activityService, TopicService topicService, SessionService sessionService, RegisterService registerService){
         this.activityService=activityService;
@@ -71,8 +72,6 @@ public class ActivityController {
 //        return  "TrangCaNhan";
 //    }
 
-//
-
     @PostMapping("/addActivity")
     @ResponseBody
     public Map<String, Object> addActivity(@RequestParam("tenChuDe") String tenChuDe,
@@ -94,25 +93,25 @@ public class ActivityController {
         {
             Integer machude = chude.getId();
             activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh, userID);
-            System.out.println("chạy 1");
         }else {
             topicService.addChude(chude);
             Integer machude = topicService.getMaChuDeByTen(tenChuDe);
             activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh, userID);
-            System.out.println("chạy 2");
         }
         sessionService.createSessionModel(model, session);
         response.put("message", "Hoạt động đã được thêm mới thành công");
         response.put("success", true);
-        System.out.println("chạy 3");
         return response;
     }
-    @RequestMapping(value="/Join-Acti")
-    public String JoinActivity(@RequestParam Integer maHD,Model model, HttpSession session)
+    @PostMapping(value="/Regis-activity")
+    @ResponseBody
+    public String JoinActivity(@RequestParam("maHD") Integer maHD,
+                               @RequestParam("maTK") Integer maTK
+                               )
     {
-        sessionService.createSessionModel(model, session);
-        Taikhoan taikhoan = (Taikhoan) model.getAttribute("account");
-        registerService.joinActivity(maHD,taikhoan.getId());
-        return null;
+        System.out.println(maHD);
+        System.out.println(maTK);
+        registerService.joinActivity(maHD,maTK);
+        return "redirect:/ChiTietHoatDong";
     }
 }

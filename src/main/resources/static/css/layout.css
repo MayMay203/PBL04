@@ -206,6 +206,7 @@
 .card:nth-child(even) {
     background-color: #fff;
     color: #000;
+
 }
 .custom-margin{
     margin-bottom: 3rem;
@@ -450,6 +451,10 @@
     fill: var(--phase-3);
     fill-opacity:0.8;
 }
+.color--frame{
+    opacity:0.5;
+}
+
 .phase-1{
     font-size: 1rem;
     font-family:sans-serif;
@@ -776,4 +781,10 @@
     background-color: #fff;
     color: #000;
 }
+/* thong bao xác nhận tham gia*/
+    .modal-footer button.closeModaljoin, #btnJoin{
+        background-color: var(--main-color);
+        border: none;
+        width: 6rem;
+    }
 

@@ -27,9 +27,7 @@ public class PersonalityController {
         List<Hoatdong> actListByHost = activityService.getActivityByHost(id);
         model.addAttribute("actListByHost",actListByHost);
         model.addAttribute("activity", new Hoatdong());
-
 //        Dangky getRegisterInfo = activityService.getRegisterInfo(id)
-
         sessionService.createSessionModel(model, session);
         return "TrangCaNhan";
     }

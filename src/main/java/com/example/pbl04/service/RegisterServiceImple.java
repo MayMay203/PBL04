@@ -36,5 +36,7 @@ public class RegisterServiceImple implements RegisterService {
         dangky.setPhanQuyen(false);
         dangky.setTrangThai(false);
         dangky.setThoiGianDK(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        regisRepository.save(dangky);
     }
+    public Dangky getDangKyByHDTK(Integer maTK, Integer maHD) {return regisRepository.getDangKyByHDTK(maTK,maHD);}
 }

@@ -8,11 +8,12 @@ import java.time.LocalDate;
 @Table(name = "thanhvien")
 public class Thanhvien {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdTV", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "maTK", nullable = false)
     private Taikhoan maTK;
 

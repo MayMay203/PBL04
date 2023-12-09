@@ -74,9 +74,10 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     public void addActivity(Integer maChuDe, String tenHD, String diaDiem, String thoiGianBD, String thoiGianKT,
-                            String sotnvtt, String sotnvtd, String moTa, String anh, Integer userID) {
+                            String sotnvtt, String sotnvtd, String moTa, String anh,String maTK) {
         try {
             Hoatdong hoatDong = new Hoatdong();
+            Integer idtk = Integer.parseInt(maTK);
             hoatDong.setMaChuDe(topicRepository.getChudeByID(maChuDe));
             hoatDong.setTenhd(tenHD);
             hoatDong.setDiaDiem(diaDiem);
@@ -89,7 +90,7 @@ public class ActivityServiceImpl implements ActivityService {
             hoatDong.setTinhTrangDuyet((byte) 1);
 //            hoatDong.setAnh(anh.getBytes());
             activityRepository.save(hoatDong);
-            Taikhoan taikhoan = accountService.getTaiKhoanByID(userID);
+            Taikhoan taikhoan = accountService.getTaiKhoanByID(idtk);
             Dangky dangky = new Dangky();
             dangky.setPhanQuyen(true);
             dangky.setMaHD(hoatDong);

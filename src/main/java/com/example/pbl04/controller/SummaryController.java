@@ -26,7 +26,6 @@ public class SummaryController {
     {
         Integer myID=4;
         List<Hoatdong> myActivities = activityService.getListActivityByMyID(myID);
-        model.addAttribute("Anh",new Anh());
         List<Tongket> summaryList = summaryService.getSummaryList();
         model.addAttribute("summaryList",summaryList);
         model.addAttribute("myActivities",myActivities);
@@ -43,7 +42,6 @@ public class SummaryController {
             List<Thanhvien> memberList = summaryService.getMemberList(id);
             List<Anhtongket> imgSummaryList = summaryService.getimgSummaryList(summary.getId());
             Thanhvien member  = summaryService.getMemberByID(taikhoan.getId());
-            model.addAttribute("Anh",new Anh());
             model.addAttribute("summary", summary);
             model.addAttribute("memberList", memberList);
             model.addAttribute("member", member);

@@ -1,177 +1,176 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>Document</title>-->
-<!--    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />-->
-<!--    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>-->
-<!--    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>-->
-<!--    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>-->
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/layout.css}">-->
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/TrangChuHoatDong.css}">-->
-<!--    <script defer th:src="@{/js/TrangChuHoatDong.js}"></script>-->
-<!--    <script  defer th:src="@{/js/Header.js}"></script>-->
-<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>-->
-<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">-->
-<!--</head>-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/TrangChuHoatDong.css}">
+    <script defer th:src="@{/js/TrangChuHoatDong.js}"></script>
+    <script  defer th:src="@{/js/Header.js}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+</head>
 
-<!--<body>-->
-<!--<div id="placeholder" style="height: 87px; display: none;"></div>-->
-<!--<div id="myHeader" style="top: -87px" th:include="Header :: html"></div>-->
-<!--<div class="HoatDongContent">-->
-<!--    <div class="slider">-->
-<!--        <div class="container-fluid">-->
-<!--            <div id="carouselExampleCaptions" class="carousel slide">-->
-<!--                <div class="carousel-inner" th:each="activity, iterStat : ${actiListHappening}">-->
-<!--                    <div class="carousel-item" th:classappend="${iterStat.index == 0} ? 'active' : ''">-->
-<!--                        <img th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(activity.getAnh())}" class="d-block w-100" alt="Image">-->
-<!--                        <i class="bi bi-broadcast icon_broad_cast"></i><span class="broad_cast"> ĐANG DIỄN RA</span>-->
-<!--                        <div class="carousel-caption d-none d-md-block"  >-->
-<!--                            <h2><a href="" th:text="${activity.getTenhd()}" th:href="@{/Join(id=${activity.getId()})}"></a></h2><br><br>-->
-<!--                            <p><a href="" th:text="${#strings.length(activity.getMoTa()) > 500 ? activity.getMoTa().substring(0, 500) + '...' : activity.getMoTa()}"></a></p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+<body>
+<div id="placeholder" style="height: 87px; display: none;"></div>
+<div id="myHeader" style="top: -87px" th:include="Header :: html"></div>
+<div class="HoatDongContent">
+    <div class="slider">
+        <div class="container-fluid">
+            <div id="carouselExampleCaptions" class="carousel slide">
+                <div class="carousel-inner" th:each="activity, iterStat : ${actiListHappening}">
+                    <div class="carousel-item" th:classappend="${iterStat.index == 0} ? 'active' : ''">
+                        <img th:src="@{${activity.getAnh()}}" class="d-block w-100" alt="Image">
+                        <i class="bi bi-broadcast icon_broad_cast"></i><span class="broad_cast"> ĐANG DIỄN RA</span>
+                        <div class="carousel-caption d-none d-md-block"  >
+                            <h2><a href="" th:text="${activity.getTenHD()}" th:href="@{/Join(id=${activity.getId()})}"></a></h2><br><br>
+                            <p><a href="" th:text="${#strings.length(activity.getMoTa()) > 500 ? activity.getMoTa().substring(0, 500) + '...' : activity.getMoTa()}"></a></p>
+                        </div>
+                    </div>
+                </div>
 
-<!--                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"-->
-<!--                        data-bs-slide="prev">-->
-<!--                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
-<!--                    <span class="visually-hidden">Previous</span>-->
-<!--                </button>-->
-<!--                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"-->
-<!--                        data-bs-slide="next">-->
-<!--                    <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
-<!--                    <span class="visually-hidden">Next</span>-->
-<!--                </button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; nội dung card &ndash;&gt;-->
-<!--        <div class="Content_left mx-n1">-->
-<!--            <div class="container">-->
-<!--                <div class="row">-->
-<!--                    &lt;!&ndash; Nội dung bên trái &ndash;&gt;-->
-<!--                    <div class="col-md-9 bg-var(&#45;&#45;white) m-0" style="max-height: 90rem;">-->
-<!--                        <h3 class="Content_left-title my-5">HOẠT ĐỘNG</h3>-->
-<!--                        <div class="Content_left-item">-->
-<!--                            <div class="act-slider" >-->
-<!--                                <div class="container-item" th:each="i : ${#numbers.sequence(0, actiListUpcomming.size() div 4 + ((actiListUpcomming.size()%4 > 0) ? 1 : 0) - 1)}">-->
-<!--                                    <div class="card mb-5"  th:each="j:${#numbers.sequence(0,4)}" th:if="${(4*i+j)<actiListUpcomming.size()}">-->
-<!--                                        <div class="row g-0">-->
-<!--                                            <div class="col-md-3">-->
-<!--                                                <img th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(actiListUpcomming.get((4*i)+j).getMaHD().getAnh())}"-->
-<!--                                                     class="img-fluid rounded-start" alt="...">-->
-<!--                                            </div>-->
-<!--                                            <div class="col-md-9">-->
-<!--                                                <div class="card-body">-->
-<!--                                                    <h5 class="card-title"><a class="card-title-a" href="" th:text="${actiListUpcomming.get((4*i)+j).getMaHD().getTenhd()}"></a>-->
-<!--                                                    </h5>-->
-<!--                                                    <p class="card-text"><a class="card-text-a" href=""  th:text="${#strings.length(actiListUpcomming.get((4*i)+j).getMaHD().getMoTa()) > 210 ? actiListUpcomming.get((4*i)+j).getMaHD().getMoTa().substring(0, 210) + '...' : actiListUpcomming.get((4*i)+j).getMaHD().getMoTa()}"></a></p>-->
-<!--                                                    <p class="card-text"><small class="text-body-secondary">-->
-<!--                                                        <span class="bi bi-calendar-date"></span><span th:text="${#temporals.format(actiListUpcomming.get((4*i)+j).getThoiGianDK(), 'dd-MM-yyyy')}"></span>-->
-<!--                                                        <button type="submit" class="btn btn-success btn-join-acti" ><a class="btn-Join-detail" th:href="@{/Join(id=${actiListUpcomming.get((4*i)+j).getMaHD().id})}">Tham gia</a></button>-->
-<!--                                                    </small></p>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    </form>-->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <!-- nội dung card -->
+        <div class="Content_left mx-n1">
+            <div class="container">
+                <div class="row">
+                    <!-- Nội dung bên trái -->
+                    <div class="col-md-9 bg-var(--white) m-0" style="max-height: 90rem;">
+                        <h3 class="Content_left-title my-5">HOẠT ĐỘNG</h3>
+                        <div class="Content_left-item">
+                            <div class="act-slider" >
+                                <div class="container-item" th:each="i : ${#numbers.sequence(0, actiListUpcomming.size() div 4 + ((actiListUpcomming.size()%4 > 0) ? 1 : 0) - 1)}">
+                                    <div class="card mb-5"  th:each="j:${#numbers.sequence(0,4)}" th:if="${(4*i+j)<actiListUpcomming.size()}">
+                                        <div class="row g-0">
+                                            <div class="col-md-3">
+                                                <img th:src="@{${actiListUpcomming.get((4*i)+j).getMaHD().getAnh()}}" class="img-fluid rounded-start" alt="...">
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><a class="card-title-a" href="" th:text="${actiListUpcomming.get((4*i)+j).getMaHD().getTenHD()}"></a>
+                                                    </h5>
+                                                    <p class="card-text"><a class="card-text-a" href=""  th:text="${#strings.length(actiListUpcomming.get((4*i)+j).getMaHD().getMoTa()) > 210 ? actiListUpcomming.get((4*i)+j).getMaHD().getMoTa().substring(0, 210) + '...' : actiListUpcomming.get((4*i)+j).getMaHD().getMoTa()}"></a></p>
+                                                    <p class="card-text"><small class="text-body-secondary">
+                                                        <span class="bi bi-calendar-date"></span><span th:text="${#temporals.format(actiListUpcomming.get((4*i)+j).getThoiGianDK(), 'dd-MM-yyyy')}"></span>
+                                                        <button type="submit" class="btn btn-success btn-join-acti" ><a class="btn-Join-detail" th:href="@{/Join(id=${actiListUpcomming.get((4*i)+j).getMaHD().id})}">Tham gia</a></button>
+                                                    </small></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </form>
 
-<!--                                </div>-->
+                                </div>
 
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                            </div>
+                        </div>
+                    </div>
 
-<!--                    <div class="col-md-3" style="text-align: center;">-->
-<!--                        <div class="fs-6 p-1 border-search width-25rem mr-5 position-relative">-->
-<!--                            <i class="bi bi-search p-2 grey-color"></i>-->
-<!--                            <label>-->
-<!--                                <input type="text" class="border-0 grey-color p-md-1 no-outline w-85 search-input"-->
-<!--                                       placeholder="Tìm kiếm hoạt động"/>-->
-<!--                            </label>-->
-<!--                            &lt;!&ndash; Infor search &ndash;&gt;-->
-<!--                            <div class="container position-abs box-shadow z-index-1 bg-white p-2  border-search radius-1 search-info no-display">-->
-<!--                                <h2 class="fs-6 pb-1 p-1">Tìm kiếm gần đây</h2>-->
-<!--                                <div class="container overflow-auto max_height-20rem">-->
-<!--                                    <div class="container d-flex align-items-center mb&#45;&#45;1 p-0 btn btn-group search-info-item">-->
-<!--                                        <img class="w-3 h-2_5 flex-1" src="../static/images/anh1.jpg" alt="" />-->
-<!--                                        <p class="m-1 fs-7 flex-16 black-color">Mang con chữ đến trẻ vùng cao</p>-->
-<!--                                        <i class="flex-1 btn btn-close p-0 fs-7"></i>-->
-<!--                                    </div>-->
+                    <div class="col-md-3" style="text-align: center;">
+                        <div class="fs-6 p-1 border-search width-25rem mr-5 position-relative">
+                            <i class="bi bi-search p-2 grey-color"></i>
+                            <label>
+                                <input type="text" class="border-0 grey-color p-md-1 no-outline w-85 search-input"
+                                       placeholder="Tìm kiếm hoạt động"/>
+                            </label>
+                            <!-- Infor search -->
+                            <div class="container position-abs box-shadow z-index-1 bg-white p-2  border-search radius-1 search-info no-display">
+                                <h2 class="fs-6 pb-1 p-1">Tìm kiếm gần đây</h2>
+                                <div class="container overflow-auto max_height-20rem">
+                                    <div class="container d-flex align-items-center mb--1 p-0 btn btn-group search-info-item">
+                                        <img class="w-3 h-2_5 flex-1" src="../static/images/anh1.jpg" alt="" />
+                                        <p class="m-1 fs-7 flex-16 black-color">Mang con chữ đến trẻ vùng cao</p>
+                                        <i class="flex-1 btn btn-close p-0 fs-7"></i>
+                                    </div>
 
-<!--                                    <div class="container d-flex align-items-center mb&#45;&#45;1 p-0 btn btn-group search-info-item">-->
-<!--                                        <img class="w-3 h-2_5 flex-1" src="../static/images/anh1.jpg" alt="" />-->
-<!--                                        <p class="m-1 fs-7 flex-16 black-color">Mang con chữ đến trẻ vùng cao</p>-->
-<!--                                        <i class="flex-1 btn btn-close p-0 fs-7"></i>-->
-<!--                                    </div>-->
+                                    <div class="container d-flex align-items-center mb--1 p-0 btn btn-group search-info-item">
+                                        <img class="w-3 h-2_5 flex-1" src="../static/images/anh1.jpg" alt="" />
+                                        <p class="m-1 fs-7 flex-16 black-color">Mang con chữ đến trẻ vùng cao</p>
+                                        <i class="flex-1 btn btn-close p-0 fs-7"></i>
+                                    </div>
 
-<!--                                    <div class="container d-flex align-items-center mb&#45;&#45;1 p-0 btn btn-group search-info-item">-->
-<!--                                        <img class="w-3 h-2_5 flex-1" src="../static/images/anh1.jpg" alt="" />-->
-<!--                                        <p class="m-1 fs-7 flex-16 black-color">Mang con chữ đến trẻ vùng cao</p>-->
-<!--                                        <i class="flex-1 btn btn-close p-0 fs-7"></i>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
+                                    <div class="container d-flex align-items-center mb--1 p-0 btn btn-group search-info-item">
+                                        <img class="w-3 h-2_5 flex-1" src="../static/images/anh1.jpg" alt="" />
+                                        <p class="m-1 fs-7 flex-16 black-color">Mang con chữ đến trẻ vùng cao</p>
+                                        <i class="flex-1 btn btn-close p-0 fs-7"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-<!--                        <div class="list_card">-->
-<!--                            <div th:each="activity : ${actiList}">-->
-<!--                            <div class="card custom-margin" style="width: 13rem;">-->
-<!--&lt;!&ndash;                                <img class="card-img-top" th:src="'data:image/jpeg;base64,' + ${Anh.getimgdata(activity.getAnh())}" alt="Card image cap">&ndash;&gt;-->
-<!--                                <div class="card-img-overlay">-->
-<!--                                    <h5 class="card-title truncate-text"><a href=""  th:text="${activity.getTenhd()}"></a>-->
-<!--                                    </h5>-->
-<!--                                    <p class="card-text" th:text="${#strings.length(activity.getMoTa()) > 100 ? activity.getMoTa().substring(0, 100) + '...' : activity.getMoTa()}"></p>-->
-<!--                                    <a th:href="@{/Join(id=${activity.id})}" class="xemttiep">Xem tiếp</a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                                <br>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="banner bg-green px-3 text-white pl-3 ">-->
-<!--        <div class="container-fluid">-->
-<!--            <div class="row custom-banner-1  text-center">-->
-<!--                <div class="col-md-4 " th:text="${numberActivitys}"></div>-->
-<!--                <div class="col-md-4">1</div>-->
-<!--                <div class="col-md-4" th:text="${numberParticipants}">+</div>-->
-<!--            </div>-->
-<!--            <div class="row custom-banner-2 text-center">-->
-<!--                <div class="col-md-4">HOẠT ĐỘNG</div>-->
-<!--                <div class="col-md-4">THÁNG</div>-->
-<!--                <div class="col-md-4">THÀNH VIÊN</div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--<div class="activity_popular bg-white text-center">-->
-<!--    <div class="container">-->
-<!--        <h3 class="activity_head p-5">HOẠT ĐỘNG PHỔ BIẾN</h3>-->
-<!--        <div class="list_acti">-->
-<!--            <div class="row p-5 custom-acti">-->
-<!--                <div class="col-md-4"><i class="bi bi-house-add-fill"></i> <br><span>TRƯỜNG HỌC</span></div>-->
-<!--                <div class="col-md-4"><i class="bi bi-tree-fill"></i> <br><span>TRỒNG CÂY</span></div>-->
-<!--                <div class="col-md-4"><i class="bi bi-trash3-fill"></i> <br><span>DỌN RÁC</span></div>-->
-<!--            </div>-->
-<!--            <div class="row p-5 custom-acti">-->
-<!--                <div class="col-md-4"><i class="bi bi-droplet-fill"></i> <br><span>HIẾN MÁU</span></div>-->
-<!--                <div class="col-md-4"><i class="bi bi-house-add-fill"></i> <br><span>Trường học</span></div>-->
-<!--                <div class="col-md-4"><i class="bi bi-house-add-fill"></i> <br><span>Trường học</span></div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>-->
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>-->
+                        <div class="list_card">
+                            <div th:each="activity : ${actiList}">
+                            <div class="card custom-margin" style="width: 13rem;">
+                                <img class="card-img-top" th:src="@{${activity.getAnh()}}" alt="Card image cap">
+                                <div class="card-img-overlay">
+                                    <h5 class="card-title truncate-text"><a href=""  th:text="${activity.getTenHD()}"></a>
+                                    </h5>
+                                    <p class="card-text" th:text="${#strings.length(activity.getMoTa()) > 100 ? activity.getMoTa().substring(0, 100) + '...' : activity.getMoTa()}"></p>
+                                    <a th:href="@{/Join(id=${activity.id})}" class="xemttiep">Xem tiếp</a>
+                                </div>
+                            </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="banner bg-green px-3 text-white pl-3 ">
+        <div class="container-fluid">
+            <div class="row custom-banner-1  text-center">
+                <div class="col-md-4 " th:text="${numberActivitys}"></div>
+                <div class="col-md-4">1</div>
+                <div class="col-md-4" th:text="${numberParticipants}">+</div>
+            </div>
+            <div class="row custom-banner-2 text-center">
+                <div class="col-md-4">HOẠT ĐỘNG</div>
+                <div class="col-md-4">THÁNG</div>
+                <div class="col-md-4">THÀNH VIÊN</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="activity_popular bg-white text-center">
+    <div class="container">
+        <h3 class="activity_head p-5">HOẠT ĐỘNG PHỔ BIẾN</h3>
+        <div class="list_acti">
+            <div class="row p-5 custom-acti">
+                <div class="col-md-4"><i class="bi bi-house-add-fill"></i> <br><span>TRƯỜNG HỌC</span></div>
+                <div class="col-md-4"><i class="bi bi-tree-fill"></i> <br><span>TRỒNG CÂY</span></div>
+                <div class="col-md-4"><i class="bi bi-trash3-fill"></i> <br><span>DỌN RÁC</span></div>
+            </div>
+            <div class="row p-5 custom-acti">
+                <div class="col-md-4"><i class="bi bi-droplet-fill"></i> <br><span>HIẾN MÁU</span></div>
+                <div class="col-md-4"><i class="bi bi-house-add-fill"></i> <br><span>Trường học</span></div>
+                <div class="col-md-4"><i class="bi bi-house-add-fill"></i> <br><span>Trường học</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
-<!--</body>-->
+</body>
 
-<!--</html>-->
+</html>
