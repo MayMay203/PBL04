@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
 
 @Service
 public class RegisterServiceImple implements RegisterService {
@@ -36,5 +37,10 @@ public class RegisterServiceImple implements RegisterService {
         dangky.setPhanQuyen(false);
         dangky.setTrangThai(false);
         dangky.setThoiGianDK(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    @Override
+    public List<Dangky> getRegisterInforByIDAct(Integer IdAct) {
+        return regisRepository.getRegisterInforByIDAct(IdAct);
     }
 }

@@ -20,6 +20,7 @@ public interface SummaryRepository extends JpaRepository<Tongket,Integer> {
     Thanhvien getMemberByID(Integer id);
     @Query("select tv from Taikhoan tk,Thanhvien tv, Dangky dk where dk.maHD.id =:id and dk.maTK =tk and tk= tv.maTK and dk.phanQuyen=false")
     List<Thanhvien> getMemberList(Integer id);
+
     @Query("select a from Anhtongket a where a.maTongKet.id=:id")
     List<Anhtongket> getimgSummaryList(@Param("id") Integer id);
 

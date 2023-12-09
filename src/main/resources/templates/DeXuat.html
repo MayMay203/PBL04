@@ -19,18 +19,18 @@
 <div id="placeholder" style="height: 87px; display: none;"></div>
 <div id="myHeader" style="top: -87px" th:include="Header :: html"></div>
 <div class="container p-5">
-    <!--Search-->
-    <!--    <div class="fs-6 p-1 border-search width-25rem m-5 position-relative">-->
-    <div class="fs-6 p-1 border-search width-25rem m-2 position-relative">
-        <i class="bi bi-search p-2 grey-color"></i>
-        <input type="text" class="border-0 grey-color p-md-1 no-outline w-85 search-input"
-               placeholder="Tìm kiếm hoạt động" />
-    </div>
+<!--Search-->
+<!--    <div class="fs-6 p-1 border-search width-25rem m-5 position-relative">-->
+<div class="fs-6 p-1 border-search width-25rem m-2 position-relative">
+    <i class="bi bi-search p-2 grey-color"></i>
+    <input type="text" class="border-0 grey-color p-md-1 no-outline w-85 search-input"
+           placeholder="Tìm kiếm hoạt động" />
+</div>
 </div>
     <!-- Content -->
- <h2 class="fs-3 mb-sm-3 mlt-8rem px-2">ĐỀ XUẤT GẦN ĐÂY</h2>
-  <div class="container show-activity">
-      <div class="fs-9 display-flex act-title" th:each="suggestion,index: ${suggestionList}" th:if="${index.index < 10}">
+<h2 class="fs-3 mb-sm-3 mlt-8rem">ĐỀ XUẤT CỦA TÔI</h2>
+<div class="container show-activity">
+      <div class="fs-9 display-flex act-title" th:each="suggestion,index: ${suggestionList}">
           <div class="container px-5 activity">
               <div class="container d-flex align-items-center p-3 border_bottom-solid">
                   <div class="container flex-5">
@@ -60,10 +60,7 @@
           </div>
       </div>
   </div>
-    <br>
-    <br>
-    <br>
-    <button class="btn bg-btn white-color px-4 mt-5 float-end mb-5 me-5 btn-add-suggest"><i class="bi bi-plus-square me-2"></i>Thêm đề xuất</button>
+<button class="btn bg-btn white-color px-4 mt-5 float-end mb-5 me-5 btn-add-suggest" th:attr="data-value=${account!=null?account.getId():null}"><i class="bi bi-plus-square me-2"></i>Thêm đề xuất</button>
 <!-- Modal -->
 <div class="modal_ box-shadow no-display">
     <div class="modal__overlay">

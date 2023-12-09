@@ -4,7 +4,7 @@ const search_input = document.querySelector(".search-input")
 const show_actitivy = document.querySelector(".show-activity")
 const btn_close = document.getElementsByClassName("btn-close-detail")
 
-console.log(show_actitivy)
+// console.log(show_actitivy)
 // const body = document.querySelector("body");
 // const modal = document.querySelector(".modal_")
 //const btn_close = document.getElementsByClassName("btn-close-detail")
@@ -20,13 +20,13 @@ search_input.addEventListener("keydown",  async e => {
     try {
         const value = search_input.value.trim()
         const title = convertToSlug(value);
-        console.log(title);
+        // console.log(title);
         const response = await fetch(`/search/suggestion/${title}`)
         if (!response.ok) {
             console.error("Lỗi HTTP! Trạng thái " + response.status)
         }
         const responseData = await response.json()
-        console.log(responseData)
+        // console.log(responseData)
         const suggestionList = responseData.suggestionList;
         const countSugg = responseData.countSugg;
         // const actListOfMember = responseData.actListOfMember;

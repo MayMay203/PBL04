@@ -100,8 +100,8 @@
         </div>
 
     <!-- Chuyển trang -->
-<a class="green_light-color no-text-decoration fw-semibold fst-italic fs-4 float-end mtrb-4rem" th:if="${account!=null}" th:href="@{/danh-gia(id = ${account.getId()})}">
-        Đánh giá hoạt động...</a>
+<button class="green_light-color no-text-decoration fw-semibold fst-italic fs-4 float-end mtrb-4rem no-border bg-white btn-evaluation-Act" th:attr="data-value=${account!=null?account.getId():null}">
+        Đánh giá hoạt động...</button>
 
 
 <!-- Modal -->
@@ -131,10 +131,10 @@
 <!--                Mo ta-->
                 <p class="m-0 p-3 fs-7 modal-Description"></p>
 
-                <div class="container d-flex m-1 justify-content-center border_top-solid">
-                    <img src="../static/images/anh2.jpg" alt="" class="height-10rem flex-1 p-1">
-                    <img src="../static/images/anh2.jpg" alt="" class="height-10rem flex-1 p-1">
-                    <img src="../static/images/anh2.jpg" alt="" class="height-10rem flex-1 p-1">
+                <div class="container d-flex m-1 justify-content-center border_top-solid images-Activity">
+<!--                    <img src="../static/images/anh2.jpg" alt="" class="height-10rem flex-1 p-1">-->
+<!--                    <img src="../static/images/anh2.jpg" alt="" class="height-10rem flex-1 p-1">-->
+<!--                    <img src="../static/images/anh2.jpg" alt="" class="height-10rem flex-1 p-1">-->
                 </div>
                 <!-- Header comment -->
                 <div class="container border_top-solid border_bottom-solid p-2 fs-9 fst-italic modal-number-evaluation"></div>

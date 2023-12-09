@@ -8,6 +8,8 @@ const btn_evaluate_member = document.getElementsByClassName("btn_eva_member");
 const btn_evaluate = document.getElementsByClassName("btn-evaluate")
 const edit_content = document.querySelector(".content-evaluate");
 const view_organized = document.querySelector(".view-organized");
+const image_activity = document.querySelector(".images-Activity")
+const members_actitivy = document.querySelector(".members-Actitivy")
 async function Evaluation(e)  {
     try{
         const IdAct =+e.target.dataset.value;
@@ -16,6 +18,7 @@ async function Evaluation(e)  {
             throw new Error(`Lỗi HTTP. Trạng thái: ${response.status}`)
         }
         const responseData = await response.json();
+        const imagesList = responseData.imagesList;
         // console.log(responseData);
         modal.classList.add('display-flex')
         view_comment.classList.remove('no-display')
@@ -28,6 +31,10 @@ async function Evaluation(e)  {
         document.querySelector(".avatar-host").src = responseData.registerInfor.maTK.anhDaiDien;
         document.querySelector(".time-post-act").innerText= responseData.registerInfor.thoiGianDK;
         //     ẢNH
+        image_activity.innerHTML = "";
+        imagesList.forEach(image => {
+            image_activity.innerHTML += `<img src="${image.anh}" alt="anhHoatDong" class="height-10rem flex-1 p-1">`;
+        });
         document.querySelector(".modal-number-evaluation").innerText = responseData.numberEvaluation + " lượt đánh giá"
         const evaluationOfAct = responseData.evaluationOfAct;
         //    console.log(evaluationOfAct);
@@ -81,6 +88,8 @@ async function EvaluationMember(e) {
             throw new Error(`Lỗi HTTP. Trạng thái: ${response.status}`)
         }
         const responseData = await response.json();
+        const imagesList = responseData.imagesList;
+        const membersList = responseData.membersList;
         // console.log(responseData);
         modal.classList.add('display-flex')
         edit_content.classList.remove('max_height-27rem')
@@ -90,9 +99,14 @@ async function EvaluationMember(e) {
 
         document.querySelector(".modal-nameAct").innerText = responseData.activity.tenhd;
         document.querySelector(".modal-Description").innerText = responseData.activity.moTa;
-        document.querySelector(".avatar").src = responseData.registerInfor.maTK.anhDaiDien;
+        document.querySelector(".name-host-act").innerText = responseData.registerInfor.maTK.tenDN;
+        document.querySelector(".avatar-host").src = responseData.registerInfor.maTK.anhDaiDien;
         document.querySelector(".time-post-act").innerText= responseData.registerInfor.thoiGianDK;
-        //     ẢNH
+        //    image summary activity
+        image_activity.innerHTML = "";
+        imagesList.forEach(image => {
+            image_activity.innerHTML += `<img src="${image.anh}" alt="anhHoatDong" class="height-10rem flex-1 p-1">`;
+        });
         document.querySelector(".modal-number-evaluation").innerText = responseData.numberEvaluation + " lượt đánh giá"
         const evaluationOfAct = responseData.evaluationOfAct;
         //    console.log(evaluationOfAct);
@@ -128,6 +142,33 @@ async function EvaluationMember(e) {
         `
                 evaluationContainer.appendChild(newEvaluationDiv);
             });
+            //Members of activity
+            members_actitivy.innerHTML = '';
+            console.log(membersList);
+            membersList.forEach(member=>{
+                members_actitivy.innerHTML += `
+                     <div class="container p-2 col-6 radius-1_8 position-relative member-evaluate">
+                            <div class="container d-flex">
+                                <img class="w-2_5 h-2_5 ml-0_1 radius-1_8 p-1" src="${member.maTK.anhDaiDien}" alt="">
+                                <h4 class="green-color fs-7 my-1 mt-1 p-2">${member.maTK.tenDN}</h4>
+                                <h10 class="fs-7 p-2">5<i class="bi bi-star-fill yellow-color fs-7 py-1"></i></h10>
+                            </div>
+                            <!-- Form evaluate -->
+                            <div
+                                    class="container bg-light radius-1 p-1 position-absolute w-75 top-75 start-0 end-0 no-display form-evaluate">
+                                <div class="container px-4 py-2">
+                                    <p class="fs-9 grey-dark-color">Rất tích cực <input type="checkbox"></p>
+                                    <p class="fs-9 grey-dark-color">Tích cực <input type="checkbox"></p>
+                                    <p class="fs-9 grey-dark-color m-0">Không tích cực <input type="checkbox"></p>
+                                </div>
+                                <div class="container d-flex justify-content-center">
+                                    <div class="btn bg-btn fs-11 fw-bold white-color p-1 px-2 m-2 button-exit">Thoát</div>
+                                    <div class="btn bg-btn fs-11 fw-bold white-color p-1 px-3 m-2 button-save">Lưu</div>
+                                </div>
+                            </div>
+                        </div>
+                `;
+            })
         }
     }catch(Error){
         console.error(Error);

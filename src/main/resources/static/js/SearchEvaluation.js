@@ -18,7 +18,7 @@ search_input.addEventListener("keydown",  async e => {
     try {
         const value = search_input.value.trim()
         const valueURL = convertToSlug(value);
-        console.log(valueURL)
+        // console.log(valueURL)
         const response = await fetch(`/search/evaluation/${valueURL}`)
         if (!response.ok) {
             console.error("Lỗi HTTP! Trạng thái " + response.status)

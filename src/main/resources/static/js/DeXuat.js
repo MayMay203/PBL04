@@ -26,9 +26,14 @@ for (var btn of btn_close_detail) {
 }
 
 btn_add_sug.addEventListener("click", () => {
-    modal.classList.add("display-flex")
-    body.classList.add("overflow-hidden")
-    suggesstionForm.classList.remove("no-display");
+    if(btn_add_sug.dataset.value==null){
+        $('#DangNhapModal').modal('show');
+    }
+    else{
+        modal.classList.add("display-flex")
+        body.classList.add("overflow-hidden")
+        suggesstionForm.classList.remove("no-display");
+    }
 })
 
 // function convertToSlug(str) {
