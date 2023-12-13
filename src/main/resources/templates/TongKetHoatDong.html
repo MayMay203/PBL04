@@ -2,11 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"><
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tổng kết hoạt động </title>
     <script  defer th:src="@{/js/Header.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/TongKetHoatDong.css}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -127,7 +128,33 @@
                 <!-- Đánh giá hoạt động -->
                 <div class="tab-pane">
                     <h2 class="tongket-title">ĐÁNH GIÁ HOẠT ĐỘNG</h2>
-
+                    <div class="container modal-comment">
+                        <div class="container d-flex justify-content-sm-end p-2 criteria-evaluation">
+                            <h4 class="fs-9 green-color fst-italic me-4 text-center">Hoạt động<br>hữu ích</h4>
+                            <h4 class="fs-9 green-color fst-italic me-4 text-center">Cần tổ chức<br>thường xuyên</h4>
+                            <h4 class="fs-9 green-color fst-italic me-4 text-center">Cần tổ chức<br>rộng rãi</h4>
+                        </div>
+                        <div class="container d-flex mb-3" th:if="evaluationOfAct!=null" th:each="eval:${evaluationOfAct}">
+                            <!-- Text comment -->
+                            <div class="container radius-1 bg-green-light">
+                                <div class="container p-1">
+                                    <img th:src="@{${eval.getMaTK().getAnhDaiDien()}}" class="w-2_5 h-2_5 p-1 radius-1_8 modal-avatar" alt="">
+                                    <h7 class="green-color fs-11 fst-italic fw-medium" th:text="${eval.maTK.tenDN}"></h7>
+                                </div>
+                                <p class="fs-10 fst-italic m-0 px-3 modal-comment" th:text="${eval.binhLuan}"></p>
+                                <p class="green_light-color fst-italic fs-10 my-1 mx-3 modal-timeEval" th:text="${eval.thoiGianBL}"></p>
+                            </div>
+                            <!-- Check comment -->
+                            <div class="container d-flex align-items-center justify-content-center icon-container-div">
+                                <div th:if="${eval.tieuChi1==true}"  class="icon-container"><i class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i></div>
+                                 <div th:if="${eval.tieuChi1==false}"  class="icon-container">  <i class="bi bi-x-lg green_light-color flex-1 p-5 fs-6 fw-bold"></i></div>
+                                <div th:if="${eval.tieuChi2==true}"  class="icon-container"><i class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i></div>
+                                <div th:if="${eval.tieuChi2==false}"  class="icon-container">  <i class="bi bi-x-lg green_light-color flex-1 p-5 fs-6 fw-bold"></i></div>
+                                <div th:if="${eval.tieuChi3==true}" class="icon-container"><i class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i></div>
+                                <div th:if="${eval.tieuChi3==false}" class="icon-container">  <i class="bi bi-x-lg green_light-color flex-1 p-5 fs-6 fw-bold"></i></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

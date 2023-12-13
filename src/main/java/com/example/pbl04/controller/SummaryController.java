@@ -1,10 +1,7 @@
 package com.example.pbl04.controller;
 
 import com.example.pbl04.entity.*;
-import com.example.pbl04.service.ActivityService;
-import com.example.pbl04.service.RegisterService;
-import com.example.pbl04.service.SessionService;
-import com.example.pbl04.service.SummaryService;
+import com.example.pbl04.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,11 +17,13 @@ public class SummaryController {
     private final ActivityService activityService;
     private final SessionService sessionService;
     private final RegisterService registerService;
-    public SummaryController(SummaryService summaryService, ActivityService activityService, RegisterService registerService, SessionService sessionService) {
+    private final EvaluationService evaluationService;
+    public SummaryController(SummaryService summaryService, ActivityService activityService, RegisterService registerService, SessionService sessionService, EvaluationService evaluationService) {
         this.summaryService=summaryService;
         this.activityService=activityService;
         this.sessionService = sessionService;
         this.registerService = registerService;
+        this.evaluationService = evaluationService;
     }
     @GetMapping("/trang-chu-tong-ket")
     public String showSummaryList(Model model, HttpSession session)
@@ -59,11 +58,15 @@ public class SummaryController {
             List<Thanhvien> memberList = summaryService.getMemberList(id);
             List<Anhtongket> imgSummaryList = summaryService.getimgSummaryList(summary.getId());
             Thanhvien member  = summaryService.getMemberByID(taikhoan.getId());
+            List<Danhgia> evaluationOfAct = evaluationService.getEvaluationByIdAct(id);
+            Dangky registerInfor = activityService.getRegisterInfo(id);
             model.addAttribute("summary", summary);
             model.addAttribute("memberList", memberList);
             model.addAttribute("member", member);
             model.addAttribute("imgSummaryList",imgSummaryList);
             model.addAttribute("summaryList",summaryList);
+            model.addAttribute("evaluationOfAct",evaluationOfAct);
+            model.addAttribute("registerInfor",registerInfor);
             sessionService.createSessionModel(model, session);
             return "TongKetHoatDong";
         } else {
