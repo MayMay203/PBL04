@@ -92,7 +92,7 @@
         </div>
         <!-- Right -->
         <div class="container flex-1 bg-green radius-lghalf p-0">
-            <div class="container mh-100 overflow-y-auto origanized-slider" th:if="${actListOfHost.size()!=0}">
+            <div class="container mh-100 overflow-y-auto hosted-slider" th:if="${actListOfHost.size()!=0}">
                 <div class="container mh-12 w-90 position-relative cursor-pointer content-right my-4 ml-0_5 origanize-act-item" th:each="activity:${actListOfHost}">
                     <img class="top-0 start-0 end-0" src=""  alt="" />
                     <div class="container position-absolute bottom-0 start-1_5 end-0 bg-white radius-1 mh-60 w-90">
@@ -136,18 +136,18 @@
 <!--                Mo ta-->
                 <p class="m-0 p-3 fs-7 modal-Description"></p>
 
-                <div class="container d-flex m-1 justify-content-center border_top-solid images-Activity">
+                <div class="container d-flex m-1 justify-content-center images-Activity">
                     <!--                    <img src="../static/images/anh2.jpg" alt="" class="height-10rem flex-1 p-1">-->
                     <!--                    <img src="../static/images/anh2.jpg" alt="" class="height-10rem flex-1 p-1">-->
                     <!--                    <img src="../static/images/anh2.jpg" alt="" class="height-10rem flex-1 p-1">-->
                 </div>
                 <div class="container border_top-solid border_bottom-solid d-flex">
-                    <div class="container border_top-solid border_bottom-solid p-2 fs-9 fst-italic modal-number-evaluation"></div>
+                    <div class="container p-2 fs-9 fst-italic modal-number-evaluation"></div>
                     <div class="container p-0 no-display view-organized">
                         <div class="container d-flex justify-content-end">
-                            <div class="container p-2 fs-9 fst-italic green cursor-pointer fw-medium btn-view-evaluation">Xem lượt
+                            <div class="container pt-0_75rem fs-11 fst-italic green cursor-pointer fw-medium btn-view-evaluation">Xem lượt
                                 đánh giá</div>
-                            <div class="container p-2 fs-9 fst-italic cursor-pointer fw-medium btn-evaluate-member"><p class="text_align-center">Đánh giá thành
+                            <div class="container pt-0_75rem fs-11 fst-italic cursor-pointer fw-medium btn-evaluate-member"><p class="text_align-center">Đánh giá thành
                                 viên</p></div>
                         </div>
                     </div>
@@ -378,7 +378,7 @@
             <!-- Write comment -->
             <div class="container position-absolute bottom-0 start-0 end-0 p-0 m-0 no-display write-comment">
                 <div class="container  start-0 end-0 w-100 bg-white box-shadow p-2 d-flex bdr-radius">
-                    <img src="../static/images/avt4.jpn" class="w-2_5 h-2_5 p-1 radius-1_8" alt="">
+                    <img th:src="${account.getAnhDaiDien()}" th:attr="data-value=${account.getId()}" class="w-2_5 h-2_5 p-1 radius-1_8 member-infor" alt="">
                     <div class="container bg-grey radius-1_8 p-2">
                         <div class="container px-2 m-0">
                             <div class="container d-flex flex-1">
@@ -393,17 +393,19 @@
                             </div>
                             <div class="container mt-1 d-flex">
                                 <p class="fs-9 dark_grey-color fst-italic m-0  ">Hoạt động: </p>
-                                <p class="fs-9 dark_grey-color fst-italic m-0 ms-5">Hữu ích <input type="checkbox"></p>
-                                <p class="fs-9 dark_grey-color fst-italic m-0  ms-5">Nên tổ chức thường xuyên <input type="checkbox">
+                                <p class="fs-9 dark_grey-color fst-italic m-0 ms-5">Hữu ích <input class="check-survey"  type="checkbox"></p>
+                                <p class="fs-9 dark_grey-color fst-italic m-0  ms-5">Nên tổ chức thường xuyên <input class="check-survey" type="checkbox">
                                 </p>
-                                <p class="fs-9 dark_grey-color fst-italic m-0  ms-5">Nên tổ chức rộng rãi <input type="checkbox">
+                                <p class="fs-9 dark_grey-color fst-italic m-0  ms-5">Nên tổ chức rộng rãi <input class="check-survey" type="checkbox">
                                 </p>
                             </div>
                         </div>
                         <div class="container d-flex">
                 <textarea type="text" placeholder="Viết đánh giá..."
-                          class="w-100 bg-grey no-outline no-border fs-9 mt-1 ms-2 p-0 no-resize" rows="2"></textarea>
-                            <i class="bi bi-send green-color mt-4 fs-6 p-2 btn-send cursor-pointer"></i>
+                          class="w-100 bg-grey no-outline no-border fs-9 mt-1 ms-2 p-0 no-resize text-comment" rows="2"></textarea>
+
+                            <i class="bi bi-send green-color mt-4 fs-6 p-2 cursor-pointer btn-send-cmt"></i>
+
                         </div>
                     </div>
                 </div>

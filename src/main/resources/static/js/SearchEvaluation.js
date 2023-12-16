@@ -47,7 +47,7 @@ search_input.addEventListener("keydown",  async e => {
                     <img src="${actListOfMember[index].anh}" class="float-start w-10 h-80" alt="" />
                     <div class="card border-0">
                         <div class="card-body fs-7">
-                            <div class="card-title fs-6 fw-bolder green-color">${actListOfMember[index].tenHD}</div>
+                            <div class="card-title fs-6 fw-bolder green-color">${actListOfMember[index].tenhd}</div>
                             <div class="card-text my-0">${moTa}</div>
                             <div class="card-text mx-2 my-1">
                                 <i class="bi bi-calendar2 m-1 green-color">  ${formattedDateStart} - ${formattedDateEnd}</i>
@@ -79,6 +79,15 @@ search_input.addEventListener("keydown",  async e => {
             for (var btn of btn_close) {
                 btn.addEventListener("click",closeFormEvaluation);
             }
+            $(document).ready(function(){
+                $('.act-slider').slick({
+                    dots: true,
+                    slidesToShow: 1,
+                    arrows: false,
+                    vertical: false,
+                    speed: 100
+                });
+            });
         }
     }
     catch

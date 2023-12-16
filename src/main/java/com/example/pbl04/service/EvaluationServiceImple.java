@@ -6,7 +6,9 @@ import com.example.pbl04.entity.Hoatdong;
 import com.example.pbl04.entity.Thanhvien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,6 +76,43 @@ public class EvaluationServiceImple implements EvaluationService {
             evaluations.add(evaluation);
         }
         return evaluations;
+    }
+
+    @Override
+    public Danhgia getEvaluationByIDHDTK(Integer IdAct, Integer IdAcc) {
+        return evaluationRepo.getEvaluationByIDHDTK(IdAct,IdAcc);
+    }
+
+    @Override
+    public void evaluateActivity(Danhgia evaluation) {
+        evaluationRepo.save(evaluation);
+    }
+
+    @Override
+    @Transactional
+    public void insertEvaluateAct(Integer maTK, Integer maHD, Integer diemTC, Boolean tieuChi1, Boolean tieuChi2, Boolean tieuChi3, String binhLuan, Instant thoiGianBL) {
+        evaluationRepo.insertEvaluateAct(maTK,maHD,diemTC,tieuChi1,tieuChi2,tieuChi3,binhLuan,thoiGianBL);
+    }
+
+    @Override
+    public List<Integer> getMembersScoreByAct(List<Thanhvien> members, Integer IdAct) {
+        List<Integer> scores = new ArrayList<>();
+        for(Thanhvien member:members){
+            if(evaluationRepo.getMemberScoreByAct(member.getId(),IdAct)==null) scores.add(0);
+            else scores.add(evaluationRepo.getMemberScoreByAct(member.getId(),IdAct));
+        }
+        return scores;
+    }
+
+    @Override
+    public void evaluateMember(Danhgia evaluation) {
+        evaluationRepo.save(evaluation);
+    }
+
+    @Override
+    @Transactional
+    public void insertEvaluateMemb(Integer maTK, Integer maHD, Integer diemTNV) {
+        evaluationRepo.insertEvaluateMemb(maTK,maHD,diemTNV);
     }
 
 

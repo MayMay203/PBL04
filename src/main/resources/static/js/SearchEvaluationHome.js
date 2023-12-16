@@ -46,7 +46,7 @@ search_input.addEventListener("keydown",  async e => {
                     <img src="${activityList[index].anh}" class="float-start w-10 h-80" alt="" />
                     <div class="card border-0">
                         <div class="card-body fs-7">
-                            <div class="card-title fs-6 fw-bolder green-color">${activityList[index].tenHD}</div>
+                            <div class="card-title fs-6 fw-bolder green-color">${activityList[index].tenhd}</div>
                             <div class="card-text my-0">${moTa}</div>
                             <div class="card-text mx-2 my-1">
                                 <i class="bi bi-calendar2 m-1 green-color">  ${formattedDateStart} - ${formattedDateEnd}</i>
@@ -74,6 +74,15 @@ search_input.addEventListener("keydown",  async e => {
           for (let btn of btn_close) {
               btn.addEventListener("click", closeViewDetail);
           }
+          $(document).ready(function () {
+              $('.act-slider').slick({
+                  dots: true,
+                  slidesToShow: 1,
+                  arrows: false,
+                  vertical: false,
+                  speed: 100
+              });
+          });
       }
   }
   catch

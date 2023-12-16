@@ -375,6 +375,10 @@
     width: 45%!important;
 }
 
+.pt-0_75rem{
+    padding-top: 0.75rem!important;
+    padding-bottom: 0rem!important;
+}
 .w-60{
     width: 60%!important;
 }
