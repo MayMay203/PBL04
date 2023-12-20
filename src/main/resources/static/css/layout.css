@@ -27,6 +27,7 @@
     --phase-3:#8BFF44;
     --red:#CC0000;
     --yellow-start:#FFC700;
+    --my-green-light:rgba(166, 246, 175, 0.30);
 }
 .bg-green{
     background-color: var(--sliderback) !important;
@@ -124,6 +125,10 @@
     color:white !important;;
     text-decoration: none;
 }
+.img-fluid{
+    width: 14rem !important;
+    height: 10rem !important;
+}
 
 .xemttiep{
     color:var(--sliderback) !important;;
@@ -200,14 +205,13 @@
     border: var(--border);
 }
 .card:nth-child(odd) {
-    background-color: var(--green-light);
+    background-color: var(--green-light) !important;
     color: #fff;
 }
 
 .card:nth-child(even) {
-    background-color: #fff;
+    background-color: #fff !important;
     color: #000;
-
 }
 .custom-margin{
     margin-bottom: 3rem;
@@ -610,6 +614,8 @@
 /* Bảng danh sách tình nguyện viên */
 .modal-body-member{
     padding:0 !important;
+    min-height: 30rem !important;
+    max-height: 30rem !important;
 }
 .modal-header-member{
     background-color: var(--activity);
@@ -645,7 +651,7 @@
     color:var(--yellow-start);
 }
 .modal-member:nth-child(odd) {
-    background-color: var(--green-light) !important;
+    background-color: var(--my-green-light) !important;
     color: #000;
 }
 
@@ -659,11 +665,6 @@
         border: none;
         width: 6rem;
     }
-
-/* Container for the button and notification */
-
-/* Button with notification */
-
 
 /* Notification */
 .notification-container {
@@ -710,4 +711,44 @@
 #cancel{
     width: 4rem !important;
 
+}
+#btnConfirmStage0,#btnConfirmStage1, #btnActivityNeedConfirm{
+    text-align: center;
+    color: var(--main-color);
+}
+#btnConfirmStage0:hover, #btnConfirmStage1:hover,#btnActivityNeedConfirm:hover{
+    cursor: pointer;
+    background-color: rgb(166, 246, 175,1);
+}
+#btnConfirmStage0.active,#btnConfirmStage1.active, #btnActivityNeedConfirm.active{
+    background-color: rgb(166, 246, 175,0.5);
+    border-bottom: 3px solid #2c832b;
+}
+.tab-sub-pane {
+    display: none;
+}
+
+.tab-sub-pane.active {
+    display: block;
+}
+.custom-btnConfirm{
+    width: 20rem;
+    height: 2rem;
+    background-color: var(--btn);
+    color:white;
+    border:none;
+}
+.custom-btn{
+    width: 50rem;
+}
+.pt-0-5 {
+    margin-top: -1.7rem !important;
+}
+.modal-footer button.closeModalConfirm, #btnConfirmActivityStage0 ,#btnConfirmActivityStage1{
+    background-color: var(--main-color);
+    border: none;
+    width: 6rem;
+}
+#btnConfirmActivityStage1{
+    width: 10rem;
 }

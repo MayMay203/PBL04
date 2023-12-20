@@ -249,6 +249,13 @@
 .tab-pane p{
     color:#000;
 }
+.tab-sub-pane {
+    display: none;
+}
+
+.tab-sub-pane.active {
+    display: block;
+}
 .tongket-title{
     color:var(--sear);
     font-weight: 700;

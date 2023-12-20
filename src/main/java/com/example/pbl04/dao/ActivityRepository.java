@@ -4,7 +4,9 @@ import com.example.pbl04.entity.Dangky;
 import com.example.pbl04.entity.Hoatdong;
 import com.example.pbl04.entity.Taikhoan;
 import com.example.pbl04.entity.Thanhvien;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -31,7 +33,7 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
      Taikhoan getOrganizator(Integer id);
     @Query("SELECT tt from Taikhoan tk , Thanhvien tt where tk = tt.maTK and tk.id=:id")
     Thanhvien getMemberByID(Integer id);
-    @Query("select tv from Taikhoan tk,Thanhvien tv, Dangky dk where dk.maHD.id =:id and dk.maTK =tk and tk= tv.maTK and dk.phanQuyen=false")
+    @Query("select tv from Taikhoan tk,Thanhvien tv, Dangky dk where dk.maHD.id =:id and dk.maTK =tk and tk= tv.maTK and dk.phanQuyen=false and dk.trangThai=true")
     List<Thanhvien> getMemberList(Integer id);
    //Lấy List hoạt động đã tham gia bằng id tài khoản
    @Query("select hd from Hoatdong hd, Dangky dk where dk.maTK.id= :myID and hd.id = dk.maHD.id and hd.tinhTrangHD=3 and dk.phanQuyen=false")
@@ -55,4 +57,36 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
 
     @Query("select hd from Hoatdong hd where hd.id =:id")
     Hoatdong getActivityByID(Integer id);
+    // Get hoạt động cho phần xét duyệt
+    @Query("select hd from Hoatdong hd where hd.tinhTrangDuyet=0") // Hoạt động chờ xét duyệt
+    List<Hoatdong> getAllActiviyPost();
+    @Query("select hd from Dangky dk, Hoatdong hd where hd.id=dk.maHD.id  and dk.maTK.id=:myID") ////Bao gồm hoạt động chưa xét duyệt, đã xét duyệt, đã huy.....
+    List<Hoatdong> getAllMyPostNeedConfirm(Integer myID);
+    @Query("select hd from Dangky dk, Hoatdong hd where dk.maHD.id= hd.id and dk.maTK.id =:maTK") //Hoạt động chờ xét duệt được phân loại theo maTK
+    List<Hoatdong> getMyActivityConfirm(Integer maTK);
+    @Query("select hd from Hoatdong hd, Dangky dk where hd.id= dk.maHD.id and dk.maTK.id=:maTK and dk.phanQuyen=true and hd.tinhTrangHD=2")
+    List<Hoatdong> getMyActivityHappeningNeedMember(Integer maTK);
+    @Transactional
+    @Modifying
+    @Query("update Hoatdong hd set hd.tinhTrangDuyet=1 , hd.tinhTrangHD=1 where hd.id=:maHD")
+    void confirmActivityStage0(Integer maHD);
+
+    @Transactional
+    @Modifying
+    @Query("update Hoatdong hd set hd.tinhTrangDuyet=2 , hd.tinhTrangHD=1 where hd.id=:maHD")
+    void confirmActivityStage1(Integer maHD);
+
+    @Query("select hd from Hoatdong hd,Dangky dk where dk.maHD.id=hd.id and dk.maTK.id=:maTK and dk.phanQuyen=true and hd.tinhTrangDuyet=1 and hd.tinhTrangHD=1")
+    List<Hoatdong> getAllMyActivityNeedConfirm(Integer maTK);
+    @Query("select hd from Hoatdong hd,Dangky dk where dk.maHD.id=hd.id and dk.phanQuyen=true and dk.id=:maTK and hd.tinhTrangHD=1 and hd.tinhTrangDuyet=1")
+    List<Hoatdong> getMyActivityNeedMember(Integer maTK);
+    @Query("select count(*) from Hoatdong hd, Dangky dk where hd.id = :IdAct and dk.maHD.id=hd.id and dk.trangThai=false and dk.phanQuyen=false ")
+    Integer countConfirm(Integer IdAct);
+    @Query("select count(*) from Hoatdong hd, Dangky dk where hd.id = :IdAct and dk.maHD.id=hd.id and dk.trangThai=true and dk.phanQuyen=false ")
+    Integer countConfirmed(Integer IdAct);
+    @Transactional
+    @Modifying
+    @Query("update Hoatdong hd set hd.liDoHuy=:txtHuy , hd.tinhTrangDuyet=-1, hd.tinhTrangHD=-1 where hd.id=:maHD")
+    void CancelActivity(Integer maHD, String txtHuy);
+
 }

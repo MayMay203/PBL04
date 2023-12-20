@@ -114,4 +114,11 @@ public class ActivityController {
         registerService.joinActivity(maHD,maTK);
         return "redirect:/ChiTietHoatDong";
     }
+    @GetMapping("/get-activity-by-id")
+    @ResponseBody
+    public Hoatdong getActivityByID(@RequestParam("maHD") Integer maHD)
+    {
+        Hoatdong hd = activityService.getActivityByID(maHD);
+        return hd;
+    }
 }

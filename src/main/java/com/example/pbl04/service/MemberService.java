@@ -7,4 +7,8 @@ import java.util.List;
 public interface MemberService {
     List<Thanhvien> getAllMember();
     Thanhvien findMemberByID(int maTK);
+    List<Thanhvien> getMemberNeedConfirmByIDHD(Integer maHD);
+
+    void ConfirmMember(Integer maHD,Integer maTK);
+    void CancelMember(Integer maHD,Integer maTK);
 }

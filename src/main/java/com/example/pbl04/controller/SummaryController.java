@@ -28,12 +28,13 @@ public class SummaryController {
     @GetMapping("/trang-chu-tong-ket")
     public String showSummaryList(Model model, HttpSession session)
     {
-        Integer myID=4;
-        List<Hoatdong> myActivities = activityService.getListActivityByMyID(myID);
+        sessionService.createSessionModel(model, session);
+        Taikhoan myaccount = (Taikhoan) model.getAttribute("account");
+        List<Hoatdong> myActivities = activityService.getListActivityByMyID(myaccount.getId());
         List<Tongket> summaryList = summaryService.getSummaryList();
         model.addAttribute("summaryList",summaryList);
         model.addAttribute("myActivities",myActivities);
-        sessionService.createSessionModel(model, session);
+
         return "TrangChuTongKet";
     }
     @RequestMapping(value = "/Check-Summary")
