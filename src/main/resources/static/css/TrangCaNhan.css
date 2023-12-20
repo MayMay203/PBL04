@@ -77,7 +77,7 @@ img.dimmed{
 .div__avatar, .div__inform, .div__contact{
     margin: 0 3.7rem 2.5rem;
 }
-#img-avatar{
+.img-avatar{
     border-radius: 50%;
     border: 0.2rem solid var(--main-color);
     width: 13rem;

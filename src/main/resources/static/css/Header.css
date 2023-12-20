@@ -93,6 +93,9 @@
     font-weight: bold;
     color: var(--main-color);
 }
+.dropdown-menu{
+    box-shadow: 1px 1px 2px #cccccc;
+}
 .user-profile .dropdown-item{
     padding: 1rem;
     border-radius: 3px;

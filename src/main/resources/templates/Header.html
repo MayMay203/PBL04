@@ -34,10 +34,9 @@
                Đăng nhập
            </button>
        </div>
-<!--        <div id="userProfile" class="float-end"> &lt;!&ndash; Hiển thị khi đã đăng nhập &ndash;&gt;-->
             <!-- Thông tin người dùng và các chức năng khác -->
-        <div class="dropdown dropstart user-profile col">
-            <button id="btnLogout"  class="float-end" th:if="${isLogin}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Đăng xuất"><i class="bi bi-box-arrow-right"></i></button>
+        <div class="dropdown dropstart user-profile col" th:if="${isLogin}">
+            <button id="btnLogout"  class="float-end"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Đăng xuất"><i class="bi bi-box-arrow-right"></i></button>
             <!-- Modal Thông báo -->
             <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -59,11 +58,12 @@
                 </div>
             </div>
 
-            <button id="btn_userProfile" class="float-end" data-bs-toggle="dropdown"  aria-haspopup="true" aria-expanded="false"  data-bs-placement="bottom" title="Tài khoản"><img class="img-avartar-login" th:src="@{/images/avatar.png}" alt="ảnh đại diện" th:if="${isLogin}"
-            ></button>
+            <button id="btn_userProfile" class="float-end" data-bs-toggle="dropdown"  aria-haspopup="true" aria-expanded="false"  >
+                <img data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tài khoản" class="img-avartar-login" th:src="@{${user.getMaTK().getAnhDaiDien()}}" alt="ảnh đại diện" >
+            </button>
             <ul class="p-3 dropdown-menu">
               <div>
-                  <img class="img-avatar-small" th:src="@{/images/avatar.png}" alt="">
+                  <img class="img-avatar-small" th:src="@{${user.getMaTK().getAnhDaiDien()}}" alt="">
                   <label class="user-name" th:text="${user.getHoTen()}"></label>
               </div>
                 <li><a class="dropdown-item" th:href="@{/trang-ca-nhan(id=${account.getId()})}">Xem trang cá nhân</a></li>

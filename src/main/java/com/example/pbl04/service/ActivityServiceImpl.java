@@ -74,10 +74,9 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     public void addActivity(Integer maChuDe, String tenHD, String diaDiem, String thoiGianBD, String thoiGianKT,
-                            String sotnvtt, String sotnvtd, String moTa, String anh,String maTK) {
+                            String sotnvtt, String sotnvtd, String moTa, String anh,Integer maTK) {
         try {
             Hoatdong hoatDong = new Hoatdong();
-            Integer idtk = Integer.parseInt(maTK);
             hoatDong.setMaChuDe(topicRepository.getChudeByID(maChuDe));
             hoatDong.setTenhd(tenHD);
             hoatDong.setDiaDiem(diaDiem);
@@ -90,7 +89,7 @@ public class ActivityServiceImpl implements ActivityService {
             hoatDong.setTinhTrangDuyet((byte) 1);
 //            hoatDong.setAnh(anh.getBytes());
             activityRepository.save(hoatDong);
-            Taikhoan taikhoan = accountService.getTaiKhoanByID(idtk);
+            Taikhoan taikhoan = accountService.getTaiKhoanByID(maTK);
             Dangky dangky = new Dangky();
             dangky.setPhanQuyen(true);
             dangky.setMaHD(hoatDong);
@@ -105,6 +104,11 @@ public class ActivityServiceImpl implements ActivityService {
             e.printStackTrace();
             throw new RuntimeException("Error adding activity: " + e.getMessage());
         }
+    }
+
+    @Override
+    public void addMyActivity(Hoatdong hoatdong) {
+        activityRepository.save(hoatdong);
     }
 
 }

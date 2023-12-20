@@ -7,4 +7,6 @@ import java.util.List;
 public interface MemberService {
     List<Thanhvien> getAllMember();
     Thanhvien findMemberByID(int maTK);
+
+    void updateInfor(Thanhvien thanhvien);
 }

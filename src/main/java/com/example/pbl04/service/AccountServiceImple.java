@@ -29,4 +29,9 @@ public class AccountServiceImple implements AccountService{
         Optional<Taikhoan> optionalTaikhoan = accountRepository.findById(id);
         return optionalTaikhoan.orElse(null);
     }
+
+    @Override
+    public void updateAvatar(String urlNew, Integer id) {
+        accountRepository.updateAvatar(urlNew, id);
+    }
 }

@@ -25,4 +25,9 @@ public class MemberServiceImple implements MemberService{
     public Thanhvien findMemberByID(int maTK) {
         return memberRepository.findMemberByID(maTK);
     }
+
+    @Override
+    public void updateInfor(Thanhvien thanhvien) {
+        memberRepository.save(thanhvien);
+    }
 }
