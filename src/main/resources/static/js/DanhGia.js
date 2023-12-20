@@ -9,7 +9,7 @@ const btn_evaluate = document.getElementsByClassName("btn-evaluate")
 const edit_content = document.querySelector(".content-evaluate");
 const view_organized = document.querySelector(".view-organized");
 const image_activity = document.querySelector(".images-Activity")
-const members_activity = document.querySelector(".members-Actitivy")
+const members_activity = document.querySelector(".members-activity")
 const btn_send_cmt = document.querySelector(".btn-send-cmt");
 const btn_star = document.querySelectorAll(".btn-star")
 const text_cmt = document.querySelector(".text-comment")
@@ -18,6 +18,7 @@ var score = 0;
 var maHD;
 var maHDTC;
 var scoreMb;
+var endActTime;
 const member_infor = document.querySelector(".member-infor");
 
 //Danh gia hoat dong
@@ -25,17 +26,25 @@ async function Evaluation(e)  {
     try{
         const IdAct =+e.target.dataset.value;
         maHD = IdAct;
-        const response =await fetch(`/hoat-dong/xem-chi-tiet/${IdAct}`);
+        const IdAcc = +e.target.dataset.account;
+        const response =await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${IdAct}&IdAcc=${IdAcc}`);
         if(!response.ok){
             throw new Error(`Lỗi HTTP. Trạng thái: ${response.status}`)
         }
         const responseData = await response.json();
         const imagesList = responseData.imagesList;
+        const accEval = responseData.evaluation;
+        const activity = responseData.activity;
+        endActTime = activity.thoiGianKT;
         modal.classList.add('display-flex')
         view_comment.classList.remove('no-display')
         body.classList.add('overflow-hidden')
-        edit_content.classList.add('max_height-27rem')
-        write_comment.classList.remove('no-display')
+
+
+       if(accEval===null){
+           edit_content.classList.add('max_height-27rem')
+           write_comment.classList.remove('no-display')
+       }
         document.querySelector(".modal-nameAct").innerText = responseData.activity.tenhd;
         document.querySelector(".modal-Description").innerText = responseData.activity.moTa;
         document.querySelector(".name-host-act").innerText = responseData.registerInfor.maTK.tenDN;
@@ -47,7 +56,6 @@ async function Evaluation(e)  {
         });
         document.querySelector(".modal-number-evaluation").innerText = responseData.numberEvaluation + " lượt đánh giá"
         const evaluationOfAct = responseData.evaluationOfAct;
-        //    console.log(evaluationOfAct);
         const evaluationContainer = document.querySelector(".view-comment");
         if (evaluationOfAct.length > 0) {
             const criteriaDiv = document.createElement("div");
@@ -95,12 +103,30 @@ function hideFormEvaluation(e) {
     const allForms = document.querySelectorAll(".form-evaluate");
     for (let form of allForms) {
         form.classList.remove("display-block");
-        // console.log(form)
     }
 }
 
 // Ham luu va cap nhat lai thong tin danh gia
 async function saveEvaluation(e) {
+    let endTime = new Date(endActTime);
+    endTime.setDate(endTime.getDate() + 7);
+    endTime.setHours(0, 0, 0, 0)
+    let now = new Date();
+    now.setHours(0, 0, 0, 0)
+    if(now > endTime) {
+        function customAlert(message){
+            Swal.fire({
+                icon: "warning",
+                confirmButtonText: "OK",
+                text: message,
+                customClass:{
+                    popup: 'custom-alert-popup'
+                }
+            });
+        }
+        customAlert("Đã hết hạn thời gian đánh giá thành viên cho hoạt động này.");
+        return;
+    }
     var maTKDG = +e.target.value;
     const evaluationContainer = e.target.closest(".form-evaluate");
     const evaluate_memb = evaluationContainer.querySelectorAll(".evaluate-memb")
@@ -128,7 +154,7 @@ async function saveEvaluation(e) {
         console.log("Lỗi HTTP! Trạng thái " + response.status)
     } else {
         //Cap nhat lai diem
-        const response = await fetch(`/hoat-dong/xem-chi-tiet/${maHDTC}`);
+        const response = await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${maHDTC}`);
         if (!response.ok) {
             throw new Error(`Lỗi HTTP. Trạng thái: ${response.status}`)
         }
@@ -143,7 +169,7 @@ async function saveEvaluation(e) {
                             <div class="container d-flex">
                                 <img class="w-2_5 h-2_5 ml-0_1 radius-1_8 p-1" src="${member.maTK.anhDaiDien}" alt="">
                                 <h4 class="green-color fs-7 my-1 mt-1 p-2">${member.maTK.tenDN}</h4>
-                                <h10 class="fs-7 p-2">${scores[i++]}<i class="bi bi-star-fill yellow-color fs-7 py-1"></i></h10>
+                                <h10 class="fs-7 p-2">${scores[i++]}<i class=" bi bi-star-fill yellow-color fs-7 p-1"></i></h10>
                             </div>
                             <!-- Form evaluate -->
                             <div
@@ -161,6 +187,13 @@ async function saveEvaluation(e) {
                      </div>
                 `;
         })
+        console.log(membersList.length)
+        if(membersList.length %2!==0){
+            console.log("vào đây ok");
+            members_activity.innerHTML += `
+            <div class="container p-2 col-6"></div>
+        `
+        }
         for (var member of member_evaluate) {
             member.addEventListener("click", formEvaluation)
         }
@@ -172,11 +205,10 @@ async function saveEvaluation(e) {
     }
 }
 async function EvaluationMember(e) {
-
     try{
         const IdAct =+e.target.dataset.value;
         maHDTC = IdAct;
-        const response =await fetch(`/hoat-dong/xem-chi-tiet/${IdAct}`);
+        const response =await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${IdAct}`);
         if(!response.ok){
             throw new Error(`Lỗi HTTP. Trạng thái: ${response.status}`)
         }
@@ -184,11 +216,13 @@ async function EvaluationMember(e) {
         const imagesList = responseData.imagesList;
         const membersList = responseData.membersList;
         const scores = responseData.scores;
-        // console.log(responseData);
+        const activity = responseData.activity;
+        endActTime = activity.thoiGianKT;
         modal.classList.add('display-flex')
         edit_content.classList.remove('max_height-27rem')
         view_comment.classList.remove('no-display')
         body.classList.add('overflow-hidden')
+
         view_organized.classList.remove('no-display')
 
         document.querySelector(".modal-nameAct").innerText = responseData.activity.tenhd;
@@ -263,6 +297,12 @@ async function EvaluationMember(e) {
                      </div>
                 `;
             })
+
+            if(membersList.length%2!==0){
+                members_activity.innerHTML += `
+            <div class="container p-2 col-6"></div>
+        `
+            }
             for (var member of member_evaluate) {
                 member.addEventListener("click", formEvaluation)
             }
@@ -271,16 +311,6 @@ async function EvaluationMember(e) {
             for(btn of btn_save){
                 btn.addEventListener("click",saveEvaluation)
             }
-
-            // const btn_exit = document.querySelectorAll(".btn-exit");
-            // btn_exit.forEach(btn => {
-            //     btn.addEventListener("click", function (e) {
-            //         const memberEvaluateContainer = btn.closest(".member-evaluate");
-            //         const formEvaluate = memberEvaluateContainer.querySelector(".form-evaluate");
-            //         formEvaluate.classList.remove("display-block","important")
-            //         console.log(formEvaluate)
-            //     });
-            // });
         }
     }catch(Error){
         console.error(Error);
@@ -334,14 +364,14 @@ for (var member of member_evaluate) {
 const btn_view_evaluation = document.querySelector(".btn-view-evaluation");
 const btn_evaluate_mb = document.querySelector(".btn-evaluate-member");
 btn_view_evaluation.addEventListener("click", function (e) {
-    btn_view_evaluation.classList.add("green")
-    btn_evaluate_mb.classList.remove("green")
+    btn_view_evaluation.classList.add("green-cb")
+    btn_evaluate_mb.classList.remove("green-cb")
     evaluation.classList.add("no-display")
     view_comment.classList.remove('no-display')
 })
 btn_evaluate_mb.addEventListener("click", function (e) {
-    btn_view_evaluation.classList.remove("green")
-    btn_evaluate_mb.classList.add("green")
+    btn_view_evaluation.classList.remove("green-cb")
+    btn_evaluate_mb.classList.add("green-cb")
     view_comment.classList.add('no-display')
     evaluation.classList.remove('no-display')
 })
@@ -362,6 +392,26 @@ for (var btn of btn_star) {
     });
 }
 btn_send_cmt.addEventListener("click", async function (e) {
+    //Sau 7 ngày không được đánh giá hoạt động nữa
+    let endTime = new Date(endActTime);
+    endTime.setDate(endTime.getDate() + 7);
+    endTime.setHours(0, 0, 0, 0)
+    let now = new Date();
+    now.setHours(0, 0, 0, 0)
+     if(now > endTime) {
+        function customAlert(message){
+            Swal.fire({
+                icon: "warning",
+                confirmButtonText: "OK",
+                text: message,
+                customClass:{
+                    popup: 'custom-alert-popup'
+                }
+            });
+        }
+        customAlert("Đã hết hạn thời gian đánh giá hoạt động này.");
+        return;
+    }
     var maTK = +member_infor.dataset.value;
     var diemTC = score;
     //Lay danh gia tieu chi
@@ -376,6 +426,18 @@ btn_send_cmt.addEventListener("click", async function (e) {
     var binhLuan = text_cmt.value;
     var currentDate = new Date();
     var thoiGianBL = currentDate.toISOString();
+    if(diemTC===0 || ((tieuChi1 || tieuChi2 || tieuChi3) === false) || binhLuan === "")
+    {
+        function customAlert(message) {
+            Swal.fire({
+                text: message,
+                icon: 'info',
+                confirmButtonText: 'OK'
+            });
+        }
+        customAlert("Vui lòng đánh giá đầy đủ thông tin yêu cầu!");
+        return;
+    }
     const url = `/danh-gia/danh-gia-hoat-dong?maTK=${maTK}&maHD=${maHD}&diemTC=${diemTC}&tieuChi1=${tieuChi1}&tieuChi2=${tieuChi2}&tieuChi3=${tieuChi3}&binhLuan=${binhLuan}&thoiGianBL=${thoiGianBL}`;
     const response = await fetch(url, {
         method: 'POST'
@@ -438,6 +500,10 @@ btn_send_cmt.addEventListener("click", async function (e) {
             }
         }
     }
+    //Ẩn bình luận đánh giá đi
+    write_comment.classList.add('no-display')
+    evaluation.classList.add('no-display')
+    edit_content.classList.remove('max_height-27rem')
 });
 
 $(document).ready(function(){

@@ -97,9 +97,13 @@ public class EvaluationServiceImple implements EvaluationService {
     @Override
     public List<Integer> getMembersScoreByAct(List<Thanhvien> members, Integer IdAct) {
         List<Integer> scores = new ArrayList<>();
-        for(Thanhvien member:members){
-            if(evaluationRepo.getMemberScoreByAct(member.getId(),IdAct)==null) scores.add(0);
-            else scores.add(evaluationRepo.getMemberScoreByAct(member.getId(),IdAct));
+        for (Thanhvien member : members) {
+            Integer score = evaluationRepo.getMemberScoreByAct(member.getMaTK().getId(), IdAct);
+            if (score == null) {
+                scores.add(0);
+            } else {
+                scores.add(score);
+            }
         }
         return scores;
     }

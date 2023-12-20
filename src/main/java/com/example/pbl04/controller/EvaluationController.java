@@ -73,9 +73,11 @@ public class EvaluationController {
         return "DanhGia";
     }
 
-    @GetMapping("/hoat-dong/xem-chi-tiet/{IdAct}")
+    @GetMapping("/hoat-dong/xem-chi-tiet")
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> Activity(@PathVariable(name = "IdAct", required = false) Integer IdAct, Model model) {
+    public ResponseEntity<Map<String, Object>> Activity(@RequestParam("IdAct") Integer IdAct,
+                                                        @RequestParam(value = "IdAcc", required = false) Integer IdAcc)
+                                                       {
         Map<String, Object> responseData = new HashMap<>();
         Hoatdong activity = activityService.getActivityByID(IdAct);
         int numberEvaluation = evaluationService.countEvaByIdAct(IdAct);
@@ -89,8 +91,11 @@ public class EvaluationController {
         }
         List<Dangky> registerList = registerService.getRegisterInforByIDAct(IdAct);
         List<Thanhvien> membersList = memberService.getMembersByRegis(registerList);
-        //
         List<Integer> scores = evaluationService.getMembersScoreByAct(membersList,IdAct);
+        if(IdAcc!=null){
+            Danhgia evaluation = evaluationService.getEvaluationByIDHDTK(IdAct,IdAcc);
+            responseData.put("evaluation",evaluation);
+        }
         responseData.put("activity", activity);
         responseData.put("numberEvaluation", numberEvaluation);
         responseData.put("evaluationOfAct",evaluationOfAct);
@@ -111,8 +116,7 @@ public class EvaluationController {
                                                  @RequestParam("tieuChi2") Boolean tieuChi2,
                                                  @RequestParam("tieuChi3") Boolean tieuChi3,
                                                  @RequestParam("binhLuan") String binhLuan,
-                                                 @RequestParam("thoiGianBL") String thoiGianBL,
-                                                 Model model)
+                                                 @RequestParam("thoiGianBL") String thoiGianBL)
     {
         Instant tgBinhLuan = Instant.parse(thoiGianBL);
        //Tim danh gia ton tai o bang chua
@@ -142,8 +146,7 @@ public class EvaluationController {
     @ResponseBody
     public ResponseEntity<Void> evaluateMembers(@RequestParam("maTK") Integer maTK,
                                                  @RequestParam("maHD") Integer maHD,
-                                                 @RequestParam("diemTNV") Integer diemTNV,
-                                                 Model model)
+                                                 @RequestParam("diemTNV") Integer diemTNV)
     {
         Danhgia evaluation = evaluationService.getEvaluationByIDHDTK(maHD,maTK);
         if(evaluation==null){
@@ -156,7 +159,7 @@ public class EvaluationController {
             evaluationService.evaluateMember(newEvaluation);
         }
         else{
-            evaluationService.insertEvaluateMemb(maHD, maTK, diemTNV);
+            evaluationService.insertEvaluateMemb(maTK, maHD, diemTNV);
         }
         return ResponseEntity.status(HttpStatus.OK).build();
     }

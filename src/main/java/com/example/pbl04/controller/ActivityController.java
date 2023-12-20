@@ -64,14 +64,6 @@ public class ActivityController {
         sessionService.createSessionModel(model, session);
         return "ChiTietHoatDong";
     }
-//    @GetMapping("/trang-ca-nhan")
-//    public String showModalThemHoatDong(Model model, HttpSession session){
-//        model.addAttribute("activity", new Hoatdong());
-//        sessionService.createSessionModel(model, session);
-//        return  "TrangCaNhan";
-//    }
-
-//
 
     @PostMapping("/addActivity")
     @ResponseBody

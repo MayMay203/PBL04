@@ -7,7 +7,7 @@ const image_activity = document.querySelector(".images-Activity")
 async function handleViewDetail(e){
     try{
         const IdAct =+e.target.dataset.value;
-        const response =await fetch(`/hoat-dong/xem-chi-tiet/${IdAct}`);
+        const response =await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${IdAct}`);
         if(!response.ok){
             throw new Error(`Lỗi HTTP. Trạng thái: ${response.status}`)
         }
@@ -78,11 +78,6 @@ function closeViewDetail(e) {
     modal_comment.innerHTML='';
     modal.classList.remove('display-flex')
     body.classList.remove('overflow-hidden')
-    // view_comment.classList.add('no-display')
-    // write_comment.classList.add('no-display')
-    // evaluation.classList.add('no-display')
-    // edit_content.classList.remove('max_height-29_5rem')
-    // view_organized.classList.add('no-display')
 }
 for (let btn of btn_close) {
     btn.addEventListener("click",closeViewDetail );

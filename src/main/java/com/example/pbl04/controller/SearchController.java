@@ -2,14 +2,17 @@ package com.example.pbl04.controller;
 
 import com.example.pbl04.entity.Dexuat;
 import com.example.pbl04.entity.Hoatdong;
+import com.example.pbl04.entity.Taikhoan;
 import com.example.pbl04.service.ActivityService;
 import com.example.pbl04.service.EvaluationService;
 import com.example.pbl04.service.SuggestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -31,19 +34,21 @@ public class SearchController {
         this.suggestionService = suggestionService;
     }
 
-    @GetMapping("search/evalatuation-home/{nameAct}")
+    @GetMapping("search/evaluation-home")
     @ResponseBody
-    public ResponseEntity<Map<String,Object>> searchActivity(@PathVariable(name="nameAct",required = false) String nameAct){
+    public ResponseEntity<Map<String,Object>> searchActivity(@RequestParam(name="nameAct",required = false) String nameAct){
         Map<String,Object> result = new HashMap<>();
         List<Hoatdong> activityList = new ArrayList<>();
         List<Integer> countEvaList = new ArrayList<>();
-        if(nameAct.isEmpty()){
+//        System.out.println(nameAct);
+        if(nameAct == null){
+            System.out.println("vào đây rồi nè!");
            activityList = activityService.getActivityOccured();
             countEvaList = evaluationService.countEvaluation(activityList);
         }
         else{
-            String name = nameAct.replaceAll("-"," ");
-            activityList = activityService.getActOccuredByName(name);
+//            String name = nameAct.replaceAll("-"," ");
+            activityList = activityService.getActOccuredByName(nameAct);
             countEvaList = evaluationService.countEvaluation(activityList);
         }
         result.put("activityList",activityList);
@@ -51,41 +56,34 @@ public class SearchController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("search/evaluation/{nameAct}")
+    @GetMapping("search/evaluation")
     @ResponseBody
-    public ResponseEntity<List<Hoatdong>> searchJoinedAct(@PathVariable(name="nameAct",required = false) String nameAct){
-//        Map<String,Object> rs = new HashMap<>();
+    public ResponseEntity<List<Hoatdong>> searchJoinedAct(@RequestParam(name="nameAct",required = false) String nameAct,@RequestParam(name="IdAcc")Integer IdAcc){
         List<Hoatdong> actListOfMember = new ArrayList<>();
-//        List<Integer> countEvaList = new ArrayList<>();
         if(nameAct.isEmpty()){
-            actListOfMember = activityService.getActivityByMember(7);
-//            countEvaList = evaluationService.countEvaluation(actListOfMember);
+            actListOfMember = activityService.getActivityByMember(IdAcc);
         }
         else{
-            String name = nameAct.replaceAll("-"," ");
-            actListOfMember = activityService.getActOfMemberByName(7,name);
-//            countEvaList = evaluationService.countEvaluation(actListOfMember);
+            actListOfMember = activityService.getActOfMemberByName(IdAcc,nameAct);
         }
-//        rs.put("actListOfMember",actListOfMember);
-//        rs.put("countEvaList",countEvaList);
         return ResponseEntity.ok(actListOfMember);
     }
 
 
-    @GetMapping("search/suggestion/{nameTitle}")
+    @GetMapping("search/suggestion")
     @ResponseBody
-    public ResponseEntity<Map<String,Object>> searchSuggestion(@PathVariable(name="nameTitle",required = false) String nameTitle){
+    public ResponseEntity<Map<String,Object>> searchSuggestion(@RequestParam(name="nameTitle",required = false) String nameTitle){
        Map<String,Object> result = new HashMap<>();
         List<Dexuat> suggestionList = new ArrayList<>();
         List<Integer> countSugg = new ArrayList<>();
         System.out.println(nameTitle);
         if(nameTitle.isEmpty()){
-            suggestionList = suggestionService.getSuggestionByTitle(nameTitle);
+            suggestionList = suggestionService.getAllSuggest();
             countSugg = suggestionService.CountSuggestion(suggestionList);
         }
         else{
-            String name = nameTitle.replaceAll("-"," ");
-            suggestionList = suggestionService.getSuggestionByTitle(name);
+//            String name = nameTitle.replaceAll("-"," ");
+            suggestionList = suggestionService.getSuggestionByTitle(nameTitle);
             countSugg = suggestionService.CountSuggestion(suggestionList);
         }
         result.put("suggestionList",suggestionList);
