@@ -351,10 +351,10 @@
 <div class="modal fade" id="ThemHoatDongModal" tabindex="-1" aria-labelledby="addActivityModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-themhd">
         <div class="modal-content modal-content-themhd">
-            <form  th:action="@{/addActivity}" th:object="${activity}" method="post" class="needs-validation" id="formAddActivity" novalidate enctype="multipart/form-data">
-                <input type="hidden" id="userID" name="maTK" th:value="${user.getMaTK()}" />
+            <form  th:action="@{/addActivity}" method="POST" class="needs-validation" id="formAddActivity" novalidate enctype="multipart/form-data">
+                <input type="hidden" id="userID" name="maTK" th:value="${account.getId()}" />
                 <div class="modal-header  modal-header-themhd ">
-                    <h5 class="modal-title modal-title-themhd "id="exampleModalLabel" >THÊM HOẠT ĐỘNG</h5>
+                    <h5 class="modal-title modal-title-themhd " id="exampleModalLabel" >THÊM HOẠT ĐỘNG</h5>
                     <button type="button" class="btn-close btnClose" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body modal-body-themhd">
@@ -363,12 +363,14 @@
                         <div class="row">
                             <div class="col-md-3"><label class="lbHD" for="txt_NameTopic"><i class="bi bi-pencil-square"></i>CHỦ
                                 ĐỀ</label></div>
-                            <select class="select-chu-de" id="txt_NameTopic" name="tenChuDe">
+                            <div class="col-md-9">
+                                <select class="select-chu-de" id="txt_NameTopic" name="tenChuDe">
                                 <option th:each="topic:${listTopics}" th:text="${topic.getTenChuDe()}" ></option>
                                 <option> Khác</option>
-                            </select>
-<!--                            <div class="col-md-9"><input class="textfieldHD form-control" type="text" name="txt_NameTopic"-->
-<!--                                                         id="txt_NameTopic"  th:field="*{maChuDe.tenChuDe}" required></div>-->
+                                </select>
+                            </div>
+                            <!--                            <div class="col-md-9"><input class="textfieldHD form-control" type="text" name="txt_NameTopic"-->
+                            <!--                                                         id="txt_NameTopic"  th:field="*{maChuDe.tenChuDe}" required></div>-->
                             <div class="invalid-feedback">Vui lòng nhập tên chủ đề</div>
                         </div>
                         <br>
@@ -376,7 +378,7 @@
                             <div class="col-md-3"><label class="lbHD" for="txt_NameActi"><i class="bi bi-fire"></i>TÊN HOẠT
                                 ĐỘNG</label></div>
                             <div class="col-md-9"> <input class="textfieldHD form-control" type="text" name="tenhd"
-                                                          id="txt_NameActi" th:field="*{tenHD}" required></div>
+                                                          id="txt_NameActi" required></div>
                             <div class="invalid-feedback">Vui lòng nhập tên hoạt động</div>
                         </div>
                         <br>
@@ -384,7 +386,7 @@
                             <div class="col-md-3"> <label class="lbHD" for="txt_Location"><i class="bi bi-geo-alt-fill"></i>ĐỊA
                                 ĐIỂM</label></div>
                             <div class="col-md-9"><input class="textfieldHD form-control" type="text" name="diaDiem"
-                                                         id="txt_Location" th:field="*{diaDiem}" required></div>
+                                                         id="txt_Location"  required></div>
                             <div class="invalid-feedback">Vui lòng nhập địa điểm</div>
                         </div>
                         <br>
@@ -393,14 +395,14 @@
                                 <label class="lbHD" for="txt_dateBD"><i class="bi bi-calendar-minus"></i>THỜI GIAN BẮT ĐẦU</label>
                             </div>
                             <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="thoiGianBD" id="txt_dateBD"
-                                                         th:date="*{thoiGianBD}"
+
                                                          required></div>
                             <div class="invalid-feedback">Vui lòng chọn thời gian bắt đầu</div>
                             <div class="col-md-3">
                                 <label class="lbHD" for="txt_dateKT"><i class="bi bi-calendar-minus"></i>THỜI GIAN KẾT THÚC</label>
                             </div>
                             <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="thoiGianKT" id="txt_dateKT"
-                                                         th:date="*{thoiGianKT}"
+
                                                          required></div>
                             <div class="invalid-feedback">Vui lòng chọn thời gian kết thúc</div>
                         </div>
@@ -408,12 +410,12 @@
                         <div class="row">
                             <div class="col-md-3 lbHD"><i class="bi bi-people-fill"></i>SỐ TNV TỐI THIỂU</div>
                             <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="soTNVToiThieu" id="txt_tnvtt"
-                                                         th:field="*{soTNVToiThieu}"
+
                                                          required></div>
                             <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>
                             <div class="col-md-3 lbHD"><i class="bi bi-person-dash"></i>SỐ TNV TỐI ĐA</div>
                             <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="soTNVToiDa" id="txt_tnvtd"
-                                                         th:field="*{soTNVToiDa}"
+
                                                          required></div>
                             <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>
                         </div>
@@ -421,7 +423,7 @@
                         <div class="row">
                             <div class="col-md-3 lbHD"><i class="bi bi-menu-up"></i>MÔ TẢ</div>
                             <div class="col-md-9">
-                                <textarea name="moTa" id="txt_mota" class="form-control" cols="71" rows="20" th:field="*{moTa}" required></textarea>
+                                <textarea name="moTa" id="txt_mota" class="form-control" cols="71" rows="20" required></textarea>
                             </div>
                             <div class="invalid-feedback">Vui lòng nhập mô tả hoạt động</div>
                         </div>
@@ -429,9 +431,9 @@
                         <div class="row">
                             <div class="col-md-3 lbHD"><i class="bi bi-card-image"></i>HÌNH ẢNH</div>
                             <div class="col-md-9">
-                                <label for="imageInputAdd" id="imagePreviewLabel">
+                                <label for="imageInput" id="imagePreviewLabel">
                                     <div id="imagePreview" class="image-preview">
-                                        <input type="file" name="imageInputAdd" id="imageInputAdd" accept="image/jpeg, image/png, image/gif" style="display: none" th:field="*{anh}" required>
+                                        <input type="file" name="anh" id="imageInput" accept="image/jpeg, image/png, image/gif" style="display: none" required>
                                         <img id="userImage" th:src="@{/images/imgstd.png}" alt="Hình ảnh người dùng" >
                                     </div>
                                 </label>
@@ -440,109 +442,12 @@
                     </div>
                 </div>
                 <div class="modal-footer modal-footer-themhd">
-                    <button type="submit" class="btnSave"><i class="bi bi-floppy2"></i> Lưu thay đổi</button>
                     <button type="button" class="btnCancel" onclick="resetFormFields()"><i class="bi bi-x-circle-fill"></i> Hủy thay đổi</button>
-<!--                    <button type="submit" class="btnSave" th:attr="data-account-id=${user.getMaTK().getId()}">-->
-<!--                        <i class="bi bi-floppy2"></i> Lưu thay đổi-->
-<!--                    </button>-->
+                    <button type="submit" class="btnSave" th:attr="data-account-id=${user.getMaTK().getId()}">
+                        <i class="bi bi-floppy2"></i> Lưu thay đổi
+                    </button>
                 </div>
             </form>
-<!--            <form  th:action="@{/addActivity}" method="POST" class="needs-validation" id="formAddActivity" novalidate enctype="multipart/form-data">-->
-<!--&lt;!&ndash;                <input type="hidden" id="userID" name="maTK" th:value="${account.getId()}" />&ndash;&gt;-->
-<!--                <div class="modal-header  modal-header-themhd ">-->
-<!--                    <h5 class="modal-title modal-title-themhd "id="exampleModalLabel" >THÊM HOẠT ĐỘNG</h5>-->
-<!--                    <button type="button" class="btn-close btnClose" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                </div>-->
-<!--                <div class="modal-body modal-body-themhd">-->
-<!--                    <div class="container modal-body-detail">-->
-
-<!--                        <div class="row">-->
-<!--                            <div class="col-md-3"><label class="lbHD" for="txt_NameTopic"><i class="bi bi-pencil-square"></i>CHỦ-->
-<!--                                ĐỀ</label></div>-->
-<!--                            <select class="select-chu-de" id="txt_NameTopic" name="tenChuDe">-->
-<!--                                <option th:each="topic:${listTopics}" th:text="${topic.getTenChuDe()}" ></option>-->
-<!--                                <option> Khác</option>-->
-<!--                            </select>-->
-<!--                            &lt;!&ndash;                            <div class="col-md-9"><input class="textfieldHD form-control" type="text" name="txt_NameTopic"&ndash;&gt;-->
-<!--                            &lt;!&ndash;                                                         id="txt_NameTopic"  th:field="*{maChuDe.tenChuDe}" required></div>&ndash;&gt;-->
-<!--                            <div class="invalid-feedback">Vui lòng nhập tên chủ đề</div>-->
-<!--                        </div>-->
-<!--                        <br>-->
-<!--                        <div class="row">-->
-<!--                            <div class="col-md-3"><label class="lbHD" for="txt_NameActi"><i class="bi bi-fire"></i>TÊN HOẠT-->
-<!--                                ĐỘNG</label></div>-->
-<!--                            <div class="col-md-9"> <input class="textfieldHD form-control" type="text" name="tenhd"-->
-<!--                                                          id="txt_NameActi" required></div>-->
-<!--                            <div class="invalid-feedback">Vui lòng nhập tên hoạt động</div>-->
-<!--                        </div>-->
-<!--                        <br>-->
-<!--                        <div class="row">-->
-<!--                            <div class="col-md-3"> <label class="lbHD" for="txt_Location"><i class="bi bi-geo-alt-fill"></i>ĐỊA-->
-<!--                                ĐIỂM</label></div>-->
-<!--                            <div class="col-md-9"><input class="textfieldHD form-control" type="text" name="diaDiem"-->
-<!--                                                         id="txt_Location"  required></div>-->
-<!--                            <div class="invalid-feedback">Vui lòng nhập địa điểm</div>-->
-<!--                        </div>-->
-<!--                        <br>-->
-<!--                        <div class="row">-->
-<!--                            <div class="col-md-3">-->
-<!--                                <label class="lbHD" for="txt_dateBD"><i class="bi bi-calendar-minus"></i>THỜI GIAN BẮT ĐẦU</label>-->
-<!--                            </div>-->
-<!--                            <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="thoiGianBD" id="txt_dateBD"-->
-
-<!--                                                         required></div>-->
-<!--                            <div class="invalid-feedback">Vui lòng chọn thời gian bắt đầu</div>-->
-<!--                            <div class="col-md-3">-->
-<!--                                <label class="lbHD" for="txt_dateKT"><i class="bi bi-calendar-minus"></i>THỜI GIAN KẾT THÚC</label>-->
-<!--                            </div>-->
-<!--                            <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="thoiGianKT" id="txt_dateKT"-->
-
-<!--                                                         required></div>-->
-<!--                            <div class="invalid-feedback">Vui lòng chọn thời gian kết thúc</div>-->
-<!--                        </div>-->
-<!--                        <br>-->
-<!--                        <div class="row">-->
-<!--                            <div class="col-md-3 lbHD"><i class="bi bi-people-fill"></i>SỐ TNV TỐI THIỂU</div>-->
-<!--                            <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="soTNVToiThieu" id="txt_tnvtt"-->
-
-<!--                                                         required></div>-->
-<!--                            <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>-->
-<!--                            <div class="col-md-3 lbHD"><i class="bi bi-person-dash"></i>SỐ TNV TỐI ĐA</div>-->
-<!--                            <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="soTNVToiDa" id="txt_tnvtd"-->
-
-<!--                                                         required></div>-->
-<!--                            <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>-->
-<!--                        </div>-->
-<!--                        <br>-->
-<!--                        <div class="row">-->
-<!--                            <div class="col-md-3 lbHD"><i class="bi bi-menu-up"></i>MÔ TẢ</div>-->
-<!--                            <div class="col-md-9">-->
-<!--                                <textarea name="moTa" id="txt_mota" class="form-control" cols="71" rows="20" required></textarea>-->
-<!--                            </div>-->
-<!--                            <div class="invalid-feedback">Vui lòng nhập mô tả hoạt động</div>-->
-<!--                        </div>-->
-<!--                        <br>-->
-<!--                        <div class="row">-->
-<!--                            <div class="col-md-3 lbHD"><i class="bi bi-card-image"></i>HÌNH ẢNH</div>-->
-<!--                            <div class="col-md-9">-->
-<!--                                <label for="imageInput" id="imagePreviewLabel">-->
-<!--                                    <div id="imagePreview" class="image-preview">-->
-<!--                                        <input type="file" id="imageInput" accept="image/jpeg, image/png, image/gif" style="display: none" required>-->
-<!--                                        <img id="userImage" th:src="@{/images/imgstd.png}" alt="Hình ảnh người dùng" >-->
-<!--                                    </div>-->
-<!--                                </label>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="modal-footer modal-footer-themhd">-->
-<!--&lt;!&ndash;                    <button type="submit" class="btnSave"><i class="bi bi-floppy2"></i> Lưu thay đổi</button>&ndash;&gt;-->
-<!--                    <button type="button" class="btnCancel" onclick="resetFormFields()"><i class="bi bi-x-circle-fill"></i> Hủy thay đổi</button>-->
-<!--                                        <button type="submit" class="btnSave" th:attr="data-account-id=${user.getMaTK().getId()}">-->
-<!--                                            <i class="bi bi-floppy2"></i> Lưu thay đổi-->
-<!--                                        </button>-->
-<!--                </div>-->
-<!--            </form>-->
         </div>
     </div>
 </div>

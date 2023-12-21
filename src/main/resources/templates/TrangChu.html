@@ -88,7 +88,7 @@
                     <div class="row align-items-center">
                         <div class="activity-item col-6 col-md-4 col-lg-3 d-blocky" th:each="activity,iterStat: ${activitiesList}" th:if="${iterStat.index >= activitiesList.size() - 8}">
                             <div class="activity-img_title">
-                                <img th:src="@{/images/activity.png}" alt="" class="activity-img">
+                                <img th:src="@{${activity.getAnh()}}" alt="" class="activity-img">
                                 <div class="activity-name" th:text="${#strings.length(activity.getTenHD()) > 40 ? activity.getTenHD().substring(0, 40) + '...' : activity.getTenHD()}"></div>
                             </div>
                             <div class="activity-address text-start">
@@ -245,7 +245,7 @@
                 <h2 class="section__heading">VÀI NÉT VỀ HOPEFULLY</h2>
                 <div class="sectionAboutUs__aboutContent">
                     <div class="mission" th:each="aboutUs: ${aboutUs}">
-                        <div class="mission__image"><img class="mission__img" th:src="@{/images/Mission.png}" alt=""></div>
+                        <div class="mission__image"><img class="mission__img" th:src="@{${aboutUs.getAnh()}}" alt=""></div>
                         <div class="mission__content">
                             <p class="content-header" th:text="${aboutUs.getTieuDe()}"></p>
                             <div class="content-body" th:text="${aboutUs.getNoiDung()}" >

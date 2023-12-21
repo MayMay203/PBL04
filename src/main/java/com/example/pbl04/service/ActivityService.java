@@ -36,5 +36,7 @@ public interface ActivityService {
 
     void addActivity(Integer maChuDe, String tenHD, String diaDiem, String thoiGianBD, String thoiGianKT,
                      String sotnvtt, String sotnvtd, String moTa, String anh,Integer maTK);
+//void addActivity(Integer maChuDe, String tenHD, String diaDiem, String thoiGianBD, String thoiGianKT,
+//                 String sotnvtt, String sotnvtd, String moTa,Integer maTK);
     void addMyActivity(Hoatdong hoatdong);
 }
