@@ -20,7 +20,7 @@ public class Danhgia {
     @JoinColumn(name = "maHD", nullable = false)
     private Hoatdong maHD;
 
-    @Column(name = "diemTC")
+    @Column(name = "diemTC",nullable = true)
     private Integer diemTC;
 
     @Column(name = "tieuChi1")
@@ -33,10 +33,10 @@ public class Danhgia {
     private Boolean tieuChi3;
 
     @Lob
-    @Column(name = "binhLuan", nullable = false)
+    @Column(name = "binhLuan")
     private String binhLuan;
 
-    @Column(name = "thoiGianBL", nullable = false)
+    @Column(name = "thoiGianBL")
     private Instant thoiGianBL;
 
     @Column(name = "diemTNV")
