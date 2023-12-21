@@ -77,12 +77,11 @@ public class SearchController {
         List<Dexuat> suggestionList = new ArrayList<>();
         List<Integer> countSugg = new ArrayList<>();
         System.out.println(nameTitle);
-        if(nameTitle.isEmpty()){
+        if(nameTitle == null){
             suggestionList = suggestionService.getAllSuggest();
             countSugg = suggestionService.CountSuggestion(suggestionList);
         }
         else{
-//            String name = nameTitle.replaceAll("-"," ");
             suggestionList = suggestionService.getSuggestionByTitle(nameTitle);
             countSugg = suggestionService.CountSuggestion(suggestionList);
         }
