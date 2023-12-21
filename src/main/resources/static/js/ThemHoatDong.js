@@ -5,7 +5,8 @@
 // });
 
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("imageInput").addEventListener("change", function (event) {
+  // document.getElementById("imageInputAdd").addEventListener("change", function (event) {
+    document.getElementById("imageInput").addEventListener("change", function (event) {
     previewImage(event);
   });
 

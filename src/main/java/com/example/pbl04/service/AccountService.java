@@ -7,4 +7,5 @@ public interface AccountService {
     Danhgia GetAccountByID(Integer ID);
     Taikhoan CheckLogin(String tenDN, String matKhau);
     Taikhoan getTaiKhoanByID(Integer id);
+    void updateAvatar(String urlNew, Integer id);
 }

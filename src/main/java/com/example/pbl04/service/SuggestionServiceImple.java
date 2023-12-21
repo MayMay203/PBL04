@@ -44,5 +44,10 @@ public class SuggestionServiceImple implements SuggestionService {
         }
         return count;
     }
+
+    @Override
+    public void Save(Dexuat dexuat) {
+        suggestionRepo.save(dexuat);
+    }
 }
 

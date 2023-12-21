@@ -18,7 +18,7 @@ public class Dexuat {
     @Column(name = "viTri", nullable = false)
     private String viTri;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "maChuDe", nullable = false)
     private Chude maChuDe;
 

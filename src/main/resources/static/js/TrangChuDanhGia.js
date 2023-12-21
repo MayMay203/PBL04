@@ -3,15 +3,16 @@ const body = document.querySelector("body");
 const view_link = document.getElementsByClassName("view-detail");
 const modal = document.querySelector(".modal_")
 const btn_close = document.getElementsByClassName("btn-close-detail")
-
+const image_activity = document.querySelector(".images-Activity")
 async function handleViewDetail(e){
     try{
         const IdAct =+e.target.dataset.value;
-        const response =await fetch(`/hoat-dong/xem-chi-tiet/${IdAct}`);
+        const response =await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${IdAct}`);
         if(!response.ok){
             throw new Error(`Lỗi HTTP. Trạng thái: ${response.status}`)
         }
         const responseData = await response.json();
+        const imagesList = responseData.imagesList;
         // console.log(responseData);
         modal.classList.add('display-flex')
         body.classList.add('overflow-hidden')
@@ -20,7 +21,11 @@ async function handleViewDetail(e){
         document.querySelector(".avatar").src = responseData.registerInfor.maTK.anhDaiDien;
         document.querySelector(".name-host-act").innerText = responseData.registerInfor.maTK.tenDN;
         document.querySelector(".time-post-act").innerText= responseData.registerInfor.thoiGianDK;
-        //     ẢNH
+        image_activity.innerHTML = "";
+        imagesList.forEach(image => {
+            image_activity.innerHTML += `<img src="${image.anh}" alt="anhHoatDong" class="height-10rem flex-1 p-1">`;
+        });
+
         document.querySelector(".modal-number-evaluation").innerText = responseData.numberEvaluation + " lượt đánh giá"
         //Generate comment
         const evaluationOfAct = responseData.evaluationOfAct;
@@ -73,11 +78,6 @@ function closeViewDetail(e) {
     modal_comment.innerHTML='';
     modal.classList.remove('display-flex')
     body.classList.remove('overflow-hidden')
-    // view_comment.classList.add('no-display')
-    // write_comment.classList.add('no-display')
-    // evaluation.classList.add('no-display')
-    // edit_content.classList.remove('max_height-29_5rem')
-    // view_organized.classList.add('no-display')
 }
 for (let btn of btn_close) {
     btn.addEventListener("click",closeViewDetail );
@@ -93,6 +93,23 @@ $(document).ready(function(){
     });
 });
 
+const btn_evaluaion_Act = document.querySelector(".btn-evaluation-Act");
+$(document).ready(function() {
+    // Show modal when button is clicked
+    $("#btn_evaluaion_Act").click(function() {
+        // Remove existing backdrop if any
+        $('.modal-backdrop').remove();
+    });
+});
+btn_evaluaion_Act.addEventListener("click",(e)=> {
+    if (btn_evaluaion_Act.dataset.value == null) {
+        $('#DangNhapModal').modal('show');
+    } else {
+        window.location.href = `/danh-gia?id=${btn_evaluaion_Act.dataset.value}`;
+    }
+})
+
+
 $(document).ready(function () {
     $('.cmt-slider').slick({
         autoplay: true,
@@ -103,6 +120,6 @@ $(document).ready(function () {
         pauseOnHover: true,
     })
 })
-// export {handleViewDetail,closeViewDetail}
+
 
 

@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (file) {
             var reader = new FileReader();
             reader.onload = function(e) {
-                document.getElementById('img-avartar').src = e.target.result; // Cập nhật src của thẻ img
+                document.getElementById('anhDaiDien').src = e.target.result; // Cập nhật src của thẻ img
             }
             reader.readAsDataURL(file); // Đọc nội dung file dưới dạng Data URL
         }
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Gán sự kiện click cho txtCreateActivity khi nó được focus
     $('.txtCreateActivity').focus(function() {
         // Mô phỏng sự kiện click trên nút
-        $('.btn.btn-primary').trigger('click');
+        $('#btnAddAct').trigger('click');
     });
 });
 //định dạng ngày
@@ -88,6 +88,110 @@ $(document).ready(function () {
     });
 });
 //sửa thông tin cá nhân:
-document.getElementById('btnSave').addEventListener('click', function() {
-    // Gọi phương thức submit cho formChangeInform
-    document.getElementById('formChangeInform').submit();});
+// document.getElementById('btnSave').addEventListener('click', function() {
+//     // Gọi phương thức submit cho formChangeInform
+//     document.getElementById('formChangeInform').submit();});
+//
+
+
+//-----------------------------sửa thông tin cá nhân---------------------------
+document.addEventListener("DOMContentLoaded", function () {
+    // Sử dụng Array.from để chuyển đổi HTMLCollection thành mảng
+    var dateInputs = Array.from(document.getElementsByClassName("formatDate"));
+
+    // Lặp qua mảng các phần tử có class "formatDate"
+    dateInputs.forEach(function (dateInput) {
+        // Chuyển đổi định dạng từ 'yyyy-MM-dd' sang 'dd-MM-yyyy'
+        dateInput.value = reverseDateFormat(dateInput.value);
+    });
+
+    // Hàm chuyển đổi định dạng ngày
+    function reverseDateFormat(dateString) {
+        var parts = dateString.split("-");
+        return parts.reverse().join("-");
+    }
+});
+// document.addEventListener("DOMContentLoaded", function () {
+// document.getElementById('formUpdateFood').addEventListener('submit', function (e) {
+//     e.preventDefault();
+//     console.log("Lay du lieu");
+//     var formData = new FormData();
+//     var selectedFile = document.getElementById("input-file").files[0];
+//     formData.append("imageInput", selectedFile);
+//     $.ajax({
+//         type: 'POST',
+//         url: '/sua-thong-tin-ca-nhan',
+//         data: formData,
+//         processData: false,
+//         contentType: false,
+//         success: function (data) {}
+//     });console.log('Form submission completed');
+// });
+// });
+
+$(document).ready(function() {
+    $('#formChangeInform').submit(function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: '/sua-thong-tin-ca-nhan',
+            data: new FormData(this),
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                if (response.success) {
+                    console.log("-------------------có chạy nề-----------------------")
+                    // Thành công, load lại trang hiện tại
+                    // if(location.pathname=="/trang-ca-nhan"){
+                    //     location.href="/trang-chu";
+                    // }
+                    // else
+                    // page.pathname=="/header";
+                    //     page.reload();
+                    location.reload();
+                } else {
+                    // Hiển thị thông báo lỗi
+                    alert(response.message);
+                }
+            },
+            error: function(error) {
+                console.error('Error updating profile:', error);
+            }
+        });
+    });
+});
+
+$(document).ready(function() {
+    $('#formAddActivity').submit(function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: '/addActivity',
+            data: new FormData(this),
+            contentType: false,
+            processData: false,
+            enctype: 'multipart/form-data',
+            success: function(response) {
+                if (response.success) {
+                    console.log("-------------------có chạy nề-----------------------")
+                    // Thành công, load lại trang hiện tại
+                    // if(location.pathname=="/trang-ca-nhan"){
+                    //     location.href="/trang-chu";
+                    // }
+                    // else
+                    // page.pathname=="/header";
+                    //     page.reload();
+                    location.reload();
+                } else {
+                    // Hiển thị thông báo lỗi
+                    alert(response.message);
+                }
+            },
+            error: function(error) {
+                console.error('Error updating profile:', error);
+            }
+        });
+    });
+});

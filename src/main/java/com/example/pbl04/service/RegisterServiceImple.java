@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
 
 @Service
 public class RegisterServiceImple implements RegisterService {
@@ -40,5 +41,10 @@ public class RegisterServiceImple implements RegisterService {
         regisRepository.save(dangky);
     }
     public Dangky getDangKyByHDTK(Integer maTK, Integer maHD) {return regisRepository.getDangKyByHDTK(maTK,maHD);}
+
+    @Override
+    public List<Dangky> getRegisterInforByIDAct(Integer IdAct) {
+        return regisRepository.getRegisterInforByIDAct(IdAct);
+    }
 //    public List<Thanhvien> getAllMyParticipants(Integer maTK) {return regisRepository.getAllMyParticipants(maTK);}
 }

@@ -191,6 +191,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-transform: uppercase;
 }
 .activity-address{
     margin-top: 0.625rem;
@@ -269,6 +270,11 @@ div.text-end{
 }
 .summary-item{
     padding-bottom: 1.5625rem;
+}
+.summary-item .img-title{
+    width: 4rem;
+    height: 4rem;
+    margin: 0 1rem;
 }
 .text-title{
     font-size: var(--subhead-size);

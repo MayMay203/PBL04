@@ -18,6 +18,48 @@
     --max-page: 70rem;
     --yellow-color: #ffc107;
 }
+/*Modal sign up*/
+.content-sign-up{
+    width: 55rem;
+    height: 34rem;
+}
+
+/*Modal sign up*/
+#modal-sign-up {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-dialog {
+    max-width: 60vw;
+}
+
+/*Thanh cuộn ở body*/
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: darkgray;
+    border-radius: 10px;
+}
+
+/*Thanh cuộn ở modal trang chủ đánh giá*/
+/*.scr-Act {*/
+/*    max-height: 36rem;*/
+/*    overflow-y: auto;*/
+/*    overflow-x: hidden;*/
+/*}*/
+
+.scr-Act::-webkit-scrollbar-thumb:vertical {
+    background-color: darkgray !important;
+    border-radius: 10px !important;
+}
+
+.custom-alert-popup {
+    width: 320px; /* Đặt chiều rộng mong muốn */
+}
 
 /* Slick Slider */
 .slick-dots{
@@ -72,6 +114,7 @@
     border: 1px solid var(--black-color) !important;
 }
 
+
 /* Modal */
 .modal_{
     position: fixed;
@@ -99,6 +142,10 @@
     border-radius: 0.5rem;
 
     /*z-index: 2000!important;*/
+}
+
+.indent-cursor {
+    text-indent: 5px;
 }
 
 .no-border{
@@ -181,6 +228,11 @@
     box-shadow: 0rem 0rem 0.5rem var(--dark-grey) !important;
 }
 
+.box-shadow_8 {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
 .z-index-0{
     z-index: 0!important;
 }
@@ -245,6 +297,11 @@
     color: var(--green) !important;
 }
 
+.green-cb {
+    color: var(--green) !important;
+    background-color: var(--bg-color);
+}
+
 .form-evaluate{
     z-index: 1 !important;
 }
@@ -286,7 +343,7 @@
 }
 
 .mlt-8rem{
-    margin-left: 6rem!important;
+    margin-left: 6.5rem!important;
     margin-bottom: 1rem!important;
 }
 
@@ -375,6 +432,10 @@
     width: 45%!important;
 }
 
+.pt-0_75rem{
+    padding-top: 0.75rem!important;
+    padding-bottom: 0rem!important;
+}
 .w-60{
     width: 60%!important;
 }
@@ -408,6 +469,10 @@
     border-radius: 0 0 0.5rem 0.5rem!important;
 }
 
+.pl-1_35rem{
+    padding-left: 1.40rem!important;
+
+}
 
 .border_bottom-2{
     border-bottom: 2rem!important;
@@ -447,6 +512,10 @@
 
 .px-4_5{
     padding: 0 3.5rem!important;
+}
+
+.pt-0_6rem {
+    padding-top: .6rem;
 }
 
 .justify-content-end{
@@ -552,6 +621,10 @@
 
 .mh-12{
     min-height: 15rem!important;
+}
+
+.h-2_3{
+height: 2.3rem!important;
 }
 
 .h-2_5{

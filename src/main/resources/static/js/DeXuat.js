@@ -8,6 +8,7 @@ const suggesstionForm = document.querySelector(".suggestion-form");
 const suggestionByTitle = document.querySelector(".suggestion-by-title");
 const btn_suggestionDetail = document.querySelectorAll(".btn-suggestion-detail");
 const btn_close_detail = document.getElementsByClassName("btn-close-detail")
+const btn_Huy = document.querySelector(".btn-Huy");
 btn_close_sug.addEventListener("click", () => {
     modal.classList.remove("display-flex")
     body.classList.remove("overflow-hidden")
@@ -25,9 +26,14 @@ for (var btn of btn_close_detail) {
 }
 
 btn_add_sug.addEventListener("click", () => {
-    modal.classList.add("display-flex")
-    body.classList.add("overflow-hidden")
-    suggesstionForm.classList.remove("no-display");
+    if(btn_add_sug.dataset.value==null){
+        $('#DangNhapModal').modal('show');
+    }
+    else{
+        modal.classList.add("display-flex")
+        body.classList.add("overflow-hidden")
+        suggesstionForm.classList.remove("no-display");
+    }
 })
 
 // function convertToSlug(str) {
@@ -75,3 +81,11 @@ async function viewDetailSuggestion(e){
 for(var btnDel of btn_suggestionDetail){
     btnDel.addEventListener("click",viewDetailSuggestion)
 }
+
+btn_Huy.addEventListener("click",(e)=>{
+    document.f.thonPhuong.value = "";
+    document.f.quanHuyen.value = "";
+    document.f.tinhThanhPho.value = "";
+    document.f.moTa.value = "";
+    document.f.chuDe.selectedIndex = 0;
+})

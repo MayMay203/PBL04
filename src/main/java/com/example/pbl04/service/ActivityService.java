@@ -20,8 +20,7 @@ public interface ActivityService {
     Integer getNumActivity();
     Integer getParticipants();
     Taikhoan getOrganizator(Integer id);
-    Thanhvien
-    getMemberByID(Integer id);
+    Thanhvien getMemberByID(Integer id);
     List<Thanhvien> getMemberList(Integer id);
 //    List<Hoatdong> getActivityByMyID(Integer myID);
     List<Hoatdong> getListActivityByMyID(Integer myID);
@@ -37,7 +36,7 @@ public interface ActivityService {
     List<Hoatdong> getActOfMemberByName(Integer idAcc,String nameAct);
 
     void addActivity(Integer maChuDe, String tenHD, String diaDiem, String thoiGianBD, String thoiGianKT,
-                     String sotnvtt, String sotnvtd, String moTa, String anh,String maTK);
+                     String sotnvtt, String sotnvtd, String moTa, String anh,Integer maTK);
     List<Hoatdong> getAllMyPostNeedConfirm(Integer maTK);
     List<Hoatdong> getMyActivityHappeningNeedMember(Integer maTK);
     void confirmActivityStage0(Integer maHD);
@@ -47,4 +46,7 @@ public interface ActivityService {
     List<Integer> countConfirm(List<Hoatdong> actList);
     List<Integer> countConfirmed(List<Hoatdong> actList);
     void CancelActivity(Integer maHD, String txtHuy);
+//void addActivity(Integer maChuDe, String tenHD, String diaDiem, String thoiGianBD, String thoiGianKT,
+//                 String sotnvtt, String sotnvtd, String moTa,Integer maTK);
+void addMyActivity(Hoatdong hoatdong);
 }

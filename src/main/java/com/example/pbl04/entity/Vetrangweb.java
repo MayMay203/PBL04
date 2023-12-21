@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class Vetrangweb {
     @Id
     @Column(name = "Ma", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Lob

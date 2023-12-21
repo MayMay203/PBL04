@@ -66,8 +66,8 @@
                 <h2 class="section__heading">TÌNH NGUYỆN VIÊN</h2>
                 <div class="sectionMember__aboutContent"  >
                     <div class="member-item" th:each="member, id: ${memberList}">
-                        <img src="#" alt="" class="member-img">
-                        <!--                        //th:src="@{'/member/image/' + ${member.id}}"-->
+                        <img th:src="@{${member.getMaTK().getAnhDaiDien()}}" alt="" class="member-img">
+
                         <p class="member-name" th:text="${member.getHoTen()}"></p>
                         <p class="member-age" th:text="${T(java.time.LocalDate).now().getYear() - member.getNgaySinh().getYear()} + ' tuổi'"></p>
                         <div class="member-rate">
@@ -88,8 +88,8 @@
                     <div class="row align-items-center">
                         <div class="activity-item col-6 col-md-4 col-lg-3 d-blocky" th:each="activity,iterStat: ${activitiesList}" th:if="${iterStat.index >= activitiesList.size() - 8}">
                             <div class="activity-img_title">
-                                <img src="../static/images/Rectangle 292 (2).png" alt="" class="activity-img">
-                                <div class="activity-name" th:text="${activity.getTenhd()}"></div>
+                                <img th:src="@{${activity.getAnh()}}" alt="" class="activity-img">
+                                <div class="activity-name" th:text="${#strings.length(activity.getTenhd()) > 40 ? activity.getTenhd().substring(0, 40) + '...' : activity.getTenhd()}"></div>
                             </div>
                             <div class="activity-address text-start">
                                 <i class="bi bi-geo-alt icon-address"></i>
@@ -114,7 +114,7 @@
                     <div class="summary-item" th:each="summary, iterStat:${summaryList}" th:if="${iterStat.last}">
                         <div class="summary-title">
                             <!-- icon -->
-                            <img class="float-start img-title" src="../static/images/Rectangle 253.png" alt="">
+                            <img class="float-start img-title" th:src="@{/images/icon1.png}" alt="">
                             <h4 class="text-title" th:text="${summary.getMaHD().getTenhd()}"></h4>
                         </div>
                         <div class="summary-content container">
@@ -147,7 +147,7 @@
                                     <div class="text-end"><a class="linkMore">Xem thêm...</a></div>
                                 </div>
                                 <div class="summary-content__image col-5 justify-content-end">
-                                    <img class="img-rightback float-end dimmed" th:src="@{/images/activity1.png}" alt="">
+<!--                                    <img class="img-rightback float-end dimmed" th:src="@{${summary.id.}}" alt="">-->
                                     <img class="img-rightfront " th:src="@{/images/activity1.png}" alt="">
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
                     <div class="summary-item" th:each="summary, iterStat:${summaryList}" th:if="${iterStat.index==summaryList.size()-2}">
                         <div class="summary-title">
                             <!-- icon -->
-                            <img class="float-start img-title" src="../static/images/Rectangle 253.png" alt="">
+                            <img class="float-start img-title" th:src="@{/images/icon1.png}" alt="">
                             <h4 class="text-title" th:text="${summary.getMaHD().getTenhd()}"></h4>
                         </div>
                         <div class="summary-content container">
@@ -168,7 +168,7 @@
                                 <div class="summary-content__inform col-3">
                                     <span class="head-inform">Nội dung</span>
                                     <div class="body-inform" th:text="${summary.getLoiKet()}"></div>
-                                    <div class="text-end"><span class="linkMore">Xem thêm...</span></div>
+                                    <div class="text-end"><a th:href="@{/View-Summary(id=${summary.getMaHD().getId()})}" class="linkMore">Xem thêm...</a></div>
                                 </div>
                                 <div class="summary-content__comment col-4">
                                     <span class="head-comment">Đánh giá</span>
@@ -190,7 +190,7 @@
                                             <div>Tôi sẽ không bao giờ quên kỉ niệm này-một kỉ niệm theo tôi mãi về sau</div>
                                         </div>
                                     </div>
-                                    <div class="text-end"><span class="linkMore">Xem thêm...</span></div>
+                                    <div class="text-end"><a th:href="@{/View-Summary(id=${summary.getMaHD().getId()})}" class="linkMore">Xem thêm...</a></div>
                                 </div>
                             </div>
                         </div>
@@ -206,7 +206,7 @@
                                 <div class="summary-content__inform col-3">
                                     <span class="head-inform">Nội dung</span>
                                     <div class="body-inform" th:text="${summary.getLoiKet()}"></div>
-                                    <div class="text-end">      <span class="linkMore">Xem thêm...</span></div>
+                                    <div class="text-end">      <a th:href="@{/View-Summary(id=${summary.getMaHD().getId()})}" class="linkMore">Xem thêm...</a></div>
                                 </div>
                                 <div class="summary-content__comment col-4">
                                     <span class="head-comment">Đánh giá</span>
@@ -228,7 +228,7 @@
                                             <div>Tôi sẽ không bao giờ quên kỉ niệm này-một kỉ niệm t. Cảm ơn ban tổ chức rất nhiều ạ.heo tôi mãi về sau</div>
                                         </div>
                                     </div>
-                                    <div class="text-end"><span class="linkMore">Xem thêm...</span></div>
+                                    <div class="text-end"><a th:href="@{/View-Summary(id=${summary.getMaHD().getId()})}" class="linkMore">Xem thêm...</a></div>
                                 </div>
                                 <div class="summary-content__image col-5 justify-content-end">
                                     <img class="img-rightback float-end dimmed" th:src="@{/images/activity1.png}" alt="">
@@ -245,7 +245,7 @@
                 <h2 class="section__heading">VÀI NÉT VỀ HOPEFULLY</h2>
                 <div class="sectionAboutUs__aboutContent">
                     <div class="mission" th:each="aboutUs: ${aboutUs}">
-                        <div class="mission__image"><img class="mission__img" th:src="@{/images/Mission.png}" alt=""></div>
+                        <div class="mission__image"><img class="mission__img" th:src="@{${aboutUs.getAnh()}}" alt=""></div>
                         <div class="mission__content">
                             <p class="content-header" th:text="${aboutUs.getTieuDe()}"></p>
                             <div class="content-body" th:text="${aboutUs.getNoiDung()}" >

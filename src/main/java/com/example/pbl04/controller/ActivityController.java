@@ -10,10 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static java.lang.Integer.parseInt;
 
 @Controller
 public class ActivityController {
@@ -72,36 +80,102 @@ public class ActivityController {
 //        return  "ThemHoatDong";
 //    }
 
-    @PostMapping(value="/addActivity")
+    @PostMapping("/addActivity")
     @ResponseBody
     public Map<String, Object> addActivity(@RequestParam("tenChuDe") String tenChuDe,
-                                           @RequestParam("tenHD") String tenHD,
+                                           @RequestParam("tenhd") String tenHD,
                                            @RequestParam("diaDiem") String diaDiem,
                                            @RequestParam("thoiGianBD") String thoiGianBD,
                                            @RequestParam("thoiGianKT") String thoiGianKT,
-                                           @RequestParam("sotnvtt") String sotnvtt,
-                                           @RequestParam("sotnvtd") String sotnvtd,
+                                           @RequestParam("soTNVToiThieu") String sotnvtt,
+                                           @RequestParam("soTNVToiDa") String sotnvtd,
                                            @RequestParam("moTa") String moTa,
                                            @RequestParam("anh") String anh,
-                                           @RequestParam("maTK") String maTK,
-                                           Model model)
+                                           @RequestParam("imageFile") MultipartFile imageInput,
+                                           @RequestParam("maTK") String userID, HttpSession session, Model model)
     {
 
         Map<String, Object> response = new HashMap<>();
-        Chude chude = topicService.getChuDeByTen(tenChuDe);
-        if(chude.getTenChuDe() !=null  )
-        {
-            Integer machude = chude.getId();
-            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh,maTK);
-        }else {
-            topicService.addChude(chude);
-            Integer machude = topicService.getMaChuDeByTen(tenChuDe);
-            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh,maTK);
-        }
+        String fileName;
+        String urlImageInDB;
+        System.out.println("Đã vào COntroller");
+        try {
+            if (imageInput != null && !imageInput.isEmpty()) {
+                System.out.println("Input image is not not not null");
+                System.out.println("imageInput"+imageInput);
+                var parts = anh.split("\\\\");// Sử dụng hàm split để tách đường dẫn thành các thành phần
+                fileName = parts[parts.length - 1];// Lấy phần tử cuối cùng trong mảng là tên tệp
+                // Giới hạn chiều dài của fileName thành 50 ký tự nếu nó dài hơn
+                int maxLength = 50;
+                if (fileName.length() > maxLength) {
+                    fileName = fileName.substring(0, maxLength);
+                }
+                System.out.println("Ten file anh Controller:" + fileName);
+                // Đường dẫn đầy đủ cho file mới
+                // Đường dẫn thư mục images trong resources/static
+                Path uploadPath = Paths.get("src", "main", "resources", "static", "images");
+                System.out.println("uploadPath:" + uploadPath);
+                // Tạo đường dẫn đầy đủ cho file mới
+                Path newImagePath = uploadPath.resolve(fileName);
+                System.out.println("newImagePath:" + newImagePath);
 
-        response.put("message", "Hoạt động đã được thêm mới thành công");
-        response.put("success", true);
-        return response;
+                // Kiểm tra xem tên file đã tồn tại hay chưa
+                if (!Files.exists(newImagePath)) {
+                    Files.copy(imageInput.getInputStream(), newImagePath, StandardCopyOption.REPLACE_EXISTING);
+                } else {
+                    // Nếu file đã tồn tại, kiểm tra xem nội dung có khác nhau hay không
+                    byte[] newImageContent = imageInput.getBytes();
+                    byte[] existingImageContent = Files.readAllBytes(newImagePath);
+
+                    if (!Arrays.equals(newImageContent, existingImageContent)) {
+                        fileName = "new" + fileName ;
+                        newImagePath = uploadPath.resolve(fileName);
+                        // Nếu nội dung khác nhau, lưu file mới và cập nhật đường dẫn ảnh
+                        Files.copy(imageInput.getInputStream(), newImagePath, StandardCopyOption.REPLACE_EXISTING);
+                    } else {
+                        // Nếu nội dung giống nhau, không cần thực hiện thêm hành động gì
+                        System.out.println("Nội dung giống nhau, không cần lưu.");
+                    }
+                }
+                // Cập nhật thông tin ảnh trong CSDL nếu cần
+                System.out.println("Ten ...Controller:" + "/images/" + fileName);
+                urlImageInDB = "/images/" + fileName;
+                System.out.println("Ten file anh urlImageInDB:" + urlImageInDB);
+                Chude chude = topicService.getChuDeByTen(tenChuDe);
+                Integer machude = chude.getId();
+            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, urlImageInDB,  parseInt(userID));
+            }
+            sessionService.createSessionModel(model, session);
+            response.put("message", "Thông báo: Thông tin đã được cập nhật thành công!");
+            response.put("success", true);
+            return response;
+        } catch (Exception e) {
+            // Xử lý lỗi nếu có
+            response.put("message", "Có lỗi xảy ra khi cập nhật thông tin thành viên.");
+            response.put("success", false);
+            return response;
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+//        Chude chude = topicService.getChuDeByTen(tenChuDe);
+//        Integer machude = chude.getId();
+////            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh, userID);
+//        activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, userID);
+//        ========================================
+//        if(chude.getTenChuDe() !=null  )
+//        {
+//            Integer machude = chude.getId();
+////            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh, userID);
+//            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, userID);
+//        }else {
+//            topicService.addChude(chude);
+//            Integer machude = topicService.getMaChuDeByTen(tenChuDe);
+////            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh, userID);
+//            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, userID);
+//        }
+//        sessionService.createSessionModel(model, session);
+//        response.put("message", "Hoạt động đã được thêm mới thành công");
+//        response.put("success", true);
+//        return response;
     }
     @PostMapping(value="/Regis-activity")
     @ResponseBody

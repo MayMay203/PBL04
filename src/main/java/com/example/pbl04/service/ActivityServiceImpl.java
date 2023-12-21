@@ -9,6 +9,7 @@ import com.example.pbl04.entity.Thanhvien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -77,10 +78,11 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     public void addActivity(Integer maChuDe, String tenHD, String diaDiem, String thoiGianBD, String thoiGianKT,
-                            String sotnvtt, String sotnvtd, String moTa, String anh,String maTK) {
+                            String sotnvtt, String sotnvtd, String moTa
+            , String anh
+            ,Integer maTK) {
         try {
             Hoatdong hoatDong = new Hoatdong();
-            Integer idtk = Integer.parseInt(maTK);
             hoatDong.setMaChuDe(topicRepository.getChudeByID(maChuDe));
             hoatDong.setTenhd(tenHD);
             hoatDong.setDiaDiem(diaDiem);
@@ -91,17 +93,18 @@ public class ActivityServiceImpl implements ActivityService {
             hoatDong.setMoTa(moTa);
             hoatDong.setTinhTrangHD((byte) 0);
             hoatDong.setTinhTrangDuyet((byte) 1);
-//            hoatDong.setAnh(anh.getBytes());
+            hoatDong.setAnh(anh);
             activityRepository.save(hoatDong);
-            Taikhoan taikhoan = accountService.getTaiKhoanByID(idtk);
+            Taikhoan taikhoan = accountService.getTaiKhoanByID(maTK);
             Dangky dangky = new Dangky();
             dangky.setPhanQuyen(true);
             dangky.setMaHD(hoatDong);
             dangky.setTrangThai(true);
-            dangky.setThoiGianDK(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+//            dangky.setThoiGianDK(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+            dangky.setThoiGianDK(Instant.now());
             dangky.setMaTK(taikhoan);
             registerService.saveDK(dangky);
-
+            System.out.println("chạy service");
 
         } catch (Exception e) {
             // Handle exception appropriately (log or throw a custom exception)
@@ -109,6 +112,12 @@ public class ActivityServiceImpl implements ActivityService {
             throw new RuntimeException("Error adding activity: " + e.getMessage());
         }
     }
+
+    @Override
+    public void addMyActivity(Hoatdong hoatdong) {
+        activityRepository.save(hoatdong);
+    }
+
     public List<Hoatdong> getAllMyPostNeedConfirm(Integer maTK) {return activityRepository.getAllMyPostNeedConfirm(maTK);}
     public List<Hoatdong> getMyActivityHappeningNeedMember(Integer maTK) {return activityRepository.getMyActivityHappeningNeedMember(maTK);}
     public void confirmActivityStage0(Integer maHD) { activityRepository.confirmActivityStage0(maHD);}

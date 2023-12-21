@@ -22,7 +22,7 @@
   <div class="row p-5">
     <div class="col-md-8 p-8 ">
       <div class="name_detail">
-        <p class="detail_title" th:text="${hoatdong.getTenHD()}"></p>
+        <p class="detail_title" th:text="${hoatdong.getTenhd()}"></p>
         <div class="date-range"> <i class="bi bi-calendar3-week"></i><span th:text="' '+ ${#temporals.format(hoatdong.getThoiGianBD(), 'dd/MM/yyyy')} + ' - ' + ${#temporals.format(hoatdong.getThoiGianKT(), 'dd/MM/yyyy')}"></span></div>
         <hr>
       </div>
