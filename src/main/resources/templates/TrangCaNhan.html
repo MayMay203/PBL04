@@ -174,7 +174,7 @@
                 </div>
             </div>
             <div class="d-flex section__padding ">
-                <p class="title-activity" th:text="${activity.getTenHD()}"></p>
+                <p class="title-activity" th:text="${activity.getTenhd()}"></p>
             </div>
             <div class="d-flex section__padding p-0">
                 <i class="bi bi-geo-alt icon-address"></i>
@@ -186,7 +186,7 @@
             <div class="text-end"><a th:href="@{/Join(id=${activity.getId()})}" class="linkMore">Xem thêm...</a></div>
             <div class="section__no-padding">
                 <div>
-                    <img class="img-activity" th:src="@{/images/anh1.jpg}" alt="">
+                    <img class="img-activity" th:src="@{${activity.getAnh()}}" alt="">
                 </div>
                 <div class="lineHorizontal"></div>
     

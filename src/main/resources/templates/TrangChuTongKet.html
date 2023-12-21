@@ -64,7 +64,7 @@
                         <img th:src="@{${summaryList.get((4*i)+j).getMaHD().getAnh()}}" alt="" class="float-start w-15 h-80 act-image"/>
                         <div class="card border-0">
                             <div class="card-body fs-7">
-                                <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1" th:text="${summaryList.get((4*i)+j).getMaHD().getTenHD()}"></div>
+                                <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1" th:text="${summaryList.get((4*i)+j).getMaHD().getTenhd()}"></div>
                                 <div class="card-text" th:text="${#strings.length(summaryList.get((4*i)+j).getLoiKet()) > 300 ? summaryList.get((4*i)+j).getLoiKet().substring(0, 300) + '...' : summaryList.get((4*i)+j).getLoiKet()}"></div>
                                 <div class="card-text">
                                     <i class="bi bi-calendar2 m-1 green-color"></i><span th:text="${#temporals.format(summaryList.get((4*i)+j).getMaHD().getThoiGianBD(), 'dd/MM/yyyy')} + ' - ' + ${#temporals.format(summaryList.get((4*i)+j).getMaHD().getThoiGianKT(), 'dd/MM/yyyy')}"></span>
@@ -86,7 +86,7 @@
                     <div class="container mh-12 w-90 position-relative cursor-pointer content-right my-4 ml-0_5">
                         <img class="top-0 start-0 end-0 w-19r h-80 ml-1 img-myActivity" th:src="@{${myActiviy.getAnh()}}" alt="" />
                         <div class="container position-absolute bottom-0 start-1_5 end-0 bg-white radius-1 mh-60 w-90">
-                            <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic m-0 max-line-3" th:text="${myActiviy.getTenHD()}"></h3>
+                            <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic m-0 max-line-3" th:text="${myActiviy.getTenhd()}"></h3>
                             <p class="card-text fs-11 text-center fst-italic px-3 m-0 max-line-4" th:text="${#strings.length(myActiviy.getMoTa()) > 100 ? myActiviy.getMoTa().substring(0, 100) + '...' : myActiviy.getMoTa()}">
                             </p>
                             <div  th:each="summ: ${summaryList}">

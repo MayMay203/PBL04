@@ -98,11 +98,14 @@
                                 aria-label="Close"></button>
                     </div>
 
-                    <form id="formLogin" class="modal-body modal-body-dangnhap was-validated" th:action="@{/check-login}" method="post" th:object="${account}">
+<!--                    <form id="formLogin" class="modal-body modal-body-dangnhap " th:action="@{/check-login}" method="post" th:object="${account}">-->
+                    <div class="modal-body modal-body-dangnhap ">
                         <div class="header_login">
                             <p id="title-top">ĐĂNG NHẬP</p>
                         </div>
+
                         <div class="body_login">
+                        <form id="formLogin" th:action="@{/check-login}" method="post" th:object="${account}">
                             <div class="body_login-content">
                                 <input class="body_login_input" id="username" type="text" placeholder="    Tên đăng nhập" th:field="*{tenDN}" required>
                                 <button class="btndelete_input" type="button" onclick="clearInput('username')">
@@ -125,6 +128,7 @@
 <!--                                <p class="notify-error"></p>-->
                             </div>
                             <input type="submit" name="btn1" id="btnLogin" value="ĐĂNG NHẬP" >
+                        </form>
                             <div class="footer_login-status">
                                 <label class="form-check-label">
                                     <input class="form-check-input" type="checkbox" name="remember"> Ghi nhớ mật khẩu
@@ -139,10 +143,12 @@
                                 </div>
                             </div>
                             <div class="regis">
-                                <span class="regis-not">Bạn chưa có tài khoản?</span><span class="regis-done">Đăng ký</span>
+                                <span class="regis-not">Bạn chưa có tài khoản?</span>
+                                <input type="button" id="btn-sign-up" value="Đăng ký">
                             </div>
                         </div>
-                    </form>
+                    </div>
+<!--                    </form>-->
                 </div>
             </div>
         </div>
@@ -175,5 +181,72 @@
         </div>
     </nav>
 </div>
+<!-----------Model đăng ký tài khoản-------------->
+<form action="/dang-ky-tai-khoan" id="formRegisterAccount" method="post">
+    <div class="modal fade"  id="modal-sign-up">
+        <div class="modal-dialog">
+            <div class="modal-content content-sign-up">
+                <div class="modal-body d-flex p-0">
+<!--                    <img class="w-30 h-100" th:src="@{/images/volunteer.png}" alt="">-->
+                    <div class="w-75 sign-up-info bg-white py-2">
+                        <div class="d-flex header-sign-up text_align-center p-0 mt-1">
+                            <h3 class="col-11 fs-3 mb-4 green-color mx-2">ĐĂNG KÝ</h3>
+                            <button type="button" class="btn-close col-1 py-2" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="container p-2">
+                            <!--   Chỗ ảnh đại diện nì   -->
+                            <!--                    <label class="col-3 text_align-center">Ảnh đại diện</label>-->
+                            <div class="container d-flex mb-3">
+                                <label class="col-3">Tên đăng nhập</label>
+                                <input class="form-control form-control-sm me-4" required type="text" name="tenDN">
+                            </div>
+                            <div class="container d-flex mb-3">
+                                <label class="col-3">Mật khẩu</label>
+                                <input class="form-control form-control-sm me-4" required type="text" name="matKhau">
+                            </div>
+                            <div class="container d-flex mb-3">
+                                <label class="col-3">Họ và tên</label>
+                                <input class="form-control form-control-sm me-4" required type="text" name="hoTen">
+                            </div>
+                            <div class="container d-flex mb-3">
+                                <label class="col-3">Ngày sinh</label>
+                                <input class="form-control form-control-sm me-4" required type="date" name="ngaySinh">
+                            </div>
+                            <div class="container d-flex mb-3">
+                                <label class="col-4">Giới tính</label>
+                                <div class="col-4 d-flex">
+                                    <label class="me-1">Nam</label>
+                                    <input type="radio" name="gender">
+                                </div>
+                                <div class="col-4 d-flex">
+                                    <label class="me-1">Nữ</label>
+                                    <input type="radio" name="gender">
+                                </div>
+                            </div>
+                            <div class="container d-flex mb-4">
+                                <label class="col-3">Địa chỉ</label>
+                                <input class="form-control form-control-sm me-4" required type="text" name="diaChi">
+                            </div>
+                            <div class="container d-flex mb-4">
+                                <label class="col-3">Số điện thoại</label>
+                                <input class="form-control form-control-sm me-4" required type="text" name="soDienThoai">
+                            </div>
+                            <div class="container d-flex mb-4">
+                                <label class="col-3">Email</label>
+                                <input class="form-control form-control-sm me-4" required type="text" name="email">
+                            </div>
+                            <div class="button mt-4 d-flex">
+                                <span class="col-3"></span>
+                                <button class="py-2 bg-btn radius-half white-color no-border col-3 mx-5 btn-signup"type="submit">Đăng ký</button>
+                                <button class="py-2 bg-btn radius-half white-color no-border col-3 btn-cancel" type="button" onclick="reset()">Hủy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
 </body>
 </html>

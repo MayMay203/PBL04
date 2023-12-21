@@ -155,7 +155,17 @@ $(document).ready(function() {
     });
 });
 
-
+$('#btn-sign-up').click(function() {
+    $('#modal-sign-up').modal('show');
+});
+// $('#confirmLogout').click(function() {
+//     $('#logoutModal').modal('hide');
+// });
+// $(document).ready(function() {
+//     $('.closeModalLogout').on('click', function() {
+//         $('#logoutModal').modal('hide');
+//     });
+// });
 
 
 // main.js
