@@ -26,8 +26,7 @@ async function Evaluation(e)  {
     try{
         const IdAct =+e.target.dataset.value;
         maHD = IdAct;
-        const IdAcc = +e.target.dataset.account;
-        const response =await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${IdAct}&IdAcc=${IdAcc}`);
+        const response =await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${IdAct}`);
         if(!response.ok){
             throw new Error(`Lỗi HTTP. Trạng thái: ${response.status}`)
         }
@@ -38,7 +37,8 @@ async function Evaluation(e)  {
         endActTime = activity.thoiGianKT;
         modal.classList.add('display-flex')
         view_comment.classList.remove('no-display')
-        body.classList.add('overflow-hidden')
+        // body.classList.add('overflow-hidden')
+        body.classList.add('disable-scrollbar')
 
 
        if(accEval===null){
@@ -51,8 +51,11 @@ async function Evaluation(e)  {
         document.querySelector(".avatar-host").src = responseData.registerInfor.maTK.anhDaiDien;
         document.querySelector(".time-post-act").innerText= responseData.registerInfor.thoiGianDK;
         image_activity.innerHTML = "";
+        let count = 0;
         imagesList.forEach(image => {
-            image_activity.innerHTML += `<img src="${image.anh}" alt="anhHoatDong" class="height-10rem flex-1 p-1">`;
+            if(count === 3) return;
+            image_activity.innerHTML += `<img src="${image.anh}" alt="anhHoatDong" class="height-10rem w-35 p-1">`;
+            count++;
         });
         document.querySelector(".modal-number-evaluation").innerText = responseData.numberEvaluation + " lượt đánh giá"
         const evaluationOfAct = responseData.evaluationOfAct;
@@ -221,7 +224,8 @@ async function EvaluationMember(e) {
         modal.classList.add('display-flex')
         edit_content.classList.remove('max_height-27rem')
         view_comment.classList.remove('no-display')
-        body.classList.add('overflow-hidden')
+        // body.classList.add('overflow-hidden')
+        body.classList.add('disable-scrollbar')
 
         view_organized.classList.remove('no-display')
 
@@ -232,9 +236,12 @@ async function EvaluationMember(e) {
         document.querySelector(".time-post-act").innerText= responseData.registerInfor.thoiGianDK;
         //    image summary activity
            image_activity.innerHTML = "";
-           imagesList.forEach(image => {
-               image_activity.innerHTML += `<img src="${image.anh}" alt="anhHoatDong" class="height-10rem flex-1 p-1">`;
-           });
+        let count = 0;
+        imagesList.forEach(image => {
+            if(count === 3) return;
+            image_activity.innerHTML += `<img src="${image.anh}" alt="anhHoatDong" class="height-10rem w-35 p-1">`;
+            count++;
+        });
         document.querySelector(".modal-number-evaluation").innerText = responseData.numberEvaluation + " lượt đánh giá"
         const evaluationOfAct = responseData.evaluationOfAct;
         const evaluationContainer = document.querySelector(".view-comment");
@@ -316,7 +323,7 @@ async function EvaluationMember(e) {
         console.error(Error);
     }
 }
-for (var btn of btn_evaluate_member) {
+for (btn of btn_evaluate_member) {
     btn.addEventListener("click",EvaluationMember)
 }
 
@@ -326,14 +333,15 @@ function closeFormEvaluation(e) {
     const modal_comment = document.querySelector('.view-comment');
     modal_comment.innerHTML='';
     modal.classList.remove('display-flex')
-    body.classList.remove('overflow-hidden')
+    // body.classList.remove('overflow-hidden')
+    body.classList.remove('disable-scrollbar')
     view_comment.classList.add('no-display')
     write_comment.classList.add('no-display')
     evaluation.classList.add('no-display')
     edit_content.classList.remove('max_height-27rem')
     view_organized.classList.add('no-display')
 }
-for (var btn of btn_close) {
+for (btn of btn_close) {
     btn.addEventListener("click",closeFormEvaluation);
 }
 
@@ -343,14 +351,14 @@ function formEvaluation(e) {
     const target = e.target;
     const container = target.closest(".member-evaluate");
     var allForms = document.querySelectorAll(".form-evaluate");
-    for (var form of allForms) {
+    for (const form of allForms) {
         form.classList.remove("display-block");
     }
     const childForm = container.querySelector(".form-evaluate");
     childForm.classList.add("display-block")
 }
 const member_evaluate = document.getElementsByClassName("member-evaluate")
-for (var member of member_evaluate) {
+for (const member of member_evaluate) {
     member.addEventListener("click", formEvaluation)
 }
 
@@ -377,7 +385,7 @@ btn_evaluate_mb.addEventListener("click", function (e) {
 })
 
 //Evaluate star
-for (var btn of btn_star) {
+for (btn of btn_star) {
     btn.addEventListener("click", (e) => {
         for (var star of btn_star) {
             star.classList.remove("yellow-color")
