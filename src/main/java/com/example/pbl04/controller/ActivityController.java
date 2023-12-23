@@ -1,10 +1,7 @@
 package com.example.pbl04.controller;
 
 import com.example.pbl04.entity.*;
-import com.example.pbl04.service.ActivityService;
-import com.example.pbl04.service.RegisterService;
-import com.example.pbl04.service.SessionService;
-import com.example.pbl04.service.TopicService;
+import com.example.pbl04.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +15,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -32,13 +31,15 @@ public class ActivityController {
     private final SessionService sessionService;
     private final TopicService topicService;
     private final RegisterService registerService;
+    private final AccountService accountService;
 
     @Autowired
-    public ActivityController(ActivityService activityService, TopicService topicService, SessionService sessionService, RegisterService registerService){
+    public ActivityController(ActivityService activityService, TopicService topicService, SessionService sessionService, RegisterService registerService, AccountService accountService){
         this.activityService=activityService;
         this.topicService = topicService;
         this.sessionService = sessionService;
         this.registerService = registerService;
+        this.accountService = accountService;
     }
 
    @GetMapping("/trang-chu-hoat-dong")
@@ -109,6 +110,22 @@ public class ActivityController {
         String fileName;
         String urlImageInDB;
         System.out.println("Đã vào COntroller");
+        Chude chude = topicService.getChuDeByTen(tenChuDe);
+        Integer machude = chude.getId();
+
+        Hoatdong hoatDong = new Hoatdong();
+
+        hoatDong.setMaChuDe(chude);
+        hoatDong.setTenhd(tenHD);
+        hoatDong.setDiaDiem(diaDiem);
+        hoatDong.setThoiGianBD(LocalDate.parse(thoiGianBD));
+        hoatDong.setThoiGianKT(LocalDate.parse(thoiGianKT));
+        hoatDong.setSoTNVToiThieu(Integer.parseInt(sotnvtt));
+        hoatDong.setSoTNVToiDa(Integer.parseInt(sotnvtd));
+        hoatDong.setMoTa(moTa);
+        hoatDong.setTinhTrangHD((byte) 0);
+        hoatDong.setTinhTrangDuyet((byte) 1);
+
         try {
             if (imageInput != null && !imageInput.isEmpty()) {
                 System.out.println("Input image is not not not null");
@@ -151,10 +168,17 @@ public class ActivityController {
                 System.out.println("Ten ...Controller:" + "/images/" + fileName);
                 urlImageInDB = "/images/" + fileName;
                 System.out.println("Ten file anh urlImageInDB:" + urlImageInDB);
-                Chude chude = topicService.getChuDeByTen(tenChuDe);
-                Integer machude = chude.getId();
-            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, urlImageInDB,  parseInt(userID));
+                hoatDong.setAnh(urlImageInDB);
             }
+            Taikhoan taikhoan = accountService.getTaiKhoanByID(parseInt(userID));
+            Dangky dangky = new Dangky();
+            dangky.setPhanQuyen(true);
+            dangky.setMaHD(hoatDong);
+            dangky.setTrangThai(true);
+//            dangky.setThoiGianDK(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+            dangky.setThoiGianDK(Instant.now());
+            dangky.setMaTK(taikhoan);
+            activityService.addActivity(hoatDong, dangky);
             sessionService.createSessionModel(model, session);
             response.put("message", "Thông báo: Thông tin đã được cập nhật thành công!");
             response.put("success", true);
