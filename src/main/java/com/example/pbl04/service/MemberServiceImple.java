@@ -41,4 +41,17 @@ public class MemberServiceImple implements MemberService{
     public void updateInfor(Thanhvien thanhvien) {
         memberRepository.save(thanhvien);
     }
+    @Override
+    public List<Thanhvien> getMemberNeedConfirmByIDHD(Integer maHD)
+    {
+        return memberRepository.getMemberNeedConfirmByIDHD(maHD);
+    }
+    public void ConfirmMember(Integer maHD, Integer maTK)
+    {
+        memberRepository.ConfirmMember(maHD,maTK);
+    }
+    public void CancelMember(Integer maHD, Integer maTK)
+    {
+        memberRepository.CancelMember(maHD,maTK);
+    }
 }

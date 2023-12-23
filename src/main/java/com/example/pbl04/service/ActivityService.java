@@ -14,6 +14,8 @@ public interface ActivityService {
     List<Hoatdong> getActivityOccured();
     List<Dangky> getActivityUpcomming();
     List<Hoatdong> getActivityHappening();
+    List<Hoatdong> getAllActiviyPost();
+    List<Hoatdong> getMyActivityConfirm(Integer id);
     Dangky getDateRegis(Integer mahd);
     Integer getNumActivity();
     Integer getParticipants();
@@ -35,7 +37,21 @@ public interface ActivityService {
 
     void addActivity(Integer maChuDe, String tenHD, String diaDiem, String thoiGianBD, String thoiGianKT,
                      String sotnvtt, String sotnvtd, String moTa, String anh,Integer maTK);
+    List<Hoatdong> getAllMyPostNeedConfirm(Integer maTK);
+    List<Dangky> getListActivityParticipate(Integer maTK);
+    List<Hoatdong> getMyActivityHappeningNeedMember(Integer maTK);
+    void confirmActivityStage0(Integer maHD);
+    void confirmActivityStage1(Integer maHD);
+    List<Hoatdong> getAllMyActivityNeedConfirm(Integer maTK);
+//    List<Hoatdong> getMyActivityNeedMember(Integer maTK);
+    List<Integer> countConfirm(List<Hoatdong> actList);
+    List<Integer> countConfirmed(List<Hoatdong> actList);
+    void CancelActivity(Integer maHD, String txtHuy);
 //void addActivity(Integer maChuDe, String tenHD, String diaDiem, String thoiGianBD, String thoiGianKT,
 //                 String sotnvtt, String sotnvtd, String moTa,Integer maTK);
-    void addMyActivity(Hoatdong hoatdong);
+void addMyActivity(Hoatdong hoatdong);
+     List<Hoatdong> getListCancel();
+     List<Hoatdong> getListCancelByOwner(Integer maTK);
+     boolean CheckActivity(Integer maHD);
+     Integer countParticipantsByIDHD(Integer maHD);
 }

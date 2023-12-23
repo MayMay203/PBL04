@@ -11,4 +11,8 @@ public interface MemberService {
     List<Thanhvien> getMembersByRegis(List<Dangky> registerList);
 
     void updateInfor(Thanhvien thanhvien);
+    List<Thanhvien> getMemberNeedConfirmByIDHD(Integer maHD);
+
+    void ConfirmMember(Integer maHD,Integer maTK);
+    void CancelMember(Integer maHD,Integer maTK);
 }
