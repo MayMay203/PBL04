@@ -8,4 +8,5 @@ public interface AccountService {
     Taikhoan CheckLogin(String tenDN, String matKhau);
     Taikhoan getTaiKhoanByID(Integer id);
     void updateAvatar(String urlNew, Integer id);
+    Taikhoan addAccount(Taikhoan taikhoan);
 }

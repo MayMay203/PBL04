@@ -94,12 +94,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 //
-$(document).ready(function() {
-    $('#DangNhapModal').on('hidden.bs.modal', function () {
-        // Xóa thuộc tính style của body
-        document.body.removeAttribute('style');
-    });
-});
+// $(document).ready(function() {
+//     $('#DangNhapModal').on('hidden.bs.modal', function () {
+//         // Xóa thuộc tính style của body
+//         document.body.removeAttribute('style');
+//     });
+// });
 
 //Sử dụng sự kiện hidden.bs.modal của Bootstrap để xử lý việc xóa các thuộc tính style khi modal được ẩn đi:
 // $('#DangNhapModal').on('hidden.bs.modal', function () {
@@ -115,25 +115,26 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 //load lại trang
 // Trong mã JavaScript
-// document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('confirmLogout').addEventListener('click', function (e) {
-    $.ajax({
-        type: 'GET',
-        url: '/logout',
-        success: function (data) {
-            // Xử lý JSON response
-            if (data.success) {
-                // Chuyển hướng đến trang đăng nhập hoặc trang chính
-                if(location.pathname=="/trang-ca-nhan"){
-                    location.href="/trang-chu";
-                }
-                else location.reload();
+$(document).ready(function() {
+    $('#confirmLogout').click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'GET',
+            url: '/logout',
+            success: function (data) {
+                // Xử lý JSON response
+                if (data.success) {
+                    // Chuyển hướng đến trang đăng nhập hoặc trang chính
+                    if(location.pathname=="/trang-ca-nhan"){
+                        location.href="/trang-chu";
+                    }
+                    else location.reload();
 
+                }
             }
-        }
+        });
     });
-    });
-// });
+});
 // custom.js
 
 
@@ -154,12 +155,20 @@ $(document).ready(function() {
         $('#logoutModal').modal('hide');
     });
 });
-
-$('#btn-sign-up').click(function() {
-    $('#modal-sign-up').modal('show');
+$(document).ready(function() {
+    $('.btn-close-register').on('click', function() {
+        $('#btn-sign-up').modal('hide');
+        $('.modal-backdrop').remove();
+        location.reload();
+    });
 });
-// $('#confirmLogout').click(function() {
-//     $('#logoutModal').modal('hide');
+// $('#btn-sign-up').click(function() {
+//     $('#modal-sign-up').modal('show');
+// });
+// $(document).ready(function() {
+//     $('#btn-close-register').on('click', function() {
+//         $('#modal-sign-up').modal('hide');
+//     });
 // });
 // $(document).ready(function() {
 //     $('.closeModalLogout').on('click', function() {
@@ -204,4 +213,37 @@ $('#btn-sign-up').click(function() {
 //         }
 //     });
 // });
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('formRegisterAccount').addEventListener('submit', function (e) {
+        e.preventDefault();
+        // Gọi AJAX đến endpoint xử lý đăng nhập
+        $.ajax({
+            type: 'POST',
+            url: '/dang-ky-tai-khoan',
+            data: new FormData(this),
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.success) {
+                    var header = document.getElementById("myHeader");
+                    header.classList.remove("sticky");
+                    // location.reload();
 
+                    $('#modal-sign-up').modal('hide');
+                    $('.modal-backdrop').remove();
+                    // location.reload();
+                    alert("Đăng ký thành công!");
+                    // $('#DangNhapModal').modal('show');
+                    // $('.modal-login').css('display', 'block');
+                    // $('.modal-backdrop').remove();
+                } else {
+                    // Hiển thị thông báo lỗi
+                    alert(response.message);
+                }
+            },
+            error: function (error) {
+                console.error('Đã có lỗi xảy ra:', error);
+            }
+        });
+    });
+});

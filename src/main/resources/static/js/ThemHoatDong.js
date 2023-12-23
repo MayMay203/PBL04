@@ -108,3 +108,9 @@ document.addEventListener("DOMContentLoaded", function () {
 //   document.getElementById('btn_userProfile').style.display = 'inline-block';
 //   // Thêm các thay đổi khác nếu cần
 // }
+// Lắng nghe sự kiện trước khi modal được hiển thị
+$('#ThemHoatDongModal').on('show.bs.modal', function (event) {
+    // Thực hiện các hành động trước khi modal được hiển thị
+    var header = document.getElementById("myHeader");
+    header.classList.remove("sticky");
+});

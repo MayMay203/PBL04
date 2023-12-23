@@ -41,4 +41,9 @@ public class MemberServiceImple implements MemberService{
     public void updateInfor(Thanhvien thanhvien) {
         memberRepository.save(thanhvien);
     }
+
+    @Override
+    public void addMember(Thanhvien thanhvien) {
+        memberRepository.save(thanhvien);
+    }
 }

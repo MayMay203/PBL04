@@ -27,6 +27,8 @@ for (var btn of btn_close_detail) {
 
 btn_add_sug.addEventListener("click", () => {
     if(btn_add_sug.dataset.value==null){
+        var header = document.getElementById("myHeader");
+        header.classList.remove("sticky");
         $('#DangNhapModal').modal('show');
     }
     else{

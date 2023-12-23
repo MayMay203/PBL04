@@ -103,6 +103,8 @@ $(document).ready(function() {
 });
 btn_evaluaion_Act.addEventListener("click",(e)=> {
     if (btn_evaluaion_Act.dataset.value == null) {
+        var header = document.getElementById("myHeader");
+        header.classList.remove("sticky");
         $('#DangNhapModal').modal('show');
     } else {
         window.location.href = `/danh-gia?id=${btn_evaluaion_Act.dataset.value}`;

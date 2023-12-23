@@ -11,4 +11,5 @@ public interface MemberService {
     List<Thanhvien> getMembersByRegis(List<Dangky> registerList);
 
     void updateInfor(Thanhvien thanhvien);
+    void addMember(Thanhvien thanhvien);
 }

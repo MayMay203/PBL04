@@ -34,4 +34,9 @@ public class AccountServiceImple implements AccountService{
     public void updateAvatar(String urlNew, Integer id) {
         accountRepository.updateAvatar(urlNew, id);
     }
+
+    @Override
+    public Taikhoan addAccount(Taikhoan taikhoan) {
+        return accountRepository.save(taikhoan);
+    }
 }
