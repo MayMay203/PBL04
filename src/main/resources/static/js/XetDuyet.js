@@ -338,7 +338,7 @@ $(document).on('click', '#btnConfirmPartici', function () {
                 // Xử lý phản hồi từ server nếu cần
                 console.log(response);
                 console.log('Data sent:', formData);
-                console.log('xác nhận thaành viên ok');
+                console.log('xác nhận thành viên ok');
                 $('#MemberModal').modal('hide');
                 switchToMemberTabAndReload();
             },

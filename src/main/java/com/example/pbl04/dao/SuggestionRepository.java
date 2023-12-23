@@ -8,16 +8,16 @@ import java.util.List;
 
 public interface SuggestionRepository extends JpaRepository<Dexuat,Integer> {
 
-    @Query("SELECT d FROM Dexuat d WHERE d.maChuDe.tenChuDe like %:NameTitle%")
+    @Query("SELECT d FROM Dexuat d WHERE d.maChuDe.tenChuDe like %:NameTitle% and d.tinhTrangDuyet=true")
     List<Dexuat> getSuggestionByTitle(String NameTitle);
 
-    @Query("SELECT d FROM Dexuat d WHERE d.maChuDe.id = :IdTitle")
+    @Query("SELECT d FROM Dexuat d WHERE d.maChuDe.id = :IdTitle and d.tinhTrangDuyet=true")
     List<Dexuat> getSuggestionByIdTitle(Integer IdTitle);
     
-    @Query("select d from Dexuat  d group by d.viTri,d.maChuDe")
+    @Query("select d from Dexuat  d where d.tinhTrangDuyet = true")
     public List<Dexuat> getAllSuggestion();
 
-    @Query("select count(*) from Dexuat where maChuDe.id = :IdTitle")
-     public List<Integer> countSuggestion(Integer IdTitle);
+//    @Query("select count(*) from Dexuat where maChuDe.id = :IdTitle and tinhTrangDuyet = true")
+//     public List<Integer> countSuggestion(Integer IdTitle);
 
 }

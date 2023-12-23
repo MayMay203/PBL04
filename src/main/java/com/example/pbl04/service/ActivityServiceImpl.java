@@ -153,4 +153,13 @@ public class ActivityServiceImpl implements ActivityService {
        else return true;
     }
     public Integer countParticipantsByIDHD(Integer maHD){ return  activityRepository.countParticipantsByIDHD(maHD);}
+
+    @Override
+    public List<Integer> countActByLocation(List<String> locationList) {
+       List<Integer> countList = new ArrayList<>();
+       for(String location:locationList){
+           countList.add(activityRepository.countActByLocation(location));
+       }
+       return countList;
+    }
 }

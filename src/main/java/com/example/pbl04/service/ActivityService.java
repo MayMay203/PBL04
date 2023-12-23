@@ -54,4 +54,5 @@ void addMyActivity(Hoatdong hoatdong);
      List<Hoatdong> getListCancelByOwner(Integer maTK);
      boolean CheckActivity(Integer maHD);
      Integer countParticipantsByIDHD(Integer maHD);
+     List<Integer> countActByLocation(List<String> locationList);
 }

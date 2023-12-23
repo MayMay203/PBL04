@@ -6,10 +6,9 @@ const modal = document.querySelector(".modal_")
 const suggestionDetail = document.querySelector(".suggestion-detail");
 const suggesstionForm = document.querySelector(".suggestion-form");
 const suggestionByTitle = document.querySelector(".suggestion-by-title");
-const btn_suggestionDetail = document.querySelectorAll(".btn-suggestion-detail");
+const btn_actDetail = document.querySelectorAll(".btn-activity-detail");
 const btn_organizeHere = document.querySelectorAll(".btn-organize-here");
 const btn_close_detail = document.getElementsByClassName("btn-close-detail")
-const btn_Huy = document.querySelector(".btn-Huy");
 btn_close_sug.addEventListener("click", () => {
     modal.classList.remove("display-flex")
    // body.classList.remove("overflow-hidden")
@@ -30,6 +29,8 @@ for (btn of btn_close_detail) {
 
 btn_add_sug.addEventListener("click", () => {
     if(btn_add_sug.dataset.value==null){
+        var header = document.getElementById("myHeader");
+        header.classList.remove("sticky");
         $('#DangNhapModal').modal('show');
     }
     else{
@@ -40,7 +41,7 @@ btn_add_sug.addEventListener("click", () => {
     }
 })
 
-async function viewDetailSuggestion(e){
+async function viewDetailActivity(e){
     const IdTitle = +e.target.dataset.value;
     console.log(IdTitle)
     try{
@@ -75,28 +76,35 @@ async function viewDetailSuggestion(e){
         console.error(error);
     }
 }
-for(var btnDel of btn_suggestionDetail){
-    btnDel.addEventListener("click",viewDetailSuggestion)
+for(btn of  btn_actDetail){
+    btn.addEventListener("click",viewDetailActivity)
 }
 
-btn_Huy.addEventListener("click",(e)=>{
-    document.f.thonPhuong.value = "";
-    document.f.quanHuyen.value = "";
-    document.f.tinhThanhPho.value = "";
-    document.f.moTa.value = "";
-    document.f.chuDe.selectedIndex = 0;
-})
+// btn_Huy.addEventListener("click",(e)=>{
+//     document.f.thonPhuong.value = "";
+//     document.f.quanHuyen.value = "";
+//     document.f.tinhThanhPho.value = "";
+//     document.f.moTa.value = "";
+//     document.f.chuDe.selectedIndex = 0;
+// })
 
 //btn ToChucTaiDay
 for(btn of btn_organizeHere){
     btn.addEventListener("click", (e) => {
-        const title = e.target.dataset.name;
-        const location = e.target.dataset.location;
-        $('#ThemHoatDongModal').modal('show');
-        $('#txt_Location').val(location);
-        $('#txt_Location').prop('disabled',true);
-        $('#txt_NameTopic').val(title);
-        $('#txt_NameTopic').prop('disabled',true);
-
+        const acc = e.target.dataset.account;
+        if(acc==null){
+            var header = document.getElementById("myHeader");
+            header.classList.remove("sticky");
+            $('#DangNhapModal').modal('show');
+        }
+        else{
+            const title = e.target.dataset.name;
+            const location = e.target.dataset.location;
+            $('#ThemHoatDongModal').modal('show');
+            $('#txt_Location').val(location);
+            $('#txt_Location').prop('disabled',true);
+            $('#txt_NameTopic').val(title);
+            $('#txt_NameTopic').prop('disabled',true);
+        }
     });
 }

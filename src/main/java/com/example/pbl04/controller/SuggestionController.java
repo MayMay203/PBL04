@@ -1,12 +1,10 @@
 package com.example.pbl04.controller;
 
-import com.example.pbl04.entity.Chude;
+import com.example.pbl04.dao.ActivityRepository;
 import com.example.pbl04.entity.Dexuat;
+import com.example.pbl04.entity.Chude;
 import com.example.pbl04.entity.Taikhoan;
-import com.example.pbl04.service.AccountService;
-import com.example.pbl04.service.SessionService;
-import com.example.pbl04.service.SuggestionService;
-import com.example.pbl04.service.TopicService;
+import com.example.pbl04.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,37 +22,45 @@ public class SuggestionController {
     private final SessionService sessionService;
     private final TopicService topicService;
     private final AccountService accountService;
+    private final ActivityService    activityService;
 
     @Autowired
     public SuggestionController(SuggestionService suggestionService, SessionService sessionService,
-                                TopicService topicService,AccountService accountService) {
+                                TopicService topicService,AccountService accountService,
+                                ActivityService activityService) {
         this.suggestionService = suggestionService;
         this.sessionService = sessionService;
         this.topicService = topicService;
         this.accountService = accountService;
+        this.activityService = activityService;
     }
 
     @GetMapping("/de-xuat")
     public String showSuggest(Model model, HttpSession session) {
         List<Dexuat> suggestionList = suggestionService.getAllSuggest();
-        List<Integer> countSugg = suggestionService.CountSuggestion(suggestionList);
-        List<Chude> topicsList = topicService.getAllTopics();
+        List<String> locationList  = new ArrayList<>();
+        for(Dexuat sugg:suggestionList){
+            locationList.add(sugg.getViTri());
+        }
+        //Dem hoat dong theo vi tri
+        List<Integer> countAct = activityService.countActByLocation(locationList);
+        List<Chude> listTopics = topicService.getAllTopics();
         model.addAttribute("suggestionList",suggestionList);
-        model.addAttribute("countSugg",countSugg);
-        model.addAttribute("topicsList",topicsList);
+        model.addAttribute("countAct",countAct);
+        model.addAttribute("listTopics",listTopics);
         // Kiểm tra xem người dùng đã đăng nhập chưa
         sessionService.createSessionModel(model, session);
         return "DeXuat";
     }
 
-    @GetMapping("/de-xuat/{IdTitle}")
-    @ResponseBody
-    public ResponseEntity<List<Dexuat>> showSuggestionByTitle(@PathVariable(name = "IdTitle", required = false) Integer IdTitle) {
-       // String str = title.replaceAll("-"," ");
-       // System.out.println(str);
-        List<Dexuat> suggestionList = suggestionService.getSuggestionByIdTitle(IdTitle);
-        return ResponseEntity.ok(suggestionList);
-    }
+//    @GetMapping("/de-xuat/{IdTitle}")
+//    @ResponseBody
+//    public ResponseEntity<List<Dexuat>> showSuggestionByTitle(@PathVariable(name = "IdTitle", required = false) Integer IdTitle) {
+//       // String str = title.replaceAll("-"," ");
+//       // System.out.println(str);
+//        List<Dexuat> suggestionList = suggestionService.getSuggestionByIdTitle(IdTitle);
+//        return ResponseEntity.ok(suggestionList);
+//    }
 
     @PostMapping("/them-de-xuat")
     public String addSuggestion(@RequestParam ("thonPhuong")String thonPhuong,

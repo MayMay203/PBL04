@@ -96,4 +96,8 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     List<Hoatdong> getListCancelByOwner(Integer maTK);
     @Query("select count(*) from Dangky dk, Hoatdong hd where hd.id= dk.maHD.id and hd.id =:maHD and dk.phanQuyen=false and dk.trangThai=true")
     Integer countParticipantsByIDHD(Integer maHD);
+
+    @Query("select count(*) from Hoatdong hd where hd.tinhTrangDuyet = 3 and hd.diaDiem like %:location%")
+    Integer countActByLocation(String location);
+
 }

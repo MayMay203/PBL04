@@ -2,16 +2,13 @@ package com.example.pbl04.controller;
 
 import com.example.pbl04.entity.Dexuat;
 import com.example.pbl04.entity.Hoatdong;
-import com.example.pbl04.entity.Taikhoan;
 import com.example.pbl04.service.ActivityService;
 import com.example.pbl04.service.EvaluationService;
 import com.example.pbl04.service.SuggestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -75,18 +72,17 @@ public class SearchController {
     public ResponseEntity<Map<String,Object>> searchSuggestion(@RequestParam(name="nameTitle",required = false) String nameTitle){
        Map<String,Object> result = new HashMap<>();
         List<Dexuat> suggestionList = new ArrayList<>();
-        List<Integer> countSugg = new ArrayList<>();
-        System.out.println(nameTitle);
-        if(nameTitle == null){
-            suggestionList = suggestionService.getAllSuggest();
-            countSugg = suggestionService.CountSuggestion(suggestionList);
-        }
-        else{
-            suggestionList = suggestionService.getSuggestionByTitle(nameTitle);
-            countSugg = suggestionService.CountSuggestion(suggestionList);
-        }
+//        List<Integer> countSugg = new ArrayList<>();
+//        if(nameTitle == null){
+//            suggestionList = suggestionService.getAllSuggest();
+//            countSugg = suggestionService.CountSuggestion(suggestionList);
+//        }
+//        else{
+//            suggestionList = suggestionService.getSuggestionByTitle(nameTitle);
+//            countSugg = suggestionService.CountSuggestion(suggestionList);
+//        }
         result.put("suggestionList",suggestionList);
-        result.put("countSugg",countSugg);
+     //   result.put("countSugg",countSugg);
         return ResponseEntity.ok(result);
     }
 }

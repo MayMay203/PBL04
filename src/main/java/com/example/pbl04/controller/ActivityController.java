@@ -205,4 +205,13 @@ public class ActivityController {
         Hoatdong hd = activityService.getActivityByID(maHD);
         return hd;
     }
+
+//    @GetMapping("/hoat-do/{IdTitle}")
+//    @ResponseBody
+//    public ResponseEntity<List<Dexuat>> showSuggestionByTitle(@PathVariable(name = "IdTitle", required = false) Integer IdTitle) {
+//       // String str = title.replaceAll("-"," ");
+//       // System.out.println(str);
+//        List<Dexuat> suggestionList = suggestionService.getSuggestionByIdTitle(IdTitle);
+//        return ResponseEntity.ok(suggestionList);
+//    }
 }
