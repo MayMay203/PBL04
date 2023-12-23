@@ -7,6 +7,7 @@ import com.example.pbl04.service.SessionService;
 import com.example.pbl04.service.TopicService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -206,12 +207,11 @@ public class ActivityController {
         return hd;
     }
 
-//    @GetMapping("/hoat-do/{IdTitle}")
-//    @ResponseBody
-//    public ResponseEntity<List<Dexuat>> showSuggestionByTitle(@PathVariable(name = "IdTitle", required = false) Integer IdTitle) {
-//       // String str = title.replaceAll("-"," ");
-//       // System.out.println(str);
-//        List<Dexuat> suggestionList = suggestionService.getSuggestionByIdTitle(IdTitle);
-//        return ResponseEntity.ok(suggestionList);
-//    }
+    @GetMapping("/hoat-dong-theo-vi-tri")
+    @ResponseBody
+    public ResponseEntity<List<Hoatdong>> getActByLocation(@RequestParam(name = "location") String location) {
+        List<Hoatdong> activityList = activityService.getActByLocation(location);
+        return ResponseEntity.ok(activityList);
+    }
 }
+

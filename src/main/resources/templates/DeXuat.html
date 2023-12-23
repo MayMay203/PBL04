@@ -50,7 +50,7 @@
           <div class="container d-flex flex-1 justify-content-end align-items-center icon-act">
               <!--                <p class="pt-1_2 px-1 fw-bold green-color">5</p>-->
               <button  class="no-border bg-white p-0 mx-4 cursor-pointer btn-activity-detail">
-                  <i th:attr="data-value=${suggestion.getMaChuDe().getId()}" class="bi bi-calendar4-week position-relative mb-1 h-1 green-color calendar cursor-pointer fs-5 ">
+                  <i th:attr="data-location=${suggestion.getViTri()},data-countAct=${countAct[index.index]}" class="bi bi-calendar4-week position-relative mb-1 h-1 green-color calendar cursor-pointer fs-5 ">
                       <p class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display number-sugg-name-title"
                          th:text="${countAct[index.index] + ' hoạt động đã tổ chức tại đây'}">
                       </p>
@@ -124,12 +124,12 @@
             </div>
     </form>
         <!-- Form chi tiet de xuat-->
-        <div class="suggestion-detail no-display">
-            <div class="container d-flex align-items-center justify-content-between bg-green-dark w-100 p-1">
-                <h3 class="fs-4 white-color fw-bold p-1 text-center mt-1 col-11">CHI TIẾT HOẠT ĐỘNG</h3>
-                <div class="btn btn-close no-outline p-1 me-3 col-1 btn-close-detail"></div>
+        <div class="act-detail no-display">
+            <div class="container d-flex align-items-center justify-content-between bg-green-dark w-100">
+                <h3 class="fs-5 white-color fw-bold text-center mt-1 col-11 py-1">CHI TIẾT HOẠT ĐỘNG</h3>
+                <div class="btn btn-close no-outline px-0 py-1 me-3 col-1 btn-close-detail"></div>
             </div>
-            <div class="container suggestion-by-title">
+            <div class="container max_height-36rem act-by-location">
             </div>
 <!--            Chủ đề đề xuất lặp-->
 <!--            <div class="fs-9 display-flex">-->

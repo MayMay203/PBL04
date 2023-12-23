@@ -162,4 +162,10 @@ public class ActivityServiceImpl implements ActivityService {
        }
        return countList;
     }
+
+    @Override
+    public List<Hoatdong> getActByLocation(String location) {
+        return activityRepository.getActByLocation(location);
+    }
+
 }

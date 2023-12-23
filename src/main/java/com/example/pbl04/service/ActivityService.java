@@ -55,4 +55,5 @@ void addMyActivity(Hoatdong hoatdong);
      boolean CheckActivity(Integer maHD);
      Integer countParticipantsByIDHD(Integer maHD);
      List<Integer> countActByLocation(List<String> locationList);
+     List<Hoatdong> getActByLocation(String location);
 }

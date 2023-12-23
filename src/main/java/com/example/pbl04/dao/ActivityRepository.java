@@ -100,4 +100,7 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     @Query("select count(*) from Hoatdong hd where hd.tinhTrangDuyet = 3 and hd.diaDiem like %:location%")
     Integer countActByLocation(String location);
 
+    @Query("select hd from Hoatdong hd where hd.diaDiem = :location and hd.tinhTrangDuyet=3")
+    List<Hoatdong> getActByLocation(String location);
+
 }
