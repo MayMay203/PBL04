@@ -60,8 +60,10 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     // Get hoạt động cho phần xét duyệt
     @Query("select hd from Hoatdong hd where hd.tinhTrangDuyet=0") // Hoạt động chờ xét duyệt
     List<Hoatdong> getAllActiviyPost();
-    @Query("select hd from Dangky dk, Hoatdong hd where hd.id=dk.maHD.id  and dk.maTK.id=:myID") ////Bao gồm hoạt động chưa xét duyệt, đã xét duyệt, đã huy.....
+    @Query("select hd from Dangky dk, Hoatdong hd where hd.id=dk.maHD.id and dk.phanQuyen=true  and dk.maTK.id=:myID ") ////Bao gồm hoạt động chưa xét duyệt, đã xét duyệt, đã huy.....
     List<Hoatdong> getAllMyPostNeedConfirm(Integer myID);
+    @Query("select dk from Dangky dk, Hoatdong hd where hd.id=dk.maHD.id  and dk.maTK.id=:myID and dk.phanQuyen=false")
+    List<Dangky> getListActivityParticipate(Integer myID);
     @Query("select hd from Dangky dk, Hoatdong hd where dk.maHD.id= hd.id and dk.maTK.id =:maTK") //Hoạt động chờ xét duệt được phân loại theo maTK
     List<Hoatdong> getMyActivityConfirm(Integer maTK);
     @Query("select hd from Hoatdong hd, Dangky dk where hd.id= dk.maHD.id and dk.maTK.id=:maTK and dk.phanQuyen=true and hd.tinhTrangHD=2")
@@ -88,5 +90,10 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     @Modifying
     @Query("update Hoatdong hd set hd.liDoHuy=:txtHuy , hd.tinhTrangDuyet=-1, hd.tinhTrangHD=-1 where hd.id=:maHD")
     void CancelActivity(Integer maHD, String txtHuy);
-
+    @Query("select hd from Hoatdong hd where hd.tinhTrangHD=-1 and hd.tinhTrangDuyet=-1")
+    List<Hoatdong> getListCancel();
+    @Query("select hd from Hoatdong hd,Dangky dk where hd.id = dk.maHD.id and dk.maTK.id=:maTK and dk.phanQuyen=true and hd.tinhTrangHD=-1 and hd.tinhTrangDuyet=-1")
+    List<Hoatdong> getListCancelByOwner(Integer maTK);
+    @Query("select count(*) from Dangky dk, Hoatdong hd where hd.id= dk.maHD.id and hd.id =:maHD and dk.phanQuyen=false and dk.trangThai=true")
+    Integer countParticipantsByIDHD(Integer maHD);
 }

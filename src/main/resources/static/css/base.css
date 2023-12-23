@@ -19,21 +19,21 @@
     --yellow-color: #ffc107;
 }
 /*Modal sign up*/
-.content-sign-up{
-    width: 55rem;
-    height: 34rem;
-}
+/*.content-sign-up{*/
+/*    width: 55rem;*/
+/*    height: 34rem;*/
+/*}*/
 
-/*Modal sign up*/
-#modal-sign-up {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+/*!*Modal sign up*!*/
+/*#modal-sign-up {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*}*/
 
-.modal-dialog {
-    max-width: 60vw;
-}
+/*.modal-dialog {*/
+/*    max-width: 60vw;*/
+/*}*/
 
 /*Thanh cuộn ở body*/
 body::-webkit-scrollbar {

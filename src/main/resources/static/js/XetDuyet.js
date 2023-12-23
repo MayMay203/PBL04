@@ -33,10 +33,13 @@ document.addEventListener("DOMContentLoaded", function () {
     var btnConfirmStage0 = document.getElementById("btnConfirmStage0");
     var btnActivityNeedConfirm = document.getElementById("btnActivityNeedConfirm");
     var btnNewButton = document.getElementById("btnConfirmStage1");
+    var btnCancelStage1 = document.getElementById("btnCancelStage1");
+    var btnActivityParticipate = document.getElementById("btnActivityParticipate");
     var subTab1 = document.getElementById("subTab1");
     var subTab2 = document.getElementById("subTab2");
     var subTab3 = document.getElementById("subTab3");
-
+    var subTab4 = document.getElementById("subTab4");
+    var subTab5 = document.getElementById("subTab5");
     // Thêm lớp 'active' cho nút và subTab mặc định
     btnActivityNeedConfirm.classList.add("active");
     subTab2.classList.add("active");
@@ -46,16 +49,16 @@ document.addEventListener("DOMContentLoaded", function () {
             // Xóa lớp 'active' từ tất cả các nút và subTabs
             btnConfirmStage0.classList.add("active");
             btnActivityNeedConfirm.classList.remove("active");
-            btnNewButton.classList.remove("active"); // Xóa lớp 'active' từ nút mới
+            btnNewButton.classList.remove("active");
+           if(btnCancelStage1) btnCancelStage1.classList.remove("active");
+            btnActivityParticipate.classList.remove("active");
             if(subTab1) subTab1.style.display = "block";
             if(subTab2) subTab2.style.display = "none";
-            if(subTab3) subTab3.style.display = "none"; // Ẩn subTab mới
-
+            if(subTab3) subTab3.style.display = "none";
+            if(subTab4) subTab4.style.display = "none";
+            if(subTab5) subTab5.style.display = "none";
         });
     }
-
-    // Thêm sự kiện click cho nút "Xét duyệt bai dang"
-
 
     // Thêm sự kiện click cho nút "Hoạt động đang chờ xét duyệt"
     btnActivityNeedConfirm.addEventListener("click", function() {
@@ -63,10 +66,13 @@ document.addEventListener("DOMContentLoaded", function () {
         if(btnConfirmStage0) btnConfirmStage0.classList.remove("active");
         btnActivityNeedConfirm.classList.add("active");
         btnNewButton.classList.remove("active");
+       if(btnCancelStage1) btnCancelStage1.classList.remove("active");
+        btnActivityParticipate.classList.remove("active");
        if(subTab2) subTab2.style.display = "block";
        if(subTab1) subTab1.style.display = "none";
        if(subTab3) subTab3.style.display = "none";
-
+        if(subTab4) subTab4.style.display = "none";
+        if(subTab5) subTab5.style.display = "none";
     });
 
     // Thêm sự kiện click cho nút mới
@@ -75,10 +81,44 @@ document.addEventListener("DOMContentLoaded", function () {
        if(btnConfirmStage0) btnConfirmStage0.classList.remove("active");
         btnActivityNeedConfirm.classList.remove("active");
         btnNewButton.classList.add("active");
+       if(btnCancelStage1) btnCancelStage1.classList.remove("active");
+        btnActivityParticipate.classList.remove("active");
        if(subTab3) subTab3.style.display = "block";
        if(subTab1) subTab1.style.display = "none";
        if(subTab2) subTab2.style.display = "none";
+        if(subTab4) subTab4.style.display = "none";
+        if(subTab5) subTab5.style.display = "none";
+    });
+    if(btnCancelStage1)
+    {
+        btnCancelStage1.addEventListener("click", function() {
+            // Xóa lớp 'active' từ tất cả các nút và subTabs
+            if(btnConfirmStage0) btnConfirmStage0.classList.remove("active");
+            btnActivityNeedConfirm.classList.remove("active");
+            btnNewButton.classList.remove("active");
+            if(btnCancelStage1) btnCancelStage1.classList.add("active");
+            btnActivityParticipate.classList.remove("active");
+            if(subTab4) subTab4.style.display = "block";
+            if(subTab1) subTab1.style.display = "none";
+            if(subTab2) subTab2.style.display = "none";
+            if(subTab3) subTab3.style.display = "none";
+            if(subTab5) subTab5.style.display = "none";
+        });
+    }
+    btnActivityParticipate.addEventListener("click", function () {
+        // Xóa lớp 'active' từ tất cả các nút và subTabs
+        if (btnConfirmStage0) btnConfirmStage0.classList.remove("active");
+        btnActivityNeedConfirm.classList.remove("active");
+        btnNewButton.classList.remove("active");
+        if (btnCancelStage1) btnCancelStage1.classList.remove("active");
+        btnActivityParticipate.classList.add("active");
 
+        // Xóa lớp 'active' từ tất cả các subTabs
+        if (subTab1) subTab1.style.display = "none";
+        if (subTab2) subTab2.style.display = "none";
+        if (subTab3) subTab3.style.display = "none";
+        if (subTab4) subTab4.style.display = "none";
+        if (subTab5) subTab5.style.display = "block";
     });
 })
 
@@ -480,4 +520,78 @@ $(document).ready(function() {
         }
     });
 })
+// View Detail Information Activity
+var mahoatdong;
+$(document).ready(function () {
+    var btnViewDetailActivity = document.getElementsByClassName('viewDetailActivity');
+    //var viewConfirmActivity =document.getElementById("viewConfirmActivity");
+    for(btn of btnViewDetailActivity){
+        btn.addEventListener("click", async (e) => {
+            console.log('maHD: ', e.target.dataset.value);
+            mahoatdong = e.target.dataset.value;
+            // var response = await fetch(`/get-member-need-confirm?maHD=${maHD}`, {
+            //     method: 'GET',
+            // });
+            var response = await fetch(`/check-activity?maHD=${mahoatdong}`)
+            if(!response.ok){
+                console.log("error:", response.status);
 
+            } else{
+                var result = await response.json();
+                var hoatdong = result.hoatdong;
+                var isCondition = result.isConditionMet;
+                var taikhoan = result.taikhoan;
+                var thanhvien = result.thanhvien;
+                var thanhvienList = result.thanhvienList;
+                var checkDangky = result.checkDangky;
+                var sotnv= result.sotnv;
+                console.log(taikhoan.hoTen);
+                console.log(thanhvienList);
+                // Sử dụng hoatdong và isCondition theo nhu cầu của bạn
+                console.log("Hoatdong:", hoatdong);
+                console.log("isCondition:", isCondition);
+                if(isCondition)
+                {
+                     window.location.href = '/Join?id=' + mahoatdong  ;
+                }else{
+                    console.log("mo modal nho");
+                    displayModal(hoatdong);
+                }
+
+            }
+        });
+    }
+
+    function displayModal(hoatdong) {
+        // Get the modal element by ID
+        //var modal = document.getElementById('ViewHoaDongModal');
+        console.log(" view hoat dong");
+        // Show the modal
+        $('#ViewHoaDongModal').modal("show");
+
+        // Populate modal fields with hoatdong information
+        // Assuming there are elements with IDs like 'txt_NameTopic', 'txt_NameActi', etc.
+        document.getElementById('txt_Chude').value = hoatdong.maChuDe.tenChuDe;
+        document.getElementById('txt_TenHD').value = hoatdong.tenhd;
+        document.getElementById('txt_DiaDiem').value = hoatdong.diaDiem;
+        document.getElementById('txt_TGBD').value = hoatdong.thoiGianBD;
+        document.getElementById('txt_TGKT').value = hoatdong.thoiGianKT;
+        document.getElementById('txt_tnvtt').value = hoatdong.soTNVToiThieu;
+        document.getElementById('txt_tnvtd').value = hoatdong.soTNVToiDa;
+        document.getElementById('txt_MotaHD').value = hoatdong.moTa;
+
+        // Set the image preview if there is an image
+        var userImage = document.getElementById('userImage');
+        if (hoatdong.anh) {
+            userImage.src = hoatdong.anh;
+        } else {
+            userImage.src = '/images/default.webp'; // Default image if no image provided
+        }
+    }
+    var closeButton = document.querySelector('.btnClose');
+    closeButton.onclick = function() {
+        var modal = document.getElementById('ViewHoaDongModal');
+        modal.style.display = 'none';
+    };
+
+})

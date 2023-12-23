@@ -119,6 +119,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     public List<Hoatdong> getAllMyPostNeedConfirm(Integer maTK) {return activityRepository.getAllMyPostNeedConfirm(maTK);}
+    public List<Dangky> getListActivityParticipate(Integer maTK) {return  activityRepository.getListActivityParticipate(maTK);}
     public List<Hoatdong> getMyActivityHappeningNeedMember(Integer maTK) {return activityRepository.getMyActivityHappeningNeedMember(maTK);}
     public void confirmActivityStage0(Integer maHD) { activityRepository.confirmActivityStage0(maHD);}
     public void confirmActivityStage1(Integer maHD) { activityRepository.confirmActivityStage1(maHD);}
@@ -142,4 +143,14 @@ public class ActivityServiceImpl implements ActivityService {
     {
         activityRepository.CancelActivity(maHD,txtHuy);
     }
+    public List<Hoatdong> getListCancel(){ return activityRepository.getListCancel();}
+    public List<Hoatdong> getListCancelByOwner(Integer maTK) {return activityRepository.getListCancelByOwner(maTK);}
+    public boolean CheckActivity(Integer maHD) {
+       Hoatdong hoatdong = activityRepository.getActivityByID(maHD);
+       if (hoatdong.getTinhTrangDuyet()==0 || hoatdong.getTinhTrangHD()==0 ||
+       hoatdong.getTinhTrangDuyet()==-1 || hoatdong.getTinhTrangHD()==-1)
+           return false;
+       else return true;
+    }
+    public Integer countParticipantsByIDHD(Integer maHD){ return  activityRepository.countParticipantsByIDHD(maHD);}
 }

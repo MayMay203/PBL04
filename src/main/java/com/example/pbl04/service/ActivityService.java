@@ -38,6 +38,7 @@ public interface ActivityService {
     void addActivity(Integer maChuDe, String tenHD, String diaDiem, String thoiGianBD, String thoiGianKT,
                      String sotnvtt, String sotnvtd, String moTa, String anh,Integer maTK);
     List<Hoatdong> getAllMyPostNeedConfirm(Integer maTK);
+    List<Dangky> getListActivityParticipate(Integer maTK);
     List<Hoatdong> getMyActivityHappeningNeedMember(Integer maTK);
     void confirmActivityStage0(Integer maHD);
     void confirmActivityStage1(Integer maHD);
@@ -49,4 +50,8 @@ public interface ActivityService {
 //void addActivity(Integer maChuDe, String tenHD, String diaDiem, String thoiGianBD, String thoiGianKT,
 //                 String sotnvtt, String sotnvtd, String moTa,Integer maTK);
 void addMyActivity(Hoatdong hoatdong);
+     List<Hoatdong> getListCancel();
+     List<Hoatdong> getListCancelByOwner(Integer maTK);
+     boolean CheckActivity(Integer maHD);
+     Integer countParticipantsByIDHD(Integer maHD);
 }

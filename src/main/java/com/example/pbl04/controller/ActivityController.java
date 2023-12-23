@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,6 +22,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
 
@@ -57,14 +60,21 @@ public class ActivityController {
         return "TrangChuHoatDong";
     }
     @RequestMapping(value ="/Join")
-    public String showActivityByID(Model model,@RequestParam("id") Integer id, HttpSession session)
+    public String showActivityByID(Model model,@RequestParam("id") Integer id,
+                                   @RequestParam Map<String, String> params,
+                                   HttpSession session)
     {
         sessionService.createSessionModel(model, session);
+        params = params.entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> URLDecoder.decode(entry.getValue(), StandardCharsets.UTF_8)
+                ));
         Taikhoan myaccount = (Taikhoan) model.getAttribute("account");
         Dangky checkDangky = registerService.getDangKyByHDTK(myaccount.getId(), id);
         Taikhoan taikhoan =activityService.getOrganizator(id);
         List<Thanhvien> thanhvienList =activityService.getMemberList(id);
-        Thanhvien thanhvien=activityService.getMemberByID(taikhoan.getId());
+        Thanhvien  thanhvien=activityService.getMemberByID(taikhoan.getId());
         Hoatdong hoatdong = activityService.getActivityByID(id);
         model.addAttribute("hoatdong",hoatdong);
         model.addAttribute("taikhoan",taikhoan);

@@ -1,5 +1,6 @@
 package com.example.pbl04.controller;
 
+import com.example.pbl04.entity.Dangky;
 import com.example.pbl04.entity.Hoatdong;
 import com.example.pbl04.entity.Taikhoan;
 import com.example.pbl04.entity.Thanhvien;
@@ -19,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ConfirmController {
@@ -45,6 +48,8 @@ public class ConfirmController {
                 List<Integer> countConfirm =new ArrayList<>();
                 List<Integer> countConfirmed=new ArrayList<>();
                 List<Hoatdong> listPost = new ArrayList<>();
+                List<Hoatdong> listCancelActivity= new ArrayList<>();
+                List<Dangky> listActivityParticipate = new ArrayList<>();
                 if(myaccount.getLoaiTK())
                 {
                     listmyActivity = activityService.getAllMyPostNeedConfirm(myaccount.getId()); //Bao gồm hoạt động chưa xét duyệt, đã xét duyệt, đã huy.....
@@ -52,6 +57,8 @@ public class ConfirmController {
                      countConfirm= activityService.countConfirm(listmyAcitivityNeedConfirm);
                      countConfirmed = activityService.countConfirmed(listmyAcitivityNeedConfirm);
                     listPost= activityService.getAllActiviyPost();
+                    listCancelActivity = activityService.getListCancel();
+                    listActivityParticipate = activityService.getListActivityParticipate(myaccount.getId());
                     model.addAttribute("listPost",listPost);
                 }
                 else if(!myaccount.getLoaiTK()){
@@ -59,11 +66,15 @@ public class ConfirmController {
                     listmyAcitivityNeedConfirm = activityService.getAllMyActivityNeedConfirm(myaccount.getId());
                     countConfirm= activityService.countConfirm(listmyAcitivityNeedConfirm);
                     countConfirmed = activityService.countConfirmed(listmyAcitivityNeedConfirm);
+                    listActivityParticipate = activityService.getListActivityParticipate(myaccount.getId());
+
                 }
                 model.addAttribute("listmyActivity",listmyActivity);
                 model.addAttribute("listmyAcitivityNeedConfirm",listmyAcitivityNeedConfirm);
                 model.addAttribute("countConfirm",countConfirm);
                 model.addAttribute("countConfirmed",countConfirmed);
+                model.addAttribute("listCancelActivity",listCancelActivity);
+                model.addAttribute("listActivityParticipate",listActivityParticipate);
             }
             return "XetDuyet";
         }
@@ -130,6 +141,29 @@ public class ConfirmController {
     public void CancelPost(@RequestParam("maHD") Integer maHD,@RequestParam String txtHuy)
     {
         activityService.CancelActivity(maHD,txtHuy);
+    }
+    @GetMapping("/check-activity")
+    @ResponseBody
+    public Map<String, Object> CheckActivity(@RequestParam("maHD") Integer maHD,Model model, HttpSession session)
+    {
+        Hoatdong hoatdong = activityService.getActivityByID(maHD);
+        boolean isConditionMet = activityService.CheckActivity(maHD);
+        sessionService.createSessionModel(model, session);
+        Taikhoan myaccount = (Taikhoan) model.getAttribute("account");
+        Dangky checkDangky = registerService.getDangKyByHDTK(myaccount.getId(), maHD);
+        Taikhoan taikhoan =activityService.getOrganizator(maHD);
+        List<Thanhvien> thanhvienList =activityService.getMemberList(maHD);
+        Thanhvien thanhvien=activityService.getMemberByID(taikhoan.getId());
+        Integer sotnv= activityService.countParticipantsByIDHD(maHD);
+        Map<String, Object> result = new HashMap<>();
+        result.put("hoatdong", hoatdong);
+        result.put("isConditionMet", isConditionMet);
+        result.put("taikhoan", taikhoan);
+        result.put("thanhvien", thanhvien);
+        result.put("thanhvienList", thanhvienList);
+        result.put("checkDangky", checkDangky);
+        result.put("sotnv",sotnv);
+        return result;
     }
 
 }

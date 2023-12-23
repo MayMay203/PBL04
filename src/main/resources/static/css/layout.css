@@ -712,15 +712,15 @@
     width: 4rem !important;
 
 }
-#btnConfirmStage0,#btnConfirmStage1, #btnActivityNeedConfirm{
+#btnConfirmStage0,#btnConfirmStage1, #btnActivityNeedConfirm,#btnCancelStage1,#btnActivityParticipate{
     text-align: center;
     color: var(--main-color);
 }
-#btnConfirmStage0:hover, #btnConfirmStage1:hover,#btnActivityNeedConfirm:hover{
+#btnConfirmStage0:hover, #btnConfirmStage1:hover,#btnActivityNeedConfirm:hover,#btnCancelStage1:hover,#btnActivityParticipate:hover{
     cursor: pointer;
     background-color: rgb(166, 246, 175,1);
 }
-#btnConfirmStage0.active,#btnConfirmStage1.active, #btnActivityNeedConfirm.active{
+#btnConfirmStage0.active,#btnConfirmStage1.active, #btnActivityNeedConfirm.active ,#btnCancelStage1.active,#btnActivityParticipate.active{
     background-color: rgb(166, 246, 175,0.5);
     border-bottom: 3px solid #2c832b;
 }
