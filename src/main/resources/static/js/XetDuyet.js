@@ -1,4 +1,4 @@
-// Chuyển tab
+//--------------------------Chuyen tab------------------------------//
 document.addEventListener("DOMContentLoaded", function () {
     const $ = document.querySelector.bind(document);
     const $$ = document.querySelectorAll.bind(document);
@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 })
 
-//show modal duyet bai dang
+//-----------------show modal duyet bai dang-------------------------//
 $(document).ready(function () {
     var btnShowModal = document.getElementById("buttonConfirmPostStage0");
     btnShowModal.addEventListener("click", function () {
@@ -142,7 +142,7 @@ $(document).ready(function () {
     }
 });
 
-// Duyệt bài đăng
+//------------------------------------ Duyệt bài đăng--------------------------//
 $(document).ready(function () {
     $('#btnConfirmActivityStage0').on('click', function () {
         var maHD = $(this).data('hoatdong-id');
@@ -189,7 +189,7 @@ $(document).ready(function () {
 
 
 
-//
+//--------------------show modal duyet hoat dong------------------//
 $(document).ready(function () {
     var btnShowModal = document.getElementById("buttonConfirmPostStage1");
     btnShowModal.addEventListener("click", function () {
@@ -208,6 +208,7 @@ $(document).ready(function () {
         $('#confirmStage1').modal("hide");
     }
 });
+//-----------------------Duyet hoat dong--------------------------//
 $(document).ready(function () {
     $('#btnConfirmActivityStage1').on('click', function () {
         var maHD = $(this).data('hoatdong-id');
@@ -252,7 +253,7 @@ $(document).ready(function () {
     });
 })
 
-// Duyệt thành vien
+//----------------------------------Show modal duyet thành vien------------------------//
 var maHD;
 $(document).ready(function () {
     var btnViewPartici = document.getElementsByClassName('viewParticipant');
@@ -311,7 +312,7 @@ $(document).ready(function () {
         // }
     });
 })
-
+//-----------------------------------Duyet thanh vien-----------------------//
 $(document).on('click', '#btnConfirmPartici', function () {
     console.log('Button clicked!');
         var selectedIds = [];
@@ -364,6 +365,7 @@ function switchToMemberTabAndReload() {
 // $('.tabs .tab-item:nth-child(2)').addClass('active');
 // $('.tab-content .tab-pane').removeClass('active');
 // $('#subTab3').addClass('active');
+//-------------------------------show modal thanh vien da duoc duyetj----------------//
 $(document).ready(function () {
 
     var btnViewMember = document.getElementsByClassName('viewParticipanted');
@@ -413,6 +415,7 @@ $(document).ready(function () {
         });
     }
 })
+//-----------------------------xoa duyet thanh vien---------------------//
 $(document).on('click', '#btnCancelPartici', function () {
     var selectedIdCancel = [];
     $('#MemberModal .modal-body-member input[type="checkbox"]:checked').each(function () {
@@ -446,7 +449,7 @@ $(document).on('click', '#btnCancelPartici', function () {
         }
     });
 });
-//Hủy bài viết - hoạt động
+//--------------------------Show modal Hủy bài viết - hoạt động----------------------//
 var idHD;
 $(document).ready(function() {
     const activityCancelButtons = document.querySelectorAll('.btnCancelPost, .btnCancelActivity');
@@ -477,32 +480,73 @@ $(document).ready(function() {
     activityCancelButtons.forEach(button => button.addEventListener('click', handleCancelClick));
 })
 
-
+//-----------------------Huy bai viet- Hoat dong---------------------------//
 var check=false;
 $(document).ready(function() {
     $(".btnSave").on("click", function() {
         // Get the value from the txt_mota textarea
         var txtMotaValue = $("#txt_mota").val();
+        var txt_mota = $("#txt_mota");
 
-        // Make an AJAX request to update the activity information
-        $.ajax({
-            url: '/cancel-post',
-            type: 'POST',
-            data: {'maHD': idHD,txtHuy: txtMotaValue,
-            },
-            success: function(response) {
-                // Handle success
-                console.log(response);
-                updateModalContent("Hủy bài đăng thành công");
-                check=true;
-                hideButtons();
-                console.log("Huy bai dang thanh cong");
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
+        if (txtMotaValue.trim() === '') {
+            txt_mota.addClass("is-invalid");
+            txt_mota.siblings(".invalid-feedback").text("Vui lòng nhập lý do hủy hoạt động");
+            $('#ThemHoatDongModal').modal('show');
+        } else {
+            $.ajax({
+                url: '/cancel-post',
+                type: 'POST',
+                data: {
+                    'maHD': idHD, txtHuy: txtMotaValue,
+                },
+                success: function (response) {
+                    // Handle success
+                    console.log(response);
+                    updateModalContent("Hủy bài đăng thành công");
+                    check = true;
+                    hideButtons();
+                    console.log("Huy bai dang thanh cong");
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
     });
+
+
+
+    // $("#ThemHoatDongModal").submit(function (e) {
+    //     e.preventDefault();
+    //
+    //     // Manually trigger the form validation
+    //     if (this.checkValidity()) {
+    //         var txtMotaValue = $("#txt_mota").val();
+    //
+    //         // Make an AJAX request to update the activity information
+    //         $.ajax({
+    //             url: '/cancel-post',
+    //             type: 'POST',
+    //             data: {
+    //                 'maHD': idHD,
+    //                 'txtHuy': txtMotaValue,
+    //             },
+    //             success: function (response) {
+    //                 // Handle success
+    //                 console.log(response);
+    //                 updateModalContent("Hủy bài đăng thành công");
+    //                 check = true;
+    //                 hideButtons();
+    //                 console.log("Huy bai dang thanh cong");
+    //             },
+    //             error: function (error) {
+    //                 console.log(error);
+    //             }
+    //         });
+    //     } else {
+    //         console.log("Form validation failed");
+    //     }
+    // });
     function updateModalContent(newContent) {
         // Update the modal body content
         $('.modal-body-themhd').html(newContent);
@@ -519,19 +563,32 @@ $(document).ready(function() {
             location.reload();
         }
     });
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
 })
-// View Detail Information Activity
+//-----------------------------Xem preview hoat dong(de duyet)-----------------------//
 var mahoatdong;
 $(document).ready(function () {
     var btnViewDetailActivity = document.getElementsByClassName('viewDetailActivity');
-    //var viewConfirmActivity =document.getElementById("viewConfirmActivity");
+
     for(btn of btnViewDetailActivity){
         btn.addEventListener("click", async (e) => {
             console.log('maHD: ', e.target.dataset.value);
             mahoatdong = e.target.dataset.value;
-            // var response = await fetch(`/get-member-need-confirm?maHD=${maHD}`, {
-            //     method: 'GET',
-            // });
             var response = await fetch(`/check-activity?maHD=${mahoatdong}`)
             if(!response.ok){
                 console.log("error:", response.status);
@@ -544,7 +601,7 @@ $(document).ready(function () {
                 var thanhvien = result.thanhvien;
                 var thanhvienList = result.thanhvienList;
                 var checkDangky = result.checkDangky;
-                var sotnv= result.sotnv;
+
                 console.log(taikhoan.hoTen);
                 console.log(thanhvienList);
                 // Sử dụng hoatdong và isCondition theo nhu cầu của bạn
@@ -556,11 +613,32 @@ $(document).ready(function () {
                 }else{
                     console.log("mo modal nho");
                     displayModal(hoatdong);
+                    document.getElementById('txt_sotnv').style.display = 'none';
+                    document.getElementById('labeltnv').style.display = 'none';
                 }
 
             }
         });
     }
+    var btnViewActivityConfirm =document.getElementById("btnViewActivityConfirm");
+    btnViewActivityConfirm.addEventListener("click",async (e)=>{
+        var id = btnViewActivityConfirm.getAttribute('data-value');
+        //var id = $(this).data('value');
+        console.log("id:",id);
+        var response = await fetch(`/check-activity?maHD=${id}`)
+        if(!response.ok){
+            console.log("error:", response.status);
+        } else {
+            var result = await response.json();
+            var hoatdong = result.hoatdong;
+            var sotnv= result.sotnv;
+            displayModal(hoatdong);
+            document.getElementById('txt_sotnv').style.display = 'block';
+            document.getElementById('labeltnv').style.display = 'block';
+            document.getElementById('txt_sotnv').value =sotnv;
+
+        }
+    })
 
     function displayModal(hoatdong) {
         // Get the modal element by ID

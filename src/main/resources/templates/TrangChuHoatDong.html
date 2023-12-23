@@ -59,7 +59,7 @@
                         <div class="Content_left-item">
                             <div class="act-slider" >
                                 <div class="container-item" th:each="i : ${#numbers.sequence(0, actiListUpcomming.size() div 4 + ((actiListUpcomming.size()%4 > 0) ? 1 : 0) - 1)}">
-                                    <div class="card mb-5"  th:each="j:${#numbers.sequence(0,4)}" th:if="${(4*i+j)<actiListUpcomming.size()}">
+                                    <div class="card mb-5"  th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<actiListUpcomming.size()}">
                                         <div class="row g-0">
                                             <div class="col-md-3">
                                                 <img th:src="@{${actiListUpcomming.get((4*i)+j).getMaHD().getAnh()}}" class="img-fluid rounded-start" alt="...">
@@ -78,7 +78,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>

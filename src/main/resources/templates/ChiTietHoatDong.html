@@ -205,16 +205,16 @@
         <h5 class="modal-title modal-title-member" id="exampleModalLabel">TÌNH NGUYỆN VIÊN</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body modal-body-member" th:each="thanhvien : ${thanhvienList}">
-        <div class="modal-member">
-                        <span>
-                            <img class="modal-member-ava" src="../static/images/ava1.jpg" alt="">
-                            <span class="modal-member-name" th:text="${thanhvien.getHoTen()}"></span>
-                        </span>
+      <div class="modal-body modal-body-member">
+        <div class="modal-member"  th:each="thanhvien : ${thanhvienList}">
+           <span>
+             <img class="modal-member-ava" src="../static/images/ava1.jpg" alt="">
+             <span class="modal-member-name" th:text="${thanhvien.getHoTen()}"></span>
+          </span>
           <span class="modal-member-rate">
-                            <i class="rate-detail" >5</i>
-                            <i class="bi bi-star-fill icon-star"></i>
-                        </span>
+            <i class="rate-detail" >5</i>
+            <i class="bi bi-star-fill icon-star"></i>
+          </span>
         </div>
         </div>
       </div>

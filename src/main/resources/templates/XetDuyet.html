@@ -117,8 +117,7 @@
                                       </div>
                                       <div class="card-link my-1 ">
                                           <button
-                                                  class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5 viewDetailActivity" th:attr="data-value=${listPost.get(4*i+j).getId()}" >Xem
-                                              chi tiết...</button>
+                                                  class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5 viewDetailActivity" th:attr="data-value=${listPost.get(4*i+j).getId()}" >Xem chi tiết...</button>
                                       </div>
                                       <div class="custom-btn pt-2">
                                           <button class="custom-btnConfirm" id="buttonConfirmPostStage0">Duyệt bài đăng</button>
@@ -161,9 +160,7 @@
                                         <i class="bi bi-calendar2 m-1  green-color" th:text="'   ' + ${listmyAcitivityNeedConfirm.get(4*i+j).getThoiGianBD() + '  -  ' + listmyAcitivityNeedConfirm.get(4*i+j).getThoiGianKT()}"></i>
                                     </div>
                                     <div class="card-link my-1 ">
-                                        <button
-                                                class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5 viewDetailActivity"  th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).getId()}" >Xem
-                                            chi tiết...</button>
+                                        <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5"  id="btnViewActivityConfirm" th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).getId()}" >Xem chi tiết...</button>
                                     </div>
                                     <div class="custom-btn pt-2">
                                         <button class="custom-btnConfirm" id="buttonConfirmPostStage1">Duyệt hoạt động</button>
@@ -188,6 +185,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -207,8 +205,7 @@
                                         </div>
                                         <div class="card-link my-1 ">
                                             <button
-                                                    class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5 viewDetailActivity" th:attr="data-value=${listCancelActivity.get(4*i+j).getId()}" >Xem
-                                                chi tiết...</button>
+                                                    class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5 viewDetailActivity" th:attr="data-value=${listCancelActivity.get(4*i+j).getId()}" >Xem chi tiết...</button>
                                         </div>
 <!--                                        <div class="custom-btn pt-2">-->
 <!--                                            <button class="custom-btnConfirm" id="buttonConfirmPostStage1">Duyệt hoạt động</button>-->
@@ -312,7 +309,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btnSave"><i class="bi bi-floppy2"></i> Đồng ý</button>
+                    <button type="submit" class="btnSave"><i class="bi bi-floppy2"></i> Đồng ý</button>
                     <button type="button" class="btnCancel"><i class="bi bi-x-circle-fill"></i> Hủy thay đổi</button>
                 </div>
             </form>
@@ -376,7 +373,11 @@
                             <div class="col-md-3 lbHD"><i class="bi bi-person-dash"></i>SỐ TNV TỐI ĐA</div>
                             <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnvTT" id="txt_tnvtd" readonly></div>
                             <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>
-                            <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnvTT" id="txt_sotnv" readonly></div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5 lbHD" id="labeltnv"><i class="bi bi-person-dash"></i>SỐ TÌNH NGUYỆN VIÊN ĐÃ ĐĂNG KÝ:</div>
+                            <div class="col-md-7"><input class="txt-tnv form-control" type="text" name="txt_tnvTT" id="txt_sotnv" readonly></div>
                         </div>
                         <br>
                         <div class="row">
