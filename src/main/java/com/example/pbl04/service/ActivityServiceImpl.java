@@ -13,6 +13,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -47,6 +48,8 @@ public class ActivityServiceImpl implements ActivityService {
     }
     public List<Dangky> getActivityUpcomming(){return activityRepository.getActivityUpcomming();}
     public List<Hoatdong> getActivityHappening() {return activityRepository.getActivityHappening();}
+    public List<Hoatdong> getAllActiviyPost() {return activityRepository.getAllActiviyPost();}
+    public List<Hoatdong> getMyActivityConfirm(Integer maTK) {return activityRepository.getMyActivityConfirm(maTK);}
     public Integer getNumActivity(){return activityRepository.getNumActivity();}
     public Dangky  getDateRegis(Integer mahd){return activityRepository.getDateRegis();}
     public Integer getParticipants() {return activityRepository.getParticipants();}
@@ -115,4 +118,48 @@ public class ActivityServiceImpl implements ActivityService {
         activityRepository.save(hoatdong);
     }
 
+    public List<Hoatdong> getAllMyPostNeedConfirm(Integer maTK) {return activityRepository.getAllMyPostNeedConfirm(maTK);}
+    public List<Dangky> getListActivityParticipate(Integer maTK) {return  activityRepository.getListActivityParticipate(maTK);}
+    public List<Hoatdong> getMyActivityHappeningNeedMember(Integer maTK) {return activityRepository.getMyActivityHappeningNeedMember(maTK);}
+    public void confirmActivityStage0(Integer maHD) { activityRepository.confirmActivityStage0(maHD);}
+    public void confirmActivityStage1(Integer maHD) { activityRepository.confirmActivityStage1(maHD);}
+    public List<Hoatdong> getAllMyActivityNeedConfirm(Integer maTK) {return activityRepository.getAllMyActivityNeedConfirm(maTK);}
+//    public List<Hoatdong> getMyActivityNeedMember(Integer maTK) {return activityRepository.getMyActivityNeedMember(maTK);}
+    public List<Integer> countConfirm(List<Hoatdong> ActList) {
+        List<Integer> countConfirms = new ArrayList<>();
+        for (Hoatdong act : ActList) {
+            countConfirms.add(activityRepository.countConfirm(act.getId()));
+        }
+        return countConfirms;
+    }
+    public List<Integer> countConfirmed(List<Hoatdong> ActList) {
+        List<Integer> countConfirms = new ArrayList<>();
+        for (Hoatdong act : ActList) {
+            countConfirms.add(activityRepository.countConfirmed(act.getId()));
+        }
+        return countConfirms;
+    }
+    public void CancelActivity(Integer maHD, String txtHuy)
+    {
+        activityRepository.CancelActivity(maHD,txtHuy);
+    }
+    public List<Hoatdong> getListCancel(){ return activityRepository.getListCancel();}
+    public List<Hoatdong> getListCancelByOwner(Integer maTK) {return activityRepository.getListCancelByOwner(maTK);}
+    public boolean CheckActivity(Integer maHD) {
+       Hoatdong hoatdong = activityRepository.getActivityByID(maHD);
+       if (hoatdong.getTinhTrangDuyet()==0 || hoatdong.getTinhTrangHD()==0 ||
+       hoatdong.getTinhTrangDuyet()==-1 || hoatdong.getTinhTrangHD()==-1)
+           return false;
+       else return true;
+    }
+    public Integer countParticipantsByIDHD(Integer maHD){ return  activityRepository.countParticipantsByIDHD(maHD);}
+
+    @Override
+    public List<Integer> countActByLocation(List<String> locationList) {
+       List<Integer> countList = new ArrayList<>();
+       for(String location:locationList){
+           countList.add(activityRepository.countActByLocation(location));
+       }
+       return countList;
+    }
 }

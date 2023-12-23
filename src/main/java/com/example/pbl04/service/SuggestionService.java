@@ -8,7 +8,7 @@ public interface SuggestionService {
     List<Dexuat> getAllSuggest();
     List<Dexuat> getSuggestionByTitle(String NameTitle);
     List<Dexuat> getSuggestionByIdTitle(Integer NameTitle);
-    List<Integer> CountSuggestion(List<Dexuat> suggestionList);
+//    List<Integer> CountSuggestion(List<Dexuat> suggestionList);
 
     void Save(Dexuat dexuat);
 

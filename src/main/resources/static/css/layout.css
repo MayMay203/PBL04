@@ -27,10 +27,12 @@
     --phase-3:#8BFF44;
     --red:#CC0000;
     --yellow-start:#FFC700;
+    --my-green-light:rgba(166, 246, 175, 0.30);
 }
 .bg-green{
     background-color: var(--sliderback) !important;
 }
+
 .bg-green-back{
     background-color: var(--green-back) !important;
 }
@@ -123,6 +125,10 @@
     color:white !important;;
     text-decoration: none;
 }
+.img-fluid{
+    width: 14rem !important;
+    height: 10rem !important;
+}
 
 .xemttiep{
     color:var(--sliderback) !important;;
@@ -199,14 +205,13 @@
     border: var(--border);
 }
 .card:nth-child(odd) {
-    background-color: var(--green-light);
+    background-color: var(--green-light) !important;
     color: #fff;
 }
 
 .card:nth-child(even) {
-    background-color: #fff;
+    background-color: #fff !important;
     color: #000;
-
 }
 .custom-margin{
     margin-bottom: 3rem;
@@ -604,140 +609,13 @@
     width: 48%;
 }
 
-.tabs {
-    display: flex;
-    position: relative;
-}
-.tabs .line {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0;
-    height: 6px;
-    border-radius: 15px;
-    background-color: var(--sear);
-    transition: all 0.2s ease;
-}
-.tab-item {
-    min-width: 80px;
-    padding: 16px 20px 11px 20px;
-    font-size: 20px;
-    text-align: center;
-    color: var(--sear);
-    background-color: #fff;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom: 5px solid transparent;
-    opacity: 0.6;
-    cursor: pointer;
-    transition: all 0.5s ease;
-}
-.tab-icon {
-    font-size: 24px;
-    width: 32px;
-    position: relative;
-    top: 2px;
-}
-.tab-item:hover {
-    opacity: 1;
-    background-color: var(--green-light);
-    border-color: var(--green-phase);
-}
-.tab-item.active {
-    opacity: 1;
-}
-.tab-content {
-    padding: 28px 0;
-}
-.tab-pane {
-    color: #333;
-    display: none;
-}
-.tab-pane.active {
-    display: block;
-}
-.tab-pane h2 {
-    font-size: 24px;
-    margin-bottom: 8px;
-}
-.tab-pane p{
-    color:#000;
-}
 /* tong quan */
-.tongket-title{
-    color:var(--sear);
-    font-weight: 700;
-    margin: 1rem 0 !important;
-}
-.tongket-title-1{
-    color:var(--white);
-    background-color: var(--sear);
-    font-weight: 600;
-    margin: 1rem 0 !important;
-    width: 15rem !important;
-    padding:0.5rem;
-    border-radius: 20px;
-}
-.tongket-title-info{
-    margin-left: 2rem;
-    padding: 0.5rem !important;
-    color:var(--sear);
-    font-weight: 500;
-    font-style: italic;
-}
-.tongket-board{
-    padding: 1rem;
-    background-color: var(--green-light);
-    border-radius: 20px;
-    font-style: italic;
-    white-space: pre-wrap;
-}
-.tongket-end{
-    padding: 1rem;
-    font-style: italic;
-    color:var(--sear);
-    white-space: pre-wrap;
-}
-.image-container {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: var(--green-light);
-    padding: 0.5rem;
-}
 
-.image-container img {
-    max-width: 11.76rem;
-    height: auto;
-    margin: 0.1rem;
-}
-/* Phần bên phải */
-.btn-judge{
-    background-color: var(--btn) !important;
-    color: white !important;
-    width: 9rem;
-    height: 3rem;
-    margin-top: 5rem;
-    border: none;
-    margin-right: -7rem !important;
-}
-/* Thành viên bên tổng kết*/
-.group_member_tongket{
-    width: 17rem;
-    height: 30rem;
-    background-color: var(--green-light);
-    margin-top: 5rem;
-    border: 1px solid var(--border);
-    box-shadow: 0 0 0.05rem #000;
-    margin-left: 9rem;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    z-index: 1;
-
-}
 /* Bảng danh sách tình nguyện viên */
 .modal-body-member{
     padding:0 !important;
+    min-height: 30rem !important;
+    max-height: 30rem !important;
 }
 .modal-header-member{
     background-color: var(--activity);
@@ -758,7 +636,7 @@
 
 }
 .modal-member{
-    background-color: var(--green-light);
+    background-color: var(--green-light) !important;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -773,7 +651,7 @@
     color:var(--yellow-start);
 }
 .modal-member:nth-child(odd) {
-    background-color: var(--green-light);
+    background-color: var(--my-green-light) !important;
     color: #000;
 }
 
@@ -788,3 +666,89 @@
         width: 6rem;
     }
 
+/* Notification */
+.notification-container {
+    /*position: relative;*/
+}
+.notification {
+    display: none;
+    position: absolute;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    height: 7.5rem;
+    width: 11rem;
+    z-index: 1;
+   margin-left: 12rem !important;
+    margin-top: 1rem;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 5px 0 black;
+}
+
+/* Arrow above the notification pointing to the button */
+.notification::before {
+    content: '';
+    position: absolute;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent var(--grey-phase) transparent; /* Đặt màu trong suốt */
+   top:-1rem;  /* Adjust the position to align with the button */
+    left: 50%;
+    transform: translateX(-50%);
+}
+.notification p{
+    color: var(--sear) !important;
+    font-size: 0.7rem;
+}
+.notification button{
+    background-color: var(--btn) ;
+    color: white;
+    padding: 0.2rem;
+    /*border-radius:;*/
+    font-size: 0.8rem;
+    border:none;
+}
+#cancel{
+    width: 4rem !important;
+
+}
+#btnConfirmStage0,#btnConfirmStage1, #btnActivityNeedConfirm,#btnCancelStage1,#btnActivityParticipate{
+    text-align: center;
+    color: var(--main-color);
+}
+#btnConfirmStage0:hover, #btnConfirmStage1:hover,#btnActivityNeedConfirm:hover,#btnCancelStage1:hover,#btnActivityParticipate:hover{
+    cursor: pointer;
+    background-color: rgb(166, 246, 175,1);
+}
+#btnConfirmStage0.active,#btnConfirmStage1.active, #btnActivityNeedConfirm.active ,#btnCancelStage1.active,#btnActivityParticipate.active{
+    background-color: rgb(166, 246, 175,0.5);
+    border-bottom: 3px solid #2c832b;
+}
+.tab-sub-pane {
+    display: none;
+}
+
+.tab-sub-pane.active {
+    display: block;
+}
+.custom-btnConfirm{
+    width: 20rem;
+    height: 2rem;
+    background-color: var(--btn);
+    color:white;
+    border:none;
+}
+.custom-btn{
+    width: 50rem;
+}
+.pt-0-5 {
+    margin-top: -1.7rem !important;
+}
+.modal-footer button.closeModalConfirm, #btnConfirmActivityStage0 ,#btnConfirmActivityStage1{
+    background-color: var(--main-color);
+    border: none;
+    width: 6rem;
+}
+#btnConfirmActivityStage1{
+    width: 10rem;
+}

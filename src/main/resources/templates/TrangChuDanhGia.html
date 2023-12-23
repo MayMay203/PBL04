@@ -64,7 +64,7 @@
                             <div class="card-title fs-6 fw-bolder green-color" th:text="${activityList.get((4*i)+j).getTenhd()}"></div>
                             <div class="card-text my-0" th:text="${#strings.length(activityList.get(4*i+j).getMoTa()) > 150 ? activityList.get(4*i+j).getMoTa().substring(0, 150) + '...' : activityList.get(4*i+j).getMoTa()}"></div>
                             <div class="card-text mx-2 my-1">
-                                <i class="bi bi-calendar2 m-1  green-color" th:text="'   ' + ${activityList.get(4*i+j).getThoiGianBD() + '  -  ' + activityList.get(4*i+j).getThoiGianKT()}"></i>
+                                <i class="bi bi-calendar2 m-1 green-color" th:text="'   ' + ${activityList.get(4*i+j).getThoiGianBD() + '  -  ' + activityList.get(4*i+j).getThoiGianKT()}"></i>
                             </div>
                             <div class="card-link p-0">
                                 <button
@@ -131,7 +131,7 @@
 <!--                Mo ta-->
                 <p class="m-0 p-3 fs-7 modal-Description"></p>
 
-                <div class="container d-flex m-1 justify-content-center border_top-solid images-Activity">
+                <div class="container d-flex m-1 justify-content-center images-Activity">
 <!--                    <img src="../static/images/anh2.jpg" alt="" class="height-10rem flex-1 p-1">-->
 <!--                    <img src="../static/images/anh2.jpg" alt="" class="height-10rem flex-1 p-1">-->
 <!--                    <img src="../static/images/anh2.jpg" alt="" class="height-10rem flex-1 p-1">-->
@@ -139,6 +139,7 @@
                 <!-- Header comment -->
                 <div class="container border_top-solid border_bottom-solid p-2 fs-9 fst-italic modal-number-evaluation"></div>
                 <div class="container modal-comment">
+<!--                    -->
 <!--                    <div class="container d-flex justify-content-sm-end p-2 criteria-evaluation">-->
 <!--                        <h4 class="fs-9 green-color fst-italic me-4 text-center">Hoạt động<br>hữu ích</h4>-->
 <!--                        <h4 class="fs-9 green-color fst-italic me-4 text-center">Cần tổ chức<br>thường xuyên</h4>-->

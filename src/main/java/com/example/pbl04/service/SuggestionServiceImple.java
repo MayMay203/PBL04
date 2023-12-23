@@ -1,7 +1,7 @@
 package com.example.pbl04.service;
 
-import com.example.pbl04.dao.SuggestionRepository;
 import com.example.pbl04.entity.Dexuat;
+import com.example.pbl04.dao.SuggestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,14 +36,14 @@ public class SuggestionServiceImple implements SuggestionService {
         return suggestionRepo.getSuggestionByIdTitle(IdTitle);
     }
 
-    @Override
-    public List<Integer> CountSuggestion(List<Dexuat> suggestionList) {
-        List<Integer> count = new ArrayList<>();
-        for(Dexuat sugg : suggestionList){
-            count.add(suggestionRepo.countSuggestion(sugg.getMaChuDe().getId()).get(0));
-        }
-        return count;
-    }
+//    @Override
+//    public List<Integer> CountSuggestion(List<Dexuat> suggestionList) {
+//        List<Integer> count = new ArrayList<>();
+//        for(Dexuat sugg : suggestionList){
+//            count.add(suggestionRepo.countSuggestion(sugg.getMaChuDe().getId()).get(0));
+//        }
+//        return count;
+//    }
 
     @Override
     public void Save(Dexuat dexuat) {

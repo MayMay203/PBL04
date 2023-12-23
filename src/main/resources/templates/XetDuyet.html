@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css "/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/TongKetHoatDong.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/ThemHoatDong.css}">
+    <script  defer th:src="@{/js/Header.js}"></script>
+</head>
+<body>
+<div id="placeholder" style="height: 87px; display: none;"></div>
+<div id="myHeader" style="top: -87px" th:include="Header :: html"></div>
+<div class="container">
+<div class="row">
+        <div class="tabs">
+            <div class="tab-item active"> Xét duyệt hoạt động</div>
+            <div class="tab-item"> Xét duyệt thành viên</div>
+            <div class="tab-item"> Xét duyệt đề xuất</div>
+            <div class="line"></div>
+        </div>
+
+        <!-- Tab content -->
+        <div class="tab-content">
+            <div class="tab-pane active">
+                <div class="d-flex">
+                    <div id="btnActivityNeedConfirm" class="p-2 flex-fill btnActivity">Hoạt động đã tổ chức</div>
+                    <div id="btnActivityParticipate" class="p-2 flex-fill btnActivity">Hoạt động đã tham gia</div>
+                    <div id="btnConfirmStage0" class="p-2 flex-fill btnActivity" th:if="${account.getLoaiTK()}">Duyệt bài đăng</div>
+                    <div id="btnConfirmStage1" class="p-2 flex-fill btnActivity">Duyệt hoạt động</div>
+                    <div id="btnCancelStage1" class="p-2 flex-fill btnActivity" th:if="${account.getLoaiTK()}">Hoạt động đã hủy</div>
+                </div>
+                <div class="tab-sub-panes">
+                    <div class="tab-sub-pane active" id="subTab2">
+<!--                        tất cả các hoạt động của tôi-->
+                        <div class="container-item" th:if="${not #lists.isEmpty(listmyActivity)}" th:each="i : ${#numbers.sequence(0, listmyActivity.size() div 4 + ((listmyActivity.size()%4 > 0) ? 1 : 0) - 1)}">
+                            <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<listmyActivity.size()}">
+                                <img th:src="@{${listmyActivity.get(4*i+j).getAnh()}}" class="float-start w-10 h-80" alt="" />
+                                <div class="card border-0">
+                                    <div class="card-body fs-7">
+                                        <div class="card-title fs-6 fw-bolder green-color" th:text="${listmyActivity.get((4*i)+j).getTenhd()}"></div>
+                                        <div class="card-text my-0" th:text="${#strings.length(listmyActivity.get(4*i+j).getMoTa()) > 220 ? listmyActivity.get(4*i+j).getMoTa().substring(0, 220) + '...' : listmyActivity.get(4*i+j).getMoTa()}"></div>
+                                        <div class="card-text mx-2 my-1">
+                                            <i class="bi bi-calendar2 m-1  green-color" th:text="'   ' + ${listmyActivity.get(4*i+j).getThoiGianBD() + '  -  ' + listmyActivity.get(4*i+j).getThoiGianKT()}"></i>
+                                        </div>
+
+                                        <div class="card-link">
+                                            <div>
+                                                <i class="fs-7 my-1">Tình trạng:
+                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 0}"> Đang chờ xét duyệt</i>
+                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 1 and listmyActivity.get(4*i+j).getTinhTrangHD() == 1}"> Chưa diễn ra</i>
+                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 2 and listmyActivity.get(4*i+j).getTinhTrangHD() == 1}"> Chưa diễn ra</i>
+                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == -1 and listmyActivity.get(4*i+j).getTinhTrangHD() == -1}"> Bị hủy</i>
+                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 2 and listmyActivity.get(4*i+j).getTinhTrangHD() == 2}"> Đang diễn ra</i>
+                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 2 and listmyActivity.get(4*i+j).getTinhTrangHD() == 3}"> Đã kết thúc</i>
+                                                </i>
+<!--                                                <i>Vai trò:-->
+<!--&lt;!&ndash;                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).get() == 0}"> Đang chờ xét duyệt</i>&ndash;&gt;-->
+<!--                                                </i>-->
+                                            </div>
+
+                                            <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5 viewDetailActivity" th:attr="data-value=${listmyActivity.get(4*i+j).getId()}">Xem chi tiết...</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-sub-pane" id="subTab5">
+                        <!--                        tất cả các hoạt động toi tham gia-->
+                        <div class="container-item" th:if="${not #lists.isEmpty(listActivityParticipate)}" th:each="i : ${#numbers.sequence(0, listActivityParticipate.size() div 4 + ((listActivityParticipate.size()%4 > 0) ? 1 : 0) - 1)}">
+                            <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<listActivityParticipate.size()}">
+                                <img th:src="@{${listActivityParticipate.get(4*i+j).getMaHD().getAnh()}}" class="float-start w-10 h-80" alt="" />
+                                <div class="card border-0">
+                                    <div class="card-body fs-7">
+                                        <div class="card-title fs-6 fw-bolder green-color" th:text="${listActivityParticipate.get((4*i)+j).getMaHD().getTenhd()}"></div>
+                                        <div class="card-text my-0" th:text="${#strings.length(listActivityParticipate.get(4*i+j).getMaHD().getMoTa()) > 220 ? listActivityParticipate.get(4*i+j).getMaHD().getMoTa().substring(0, 220) + '...' : listActivityParticipate.get(4*i+j).getMaHD().getMoTa()}"></div>
+                                        <div class="card-text mx-2 my-1">
+                                            <i class="bi bi-calendar2 m-1  green-color" th:text="'   ' + ${listActivityParticipate.get(4*i+j).getMaHD().getThoiGianBD() + '  -  ' + listActivityParticipate.get(4*i+j).getMaHD().getThoiGianKT()}"></i>
+                                        </div>
+
+                                        <div class="card-link">
+                                            <div>
+                                                <i class="fs-7 my-1">Tình trạng:
+                                                    <i class="fw-medium green_light-color" th:if="${listActivityParticipate.get(4*i+j).getTrangThai() == false}"> Đang chờ xét duyệt</i>
+                                                    <i class="fw-medium green_light-color" th:if="${listActivityParticipate.get(4*i+j).getTrangThai()==true}"> Đã được xét duyệt</i>
+                                                </i>
+                                                <!--                                                <i>Vai trò:-->
+                                                <!--&lt;!&ndash;                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).get() == 0}"> Đang chờ xét duyệt</i>&ndash;&gt;-->
+                                                <!--                                                </i>-->
+                                            </div>
+
+                                            <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5 viewDetailActivity" th:attr="data-value=${listActivityParticipate.get(4*i+j).getMaHD().getId()}">Xem chi tiết...</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-sub-pane" id="subTab1" th:if="${account.getLoaiTK()}">
+                      <div class="container-item" th:if="${listPost != null and not #lists.isEmpty(listPost)}" th:each="i : ${#numbers.sequence(0, listPost.size() div 4 + ((listPost.size()%4 > 0) ? 1 : 0) - 1)}">
+                          <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<listPost.size()}">
+                              <img th:src="@{${listPost.get(4*i+j).getAnh()}}" class="float-start w-10 h-80" alt="" />
+                              <div class="card border-0">
+                                  <div class="card-body fs-7">
+                                      <div class="card-title fs-6 fw-bolder green-color" th:text="${listPost.get((4*i)+j).getTenhd()}"></div>
+                                      <div class="card-text my-0" th:text="${#strings.length(listPost.get(4*i+j).getMoTa()) > 220 ? listPost.get(4*i+j).getMoTa().substring(0, 220) + '...' : listPost.get(4*i+j).getMoTa()}"></div>
+                                      <div class="card-text mx-2 my-1">
+                                          <i class="bi bi-calendar2 m-1  green-color" th:text="'   ' + ${listPost.get(4*i+j).getThoiGianBD() + '  -  ' + listPost.get(4*i+j).getThoiGianKT()}"></i>
+                                      </div>
+                                      <div class="card-link my-1 ">
+                                          <button
+                                                  class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5 viewDetailActivity" th:attr="data-value=${listPost.get(4*i+j).getId()}" >Xem
+                                              chi tiết...</button>
+                                      </div>
+                                      <div class="custom-btn pt-2">
+                                          <button class="custom-btnConfirm" id="buttonConfirmPostStage0">Duyệt bài đăng</button>
+                                          <button class="custom-btnConfirm btnCancelPost" id="buttonCancelPostStage0" th:attr="data-value=${listPost.get(4*i+j).id}">Hủy bài đăng</button>
+                                      </div>
+                                      <div class="modal fade" id="confirmStage0" tabindex="-1" role="dialog" aria-labelledby="confirmStage0ModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                  <div class="modal-header">
+                                                      <h5 class="modal-title" id="confirmStage0ModalLabel">THÔNG BÁO</h5>
+                                                      <button type="button" class="closeModalLogout" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                  </div>
+                                                  <div class="modal-body"  id="modalBodyContent">
+                                                      Xác nhận xét duyệt bài đăng ?
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                      <button type="submit" class="btn btn-danger"  id="btnConfirmActivityStage0"  th:attr="data-hoatdong-id=${listPost.get(4*i+j).id}">Duyệt bài</button>
+                                                      <button type="button" class="close closeModalLogout btn btn-secondary" data-dismiss="modal" >Hủy</button>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                <div class="tab-sub-pane" id="subTab3">
+                    <!--                    <h2 class="tongket-title">HOẠT ĐỘNG CHỜ XÉT DUYỆT</h2>-->
+                    <div class="container-item" th:if="${not #lists.isEmpty(listmyAcitivityNeedConfirm)}" th:each="i : ${#numbers.sequence(0, listmyAcitivityNeedConfirm.size() div 4 + ((listmyAcitivityNeedConfirm.size()%4 > 0) ? 1 : 0) - 1)}">
+                        <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<listmyAcitivityNeedConfirm.size()}">
+                            <img th:src="@{${listmyAcitivityNeedConfirm.get(4*i+j).getAnh()}}" class="float-start w-10 h-80" alt="" />
+                            <div class="card border-0">
+                                <div class="card-body fs-7">
+                                    <div class="card-title fs-6 fw-bolder green-color" th:text="${listmyAcitivityNeedConfirm.get((4*i)+j).getTenhd()}"></div>
+                                    <div class="card-text my-0" th:text="${#strings.length(listmyAcitivityNeedConfirm.get(4*i+j).getMoTa()) > 220 ? listmyAcitivityNeedConfirm.get(4*i+j).getMoTa().substring(0, 220) + '...' : listmyAcitivityNeedConfirm.get(4*i+j).getMoTa()}"></div>
+                                    <div class="card-text mx-2 my-1">
+                                        <i class="bi bi-calendar2 m-1  green-color" th:text="'   ' + ${listmyAcitivityNeedConfirm.get(4*i+j).getThoiGianBD() + '  -  ' + listmyAcitivityNeedConfirm.get(4*i+j).getThoiGianKT()}"></i>
+                                    </div>
+                                    <div class="card-link my-1 ">
+                                        <button
+                                                class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5 viewDetailActivity"  th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).getId()}" >Xem
+                                            chi tiết...</button>
+                                    </div>
+                                    <div class="custom-btn pt-2">
+                                        <button class="custom-btnConfirm" id="buttonConfirmPostStage1">Duyệt hoạt động</button>
+                                        <button class="custom-btnConfirm btnCancelActivity" th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).id}">Hủy hoạt động</button>
+                                    </div>
+                                    <div class="modal fade" id="confirmStage1" tabindex="-1" role="dialog" aria-labelledby="confirmStage0ModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="confirmStage1ModalLabel">THÔNG BÁO</h5>
+                                                    <button type="button" class="closeModalLogout" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body"  id="modalBodyContent2">
+                                                    Xác nhận xét duyệt hoạt động ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-danger"  id="btnConfirmActivityStage1"  th:attr="data-hoatdong-id=${listmyAcitivityNeedConfirm.get(4*i+j).id}">Duyệt hoạt động</button>
+                                                    <button type="button" class="close closeModalLogout btn btn-secondary" data-dismiss="modal" >Hủy</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="tab-sub-pane" id="subTab4" th:if="${account.getLoaiTK()}">
+                        <!--                    <h2 class="tongket-title">HOẠT ĐỘNG CHỜ XÉT DUYỆT</h2>-->
+                        <div class="container-item" th:if="${listCancelActivity!=null and not #lists.isEmpty(listCancelActivity)}" th:each="i : ${#numbers.sequence(0, listCancelActivity.size() div 4 + ((listCancelActivity.size()%4 > 0) ? 1 : 0) - 1)}">
+                            <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<listCancelActivity.size()}">
+                                <img th:src="@{${listCancelActivity.get(4*i+j).getAnh()}}" class="float-start w-10 h-80" alt="" />
+                                <div class="card border-0">
+                                    <div class="card-body fs-7">
+                                        <div class="card-title fs-6 fw-bolder green-color" th:text="${listCancelActivity.get((4*i)+j).getTenhd()}"></div>
+                                        <div class="card-text my-0" th:text="${#strings.length(listCancelActivity.get(4*i+j).getMoTa()) > 220 ? listCancelActivity.get(4*i+j).getMoTa().substring(0, 220) + '...' : listCancelActivity.get(4*i+j).getMoTa()}"></div>
+                                        <div class="card-text mx-2 my-1">
+                                            <i class="bi bi-calendar2 m-1  green-color" th:text="'   ' + ${listCancelActivity.get(4*i+j).getThoiGianBD() + '  -  ' + listCancelActivity.get(4*i+j).getThoiGianKT()}"></i>
+                                        </div>
+                                        <div class="card-link my-1 ">
+                                            <button
+                                                    class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5 viewDetailActivity" th:attr="data-value=${listCancelActivity.get(4*i+j).getId()}" >Xem
+                                                chi tiết...</button>
+                                        </div>
+<!--                                        <div class="custom-btn pt-2">-->
+<!--                                            <button class="custom-btnConfirm" id="buttonConfirmPostStage1">Duyệt hoạt động</button>-->
+<!--                                            <button class="custom-btnConfirm btnCancelActivity" th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).id}">Hủy hoạt động</button>-->
+<!--                                        </div>-->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Hình ảnh hoạt động -->
+            <div class="tab-pane">
+                <h2 class="tongket-title">XÉT DUYỆT THÀNH VIÊN</h2>
+                    <div th:if="${not #lists.isEmpty(listmyAcitivityNeedConfirm)}">
+                    <div class="container-item"  th:each="i : ${#numbers.sequence(0, listmyAcitivityNeedConfirm.size() div 4 + ((listmyAcitivityNeedConfirm.size()%4 > 0) ? 1 : 0) - 1)}">
+                        <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<listmyAcitivityNeedConfirm.size()}">
+                            <img th:src="@{${listmyAcitivityNeedConfirm.get(4*i+j).getAnh()}}" class="float-start w-10 h-80" alt="" />
+                            <div class="card border-0">
+                                <div class="card-body fs-7">
+                                    <div class="card-title fs-6 fw-bolder green-color" th:text="${listmyAcitivityNeedConfirm.get((4*i)+j).getTenhd()}"></div>
+                                    <div class="card-text my-0" th:text="${#strings.length(listmyAcitivityNeedConfirm.get(4*i+j).getMoTa()) > 150 ? listmyAcitivityNeedConfirm.get(4*i+j).getMoTa().substring(0, 150) + '...' : listmyAcitivityNeedConfirm.get(4*i+j).getMoTa()}"></div>
+                                    <div class="card-text mx-2 my-1">
+                                        <i class="bi bi-calendar2 m-1  green-color" th:text="'   ' + ${listmyAcitivityNeedConfirm.get(4*i+j).getThoiGianBD() + '  -  ' + listmyAcitivityNeedConfirm.get(4*i+j).getThoiGianKT()}"></i>
+                                    </div>
+                                    <div class="card-link p-0">
+                                        <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail viewParticipanted" th:text="'Đã xét duyệt(' + ${countConfirmed.get(4*i+j)} + ')'" th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).id}" data-target="#MemberModal"></button>
+                                        <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail viewParticipant" th:text="'Chờ xét duyệt(' + ${countConfirm.get(4*i+j)} + ')'" th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).id}" data-target="#MemberModal"></button>
+                                    </div>
+
+<!--                                th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).getId()}"-->
+                                <div class="modal fade" id="MemberModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-member-member">
+                                        <div class="modal-content modal-content-member">
+                                            <div class="modal-header modal-header-member">
+                                                <h5 class="modal-title modal-title-member" id="exampleModalLabel">TÌNH NGUYỆN VIÊN</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body modal-body-member">
+                                                <div class="modal-member">
+                                                   <span>
+                                                      <img class="modal-member-ava" src="" alt="">
+                                                      <span class="modal-member-name" ></span>
+                                                   </span>
+                                                    <span class="modal-member-rate">
+                                                        <i class="rate-detail" ></i>
+                                                        <i class="bi bi-star-fill icon-star"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!--Xet duyet de xuat-->
+            <div class="tab-pane">hihi</div>
+        </div>
+        </div>
+    </div>
+<!--Modal hủy hoạt động -->
+<div class="modal fade" id="ThemHoatDongModal" tabindex="-1" aria-labelledby="ModalCancelActivity" aria-hidden="true">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content">
+            <form class="needs-validation" id="myFormActivity" novalidate>
+                <div class="modal-header  modal-header-themhd ">
+                    <h5 class="modal-title modal-title-themhd "id="ModalCancelActivity" >Hủy hoạt động</h5>
+                    <button type="button" class="btn-close btnClose btnCancel" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body modal-body-themhd">
+                    <div class="container modal-body-detail">
+
+                        <div class="row">
+                            <div class="col-md-3"><label class="lbHD" for="txt_NameTopic"><i class="bi bi-pencil-square"></i>CHỦ
+                                ĐỀ</label></div>
+                            <div class="col-md-9"><input class="textfieldHD form-control" type="text" name="txt_NameTopic"
+                                                         id="txt_NameTopic" readonly></div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3"><label class="lbHD" for="txt_NameActi"><i class="bi bi-fire"></i>TÊN HOẠT
+                                ĐỘNG</label></div>
+                            <div class="col-md-9"> <input class="textfieldHD form-control" type="text" name="txt_NameActi"
+                                                          id="txt_NameActi" readonly></div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3 lbHD"><i class="bi bi-menu-up"></i> Lý do hủy</div>
+                            <div class="col-md-9">
+                                <textarea name="txt_mota" id="txt_mota" class="form-control" style="height: 20rem;" cols="30" rows="20" required></textarea>
+                            </div>
+                            <div class="invalid-feedback">Vui lòng nhập lý do hủy hoạt động</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btnSave"><i class="bi bi-floppy2"></i> Đồng ý</button>
+                    <button type="button" class="btnCancel"><i class="bi bi-x-circle-fill"></i> Hủy thay đổi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="ViewHoaDongModal" tabindex="-1" aria-labelledby="viewHoatDongModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-themhd">
+        <div class="modal-content modal-content-themhd">
+            <form class="needs-validation" id="ViewFormActivity" novalidate>
+                <div class="modal-header  modal-header-themhd ">
+                    <h5 class="modal-title modal-title-themhd " id="viewHoatDongModal" >THÊM HOẠT ĐỘNG</h5>
+                    <button type="button" class="btn-close btnClose" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body modal-body-themhd">
+                    <div class="container modal-body-detail">
+
+                        <div class="row">
+                            <div class="col-md-3"><label class="lbHD" for="txt_NameTopic"><i class="bi bi-pencil-square"></i>CHỦ
+                                ĐỀ</label></div>
+                            <div class="col-md-9"><input class="textfieldHD form-control" type="text" name="txt_NameTopic"
+                                                         id="txt_Chude" readonly></div>
+                            <div class="invalid-feedback">Vui lòng nhập tên chủ đề</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3"><label class="lbHD" for="txt_NameActi"><i class="bi bi-fire"></i>TÊN HOẠT
+                                ĐỘNG</label></div>
+                            <div class="col-md-9"> <input class="textfieldHD form-control" type="text" name="txt_NameActi"
+                                                          id="txt_TenHD" readonly></div>
+                            <div class="invalid-feedback">Vui lòng nhập tên hoạt động</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3"> <label class="lbHD" for="txt_DiaDiem"><i class="bi bi-geo-alt-fill"></i>ĐỊA
+                                ĐIỂM</label></div>
+                            <div class="col-md-9"><input class="textfieldHD form-control" type="text" name="txt_Location"
+                                                         id="txt_DiaDiem" readonly></div>
+                            <div class="invalid-feedback">Vui lòng nhập địa điểm</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="lbHD" for="txt_TGBD"><i class="bi bi-calendar-minus"></i>THỜI GIAN BẮT ĐẦU</label>
+                            </div>
+                            <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="txt_dateBD" id="txt_TGBD" readonly></div>
+                            <div class="invalid-feedback">Vui lòng chọn thời gian bắt đầu</div>
+                            <div class="col-md-3">
+                                <label class="lbHD" for="txt_TGKT"><i class="bi bi-calendar-minus"></i>THỜI GIAN KẾT THÚC</label>
+                            </div>
+                            <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="txt_dateKT" id="txt_TGKT" readonly></div>
+                            <div class="invalid-feedback">Vui lòng chọn thời gian kết thúc</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3 lbHD"><i class="bi bi-people-fill"></i>SỐ TNV TỐI THIỂU</div>
+                            <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnv" id="txt_tnvtt" readonly></div>
+                            <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>
+                            <div class="col-md-3 lbHD"><i class="bi bi-person-dash"></i>SỐ TNV TỐI ĐA</div>
+                            <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnvTT" id="txt_tnvtd" readonly></div>
+                            <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>
+                            <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnvTT" id="txt_sotnv" readonly></div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3 lbHD"><i class="bi bi-menu-up"></i>MÔ TẢ</div>
+                            <div class="col-md-9">
+                                <textarea name="txt_mota" id="txt_MotaHD" class="form-control" cols="71" rows="20" readonly></textarea>
+                            </div>
+                            <div class="invalid-feedback">Vui lòng nhập mô tả hoạt động</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3 lbHD"><i class="bi bi-card-image" ></i>HÌNH ẢNH</div>
+                            <div class="col-md-9">
+                                <label for="imageInput" id="imagePreviewLabel">
+                                    <div id="imagePreview" class="image-preview">
+                                        <input type="file" id="imageInput" accept="image/jpeg, image/png, image/gif" style="display: none"
+                                              disabled>
+                                        <img id="userImage" th:src="@{/images/default.webp}" alt="Hình ảnh người dùng" >
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--                <div class="modal-footer modal-footer-themhd">-->
+<!--                    <button type="submit" class="btnSave"><i class="bi bi-floppy2"></i> Lưu thay đổi</button>-->
+<!--                    <button type="button" class="btnCancel" onclick="resetFormFields()"><i class="bi bi-x-circle-fill"></i> Hủy thay-->
+<!--                        đổi</button>-->
+<!--                </div>-->
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script th:src="@{/js/XetDuyet.js}" defer="defer"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</html>

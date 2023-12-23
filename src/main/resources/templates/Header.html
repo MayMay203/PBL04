@@ -169,7 +169,7 @@
                     <a class="nav-link" th:href="@{/trang-chu-tong-ket}">Tổng kết</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Xét duyệt</a>
+                    <a class="nav-link" th:href="@{xet-duyet-hoat-dong}">Xét duyệt</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/de-xuat}">Đề xuất</a>
@@ -252,7 +252,6 @@
                 </form>
             </div>
         </div>
-
     </div>
 <!--modla thêm hoạt động-->
 <div class="modal fade" id="ThemHoatDongModal" tabindex="-1" aria-labelledby="addActivityModalLabel" aria-hidden="true" th:if="${isLogin}">

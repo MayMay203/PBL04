@@ -6,6 +6,7 @@ import com.example.pbl04.dao.RegisRepository;
 import com.example.pbl04.entity.Dangky;
 import com.example.pbl04.entity.Hoatdong;
 import com.example.pbl04.entity.Taikhoan;
+import com.example.pbl04.entity.Thanhvien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,4 +46,5 @@ public class RegisterServiceImple implements RegisterService {
     public List<Dangky> getRegisterInforByIDAct(Integer IdAct) {
         return regisRepository.getRegisterInforByIDAct(IdAct);
     }
+//    public List<Thanhvien> getAllMyParticipants(Integer maTK) {return regisRepository.getAllMyParticipants(maTK);}
 }
