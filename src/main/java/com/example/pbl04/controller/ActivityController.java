@@ -6,6 +6,7 @@ import com.example.pbl04.service.RegisterService;
 import com.example.pbl04.service.SessionService;
 import com.example.pbl04.service.TopicService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
@@ -205,4 +203,9 @@ public class ActivityController {
         Hoatdong hd = activityService.getActivityByID(maHD);
         return hd;
     }
+//    @Transactional
+//    public void updateTrangThaiForExpiredEntities() {
+//        Date currentDate = new Date();
+//        activityService.updateTrangThaiByNgayAndTrangThai(currentDate);
+//    }
 }

@@ -192,8 +192,33 @@ $(document).ready(function () {
 //--------------------show modal duyet hoat dong------------------//
 $(document).ready(function () {
     var btnShowModal = document.getElementById("buttonConfirmPostStage1");
-    btnShowModal.addEventListener("click", function () {
-        showConfirmModal();
+    var idhd;
+    btnShowModal.addEventListener("click", async (e) => {
+        idhd = e.target.dataset.hoatdongId;
+        //idhd =  $(this).data('hoatdong-id');
+        var response = await fetch(`/check-participant?maHD=${idhd}`)
+        if(!response.ok){
+            console.log("error:", response.status);
+        } else {
+            var result = await response.json();
+            var hoatdong = result.hoatdong;
+            var sotnv= result.sotnv;
+            var checkParticipant = result.checkParticipant;
+            if(checkParticipant)
+            {
+               // document.getElementsByClassName('incorrect-participant').style.display = 'none';
+                var element = document.getElementsByClassName('incorrect-participant')[0];
+                if (element) {
+                    element.style.display = 'none';
+                }
+                showConfirmModal();
+            }else{
+                document.getElementById('txt_stnvtt').value= hoatdong.soTNVToiThieu;
+                document.getElementById('txt_stnvtd').value =hoatdong.soTNVToiDa;
+                document.getElementById('txt_stnv').value =sotnv;
+                showConfirmModal();
+            }
+        }
     });
 
     confirmStage0Modal.addEventListener("click", function () {
@@ -207,6 +232,7 @@ $(document).ready(function () {
         // Đóng modal
         $('#confirmStage1').modal("hide");
     }
+
 });
 //-----------------------Duyet hoat dong--------------------------//
 $(document).ready(function () {
@@ -238,12 +264,12 @@ $(document).ready(function () {
 
     function updateModalContent(newContent) {
         // Update the modal body content
-        $('#modalBodyContent').html(newContent);
+        $('#modalBodyContent2').html(newContent);
     }
 
     function hideButtons() {
         // Hide the buttons in the modal footer
-        $('#confirmStage0 .modal-footer').hide();
+        $('#confirmStage1 .modal-footer').hide();
     }
     $('.closeModalLogout').on('click', function () {
         $('#confirmStage1').modal('hide');
@@ -597,14 +623,6 @@ $(document).ready(function () {
                 var result = await response.json();
                 var hoatdong = result.hoatdong;
                 var isCondition = result.isConditionMet;
-                var taikhoan = result.taikhoan;
-                var thanhvien = result.thanhvien;
-                var thanhvienList = result.thanhvienList;
-                var checkDangky = result.checkDangky;
-
-                console.log(taikhoan.hoTen);
-                console.log(thanhvienList);
-                // Sử dụng hoatdong và isCondition theo nhu cầu của bạn
                 console.log("Hoatdong:", hoatdong);
                 console.log("isCondition:", isCondition);
                 if(isCondition)

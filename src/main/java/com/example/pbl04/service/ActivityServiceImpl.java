@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -153,4 +154,6 @@ public class ActivityServiceImpl implements ActivityService {
        else return true;
     }
     public Integer countParticipantsByIDHD(Integer maHD){ return  activityRepository.countParticipantsByIDHD(maHD);}
+    public List<Hoatdong> getAllActivityNotOccured() {return  activityRepository.getAllActivityNotOccured();}
+    public List<Hoatdong> getActivityByNameAct(String nameAct) {return activityRepository.getActivityByNameAct(nameAct);}
 }

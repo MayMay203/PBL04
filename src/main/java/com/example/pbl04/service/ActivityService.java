@@ -6,6 +6,7 @@ import com.example.pbl04.entity.Hoatdong;
 import com.example.pbl04.entity.Taikhoan;
 import com.example.pbl04.entity.Thanhvien;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ActivityService {
@@ -49,9 +50,12 @@ public interface ActivityService {
     void CancelActivity(Integer maHD, String txtHuy);
 //void addActivity(Integer maChuDe, String tenHD, String diaDiem, String thoiGianBD, String thoiGianKT,
 //                 String sotnvtt, String sotnvtd, String moTa,Integer maTK);
-void addMyActivity(Hoatdong hoatdong);
+    void addMyActivity(Hoatdong hoatdong);
      List<Hoatdong> getListCancel();
      List<Hoatdong> getListCancelByOwner(Integer maTK);
      boolean CheckActivity(Integer maHD);
      Integer countParticipantsByIDHD(Integer maHD);
+     List<Hoatdong> getAllActivityNotOccured();
+     List<Hoatdong> getActivityByNameAct(String nameAct);
+
 }

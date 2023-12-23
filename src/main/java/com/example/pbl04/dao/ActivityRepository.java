@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
@@ -21,6 +22,8 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     List<Hoatdong> getActivityOccured();
      @Query("select dk from Hoatdong h,Dangky dk where h.tinhTrangHD = 1 and h = dk.maHD and dk.phanQuyen=true")
      List<Dangky> getActivityUpcomming();
+     @Query("select h from Hoatdong h where h.tinhTrangHD = 1 and h.tinhTrangDuyet=2")
+     List<Hoatdong> getAllActivityNotHappening();
      @Query("select dk from Hoatdong h , Dangky dk where h= dk.maHD and dk.phanQuyen=true")
      Dangky getDateRegis();
     @Query("select h from Hoatdong h where h.tinhTrangHD = 2")
@@ -96,4 +99,13 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     List<Hoatdong> getListCancelByOwner(Integer maTK);
     @Query("select count(*) from Dangky dk, Hoatdong hd where hd.id= dk.maHD.id and hd.id =:maHD and dk.phanQuyen=false and dk.trangThai=true")
     Integer countParticipantsByIDHD(Integer maHD);
+    @Transactional
+    @Modifying
+    @Query("UPDATE Hoatdong e SET e.tinhTrangHD = 2 WHERE e.id=:maHD")
+    void updateTrangThaiByNgayAndTrangThai(Integer maHD);
+   @Query("select hd from Hoatdong hd where hd.tenhd like %:nameAct% and hd.tinhTrangHD=1")
+    List<Hoatdong> getActivityByNameAct(String nameAct);
+    @Query("select h from Hoatdong h where h.tinhTrangHD = 1")
+    List<Hoatdong> getAllActivityNotOccured();
+
 }

@@ -23,6 +23,6 @@ public interface SummaryRepository extends JpaRepository<Tongket,Integer> {
 
     @Query("select a from Anhtongket a where a.maTongKet.id=:id")
     List<Anhtongket> getimgSummaryList(@Param("id") Integer id);
-
-
+    @Query("select tk from Tongket tk where tk.maHD.tenhd like %:name%")
+    List<Tongket> getSummaryListByName(String name);
 }

@@ -132,8 +132,8 @@
                                                           <span aria-hidden="true">&times;</span>
                                                       </button>
                                                   </div>
-                                                  <div class="modal-body"  id="modalBodyContent">
-                                                      Xác nhận xét duyệt bài đăng ?
+                                                  <div class="modal-body"  id="modalBodyContent" style="font-size: 1rem">
+                                                      Xác nhận xét duyệt hoạt động ?
                                                   </div>
                                                   <div class="modal-footer">
                                                       <button type="submit" class="btn btn-danger"  id="btnConfirmActivityStage0"  th:attr="data-hoatdong-id=${listPost.get(4*i+j).id}">Duyệt bài</button>
@@ -163,7 +163,7 @@
                                         <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5"  id="btnViewActivityConfirm" th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).getId()}" >Xem chi tiết...</button>
                                     </div>
                                     <div class="custom-btn pt-2">
-                                        <button class="custom-btnConfirm" id="buttonConfirmPostStage1">Duyệt hoạt động</button>
+                                        <button class="custom-btnConfirm" id="buttonConfirmPostStage1" th:attr="data-hoatdong-id=${listmyAcitivityNeedConfirm.get(4*i+j).id}">Duyệt hoạt động</button>
                                         <button class="custom-btnConfirm btnCancelActivity" th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).id}">Hủy hoạt động</button>
                                     </div>
                                     <div class="modal fade" id="confirmStage1" tabindex="-1" role="dialog" aria-labelledby="confirmStage0ModalLabel" aria-hidden="true">
@@ -176,7 +176,23 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body"  id="modalBodyContent2">
-                                                    Xác nhận xét duyệt hoạt động ?
+                                                    <div class="incorrect-participant">
+                                                        <div class="row">
+                                                            <div class="col-md-4 lbHD"><i class="bi bi-people-fill"></i>Số TNV tối thiểu:</div>
+                                                            <div class="col-md-2"><input class="txt-tnv form-control" type="text" name="txt_tnv" id="txt_stnvtt" readonly></div>
+                                                            <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>
+                                                            <div class="col-md-4 lbHD"><i class="bi bi-person-dash"></i>Số TNV tối đa</div>
+                                                            <div class="col-md-2"><input class="txt-tnv form-control" type="text" name="txt_tnvTT" id="txt_stnvtd" readonly></div>
+                                                            <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-md-5 lbHD" id="lbtnv"><i class="bi bi-person-dash"></i>Số TNV đã đăng ký:</div>
+                                                            <div class="col-md-4"><input class="txt-tnv form-control" type="text" name="txt_tnvTT" id="txt_stnv" readonly></div>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <div class="correct-participant" style="font-size: 1rem">  Xác nhận xét duyệt hoạt động?</div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="submit" class="btn btn-danger"  id="btnConfirmActivityStage1"  th:attr="data-hoatdong-id=${listmyAcitivityNeedConfirm.get(4*i+j).id}">Duyệt hoạt động</button>
@@ -185,7 +201,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
