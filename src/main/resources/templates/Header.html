@@ -144,7 +144,7 @@
                             </div>
                             <div class="regis">
                                 <span class="regis-not">Bạn chưa có tài khoản?</span>
-                                <input type="button" id="btn-sign-up" value="Đăng ký">
+                                <input type="button" id="btn-sign-up"  value="Đăng ký" data-bs-toggle="modal" data-bs-target="#modal-sign-up">
                             </div>
                         </div>
                     </div>
@@ -182,16 +182,18 @@
     </nav>
 </div>
 <!-----------Model đăng ký tài khoản-------------->
-<form action="/dang-ky-tai-khoan" id="formRegisterAccount" method="post">
-    <div class="modal fade"  id="modal-sign-up">
+
+    <div class="modal fade modal-login"  id="modal-sign-up">
         <div class="modal-dialog">
             <div class="modal-content content-sign-up">
-                <div class="modal-body d-flex p-0">
+                <form action="/dang-ky-tai-khoan" th:object="${user}" id="formRegisterAccount" method="post" class="modal-body d-flex p-0">
+<!--                <div class="modal-body d-flex p-0">-->
 <!--                    <img class="w-30 h-100" th:src="@{/images/volunteer.png}" alt="">-->
                     <div class="w-75 sign-up-info bg-white py-2">
                         <div class="d-flex header-sign-up text_align-center p-0 mt-1">
                             <h3 class="col-11 fs-3 mb-4 green-color mx-2">ĐĂNG KÝ</h3>
-                            <button type="button" class="btn-close col-1 py-2" data-bs-dismiss="modal"></button>
+                            <button type="button" class="btn-close btn-close-register btnClose" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                         </div>
                         <div class="container p-2">
                             <!--   Chỗ ảnh đại diện nì   -->
@@ -213,14 +215,18 @@
                                 <input class="form-control form-control-sm me-4" required type="date" name="ngaySinh">
                             </div>
                             <div class="container d-flex mb-3">
-                                <label class="col-4">Giới tính</label>
-                                <div class="col-4 d-flex">
-                                    <label class="me-1">Nam</label>
-                                    <input type="radio" name="gender">
+                                <label class="form-label">Giới tính:</label>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input form-check-gender" id="radio1" name="gioiTinh" value="0" required >
+                                    <label class="form-check-label" for="radio1">Nam</label>
                                 </div>
-                                <div class="col-4 d-flex">
-                                    <label class="me-1">Nữ</label>
-                                    <input type="radio" name="gender">
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input form-check-gender" id="radio2" name="gioiTinh" value="1" required >
+                                    <label class="form-check-label" for="radio2">Nữ</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input form-check-gender" id="radio3" name="gioiTinh" value="2" required>
+                                    <label class="form-check-label" for="radio3">Khác</label>
                                 </div>
                             </div>
                             <div class="container d-flex mb-4">
@@ -242,10 +248,114 @@
                             </div>
                         </div>
                     </div>
-                </div>
+<!--                </div>-->
+                </form>
             </div>
         </div>
     </div>
-</form>
+<!--modla thêm hoạt động-->
+<div class="modal fade" id="ThemHoatDongModal" tabindex="-1" aria-labelledby="addActivityModalLabel" aria-hidden="true" th:if="${isLogin}">
+    <div class="modal-dialog modal-lg modal-dialog-themhd">
+        <div class="modal-content modal-content-themhd">
+            <form  th:action="@{/addActivity}" method="POST" class="needs-validation" id="formAddActivity" novalidate enctype="multipart/form-data">
+                <input type="hidden" id="userID" name="maTK" th:value="${account.getId()}" />
+                <div class="modal-header  modal-header-themhd ">
+                    <h5 class="modal-title modal-title-themhd " id="exampleModalLabel" >THÊM HOẠT ĐỘNG</h5>
+                    <button type="button" class="btn-close btnClose" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body modal-body-themhd">
+                    <div class="container modal-body-detail">
+
+                        <div class="row">
+                            <div class="col-md-3"><label class="lbHD" for="txt_NameTopic"><i class="bi bi-pencil-square"></i>CHỦ
+                                ĐỀ</label></div>
+                            <div class="col-md-9">
+                                <select class="select-chu-de" id="txt_NameTopic" name="tenChuDe">
+                                    <option th:each="topic:${listTopics}" th:text="${topic.getTenChuDe()}" ></option>
+                                    <option> Khác</option>
+                                </select>
+                            </div>
+                            <!--                            <div class="col-md-9"><input class="textfieldHD form-control" type="text" name="txt_NameTopic"-->
+                            <!--                                                         id="txt_NameTopic"  th:field="*{maChuDe.tenChuDe}" required></div>-->
+                            <div class="invalid-feedback">Vui lòng nhập tên chủ đề</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3"><label class="lbHD" for="txt_NameActi"><i class="bi bi-fire"></i>TÊN HOẠT
+                                ĐỘNG</label></div>
+                            <div class="col-md-9"> <input class="textfieldHD form-control" type="text" name="tenhd"
+                                                          id="txt_NameActi" required></div>
+                            <div class="invalid-feedback">Vui lòng nhập tên hoạt động</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3"> <label class="lbHD" for="txt_Location"><i class="bi bi-geo-alt-fill"></i>ĐỊA
+                                ĐIỂM</label></div>
+                            <div class="col-md-9"><input class="textfieldHD form-control" type="text" name="diaDiem"
+                                                         id="txt_Location"  required></div>
+                            <div class="invalid-feedback">Vui lòng nhập địa điểm</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="lbHD" for="txt_dateBD"><i class="bi bi-calendar-minus"></i>THỜI GIAN BẮT ĐẦU</label>
+                            </div>
+                            <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="thoiGianBD" id="txt_dateBD"
+
+                                                         required></div>
+                            <div class="invalid-feedback">Vui lòng chọn thời gian bắt đầu</div>
+                            <div class="col-md-3">
+                                <label class="lbHD" for="txt_dateKT"><i class="bi bi-calendar-minus"></i>THỜI GIAN KẾT THÚC</label>
+                            </div>
+                            <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="thoiGianKT" id="txt_dateKT"
+
+                                                         required></div>
+                            <div class="invalid-feedback">Vui lòng chọn thời gian kết thúc</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3 lbHD"><i class="bi bi-people-fill"></i>SỐ TNV TỐI THIỂU</div>
+                            <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="soTNVToiThieu" id="txt_tnvtt"
+
+                                                         required></div>
+                            <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>
+                            <div class="col-md-3 lbHD"><i class="bi bi-person-dash"></i>SỐ TNV TỐI ĐA</div>
+                            <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="soTNVToiDa" id="txt_tnvtd"
+
+                                                         required></div>
+                            <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3 lbHD"><i class="bi bi-menu-up"></i>MÔ TẢ</div>
+                            <div class="col-md-9">
+                                <textarea name="moTa" id="txt_mota" class="form-control" cols="71" rows="20" required></textarea>
+                            </div>
+                            <div class="invalid-feedback">Vui lòng nhập mô tả hoạt động</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3 lbHD"><i class="bi bi-card-image"></i>HÌNH ẢNH</div>
+                            <div class="col-md-9">
+                                <label for="imageInput" id="imagePreviewLabel">
+                                    <div id="imagePreview" class="image-preview">
+                                        <input type="file" name="anh" id="imageInput" accept="image/jpeg, image/png, image/gif" style="display: none" required>
+                                        <img id="userImage" th:src="@{/images/imgstd.png}" alt="Hình ảnh người dùng" >
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer modal-footer-themhd">
+                    <button type="reset" class="btnCancel"><i class="bi bi-x-circle-fill"></i> Hủy thay đổi</button>
+                    <button type="submit" class="btnSave" th:attr="data-account-id=${user.getMaTK().getId()}">
+                        <i class="bi bi-floppy2"></i> Lưu thay đổi
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
