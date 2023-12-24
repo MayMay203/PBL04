@@ -49,6 +49,7 @@
 }
 .act-slider{
     max-height: 50rem;
+    width: 100%;
 }
 .slick-prev{
     margin-left: 0rem;

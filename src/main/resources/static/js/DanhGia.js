@@ -49,7 +49,20 @@ async function Evaluation(e)  {
         document.querySelector(".modal-Description").innerText = responseData.activity.moTa;
         document.querySelector(".name-host-act").innerText = responseData.registerInfor.maTK.tenDN;
         document.querySelector(".avatar-host").src = responseData.registerInfor.maTK.anhDaiDien;
-        document.querySelector(".time-post-act").innerText= responseData.registerInfor.thoiGianDK;
+        const date = new Date(responseData.registerInfor.thoiGianDK);
+        const datePart = date.toLocaleDateString("vi-VN", {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+        });
+
+        const timePart = date.toLocaleTimeString("vi-VN", {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+        });
+        const registerTime = `${datePart} ${timePart}`;
+        document.querySelector(".time-post-act").innerText = registerTime;
         image_activity.innerHTML = "";
         let count = 0;
         imagesList.forEach(image => {
@@ -81,7 +94,7 @@ async function Evaluation(e)  {
                 </div>
                 <p class="fs-10 green_light-color fst-italic m-0 px-3">Điểm cho ban tổ chức: ${eval.diemTC}</p>
                 <p class="fs-10 fst-italic m-0 px-3">${eval.binhLuan}</p>
-                <p class="green_light-color fst-italic fs-10 my-1 mx-3">${new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(eval.thoiGianBL))}</p>
+                <p class="green_light-color fst-italic fs-10 my-1 mx-3">${new Intl.DateTimeFormat("vi-VN",{ day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(eval.thoiGianBL))}</p>
             </div>
             <!-- Check comment -->
             <div class="container d-flex align-items-center justify-content-center">
@@ -197,7 +210,7 @@ async function saveEvaluation(e) {
             <div class="container p-2 col-6"></div>
         `
         }
-        for (var member of member_evaluate) {
+        for (member of member_evaluate) {
             member.addEventListener("click", formEvaluation)
         }
         // Ham chuc nang danh gia thanh vien
@@ -266,7 +279,7 @@ async function EvaluationMember(e) {
                 </div>
                 <p class="fs-10 green_light-color fst-italic m-0 px-3">Điểm cho ban tổ chức: ${eval.diemTC}</p>
                 <p class="fs-10 fst-italic m-0 px-3">${eval.binhLuan}</p>
-                <p class="green_light-color fst-italic fs-10 my-1 mx-3">${new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(eval.thoiGianBL))}</p>
+                <p class="green_light-color fst-italic fs-10 my-1 mx-3">${new Intl.DateTimeFormat("vi-VN",{ day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(eval.thoiGianBL))}</p>
             </div>
             <!-- Check comment -->
             <div class="container d-flex align-items-center justify-content-center">
@@ -494,7 +507,7 @@ btn_send_cmt.addEventListener("click", async function (e) {
                 </div>
                 <p class="fs-10 green_light-color fst-italic m-0 px-3">Điểm cho ban tổ chức: ${eval.diemTC}</p>
                 <p class="fs-10 fst-italic m-0 px-3">${eval.binhLuan}</p>
-                <p class="green_light-color fst-italic fs-10 my-1 mx-3">${new Intl.DateTimeFormat("vi-VN", "dd/MM/yyyy").format(new Date(eval.thoiGianBL))}</p>
+                <p class="green_light-color fst-italic fs-10 my-1 mx-3">${new Intl.DateTimeFormat("vi-VN",{ day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(eval.thoiGianBL))}</p>
             </div>
             <!-- Check comment -->
             <div class="container d-flex align-items-center justify-content-center">

@@ -2,16 +2,6 @@
 //Content-search
 const search_input = document.querySelector(".search-input")
 const act_slider = document.querySelector(".act-slider")
-// const body = document.querySelector("body");
-// const modal = document.querySelector(".modal_")
-//const btn_close = document.getElementsByClassName("btn-close-detail")
-// function convertToSlug(str) {
-//     return str
-//         .toLowerCase()
-//         .normalize('NFKD')
-//         .replace(/[\u0300-\u036f]/g, '')
-//         .replace(/\s+/g, '-');
-// }
 
 search_input.addEventListener("keyup",  async e => {
     // search_infor.classList.add('display-block');
@@ -36,10 +26,8 @@ search_input.addEventListener("keyup",  async e => {
                      const index = 4 * i + j;
                      if (index < activityList.length) {
                          const moTa = activityList[index].moTa.length > 150 ? activityList[index].moTa.substring(0, 150) + "..." : activityList[index].moTa
-                         const dateStart = new Date(activityList[index].thoiGianBD)
-                         const formattedDateStart = `${dateStart.getDate()}/${dateStart.getMonth() + 1}/${dateStart.getFullYear()}`;
-                         const dateEnd = new Date(activityList[index].thoiGianKT)
-                         const formattedDateEnd = `${dateEnd.getDate()}/${dateEnd.getMonth() + 1}/${dateEnd.getFullYear()}`;
+                         const dateStart = new Intl.DateTimeFormat("vi-VN", { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(activityList[index].thoiGianBD))
+                         const dateEnd = new Intl.DateTimeFormat("vi-VN", { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(activityList[index].thoiGianKT))
                          const innerContainer = document.createElement("div");
                          innerContainer.className = "container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid";
                          innerContainer.innerHTML =
@@ -50,7 +38,7 @@ search_input.addEventListener("keyup",  async e => {
                             <div class="card-title fs-6 fw-bolder green-color">${activityList[index].tenhd}</div>
                             <div class="card-text my-0">${moTa}</div>
                             <div class="card-text mx-2 my-1">
-                                <i class="bi bi-calendar2 m-1 green-color">  ${formattedDateStart} - ${formattedDateEnd}</i>
+                                <i class="bi bi-calendar2 m-1 green-color">  ${dateStart} - ${dateEnd}</i>
                             </div>
                             <div class="card-link p-0">
                                 <button

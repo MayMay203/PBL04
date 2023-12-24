@@ -2,9 +2,14 @@ package com.example.pbl04.controller;
 
 import com.example.pbl04.entity.Dexuat;
 import com.example.pbl04.entity.Hoatdong;
+import com.example.pbl04.entity.Taikhoan;
+import com.example.pbl04.entity.Tongket;
 import com.example.pbl04.service.ActivityService;
 import com.example.pbl04.service.EvaluationService;
+import com.example.pbl04.service.SessionService;
 import com.example.pbl04.service.SuggestionService;
+import com.example.pbl04.service.SummaryService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,12 +28,16 @@ public class SearchController {
     private final ActivityService activityService;
     private final EvaluationService evaluationService;
     private final SuggestionService suggestionService;
+    private final SummaryService summaryService;
+    private final SessionService sessionService;
     @Autowired
 
-    public SearchController(ActivityService activityService, EvaluationService evaluationService, SuggestionService suggestionService) {
+    public SearchController(ActivityService activityService, EvaluationService evaluationService, SuggestionService suggestionService, SummaryService summaryService, SessionService sessionService) {
         this.activityService = activityService;
         this.evaluationService = evaluationService;
         this.suggestionService = suggestionService;
+        this.summaryService = summaryService;
+        this.sessionService = sessionService;
     }
 
     @GetMapping("search/evaluation-home")
@@ -69,20 +78,66 @@ public class SearchController {
 
     @GetMapping("search/suggestion")
     @ResponseBody
-    public ResponseEntity<Map<String,Object>> searchSuggestion(@RequestParam(name="nameTitle",required = false) String nameTitle){
+    public ResponseEntity<Map<String,Object>> searchSuggestion(@RequestParam(name="nameTitle",required = false) String nameTitle,
+                                                               HttpSession session
+                                                             ){
        Map<String,Object> result = new HashMap<>();
         List<Dexuat> suggestionList = new ArrayList<>();
-//        List<Integer> countSugg = new ArrayList<>();
-//        if(nameTitle == null){
-//            suggestionList = suggestionService.getAllSuggest();
-//            countSugg = suggestionService.CountSuggestion(suggestionList);
-//        }
-//        else{
-//            suggestionList = suggestionService.getSuggestionByTitle(nameTitle);
-//            countSugg = suggestionService.CountSuggestion(suggestionList);
-//        }
+        List<String> locationList  = new ArrayList<>();
+        List<Integer> countAct = new ArrayList<>();
+        Taikhoan account = (Taikhoan) session.getAttribute("account");
+        System.out.println("Tài khoản nè he" + account);
+        if(nameTitle == null){
+            suggestionList = suggestionService.getAllSuggest();
+            for(Dexuat sugg:suggestionList){
+                locationList.add(sugg.getViTri());
+            }
+            //Dem hoat dong theo vi tri
+            countAct = activityService.countActByLocation(locationList);
+        }
+        else{
+            suggestionList = suggestionService.getSuggestionByTitle(nameTitle);
+            for(Dexuat sugg:suggestionList){
+                locationList.add(sugg.getViTri());
+            }
+            //Dem hoat dong theo vi tri
+            countAct = activityService.countActByLocation(locationList);
+        }
         result.put("suggestionList",suggestionList);
-     //   result.put("countSugg",countSugg);
+        result.put("account",account);
+        result.put("countAct",countAct);
+        return ResponseEntity.ok(result);
+    }
+    @GetMapping("search/activity-home")
+    @ResponseBody
+    public ResponseEntity<Map<String,Object>> searchActivityHome(@RequestParam(name="nameAct",required=false) String nameAct)
+    {
+        Map<String,Object> result = new HashMap<>();
+        List<Hoatdong> activityListNotHappening = new ArrayList<>();
+        System.out.println(nameAct);
+        if(nameAct.isEmpty())
+        {
+            activityListNotHappening = activityService.getAllActivityNotOccured();
+        }else{
+            activityListNotHappening = activityService.getActivityByNameAct(nameAct);
+        }
+        result.put("activityListNotHappening",activityListNotHappening);
+        return ResponseEntity.ok(result);
+    }
+    @GetMapping("search/summary-home")
+    @ResponseBody
+    public ResponseEntity<Map<String,Object>> searchSummaryHome(@RequestParam(name="nameSummary",required=false) String nameSummary)
+    {
+        Map<String,Object> result = new HashMap<>();
+        List<Tongket> summaryList = new ArrayList<>();
+        System.out.println(nameSummary);
+        if(nameSummary.isEmpty())
+        {
+            summaryList = summaryService.getSummaryList();
+        }else{
+            summaryList =summaryService.getSummaryListByName(nameSummary);
+        }
+        result.put("summaryList",summaryList);
         return ResponseEntity.ok(result);
     }
 }

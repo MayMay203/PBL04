@@ -69,14 +69,14 @@
         <div class="container p-5 pt-0 fs-6 mx--2 w-70 act-slider">
             <div class="container-item" th:if="${actListOfMember.size()!=0}" th:each="i : ${#numbers.sequence(0, actListOfMember.size() div 4 + ((actListOfMember.size()%4 > 0) ? 1 : 0) - 1)}">
                 <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<actListOfMember.size()}">
-                    <img th:src="@{${actListOfMember.get((4*i)+j).getAnh()}}" class="float-start w-15 h-80 act-image" alt="" />
-                    <div class="card border-0">
+                    <img th:src="@{${actListOfMember.get((4*i)+j).getAnh()}}" class="float-start w-15 h-80 act-image col-2" alt="" />
+                    <div class="card border-0 col-10">
                         <div class="card-body fs-7">
                             <div class="card-title fs-6 fw-bolder green-color" th:text="${actListOfMember.get((4*i)+j).getTenhd()}">
                             </div>
-                            <div class="card-text fs-8" th:text="${#strings.length(actListOfMember.get(4*i+j).getMoTa()) > 150 ? actListOfMember.get(4*i+j).getMoTa().substring(0, 150) + '...' : actListOfMember.get(4*i+j).getMoTa()}"></div>
+                            <div class="card-text fs-8" th:text="${#strings.length(actListOfMember.get(4*i+j).getMoTa()) > 200 ? actListOfMember.get(4*i+j).getMoTa().substring(0, 200) + '...' : actListOfMember.get(4*i+j).getMoTa()}"></div>
                             <div class="card-text">
-                                <i class="bi bi-calendar2 m-1 green-color" th:text="'   ' + ${actListOfMember.get(4*i+j).getThoiGianBD() + '  -  ' + actListOfMember.get(4*i+j).getThoiGianKT()}"></i>
+                                <i class="bi bi-calendar2 m-1 green-color" th:text="'   ' + ${#temporals.format(actListOfMember.get(4*i+j).getThoiGianBD(),'dd/MM/yyyy')} + ' - ' + ${#temporals.format(actListOfMember.get(4*i+j).getThoiGianKT(),'dd/MM/yyyy')}"></i>
                             </div>
                             <div class="card-link">
                                 <a
@@ -110,11 +110,11 @@
         <!-- Right -->
         <div class="container flex-1 bg-green radius-lghalf p-0">
             <div class="container mh-100 overflow-y-auto hosted-slider" th:if="${actListOfHost.size()!=0}">
-                <div class="container mh-12 w-100 position-relative cursor-pointer content-right my-4 origanize-act-item" th:each="activity:${actListOfHost}">
-                    <img class="w-100 start-0 end-0 radius-lghalf" th:src="${activity.getAnh()}"  alt="" />
-                    <div class="container position-absolute bottom-0 start-0 end-0 bg-white radius-1 mh-60 w-85 box-shadow_8">
+                <div class="container mh-15 w-100 position-relative cursor-pointer content-right my-4 origanize-act-item" th:each="activity:${actListOfHost}">
+                    <img class="w-100 start-0 end-0 radius-lghalf h-13rem" th:src="${activity.getAnh()}"  alt="" />
+                    <div class="container position-absolute bottom-0 start-0 end-0 bg-white radius-1 mh-50 w-85 box-shadow_8">
                         <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic fs-6 green-color" th:text="${activity.getTenhd()}"></h3>
-                        <p class="card-text fs-9 text-center fst-italic px-3" th:text="${#strings.length(activity.getMoTa()) > 80 ? activity.getMoTa().substring(0, 70) + '...' : activity.getMoTa()}">
+                        <p class="card-text fs-9 text-center fst-italic px-3" th:text="${#strings.length(activity.getMoTa()) > 70 ? activity.getMoTa().substring(0, 70) + '...' : activity.getMoTa()}">
                         </p>
                         <button
                              class="fs-7 p-0 text-decoration-none green_light-color fw-medium fst-italic px-2 mb-3 no-border radius-1 bg-green-light w-100 btn_eva_member" th:attr="data-value=${activity.getId()}">Đánh

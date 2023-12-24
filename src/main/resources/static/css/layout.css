@@ -615,7 +615,6 @@
 .modal-body-member{
     padding:0 !important;
     min-height: 30rem !important;
-    max-height: 30rem !important;
 }
 .modal-header-member{
     background-color: var(--activity);
@@ -635,6 +634,8 @@
     font-style: italic ;
 
 }
+
+
 .modal-member{
     background-color: var(--green-light) !important;
     display: flex;
@@ -656,7 +657,7 @@
 }
 
 .modal-member:nth-child(even) {
-    background-color: #fff;
+    background-color: #fff !important;
     color: #000;
 }
 /* thong bao xác nhận tham gia*/
@@ -738,6 +739,7 @@
     color:white;
     border:none;
 }
+
 .custom-btn{
     width: 50rem;
 }

@@ -31,7 +31,7 @@ public class Dexuat {
     private String moTa;
 
     @Column(name = "thoiGianDeXuat")
-    private LocalDate thoiGianDeXuat;
+    private LocalDate thoiGianDeXuat = LocalDate.now();
 
     @Column(name = "tinhTrangDuyet", nullable = false)
     private Boolean tinhTrangDuyet = false;
