@@ -23,6 +23,11 @@ html{
     /* font-family: 'Roboto', sans-serif; */
     box-sizing: border-box;
 }
+
 .clear{
     clear: both;
+}
+
+body {
+    overflow-x: hidden;
 }

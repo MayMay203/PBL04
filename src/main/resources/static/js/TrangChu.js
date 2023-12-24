@@ -11,6 +11,7 @@ $(document).ready(function(){
     });
 
 });
+
 // const body = document.querySelector("body");
 // const modal = document.querySelector(".modal_")
 // const btn_close = document.getElementsByClassName("btn-close-detail")
