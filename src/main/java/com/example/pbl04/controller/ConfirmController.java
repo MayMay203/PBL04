@@ -54,8 +54,8 @@ public class ConfirmController {
                 {
                     listmyActivity = activityService.getAllMyPostNeedConfirm(myaccount.getId()); //Bao gồm hoạt động chưa xét duyệt, đã xét duyệt, đã huy.....
                     listmyAcitivityNeedConfirm = activityService.getAllMyActivityNeedConfirm(myaccount.getId());
-                     countConfirm= activityService.countConfirm(listmyAcitivityNeedConfirm);
-                     countConfirmed = activityService.countConfirmed(listmyAcitivityNeedConfirm);
+                    countConfirm= activityService.countConfirm(listmyAcitivityNeedConfirm);
+                    countConfirmed = activityService.countConfirmed(listmyAcitivityNeedConfirm);
                     listPost= activityService.getAllActiviyPost();
                     listCancelActivity = activityService.getListCancel();
                     listActivityParticipate = activityService.getListActivityParticipate(myaccount.getId());
@@ -150,23 +150,32 @@ public class ConfirmController {
     {
         Hoatdong hoatdong = activityService.getActivityByID(maHD);
         boolean isConditionMet = activityService.CheckActivity(maHD);
-        sessionService.createSessionModel(model, session);
-        Taikhoan myaccount = (Taikhoan) model.getAttribute("account");
-        Dangky checkDangky = registerService.getDangKyByHDTK(myaccount.getId(), maHD);
-        Taikhoan taikhoan =activityService.getOrganizator(maHD);
-        List<Thanhvien> thanhvienList =activityService.getMemberList(maHD);
-        Thanhvien thanhvien=activityService.getMemberByID(taikhoan.getId());
         Integer sotnv= activityService.countParticipantsByIDHD(maHD);
         Map<String, Object> result = new HashMap<>();
         result.put("hoatdong", hoatdong);
         result.put("isConditionMet", isConditionMet);
-        result.put("taikhoan", taikhoan);
-        result.put("thanhvien", thanhvien);
-        result.put("thanhvienList", thanhvienList);
-        result.put("checkDangky", checkDangky);
         result.put("sotnv",sotnv);
         return result;
     }
+    @GetMapping("/check-participant")
+    @ResponseBody
+    public Map<String, Object> CheckParticipant(@RequestParam("maHD") Integer maHD)
+    {
+        Hoatdong hoatdong = activityService.getActivityByID(maHD);
+        Integer sotnv= activityService.countParticipantsByIDHD(maHD);
+        boolean checkParticipant;
+        if(sotnv< hoatdong.getSoTNVToiThieu() || sotnv >hoatdong.getSoTNVToiDa()) {
+            checkParticipant=false;
+        }else {
+            checkParticipant=true;
+        }
+        Map<String, Object> result = new HashMap<>();
+        result.put("hoatdong", hoatdong);
+        result.put("sotnv",sotnv);
+        result.put("checkParticipant",checkParticipant);
+        return result;
+    }
+
 
     @PostMapping("/confirm-suggestion")
     @ResponseBody

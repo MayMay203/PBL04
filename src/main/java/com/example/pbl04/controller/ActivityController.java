@@ -3,6 +3,7 @@ package com.example.pbl04.controller;
 import com.example.pbl04.entity.*;
 import com.example.pbl04.service.*;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -125,7 +126,7 @@ public class ActivityController {
         hoatDong.setSoTNVToiDa(Integer.parseInt(sotnvtd));
         hoatDong.setMoTa(moTa);
         hoatDong.setTinhTrangHD((byte) 0);
-        hoatDong.setTinhTrangDuyet((byte) 1);
+        hoatDong.setTinhTrangDuyet((byte) 0);
 
         try {
             if (imageInput != null && !imageInput.isEmpty()) {
@@ -237,5 +238,10 @@ public class ActivityController {
         List<Hoatdong> activityList = activityService.getActByLocation(location);
         return ResponseEntity.ok(activityList);
     }
+//    @Transactional
+//    public void updateTrangThaiForExpiredEntities() {
+//        Date currentDate = new Date();
+//        activityService.updateTrangThaiByNgayAndTrangThai(currentDate);
+//    }
 }
 

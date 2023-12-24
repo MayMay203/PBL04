@@ -14,5 +14,6 @@ public interface SummaryService {
     Thanhvien getMemberByID(Integer id);
     List<Thanhvien> getMemberList(Integer id);
     List<Anhtongket> getimgSummaryList(Integer id);
+    List<Tongket> getSummaryListByName(String nameSummary);
 
 }

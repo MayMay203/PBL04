@@ -26,4 +26,5 @@ public class SummaryServiceImple implements SummaryService{
     public Thanhvien getMemberByID(Integer id){return summaryRepository.getMemberByID(id);}
     public List<Thanhvien> getMemberList(Integer id){return summaryRepository.getMemberList(id);}
     public List<Anhtongket> getimgSummaryList(Integer id) {return  summaryRepository.getimgSummaryList(id);}
+    public List<Tongket> getSummaryListByName(String name) {return summaryRepository.getSummaryListByName(name);}
 }

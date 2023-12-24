@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -49,7 +50,7 @@ public class ActivityServiceImpl implements ActivityService {
     public List<Dangky> getActivityUpcomming(){return activityRepository.getActivityUpcomming();}
     public List<Hoatdong> getActivityHappening() {return activityRepository.getActivityHappening();}
     public List<Hoatdong> getAllActiviyPost() {return activityRepository.getAllActiviyPost();}
-    public List<Hoatdong> getMyActivityConfirm(Integer maTK) {return activityRepository.getMyActivityConfirm(maTK);}
+   // public List<Hoatdong> getMyActivityConfirm(Integer maTK) {return activityRepository.getMyActivityConfirm(maTK);}
     public Integer getNumActivity(){return activityRepository.getNumActivity();}
     public Dangky  getDateRegis(Integer mahd){return activityRepository.getDateRegis();}
     public Integer getParticipants() {return activityRepository.getParticipants();}
@@ -147,4 +148,6 @@ public class ActivityServiceImpl implements ActivityService {
         return activityRepository.getActByLocation(location);
     }
 
+    public List<Hoatdong> getAllActivityNotOccured() {return  activityRepository.getAllActivityNotOccured();}
+    public List<Hoatdong> getActivityByNameAct(String nameAct) {return activityRepository.getActivityByNameAct(nameAct);}
 }
