@@ -58,7 +58,7 @@
                         <h3 class="Content_left-title my-5">HOẠT ĐỘNG</h3>
                         <div class="Content_left-item">
                             <div class="act-slider" >
-                                <div class="container-item" th:each="i : ${#numbers.sequence(0, actiListUpcomming.size() div 4 + ((actiListUpcomming.size()%4 > 0) ? 1 : 0) - 1)}">
+                                <div class="container-item" th:if="${not #lists.isEmpty(actiListUpcomming)}" th:each="i : ${#numbers.sequence(0, actiListUpcomming.size() div 4 + ((actiListUpcomming.size()%4 > 0) ? 1 : 0) - 1)}">
                                     <div class="card mb-5"  th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<actiListUpcomming.size()}">
                                         <div class="row g-0">
                                             <div class="col-md-3">

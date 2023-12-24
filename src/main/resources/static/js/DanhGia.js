@@ -545,3 +545,31 @@ $(document).ready(function () {
         nextArrow: '<div class="slick-next"><i class="bi bi-chevron-compact-down"></i></div>',
     })
 });
+    $(document).ready(function () {
+        var btnViewSummary = document.getElementsByClassName("view-summary");
+        for(btn of btnViewSummary){
+            btn.addEventListener("click", async (e) => {
+                var maTongKet = e.target.dataset.hoatdongId;
+                $.ajax({
+                    type: 'GET',
+                    url: '/Check-Summary',
+                    data: { 'maHD': maTongKet},
+
+                    success: function (data) {
+                        if (data.summaryExists) {
+                            window.location.href = '/View-Summary?id=' +maTongKet;
+                        } else {
+                            $('#noSummaryModal').modal('show');
+                        }
+                    },
+
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            })
+        }
+        $('.closeModalLogout').on('click', function () {
+            $('#noSummaryModal').modal('hide');
+        });
+    })

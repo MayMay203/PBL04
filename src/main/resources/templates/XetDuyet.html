@@ -50,7 +50,7 @@
                                             <i class="bi bi-calendar2 m-1  green-color" th:text="'   ' + ${listmyActivity.get(4*i+j).getThoiGianBD() + '  -  ' + listmyActivity.get(4*i+j).getThoiGianKT()}"></i>
                                         </div>
 
-                                        <div class="card-link">
+                                        <div class="card-link custom-confirm">
                                             <div>
                                                 <i class="fs-7 my-1">Tình trạng:
                                                     <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 0 and listmyActivity.get(4*i+j).getTinhTrangHD() == 0}"> Đang chờ xét duyệt bài đăng</i>
@@ -60,11 +60,7 @@
                                                     <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == -1 and listmyActivity.get(4*i+j).getTinhTrangHD() == -1}"> Bị hủy</i>
                                                     <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 2 and listmyActivity.get(4*i+j).getTinhTrangHD() == 2}"> Đã kết thúc</i>
                                                 </i>
-<!--                                                <i>Vai trò:-->
-<!--&lt;!&ndash;                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).get() == 0}"> Đang chờ xét duyệt</i>&ndash;&gt;-->
-<!--                                                </i>-->
                                             </div>
-
                                             <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5 viewDetailActivity" th:attr="data-value=${listmyActivity.get(4*i+j).getId()}">Xem chi tiết...</button>
                                         </div>
 
@@ -86,15 +82,12 @@
                                             <i class="bi bi-calendar2 m-1  green-color" th:text="'   ' + ${listActivityParticipate.get(4*i+j).getMaHD().getThoiGianBD() + '  -  ' + listActivityParticipate.get(4*i+j).getMaHD().getThoiGianKT()}"></i>
                                         </div>
 
-                                        <div class="card-link">
+                                        <div class="card-link custom-confirm">
                                             <div>
                                                 <i class="fs-7 my-1">Tình trạng:
                                                     <i class="fw-medium green_light-color" th:if="${listActivityParticipate.get(4*i+j).getTrangThai() == false}"> Đang chờ xét duyệt</i>
                                                     <i class="fw-medium green_light-color" th:if="${listActivityParticipate.get(4*i+j).getTrangThai()==true}"> Đã được xét duyệt</i>
                                                 </i>
-                                                <!--                                                <i>Vai trò:-->
-                                                <!--&lt;!&ndash;                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).get() == 0}"> Đang chờ xét duyệt</i>&ndash;&gt;-->
-                                                <!--                                                </i>-->
                                             </div>
 
                                             <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5 viewDetailActivity" th:attr="data-value=${listActivityParticipate.get(4*i+j).getMaHD().getId()}">Xem chi tiết...</button>
@@ -113,13 +106,15 @@
                                   <div class="card-body fs-7">
                                       <div class="card-title fs-6 fw-bolder green-color" th:text="${listPost.get((4*i)+j).getTenhd()}"></div>
                                       <div class="card-text my-0" th:text="${#strings.length(listPost.get(4*i+j).getMoTa()) > 220 ? listPost.get(4*i+j).getMoTa().substring(0, 220) + '...' : listPost.get(4*i+j).getMoTa()}"></div>
+                                     <div class="custom-confirm">
                                       <div class="card-text mx-2 my-1">
                                           <i class="bi bi-calendar2 m-1  green-color" th:text="'   ' + ${listPost.get(4*i+j).getThoiGianBD() + '  -  ' + listPost.get(4*i+j).getThoiGianKT()}"></i>
                                       </div>
-                                      <div class="card-link my-1 ">
+                                      <div class="card-link my-1">
                                           <button
-                                                  class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5 viewDetailActivity" th:attr="data-value=${listPost.get(4*i+j).getId()}" >Xem chi tiết...</button>
+                                                  class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail viewDetailActivity" th:attr="data-value=${listPost.get(4*i+j).getId()}" >Xem chi tiết...</button>
                                       </div>
+                                     </div>
                                       <div class="custom-btn pt-2">
                                           <button class="custom-btnConfirm buttonConfirmPostStage0"  th:attr="data-hoatdong-id=${listPost.get(4*i+j).id}">Duyệt bài đăng</button>
                                           <button class="custom-btnConfirm btnCancelPost" id="buttonCancelPostStage0" th:attr="data-value=${listPost.get(4*i+j).id}">Hủy bài đăng</button>
@@ -157,12 +152,14 @@
                                 <div class="card-body fs-7">
                                     <div class="card-title fs-6 fw-bolder green-color" th:text="${listmyAcitivityNeedConfirm.get((4*i)+j).getTenhd()}"></div>
                                     <div class="card-text my-0" th:text="${#strings.length(listmyAcitivityNeedConfirm.get(4*i+j).getMoTa()) > 220 ? listmyAcitivityNeedConfirm.get(4*i+j).getMoTa().substring(0, 220) + '...' : listmyAcitivityNeedConfirm.get(4*i+j).getMoTa()}"></div>
+                                   <div class="custom-confirm">
                                     <div class="card-text mx-2 my-1">
                                         <i class="bi bi-calendar2 m-1  green-color" th:text="'   ' + ${listmyAcitivityNeedConfirm.get(4*i+j).getThoiGianBD() + '  -  ' + listmyAcitivityNeedConfirm.get(4*i+j).getThoiGianKT()}"></i>
                                     </div>
                                     <div class="card-link my-1 ">
-                                        <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5 btnViewActivityConfirm"  th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).getId()}" >Xem chi tiết...</button>
+                                        <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail btnViewActivityConfirm"  th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).getId()}" >Xem chi tiết...</button>
                                     </div>
+                                   </div>
                                     <div class="custom-btn pt-2">
                                         <button class="custom-btnConfirm buttonConfirmPostStage1"  th:attr="data-hoatdong-id=${listmyAcitivityNeedConfirm.get(4*i+j).id}">Duyệt hoạt động</button>
                                         <button class="custom-btnConfirm btnCancelActivity" th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).id}">Hủy hoạt động</button>
@@ -216,18 +213,18 @@
                                     <div class="card-body fs-7">
                                         <div class="card-title fs-6 fw-bolder green-color" th:text="${listCancelActivity.get((4*i)+j).getTenhd()}"></div>
                                         <div class="card-text my-0" th:text="${#strings.length(listCancelActivity.get(4*i+j).getMoTa()) > 220 ? listCancelActivity.get(4*i+j).getMoTa().substring(0, 220) + '...' : listCancelActivity.get(4*i+j).getMoTa()}"></div>
+                                        <div class="custom-confirm">
                                         <div class="card-text mx-2 my-1">
                                             <i class="bi bi-calendar2 m-1  green-color" th:text="'   ' + ${listCancelActivity.get(4*i+j).getThoiGianBD() + '  -  ' + listCancelActivity.get(4*i+j).getThoiGianKT()}"></i>
                                         </div>
                                         <div class="card-link my-1 ">
-                                            <button
-                                                    class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5 viewDetailActivity" th:attr="data-value=${listCancelActivity.get(4*i+j).getId()}" >Xem chi tiết...</button>
+                                            <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5 viewDetailActivity" th:attr="data-value=${listCancelActivity.get(4*i+j).getId()}" >Xem chi tiết...</button>
                                         </div>
 <!--                                        <div class="custom-btn pt-2">-->
 <!--                                            <button class="custom-btnConfirm" id="buttonConfirmPostStage1">Duyệt hoạt động</button>-->
 <!--                                            <button class="custom-btnConfirm btnCancelActivity" th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).id}">Hủy hoạt động</button>-->
 <!--                                        </div>-->
-
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -403,10 +400,10 @@
                         <br>
                         <div class="row">
                             <div class="col-md-3 lbHD"><i class="bi bi-people-fill"></i>SỐ TNV TỐI THIỂU</div>
-                            <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnv" id="txt_tnvtt" readonly></div>
+                            <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnv" id="txt_toithieu" readonly></div>
                             <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>
                             <div class="col-md-3 lbHD"><i class="bi bi-person-dash"></i>SỐ TNV TỐI ĐA</div>
-                            <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnvTT" id="txt_tnvtd" readonly></div>
+                            <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="txt_tnvTT" id="txt_toida" readonly></div>
                             <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>
                         </div>
                         <br>
@@ -430,7 +427,7 @@
                                     <div id="imagePreview" class="image-preview">
                                         <input type="file" id="imageInput" accept="image/jpeg, image/png, image/gif" style="display: none"
                                               disabled>
-                                        <img id="userImage" th:src="@{/images/default.webp}" alt="Hình ảnh người dùng" >
+                                        <img id="userImageView" th:src="@{/images/default.webp}" alt="Hình ảnh người dùng" >
                                     </div>
                                 </label>
                             </div>

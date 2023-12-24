@@ -148,7 +148,7 @@ ul.tongket_attach_view li input{
     width: 33rem;
     height: 20rem;
 } */
-#userImage{
+#userImage, #userImageView{
     display: block;
     width: 33rem;
     height: 20rem;

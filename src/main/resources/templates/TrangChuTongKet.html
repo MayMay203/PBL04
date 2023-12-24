@@ -67,8 +67,8 @@
                             <p class="card-text fs-11 text-center fst-italic px-3 m-0 max-line-4" th:text="${#strings.length(myActiviy.getMoTa()) > 100 ? myActiviy.getMoTa().substring(0, 100) + '...' : myActiviy.getMoTa()}">
                             </p>
                             <div  th:each="summ: ${summaryList}">
-                                <div  th:if="${myActiviy.getId()==summ.getMaHD().getId()}" >
-                                    <div class="fs-11 p-2 text-decoration-none green_dark-color fw-medium fst-italic px-6">
+                                <div  th:if="${myActiviy.getId()==summ.getMaHD().getId()}">
+                                    <div class="fs-11 p-2 text-decoration-none green_dark-color fw-medium fst-italic px-6 d-flex justify-content-center align-items-center">
                                         <a class="btn-myacti-summary" th:href="@{/View-Summary(id=${myActiviy.getId()})}" >Xem tổng kết</a>
                                     </div>
                                 </div>
