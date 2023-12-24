@@ -210,7 +210,7 @@ async function saveEvaluation(e) {
             <div class="container p-2 col-6"></div>
         `
         }
-        for (var member of member_evaluate) {
+        for (member of member_evaluate) {
             member.addEventListener("click", formEvaluation)
         }
         // Ham chuc nang danh gia thanh vien

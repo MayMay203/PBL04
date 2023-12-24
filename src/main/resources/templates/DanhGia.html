@@ -111,10 +111,10 @@
         <div class="container flex-1 bg-green radius-lghalf p-0">
             <div class="container mh-100 overflow-y-auto hosted-slider" th:if="${actListOfHost.size()!=0}">
                 <div class="container mh-15 w-100 position-relative cursor-pointer content-right my-4 origanize-act-item" th:each="activity:${actListOfHost}">
-                    <img class="w-100 start-0 end-0 radius-lghalf h-45" th:src="${activity.getAnh()}"  alt="" />
-                    <div class="container position-absolute bottom-0 start-0 end-0 bg-white radius-1 mh-60 w-85 box-shadow_8">
+                    <img class="w-100 start-0 end-0 radius-lghalf h-13rem" th:src="${activity.getAnh()}"  alt="" />
+                    <div class="container position-absolute bottom-0 start-0 end-0 bg-white radius-1 mh-50 w-85 box-shadow_8">
                         <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic fs-6 green-color" th:text="${activity.getTenhd()}"></h3>
-                        <p class="card-text fs-9 text-center fst-italic px-3" th:text="${#strings.length(activity.getMoTa()) > 80 ? activity.getMoTa().substring(0, 70) + '...' : activity.getMoTa()}">
+                        <p class="card-text fs-9 text-center fst-italic px-3" th:text="${#strings.length(activity.getMoTa()) > 70 ? activity.getMoTa().substring(0, 70) + '...' : activity.getMoTa()}">
                         </p>
                         <button
                              class="fs-7 p-0 text-decoration-none green_light-color fw-medium fst-italic px-2 mb-3 no-border radius-1 bg-green-light w-100 btn_eva_member" th:attr="data-value=${activity.getId()}">Đánh
