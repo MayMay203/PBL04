@@ -103,9 +103,12 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     @Modifying
     @Query("UPDATE Hoatdong e SET e.tinhTrangHD = 2 WHERE e.id=:maHD")
     void updateTrangThaiByNgayAndTrangThai(Integer maHD);
-   @Query("select hd from Hoatdong hd where hd.tenhd like %:nameAct% and hd.tinhTrangHD=1")
+    @Query("select hd from Hoatdong hd where hd.tenhd like %:nameAct% and hd.tinhTrangHD=1")
     List<Hoatdong> getActivityByNameAct(String nameAct);
     @Query("select h from Hoatdong h where h.tinhTrangHD = 1")
     List<Hoatdong> getAllActivityNotOccured();
-
+    @Transactional
+    @Modifying
+    @Query("UPDATE Hoatdong e SET e.tinhTrangHD = 3 WHERE e.id=:maHD")
+    void TransActivityToFinish(Integer maHD);
 }
