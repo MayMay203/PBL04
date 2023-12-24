@@ -536,6 +536,7 @@ $(document).ready(function() {
                     check = true;
                     hideButtons();
                     console.log("Huy bai dang thanh cong");
+                    location.reload();
                 },
                 error: function (error) {
                     console.log(error);
