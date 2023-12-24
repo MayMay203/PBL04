@@ -57,8 +57,8 @@ async function viewActByLocation(e){
                 body.classList.add("disable-scrollbar")
                 actDetail.classList.remove("no-display");
                 actList.forEach(act => {
-                    var startTime = new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(act.thoiGianBD))
-                    var endTime = new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(act.thoiGianKT))
+                    var startTime = new Intl.DateTimeFormat("vi-VN",{ day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(act.thoiGianBD))
+                    var endTime = new Intl.DateTimeFormat("vi-VN",{ day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(act.thoiGianKT))
                     const div = document.createElement("div")
                     div.classList.add("fs-9", "display-flex")
                     div.innerHTML = `

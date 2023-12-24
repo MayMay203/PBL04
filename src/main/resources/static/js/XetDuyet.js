@@ -600,7 +600,7 @@ function reloadSugg(suggList){
     const suggDiv = document.querySelector(".suggestion")
     suggDiv.innerHTML = ''
     suggList.forEach(sugg=>{
-        const suggTime = new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(sugg.thoiGianDeXuat))
+        const suggTime = new Intl.DateTimeFormat("vi-VN",{ day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(sugg.thoiGianDeXuat))
         suggDiv.innerHTML+=
             `
                     <div class="container d-flex align-items-center p-3 border_bottom-solid">

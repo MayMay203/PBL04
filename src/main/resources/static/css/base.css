@@ -626,8 +626,12 @@ body {
     width: 45rem !important;
 }
 
-.mh-12{
-    min-height: 15rem!important;
+.h-45rem{
+    height: 20rem!important;
+}
+
+.mh-15{
+    max-height: 15rem!important;
 }
 
 .h-2_3{

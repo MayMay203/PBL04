@@ -28,7 +28,7 @@ search_input.addEventListener("keyup",  async e => {
                   //const moTa = sugg.moTa.length > 150 ? sugg.moTa.substring(0, 150) + "..." : sugg.moTa
                   const activity = document.createElement("div");
                   activity.className = "container px-5 activity";
-                  const time = new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(sugg.thoiGianDeXuat))
+                  const time = new Intl.DateTimeFormat("vi-VN",{ day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(sugg.thoiGianDeXuat))
                   activity.innerHTML =
                       `
                         <div class="container d-flex align-items-center p-3 border_bottom-solid">
