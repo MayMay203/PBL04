@@ -60,60 +60,63 @@
 </div>
 
     <!-- Content -->
-    <div class="container d-flex justify-content-between">
-        <h2 class="fs-3 mb-sm-3 ms-5">HOẠT ĐỘNG ĐÃ THAM GIA</h2>
-        <h2 class="fs-3 pt-sm-3 text-center me-4">HOẠT ĐỘNG ĐÃ TỔ CHỨC</h2>
+    <div class="container px-5 d-flex justify-content-between">
+        <h2 class="fs-3 mb-sm-3 px-3">HOẠT ĐỘNG ĐÃ THAM GIA</h2>
+        <h2 class="fs-3 pt-sm-3 text-center me-1">HOẠT ĐỘNG ĐÃ TỔ CHỨC</h2>
     </div>
     <div class="container d-flex content">
         <!-- Left -->
-        <div class="container p-5 pt-0 fs-6 mx--2 w-70 act-slider">
-            <div class="container-item" th:if="${actListOfMember.size()!=0}" th:each="i : ${#numbers.sequence(0, actListOfMember.size() div 4 + ((actListOfMember.size()%4 > 0) ? 1 : 0) - 1)}">
-                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<actListOfMember.size()}">
-                    <img th:src="@{${actListOfMember.get((4*i)+j).getAnh()}}" class="float-start w-15 h-80 act-image col-2" alt="" />
-                    <div class="card border-0 col-10">
-                        <div class="card-body fs-7">
-                            <div class="card-title fs-6 fw-bolder green-color" th:text="${actListOfMember.get((4*i)+j).getTenhd()}">
-                            </div>
-                            <div class="card-text fs-8" th:text="${#strings.length(actListOfMember.get(4*i+j).getMoTa()) > 200 ? actListOfMember.get(4*i+j).getMoTa().substring(0, 200) + '...' : actListOfMember.get(4*i+j).getMoTa()}"></div>
-                            <div class="card-text">
-                                <i class="bi bi-calendar2 m-1 green-color" th:text="'   ' + ${#temporals.format(actListOfMember.get(4*i+j).getThoiGianBD(),'dd/MM/yyyy')} + ' - ' + ${#temporals.format(actListOfMember.get(4*i+j).getThoiGianKT(),'dd/MM/yyyy')}"></i>
-                            </div>
-                            <div class="card-link">
-                                <a class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-2 no-border fs-7 view-summary"  id="btnSummary" th:attr="data-hoatdong-id=${actListOfMember.get(4*i+j).getId()}">
-                                    Xem tổng kết...</a>
+        <div class="container p-5 pt-0 fs-6 mx--2 w-70 ">
+            <div th:if="${not #lists.isEmpty(actListOfMember)}" class="act-slider">
+                <div class="container-item" th:if="${not #lists.isEmpty(actListOfMember)}" th:each="i : ${#numbers.sequence(0, actListOfMember.size() div 4 + ((actListOfMember.size()%4 > 0) ? 1 : 0) - 1)}">
+                    <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<actListOfMember.size()}">
+                        <img th:src="@{${actListOfMember.get((4*i)+j).getAnh()}}" class="float-start w-15 h-80 act-image col-2" alt="" />
+                        <div class="card border-0 col-10">
+                            <div class="card-body fs-7">
+                                <div class="card-title fs-6 fw-bolder green-color" th:text="${actListOfMember.get((4*i)+j).getTenhd()}">
+                                </div>
+                                <div class="card-text fs-8" th:text="${#strings.length(actListOfMember.get(4*i+j).getMoTa()) > 200 ? actListOfMember.get(4*i+j).getMoTa().substring(0, 200) + '...' : actListOfMember.get(4*i+j).getMoTa()}"></div>
+                                <div class="card-text">
+                                    <i class="bi bi-calendar2 m-1 green-color" th:text="'   ' + ${#temporals.format(actListOfMember.get(4*i+j).getThoiGianBD(),'dd/MM/yyyy')} + ' - ' + ${#temporals.format(actListOfMember.get(4*i+j).getThoiGianKT(),'dd/MM/yyyy')}"></i>
+                                </div>
+                                <div class="card-link">
+                                    <a
+                                            class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-2 no-border fs-7 view-summary"  id="btnSummary" th:attr="data-hoatdong-id=${actListOfMember.get(4*i+j).getId()}">
+                                        Xem tổng kết...</a>
 
-                            </div>
-                            <button class="card-text bg-btn height-2rem radius-lghalf white-color fs-9 p-1 pleft-6 fs-8 btn-evaluate w-100 no-border" th:attr="data-value=${actListOfMember.get(4*i+j).getId()},data-account = ${account.getId()}">
+                                </div>
+                                <button class="card-text bg-btn height-2rem radius-lghalf white-color fs-9 p-1 pleft-6 fs-8 btn-evaluate w-100 no-border" th:attr="data-value=${actListOfMember.get(4*i+j).getId()},data-account = ${account.getId()}">
                                     Đánh giá
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="noSummaryModal" tabindex="-1" role="dialog" aria-labelledby="joinconfirmModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmModalLabel">Thông báo</h5>
+                            <button type="button" class="closeModalLogout" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
                             </button>
+                        </div>
+                        <div class="modal-body"  id="modalBodyContentNoti">
+                            Hoạt động này chưa có tổng kết
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="noSummaryModal" tabindex="-1" role="dialog" aria-labelledby="joinconfirmModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="confirmModalLabel">Thông báo</h5>
-                        <button type="button" class="closeModalLogout" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body"  id="modalBodyContentNoti">
-                        Hoạt động này chưa có tổng kết
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Right -->
-        <div class="container flex-1 bg-green radius-lghalf p-0">
+        <div class="container flex-1 radius-lghalf bg-green p-0">
             <div class="container mh-100 overflow-y-auto hosted-slider" th:if="${actListOfHost.size()!=0}">
                 <div class="container mh-15 w-100 position-relative cursor-pointer content-right my-4 origanize-act-item" th:each="activity:${actListOfHost}">
-                    <img class="w-100 start-0 end-0 radius-lghalf h-45" th:src="${activity.getAnh()}"  alt="" />
-                    <div class="container position-absolute bottom-0 start-0 end-0 bg-white radius-1 mh-60 w-85 box-shadow_8">
+                    <img class="w-100 start-0 end-0 radius-lghalf h-13rem" th:src="${activity.getAnh()}"  alt="" />
+                    <div class="container position-absolute bottom-0 start-0 end-0 bg-white radius-1 mh-50 w-85 box-shadow_8">
                         <h3 class="fs-9 card-title py-2 pt-sm-2 text-center fst-italic fs-6 green-color" th:text="${activity.getTenhd()}"></h3>
-                        <p class="card-text fs-9 text-center fst-italic px-3" th:text="${#strings.length(activity.getMoTa()) > 80 ? activity.getMoTa().substring(0, 70) + '...' : activity.getMoTa()}">
+                        <p class="card-text fs-9 text-center fst-italic px-3" th:text="${#strings.length(activity.getMoTa()) > 70 ? activity.getMoTa().substring(0, 70) + '...' : activity.getMoTa()}">
                         </p>
                         <button
                              class="fs-7 p-0 text-decoration-none green_light-color fw-medium fst-italic px-2 mb-3 no-border radius-1 bg-green-light w-100 btn_eva_member" th:attr="data-value=${activity.getId()}">Đánh
@@ -171,11 +174,221 @@
 
                 <!-- Content comment -->
                 <div class="container no-display view-comment">
+<!--                    <div class="container d-flex justify-content-sm-end p-0 mt-3">-->
+<!--                        <h4 class="fs-9 fw-normal fst-italic me-4 text-center">Hoạt động<br>hữu ích</h4>-->
+<!--                        <h4 class="fs-9 fw-normal fst-italic me-4 text-center">Cần tổ chức<br>thường xuyên</h4>-->
+<!--                        <h4 class="fs-9 fw-normal fst-italic me-4 text-center">Cần tổ chức<br>rộng rãi</h4>-->
+<!--                    </div>-->
 
+                    <!-- Comment -->
+<!--                    <div class="container d-flex mb-3 show-comment">-->
+<!--                        &lt;!&ndash; Text comment &ndash;&gt;-->
+<!--                        <div class="container radius-1 bg-green">-->
+<!--                            <div class="container p-0">-->
+<!--                                <img src="../static/images/avt1.jpn" class="w-2_5 h-2_5 p-1 radius-1_8" alt="">-->
+<!--                                <h7 class="green-color fs-11 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>-->
+<!--                            </div>-->
+<!--                            <p class="fs-10 fst-italic m-0 ml-2_5">Một trải nghiệm tuyệt vời. Love youuu!</p>-->
+<!--                            <p class="green_light-color fst-italic fs-10 ml-2_5">20 ngày trước</p>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Check comment &ndash;&gt;-->
+<!--                        <div class="container d-flex align-items-center justify-content-center">-->
+<!--                            <i class="bi bi-check-lg green_light-color flex-1 px-4 fs-3 fw-bold"></i>-->
+<!--                            <i class="bi bi-x-lg green_light-color flex-1 px-4 fs-5 fw-bold"></i>-->
+<!--                            <i class="bi bi-check-lg green_light-color flex-1 px-4 fs-3 fw-bold"></i>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="container d-flex mb-3">-->
+<!--                        &lt;!&ndash; Text comment &ndash;&gt;-->
+<!--                        <div class="container radius-1 bg-green">-->
+<!--                            <div class="container p-0">-->
+<!--                                <img src="../static/images/avt2.jpn" class="w-2_5 h-2_5 p-1 radius-1_8" alt="">-->
+<!--                                <h7 class="green-color fs-11 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>-->
+<!--                            </div>-->
+<!--                            <p class="fs-10 fst-italic m-0 ml-2_5">Thật may mắn khi được tham gia hoạt động ý nghĩa như vậy. Cảm ơn-->
+<!--                                ban tổ chức!</p>-->
+<!--                            <p class="green_light-color fst-italic fs-10 ml-2_5">20 ngày trước</p>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Check comment &ndash;&gt;-->
+<!--                        <div class="container d-flex align-items-center justify-content-center">-->
+<!--                            <i class="bi bi-check-lg green_light-color flex-1 px-4 fs-3 fw-bold"></i>-->
+<!--                            <i class="bi bi-check-lg green_light-color flex-1 px-4 fs-3 fw-bold"></i><i-->
+<!--                                class="bi bi-check-lg green_light-color flex-1 px-4 fs-3 fw-bold"></i>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
                 <!-- Evaluate -->
                 <div class="container no-display evaluation">
                     <div class="container d-flex flex-wrap m-2 justify-content-start members-activity">
+
+<!--                        <div class="container p-2 col-6 radius-1_8 position-relative member-evaluate">-->
+<!--                            <div class="container d-flex">-->
+<!--                                <img class="w-2_5 h-2_5 ml-0_1 radius-1_8 p-1" src="../static/images/avt2.jpn" alt="">-->
+<!--                                <h4 class="green-color fs-7 my-1 mt-1 p-2">Nguyễn Trung Thành</h4>-->
+<!--                                <h10 class="fs-7 p-2">5<i class="bi bi-star-fill yellow-color fs-7 py-1"></i></h10>-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; Form evaluate &ndash;&gt;-->
+<!--                            <div-->
+<!--                                    class="container bg-light radius-1 p-1 position-absolute w-75 top-75 start-0 end-0 no-display form-evaluate">-->
+<!--                                <div class="container px-4 py-2">-->
+<!--                                    <p class="fs-9 grey-dark-color">Rất tích cực <input type="checkbox"></p>-->
+<!--                                    <p class="fs-9 grey-dark-color">Tích cực <input type="checkbox"></p>-->
+<!--                                    <p class="fs-9 grey-dark-color m-0">Không tích cực <input type="checkbox"></p>-->
+<!--                                </div>-->
+<!--                                <div class="container d-flex justify-content-center">-->
+<!--                                    <div class="btn bg-btn fs-11 fw-bold white-color p-1 px-2 m-2 button-exit">Thoát</div>-->
+<!--                                    <div class="btn bg-btn fs-11 fw-bold white-color p-1 px-3 m-2 button-save">Lưu</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="container p-2 col-6 radius-1_8 position-relative member-evaluate">-->
+<!--                            <div class="container d-flex">-->
+<!--                                <img class="w-2_5 h-2_5 ml-0_1 radius-1_8 p-1" src="../static/images/avt2.jpn" alt="">-->
+<!--                                <h4 class="green-color fs-7 my-1 mt-1 p-2">Nguyễn Trung Thành</h4>-->
+<!--                                <h10 class="fs-7 p-2">5<i class="bi bi-star-fill yellow-color fs-7 py-1"></i></h10>-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; Form evaluate &ndash;&gt;-->
+<!--                            <div-->
+<!--                                    class="container bg-light radius-1 p-1 position-absolute w-75 top-75 start-0 end-0 no-display form-evaluate">-->
+<!--                                <div class="container px-4 py-2">-->
+<!--                                    <p class="fs-9 grey-dark-color">Rất tích cực <input type="checkbox"></p>-->
+<!--                                    <p class="fs-9 grey-dark-color">Tích cực <input type="checkbox"></p>-->
+<!--                                    <p class="fs-9 grey-dark-color m-0">Không tích cực <input type="checkbox"></p>-->
+<!--                                </div>-->
+<!--                                <div class="container d-flex justify-content-center">-->
+<!--                                    <div class="btn bg-btn fs-11 fw-bold white-color p-1 px-2 m-2 btn-exit">Thoát</div>-->
+<!--                                    <div class="btn bg-btn fs-11 fw-bold white-color p-1 px-3 m-2 btn-save">Lưu</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="container p-2 col-6 radius-1_8 position-relative member-evaluate">-->
+<!--                            <div class="container d-flex">-->
+<!--                                <img class="w-2_5 h-2_5 ml-0_1 radius-1_8 p-1" src="../static/images/avt2.jpn" alt="">-->
+<!--                                <h4 class="green-color fs-7 my-1 mt-1 p-2">Nguyễn Trung Thành</h4>-->
+<!--                                <h10 class="fs-7 p-2">5<i class="bi bi-star-fill yellow-color fs-7 py-1"></i></h10>-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; Form evaluate &ndash;&gt;-->
+<!--                            <div-->
+<!--                                    class="container bg-light radius-1 p-1 position-absolute w-75 top-75 start-0 end-0 no-display form-evaluate">-->
+<!--                                <div class="container px-4 py-2">-->
+<!--                                    <p class="fs-9 grey-dark-color">Rất tích cực <input type="checkbox"></p>-->
+<!--                                    <p class="fs-9 grey-dark-color">Tích cực <input type="checkbox"></p>-->
+<!--                                    <p class="fs-9 grey-dark-color m-0">Không tích cực <input type="checkbox"></p>-->
+<!--                                </div>-->
+<!--                                <div class="container d-flex justify-content-center">-->
+<!--                                    <div class="btn bg-btn fs-11 fw-bold white-color p-1 px-2 m-2 btn-exit">Thoát</div>-->
+<!--                                    <div class="btn bg-btn fs-11 fw-bold white-color p-1 px-3 m-2 btn-save">Lưu</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="container p-2 col-6 radius-1_8 position-relative member-evaluate">-->
+<!--                            <div class="container d-flex">-->
+<!--                                <img class="w-2_5 h-2_5 ml-0_1 radius-1_8 p-1" src="../static/images/avt2.jpn" alt="">-->
+<!--                                <h4 class="green-color fs-7 my-1 mt-1 p-2">Nguyễn Trung Thành</h4>-->
+<!--                                <h10 class="fs-7 p-2">5<i class="bi bi-star-fill yellow-color fs-7 py-1"></i></h10>-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; Form evaluate &ndash;&gt;-->
+<!--                            <div-->
+<!--                                    class="container bg-light radius-1 p-1 position-absolute w-75 top-75 start-0 end-0 no-display form-evaluate">-->
+<!--                                <div class="container px-4 py-2">-->
+<!--                                    <p class="fs-9 grey-dark-color">Rất tích cực <input type="checkbox"></p>-->
+<!--                                    <p class="fs-9 grey-dark-color">Tích cực <input type="checkbox"></p>-->
+<!--                                    <p class="fs-9 grey-dark-color m-0">Không tích cực <input type="checkbox"></p>-->
+<!--                                </div>-->
+<!--                                <div class="container d-flex justify-content-center">-->
+<!--                                    <div class="btn bg-btn fs-11 fw-bold white-color p-1 px-2 m-2 btn-exit">Thoát</div>-->
+<!--                                    <div class="btn bg-btn fs-11 fw-bold white-color p-1 px-3 m-2 btn-save">Lưu</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="container p-2 col-6 radius-1_8 position-relative member-evaluate">-->
+<!--                            <div class="container d-flex">-->
+<!--                                <img class="w-2_5 h-2_5 ml-0_1 radius-1_8 p-1" src="../static/images/avt2.jpn" alt="">-->
+<!--                                <h4 class="green-color fs-7 my-1 mt-1 p-2">Nguyễn Trung Thành</h4>-->
+<!--                                <h10 class="fs-7 p-2">5<i class="bi bi-star-fill yellow-color fs-7 py-1"></i></h10>-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; Form evaluate &ndash;&gt;-->
+<!--                            <div-->
+<!--                                    class="container bg-light radius-1 p-1 position-absolute w-75 top-75 start-0 end-0 no-display form-evaluate">-->
+<!--                                <div class="container px-4 py-2">-->
+<!--                                    <p class="fs-9 grey-dark-color">Rất tích cực <input type="checkbox"></p>-->
+<!--                                    <p class="fs-9 grey-dark-color">Tích cực <input type="checkbox"></p>-->
+<!--                                    <p class="fs-9 grey-dark-color m-0">Không tích cực <input type="checkbox"></p>-->
+<!--                                </div>-->
+<!--                                <div class="container d-flex justify-content-center">-->
+<!--                                    <div class="btn bg-btn fs-11 fw-bold white-color p-1 px-2 m-2 btn-exit">Thoát</div>-->
+<!--                                    <div class="btn bg-btn fs-11 fw-bold white-color p-1 px-3 m-2 btn-save">Lưu</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="container p-2 col-6 radius-1_8 position-relative member-evaluate">-->
+<!--                            <div class="container d-flex">-->
+<!--                                <img class="w-2_5 h-2_5 ml-0_1 radius-1_8 p-1" src="../static/images/avt2.jpn" alt="">-->
+<!--                                <h4 class="green-color fs-7 my-1 mt-1 p-2">Nguyễn Trung Thành</h4>-->
+<!--                                <h10 class="fs-7 p-2">5<i class="bi bi-star-fill yellow-color fs-7 py-1"></i></h10>-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; Form evaluate &ndash;&gt;-->
+<!--                            <div-->
+<!--                                    class="container bg-light radius-1 p-1 position-absolute w-75 top-75 start-0 end-0 no-display form-evaluate">-->
+<!--                                <div class="container px-4 py-2">-->
+<!--                                    <p class="fs-9 grey-dark-color">Rất tích cực <input type="checkbox"></p>-->
+<!--                                    <p class="fs-9 grey-dark-color">Tích cực <input type="checkbox"></p>-->
+<!--                                    <p class="fs-9 grey-dark-color m-0">Không tích cực <input type="checkbox"></p>-->
+<!--                                </div>-->
+<!--                                <div class="container d-flex justify-content-center">-->
+<!--                                    <div class="btn bg-btn fs-11 fw-bold white-color p-1 px-2 m-2 btn-exit">Thoát</div>-->
+<!--                                    <div class="btn bg-btn fs-11 fw-bold white-color p-1 px-3 m-2 btn-save">Lưu</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="container p-2 col-6 radius-1_8 position-relative member-evaluate">-->
+<!--                            <div class="container d-flex">-->
+<!--                                <img class="w-2_5 h-2_5 ml-0_1 radius-1_8 p-1" src="../static/images/avt2.jpn" alt="">-->
+<!--                                <h4 class="green-color fs-7 my-1 mt-1 p-2">Nguyễn Trung Thành</h4>-->
+<!--                                <h10 class="fs-7 p-2">5<i class="bi bi-star-fill yellow-color fs-7 py-1"></i></h10>-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; Form evaluate &ndash;&gt;-->
+<!--                            <div-->
+<!--                                    class="container bg-light radius-1 p-1 position-absolute w-75 top-75 start-0 end-0 no-display form-evaluate">-->
+<!--                                <div class="container px-4 py-2">-->
+<!--                                    <p class="fs-9 grey-dark-color">Rất tích cực <input type="checkbox"></p>-->
+<!--                                    <p class="fs-9 grey-dark-color">Tích cực <input type="checkbox"></p>-->
+<!--                                    <p class="fs-9 grey-dark-color m-0">Không tích cực <input type="checkbox"></p>-->
+<!--                                </div>-->
+<!--                                <div class="container d-flex justify-content-center">-->
+<!--                                    <div class="btn bg-btn fs-11 fw-bold white-color p-1 px-2 m-2 btn-exit">Thoát</div>-->
+<!--                                    <div class="btn bg-btn fs-11 fw-bold white-color p-1 px-3 m-2 btn-save">Lưu</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="container p-2 col-6 radius-1_8 position-relative member-evaluate">-->
+<!--                            <div class="container d-flex">-->
+<!--                                <img class="w-2_5 h-2_5 ml-0_1 radius-1_8 p-1" src="../static/images/ava" alt="">-->
+<!--                                <h4 class="green-color fs-7 my-1 mt-1 p-2">Nguyễn Trung Thành</h4>-->
+<!--                                <h10 class="fs-7 p-2">5<i class="bi bi-star-fill yellow-color fs-7 py-1"></i></h10>-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; Form evaluate &ndash;&gt;-->
+<!--                            <div-->
+<!--                                    class="container bg-light radius-1 p-1 position-absolute w-75 top-75 start-0 end-0 no-display form-evaluate">-->
+<!--                                <div class="container px-4 py-2">-->
+<!--                                    <p class="fs-9 grey-dark-color">Rất tích cực <input type="checkbox"></p>-->
+<!--                                    <p class="fs-9 grey-dark-color">Tích cực <input type="checkbox"></p>-->
+<!--                                    <p class="fs-9 grey-dark-color m-0">Không tích cực <input type="checkbox"></p>-->
+<!--                                </div>-->
+<!--                                <div class="container d-flex justify-content-center">-->
+<!--                                    <div class="btn bg-btn fs-11 fw-bold white-color p-1 px-2 m-2 btn-exit">Thoát</div>-->
+<!--                                    <div class="btn bg-btn fs-11 fw-bold white-color p-1 px-3 m-2 btn-save">Lưu</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
 
                     </div>
                 </div>
@@ -219,6 +432,8 @@
     </div>
 </div>
 </div>
+<div style="margin-bottom: 4rem"></div>
+<div id="myFooter" th:include="Footer :: html" ></div>
 </body>
 <script
         type="text/javascript"

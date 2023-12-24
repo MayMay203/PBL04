@@ -378,8 +378,8 @@ body {
     resize: none !important;
 }
 
-.mh-60{
-    min-height: 60%!important;
+.mh-50{
+    min-height: 50%!important;
 }
 
 .btn-send:hover{
@@ -626,8 +626,8 @@ body {
     width: 45rem !important;
 }
 
-.h-45rem{
-    height: 20rem!important;
+.h-13rem{
+    height: 13rem!important;
 }
 
 .mh-15{

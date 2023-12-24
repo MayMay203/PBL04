@@ -1,3 +1,7 @@
+.no-display{
+    display: none;
+}
+
 .logo{
     margin-left: 15rem;
     font-size: 3rem;
@@ -5,6 +9,11 @@
     background: linear-gradient(to bottom, #1a4d51, #0E5416, #8BFF44);
     -webkit-background-clip: text; /* Cho trình duyệt WebKit (Chrome, Safari) */
     color: transparent;
+}
+.logo-header{
+    /*transform: rotate(-20deg);*/
+    width: 3rem;
+    height: 3rem;
 }
 .sticky {
     position: fixed;
@@ -117,4 +126,22 @@
     background-color: var(--main-color);
     border: none;
     width: 6rem;
+}
+/*-------------------alert thông báo chung------------------*/
+.custom-alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.custom-alert img {
+    width: 30px; /* Điều chỉnh kích thước của icon tùy theo yêu cầu */
+    height: 30px;
+    margin-bottom: 10px;
 }

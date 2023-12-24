@@ -2,7 +2,7 @@
     --white-color: #fff;
     --black-color: #000;
     --text-color: #333;
-    --main-color:  #0E5416;
+    --main-color: #136b1d;
 
     --main-width: 1170px;
     --main-padding: 150px;
@@ -23,6 +23,11 @@ html{
     /* font-family: 'Roboto', sans-serif; */
     box-sizing: border-box;
 }
+
 .clear{
     clear: both;
+}
+
+body {
+    overflow-x: hidden;
 }

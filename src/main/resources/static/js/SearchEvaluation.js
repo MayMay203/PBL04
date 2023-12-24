@@ -29,8 +29,8 @@ search_input.addEventListener("keyup",  async e => {
                            innerContainer.className = "container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid";
                            innerContainer.innerHTML =
                                `
-                    <img src="${actListOfMember[index].anh}" class="float-start w-10 h-80" alt="" />
-                    <div class="card border-0">
+                    <img src="${actListOfMember[index].anh}" class="float-start col-2 h-80" alt="" />
+                    <div class="card border-0 col-10">
                         <div class="card-body fs-7">
                             <div class="card-title fs-6 fw-bolder green-color">${actListOfMember[index].tenhd}</div>
                             <div class="card-text my-0">${moTa}</div>
@@ -39,7 +39,7 @@ search_input.addEventListener("keyup",  async e => {
                             </div>
                             <div class="card-link">
                                 <a
-                                   class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-2 no-border fs-7 view-summary" href="/View-Summary/id=${actListOfMember[index].id}">
+                                   class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-2 no-border fs-7 view-summary" href="/View-Summary?id=${actListOfMember[index].id}">
                                     Xem tổng kết...</a>
                             </div>
                            <button class="card-text bg-btn height-2rem radius-lghalf white-color fs-9 p-1 pleft-6 fs-8 btn-evaluate w-100 no-border" data-value="${actListOfMember[index].id}">

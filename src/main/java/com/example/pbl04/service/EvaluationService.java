@@ -17,8 +17,9 @@ public interface EvaluationService {
 
     Integer countEvaByIdAct(Integer IdAct);
 
+    List<List<Danhgia>> getEvaluationByIdActList(List<Hoatdong> activities);
 
-    List<Danhgia> getEvaluationByIdActList(List<Hoatdong> activities);
+
 
     Danhgia getEvaluationByIDHDTK(Integer IdAct,Integer IdAcc);
     void evaluateActivity(Danhgia evaluation);

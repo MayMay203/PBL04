@@ -64,11 +64,11 @@ async function viewActByLocation(e){
                     div.innerHTML = `
                 <div class="container px-2">
                     <div class="container d-flex align-items-center p-1 border_bottom-solid d-flex">
-                    <img src="${act.anh}" class="float-start w-10 h-80" alt="" />
-                        <div class="container flex-5">
+                    <img src="${act.anh}" class="float-start col-2 h-80" alt="" />
+                        <div class="container col-10">
                             <h3 class="green-color fs-5 p-0 mb-0">${act.maChuDe.tenChuDe}</h3>
                             <p class="mb-0 fs-6 p-0">${act.tenhd}</p>
-                            <p class="mb-0 fs-7">${act.moTa}</p>
+                            <p class="mb-0 fs-7">${act.moTa.length>200?act.moTa.substring(0,200)+"...":act.moTa}</p>
                             <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green px-1"></i>${act.diaDiem}</p>
                             <p class="fs-7 fst-italic my-1">
                                 <i class="bi bi-calendar2 m-1 green-color"></i>${startTime + '  -  ' + endTime}</p>              
