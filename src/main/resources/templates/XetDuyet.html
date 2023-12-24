@@ -29,8 +29,8 @@
         <div class="tab-content">
             <div class="tab-pane active">
                 <div class="d-flex">
-                    <div id="btnActivityNeedConfirm" class="p-2 flex-fill btnActivity">Hoạt động đã tổ chức</div>
-                    <div id="btnActivityParticipate" class="p-2 flex-fill btnActivity">Hoạt động đã tham gia</div>
+                    <div id="btnActivityNeedConfirm" class="p-2 flex-fill btnActivity">Hoạt động tổ chức</div>
+                    <div id="btnActivityParticipate" class="p-2 flex-fill btnActivity">Hoạt động tham gia</div>
                     <div id="btnConfirmStage0" class="p-2 flex-fill btnActivity" th:if="${account.getLoaiTK()}">Duyệt bài đăng</div>
                     <div id="btnConfirmStage1" class="p-2 flex-fill btnActivity">Duyệt hoạt động</div>
                     <div id="btnCancelStage1" class="p-2 flex-fill btnActivity" th:if="${account.getLoaiTK()}">Hoạt động đã hủy</div>
@@ -53,8 +53,8 @@
                                             <div>
                                                 <i class="fs-7 my-1">Tình trạng:
                                                     <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 0}"> Đang chờ xét duyệt</i>
-                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 1 and listmyActivity.get(4*i+j).getTinhTrangHD() == 1}"> Chưa diễn ra</i>
-                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 2 and listmyActivity.get(4*i+j).getTinhTrangHD() == 1}"> Chưa diễn ra</i>
+                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 1 and listmyActivity.get(4*i+j).getTinhTrangHD() == 1}"> Chưa duyệt hoạt động, Chưa diễn ra</i>
+                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 2 and listmyActivity.get(4*i+j).getTinhTrangHD() == 1}"> Đã duyệt hoạt động, Chưa diễn ra</i>
                                                     <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == -1 and listmyActivity.get(4*i+j).getTinhTrangHD() == -1}"> Bị hủy</i>
                                                     <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 2 and listmyActivity.get(4*i+j).getTinhTrangHD() == 2}"> Đang diễn ra</i>
                                                     <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 2 and listmyActivity.get(4*i+j).getTinhTrangHD() == 3}"> Đã kết thúc</i>
@@ -120,7 +120,7 @@
                                                   class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5 viewDetailActivity" th:attr="data-value=${listPost.get(4*i+j).getId()}" >Xem chi tiết...</button>
                                       </div>
                                       <div class="custom-btn pt-2">
-                                          <button class="custom-btnConfirm " id="buttonConfirmPostStage0">Duyệt bài đăng</button>
+                                          <button class="custom-btnConfirm buttonConfirmPostStage0"  th:attr="data-hoatdong-id=${listPost.get(4*i+j).id}">Duyệt bài đăng</button>
                                           <button class="custom-btnConfirm btnCancelPost" id="buttonCancelPostStage0" th:attr="data-value=${listPost.get(4*i+j).id}">Hủy bài đăng</button>
                                       </div>
                                       <div class="modal fade" id="confirmStage0" tabindex="-1" role="dialog" aria-labelledby="confirmStage0ModalLabel" aria-hidden="true">
@@ -136,7 +136,7 @@
                                                       Xác nhận xét duyệt hoạt động ?
                                                   </div>
                                                   <div class="modal-footer">
-                                                      <button type="submit" class="btn btn-danger"  id="btnConfirmActivityStage0"  th:attr="data-hoatdong-id=${listPost.get(4*i+j).id}">Duyệt bài</button>
+                                                      <button type="button" class="btn btn-danger custom-btnConfirm btnConfirmActivityStage0"  th:attr="data-hoatdong-id=${listPost.get(4*i+j).id}">Duyệt bài</button>
                                                       <button type="button" class="close closeModalLogout btn btn-secondary" data-dismiss="modal" >Hủy</button>
                                                   </div>
                                               </div>
@@ -163,7 +163,7 @@
                                         <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5"  id="btnViewActivityConfirm" th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).getId()}" >Xem chi tiết...</button>
                                     </div>
                                     <div class="custom-btn pt-2">
-                                        <button class="custom-btnConfirm" id="buttonConfirmPostStage1" th:attr="data-hoatdong-id=${listmyAcitivityNeedConfirm.get(4*i+j).id}">Duyệt hoạt động</button>
+                                        <button class="custom-btnConfirm buttonConfirmPostStage1"  th:attr="data-hoatdong-id=${listmyAcitivityNeedConfirm.get(4*i+j).id}">Duyệt hoạt động</button>
                                         <button class="custom-btnConfirm btnCancelActivity" th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).id}">Hủy hoạt động</button>
                                     </div>
                                     <div class="modal fade" id="confirmStage1" tabindex="-1" role="dialog" aria-labelledby="confirmStage0ModalLabel" aria-hidden="true">
@@ -195,7 +195,7 @@
                                                     <div class="correct-participant" style="font-size: 1rem">  Xác nhận xét duyệt hoạt động?</div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-danger"  id="btnConfirmActivityStage1"  th:attr="data-hoatdong-id=${listmyAcitivityNeedConfirm.get(4*i+j).id}">Duyệt hoạt động</button>
+                                                    <button type="submit" class="btn btn-danger btnConfirmActivityStage1" >Duyệt hoạt động</button>
                                                     <button type="button" class="close closeModalLogout btn btn-secondary" data-dismiss="modal" >Hủy</button>
                                                 </div>
                                             </div>
@@ -324,7 +324,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btnSave"><i class="bi bi-floppy2"></i> Đồng ý</button>
+                    <button type="submit" class="btnSave "><i class="bi bi-floppy2"></i> Đồng ý</button>
                     <button type="button" class="btnCancel"><i class="bi bi-x-circle-fill"></i> Hủy thay đổi</button>
                 </div>
             </form>

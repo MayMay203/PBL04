@@ -13,21 +13,22 @@ import java.util.List;
 @EnableScheduling
 public class ScheduledTasks {
     private final ActivityRepository activityRepository;
-
+    // Chuyển Chưa diễn ra -> Đang diễn ra khi hoạt động đã được duyệt (Duyệt hoạt động)
     public ScheduledTasks(ActivityRepository activityRepository) {
         this.activityRepository = activityRepository;
     }
 
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 * * * * ?")
     public void checkActivityStatus() {
         List<Hoatdong> activities = activityRepository.getAllActivityNotHappening();
         LocalDate currentDate = LocalDate.now();
         for (Hoatdong activity : activities) {
-            if (currentDate.equals(activity.getThoiGianBD())) {
+            if (currentDate.isAfter(activity.getThoiGianBD())) {
                 activityRepository.updateTrangThaiByNgayAndTrangThai(activity.getId());
             }
         }
     }
+    // Hủy bài đăng đến thời gian mà Bài đăng chưa được duyệt
     @Scheduled(cron = "0 0 0 * * ?")
     public void CancelPostOverdue()
     {
@@ -41,6 +42,7 @@ public class ScheduledTasks {
             }
         }
     }
+    // Hủy hoạt động khi người tổ chức không xác nhận Duyệt hoạt động sau 7 ngày (kể từ thời gian bắt đầu)
     @Scheduled(cron="0 0 0 * * ?")
     public void CancelActivityOverdue()
     {
@@ -55,6 +57,8 @@ public class ScheduledTasks {
             }
         }
     }
+
+    // Chuyển trạng thái hoạt động từ Đang diễn ra -> Đã diễn ra
     @Scheduled(cron="0 0 * * * ?")
     public void TransActivityToFinish()
     {

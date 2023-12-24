@@ -65,7 +65,7 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     List<Hoatdong> getAllActiviyPost();
     @Query("select hd from Dangky dk, Hoatdong hd where hd.id=dk.maHD.id and dk.phanQuyen=true  and dk.maTK.id=:myID ") ////Bao gồm hoạt động chưa xét duyệt, đã xét duyệt, đã huy.....
     List<Hoatdong> getAllMyPostNeedConfirm(Integer myID);
-    @Query("select dk from Dangky dk, Hoatdong hd where hd.id=dk.maHD.id  and dk.maTK.id=:myID and dk.phanQuyen=false")
+    @Query("select dk from Dangky dk, Hoatdong hd where hd.id=dk.maHD.id  and dk.maTK.id=:myID and dk.phanQuyen=false ORDER BY dk.trangThai desc")
     List<Dangky> getListActivityParticipate(Integer myID);
     @Query("select hd from Dangky dk, Hoatdong hd where dk.maHD.id= hd.id and dk.maTK.id =:maTK") //Hoạt động chờ xét duệt được phân loại theo maTK
     List<Hoatdong> getMyActivityConfirm(Integer maTK);

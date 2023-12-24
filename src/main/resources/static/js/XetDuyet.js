@@ -123,11 +123,16 @@ document.addEventListener("DOMContentLoaded", function () {
 })
 
 //-----------------show modal duyet bai dang-------------------------//
+var maDuyetBai;
 $(document).ready(function () {
-    var btnShowModal = document.getElementById("buttonConfirmPostStage0");
-    btnShowModal.addEventListener("click", function () {
-        showConfirmModal();
-    });
+    var btnShowModal = document.getElementsByClassName("buttonConfirmPostStage0");
+    for(btn of btnShowModal){
+        btn.addEventListener("click", async (e) =>{
+            maDuyetBai = e.target.dataset.hoatdongId;
+            showConfirmModal();
+        });
+    }
+
 
     confirmStage0Modal.addEventListener("click", function () {
         closeConfirmModal();
@@ -144,11 +149,11 @@ $(document).ready(function () {
 
 //------------------------------------ Duyệt bài đăng--------------------------//
 $(document).ready(function () {
-    $('#btnConfirmActivityStage0').on('click', function () {
-        var maHD = $(this).data('hoatdong-id');
-        console.log("maHD:", maHD);
-        confirmPost(maHD);
+    $(".btnConfirmActivityStage0").on("click", function() {
+        console.log("maHD:", maDuyetBai);
+        confirmPost(maDuyetBai);
     });
+
     var modalContentUpdated = false;
     function confirmPost(maHD) {
 
@@ -190,36 +195,36 @@ $(document).ready(function () {
 
 
 //--------------------show modal duyet hoat dong------------------//
+var maDuyetHD;
 $(document).ready(function () {
-    var btnShowModal = document.getElementById("buttonConfirmPostStage1");
-    var idhd;
-    btnShowModal.addEventListener("click", async (e) => {
-        idhd = e.target.dataset.hoatdongId;
-        //idhd =  $(this).data('hoatdong-id');
-        var response = await fetch(`/check-participant?maHD=${idhd}`)
-        if(!response.ok){
-            console.log("error:", response.status);
-        } else {
-            var result = await response.json();
-            var hoatdong = result.hoatdong;
-            var sotnv= result.sotnv;
-            var checkParticipant = result.checkParticipant;
-            if(checkParticipant)
-            {
-               // document.getElementsByClassName('incorrect-participant').style.display = 'none';
-                var element = document.getElementsByClassName('incorrect-participant')[0];
-                if (element) {
-                    element.style.display = 'none';
+    var buttonConfirmPostStage1 = document.getElementsByClassName("buttonConfirmPostStage1");
+    for(btn of buttonConfirmPostStage1) {
+        btn.addEventListener("click", async (e) => {
+            maDuyetHD = e.target.dataset.hoatdongId;
+            var response = await fetch(`/check-participant?maHD=${maDuyetHD}`)
+            if (!response.ok) {
+                console.log("error:", response.status);
+            } else {
+                var result = await response.json();
+                var hoatdong = result.hoatdong;
+                var sotnv = result.sotnv;
+                var checkParticipant = result.checkParticipant;
+                if (checkParticipant) {
+                    // document.getElementsByClassName('incorrect-participant').style.display = 'none';
+                    var element = document.getElementsByClassName('incorrect-participant')[0];
+                    if (element) {
+                        element.style.display = 'none';
+                    }
+                    showConfirmModal();
+                } else {
+                    document.getElementById('txt_stnvtt').value = hoatdong.soTNVToiThieu;
+                    document.getElementById('txt_stnvtd').value = hoatdong.soTNVToiDa;
+                    document.getElementById('txt_stnv').value = sotnv;
+                    showConfirmModal();
                 }
-                showConfirmModal();
-            }else{
-                document.getElementById('txt_stnvtt').value= hoatdong.soTNVToiThieu;
-                document.getElementById('txt_stnvtd').value =hoatdong.soTNVToiDa;
-                document.getElementById('txt_stnv').value =sotnv;
-                showConfirmModal();
             }
-        }
-    });
+        });
+    }
 
     confirmStage0Modal.addEventListener("click", function () {
         closeConfirmModal();
@@ -236,10 +241,9 @@ $(document).ready(function () {
 });
 //-----------------------Duyet hoat dong--------------------------//
 $(document).ready(function () {
-    $('#btnConfirmActivityStage1').on('click', function () {
-        var maHD = $(this).data('hoatdong-id');
-        console.log("maHD:", maHD);
-        confirmPost(maHD);
+    $('.btnConfirmActivityStage1').on('click', function () {
+        console.log("maHD:", maDuyetHD);
+        confirmPost(maDuyetHD);
     });
     var modalContentUpdated = false;
     function confirmPost(maHD) {
