@@ -34,7 +34,7 @@ public class ConfirmController {
         this.memberService = memberService;
         this.suggestionService = suggestionService;
     }
-        @GetMapping("xet-duyet-hoat-dong")
+        @GetMapping("xet-duyet")
         public String showConfirmActivity(Model model, HttpSession session)
         {
             sessionService.createSessionModel(model, session);
