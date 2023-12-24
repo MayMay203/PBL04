@@ -67,16 +67,19 @@ public class EvaluationServiceImple implements EvaluationService {
        return evaluationRepo.countEvaluation(IdAct);
     }
 
+
     @Override
-    public List<Danhgia> getEvaluationByIdActList(List<Hoatdong> activities) {
-        List<Danhgia> evaluations = new ArrayList<>();
-        Danhgia evaluation;
-        for(Hoatdong activity : activities){
-            evaluation = (Danhgia) evaluationRepo.getEvaluationByIdAct(activity.getId());
-            evaluations.add(evaluation);
+    public List<List<Danhgia>> getEvaluationByIdActList(List<Hoatdong> activities) {
+        List<List<Danhgia>> evaluations = new ArrayList<>();
+
+        for (Hoatdong activity : activities) {
+            List<Danhgia> evaluationList = evaluationRepo.getEvaluationByIdAct(activity.getId());
+            evaluations.add(evaluationList);
         }
+
         return evaluations;
     }
+
 
     @Override
     public Danhgia getEvaluationByIDHDTK(Integer IdAct, Integer IdAcc) {
@@ -97,12 +100,14 @@ public class EvaluationServiceImple implements EvaluationService {
     @Override
     public List<Integer> getMembersScoreByAct(List<Thanhvien> members, Integer IdAct) {
         List<Integer> scores = new ArrayList<>();
-        for (Thanhvien member : members) {
-            Integer score = evaluationRepo.getMemberScoreByAct(member.getMaTK().getId(), IdAct);
-            if (score == null) {
-                scores.add(0);
-            } else {
-                scores.add(score);
+        if(members != null){
+            for (Thanhvien member : members) {
+                Integer score = evaluationRepo.getMemberScoreByAct(member.getMaTK().getId(), IdAct);
+                if (score == null) {
+                    scores.add(0);
+                } else {
+                    scores.add(score);
+                }
             }
         }
         return scores;

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>footer</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/Footer.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+<!-- Footer -->
+<!--        <div class="footer">-->
+<!--            <p>&copy; 2023 HOPEFULLY.<br> Trao hy vọng, gửi yêu thương.</p>-->
+<!--            <div>-->
+<!--                <a href="#">Điều khoản</a>-->
+<!--                <a href="#">Chính sách riêng tư</a>-->
+<!--                <a href="#">Advertising</a>-->
+<!--                <a href="#">Liên hệ</a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <p>Thông tin liên hệ:</p>-->
+<!--                <p>Địa chỉ: Đà Nẵng, Việt Nam</p>-->
+<!--                <p>Email: hopefullyweb@gmail.com</p>-->
+<!--                <a href="https://www.facebook.com/workaway.info">Facebook: www.facebook.com/workaway.info</a>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Add more footer content and links as needed &ndash;&gt;-->
+<!--        </div>-->
+<!--        <footer id="site-footer">-->
+<div class="footer" id="site-footer">
+  <div class="container">
+    <div class="clear40"></div>
+    <div class="row">
+      <div class="col-sm-3" style="text-align: left">
+        <div class="d-flex align-items-center"> <!-- Dùng flexbox để căn giữa theo chiều ngang -->
+          <img class="footer-image-web" th:src="@{/images/Logo_footer.png}">
+          <p class="footer-name-web">Hopefully</p>
+        </div>
+        <!--                        <hr class="visible-xs-block">-->
+        <p style="font-style: italic; text-align: center" >Trao hy vọng, gửi yêu thương</p>
+        <p>&copy; 2023</p>
+<!--        <a href="/en/hostlist">Trang chủ</a><br>-->
+       <button class="btn-join-now"> <a href="#">Tham gia ngay</a><br></button>
+<!--        <a href="/en/info/how-it-works/workawayer">Information for Workawayers</a><br>-->
+      </div>
+
+      <div class="col-sm-3" style="text-align: left">
+        <p style="text-align: center"><strong>Tổ chức</strong></p>
+        <hr class="visible-xs-block">
+<!--        <a href="/en/stories" target="_blank"></a><br>-->
+        <a href="#">Sứ mệnh</a><br>
+        <a href="#" target="_blank">Quy định</a><br>
+        <a href="#">Chính sách bảo mật</a><br>
+        <a href="#">Quyền riêng tư</a><br>
+      </div>
+      <div class="col-sm-3" style="text-align: left">
+        <p style="text-align: center"><strong>Thông tin</strong></p>
+        <hr class="visible-xs-block">
+        <p style="margin-left: 0.6rem; margin-bottom: 0.5rem">  Địa chỉ: Đà Nẵng, Việt Nam</p>
+        <p style="margin-left: 0.6rem; margin-bottom: 0.5rem">  Email: hopefullyweb@gmail.com</p>
+        <a href="https://www.facebook.com/workaway.info">Facebook: hopefully.info</a>
+      </div>
+      <div class="col-sm-3">
+        <p><strong>Language</strong></p>
+        <hr class="visible-xs-block">
+        <a href="#" title="Tiếng việt" class="languageSelector" data-lang="de" data-href="/de"><img class="footer-flag" th:src="@{/images/LaCoViet.png}"></a>&nbsp;
+        <a href="#" title="Tiếng anh" class="languageSelector" data-lang="fr" data-href="/fr"><img class="footer-flag" th:src="@{/images/LaCoAnh.png}"></a>&nbsp;
+        <a href="#" title="Tiếng hàn" class="languageSelector" data-lang="es" data-href="/es"><img class="footer-flag" th:src="@{/images/LaCoHan.png}"></a>&nbsp;
+        <a href="#" title="Tiếng nhật" class="languageSelector" data-lang="pt" data-href="/pt"><img class="footer-flag" th:src="@{/images/LaCoNhat.png}"></a>&nbsp;
+      </div>
+    </div>
+    <div class="clear20"></div><hr>
+    <div class="row">
+      <div class="col-md-8 col-sm-6">
+        <p class="h4">Chia sẻ cùng Hopefully ...</p>
+        <a href="https://www.facebook.com/workaway.info" target="_blank" class="social_circle" title="Facebook">
+          <i class="bi bi-facebook"></i>
+        </a>
+        <a href="https://twitter.com/Workaway" target="_blank" class="social_circle" title="twitter">
+          <i class="bi bi-twitter"></i>
+        </a>
+        <a href="https://www.youtube.com/channel/UC3dVlAlI4zLMJWT1LW6Hasw" target="_blank" class="social_circle" title="YouTube">
+          <i class="bi bi-youtube"></i>
+        </a>
+        <a href="https://instagram.com/workawayinfo" target="_blank" class="social_circle" title="instagram">
+          <i class="bi bi-instagram"></i>
+        </a>
+      </div>
+      <div class="col-md-4 col-sm-6 text-right text-left-xs"></div>
+    </div>
+    <div class="clear20"></div>
+  </div>
+</div>
+</body>
+</html>

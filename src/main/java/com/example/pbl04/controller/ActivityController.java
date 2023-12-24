@@ -124,7 +124,7 @@ public class ActivityController {
         hoatDong.setSoTNVToiDa(Integer.parseInt(sotnvtd));
         hoatDong.setMoTa(moTa);
         hoatDong.setTinhTrangHD((byte) 0);
-        hoatDong.setTinhTrangDuyet((byte) 1);
+        hoatDong.setTinhTrangDuyet((byte) 0);
 
         try {
             if (imageInput != null && !imageInput.isEmpty()) {

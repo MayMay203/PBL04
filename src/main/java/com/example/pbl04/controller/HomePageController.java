@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -53,9 +54,28 @@ public class HomePageController {
         List<Tongket> summaryList = summaryService.getSummaryList();
         model.addAttribute("summaryList",summaryList);
 
-//        List<Danhgia> evaluateListByIDList = evaluationService.getEvaluationByIdActList(activitiesList);
-//        model.addAttribute("evaluateListByIDList",evaluateListByIDList);
+        List<Hoatdong> listActiSummarried = new ArrayList<>();
+        for(Tongket tk : summaryList){
+            listActiSummarried.add(tk.getMaHD());
+        }
 
+        List<List<Danhgia>> evaluateListByIDList = evaluationService.getEvaluationByIdActList(listActiSummarried);
+        model.addAttribute("evaluateListByIDList",evaluateListByIDList);
+        for (List<Danhgia> x : evaluateListByIDList) {
+
+            for (Danhgia xx : x) {
+                System.out.println(xx.getMaHD().getTenHD());
+                System.out.println(xx);
+                // In ra các thuộc tính của đối tượng Danhgia
+                System.out.println("Id: " + xx.getId());
+                System.out.println("BinhLuan: " + xx.getBinhLuan());
+                // Thêm các thuộc tính khác nếu cần
+                System.out.println("-------------------");
+            }
+        }
+
+
+//        List<Danhgia> evaluationOfAct = evaluationService.getEvaluationByIdAct(id);
 
         sessionService.createSessionModel(model, session);
 

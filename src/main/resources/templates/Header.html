@@ -17,6 +17,7 @@
 
     <div class="header__navlogo row" style="position: relative;">
         <div col>
+<!--            <img class="logo-header" th:src="@{images/logo_header.png}">-->
             <label class="logo">
                 HOPEFULLY
                 <!--            <h2 th:text="${user.getHoTen()}"></h2>-->
@@ -169,7 +170,7 @@
                     <a class="nav-link" th:href="@{/trang-chu-tong-ket}">Tổng kết</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{xet-duyet-hoat-dong}">Xét duyệt</a>
+                    <a class="nav-link" th:href="@{xet-duyet}">Xét duyệt</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/de-xuat}">Đề xuất</a>
@@ -188,8 +189,9 @@
             <div class="modal-content content-sign-up">
                 <form action="/dang-ky-tai-khoan" th:object="${user}" id="formRegisterAccount" method="post" class="modal-body d-flex p-0">
 <!--                <div class="modal-body d-flex p-0">-->
-<!--                    <img class="w-30 h-100" th:src="@{/images/volunteer.png}" alt="">-->
-                    <div class="w-75 sign-up-info bg-white py-2">
+<!--                    <img class="w-30 h-100" th:src="@{/images/nen_login.png}" alt="">-->
+<!--                    <div class="w-75 sign-up-info  py-2">-->
+                    <div >
                         <div class="d-flex header-sign-up text_align-center p-0 mt-1">
                             <h3 class="col-11 fs-3 mb-4 green-color mx-2">ĐĂNG KÝ</h3>
                             <button type="button" class="btn-close btn-close-register btnClose" data-bs-dismiss="modal"
@@ -199,19 +201,19 @@
                             <!--   Chỗ ảnh đại diện nì   -->
                             <!--                    <label class="col-3 text_align-center">Ảnh đại diện</label>-->
                             <div class="container d-flex mb-3">
-                                <label class="col-3">Tên đăng nhập</label>
+                                <label class="col-4">Tên đăng nhập</label>
                                 <input class="form-control form-control-sm me-4" required type="text" name="tenDN">
                             </div>
                             <div class="container d-flex mb-3">
-                                <label class="col-3">Mật khẩu</label>
+                                <label class="col-4">Mật khẩu</label>
                                 <input class="form-control form-control-sm me-4" required type="text" name="matKhau">
                             </div>
                             <div class="container d-flex mb-3">
-                                <label class="col-3">Họ và tên</label>
+                                <label class="col-4">Họ và tên</label>
                                 <input class="form-control form-control-sm me-4" required type="text" name="hoTen">
                             </div>
                             <div class="container d-flex mb-3">
-                                <label class="col-3">Ngày sinh</label>
+                                <label class="col-4">Ngày sinh</label>
                                 <input class="form-control form-control-sm me-4" required type="date" name="ngaySinh">
                             </div>
                             <div class="container d-flex mb-3">
@@ -230,21 +232,21 @@
                                 </div>
                             </div>
                             <div class="container d-flex mb-4">
-                                <label class="col-3">Địa chỉ</label>
+                                <label class="col-4">Địa chỉ</label>
                                 <input class="form-control form-control-sm me-4" required type="text" name="diaChi">
                             </div>
                             <div class="container d-flex mb-4">
-                                <label class="col-3">Số điện thoại</label>
-                                <input class="form-control form-control-sm me-4" required type="text" name="soDienThoai">
+                                <label class="col-4">Số điện thoại</label>
+                                <input class="form-control form-control-sm me-4" required type="tel" pattern="[0-9]{10}" title="Vui lòng nhập 10 số" name="soDienThoai">
                             </div>
                             <div class="container d-flex mb-4">
-                                <label class="col-3">Email</label>
-                                <input class="form-control form-control-sm me-4" required type="text" name="email">
+                                <label class="col-4">Email</label>
+                                <input class="form-control form-control-sm me-4" required type="email" name="email">
                             </div>
-                            <div class="button mt-4 d-flex">
-                                <span class="col-3"></span>
-                                <button class="py-2 bg-btn radius-half white-color no-border col-3 mx-5 btn-signup"type="submit">Đăng ký</button>
-                                <button class="py-2 bg-btn radius-half white-color no-border col-3 btn-cancel" type="button" onclick="reset()">Hủy</button>
+                            <div class="button mt-4 d-flex btn-footer-modal">
+<!--                                <span class="col-3"></span>-->
+                                <button class="py-2 radius-half white-color no-border col-3 mx-5 btn-signup" type="submit">Đăng ký</button>
+                                <button class="py-2 radius-half white-color no-border col-3 btn-cancel" type="button" onclick="reset()">Hủy</button>
                             </div>
                         </div>
                     </div>
@@ -357,5 +359,14 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+<!--==============modal chung==================-->
+
 </body>
 </html>
