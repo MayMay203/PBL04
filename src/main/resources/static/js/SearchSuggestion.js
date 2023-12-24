@@ -4,24 +4,10 @@ const search_input = document.querySelector(".search-input")
 const show_actitivy = document.querySelector(".show-activity")
 const btn_close = document.getElementsByClassName("btn-close-detail")
 
-// console.log(show_actitivy)
-// const body = document.querySelector("body");
-// const modal = document.querySelector(".modal_")
-//const btn_close = document.getElementsByClassName("btn-close-detail")
-// function convertToSlug(str) {
-//     return str
-//         .toLowerCase()
-//         .normalize('NFKD')
-//         .replace(/[\u0300-\u036f]/g, '')
-//         .replace(/\s+/g, '-');
-// }
-
 search_input.addEventListener("keyup",  async e => {
   if(e.key==="Enter"){
       try {
           const title = search_input.value.trim()
-          // const title = convertToSlug(value);
-          // console.log(title);
           const response = await fetch(`/search/suggestion?nameTitle=${title}`)
           if (!response.ok) {
               console.error("Lỗi HTTP! Trạng thái " + response.status)
@@ -68,7 +54,7 @@ search_input.addEventListener("keyup",  async e => {
                       </button>
 
                       <button class="no-border bg-white p-0 mx-3 cursor-pointer btn-organize-here">
-                        <i data-name="${sugg.maChuDe.tenChuDe}" data-location="${sugg.viTri}" data-account="${account!=null?account.id:null}" class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast cursor-pointer fs-5">
+                        <i data-name="${sugg.maChuDe.tenChuDe}" data-location="${sugg.viTri}" data-account="${account!=null?account.id : null}" class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast cursor-pointer fs-5">
                         <p class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">
                           Tổ chức tại đây</p>
                         </i>
@@ -87,35 +73,12 @@ search_input.addEventListener("keyup",  async e => {
                   btn.addEventListener("click",closeViewAct);
               }
               const btn_organizeHere = document.querySelectorAll(".btn-organize-here");
-              function organizeHere(e){
-                  try{
-                      const acc = e.target.getAttribute("data-account")
-                      console.log(acc);
-                      if(acc===null){
-                          var header = document.getElementById("myHeader");
-                          header.classList.remove("sticky");
-                          $('#DangNhapModal').modal('show');
-                      }
-                      else{
-                          const title = e.target.dataset.name;
-                          const location = e.target.dataset.location;
-                          $('#ThemHoatDongModal').modal('show');
-                          $('#txt_Location').val(location);
-                          $('#txt_Location').prop('disabled',true);
-                          $('#txt_NameTopic').val(title);
-                          $('#txt_NameTopic').prop('disabled',true);
-                      }
-                  }catch(error){
-                      console.log(error);
-                  }
-              }
               for(btn of btn_organizeHere){
                   btn.addEventListener("click",organizeHere)
               }
           }
       }
-      catch
-          (Error)
+      catch(Error)
       {
           console.error(Error)
       }

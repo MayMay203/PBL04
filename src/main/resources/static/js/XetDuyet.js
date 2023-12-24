@@ -595,3 +595,90 @@ $(document).ready(function () {
     };
 
 })
+//Duyệt đề xuất
+function reloadSugg(suggList){
+    const suggDiv = document.querySelector(".suggestion")
+    suggDiv.innerHTML = ''
+    suggList.forEach(sugg=>{
+        const suggTime = new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(sugg.thoiGianDeXuat))
+        suggDiv.innerHTML+=
+            `
+                    <div class="container d-flex align-items-center p-3 border_bottom-solid">
+                        <div class="container flex-5 col-9">
+                            <h3 class="green-color fs-4">${sugg.maChuDe.tenChuDe}</h3>
+                            <p class="mb-0 fs-6">${sugg.moTa}</p>
+                            <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green"></i>${sugg.viTri}</p>
+                            <p class="fs-7 fst-italic my-1">
+                                <i class="bi bi-alarm-fill green"></i>
+                                Thời gian đề xuất ${suggTime}
+                            </p>
+                        </div>
+                        <div class="container col-3 display-flex p-0 justify-content-center ml-3">
+                            <button class="btn white-color p-2 bg-btn me-3" id="btn-confirm-sugg" data-id="${sugg.id}">Duyệt đề xuất</button>
+                            <button class="btn btn-danger" id="btn-cancel-sugg" data-id="${sugg.id}">Hủy</button>
+                        </div>
+                    </div>
+           `
+    })
+}
+async function confirmSugg(){
+    try{
+        const idSugg = $(this).data("id")
+        const response =  fetch(`/confirm-suggestion?idSugg=${idSugg}`,{
+            method: 'POST'
+        })
+        function customAlert(message){
+            Swal.fire({
+                icon: 'success',
+                text: message,
+                confirmButtonText: 'OK',
+                customClass:{
+                    popup: 'custom-alert-popup'
+                }
+            })
+        }
+        customAlert("Duyệt đề xuất thành công!")
+        const res = await fetch(`de-xuat-chua-duyet`)
+        if(!res.ok){
+            console.log("Lỗi HTTP. Trạng thái " + res.status)
+        }
+        else{
+            const suggList = await res.json();
+            reloadSugg(suggList);
+        }
+    }catch(error){
+        console.error(error)
+    }
+}
+
+$(document).on('click', '#btn-confirm-sugg',confirmSugg)
+//Huy de xuat
+$(document).on('click', '#btn-cancel-sugg',async function (){
+    try {
+        const idSugg = $(this).data('id');
+        const response = fetch(`/cancel-suggestion?idSugg=${idSugg}`, {
+            method: 'POST'
+        });
+            function customAlert(message) {
+                Swal.fire({
+                    icon: 'success',
+                    text: message,
+                    confirmButtonText: 'OK',
+                    customClass: {
+                        popup: 'custom-alert-popup'
+                    }
+                });
+            }
+            customAlert("Hủy đề xuất thành công!");
+        const res = await fetch(`de-xuat-chua-duyet`)
+        if(!res.ok){
+            console.log("Lỗi HTTP. Trạng thái " + res.status)
+        }
+        else{
+            const suggList = await res.json();
+            reloadSugg(suggList);
+        }
+    } catch (error) {
+         console.error(error);
+    }
+});

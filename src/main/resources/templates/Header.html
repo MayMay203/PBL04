@@ -168,7 +168,7 @@
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/trang-chu-tong-ket}">Tổng kết</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" th:if="${isLogin}">
                     <a class="nav-link" th:href="@{xet-duyet-hoat-dong}">Xét duyệt</a>
                 </li>
                 <li class="nav-item">
