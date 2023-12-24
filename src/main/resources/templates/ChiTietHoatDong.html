@@ -80,13 +80,13 @@
           </div>
           <div class="frame1-text">Chưa diễn ra</div>
           <div class="frame2-text">Đang diễn ra</div>
-          <div th:if="${hoatdong.getTinhTrangHD()!=3}" class="frame3-text color_black-light">Đã diễn ra</div>
-          <div th:if="${hoatdong.getTinhTrangHD()==3}" class="frame3-text">Đã diễn ra</div>
+          <div th:if="${hoatdong.getTinhTrangHD()!=2}" class="frame3-text color_black-light">Đã diễn ra</div>
+          <div th:if="${hoatdong.getTinhTrangHD()==2}" class="frame3-text">Đã diễn ra</div>
         </div>
 
       </div>
       <div class="notification-container">
-      <button th:if="${hoatdong.getTinhTrangHD() == 1} and ${checkDangky==null}"
+      <button th:if="${hoatdong.getTinhTrangHD() == 0} and ${hoatdong.getTinhTrangDuyet() == 1} and ${checkDangky==null}"
               type="button"
               class="btn-Join" id="thamgiaButton" th:attr="data-account-id=${account.id}"
               >Tham gia</button>
@@ -97,13 +97,13 @@
           <button id="cancel">Hủy</button>
         </div>
       </div>
-      <button th:if="${hoatdong.getTinhTrangHD() == 1} and ${checkDangky != null} and ${checkDangky.getTrangThai()==false}"
+      <button th:if="${hoatdong.getTinhTrangHD() == 0} and ${hoatdong.getTinhTrangDuyet() == 1} and ${checkDangky != null} and ${checkDangky.getTrangThai()==false}"
               type="button"
               class="btn-Join" id="thamgiaButton1">Chờ xét duyệt</button>
-      <button th:if="${hoatdong.getTinhTrangHD() == 1} and ${checkDangky != null} and ${checkDangky.getTrangThai()==true} and ${checkDangky.getPhanQuyen()==false}"
+      <button th:if="${hoatdong.getTinhTrangHD() == 0} and ${hoatdong.getTinhTrangDuyet() == 1} and ${checkDangky != null} and ${checkDangky.getTrangThai()==true} and ${checkDangky.getPhanQuyen()==false}"
               type="button"
               class="btn-Join" id="thamgiaButton2">Đã xét duyệt</button>
-      <button th:if="${hoatdong.getTinhTrangHD() == 1} and ${checkDangky != null} and ${checkDangky.getTrangThai()==true} and ${checkDangky.getPhanQuyen()==true}"
+      <button th:if="${hoatdong.getTinhTrangHD() == 0} and ${hoatdong.getTinhTrangDuyet() == 1} and ${checkDangky != null} and ${checkDangky.getTrangThai()==true} and ${checkDangky.getPhanQuyen()==true}"
               type="button"
               class="btn-Join" id="thamgiaButton3" style="display: none">Đã xét duyệt</button>
 
@@ -131,7 +131,7 @@
               class="btn-Join"
               style="display: none">Tham gia</button>
 
-      <button th:if="${hoatdong.getTinhTrangHD() == 3}"
+      <button th:if="${hoatdong.getTinhTrangHD() == 2}"
               type="button"
               class="btn-KetThuc" ><a class="btn-summary" id="btnSummary"  th:attr="data-hoatdong-id=${hoatdong.id}" >Tổng kết</a></button>
 

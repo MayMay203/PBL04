@@ -495,11 +495,11 @@ $(document).ready(function() {
             success: function (data) {
                 console.log(data);
                 // Populate modal with activity information
-                $("#txt_NameTopic").val(data.maChuDe.tenChuDe); // Replace 'data.txt_NameTopic' with the actual field from your controller
-                $("#txt_NameActi").val(data.tenHD); // Replace 'data.txt_NameActi' with the actual field from your controller
-                $("#txt_mota").val(""); // Leave txt_mota empty for the user to input
+                $("#txt_TenChuDe").val(data.maChuDe.tenChuDe); // Replace 'data.txt_NameTopic' with the actual field from your controller
+                $("#txt_TenHoatDong").val(data.tenHD); // Replace 'data.txt_NameActi' with the actual field from your controller
+                $("#txt_LydoHuy").val(""); // Leave txt_mota empty for the user to input
                 // Show the modal
-                $('#ThemHoatDongModal').modal('show');
+                $('#HuyHoatDongModal').modal('show');
             },
             error: function (error) {
                 console.log(error);
@@ -515,13 +515,13 @@ var check=false;
 $(document).ready(function() {
     $(".btnSave").on("click", function() {
         // Get the value from the txt_mota textarea
-        var txtMotaValue = $("#txt_mota").val();
-        var txt_mota = $("#txt_mota");
+        var txtMotaValue = $("#txt_LydoHuy").val();
+        var txt_mota = $("#txt_LydoHuy");
 
         if (txtMotaValue.trim() === '') {
             txt_mota.addClass("is-invalid");
             txt_mota.siblings(".invalid-feedback").text("Vui lòng nhập lý do hủy hoạt động");
-            $('#ThemHoatDongModal').modal('show');
+            $('#HuyHoatDongModal').modal('show');
         } else {
             $.ajax({
                 url: '/cancel-post',
@@ -544,51 +544,18 @@ $(document).ready(function() {
         }
     });
 
-
-
-    // $("#ThemHoatDongModal").submit(function (e) {
-    //     e.preventDefault();
-    //
-    //     // Manually trigger the form validation
-    //     if (this.checkValidity()) {
-    //         var txtMotaValue = $("#txt_mota").val();
-    //
-    //         // Make an AJAX request to update the activity information
-    //         $.ajax({
-    //             url: '/cancel-post',
-    //             type: 'POST',
-    //             data: {
-    //                 'maHD': idHD,
-    //                 'txtHuy': txtMotaValue,
-    //             },
-    //             success: function (response) {
-    //                 // Handle success
-    //                 console.log(response);
-    //                 updateModalContent("Hủy bài đăng thành công");
-    //                 check = true;
-    //                 hideButtons();
-    //                 console.log("Huy bai dang thanh cong");
-    //             },
-    //             error: function (error) {
-    //                 console.log(error);
-    //             }
-    //         });
-    //     } else {
-    //         console.log("Form validation failed");
-    //     }
-    // });
     function updateModalContent(newContent) {
         // Update the modal body content
         $('.modal-body-themhd').html(newContent);
     }
     function hideButtons() {
         // Hide the buttons in the modal footer
-        $('#ThemHoatDongModal .modal-footer').hide();
+        $('#HuyHoatDongModal .modal-footer').hide();
     }
     // Add an event listener for the Cancel button inside the modal
     $(".btnCancel").on("click", function() {
         // Close the modal without saving
-        $('#ThemHoatDongModal').modal('hide');
+        $('#HuyHoatDongModal').modal('hide');
         if(check ===true){
             location.reload();
         }

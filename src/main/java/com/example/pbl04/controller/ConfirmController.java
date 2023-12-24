@@ -54,8 +54,8 @@ public class ConfirmController {
                 {
                     listmyActivity = activityService.getAllMyPostNeedConfirm(myaccount.getId()); //Bao gồm hoạt động chưa xét duyệt, đã xét duyệt, đã huy.....
                     listmyAcitivityNeedConfirm = activityService.getAllMyActivityNeedConfirm(myaccount.getId());
-                     countConfirm= activityService.countConfirm(listmyAcitivityNeedConfirm);
-                     countConfirmed = activityService.countConfirmed(listmyAcitivityNeedConfirm);
+                    countConfirm= activityService.countConfirm(listmyAcitivityNeedConfirm);
+                    countConfirmed = activityService.countConfirmed(listmyAcitivityNeedConfirm);
                     listPost= activityService.getAllActiviyPost();
                     listCancelActivity = activityService.getListCancel();
                     listActivityParticipate = activityService.getListActivityParticipate(myaccount.getId());
