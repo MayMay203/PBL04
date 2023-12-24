@@ -642,25 +642,29 @@ $(document).ready(function () {
             }
         });
     }
-    var btnViewActivityConfirm =document.getElementById("btnViewActivityConfirm");
-    btnViewActivityConfirm.addEventListener("click",async (e)=>{
-        var id = btnViewActivityConfirm.getAttribute('data-value');
-        //var id = $(this).data('value');
-        console.log("id:",id);
-        var response = await fetch(`/check-activity?maHD=${id}`)
-        if(!response.ok){
-            console.log("error:", response.status);
-        } else {
-            var result = await response.json();
-            var hoatdong = result.hoatdong;
-            var sotnv= result.sotnv;
-            displayModal(hoatdong);
-            document.getElementById('txt_sotnv').style.display = 'block';
-            document.getElementById('labeltnv').style.display = 'block';
-            document.getElementById('txt_sotnv').value =sotnv;
+    var btnViewActivityConfirm =document.getElementsByClassName("btnViewActivityConfirm");
+    for(btn of btnViewActivityConfirm){
+        btn.addEventListener("click",async (e)=>{
+            //var id = btnViewActivityConfirm.getAttribute('data-value');
+            //var id = $(this).data('value');
+            var id= e.target.dataset.value;
+            console.log("id:",id);
+            var response = await fetch(`/check-activity?maHD=${id}`)
+            if(!response.ok){
+                console.log("error:", response.status);
+            } else {
+                var result = await response.json();
+                var hoatdong = result.hoatdong;
+                var sotnv= result.sotnv;
+                displayModal(hoatdong);
+                document.getElementById('txt_sotnv').style.display = 'block';
+                document.getElementById('labeltnv').style.display = 'block';
+                document.getElementById('txt_sotnv').value =sotnv;
 
-        }
-    })
+            }
+        })
+    }
+
 
     function displayModal(hoatdong) {
         // Get the modal element by ID

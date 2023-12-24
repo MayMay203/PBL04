@@ -52,12 +52,12 @@
                                         <div class="card-link">
                                             <div>
                                                 <i class="fs-7 my-1">Tình trạng:
-                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 0}"> Đang chờ xét duyệt</i>
-                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 1 and listmyActivity.get(4*i+j).getTinhTrangHD() == 1}"> Chưa duyệt hoạt động, Chưa diễn ra</i>
-                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 2 and listmyActivity.get(4*i+j).getTinhTrangHD() == 1}"> Đã duyệt hoạt động, Chưa diễn ra</i>
+                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 0 and listmyActivity.get(4*i+j).getTinhTrangHD() == 0}"> Đang chờ xét duyệt bài đăng</i>
+                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 1 and listmyActivity.get(4*i+j).getTinhTrangHD() == 0}"> Đang chờ xét duyệt hoạt động</i>
+                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 2 and listmyActivity.get(4*i+j).getTinhTrangHD() == 0}"> Chưa diễn ra</i>
+                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 2 and listmyActivity.get(4*i+j).getTinhTrangHD() == 1}"> Đang diễn ra</i>
                                                     <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == -1 and listmyActivity.get(4*i+j).getTinhTrangHD() == -1}"> Bị hủy</i>
-                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 2 and listmyActivity.get(4*i+j).getTinhTrangHD() == 2}"> Đang diễn ra</i>
-                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 2 and listmyActivity.get(4*i+j).getTinhTrangHD() == 3}"> Đã kết thúc</i>
+                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).getTinhTrangDuyet() == 2 and listmyActivity.get(4*i+j).getTinhTrangHD() == 2}"> Đã kết thúc</i>
                                                 </i>
 <!--                                                <i>Vai trò:-->
 <!--&lt;!&ndash;                                                    <i class="fw-medium green_light-color" th:if="${listmyActivity.get(4*i+j).get() == 0}"> Đang chờ xét duyệt</i>&ndash;&gt;-->
@@ -160,7 +160,7 @@
                                         <i class="bi bi-calendar2 m-1  green-color" th:text="'   ' + ${listmyAcitivityNeedConfirm.get(4*i+j).getThoiGianBD() + '  -  ' + listmyAcitivityNeedConfirm.get(4*i+j).getThoiGianKT()}"></i>
                                     </div>
                                     <div class="card-link my-1 ">
-                                        <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5"  id="btnViewActivityConfirm" th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).getId()}" >Xem chi tiết...</button>
+                                        <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail pt-0-5 btnViewActivityConfirm"  th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).getId()}" >Xem chi tiết...</button>
                                     </div>
                                     <div class="custom-btn pt-2">
                                         <button class="custom-btnConfirm buttonConfirmPostStage1"  th:attr="data-hoatdong-id=${listmyAcitivityNeedConfirm.get(4*i+j).id}">Duyệt hoạt động</button>

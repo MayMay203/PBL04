@@ -50,7 +50,7 @@ public class ActivityServiceImpl implements ActivityService {
     public List<Dangky> getActivityUpcomming(){return activityRepository.getActivityUpcomming();}
     public List<Hoatdong> getActivityHappening() {return activityRepository.getActivityHappening();}
     public List<Hoatdong> getAllActiviyPost() {return activityRepository.getAllActiviyPost();}
-    public List<Hoatdong> getMyActivityConfirm(Integer maTK) {return activityRepository.getMyActivityConfirm(maTK);}
+   // public List<Hoatdong> getMyActivityConfirm(Integer maTK) {return activityRepository.getMyActivityConfirm(maTK);}
     public Integer getNumActivity(){return activityRepository.getNumActivity();}
     public Dangky  getDateRegis(Integer mahd){return activityRepository.getDateRegis();}
     public Integer getParticipants() {return activityRepository.getParticipants();}
@@ -93,7 +93,7 @@ public class ActivityServiceImpl implements ActivityService {
             hoatDong.setSoTNVToiDa(Integer.parseInt(sotnvtd));
             hoatDong.setMoTa(moTa);
             hoatDong.setTinhTrangHD((byte) 0);
-            hoatDong.setTinhTrangDuyet((byte) 1);
+            hoatDong.setTinhTrangDuyet((byte) 0);
             hoatDong.setAnh(anh);
             activityRepository.save(hoatDong);
             Taikhoan taikhoan = accountService.getTaiKhoanByID(maTK);

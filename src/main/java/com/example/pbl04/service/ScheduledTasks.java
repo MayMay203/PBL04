@@ -18,13 +18,13 @@ public class ScheduledTasks {
         this.activityRepository = activityRepository;
     }
 
-    @Scheduled(cron = "0 * * * * ?")
+    @Scheduled(cron = "0 0 0 * * ?")
     public void checkActivityStatus() {
         List<Hoatdong> activities = activityRepository.getAllActivityNotHappening();
         LocalDate currentDate = LocalDate.now();
         for (Hoatdong activity : activities) {
             if (currentDate.isAfter(activity.getThoiGianBD())) {
-                activityRepository.updateTrangThaiByNgayAndTrangThai(activity.getId());
+                activityRepository.TransActivityToHappening(activity.getId());
             }
         }
     }

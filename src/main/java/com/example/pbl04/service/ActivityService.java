@@ -16,7 +16,7 @@ public interface ActivityService {
     List<Dangky> getActivityUpcomming();
     List<Hoatdong> getActivityHappening();
     List<Hoatdong> getAllActiviyPost();
-    List<Hoatdong> getMyActivityConfirm(Integer id);
+    //List<Hoatdong> getMyActivityConfirm(Integer id);
     Dangky getDateRegis(Integer mahd);
     Integer getNumActivity();
     Integer getParticipants();

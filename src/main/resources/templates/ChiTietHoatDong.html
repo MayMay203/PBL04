@@ -43,17 +43,17 @@
         <div class="row">
           <div class="col-md-2">
             <div class="rectangle">
-              <i th:if="${hoatdong.getTinhTrangHD()==2}" class="bi bi-circle-fill circle-1 color-gd1"></i>
-              <i th:if="${hoatdong.getTinhTrangHD()==3}" class="bi bi-circle-fill circle-1 color-gd2"></i>
               <i th:if="${hoatdong.getTinhTrangHD()==1}" class="bi bi-circle-fill circle-1 color-gd1"></i>
+              <i th:if="${hoatdong.getTinhTrangHD()==2}" class="bi bi-circle-fill circle-1 color-gd2"></i>
+              <i th:if="${hoatdong.getTinhTrangHD()==0}" class="bi bi-circle-fill circle-1 color-gd1"></i>
 
+              <i th:if="${hoatdong.getTinhTrangHD()==1}" class="bi bi-circle-fill circle-2 color-gd2"></i>
               <i th:if="${hoatdong.getTinhTrangHD()==2}" class="bi bi-circle-fill circle-2 color-gd2"></i>
-              <i th:if="${hoatdong.getTinhTrangHD()==3}" class="bi bi-circle-fill circle-2 color-gd2"></i>
-              <i th:if="${hoatdong.getTinhTrangHD()==1}" class="bi bi-circle-fill circle-2 color-gd1"></i>
+              <i th:if="${hoatdong.getTinhTrangHD()==0}" class="bi bi-circle-fill circle-2 color-gd1"></i>
 
+              <i th:if="${hoatdong.getTinhTrangHD()==1}" class="bi bi-circle-fill circle-3 color-gd2"></i>
               <i th:if="${hoatdong.getTinhTrangHD()==2}" class="bi bi-circle-fill circle-3 color-gd2"></i>
-              <i th:if="${hoatdong.getTinhTrangHD()==3}" class="bi bi-circle-fill circle-3 color-gd2"></i>
-              <i th:if="${hoatdong.getTinhTrangHD()==1}" class="bi bi-circle-fill circle-3 color-gd1"></i>
+              <i th:if="${hoatdong.getTinhTrangHD()==0}" class="bi bi-circle-fill circle-3 color-gd1"></i>
               <i class="bi bi-circle-fill circle-3 color-gd2"></i>
             </div>
           </div>
@@ -65,13 +65,16 @@
             <svg th:if="${hoatdong.getTinhTrangHD()==1}" viewBox="0 0 90 31"  class="frame2 color--frame" >
               <path d="M90.9328 31.5087H19.1139C17.4201 31.5087 15.7262 30.8909  14.3712 29.6553L1.83674 18.2255C0.481666 16.9898 0.481666 15.1363 1.83674 13.9007L14.3712 2.47091C15.7262 1.23526 17.4201 0.617432 19.1139 0.617432H90.9328C92.9654 0.617432 94.3204 1.85308 94.3204 3.70656V28.4196C94.3204 30.2731 92.9654 31.5087 90.9328 31.5087Z"/>
             </svg>
-            <svg th:if="${hoatdong.getTinhTrangHD()==2} or ${hoatdong.getTinhTrangHD()==3} " viewBox="0 0 90 31"  class="frame2" >
+            <svg th:if="${hoatdong.getTinhTrangHD()==2} or ${hoatdong.tinhTrangHD==1}" viewBox="0 0 90 31"  class="frame2" >
               <path d="M90.9328 31.5087H19.1139C17.4201 31.5087 15.7262 30.8909  14.3712 29.6553L1.83674 18.2255C0.481666 16.9898 0.481666 15.1363 1.83674 13.9007L14.3712 2.47091C15.7262 1.23526 17.4201 0.617432 19.1139 0.617432H90.9328C92.9654 0.617432 94.3204 1.85308 94.3204 3.70656V28.4196C94.3204 30.2731 92.9654 31.5087 90.9328 31.5087Z"/>
             </svg>
-            <svg th:if="${hoatdong.getTinhTrangHD()==1} or ${hoatdong.getTinhTrangHD()==2} " viewBox="0 0 73 31"  class="frame3 color--frame color_black-light">
+            <svg th:if="${hoatdong.getTinhTrangHD()==0}" viewBox="0 0 90 31"  class="frame2 color--frame color_black-light" >
+              <path d="M90.9328 31.5087H19.1139C17.4201 31.5087 15.7262 30.8909  14.3712 29.6553L1.83674 18.2255C0.481666 16.9898 0.481666 15.1363 1.83674 13.9007L14.3712 2.47091C15.7262 1.23526 17.4201 0.617432 19.1139 0.617432H90.9328C92.9654 0.617432 94.3204 1.85308 94.3204 3.70656V28.4196C94.3204 30.2731 92.9654 31.5087 90.9328 31.5087Z"/>
+            </svg>
+            <svg th:if="${hoatdong.getTinhTrangHD()==0} or ${hoatdong.getTinhTrangHD()==1}" viewBox="0 0 73 31"  class="frame3 color--frame color_black-light">
               <path d="M62.5107 31.1059H18.8244C17.1696 31.1059 15.5149 30.4844 14.191 29.2414L1.94563 17.7436C0.621802 16.5006 0.621802 14.6361 1.94563 13.3931L14.191 1.89527C15.5149 0.652261 17.1696 0.0307617 18.8244 0.0307617H62.5107C64.4964 0.0307617 65.8203 1.27377 65.8203 3.13828V27.9984C65.8203 29.8629 64.4964 31.1059 62.5107 31.1059Z"/>
             </svg>
-            <svg th:if="${hoatdong.getTinhTrangHD()==3}" viewBox="0 0 73 31"  class="frame3">
+            <svg th:if="${hoatdong.getTinhTrangHD()==2}" viewBox="0 0 73 31"  class="frame3">
               <path d="M62.5107 31.1059H18.8244C17.1696 31.1059 15.5149 30.4844 14.191 29.2414L1.94563 17.7436C0.621802 16.5006 0.621802 14.6361 1.94563 13.3931L14.191 1.89527C15.5149 0.652261 17.1696 0.0307617 18.8244 0.0307617H62.5107C64.4964 0.0307617 65.8203 1.27377 65.8203 3.13828V27.9984C65.8203 29.8629 64.4964 31.1059 62.5107 31.1059Z"/>
             </svg>
           </div>
