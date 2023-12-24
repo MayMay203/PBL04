@@ -60,9 +60,9 @@
 </div>
 
     <!-- Content -->
-    <div class="container d-flex justify-content-between">
-        <h2 class="fs-3 mb-sm-3 ms-5">HOẠT ĐỘNG ĐÃ THAM GIA</h2>
-        <h2 class="fs-3 pt-sm-3 text-center me-4">HOẠT ĐỘNG ĐÃ TỔ CHỨC</h2>
+    <div class="container px-5 d-flex justify-content-between">
+        <h2 class="fs-3 mb-sm-3 px-3">HOẠT ĐỘNG ĐÃ THAM GIA</h2>
+        <h2 class="fs-3 pt-sm-3 text-center me-1">HOẠT ĐỘNG ĐÃ TỔ CHỨC</h2>
     </div>
     <div class="container d-flex content">
         <!-- Left -->
@@ -108,7 +108,7 @@
             </div>
         </div>
         <!-- Right -->
-        <div class="container flex-1 bg-green radius-lghalf p-0">
+        <div class="container flex-1 radius-lghalf p-0">
             <div class="container mh-100 overflow-y-auto hosted-slider" th:if="${actListOfHost.size()!=0}">
                 <div class="container mh-15 w-100 position-relative cursor-pointer content-right my-4 origanize-act-item" th:each="activity:${actListOfHost}">
                     <img class="w-100 start-0 end-0 radius-lghalf h-13rem" th:src="${activity.getAnh()}"  alt="" />
