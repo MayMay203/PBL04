@@ -18,7 +18,7 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     @Query("SELECT h FROM Hoatdong h WHERE h.id = :id")
     Hoatdong findActivityByID(int id);
 
-     @Query("SELECT h from Hoatdong h where h.tinhTrangHD = 2")
+     @Query("SELECT h from Hoatdong h where h.tinhTrangHD = 2 and h.tinhTrangDuyet=2")
     List<Hoatdong> getActivityOccured();
      @Query("select dk from Hoatdong h,Dangky dk where h.tinhTrangHD = 0 and h.tinhTrangDuyet=2 and h = dk.maHD and dk.phanQuyen=true")
      List<Dangky> getActivityUpcomming();
@@ -55,7 +55,7 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     @Query("select hd from Hoatdong hd where hd.tenhd like %:nameAct% and hd.tinhTrangHD=2 and hd.tinhTrangDuyet=2")
     List<Hoatdong> getActOccuredByName(String nameAct);
 
-    @Query("select h from Hoatdong h,Dangky dk where dk.phanQuyen=false and h.id = dk.maHD.id and dk.maTK.id=:idAcc and h.tinhTrangHD=2 and h.tinhTrangDuyet=2 and h.tenhd like %:nameAct%")
+    @Query("select h from Hoatdong h,Dangky dk where dk.phanQuyen=false and h.id = dk.maHD.id and dk.maTK.id=:idAcc and h.tinhTrangHD=2 and h.tinhTrangDuyet = 2 and h.tenhd like %:nameAct%")
     List<Hoatdong> getActOfMemberByName(Integer idAcc, String nameAct);
 
     @Query("select hd from Hoatdong hd where hd.id =:id")
@@ -99,6 +99,13 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     List<Hoatdong> getListCancelByOwner(Integer maTK);
     @Query("select count(*) from Dangky dk, Hoatdong hd where hd.id= dk.maHD.id and hd.id =:maHD and dk.phanQuyen=false and dk.trangThai=true")
     Integer countParticipantsByIDHD(Integer maHD);
+
+    @Query("select count(*) from Hoatdong hd where hd.tinhTrangDuyet = 2 and hd.tinhTrangHD=2 and hd.diaDiem like %:location%")
+    Integer countActByLocation(String location);
+
+    @Query("select hd from Hoatdong hd where hd.diaDiem = :location and hd.tinhTrangHD=2 and hd.tinhTrangDuyet=2")
+    List<Hoatdong> getActByLocation(String location);
+
     @Transactional
     @Modifying
     @Query("UPDATE Hoatdong e SET e.tinhTrangHD = 1 WHERE e.id=:maHD")

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
+
 public interface RegisRepository extends JpaRepository<Dangky,Integer> {
     @Query("select dk from Dangky dk where dk.maHD.id = :IdAct and dk.phanQuyen=false ")
     List<Dangky> getRegisterInforByIDAct(Integer IdAct);

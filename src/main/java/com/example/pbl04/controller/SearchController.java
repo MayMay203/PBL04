@@ -2,11 +2,14 @@ package com.example.pbl04.controller;
 
 import com.example.pbl04.entity.Dexuat;
 import com.example.pbl04.entity.Hoatdong;
+import com.example.pbl04.entity.Taikhoan;
 import com.example.pbl04.entity.Tongket;
 import com.example.pbl04.service.ActivityService;
 import com.example.pbl04.service.EvaluationService;
+import com.example.pbl04.service.SessionService;
 import com.example.pbl04.service.SuggestionService;
 import com.example.pbl04.service.SummaryService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,13 +29,15 @@ public class SearchController {
     private final EvaluationService evaluationService;
     private final SuggestionService suggestionService;
     private final SummaryService summaryService;
+    private final SessionService sessionService;
     @Autowired
 
-    public SearchController(ActivityService activityService, EvaluationService evaluationService, SuggestionService suggestionService, SummaryService summaryService) {
+    public SearchController(ActivityService activityService, EvaluationService evaluationService, SuggestionService suggestionService, SummaryService summaryService, SessionService sessionService) {
         this.activityService = activityService;
         this.evaluationService = evaluationService;
         this.suggestionService = suggestionService;
         this.summaryService = summaryService;
+        this.sessionService = sessionService;
     }
 
     @GetMapping("search/evaluation-home")
@@ -71,25 +76,36 @@ public class SearchController {
     }
 
 
-
     @GetMapping("search/suggestion")
     @ResponseBody
-    public ResponseEntity<Map<String,Object>> searchSuggestion(@RequestParam(name="nameTitle",required = false) String nameTitle){
+    public ResponseEntity<Map<String,Object>> searchSuggestion(@RequestParam(name="nameTitle",required = false) String nameTitle,
+                                                               HttpSession session
+                                                             ){
        Map<String,Object> result = new HashMap<>();
         List<Dexuat> suggestionList = new ArrayList<>();
-        List<Integer> countSugg = new ArrayList<>();
-        System.out.println(nameTitle);
-        if(nameTitle.isEmpty()){
+        List<String> locationList  = new ArrayList<>();
+        List<Integer> countAct = new ArrayList<>();
+        Taikhoan account = (Taikhoan) session.getAttribute("account");
+        System.out.println("Tài khoản nè he" + account);
+        if(nameTitle == null){
             suggestionList = suggestionService.getAllSuggest();
-            countSugg = suggestionService.CountSuggestion(suggestionList);
+            for(Dexuat sugg:suggestionList){
+                locationList.add(sugg.getViTri());
+            }
+            //Dem hoat dong theo vi tri
+            countAct = activityService.countActByLocation(locationList);
         }
         else{
-//            String name = nameTitle.replaceAll("-"," ");
             suggestionList = suggestionService.getSuggestionByTitle(nameTitle);
-            countSugg = suggestionService.CountSuggestion(suggestionList);
+            for(Dexuat sugg:suggestionList){
+                locationList.add(sugg.getViTri());
+            }
+            //Dem hoat dong theo vi tri
+            countAct = activityService.countActByLocation(locationList);
         }
         result.put("suggestionList",suggestionList);
-        result.put("countSugg",countSugg);
+        result.put("account",account);
+        result.put("countAct",countAct);
         return ResponseEntity.ok(result);
     }
     @GetMapping("search/activity-home")

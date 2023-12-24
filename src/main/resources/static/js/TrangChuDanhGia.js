@@ -15,21 +15,37 @@ async function handleViewDetail(e){
         const imagesList = responseData.imagesList;
         // console.log(responseData);
         modal.classList.add('display-flex')
-        body.classList.add('overflow-hidden')
+        // body.classList.add('overflow-hidden')
+        body.classList.add('disable-scrollbar');
         document.querySelector(".modal-nameAct").innerText = responseData.activity.tenhd;
         document.querySelector(".modal-Description").innerText = responseData.activity.moTa;
         document.querySelector(".avatar").src = responseData.registerInfor.maTK.anhDaiDien;
         document.querySelector(".name-host-act").innerText = responseData.registerInfor.maTK.tenDN;
-        document.querySelector(".time-post-act").innerText= responseData.registerInfor.thoiGianDK;
+        const date = new Date(responseData.registerInfor.thoiGianDK);
+        const datePart = date.toLocaleDateString("vi-VN", {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+        });
+
+        const timePart = date.toLocaleTimeString("vi-VN", {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+        });
+        const registerTime = `${datePart} ${timePart}`;
+        document.querySelector(".time-post-act").innerText = registerTime;
         image_activity.innerHTML = "";
+        let count = 0;
         imagesList.forEach(image => {
-            image_activity.innerHTML += `<img src="${image.anh}" alt="anhHoatDong" class="height-10rem flex-1 p-1">`;
+            if(count === 3) return;
+            image_activity.innerHTML += `<img src="${image.anh}" alt="anhHoatDong" class="height-10rem w-35 p-1">`;
+            count++;
         });
 
         document.querySelector(".modal-number-evaluation").innerText = responseData.numberEvaluation + " lượt đánh giá"
         //Generate comment
         const evaluationOfAct = responseData.evaluationOfAct;
-        //    console.log(evaluationOfAct);
         const evaluationContainer = document.querySelector(".modal-comment");
         if (evaluationOfAct.length > 0) {
             const criteriaDiv = document.createElement("div");
@@ -51,7 +67,7 @@ async function handleViewDetail(e){
                     <h7 class="green-color fs-11 fst-italic fw-medium">${eva.maTK.tenDN}</h7>
                 </div>
                 <p class="fs-10 fst-italic m-0 px-3">${eva.binhLuan}</p>
-                <p class="green_light-color fst-italic fs-10 my-1 mx-3">${new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(eva.thoiGianBL))}</p>
+                <p class="green_light-color fst-italic fs-10 my-1 mx-3">${new Intl.DateTimeFormat("vi-VN", { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(eva.thoiGianBL))}</p>
             </div>
             <!-- Check comment -->
             <div class="container d-flex align-items-center justify-content-center">
@@ -77,7 +93,7 @@ function closeViewDetail(e) {
     const modal_comment = document.querySelector('.modal-comment');
     modal_comment.innerHTML='';
     modal.classList.remove('display-flex')
-    body.classList.remove('overflow-hidden')
+    body.classList.remove('disable-scrollbar');
 }
 for (let btn of btn_close) {
     btn.addEventListener("click",closeViewDetail );
@@ -94,15 +110,17 @@ $(document).ready(function(){
 });
 
 const btn_evaluaion_Act = document.querySelector(".btn-evaluation-Act");
-$(document).ready(function() {
-    // Show modal when button is clicked
-    $("#btn_evaluaion_Act").click(function() {
-        // Remove existing backdrop if any
-        $('.modal-backdrop').remove();
-    });
-});
+// $(document).ready(function() {
+//     // Show modal when button is clicked
+//     $("#btn_evaluaion_Act").click(function() {
+//         // Remove existing backdrop if any
+//         $('.modal-backdrop').remove();
+//     });
+// });
 btn_evaluaion_Act.addEventListener("click",(e)=> {
     if (btn_evaluaion_Act.dataset.value == null) {
+        var header = document.getElementById("myHeader");
+        header.classList.remove("sticky");
         $('#DangNhapModal').modal('show');
     } else {
         window.location.href = `/danh-gia?id=${btn_evaluaion_Act.dataset.value}`;

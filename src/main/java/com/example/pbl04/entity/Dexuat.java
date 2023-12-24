@@ -1,6 +1,10 @@
 package com.example.pbl04.entity;
 
+import com.example.pbl04.entity.Chude;
+import com.example.pbl04.entity.Taikhoan;
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "dexuat")
@@ -10,7 +14,7 @@ public class Dexuat {
     @Column(name = "maDX", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "maTK", nullable = false)
     private Taikhoan maTK;
 
@@ -25,6 +29,12 @@ public class Dexuat {
     @Lob
     @Column(name = "moTa", nullable = false)
     private String moTa;
+
+    @Column(name = "thoiGianDeXuat")
+    private LocalDate thoiGianDeXuat = LocalDate.now();
+
+    @Column(name = "tinhTrangDuyet", nullable = false)
+    private Boolean tinhTrangDuyet = false;
 
     public Integer getId() {
         return id;
@@ -64,6 +74,22 @@ public class Dexuat {
 
     public void setMoTa(String moTa) {
         this.moTa = moTa;
+    }
+
+    public LocalDate getThoiGianDeXuat() {
+        return thoiGianDeXuat;
+    }
+
+    public void setThoiGianDeXuat(LocalDate thoiGianDeXuat) {
+        this.thoiGianDeXuat = thoiGianDeXuat;
+    }
+
+    public Boolean getTinhTrangDuyet() {
+        return tinhTrangDuyet;
+    }
+
+    public void setTinhTrangDuyet(Boolean tinhTrangDuyet) {
+        this.tinhTrangDuyet = tinhTrangDuyet;
     }
 
 }

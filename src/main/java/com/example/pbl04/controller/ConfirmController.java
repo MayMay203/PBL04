@@ -1,15 +1,10 @@
 package com.example.pbl04.controller;
 
-import com.example.pbl04.entity.Dangky;
-import com.example.pbl04.entity.Hoatdong;
-import com.example.pbl04.entity.Taikhoan;
-import com.example.pbl04.entity.Thanhvien;
-import com.example.pbl04.service.ActivityService;
-import com.example.pbl04.service.MemberService;
-import com.example.pbl04.service.RegisterService;
-import com.example.pbl04.service.SessionService;
+import com.example.pbl04.entity.*;
+import com.example.pbl04.service.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,11 +25,14 @@ public class ConfirmController {
     private final SessionService sessionService;
     private final RegisterService registerService;
     private final MemberService memberService;
-    public ConfirmController(ActivityService activityService, SessionService sessionService, RegisterService registerService, MemberService memberService) {
+    private final SuggestionService suggestionService;
+    @Autowired
+    public ConfirmController(ActivityService activityService, SessionService sessionService, RegisterService registerService, MemberService memberService,SuggestionService suggestionService) {
         this.activityService = activityService;
         this.sessionService = sessionService;
         this.registerService = registerService;
         this.memberService = memberService;
+        this.suggestionService = suggestionService;
     }
         @GetMapping("xet-duyet-hoat-dong")
         public String showConfirmActivity(Model model, HttpSession session)
@@ -50,6 +48,8 @@ public class ConfirmController {
                 List<Hoatdong> listPost = new ArrayList<>();
                 List<Hoatdong> listCancelActivity= new ArrayList<>();
                 List<Dangky> listActivityParticipate = new ArrayList<>();
+                List<Dexuat> suggestionList = new ArrayList<>();
+
                 if(myaccount.getLoaiTK())
                 {
                     listmyActivity = activityService.getAllMyPostNeedConfirm(myaccount.getId()); //Bao gồm hoạt động chưa xét duyệt, đã xét duyệt, đã huy.....
@@ -59,7 +59,9 @@ public class ConfirmController {
                     listPost= activityService.getAllActiviyPost();
                     listCancelActivity = activityService.getListCancel();
                     listActivityParticipate = activityService.getListActivityParticipate(myaccount.getId());
+                    suggestionList = suggestionService.getSuggestionNConf();
                     model.addAttribute("listPost",listPost);
+                    model.addAttribute("suggestionList",suggestionList);
                 }
                 else if(!myaccount.getLoaiTK()){
                     listmyActivity = activityService.getAllMyPostNeedConfirm(myaccount.getId());
@@ -175,4 +177,24 @@ public class ConfirmController {
     }
 
 
+    @PostMapping("/confirm-suggestion")
+    @ResponseBody
+    public ResponseEntity<Void> confirmSugg(@RequestParam("idSugg") Integer idSugg) {
+            suggestionService.confirmSugg(idSugg);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }
+
+    @PostMapping("/cancel-suggestion")
+    @ResponseBody
+    public ResponseEntity<Void>  cancelSugg(@RequestParam("idSugg") Integer idSugg) {
+        suggestionService.cancelSugg(idSugg);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("/de-xuat-chua-duyet")
+    @ResponseBody
+    public ResponseEntity<List<Dexuat>> getSuggNotConf(){
+        List<Dexuat> suggestionList = suggestionService.getSuggestionNConf();
+        return ResponseEntity.ok(suggestionList);
+    }
 }

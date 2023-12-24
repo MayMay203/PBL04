@@ -76,9 +76,15 @@ public class EvaluationController {
     @GetMapping("/hoat-dong/xem-chi-tiet")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> Activity(@RequestParam("IdAct") Integer IdAct,
-                                                        @RequestParam(value = "IdAcc", required = false) Integer IdAcc)
+                                                       HttpSession session)
                                                        {
         Map<String, Object> responseData = new HashMap<>();
+        Taikhoan myAcc = (Taikhoan)session.getAttribute("account");
+        if(myAcc!=null){
+            Integer IdAcc = myAcc.getId();
+            Danhgia evaluation = evaluationService.getEvaluationByIDHDTK(IdAct,IdAcc);
+            responseData.put("evaluation",evaluation);
+        }
         Hoatdong activity = activityService.getActivityByID(IdAct);
         int numberEvaluation = evaluationService.countEvaByIdAct(IdAct);
         List<Danhgia> evaluationOfAct = evaluationService.getEvaluationByIdAct(IdAct);
@@ -92,10 +98,6 @@ public class EvaluationController {
         List<Dangky> registerList = registerService.getRegisterInforByIDAct(IdAct);
         List<Thanhvien> membersList = memberService.getMembersByRegis(registerList);
         List<Integer> scores = evaluationService.getMembersScoreByAct(membersList,IdAct);
-        if(IdAcc!=null){
-            Danhgia evaluation = evaluationService.getEvaluationByIDHDTK(IdAct,IdAcc);
-            responseData.put("evaluation",evaluation);
-        }
         responseData.put("activity", activity);
         responseData.put("numberEvaluation", numberEvaluation);
         responseData.put("evaluationOfAct",evaluationOfAct);

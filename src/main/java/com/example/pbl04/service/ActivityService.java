@@ -36,8 +36,7 @@ public interface ActivityService {
 
     List<Hoatdong> getActOfMemberByName(Integer idAcc,String nameAct);
 
-    void addActivity(Integer maChuDe, String tenHD, String diaDiem, String thoiGianBD, String thoiGianKT,
-                     String sotnvtt, String sotnvtd, String moTa, String anh,Integer maTK);
+    void addActivity(Hoatdong hoatdong, Dangky dangky);
     List<Hoatdong> getAllMyPostNeedConfirm(Integer maTK);
     List<Dangky> getListActivityParticipate(Integer maTK);
     List<Hoatdong> getMyActivityHappeningNeedMember(Integer maTK);
@@ -55,6 +54,8 @@ public interface ActivityService {
      List<Hoatdong> getListCancelByOwner(Integer maTK);
      boolean CheckActivity(Integer maHD);
      Integer countParticipantsByIDHD(Integer maHD);
+     List<Integer> countActByLocation(List<String> locationList);
+     List<Hoatdong> getActByLocation(String location);
      List<Hoatdong> getAllActivityNotOccured();
      List<Hoatdong> getActivityByNameAct(String nameAct);
 

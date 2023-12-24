@@ -54,4 +54,9 @@ public class MemberServiceImple implements MemberService{
     {
         memberRepository.CancelMember(maHD,maTK);
     }
+
+    @Override
+    public void addMember(Thanhvien thanhvien) {
+        memberRepository.save(thanhvien);
+    }
 }

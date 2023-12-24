@@ -18,7 +18,7 @@
     --max-page: 70rem;
     --yellow-color: #ffc107;
 }
-/*Modal sign up*/
+/*!*Modal sign up*!*/
 /*.content-sign-up{*/
 /*    width: 55rem;*/
 /*    height: 34rem;*/
@@ -35,30 +35,33 @@
 /*    max-width: 60vw;*/
 /*}*/
 
-/*Thanh cuộn ở body*/
-body::-webkit-scrollbar {
-    width: 12px;
+/*Thanh cuộn ở modal*/
+.scr-Act::-webkit-scrollbar {
+    width: 10px;
 }
 
-body::-webkit-scrollbar-thumb {
+.scr-Act::-webkit-scrollbar-thumb {
     background-color: darkgray;
     border-radius: 10px;
 }
-
-/*Thanh cuộn ở modal trang chủ đánh giá*/
-/*.scr-Act {*/
-/*    max-height: 36rem;*/
-/*    overflow-y: auto;*/
-/*    overflow-x: hidden;*/
-/*}*/
-
-.scr-Act::-webkit-scrollbar-thumb:vertical {
-    background-color: darkgray !important;
-    border-radius: 10px !important;
+.scr-Act::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
 }
 
+/*Vo hieu hoa thanh cuon cua body*/
+.disable-scrollbar {
+     position: fixed;
+     width: 100%;
+     height: 100%;
+     overflow-y: scroll;
+ }
+body {
+    overflow-x: hidden;
+}
+
+/*custom-alert*/
 .custom-alert-popup {
-    width: 320px; /* Đặt chiều rộng mong muốn */
+    width: 320px;
 }
 
 /* Slick Slider */
@@ -132,7 +135,7 @@ body::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.6);
     width: 100%;
     height: 100%;
-    /*z-index: 1000!important;*/
+    /*z-index: 9999;*/
 }
 
 .modal__body {
@@ -140,7 +143,7 @@ body::-webkit-scrollbar-thumb {
     position: relative;
     margin: 1rem auto 1rem;
     border-radius: 0.5rem;
-
+    /*z-index: 10000;*/
     /*z-index: 2000!important;*/
 }
 
@@ -448,6 +451,10 @@ body::-webkit-scrollbar-thumb {
     width: 30% !important;
 }
 
+.w-35{
+    width: 35%!important;
+}
+
 .w-2{
     width: 2rem !important;
 }
@@ -619,8 +626,12 @@ body::-webkit-scrollbar-thumb {
     width: 45rem !important;
 }
 
-.mh-12{
-    min-height: 15rem!important;
+.h-45rem{
+    height: 20rem!important;
+}
+
+.mh-15{
+    max-height: 15rem!important;
 }
 
 .h-2_3{

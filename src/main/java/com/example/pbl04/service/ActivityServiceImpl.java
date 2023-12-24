@@ -78,32 +78,11 @@ public class ActivityServiceImpl implements ActivityService {
         return activityRepository.getActOfMemberByName(idAcc,nameAct);
     }
 
-    public void addActivity(Integer maChuDe, String tenHD, String diaDiem, String thoiGianBD, String thoiGianKT,
-                            String sotnvtt, String sotnvtd, String moTa
-            , String anh
-            ,Integer maTK) {
+    public void addActivity(Hoatdong hoatDong,Dangky dangky) {
         try {
-            Hoatdong hoatDong = new Hoatdong();
-            hoatDong.setMaChuDe(topicRepository.getChudeByID(maChuDe));
-            hoatDong.setTenhd(tenHD);
-            hoatDong.setDiaDiem(diaDiem);
-            hoatDong.setThoiGianBD(LocalDate.parse(thoiGianBD));
-            hoatDong.setThoiGianKT(LocalDate.parse(thoiGianKT));
-            hoatDong.setSoTNVToiThieu(Integer.parseInt(sotnvtt));
-            hoatDong.setSoTNVToiDa(Integer.parseInt(sotnvtd));
-            hoatDong.setMoTa(moTa);
-            hoatDong.setTinhTrangHD((byte) 0);
-            hoatDong.setTinhTrangDuyet((byte) 0);
-            hoatDong.setAnh(anh);
+
             activityRepository.save(hoatDong);
-            Taikhoan taikhoan = accountService.getTaiKhoanByID(maTK);
-            Dangky dangky = new Dangky();
-            dangky.setPhanQuyen(true);
-            dangky.setMaHD(hoatDong);
-            dangky.setTrangThai(true);
-//            dangky.setThoiGianDK(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
-            dangky.setThoiGianDK(Instant.now());
-            dangky.setMaTK(taikhoan);
+
             registerService.saveDK(dangky);
             System.out.println("chạy service");
 
@@ -154,6 +133,21 @@ public class ActivityServiceImpl implements ActivityService {
        else return true;
     }
     public Integer countParticipantsByIDHD(Integer maHD){ return  activityRepository.countParticipantsByIDHD(maHD);}
+
+    @Override
+    public List<Integer> countActByLocation(List<String> locationList) {
+       List<Integer> countList = new ArrayList<>();
+       for(String location:locationList){
+           countList.add(activityRepository.countActByLocation(location));
+       }
+       return countList;
+    }
+
+    @Override
+    public List<Hoatdong> getActByLocation(String location) {
+        return activityRepository.getActByLocation(location);
+    }
+
     public List<Hoatdong> getAllActivityNotOccured() {return  activityRepository.getAllActivityNotOccured();}
     public List<Hoatdong> getActivityByNameAct(String nameAct) {return activityRepository.getActivityByNameAct(nameAct);}
 }
