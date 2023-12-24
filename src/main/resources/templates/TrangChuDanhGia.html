@@ -56,7 +56,7 @@
     <div class="container d-flex">
         <!--Left-->
         <div class="container p-5 pt-0 fs-6 mx--2 w-75 act-slider">
-            <div class="container-item" th:if="${not #lists.isEmpty(activityList)}" th:each="i : ${#numbers.sequence(0, activityList.size() div 4 + ((activityList.size()%4 > 0) ? 1 : 0) - 1)}">
+            <div class="container-item" th:each="i : ${#numbers.sequence(0, activityList.size() div 4 + ((activityList.size()%4 > 0) ? 1 : 0) - 1)}" th:if="${not #lists.isEmpty(activityList)}">
                 <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<activityList.size()}">
                     <img th:src="@{${activityList.get(4*i+j).getAnh()}}" class="float-start h-80 col-2" alt="" />
                     <div class="card border-0 col-10">
@@ -188,7 +188,8 @@
     </div>
 </div>
 
-
+<div style="margin-bottom: 10rem"></div>
+<div id="myFooter" th:include="Footer :: html" ></div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>

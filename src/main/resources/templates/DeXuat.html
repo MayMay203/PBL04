@@ -12,7 +12,6 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script  defer th:src="@{/js/Header.js}"></script>
     <script  defer th:src="@{/js/ThemHoatDong.js}"></script>
-<!--    <script  defer th:src="@{/js/HoatDong.js}"></script>-->
     <script defer th:src="@{/js/DeXuat.js}"></script>
     <script defer th:src="@{/js/SearchSuggestion.js}"></script>
 
@@ -66,8 +65,7 @@
           </div>
       </div>
   </div>
-<!--<button class="btn bg-btn white-color px-4 mt-5 float-end mb-5 me-5 btn-add-suggest" th:attr="data-value=${account!=null?account.getId():null}" ><i class="bi bi-plus-square me-2"></i>Thêm đề xuất</button>-->
-<button class="btn bg-btn white-color px-4 mt-5 float-end mb-5 me-5 btn-add-suggest" type="button" th:attr="data-value=${account!=null?account.getId():null}"><i class="bi bi-plus-square me-2"></i>Thêm đề xuất</button>
+<button class="btn bg-btn white-color px-4 mt-5 float-end mb-5 me-5 btn-add-suggest" th:attr="data-value=${account!=null?account.getId():null}" ><i class="bi bi-plus-square me-2"></i>Thêm đề xuất</button>
 <!-- Modal -->
 <div class="modal_ box-shadow no-display">
     <div class="modal__overlay">
@@ -132,6 +130,29 @@
             </div>
             <div class="container max_height-36rem act-by-location scr-Act max_height-36rem overflow-y-auto overflow-x-hidden">
             </div>
+<!--            Chủ đề đề xuất lặp-->
+<!--            <div class="fs-9 display-flex">-->
+<!--                <div class="container px-5">-->
+<!--                    <div class="container d-flex align-items-center p-3 border_bottom-solid">-->
+<!--                        <div class="container flex-5">-->
+<!--&lt;!&ndash;                            Get chủ đề&ndash;&gt;-->
+<!--                            <h3 class="green-color fs-4 title-sugg"></h3>-->
+<!--&lt;!&ndash;                            Get mô tả&ndash;&gt;-->
+<!--                            <p class="mb-0 fs-6 description-sugg"></p>-->
+<!--&lt;!&ndash;                            Get vị trí&ndash;&gt;-->
+<!--                            <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green px-1 location-sugg"></i></p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--        </div>-->
+<!--             icon -->
+<!--            <div class="container d-flex flex-1 justify-content-end align-items-center">-->
+<!--                &lt;!&ndash;                <p class="pt-1_2 px-1 fw-bold green-color">5</p>&ndash;&gt;-->
+<!--                <i class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast me-4 cursor-pointer fs-5">-->
+<!--                    <p class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">-->
+<!--                        Tổ chức tại đây</p>-->
+<!--                </i>-->
+<!--            </div>-->
         </div>
     </div>
 </div>
@@ -144,6 +165,8 @@
     <div class="container max_height-36rem act-by-location">
     </div>
 </div>
+<div style="margin-bottom: 10rem"></div>
+<div id="myFooter" th:include="Footer :: html" ></div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>

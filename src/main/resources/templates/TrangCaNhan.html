@@ -24,7 +24,6 @@
     <script defer th:src="@{/js/Header.js}"></script>
     <script  defer th:src="@{/js/TrangCaNhan.js}"></script>
     <script  defer th:src="@{/js/ThemHoatDong.js}"></script>
-    <script  defer th:src="@{/js/HoatDong.js}"></script>
 
 </head>
 <body>
@@ -268,7 +267,7 @@
                                 <div class="mb-3 d-flex align-items-center">
                                     <i class="bi bi-cake2"></i>
                                     <label for="birthday" class="form-label">Ngày sinh: </label>
-                                    <input type="date" class="form-control " id="birthday" name="ngaySinh" required th:value="${user.getNgaySinh()}">
+                                    <input type="date" class="form-control date-show" id="birthday" name="ngaySinh" required th:value="${user.getNgaySinh()}">
 <!--                                    <input type="date" class="form-control datepicker" id="birthday" name="birthday" required-->
 <!--                                           th:value="${#dates.format(user.getNgaySinh(), 'yyyy-MM-dd')}"-->
 <!--                                           th:attr="data-date-format=('dd/MM/yyyy')">-->
@@ -452,7 +451,8 @@
 <!--    </div>-->
 <!--</div>-->
 
-
+<div style="margin-bottom: 4rem"></div>
+<div id="myFooter" th:include="Footer :: html" ></div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>
