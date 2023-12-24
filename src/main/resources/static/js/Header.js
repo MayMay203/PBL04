@@ -275,13 +275,9 @@ document.addEventListener('DOMContentLoaded', function() {
 //===============================modal chung=============================
 async function handleViewDetail(e){
     try{
-        console.log("e" + e.target);
         const IdAct =+e.target.dataset.value;
-        console.log("Id:" + IdAct);
         const response =await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${IdAct}`);
         if(!response.ok){
-            // Sử dụng hàm showAlert
-            // showAlert("Hoạt động chưa có tổng kết nào!");
             throw new Error(`Lỗi HTTP. Trạng thái: ${response.status}`)
         }
         const responseData = await response.json();
@@ -294,7 +290,20 @@ async function handleViewDetail(e){
         document.querySelector(".modal-Description").innerText = responseData.activity.moTa;
         document.querySelector(".avatar").src = responseData.registerInfor.maTK.anhDaiDien;
         document.querySelector(".name-host-act").innerText = responseData.registerInfor.maTK.tenDN;
-        document.querySelector(".time-post-act").innerText= responseData.registerInfor.thoiGianDK;
+        const date = new Date(responseData.registerInfor.thoiGianDK);
+        const datePart = date.toLocaleDateString("vi-VN", {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+        });
+
+        const timePart = date.toLocaleTimeString("vi-VN", {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+        });
+        const registerTime = `${datePart} ${timePart}`;
+        document.querySelector(".time-post-act").innerText = registerTime;
         image_activity.innerHTML = "";
         let count = 0;
         imagesList.forEach(image => {
@@ -327,7 +336,7 @@ async function handleViewDetail(e){
                     <h7 class="green-color fs-11 fst-italic fw-medium">${eva.maTK.tenDN}</h7>
                 </div>
                 <p class="fs-10 fst-italic m-0 px-3">${eva.binhLuan}</p>
-                <p class="green_light-color fst-italic fs-10 my-1 mx-3">${new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(eva.thoiGianBL))}</p>
+                <p class="green_light-color fst-italic fs-10 my-1 mx-3">${new Intl.DateTimeFormat("vi-VN", { day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(eva.thoiGianBL))}</p>
             </div>
             <!-- Check comment -->
             <div class="container d-flex align-items-center justify-content-center">
@@ -338,10 +347,6 @@ async function handleViewDetail(e){
         `
                 evaluationContainer.appendChild(newEvaluationDiv);
             });
-        }
-        else{
-            //cho cái thông báo:
-            alert("Hoạt động chưa có tổng kết nào!");
         }
     }catch(error){
         console.error(error)
