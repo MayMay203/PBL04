@@ -44,7 +44,7 @@ public class HomePageController {
         model.addAttribute(("totalRates"),totalRates);
 
 
-        List<Hoatdong> activitiesList = activityService.getAllActivity();
+        List<Hoatdong> activitiesList = activityService.getActivityToRegis();
         model.addAttribute("activitiesList",activitiesList);
 
 

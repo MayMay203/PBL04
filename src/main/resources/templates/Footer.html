@@ -5,6 +5,7 @@
     <title>footer</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/Footer.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<!--  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script><script  defer th:src="@{/js/Footer.js}"></script>-->
 </head>
 <body>
 <!-- Footer -->
@@ -38,7 +39,7 @@
         <p style="font-style: italic; text-align: center" >Trao hy vọng, gửi yêu thương</p>
         <p>&copy; 2023</p>
 <!--        <a href="/en/hostlist">Trang chủ</a><br>-->
-       <button class="btn-join-now"> <a href="#">Tham gia ngay</a><br></button>
+       <button class="btn-join-now" th:if="${!isLogin}" data-bs-toggle="modal" data-bs-target="#DangNhapModal"> Tham gia ngay<br></button>
 <!--        <a href="/en/info/how-it-works/workawayer">Information for Workawayers</a><br>-->
       </div>
 
@@ -46,8 +47,8 @@
         <p style="text-align: center"><strong>Tổ chức</strong></p>
         <hr class="visible-xs-block">
 <!--        <a href="/en/stories" target="_blank"></a><br>-->
-        <a href="#">Sứ mệnh</a><br>
-        <a href="#" target="_blank">Quy định</a><br>
+        <a href="#">Sứ mệnh của chúng tôi</a><br>
+        <a href="#" target="_blank">Quy định khi tham gia</a><br>
         <a href="#">Chính sách bảo mật</a><br>
         <a href="#">Quyền riêng tư</a><br>
       </div>
