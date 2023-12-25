@@ -35,6 +35,11 @@ public class HeaderController {
         this.memberService = memberService;
         this.sessionService = sessionService;
     }
+    @GetMapping("/footer")
+    public String show(Model model, HttpSession session){
+        sessionService.createSessionModel(model, session);
+        return "Footer";
+    }
 //    @GetMapping("/login")
 //    public String showFormLogin(Model model){
 //        model.addAttribute("account", new Taikhoan());
