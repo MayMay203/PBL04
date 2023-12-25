@@ -1,8 +1,7 @@
 package com.example.pbl04.entity;
 
-import com.example.pbl04.entity.Chude;
-import com.example.pbl04.entity.Taikhoan;
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 

@@ -1,10 +1,5 @@
 package com.example.pbl04.service;
-
-import com.example.pbl04.entity.Anhtongket;
-import com.example.pbl04.entity.Taikhoan;
-import com.example.pbl04.entity.Thanhvien;
-import com.example.pbl04.entity.Tongket;
-
+import com.example.pbl04.entity.*;
 import java.util.List;
 
 public interface SummaryService  {

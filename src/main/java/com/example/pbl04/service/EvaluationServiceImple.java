@@ -3,10 +3,10 @@ package com.example.pbl04.service;
 import com.example.pbl04.dao.EvaluationRepository;
 import com.example.pbl04.entity.Danhgia;
 import com.example.pbl04.entity.Hoatdong;
-import com.example.pbl04.entity.Thanhvien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.example.pbl04.entity.*;
 
 import java.time.Instant;
 import java.util.ArrayList;

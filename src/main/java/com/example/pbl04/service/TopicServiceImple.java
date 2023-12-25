@@ -2,12 +2,11 @@ package com.example.pbl04.service;
 
 
 import com.example.pbl04.dao.TopicRepository;
-import com.example.pbl04.entity.Chude;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+import com.example.pbl04.entity.*;
 @Service
 public class TopicServiceImple implements TopicService {
     private final TopicRepository topicRepository;

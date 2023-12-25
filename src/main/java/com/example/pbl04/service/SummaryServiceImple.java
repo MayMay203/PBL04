@@ -2,15 +2,11 @@ package com.example.pbl04.service;
 
 import com.example.pbl04.dao.ImageSummaryRepository;
 import com.example.pbl04.dao.SummaryRepository;
-import com.example.pbl04.entity.Anhtongket;
-import com.example.pbl04.entity.Taikhoan;
-import com.example.pbl04.entity.Thanhvien;
-import com.example.pbl04.entity.Tongket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+import com.example.pbl04.entity.*;
 @Service
 public class SummaryServiceImple implements SummaryService{
     public SummaryRepository summaryRepository;

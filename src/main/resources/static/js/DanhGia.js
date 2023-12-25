@@ -37,8 +37,7 @@ async function Evaluation(e)  {
         endActTime = activity.thoiGianKT;
         modal.classList.add('display-flex')
         view_comment.classList.remove('no-display')
-        // body.classList.add('overflow-hidden')
-        body.classList.add('disable-scrollbar')
+        body.classList.add('overflow-hidden')
 
 
        if(accEval===null){
@@ -176,6 +175,7 @@ async function saveEvaluation(e) {
         }
         const responseData = await response.json();
         const membersList = responseData.membersList;
+        console.log("Thanh vien list: ",membersList)
         const scores = responseData.scores;
         members_activity.innerHTML = '';
         var i = 0;
@@ -203,9 +203,7 @@ async function saveEvaluation(e) {
                      </div>
                 `;
         })
-        console.log(membersList.length)
         if(membersList.length %2!==0){
-            console.log("vào đây ok");
             members_activity.innerHTML += `
             <div class="container p-2 col-6"></div>
         `
@@ -237,8 +235,7 @@ async function EvaluationMember(e) {
         modal.classList.add('display-flex')
         edit_content.classList.remove('max_height-27rem')
         view_comment.classList.remove('no-display')
-        // body.classList.add('overflow-hidden')
-        body.classList.add('disable-scrollbar')
+        body.classList.add('overflow-hidden')
 
         view_organized.classList.remove('no-display')
 
@@ -246,7 +243,20 @@ async function EvaluationMember(e) {
         document.querySelector(".modal-Description").innerText = responseData.activity.moTa;
         document.querySelector(".name-host-act").innerText = responseData.registerInfor.maTK.tenDN;
         document.querySelector(".avatar-host").src = responseData.registerInfor.maTK.anhDaiDien;
-        document.querySelector(".time-post-act").innerText= responseData.registerInfor.thoiGianDK;
+        const date = new Date(responseData.registerInfor.thoiGianDK);
+        const datePart = date.toLocaleDateString("vi-VN", {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+        });
+
+        const timePart = date.toLocaleTimeString("vi-VN", {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+        });
+        const registerTime = `${datePart} ${timePart}`;
+        document.querySelector(".time-post-act").innerText= registerTime;
         //    image summary activity
            image_activity.innerHTML = "";
         let count = 0;
@@ -258,15 +268,16 @@ async function EvaluationMember(e) {
         document.querySelector(".modal-number-evaluation").innerText = responseData.numberEvaluation + " lượt đánh giá"
         const evaluationOfAct = responseData.evaluationOfAct;
         const evaluationContainer = document.querySelector(".view-comment");
-        if (evaluationOfAct.length > 0) {
-            const criteriaDiv = document.createElement("div");
-            criteriaDiv.classList.add("container", "d-flex", "justify-content-sm-end","p-2", "criteria-evaluation")
-            criteriaDiv.innerHTML=
-                `    <h4 class="fs-9 green-color fst-italic me-4 text-center">Hoạt động<br>hữu ích</h4>
+            if(evaluationOfAct.length > 0){
+                const criteriaDiv = document.createElement("div");
+                criteriaDiv.classList.add("container", "d-flex", "justify-content-sm-end","p-2", "criteria-evaluation")
+                criteriaDiv.innerHTML=
+                    `    <h4 class="fs-9 green-color fst-italic me-4 text-center">Hoạt động<br>hữu ích</h4>
                     <h4 class="fs-9 green-color fst-italic me-4 text-center">Cần tổ chức<br>thường xuyên</h4>
                     <h4 class="fs-9 green-color fst-italic me-4 text-center">Cần tổ chức<br>rộng rãi</h4>
                 `
-            evaluationContainer.appendChild(criteriaDiv)
+                evaluationContainer.appendChild(criteriaDiv)
+            }
             evaluationOfAct.forEach(eval => {
                 const newEvaluationDiv = document.createElement("div");
                 newEvaluationDiv.classList.add("container", "d-flex", "mb-3", "comment-member");
@@ -293,6 +304,7 @@ async function EvaluationMember(e) {
             //Members of activity
             members_activity.innerHTML = '';
             var i=0;
+            console.log("Thanh vien: ",membersList);
             membersList.forEach(member=>{
                 members_activity.innerHTML += `
                      <div class="container p-2 col-6 radius-1_8 position-relative member-evaluate">
@@ -331,7 +343,6 @@ async function EvaluationMember(e) {
             for(btn of btn_save){
                 btn.addEventListener("click",saveEvaluation)
             }
-        }
     }catch(Error){
         console.error(Error);
     }
@@ -348,8 +359,7 @@ function closeFormEvaluation(e) {
     btn_evaluate_mb.classList.remove("green-cb")
     modal_comment.innerHTML='';
     modal.classList.remove('display-flex')
-    // body.classList.remove('overflow-hidden')
-    body.classList.remove('disable-scrollbar')
+    body.classList.remove('overflow-hidden')
     view_comment.classList.add('no-display')
     write_comment.classList.add('no-display')
     evaluation.classList.add('no-display')
@@ -577,3 +587,4 @@ $(document).ready(function () {
         $('#noSummaryModal').modal('hide');
     });
 })
+

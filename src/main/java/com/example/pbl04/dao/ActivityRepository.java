@@ -1,15 +1,10 @@
 package com.example.pbl04.dao;
-
-import com.example.pbl04.entity.Dangky;
-import com.example.pbl04.entity.Hoatdong;
-import com.example.pbl04.entity.Taikhoan;
-import com.example.pbl04.entity.Thanhvien;
+import com.example.pbl04.entity.*;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.Date;
 import java.util.List;
 
 public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
@@ -35,7 +30,7 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
      Integer getParticipants();
      @Query("SELECT d.maTK from Dangky d,Hoatdong h where d.phanQuyen=true and d.maHD = h and h.id= :id")
      Taikhoan getOrganizator(Integer id);
-    @Query("SELECT tt from Taikhoan tk , Thanhvien tt where tk = tt.maTK and tk.id=:id")
+    @Query("SELECT tt from Taikhoan tk , Thanhvien tt where tk = tt.maTK and tk.id=:id ")
     Thanhvien getMemberByID(Integer id);
     @Query("select tv from Taikhoan tk,Thanhvien tv, Dangky dk where dk.maHD.id =:id and dk.maTK =tk and tk= tv.maTK and dk.phanQuyen=false and dk.trangThai=true")
     List<Thanhvien> getMemberList(Integer id);

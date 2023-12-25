@@ -1,9 +1,5 @@
 package com.example.pbl04.controller;
 
-import com.example.pbl04.entity.Dexuat;
-import com.example.pbl04.entity.Hoatdong;
-import com.example.pbl04.entity.Taikhoan;
-import com.example.pbl04.entity.Tongket;
 import com.example.pbl04.service.ActivityService;
 import com.example.pbl04.service.EvaluationService;
 import com.example.pbl04.service.SessionService;
@@ -21,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import com.example.pbl04.entity.*;
 @Controller
 public class SearchController {
 

@@ -1,7 +1,5 @@
 package com.example.pbl04.service;
-
-import com.example.pbl04.entity.Chude;
-
+import com.example.pbl04.entity.*;
 import java.util.List;
 
 public interface TopicService {

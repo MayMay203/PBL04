@@ -2,12 +2,10 @@ package com.example.pbl04.service;
 
 import com.example.pbl04.controller.HeaderController;
 import com.example.pbl04.dao.MemberRepository;
-import com.example.pbl04.entity.Taikhoan;
-import com.example.pbl04.entity.Thanhvien;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
+import com.example.pbl04.entity.*;
 
 @Service
 public class SessionService {

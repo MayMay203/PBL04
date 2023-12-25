@@ -1,7 +1,7 @@
 
 //Content-search
 const search_input = document.querySelector(".search-input")
-const act_slider = document.querySelector(".act-slider")
+const surround_div = document.querySelector(".surround-left")
 
 search_input.addEventListener("keyup",  async e => {
     // search_infor.classList.add('display-block');
@@ -17,9 +17,12 @@ search_input.addEventListener("keyup",  async e => {
          const responseData = await response.json()
          const activityList = responseData.activityList;
          const countEvaList = responseData.countEvaList;
-         act_slider.innerHTML = "";
-         if (activityList.length > 0) {
-             for (let i = 0; i < Math.ceil(activityList.length / 4) + ((i % 4 === 0 ? 0 : 1)); i++) {
+         surround_div.innerHTML = "";
+         const act_slider = document.createElement("div");
+         act_slider.className = "container p-5 pt-0 fs-6 mx--2 act-slider"
+         const sizeList = activityList.length;
+         if (sizeList > 0) {
+             for (let i = 0; i < Math.floor(activityList.length / 4) + ((sizeList % 4 === 0 ? 0 : 1)); i++) {
                  const containerItem = document.createElement("div");
                  containerItem.className = "container-item";
                  for (let j = 0; j < 4; j++) {
@@ -57,21 +60,24 @@ search_input.addEventListener("keyup",  async e => {
                  }
                  act_slider.appendChild(containerItem)
              }
+             surround_div.appendChild(act_slider)
              for (let view of view_link) {
                  view.addEventListener("click", handleViewDetail)
              }
              for (let btn of btn_close) {
                  btn.addEventListener("click", closeViewDetail);
              }
-             $(document).ready(function () {
-                 $('.act-slider').slick({
-                     dots: true,
-                     slidesToShow: 1,
-                     arrows: false,
-                     vertical: false,
-                     speed: 100
+             if(act_slider.children.length > 0){
+                 $(document).ready(function () {
+                     $('.act-slider').slick({
+                         dots: true,
+                         slidesToShow: 1,
+                         arrows: false,
+                         vertical: false,
+                         speed: 100
+                     });
                  });
-             });
+             }
          }
      }
      catch
@@ -82,15 +88,6 @@ search_input.addEventListener("keyup",  async e => {
  }
   })
 
-$(document).ready(function () {
-    $('.act-slider').slick({
-        dots: true,
-        slidesToShow: 1,
-        arrows: false,
-        vertical: false,
-        speed: 100
-    });
-});
 
 
 

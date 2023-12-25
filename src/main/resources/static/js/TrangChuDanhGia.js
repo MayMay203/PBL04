@@ -140,5 +140,33 @@ $(document).ready(function () {
     })
 })
 
+// // var modal = document.querySelector('.modal_');
+// var modalContent = document.querySelector('.modal__body');
+//
+// // Cập nhật vị trí của modal khi trang được cuộn
+// var modalContent = document.querySelector('.modal__body');
+//
+// // Cập nhật vị trí của modal khi trang được cuộn
+// window.addEventListener('scroll', function () {
+//     updateModalPosition();
+// });
+//
+// // Cập nhật vị trí của modal khi trang được tải
+// window.addEventListener('load', function () {
+//     updateModalPosition();
+// });
+//
+// // Hàm cập nhật vị trí của modal
+// function updateModalPosition() {
+//     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+//     var modalHeight = modal.clientHeight; // Sử dụng đúng biến modal ở đây
+//     var windowHeight = window.innerHeight;
+//
+//     // Tính toán vị trí giữa trang
+//     var topPosition = (windowHeight - modalHeight) / 2 + scrollTop;
+//
+//     // Đặt vị trí của modal
+//     modal.style.top = topPosition + 'px';
+// }
 
 

@@ -1,7 +1,7 @@
 package com.example.pbl04.service;
 
 import com.example.pbl04.dao.AboutUsRepository;
-import com.example.pbl04.entity.Vetrangweb;
+import com.example.pbl04.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
