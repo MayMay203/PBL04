@@ -148,7 +148,7 @@ ul.tongket_attach_view li input{
     width: 33rem;
     height: 20rem;
 } */
-#userImage{
+#userImage, #userImageView{
     display: block;
     width: 33rem;
     height: 20rem;
@@ -215,13 +215,17 @@ ul.tongket_attach_view li input{
     padding:0.5rem;
 }
 /* Thêm một tổng kết hoạt động */
-#txt_tongket{
+#txt_tongket,#txt_loiket{
     background-color: white;
     border: 1px solid var(--sear);
     border-radius: 20px;
     outline: none;
 }
 
+#TongKetModal{
+    max-height: 45rem;
+    overflow-y: auto;
+}
 
 #defaultImageTK{
     display: block;

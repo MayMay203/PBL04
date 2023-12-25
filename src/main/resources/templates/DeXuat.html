@@ -30,7 +30,7 @@
 </div>
 </div>
     <!-- Content -->
-<h2 class="fs-3 mb-sm-3 mlt-8rem">ĐỀ XUẤT GẦN ĐÂY</h2>
+<div class="container px-5"> <h2 class="fs-3 px-3">ĐỀ XUẤT GẦN ĐÂY</h2></div>
 <div class="container show-activity">
       <div class="fs-9 display-flex act-title" th:if="${suggestionList!=null}" th:each="suggestion,index: ${suggestionList}">
           <div class="container px-5">
@@ -128,7 +128,7 @@
                 <h3 class="fs-5 white-color fw-bold text-center mt-1 col-11 py-1">CHI TIẾT HOẠT ĐỘNG</h3>
                 <div class="btn btn-close no-outline px-0 py-1 me-3 col-1 btn-close-detail"></div>
             </div>
-            <div class="container max_height-36rem act-by-location">
+            <div class="container max_height-36rem act-by-location scr-Act max_height-36rem overflow-y-auto overflow-x-hidden">
             </div>
 <!--            Chủ đề đề xuất lặp-->
 <!--            <div class="fs-9 display-flex">-->
@@ -154,6 +154,15 @@
 <!--                </i>-->
 <!--            </div>-->
         </div>
+    </div>
+</div>
+
+<div class="act-detail no-display">
+    <div class="container d-flex align-items-center justify-content-between bg-green-dark w-100">
+        <h3 class="fs-5 white-color fw-bold text-center mt-1 col-11 py-1">CHI TIẾT HOẠT ĐỘNG</h3>
+        <div class="btn btn-close no-outline px-0 py-1 me-3 col-1 btn-close-detail"></div>
+    </div>
+    <div class="container max_height-36rem act-by-location">
     </div>
 </div>
 <div style="margin-bottom: 10rem"></div>

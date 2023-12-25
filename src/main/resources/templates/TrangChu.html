@@ -235,7 +235,7 @@
                 <h2 class="section__heading">VÀI NÉT VỀ HOPEFULLY</h2>
                 <div class="sectionAboutUs__aboutContent">
                     <div class="mission" th:each="aboutUs: ${aboutUs}">
-                        <div class="mission__image"><img class="mission__img" th:src="@{${aboutUs.getAnh()}}" alt=""></div>
+                        <div class="mission__image"><img class="mission__img" src="" alt=""></div>
                         <div class="mission__content">
                             <p class="content-header" th:text="${aboutUs.getTieuDe()}"></p>
                             <div class="content-body" th:text="${aboutUs.getNoiDung()}" >

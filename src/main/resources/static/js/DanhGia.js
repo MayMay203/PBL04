@@ -344,6 +344,8 @@ for (btn of btn_evaluate_member) {
 const btn_close = document.getElementsByClassName("btn-close-detail")
 function closeFormEvaluation(e) {
     const modal_comment = document.querySelector('.view-comment');
+    members_activity.innerHTML = '';
+    btn_evaluate_mb.classList.remove("green-cb")
     modal_comment.innerHTML='';
     modal.classList.remove('display-flex')
     // body.classList.remove('overflow-hidden')

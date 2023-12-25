@@ -1,7 +1,7 @@
 // function getContentBodyHeight() {
 //   return document.querySelector(".content_detail_body").scrollHeight;
 // }
-
+//
 // document.querySelector(".content_detail").style.height = getContentBodyHeight() + "px";
 
 

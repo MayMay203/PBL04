@@ -24,7 +24,7 @@
     <script defer th:src="@{/js/Header.js}"></script>
     <script  defer th:src="@{/js/TrangCaNhan.js}"></script>
     <script  defer th:src="@{/js/ThemHoatDong.js}"></script>
-
+    <script  defer th:src="@{/js/ThemTongKet.js}"></script>
 </head>
 <body>
 <!--    <div id="iframe-container" class="sticky-top" style="top: -87px">-->
@@ -200,7 +200,7 @@
             </div>
             <div class="pb-1 pt-1 section__padding d-flex align-items-center justify-content-center">
                 <button id="btnEvaluate"><i  class="bi bi-chat-square-heart"></i> Đánh giá</button>
-                <button id="btnSummary"><i class="bi bi-send-check"></i> Tổng kết</button>
+                <button class="buttonSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.id},data-account=${account.id}"><i class="bi bi-send-check"></i> Tổng kết</button>
             </div>
         </div>
     </div>
@@ -344,6 +344,79 @@
         </div>
     </div>
 </div>
+<!------------------------Modal Thêm tổng kết-------------------------->
+
+<div class="modal fade" id="TongKetModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg modal-dialog-tongket">
+        <div class="modal-content modal-content-tongket">
+            <form class="needs-validation" id="myForm" novalidate>
+                <div class="modal-header modal-header-tongket">
+                    <h5 class="modal-title modal-title-tongket" id="exampleModalLabel">TỔNG KẾT HOẠT ĐỘNG</h5>
+                    <button type="button" class="btn-close btnClose" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body modal-body-themhd">
+                    <div class="container modal-body-detail">
+                        <div class="row">
+                            <div class="col-md-3"><label class="lbHD" for="txt_TenChuDe"><i class="bi bi-pencil-square"></i>CHỦ
+                                ĐỀ</label></div>
+                            <div class="col-md-9"><input class="textfieldHD form-control" type="text" name="txt_NameTopic" id="txt_TenChuDe"
+                                                         value="" readonly></div>
+                            <div class="invalid-feedback">Vui lòng nhập tên chủ đề</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3"><label class="lbHD" for="txt_TenHoatDong"><i class="bi bi-fire"></i>TÊN HOẠT
+                                ĐỘNG</label></div>
+                            <div class="col-md-9"> <input class="textfieldHD form-control" type="text" name="txt_NameActi" id="txt_TenHoatDong"
+                                                          value="" readonly></div>
+                            <div class="invalid-feedback">Vui lòng nhập tên hoạt động</div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-3 lbHD"><i class="bi bi-menu-up"></i>BẢNG TỔNG KẾT</div>
+                            <div class="col-md-9">
+                                <textarea name="txt_tongket" class=" form-control" id="txt_tongket" cols="71" rows="15" required></textarea>
+                            </div>
+                            <div class="invalid-feedback">Vui lòng nhập bảng tổng kết</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3 lbHD"><i class="bi bi-menu-up"></i>LỜI KẾT</div>
+                            <div class="col-md-9">
+                                <textarea name="txt_loiket" class=" form-control" id="txt_loiket" cols="71" rows="7" required></textarea>
+                            </div>
+                            <div class="invalid-feedback">Vui lòng nhập lời kết</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-3 lbHD"><i class="bi bi-card-image"></i>HÌNH ẢNH</div>
+                            <div class="col-md-9 tongket-reviews">
+                                <div class="tongket-reviews">
+                                    <div class="form_upload">
+                                        <label class="tongket_insert_attach"><span><img th:src="@{/images/imgdf.png}" alt="" id="imgdf">
+                        Chọn ảnh</span></label>
+                                    </div>
+                                    <div class="list_attach">
+                                        <ul class="tongket_attach_view">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer modal-footer-themhd">
+                    <button type="submit" class="btnSave"><i class="bi bi-floppy2"></i> Lưu thay đổi</button>
+                    <button type="button" class="btnCancel" onclick="resetFormFields()"><i class="bi bi-x-circle-fill"></i> Hủy thay
+                        đổi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!----------Model đăng hoạt động mới---------------------->
 <!--<div class="modal fade" id="ThemHoatDongModal" tabindex="-1" aria-labelledby="addActivityModalLabel" aria-hidden="true">-->
 <!--    <div class="modal-dialog modal-lg modal-dialog-themhd">-->

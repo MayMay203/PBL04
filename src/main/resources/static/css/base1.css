@@ -18,6 +18,10 @@
     --max-page: 70rem;
     --yellow-color: #ffc107;
 }
+.btn-myacti-summary{
+    color:var(--main-color) ;
+    text-decoration: none;
+}
 
 /* Modal */
 .modal_{

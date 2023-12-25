@@ -648,12 +648,11 @@ $(document).ready(function () {
         document.getElementById('txt_DiaDiem').value = hoatdong.diaDiem;
         document.getElementById('txt_TGBD').value = hoatdong.thoiGianBD;
         document.getElementById('txt_TGKT').value = hoatdong.thoiGianKT;
-        document.getElementById('txt_tnvtt').value = hoatdong.soTNVToiThieu;
-        document.getElementById('txt_tnvtd').value = hoatdong.soTNVToiDa;
+        document.getElementById('txt_toithieu').value = hoatdong.soTNVToiThieu;
+        document.getElementById('txt_toida').value = hoatdong.soTNVToiDa;
         document.getElementById('txt_MotaHD').value = hoatdong.moTa;
-
         // Set the image preview if there is an image
-        var userImage = document.getElementById('userImage');
+        var userImage = document.getElementById('userImageView');
         if (hoatdong.anh) {
             userImage.src = hoatdong.anh;
         } else {
