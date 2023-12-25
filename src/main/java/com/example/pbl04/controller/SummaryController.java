@@ -71,21 +71,42 @@ public class SummaryController {
             sessionService.createSessionModel(model, session);
             return "TongKetHoatDong";
         } else {
-//            sessionService.createSessionModel(model, session);
-//            Taikhoan myaccount = (Taikhoan) model.getAttribute("account");
-//            Dangky checkDangky = registerService.getDangKyByHDTK(myaccount.getId(), id);
-//            Taikhoan taikhoan =activityService.getOrganizator(id);
-//            List<Thanhvien> thanhvienList =activityService.getMemberList(id);
-//            Thanhvien thanhvien=activityService.getMemberByID(taikhoan.getId());
-//            Hoatdong hoatdong = activityService.getActivityByID(id);
-//            model.addAttribute("hoatdong",hoatdong);
-//            model.addAttribute("taikhoan",taikhoan);
-//            model.addAttribute("thanhvien",thanhvien);
-//            model.addAttribute("thanhvienList",thanhvienList);
-//            model.addAttribute("checkDangky",checkDangky);
-//            model.addAttribute("showMessage", true);
             return "error";
         }
     }
+    @PostMapping("/addSummary")
+    @ResponseBody
+    public  Map<String, Object> addSummary(@RequestParam("maHD") Integer maHD,
+                           @RequestParam("bangTongKet") String bangTongKet,
+                           @RequestParam("loiKet") String loiKet,
+                           @RequestParam("imagesPaths") List<String> imagesPaths)
+    {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Tongket tongket = new Tongket();
+            Hoatdong hoatdong = activityService.getActivityByID(maHD);
+            tongket.setMaHD(hoatdong);
+            tongket.setBangTongKet(bangTongKet);
+            tongket.setLoiKet(loiKet);
+            Tongket maTongKet= summaryService.addSummary(tongket);
+            for(String imagesPath : imagesPaths)
+            {
+                Anhtongket anhTongKet = new Anhtongket();
+                anhTongKet.setMaTongKet(maTongKet);
+                anhTongKet.setAnh(imagesPath);
+                summaryService.addImages(anhTongKet);
+            }
+            response.put("message", "Thêm thành công");
+            response.put("success", true);
+
+            return response;
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "Đã có lỗi xảy ra: " + e.getMessage());
+            return response;
+        }
+
+    }
+
 
 }
