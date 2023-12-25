@@ -1,12 +1,12 @@
 //-----sửa format ngày -------------
-var dateformat = date.toLocaleDateString("vi-VN", {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-        });
-
-        var dateformatshow = `${dateformat}`;
-        document.querySelector(".date-show").innerText = dateformatshow;
+// var dateformat = date.toLocaleDateString("vi-VN", {
+//             day: '2-digit',
+//             month: '2-digit',
+//             year: 'numeric',
+//         });
+//
+//         var dateformatshow = `${dateformat}`;
+//         document.querySelector(".date-show").innerText = dateformatshow;
 //--------------- trang cá nhân ---------------
 $(document).ready(function() {
     $('#icon-edit').on('click', function() {
