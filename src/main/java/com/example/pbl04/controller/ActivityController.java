@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
-
+import com.example.pbl04.entity.*;
 @Controller
 public class ActivityController {
     private final ActivityService activityService;

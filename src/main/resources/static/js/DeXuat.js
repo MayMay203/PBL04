@@ -11,16 +11,14 @@ const btn_organizeHere = document.querySelectorAll(".btn-organize-here");
 const btn_close_detail = document.getElementsByClassName("btn-close-detail")
 btn_close_sug.addEventListener("click", () => {
     modal.classList.remove("display-flex")
-   // body.classList.remove("overflow-hidden")
-    body.classList.remove("disable-scrollbar")
+   body.classList.remove("overflow-hidden")
     suggesstionForm.classList.add("no-display");
 })
 
 function closeViewAct() {
     actByLocation.innerHTML = "";
     modal.classList.remove("display-flex")
-   // body.classList.remove("overflow-hidden")
-    body.classList.remove("disable-scrollbar")
+   body.classList.remove("overflow-hidden")
     actDetail.classList.add("no-display");
 }
 for (btn of btn_close_detail) {
@@ -35,8 +33,7 @@ btn_add_sug.addEventListener("click", () => {
     }
     else{
         modal.classList.add("display-flex")
-       // body.classList.add("overflow-hidden")
-        body.classList.add("disable-scrollbar")
+       body.classList.add("overflow-hidden")
         suggesstionForm.classList.remove("no-display");
     }
 })
@@ -53,8 +50,7 @@ async function viewActByLocation(e){
             const actList = await response.json();
             if(actList.length > 0){
                 modal.classList.add("display-flex");
-                // body.classList.add("overflow-hidden");
-                body.classList.add("disable-scrollbar")
+                body.classList.add("overflow-hidden");
                 actDetail.classList.remove("no-display");
                 actList.forEach(act => {
                     var startTime = new Intl.DateTimeFormat("vi-VN",{ day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(act.thoiGianBD))
@@ -137,4 +133,16 @@ function organizeHere(e){
 //btn ToChucTaiDay
 for(btn of btn_organizeHere){
     btn.addEventListener("click",organizeHere)
+}
+
+const suggSlider = document.querySelector(".sugg-slider");
+if (suggSlider.children.length > 0) {
+        $('.sugg-slider').slick({
+            dots: true,
+            slidesToShow: 1,
+            arrows: false,
+            vertical: false,
+            speed: 100
+        });
+    console.log("Tao slider dau tien thanh cong!")
 }

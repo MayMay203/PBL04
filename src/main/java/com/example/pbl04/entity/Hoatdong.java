@@ -72,7 +72,6 @@ public class Hoatdong {
         this.tenhd = tenhd;
     }
 
-
     public Chude getMaChuDe() {
         return maChuDe;
     }

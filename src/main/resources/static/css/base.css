@@ -45,19 +45,26 @@
     border-radius: 10px;
 }
 .scr-Act::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
+    /*background-color: #f1f1f1;*/
+    /*border-radius: 10px;*/
+    display: none;
 }
 
-/*Vo hieu hoa thanh cuon cua body*/
-.disable-scrollbar {
-     position: fixed;
-     width: 100%;
-     height: 100%;
-     overflow-y: scroll;
- }
 body {
     overflow-x: hidden;
 }
+/*Thanh cuon body*/
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: darkgray;
+}
+/*body::-webkit-scrollbar-track {*/
+/*    background-color: #f1f1f1;*/
+/*    border-radius: 10px;*/
+/*}*/
 
 /*custom-alert*/
 .custom-alert-popup {
@@ -88,15 +95,23 @@ body {
 }
 
 .slick-prev {
-    margin-left: 10rem;
+    margin-left: 11rem;
     font-size: 2rem;
     cursor: pointer;
 }
 
 .slick-next{
-    margin-left: 10rem;
+    margin-left: 11rem;
     font-size: 2rem;
     cursor: pointer;
+}
+
+.form-control{
+    border: 1px solid var(--black-color)!important;
+}
+
+.form-control {
+    border: 1px solid var(--black-color) !important;
 }
 
 /* Animation */
@@ -109,16 +124,7 @@ body {
     }
 }
 
-.form-control{
-    border: 1px solid var(--black-color)!important;
-}
-
-.form-control {
-    border: 1px solid var(--black-color) !important;
-}
-
-
-/* Modal */
+ /*Modal */
 .modal_{
     position: fixed;
     top: 0;
@@ -126,7 +132,7 @@ body {
     left: 0;
     bottom: 0;
     display: flex;
-    animation: fadeIn ease-in-out 0.2s;
+    animation: fadeIn ease-in-out 0.25s;
     z-index: 1050;
 }
 
@@ -135,7 +141,6 @@ body {
     background-color: rgba(0, 0, 0, 0.6);
     width: 100%;
     height: 100%;
-    /*z-index: 9999;*/
 }
 
 .modal__body {
@@ -143,8 +148,7 @@ body {
     position: relative;
     margin: 1rem auto 1rem;
     border-radius: 0.5rem;
-    /*z-index: 10000;*/
-    /*z-index: 2000!important;*/
+    height: 39.25rem;
 }
 
 .indent-cursor {

@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "taikhoan")
 public class Taikhoan {
     @Id
-    @Column(name = "maTK", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "maTK", nullable = false)
     private Integer id;
 
     @Column(name = "tenDN", nullable = false, length = 50)

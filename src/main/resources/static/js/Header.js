@@ -299,8 +299,7 @@ async function handleViewDetail(e){
         const imagesList = responseData.imagesList;
         // console.log(responseData);
         modal.classList.add('display-flex')
-        // body.classList.add('overflow-hidden')
-        body.classList.add('disable-scrollbar');
+        body.classList.add('overflow-hidden')
         document.querySelector(".modal-nameAct").innerText = responseData.activity.tenhd;
         document.querySelector(".modal-Description").innerText = responseData.activity.moTa;
         document.querySelector(".avatar").src = responseData.registerInfor.maTK.anhDaiDien;
@@ -373,7 +372,7 @@ function closeViewDetail(e) {
     const modal_comment = document.querySelector('.modal-comment');
     modal_comment.innerHTML='';
     modal.classList.remove('display-flex')
-    body.classList.remove('disable-scrollbar');
+    body.classList.remove('overflow-hidden');
 }
 
 <!--=========================================== alert chung ===============================================-->

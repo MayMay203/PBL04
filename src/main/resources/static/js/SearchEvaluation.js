@@ -1,22 +1,23 @@
-
+//Hoat dong cua tai khoan dang nhap
 //Content-search
 const search_input = document.querySelector(".search-input")
-const act_slider = document.querySelector(".act-slider")
+const surround_div = document.querySelector(".surround-left")
 search_input.addEventListener("keyup",  async e => {
    if(e.key === "Enter"){
        try {
            const nameAct = search_input.value.trim()
            const IdAcc = search_input.dataset.account;
-           // const valueURL = convertToSlug(value);
-           // console.log(valueURL)
            const response = await fetch(`/search/evaluation?nameAct=${nameAct}&IdAcc=${IdAcc}`)
            if (!response.ok) {
                console.error("Lỗi HTTP! Trạng thái " + response.status)
            }
            const actListOfMember = await response.json()
-           act_slider.innerHTML = "";
-           if (actListOfMember.length > 0) {
-               for (let i = 0; i < Math.ceil(actListOfMember.length / 4) + ((i % 4 === 0 ? 0 : 1)); i++) {
+           surround_div.innerHTML = "";
+           const act_slider = document.createElement("div");
+           act_slider.className = "act-slider"
+           const sizeList = actListOfMember.length;
+           if (sizeList > 0) {
+               for (let i = 0; i < Math.floor(actListOfMember.length / 4) + ((sizeList % 4 === 0 ? 0 : 1)); i++) {
                    const containerItem = document.createElement("div");
                    containerItem.className = "container-item";
                    for (let j = 0; j < 4; j++) {
@@ -54,25 +55,27 @@ search_input.addEventListener("keyup",  async e => {
                    }
                    act_slider.appendChild(containerItem)
                }
+               surround_div.appendChild(act_slider);
                for (var btn of btn_evaluate) {
                    btn.addEventListener("click", Evaluation)
                }
                for (var btn of btn_evaluate_member) {
                    btn.addEventListener("click",EvaluationMember)
                }
-
                for (var btn of btn_close) {
                    btn.addEventListener("click",closeFormEvaluation);
                }
-               $(document).ready(function(){
-                   $('.act-slider').slick({
-                       dots: true,
-                       slidesToShow: 1,
-                       arrows: false,
-                       vertical: false,
-                       speed: 100
+               if(act_slider.children.length > 0){
+                   $(document).ready(function(){
+                       $('.act-slider').slick({
+                           dots: true,
+                           slidesToShow: 1,
+                           arrows: false,
+                           vertical: false,
+                           speed: 100
+                       });
                    });
-               });
+               }
            }
        }
        catch
@@ -83,15 +86,6 @@ search_input.addEventListener("keyup",  async e => {
    }
 })
 
-$(document).ready(function () {
-    $('.act-slider').slick({
-        dots: true,
-        slidesToShow: 1,
-        arrows: false,
-        vertical: false,
-        speed: 100
-    });
-});
 
 
 

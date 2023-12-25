@@ -20,7 +20,7 @@ public class Danhgia {
     @JoinColumn(name = "maHD", nullable = false)
     private Hoatdong maHD;
 
-    @Column(name = "diemTC",nullable = true)
+    @Column(name = "diemTC")
     private Integer diemTC;
 
     @Column(name = "tieuChi1")
@@ -37,7 +37,7 @@ public class Danhgia {
     private String binhLuan;
 
     @Column(name = "thoiGianBL")
-    private Instant thoiGianBL;
+    private Instant thoiGianBL = Instant.now();
 
     @Column(name = "diemTNV")
     private Integer diemTNV;
