@@ -43,6 +43,11 @@ public class RegisterServiceImple implements RegisterService {
     public Dangky getDangKyByHDTK(Integer maTK, Integer maHD) {return regisRepository.getDangKyByHDTK(maTK,maHD);}
 
     @Override
+    public Dangky getRegisterIsMember(Integer maHD, Integer maTK) {
+        return regisRepository.getRegisterIsMember(maHD, maTK);
+    }
+
+    @Override
     public List<Dangky> getRegisterInforByIDAct(Integer IdAct) {
         return regisRepository.getRegisterInforByIDAct(IdAct);
     }

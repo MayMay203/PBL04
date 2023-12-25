@@ -574,5 +574,6 @@ $(document).ready(function () {
     }
     $('.closeModalLogout').on('click', function () {
         $('#noSummaryModal').modal('hide');
+        $('#noSummaryModal').modal('hide');
     });
 })

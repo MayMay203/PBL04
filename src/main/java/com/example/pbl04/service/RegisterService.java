@@ -14,5 +14,7 @@ public interface RegisterService {
 
     List<Dangky> getRegisterInforByIDAct(Integer IdAct);
     Dangky getDangKyByHDTK(Integer maTK, Integer maHD);
+
+    Dangky getRegisterIsMember(Integer maHD, Integer maTK);
 //    List<Thanhvien> getAllMyParticipants(Integer maTK);
 }

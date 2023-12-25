@@ -1,8 +1,6 @@
 package com.example.pbl04.controller;
 
-import com.example.pbl04.entity.Chude;
-import com.example.pbl04.entity.Hoatdong;
-import com.example.pbl04.entity.Thanhvien;
+import com.example.pbl04.entity.*;
 import com.example.pbl04.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class PersonalityController {
@@ -38,16 +33,20 @@ public class PersonalityController {
     private final AccountService accountService;
 
     private final TopicService topicService;
+    private final SummaryService summaryService;
+    private final RegisterService registerService;
 
     @Autowired
     public PersonalityController(SessionService sessionService, ActivityService activityService,
-                                 MemberService memberService, ImageProcessorService imageProcessorService, AccountService accountService, TopicService topicService) {
+                                 MemberService memberService, ImageProcessorService imageProcessorService, AccountService accountService, TopicService topicService, SummaryService summaryService, RegisterService registerService) {
         this.sessionService = sessionService;
         this.activityService = activityService;
         this.memberService = memberService;
         this.imageProcessorService = imageProcessorService;
         this.accountService = accountService;
         this.topicService = topicService;
+        this.summaryService = summaryService;
+        this.registerService = registerService;
     }
 
     @GetMapping("/trang-ca-nhan")
@@ -55,8 +54,44 @@ public class PersonalityController {
                        @RequestParam("id") Integer id,
                        @ModelAttribute("message") String message,
                        HttpSession session) {
-        List<Hoatdong> actListByHost = activityService.getActivityByHost(id);
-        model.addAttribute("actListByHost", actListByHost);
+        List<Hoatdong> actListIsHost = activityService.getAllActivityIsHost(id);
+        model.addAttribute("actListIsHost", actListIsHost);
+        List<Dangky> listRegisIsHostActi = new ArrayList<>();
+        List<Integer> listSummaryIsHostActi = new ArrayList<>();
+        for(Hoatdong hd : actListIsHost){
+            //lấy đăng ký:
+            listRegisIsHostActi.add(activityService.getRegisterInfo(hd.getId()));
+            //lấy tổng kết
+           if(summaryService.getSummaryByID(hd.getId()) != null){
+               listSummaryIsHostActi.add(summaryService.getSummaryByID(hd.getId()).getId());
+               System.out.println("Tổng kết host:"+ summaryService.getSummaryByID(hd.getId()).getId() +"---"+summaryService.getSummaryByID(hd.getId()).getMaHD().getTenhd());
+           }
+           else{
+               listSummaryIsHostActi.add(-1);
+           }
+        }
+        model.addAttribute("listRegisIsHostActi",listRegisIsHostActi);
+        model.addAttribute("listSummaryIsHostActi", listSummaryIsHostActi);
+
+        List<Hoatdong> actListIsMember = activityService.getAllActivityIsMember(id);
+        model.addAttribute("actListIsMember", actListIsMember);
+        List<Dangky> listRegisIsMemberActi = new ArrayList<>();
+        List<Integer> listSummaryIsMemberActi = new ArrayList<>();
+        for(Hoatdong hd : actListIsMember){
+            //lấy đăng ký:
+            listRegisIsMemberActi.add(registerService.getRegisterIsMember(hd.getId(), id));
+            //lấy tổng kết
+            if(summaryService.getSummaryByID(hd.getId()) != null){
+                listSummaryIsMemberActi.add(summaryService.getSummaryByID(hd.getId()).getId());
+                System.out.println("Tổng kết member:"+ summaryService.getSummaryByID(hd.getId()).getId() +"---"+summaryService.getSummaryByID(hd.getId()).getMaHD().getTenhd());
+            }
+            else{
+                listSummaryIsMemberActi.add(-1);
+            }
+        }
+        model.addAttribute("listRegisIsMemberActi", listRegisIsMemberActi);
+        model.addAttribute("listSummaryIsMemberActi", listSummaryIsMemberActi);
+
         model.addAttribute("activity", new Hoatdong());
 //        Dangky getRegisterInfo = activityService.getRegisterInfo(id)
         List<Chude> listTopics = topicService.getAllTopics();

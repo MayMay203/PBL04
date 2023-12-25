@@ -10,6 +10,8 @@ import java.util.List;
 public interface RegisRepository extends JpaRepository<Dangky,Integer> {
     @Query("select dk from Dangky dk where dk.maHD.id = :IdAct and dk.phanQuyen=false ")
     List<Dangky> getRegisterInforByIDAct(Integer IdAct);
+    @Query("select dk from Dangky dk where dk.maHD.id = :IdAct and dk.phanQuyen=false and dk.maTK.id = :maTK")
+    Dangky getRegisterIsMember(Integer IdAct, Integer maTK);
     @Query("select dk from Dangky dk where dk.maTK.id =:idTK and dk.maHD.id =:idHD")
     Dangky getDangKyByHDTK(Integer idTK, Integer idHD);
 }

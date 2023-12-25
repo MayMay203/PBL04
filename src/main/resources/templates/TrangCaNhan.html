@@ -70,86 +70,10 @@
                     <button class="ms-auto" id="btnFilter" name="btnFilter">Bộ lọc <i class="bi bi-filter"></i></button>
                 </div>
             </div> -->
-            <!-- The Modal -->
-            <div class="modal" id="modalFilter">
-                <div class="modal-dialog">
-                    <div class="modal-content" style="align-items: center">
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                        <h4 class="modal-title titleFilter"  style="margin-left: 0">Bộ lọc hoạt động</h4>
-                        <button id="btn-closeFilter" type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            <form action="#" id="formFilter">
-                                <!-- mục hoạt động tổ chức -->
-                                <div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <p>Duyệt thành viên</p>
-                                        </div>
-                                        <div class="col-md-6" style="margin-bottom: 0.5rem">
-                                            <select class="form-select form-select-sm mt-3 optEvaluate">
-                                                <option>Tất cả</option>
-                                                <option>Thành viên đăng ký tham gia</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center">
-                                        <div class="col-md-6">
-                                            <p>Trạng thái hoạt động</p>
-                                        </div>
-                                        <div class="col-md-6" style="margin-bottom: 0.5rem">
-                                            <select class="form-select form-select-sm mt-3 optState">
-                                                <option>Tất cả</option>
-                                                <option>Chờ duyệt</option>
-                                                <option>Chưa diễn ra</option>
-                                                <option>Đang diễn ra</option>
-                                                <option>Đã diễn ra</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <p>Tổng kết</p>
-                                        </div>
-                                        <div class="col-md-6" style="margin-bottom: 0.5rem">
-                                            <select class="form-select form-select-sm mt-3 optSummary">
-                                                <option>Tất cả</option>
-                                                <option>Đã tổng kết</option>
-                                                <option>Chưa tổng kết</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <p>Đánh giá</p>
-                                        </div>
-                                        <div class="col-md-6" style="margin-bottom: 0.5rem">
-                                            <select class="form-select form-select-sm mt-3 optEvaluate">
-                                                <option>Tất cả</option>
-                                                <option>Đã đánh giá</option>
-                                                <option>Chưa đánh giá</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- mục hoạt động tham gia -->
-                            </form>
-                        </div>
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <button type="reset" class="btnReset btn-secondary" id="btnResetFilter" >Hủy thay đổi</button>
-                            <button type="button" class="btnSave btn-primary">Lưu thay đổi</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
         </div>
-<!--        <div th:text="${actListOfMember.size()}"></div>-->
-        <div class="container__sectionAct" th:each="activity:${actListByHost}" >
-
+        <div class="container__sectionAct" th:each="activity, index:${actListIsHost}" >
             <div class="d-flex section__padding">
                 <img class="img-avatar-small" th:src="@{${user.getMaTK().getAnhDaiDien()}}" alt="">
                 <div class="header-activity">
@@ -157,7 +81,7 @@
                     <div class="time-activity">
                         <i class="bi bi-clock"></i>
 <!--                        chỗ ni phải lấy thời gian đăng ký-->
-                        <span th:text="${activity.getThoiGianBD()}"></span>
+                        <span th:text="${listRegisIsHostActi.get(index.index).getThoiGianDK()}"></span>
                     </div>
                 </div>
                 
@@ -200,7 +124,9 @@
             </div>
             <div class="pb-1 pt-1 section__padding d-flex align-items-center justify-content-center">
                 <button id="btnEvaluate"><i  class="bi bi-chat-square-heart"></i> Đánh giá</button>
-                <button class="buttonSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.id},data-account=${account.id}"><i class="bi bi-send-check"></i> Tổng kết</button>
+                <button class="buttonSummary btnSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#confirmAddSummaryModal" th:if="${listSummaryIsHostActi.get(index.index)} == -1"><i class="bi bi-send-check"></i> Tổng kết</button>
+                <button class="buttonSummary btnSummary" th:if="${listSummaryIsHostActi.get(index.index)} > 0"><i class="bi bi-send-check"></i> <a th:href="@{/View-Summary(id=${activity.getId()})}" style="text-decoration: none; color: #136b1d">Tổng kết</a></button>
+<!--                <button class="buttonSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.id},data-account=${account.id}"><i class="bi bi-send-check"></i> Tổng kết</button>-->
             </div>
         </div>
     </div>
@@ -521,7 +447,102 @@
 <!--        </div>-->
 <!--    </div>-->
 <!--</div>-->
-
+<!-- The Modal bộ lọc -->
+<div class="modal" id="modalFilter">
+    <div class="modal-dialog">
+        <div class="modal-content" style="align-items: center">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title titleFilter"  style="margin-left: 0">Bộ lọc hoạt động</h4>
+                <button id="btn-closeFilter" type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style="margin-left: 3rem"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="#" id="formFilter">
+                    <!-- mục hoạt động tổ chức -->
+                    <div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <p>Duyệt thành viên</p>
+                            </div>
+                            <div class="col-md-6" style="margin-bottom: 0.5rem">
+                                <select class="form-select form-select-sm mt-3 optEvaluate">
+                                    <option>Tất cả</option>
+                                    <option>Thành viên đăng ký tham gia</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <p>Trạng thái hoạt động</p>
+                            </div>
+                            <div class="col-md-6" style="margin-bottom: 0.5rem">
+                                <select class="form-select form-select-sm mt-3 optState">
+                                    <option>Tất cả</option>
+                                    <option>Chờ duyệt</option>
+                                    <option>Chưa diễn ra</option>
+                                    <option>Đang diễn ra</option>
+                                    <option>Đã diễn ra</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <p>Tổng kết</p>
+                            </div>
+                            <div class="col-md-6" style="margin-bottom: 0.5rem">
+                                <select class="form-select form-select-sm mt-3 optSummary">
+                                    <option>Tất cả</option>
+                                    <option>Đã tổng kết</option>
+                                    <option>Chưa tổng kết</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <p>Đánh giá</p>
+                            </div>
+                            <div class="col-md-6" style="margin-bottom: 0.5rem">
+                                <select class="form-select form-select-sm mt-3 optEvaluate">
+                                    <option>Tất cả</option>
+                                    <option>Đã đánh giá</option>
+                                    <option>Chưa đánh giá</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- mục hoạt động tham gia -->
+                </form>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="reset" class="btnReset btn-secondary" id="btnResetFilter" style="background-color: #136b1d">Hủy thay đổi</button>
+                <button type="button" class="btnSave btn-primary" style="background-color: #136b1d; width: 130px; margin-left: 1rem">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Thông báo xác nhận thêm tổng kết-->
+<div class="modal fade" id="confirmAddSummaryModal" tabindex="-1" role="dialog" aria-labelledby="confirmAddSummaryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="align-items: center">
+            <div class="modal-header" >
+                <h5 class="modal-title" id="confirmAddSummaryModalLabel" style="margin-left: 11rem">Xác nhận</h5>
+                <button type="button" class="closeModalLogout" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 10rem">
+                    <span aria-hidden="true" >&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="font-size: 1.1rem">
+                Hoạt động này chưa được tổng kết<br>
+                Bạn có muốn tổng kết hoạt động này?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close closeModalLogout btn btn-secondary" data-dismiss="modal" >Hủy</button>
+                <button type="submit" class="btn" style="background-color: #136b1d; color: #ffffff; width: 6rem; margin-left: 2rem" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.id},data-account=${account.id}">Đồng ý</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div style="margin-bottom: 4rem"></div>
 <div id="myFooter" th:include="Footer :: html" ></div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

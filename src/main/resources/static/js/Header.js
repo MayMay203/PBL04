@@ -129,6 +129,19 @@ $('#modal-sign-up').on('hidden.bs.modal', function () {
     // Giảm biến đếm mỗi khi modal được đóng
     backdropCount--;
 });
+$('.modal').on('show.bs.modal', function () {
+    // Tăng biến đếm mỗi khi modal sắp hiển thị
+    backdropCount++;
+
+    // Nếu có nhiều hơn một backdrop, xóa đi các backdrop thừa
+    if (backdropCount > 1) {
+        $('.modal-backdrop').not(':last').remove();
+    }
+});
+$('.modal').on('hidden.bs.modal', function () {
+    // Giảm biến đếm mỗi khi modal được đóng
+    backdropCount--;
+});
 $('#DangNhapModal').on('hidden.bs.modal', function () {
     //mỗi khi modal được đóng
     var header = document.getElementById("myHeader");
