@@ -97,6 +97,9 @@ public class EvaluationController {
         }
         List<Dangky> registerList = registerService.getRegisterInforByIDAct(IdAct);
         List<Thanhvien> membersList = memberService.getMembersByRegis(registerList);
+        for(Thanhvien tv:membersList){
+            System.out.println(tv.getHoTen());
+        }
         List<Integer> scores = evaluationService.getMembersScoreByAct(membersList,IdAct);
         responseData.put("activity", activity);
         responseData.put("numberEvaluation", numberEvaluation);
