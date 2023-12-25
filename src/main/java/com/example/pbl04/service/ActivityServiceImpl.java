@@ -25,6 +25,11 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    public List<Hoatdong> getActivityToRegis() {
+        return activityRepository.getActivityToRegis();
+    }
+
+    @Override
     public List<Hoatdong> getAllActivity() {
         return activityRepository.findAll();
     }

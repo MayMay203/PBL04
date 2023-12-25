@@ -58,7 +58,7 @@
                         <h3 class="Content_left-title my-5">HOẠT ĐỘNG</h3>
                         <div class="Content_left-item">
                             <div class="act-slider" >
-                                <div class="container-item" th:each="i : ${#numbers.sequence(0, actiListUpcomming.size() div 4 + ((actiListUpcomming.size()%4 > 0) ? 1 : 0) - 1)}" th:if="${not #lists.isEmpty(actiListUpcomming)}">
+                                <div class="container-item" th:if="${not #lists.isEmpty(actiListUpcomming)}" th:each="i : ${#numbers.sequence(0, actiListUpcomming.size() div 4 + ((actiListUpcomming.size()%4 > 0) ? 1 : 0) - 1)}">
                                     <div class="card mb-5"  th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<actiListUpcomming.size()}">
                                         <div class="row g-0">
                                             <div class="col-md-3">
@@ -127,7 +127,7 @@
 </div>
 <div class="activity_popular bg-white text-center">
     <div class="container">
-        <h3 class="activity_head p-5">HOẠT ĐỘNG PHỔ BIẾN</h3>
+        <h3 class="activity_head p-5">HOẠT ĐỘNG PHỔ BIẾN </h3>
         <div class="list_acti">
             <div class="row p-5 custom-acti">
                 <div class="col-md-4"><i class="bi bi-house-add-fill"></i> <br><span>TRƯỜNG HỌC</span></div>

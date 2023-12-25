@@ -7,6 +7,7 @@ import com.example.pbl04.entity.*;
 import java.util.List;
 
 public interface ActivityService {
+    List<Hoatdong> getActivityToRegis();
     List<Hoatdong> getAllActivity();
     Hoatdong getActivityByID(Integer id);
     List<Hoatdong> getActivityOccured();

@@ -158,7 +158,8 @@
     border: solid 0.625rem rgba(219, 250, 220, 0.8);
     padding: 0 !important;
     border-radius: 0.625rem;
-    /*height: 27.875rem;*/
+    height: 27.875rem;
+
 }
 .activity-img_title{
     position: relative;
@@ -214,8 +215,11 @@
     text-transform: capitalize;
     color: var(--main-color);
 }
-.acitivity-content{
-    margin-top: 1.875rem;
+.activity-content{
+    /*margin-top: 1.875rem;*/
+    /*    để chữ xem thêm hiện cuối bên phải*/
+    display: flex;
+    flex-direction: column;
 }
 .text-content{
     text-align: justify;

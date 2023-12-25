@@ -41,7 +41,7 @@ public class ScheduledTasks {
             }
         }
     }
-    // Hủy hoạt động khi người tổ chức không xác nhận Duyệt hoạt động sau 7 ngày (kể từ thời gian bắt đầu)
+    // Hủy hoạt động khi người tổ chức không xác nhận Duyệt hoạt động sau 1 ngày (kể từ thời gian bắt đầu)
     @Scheduled(cron="0 0 0 * * ?")
     public void CancelActivityOverdue()
     {
@@ -50,7 +50,7 @@ public class ScheduledTasks {
         {
             LocalDate currentDate = LocalDate.now();
             LocalDate startDate = activity.getThoiGianBD();
-            LocalDate sevenDaysBefore = startDate.minusDays(7);
+            LocalDate sevenDaysBefore = startDate.minusDays(1);
             if (currentDate.equals(sevenDaysBefore) || currentDate.isAfter(sevenDaysBefore)) {
                 activityRepository.CancelActivity(activity.getId(),"Hủy do người tổ chức không duyệt hoạt động");
             }

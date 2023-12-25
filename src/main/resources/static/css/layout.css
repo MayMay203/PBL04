@@ -597,6 +597,7 @@
     display: block;
     margin-bottom: 5px;
     width: 12.2rem !important;
+    height: 6.8rem !important;
 }
 
 .row-img {
@@ -753,4 +754,15 @@
 }
 #btnConfirmActivityStage1{
     width: 10rem;
+}
+.custom-confirm{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 50rem;
+}
+.btn-myacti-summary{
+    color:var(--main-color) ;
+    text-decoration: none;
+
 }

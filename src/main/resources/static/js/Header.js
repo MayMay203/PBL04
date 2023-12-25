@@ -129,6 +129,20 @@ $('#modal-sign-up').on('hidden.bs.modal', function () {
     // Giảm biến đếm mỗi khi modal được đóng
     backdropCount--;
 });
+$('#DangNhapModal').on('hidden.bs.modal', function () {
+    //mỗi khi modal được đóng
+    var header = document.getElementById("myHeader");
+    header.classList.add("sticky");
+});
+$('#DangNhapModal').on('show.bs.modal', function () {
+    console.log("Có chạy mà =======");
+    // Đặt độ trễ để đảm bảo việc xóa class "sticky" được thực hiện sau khi modal hiển thị
+    setTimeout(function() {
+        var header = document.getElementById("myHeader");
+        header.classList.remove("sticky");
+    }, 100);
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('checkShowPass').addEventListener('change', function (event) {
         var password = document.getElementById("password");
@@ -272,8 +286,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-//===============================modal chung=============================
+//===============================modal chung xem đánh giá của hoạt động=============================
 async function handleViewDetail(e){
+    e.preventDefault(); // Ngăn chặn sự kiện mặc định
     try{
         const IdAct =+e.target.dataset.value;
         const response =await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${IdAct}`);

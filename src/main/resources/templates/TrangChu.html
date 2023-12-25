@@ -98,7 +98,9 @@
                             </div>
                             <div class="activity-content">
                                 <div class="text-content" th:text="${activity.getMoTa()}"> </div>
-                                <div class="text-end"><a th:href="@{/Join(id=${activity.getId()})}" class="linkMore">Xem thêm...</a></div>
+                                <div class="text-end">
+                                    <a th:href="@{/Join(id=${activity.getId()})}" class="linkMore">Xem thêm...</a>
+                                </div>
                             </div>
                         </div>
                         <div class="clear"></div>
@@ -145,8 +147,12 @@
                                 <div class="summary-content__image col-5 justify-content-end">
 <!--                                    <img class="img-rightback float-end dimmed" th:src="@{${summary.id.}}" alt="">-->
 <!--                                    <img class="img-rightfront " th:src="@{/images/activity1.png}" alt="">-->
-                                    <img class="summary-image-back dimmed" th:src="@{/images/activity1.png}" alt="">
-                                    <img class="summary-image-front" th:src="@{/images/activity1.png}" alt="">
+                                    <img class="summary-image-back dimmed" th:src="@{${listImgSummarried.get(listImgSummarried.size()-1)}}">
+                                    <img class="summary-image-front" th:src="@{${listImgSummarried.get(listImgSummarried.size()-1)}}">
+<!--                                         th:src="${listImgSummarried != null and listImgSummarried.size() > 0 ? listImgSummarried.get(listImgSummarried.size()-1) : '/images/imgstd.png'}"-->
+<!--                                         alt="">-->
+
+<!--                                    <img class="summary-image-front" th:src="${listImgSummarried != null and listImgSummarried.size() > 0 ? listImgSummarried.get(listImgSummarried.size()-1) : '/images/imgstd.png'}" alt="">-->
                                 </div>
                             </div>
                         </div>
@@ -160,8 +166,8 @@
                         <div class="summary-content container">
                             <div class="row align-items-center">
                                 <div class="summary-content__image col-5 justify-content-start">
-                                    <img class="summary-image-back dimmed" th:src="@{/images/activity1.png}" alt="">
-                                    <img class="summary-image-front" th:src="@{/images/activity1.png}" alt="">
+                                    <img class="summary-image-back dimmed" th:src="@{${listImgSummarried.get(listImgSummarried.size()-2)}}">
+                                    <img class="summary-image-front" th:src="@{${listImgSummarried.get(listImgSummarried.size()-2)}}">
 <!--                                    <img class="img-leftback float-start dimmed" th:src="@{/images/activity1.png}" alt="">-->
 <!--                                    <img class="img-leftfront" th:src="@{/images/activity1.png}" alt="">-->
                                 </div>
@@ -215,8 +221,8 @@
                                     </div>
                                 </div>
                                 <div class="summary-content__image col-5 justify-content-end">
-                                    <img class="summary-image-back dimmed" th:src="@{/images/activity1.png}" alt="">
-                                    <img class="summary-image-front" th:src="@{/images/activity1.png}" alt="">
+                                    <img class="summary-image-back dimmed" th:src="@{${listImgSummarried.get(listImgSummarried.size()-3)}}">
+                                    <img class="summary-image-front" th:src="@{${listImgSummarried.get(listImgSummarried.size()-3)}}">
                                 </div>
                             </div>
                         </div>
@@ -229,7 +235,7 @@
                 <h2 class="section__heading">VÀI NÉT VỀ HOPEFULLY</h2>
                 <div class="sectionAboutUs__aboutContent">
                     <div class="mission" th:each="aboutUs: ${aboutUs}">
-                        <div class="mission__image"><img class="mission__img" th:src="@{${aboutUs.getAnh()}}" alt=""></div>
+                        <div class="mission__image"><img class="mission__img" src="" alt=""></div>
                         <div class="mission__content">
                             <p class="content-header" th:text="${aboutUs.getTieuDe()}"></p>
                             <div class="content-body" th:text="${aboutUs.getNoiDung()}" >

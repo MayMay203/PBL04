@@ -44,7 +44,7 @@ public class HomePageController {
         model.addAttribute(("totalRates"),totalRates);
 
 
-        List<Hoatdong> activitiesList = activityService.getAllActivity();
+        List<Hoatdong> activitiesList = activityService.getActivityToRegis();
         model.addAttribute("activitiesList",activitiesList);
 
 
@@ -55,9 +55,28 @@ public class HomePageController {
         model.addAttribute("summaryList",summaryList);
 
         List<Hoatdong> listActiSummarried = new ArrayList<>();
-        for(Tongket tk : summaryList){
+        List<String> listImgSummarried = new ArrayList<>();
+//        String imgdefault = "/images/imgsdt.png";
+        List<Anhtongket> imgSummarried = new ArrayList<>();
+        for (Tongket tk : summaryList) {
+            System.out.println("Tổng kết:" + tk.getId() + "--" + tk.getMaHD().getTenhd());
             listActiSummarried.add(tk.getMaHD());
+            imgSummarried = summaryService.getimgSummaryList(tk.getId());
+
+            if (imgSummarried != null && !imgSummarried.isEmpty()) {
+                System.out.println("ảnh:" + imgSummarried.get(0).getAnh());
+                listImgSummarried.add(imgSummarried.get(0).getAnh());
+            } else {
+                System.out.println("ảnh:" + tk.getMaHD().getAnh());
+                listImgSummarried.add(tk.getMaHD().getAnh());
+            }
         }
+
+        System.out.println("Danh sách gửi vào:");
+        for(String img : listImgSummarried){
+            System.out.println(img);
+        }
+        model.addAttribute("listImgSummarried", listImgSummarried);
 
         List<List<Danhgia>> evaluateListByIDList = evaluationService.getEvaluationByIdActList(listActiSummarried);
         model.addAttribute("evaluateListByIDList",evaluateListByIDList);
@@ -73,6 +92,9 @@ public class HomePageController {
                 System.out.println("-------------------");
             }
         }
+
+
+
 
 
 //        List<Danhgia> evaluationOfAct = evaluationService.getEvaluationByIdAct(id);

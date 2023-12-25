@@ -24,10 +24,9 @@ html{
     box-sizing: border-box;
 }
 
-.clear{
-    clear: both;
-}
-
 body {
     overflow-x: hidden;
+}
+.clear{
+    clear: both;
 }

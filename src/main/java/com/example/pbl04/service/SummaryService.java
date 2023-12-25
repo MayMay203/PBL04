@@ -2,7 +2,7 @@ package com.example.pbl04.service;
 import com.example.pbl04.entity.*;
 import java.util.List;
 
-public interface SummaryService {
+public interface SummaryService  {
     List<Tongket> getSummaryList();
     Tongket getSummaryByID(Integer id);
     Taikhoan getOrganizator(Integer id);
@@ -10,5 +10,7 @@ public interface SummaryService {
     List<Thanhvien> getMemberList(Integer id);
     List<Anhtongket> getimgSummaryList(Integer id);
     List<Tongket> getSummaryListByName(String nameSummary);
+    Tongket addSummary(Tongket tongket);
+    void addImages(Anhtongket anhtongket);
 
 }

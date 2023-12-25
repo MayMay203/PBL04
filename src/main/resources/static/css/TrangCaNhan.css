@@ -276,7 +276,8 @@ img.dimmed{
     cursor: pointer;
 }
 .dropdown-item:hover{
-    background-color: rgb(217, 249, 249) !important;
+    background-color: var(--main-color) !important;
+    color: #ffffff !important;
 }
 .title-activity{
     font-weight: bold;
