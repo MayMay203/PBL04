@@ -31,4 +31,6 @@ public interface EvaluationRepository extends JpaRepository<Danhgia,Integer> {
     @Modifying
     @Query("update Danhgia dg set dg.diemTNV=:diemTNV where dg.maTK.id=:maTK and dg.maHD.id=:maHD")
     void insertEvaluateMemb(Integer maTK, Integer maHD, Integer diemTNV);
+    @Query("select sum(dg.diemTNV) from Danhgia dg where dg.maTK.id=:idtk")
+    Integer sumPointByIDTK(Integer idtk);
 }

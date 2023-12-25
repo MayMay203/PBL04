@@ -296,7 +296,9 @@ $(document).ready(function () {
                 console.log("error:", response.status);
 
             } else{
-                var listMember = await response.json();
+                var responseData = await response.json();
+                var listMember = responseData.listMemberNeedConfirm;
+                var pointList = responseData.pointList;
                 console.log(listMember);
                 console.log('ok');
                 // $('#MemberModal .modal-content').empty();
@@ -304,14 +306,14 @@ $(document).ready(function () {
                 $('#MemberModal .modal-body-member').empty();
                 $('#MemberModal .modal-footer').empty();
                 // $(targetModal + ' .modal-body-member').empty();
-                listMember.forEach(function (thanhvien) {
+                listMember.forEach(function (thanhvien,index) {
                     var modalContent = '<div class="modal-member">\
                                <span>\
                                  <img class="modal-member-ava" src="' + thanhvien.anh + '" alt="">\
                                  <span class="modal-member-name">' + thanhvien.hoTen + '</span>\
                                </span>\
                                <span class="modal-member-rate">\
-                                 <i class="rate-detail">5</i>\
+                                 <i class="rate-detail" >' + pointList[index] + '</i>\
                                  <i class="bi bi-star-fill icon-star"></i>\
                                  <input type="checkbox" value="'+thanhvien.id+'">\
                                </span>\
@@ -411,21 +413,23 @@ $(document).ready(function () {
                 console.log("error:", response.status);
 
             } else{
-                var listMember = await response.json();
+                var responseData = await response.json();
+                var listMember = responseData.listMemberConfirmed;
+                var pointList = responseData.pointList;
                 console.log(listMember);
                 console.log('ok');
                 $('#MemberModal').modal('show');
                 $('#MemberModal .modal-footer').empty();
                 $('#MemberModal .modal-body-member').empty();
                 // $(targetModal + ' .modal-body-member').empty();
-                listMember.forEach(function (thanhvien) {
+                listMember.forEach(function (thanhvien,index) {
                     var modalContent = '<div class="modal-member">\
                                <span>\
                                  <img class="modal-member-ava" src="' + thanhvien.anh + '" alt="">\
                                  <span class="modal-member-name">' + thanhvien.hoTen + '</span>\
                                </span>\
                                <span class="modal-member-rate">\
-                                 <i class="rate-detail">5</i>\
+                                 <i class="rate-detail">' + pointList[index] + '</i>\
                                  <i class="bi bi-star-fill icon-star"></i>\
                                  <input type="checkbox" value="'+thanhvien.id+'">\
                                </span>\

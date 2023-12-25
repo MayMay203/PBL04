@@ -189,13 +189,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body modal-body-member">
-                <div class="modal-member"  th:each="member: ${memberList}">
+                <div class="modal-member"  th:each="member, iterStat : ${memberList}">
                         <span>
                             <img class="modal-member-ava" th:src="@{${member.getMaTK().getAnhDaiDien()}}" alt="">
                             <span class="modal-member-name" th:text="${member.getHoTen()}"></span>
                         </span>
                     <span class="modal-member-rate">
-                            <i class="rate-detail">5</i>
+                            <i class="rate-detail" th:text="${pointList[iterStat.index]}"></i>
                             <i class="bi bi-star-fill icon-star"></i>
                         </span>
                 </div>

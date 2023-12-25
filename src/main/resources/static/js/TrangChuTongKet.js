@@ -19,7 +19,7 @@ $(document).ready(function(){
     })
 });
 const search_input = document.querySelector(".search-input")
-const act_slider = document.querySelector(".act-slider")
+const surround_div = document.querySelector(".surround-left")
 search_input.addEventListener("keyup",  async e => {
     if(e.key==="Enter"){
         try {
@@ -31,10 +31,11 @@ search_input.addEventListener("keyup",  async e => {
             const responseData = await response.json();
             const summaryList = responseData.summaryList;
             //const activityListOccured = responseData.activityListOccured;
-            console.log(summaryList);
-            act_slider.innerHTML = "";
+            surround_div.innerHTML = "";
+            const act_slider = document.createElement("div");
+            act_slider.className = "act-slider"
             if (summaryList.length > 0) {
-                for (let i = 0; i < Math.ceil(summaryList.length / 4) + ((i % 4 === 0 ? 0 : 1)); i++) {
+                for (let i = 0; i < Math.floor(summaryList.length / 4) + ((summaryList.length % 4 === 0 ? 0 : 1)); i++) {
                     const containerItem = document.createElement("div");
                     containerItem.className = "container-item";
                     for (let j = 0; j < 4; j++) {
@@ -68,21 +69,18 @@ search_input.addEventListener("keyup",  async e => {
                     }
                     act_slider.appendChild(containerItem)
                 }
-                for (let view of view_link) {
-                    view.addEventListener("click", handleViewDetail)
-                }
-                for (let btn of btn_close) {
-                    btn.addEventListener("click", closeViewDetail);
-                }
-                $(document).ready(function () {
-                    $('.act-slider').slick({
-                        dots: true,
-                        slidesToShow: 1,
-                        arrows: false,
-                        vertical: false,
-                        speed: 100
+                surround_div.appendChild(act_slider)
+                if(act_slider.children.length > 0){
+                    $(document).ready(function () {
+                        $('.act-slider').slick({
+                            dots: true,
+                            slidesToShow: 1,
+                            arrows: false,
+                            vertical: false,
+                            speed: 100
+                        });
                     });
-                });
+                }
             }
         }
         catch

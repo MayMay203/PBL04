@@ -45,6 +45,11 @@ public class MemberServiceImple implements MemberService{
     {
         return memberRepository.getMemberNeedConfirmByIDHD(maHD);
     }
+    public List<Taikhoan> getAccountNeedConfirmByIDHD(Integer maHD)
+    {
+        return memberRepository.getAccountNeedConfirmByIDHD(maHD);
+    }
+
     public void ConfirmMember(Integer maHD, Integer maTK)
     {
         memberRepository.ConfirmMember(maHD,maTK);

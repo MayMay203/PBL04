@@ -3,7 +3,6 @@ package com.example.pbl04.controller;
 import com.example.pbl04.entity.*;
 import com.example.pbl04.service.*;
 import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,7 +25,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
-import com.example.pbl04.entity.*;
+
 @Controller
 public class ActivityController {
     private final ActivityService activityService;
@@ -34,14 +33,16 @@ public class ActivityController {
     private final TopicService topicService;
     private final RegisterService registerService;
     private final AccountService accountService;
+    private final EvaluationService evaluationService;
 
     @Autowired
-    public ActivityController(ActivityService activityService, TopicService topicService, SessionService sessionService, RegisterService registerService, AccountService accountService){
+    public ActivityController(ActivityService activityService, TopicService topicService, SessionService sessionService, RegisterService registerService, AccountService accountService, EvaluationService evaluationService){
         this.activityService=activityService;
         this.topicService = topicService;
         this.sessionService = sessionService;
         this.registerService = registerService;
         this.accountService = accountService;
+        this.evaluationService = evaluationService;
     }
 
    @GetMapping("/trang-chu-hoat-dong")
@@ -77,6 +78,8 @@ public class ActivityController {
         Dangky checkDangky = registerService.getDangKyByHDTK(myaccount.getId(), id);
         Taikhoan taikhoan =activityService.getOrganizator(id);
         List<Thanhvien> thanhvienList =activityService.getMemberList(id);
+        List<Taikhoan> taikhoanTV= activityService.getAccountList(id);
+        List<Integer> pointList=evaluationService.getPointOfMember(taikhoanTV);
         Thanhvien  thanhvien=activityService.getMemberByID(taikhoan.getId());
         Hoatdong hoatdong = activityService.getActivityByID(id);
         model.addAttribute("hoatdong",hoatdong);
@@ -84,6 +87,8 @@ public class ActivityController {
         model.addAttribute("thanhvien",thanhvien);
         model.addAttribute("thanhvienList",thanhvienList);
         model.addAttribute("checkDangky",checkDangky);
+        model.addAttribute("pointList",pointList);
+//        model.addAttribute("")
         return "ChiTietHoatDong";
     }
 //    @GetMapping("/them-hoat-dong")
