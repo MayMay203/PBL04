@@ -161,7 +161,7 @@ $(document).ready(function() {
                     location.reload();
                 } else {
                     // Hiển thị thông báo lỗi
-                    alert(response.message);
+                    alert(response);
                 }
             },
             error: function(error) {

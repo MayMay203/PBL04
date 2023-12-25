@@ -89,13 +89,17 @@ public class SummaryController {
             tongket.setBangTongKet(bangTongKet);
             tongket.setLoiKet(loiKet);
             Tongket maTongKet= summaryService.addSummary(tongket);
-            for(String imagesPath : imagesPaths)
+            if(imagesPaths !=null)
             {
-                Anhtongket anhTongKet = new Anhtongket();
-                anhTongKet.setMaTongKet(maTongKet);
-                anhTongKet.setAnh(imagesPath);
-                summaryService.addImages(anhTongKet);
+                for(String imagesPath : imagesPaths)
+                {
+                    Anhtongket anhTongKet = new Anhtongket();
+                    anhTongKet.setMaTongKet(maTongKet);
+                    anhTongKet.setAnh(imagesPath);
+                    summaryService.addImages(anhTongKet);
+                }
             }
+
             response.put("message", "Thêm thành công");
             response.put("success", true);
 
@@ -107,6 +111,33 @@ public class SummaryController {
         }
 
     }
+//    @PostMapping("/addSummary")
+//    @ResponseBody
+//    public void addSummary(@RequestParam("maHD") Integer maHD,
+//                                           @RequestParam("bangTongKet") String bangTongKet,
+//                                           @RequestParam("loiKet") String loiKet,
+//                                           @RequestParam("imagesPaths") List<String> imagesPaths)
+//    {
+//
+//            Tongket tongket = new Tongket();
+//            Hoatdong hoatdong = activityService.getActivityByID(maHD);
+//            tongket.setMaHD(hoatdong);
+//            tongket.setBangTongKet(bangTongKet);
+//            tongket.setLoiKet(loiKet);
+//            Tongket maTongKet= summaryService.addSummary(tongket);
+//            if(imagesPaths!=null)
+//            {
+//                for(String imagesPath : imagesPaths)
+//                {
+//                    Anhtongket anhTongKet = new Anhtongket();
+//                    anhTongKet.setMaTongKet(maTongKet);
+//                    anhTongKet.setAnh(imagesPath);
+//                    summaryService.addImages(anhTongKet);
+//                }
+//            }
+//
+//    }
+
 
 
 }

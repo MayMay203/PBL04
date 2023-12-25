@@ -56,7 +56,7 @@ public class PersonalityController {
 
     @GetMapping("/trang-ca-nhan")
     public String show(Model model,
-                       @RequestParam("id") Integer id,
+                       @RequestParam(name="id") Integer id,
                        @ModelAttribute("message") String message,
                        HttpSession session) {
         List<Hoatdong> actListIsHost = activityService.getAllActivityIsHost(id);

@@ -244,13 +244,16 @@
                                 <div class="card-body fs-7">
                                     <div class="card-title fs-6 fw-bolder green-color" th:text="${listmyAcitivityNeedConfirm.get((4*i)+j).getTenhd()}"></div>
                                     <div class="card-text my-0" th:text="${#strings.length(listmyAcitivityNeedConfirm.get(4*i+j).getMoTa()) > 150 ? listmyAcitivityNeedConfirm.get(4*i+j).getMoTa().substring(0, 150) + '...' : listmyAcitivityNeedConfirm.get(4*i+j).getMoTa()}"></div>
-                                    <div class="card-text mx-2 my-1">
-                                        <i class="bi bi-calendar2 m-1  green-color" th:text="'   ' + ${listmyAcitivityNeedConfirm.get(4*i+j).getThoiGianBD() + '  -  ' + listmyAcitivityNeedConfirm.get(4*i+j).getThoiGianKT()}"></i>
+                                    <div class="custom-confirm">
+                                        <div class="card-text mx-2 my-1">
+                                            <i class="bi bi-calendar2 m-1  green-color" th:text="'   ' + ${listmyAcitivityNeedConfirm.get(4*i+j).getThoiGianBD() + '  -  ' + listmyAcitivityNeedConfirm.get(4*i+j).getThoiGianKT()}"></i>
+                                        </div>
+                                        <div class="card-link p-0">
+                                            <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail viewParticipanted" th:text="'Đã xét duyệt(' + ${countConfirmed.get(4*i+j)} + ')'" th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).id}" data-target="#MemberModal"></button>
+                                            <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail viewParticipant" th:text="'Chờ xét duyệt(' + ${countConfirm.get(4*i+j)} + ')'" th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).id}" data-target="#MemberModal"></button>
+                                        </div>
                                     </div>
-                                    <div class="card-link p-0">
-                                        <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail viewParticipanted" th:text="'Đã xét duyệt(' + ${countConfirmed.get(4*i+j)} + ')'" th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).id}" data-target="#MemberModal"></button>
-                                        <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail viewParticipant" th:text="'Chờ xét duyệt(' + ${countConfirm.get(4*i+j)} + ')'" th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).id}" data-target="#MemberModal"></button>
-                                    </div>
+
 
 <!--                                th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).getId()}"-->
                                 <div class="modal fade" id="MemberModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -423,10 +426,9 @@
                         <div class="row">
                             <div class="col-md-3 lbHD"><i class="bi bi-card-image" ></i>HÌNH ẢNH</div>
                             <div class="col-md-9">
-                                <label for="imageInput" id="imagePreviewLabel">
+                                <label id="imagePreviewLabel">
                                     <div id="imagePreview" class="image-preview">
-                                        <input type="file" id="imageInput" accept="image/jpeg, image/png, image/gif" style="display: none"
-                                              disabled>
+<!--                                        <input type="file" id="imageInput" accept="image/jpeg, image/png, image/gif" style="display: none" onclick="return false;">-->
                                         <img id="userImageView" th:src="@{/images/default.webp}" alt="Hình ảnh người dùng" >
                                     </div>
                                 </label>
