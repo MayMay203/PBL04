@@ -76,6 +76,7 @@ function DelImg(el) {
 }
 
 $(document).ready(function () {
+    'use strict'
     var forms = document.querySelectorAll('.needs-validation');
 
     Array.prototype.slice.call(forms)
@@ -106,37 +107,72 @@ $(document).ready(function () {
       formElements[i].setCustomValidity('');
     }
   }
+
 var maHD;var maTK;
 $(document).ready(function () {
     var btnSummary = document.getElementsByClassName("buttonSummary");
     for(btn of btnSummary){
         btn.addEventListener("click" ,async (e) =>{
-            maHD= e.target.dataset.value;
+            var mahoatdong= e.target.dataset.value;
             maTK= e.target.dataset.account;
-            console.log("maHD:",maHD);
+            console.log("maHD:",mahoatdong);
             console.log("maTK",maTK);
-            $.ajax({
-                url: '/get-activity-by-id',
-                type: 'GET',
-                data: {'maHD' :maHD},
-                success: function (data) {
-                    console.log(data);
-                    // Populate modal with activity information
-                    $("#txt_TenChuDe").val(data.maChuDe.tenChuDe);
-                    $("#txt_TenHoatDong").val(data.tenHD);
-                    $("#txt_tongket").val("");
-                    $("#txt_loiket").val("");
-                    // Show the modal
-                    $('#TongKetModal').modal('show');
-                },
-                error: function (error) {
-                    console.log(error);
+            maHD= mahoatdong;
+            try {
+                const data = await checkSummary(mahoatdong);
+                if (data.summaryExists) {
+                    window.location.href = '/View-Summary?id=' + mahoatdong;
+                } else {
+                    await showModalSummary();
                 }
-            });
+            } catch (error) {
+                console.error('Error:', error);
+            }
+
         })
     }
+
 })
-var check=false;
+function checkSummary(mahoatdong) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: 'GET',
+            url: '/Check-Summary',
+            data: { 'maHD': mahoatdong },
+            success: resolve,
+            error: reject
+        });
+    });
+}
+function getActivityById(maHD) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: '/get-activity-by-id',
+            type: 'GET',
+            data: { 'maHD': maHD },
+            success: resolve,
+            error: reject
+        });
+    });
+}
+
+async function showModalSummary() {
+    try {
+        const data = await getActivityById(maHD);
+        console.log(data);
+        // Populate modal with activity information
+        $("#txt_TenChuDe").val(data.maChuDe.tenChuDe);
+        $("#txt_TenHoatDong").val(data.tenHD);
+        $("#txt_tongket").val("");
+        $("#txt_loiket").val("");
+        // Show the modal
+        $('#TongKetModal').modal('show');
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
 $(document).ready(function () {
     var btnSave = document.getElementsByClassName("btnSave");
     for(btn of btnSave){
@@ -144,38 +180,47 @@ $(document).ready(function () {
             const formData = new FormData();
             const bangTongKet = $('#txt_tongket').val();
             const loiKet = $('#txt_loiket').val();
+            if (!bangTongKet || !loiKet) {
+                 console.error('Vui lòng nhập đầy đủ thông tin.');
+                return;
+            }
             formData.append('maHD', maHD);
             formData.append('bangTongKet', bangTongKet);
             formData.append('loiKet', loiKet);
-            formData.append('imagesPaths', imagePaths);
+            if (imagePaths.length === 0) {
+                formData.append('imagesPaths',imagePaths ); // hoặc có thể không thêm gì cả
+            } else {
+                for (var i = 0; i < imagePaths.length; i++) {
+                    formData.append('imagesPaths', imagePaths[i]);
+                }
+            }
             $.ajax({
                 type: 'POST',
                 url: '/addSummary',
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: function (data) {
-                    console.log('data:', data);
-                    if (data.success) {
-                        console.log("them thanh cong");
-                        $('#TongKetModal').modal('hide');
-                        //location.reload();
-                       //window.location.href = '/trang-ca-nhan?id=${maTK}';
-                    } else {
-                        console.error('Đã có lỗi xảy ra:', data.message);
+                success: function (response) {
+                    if(response.success)
+                    {
+                        console.log(response);
+                        location.reload();
+                    }else{
+                        alert(response.message)
                     }
                 },
                 error: function (error) {
+                    console.error('AJAX Error:', error);
                     console.error('Đã có lỗi xảy ra:', error);
                 }
 
             });console.log('Form submission completed');
         })
     }
-    function updateModalContent(newContent) {
-        // Update the modal body content
-        $('.modal-body-themhd').html(newContent);
-    }
+    // function updateModalContent(newContent) {
+    //     // Update the modal body content
+    //     $('.modal-body-themhd').html(newContent);
+    // }
     $(".btnClose").on("click", function() {
         // Close the modal without saving
         $('#TongKetModal').modal('hide');

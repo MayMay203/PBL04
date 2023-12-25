@@ -13,8 +13,8 @@ import java.util.List;
 
 @Service
 public class SummaryServiceImple implements SummaryService{
-    public SummaryRepository summaryRepository;
-    public ImageSummaryRepository imageSummaryRepository;
+    private final SummaryRepository summaryRepository;
+    private final ImageSummaryRepository imageSummaryRepository;
     @Autowired
     private SummaryServiceImple(SummaryRepository summaryRepository,ImageSummaryRepository imageSummaryRepository){
         this.summaryRepository=summaryRepository;
