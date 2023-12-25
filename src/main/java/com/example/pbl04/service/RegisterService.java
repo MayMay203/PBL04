@@ -1,11 +1,6 @@
 package com.example.pbl04.service;
 
-
-import com.example.pbl04.entity.Dangky;
-import com.example.pbl04.entity.Thanhvien;
-
-import java.util.List;
-
+import com.example.pbl04.entity.*;
 import java.util.List;
 
 public interface RegisterService {

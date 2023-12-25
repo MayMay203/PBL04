@@ -1,8 +1,5 @@
 package com.example.pbl04.controller;
 
-import com.example.pbl04.entity.Chude;
-import com.example.pbl04.entity.Hoatdong;
-import com.example.pbl04.entity.Thanhvien;
 import com.example.pbl04.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +25,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import com.example.pbl04.entity.*;
 @Controller
 public class PersonalityController {
     private final SessionService sessionService;

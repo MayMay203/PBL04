@@ -1,6 +1,6 @@
 package com.example.pbl04.service;
 
-import com.example.pbl04.entity.Vetrangweb;
+import com.example.pbl04.entity.*;
 
 import java.util.List;
 

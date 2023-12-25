@@ -1,14 +1,13 @@
 package com.example.pbl04.service;
 
 import com.example.pbl04.dao.ActivityRepository;
-import com.example.pbl04.entity.Hoatdong;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.time.LocalDate;
 import java.util.List;
-
+import com.example.pbl04.entity.*;
 @Configuration
 @EnableScheduling
 public class ScheduledTasks {

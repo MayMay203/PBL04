@@ -138,3 +138,15 @@ function organizeHere(e){
 for(btn of btn_organizeHere){
     btn.addEventListener("click",organizeHere)
 }
+
+const suggSlider = document.querySelector(".sugg-slider");
+if (suggSlider.children.length > 0) {
+        $('.sugg-slider').slick({
+            dots: true,
+            slidesToShow: 1,
+            arrows: false,
+            vertical: false,
+            speed: 100
+        });
+    console.log("Tao slider dau tien thanh cong!")
+}

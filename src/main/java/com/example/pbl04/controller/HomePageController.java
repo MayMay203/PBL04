@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import com.example.pbl04.entity.*;
 @Controller
 public class HomePageController {
     private final MemberService memberService;
@@ -64,7 +64,7 @@ public class HomePageController {
         for (List<Danhgia> x : evaluateListByIDList) {
 
             for (Danhgia xx : x) {
-                System.out.println(xx.getMaHD().getTenHD());
+                System.out.println(xx.getMaHD().getTenhd());
                 System.out.println(xx);
                 // In ra các thuộc tính của đối tượng Danhgia
                 System.out.println("Id: " + xx.getId());

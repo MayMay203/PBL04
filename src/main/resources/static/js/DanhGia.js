@@ -246,7 +246,20 @@ async function EvaluationMember(e) {
         document.querySelector(".modal-Description").innerText = responseData.activity.moTa;
         document.querySelector(".name-host-act").innerText = responseData.registerInfor.maTK.tenDN;
         document.querySelector(".avatar-host").src = responseData.registerInfor.maTK.anhDaiDien;
-        document.querySelector(".time-post-act").innerText= responseData.registerInfor.thoiGianDK;
+        const date = new Date(responseData.registerInfor.thoiGianDK);
+        const datePart = date.toLocaleDateString("vi-VN", {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+        });
+
+        const timePart = date.toLocaleTimeString("vi-VN", {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+        });
+        const registerTime = `${datePart} ${timePart}`;
+        document.querySelector(".time-post-act").innerText= registerTime;
         //    image summary activity
            image_activity.innerHTML = "";
         let count = 0;
@@ -576,3 +589,4 @@ $(document).ready(function () {
         $('#noSummaryModal').modal('hide');
     });
 })
+

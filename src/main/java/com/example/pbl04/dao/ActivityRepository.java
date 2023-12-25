@@ -1,15 +1,10 @@
 package com.example.pbl04.dao;
-
-import com.example.pbl04.entity.Dangky;
-import com.example.pbl04.entity.Hoatdong;
-import com.example.pbl04.entity.Taikhoan;
-import com.example.pbl04.entity.Thanhvien;
+import com.example.pbl04.entity.*;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.Date;
 import java.util.List;
 
 public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {

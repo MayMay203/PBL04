@@ -13,77 +13,48 @@
 </head>
 <div id="placeholder" style="height: 87px; display: none;"></div>
 <div id="myHeader" style="top: -87px" th:include="Header :: html"></div>
+<!--The tim kiem-->
 <div class="container p-5">
-    <!--Search-->
-<!--    <div class="fs-6 p-1 border-search width-25rem m-5 position-relative">-->
     <div class="fs-6 p-1 border-search width-25rem m-2 position-relative">
         <i class="bi bi-search p-2 grey-color"></i>
         <input type="text" class="border-0 grey-color p-md-1 no-outline w-85 search-input"
                placeholder="Tìm kiếm hoạt động" />
-        <!--Infor search-->
-<!--        <div class="container position-abs box-shadow z-index-1 bg-white p-2 radius-1 search-info no-display">-->
-<!--            <h2 class="fs-6 pb-1 p-1">Tìm kiếm gần đây</h2>-->
-<!--            <div class="container overflow-auto max_height-20rem">-->
-<!--                <div class="container d-flex align-items-center mb&#45;&#45;1 p-0 btn btn-group search-info-item">-->
-<!--                    <img class="w-3 h-2_5 flex-1" src="../static/images/anh1.png" alt="" />-->
-<!--                    <p class="m-1 fs-7 ml&#45;&#45;3 flex-16">-->
-<!--                        Mang con chữ đến trẻ vùng cao-->
-<!--                    </p>-->
-<!--                    <i class="flex-1 btn btn-close p-0 fs-7"></i>-->
-<!--                </div>-->
-
-<!--                <div class="container d-flex align-items-center mb&#45;&#45;1 p-0 btn btn-group search-info-item">-->
-<!--                    <img class="w-3 h-2_5 flex-1" src="../static/images/anh1.png" alt="" />-->
-<!--                    <p class="m-1 fs-7 ml&#45;&#45;3 flex-16">-->
-<!--                        Mang con chữ đến trẻ vùng cao-->
-<!--                    </p>-->
-<!--                    <i class="flex-1 btn btn-close p-0 fs-7"></i>-->
-<!--                </div>-->
-
-<!--&lt;!&ndash;                <div class="container d-flex align-items-center mb&#45;&#45;1 p-0 btn btn-group search-info-item">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <img class="w-3 h-2_5 flex-1" src="../static/images/anh1.png" alt="" />&ndash;&gt;-->
-<!--&lt;!&ndash;                    <p class="m-1 fs-7 ml&#45;&#45;3 flex-16">&ndash;&gt;-->
-<!--&lt;!&ndash;                        Mang con chữ đến trẻ vùng cao&ndash;&gt;-->
-<!--&lt;!&ndash;                    </p>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <i class="flex-1 btn btn-close p-0 fs-7"></i>&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--            </div>-->
  </div>
-    </div>
+</div>
 
     <!--Content-->
 <div class="container px-5"> <h2 class="fs-3 px-3 mb-4">HOẠT ĐỘNG GẦN ĐÂY</h2></div>
     <div class="container d-flex">
         <!--Left-->
-        <div class="container p-5 pt-0 fs-6 mx--2 w-75 act-slider">
-            <div class="container-item" th:each="i : ${#numbers.sequence(0, activityList.size() div 4 + ((activityList.size()%4 > 0) ? 1 : 0) - 1)}" th:if="${not #lists.isEmpty(activityList)}">
-                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<activityList.size()}">
-                    <img th:src="@{${activityList.get(4*i+j).getAnh()}}" class="float-start h-80 col-2" alt="" />
-                    <div class="card border-0 col-10">
-                        <div class="card-body fs-7">
-                            <div class="card-title fs-6 fw-bolder green-color" th:text="${activityList.get((4*i)+j).getTenhd()}"></div>
-                            <div class="card-text my-0" th:text="${#strings.length(activityList.get(4*i+j).getMoTa()) > 200 ? activityList.get(4*i+j).getMoTa().substring(0, 200) + '...' : activityList.get(4*i+j).getMoTa()}"></div>
-                            <div class="card-text mx-2 my-1">
-                                <i class="bi bi-calendar2 m-1 green-color" th:text="'   ' + ${#temporals.format(activityList.get(4*i+j).getThoiGianBD(),'dd/MM/yyyy')} + ' - ' + ${#temporals.format(activityList.get(4*i+j).getThoiGianKT(),'dd/MM/yyyy')}"></i>
+            <div class="container w-75 surround-left">
+                <div class="container p-5 pt-0 fs-6 mx--2 act-slider">
+                    <div class="container-item" th:each="i : ${#numbers.sequence(0, activityList.size() div 4 + ((activityList.size()%4 > 0) ? 1 : 0) - 1)}" th:if="${not #lists.isEmpty(activityList)}">
+                        <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<activityList.size()}">
+                            <img th:src="@{${activityList.get(4*i+j).getAnh()}}" class="float-start h-80 col-2" alt="" />
+                            <div class="card border-0 col-10">
+                                <div class="card-body fs-7">
+                                    <div class="card-title fs-6 fw-bolder green-color" th:text="${activityList.get((4*i)+j).getTenhd()}"></div>
+                                    <div class="card-text my-0" th:text="${#strings.length(activityList.get(4*i+j).getMoTa()) > 200 ? activityList.get(4*i+j).getMoTa().substring(0, 200) + '...' : activityList.get(4*i+j).getMoTa()}"></div>
+                                    <div class="card-text mx-2 my-1">
+                                        <i class="bi bi-calendar2 m-1 green-color" th:text="'   ' + ${#temporals.format(activityList.get(4*i+j).getThoiGianBD(),'dd/MM/yyyy')} + ' - ' + ${#temporals.format(activityList.get(4*i+j).getThoiGianKT(),'dd/MM/yyyy')}"></i>
+                                    </div>
+                                    <div class="card-link p-0">
+                                        <button
+                                                class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail" th:attr="data-value=${activityList.get(4*i+j).getId()}" >Xem
+                                            chi tiết...</button>
+                                    </div>
+                                    <div
+                                            class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 p-1 pleft-6 fs-8 mt-9 text_align-center"> <p class="ml-20p" th:text="'Lượt đánh giá ' + '(' + ${countEvaList.get(4*i+j)} + ')'"></p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-link p-0">
-                                <button
-                                        class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail" th:attr="data-value=${activityList.get(4*i+j).getId()}" >Xem
-                                    chi tiết...</button>
-                            </div>
-                            <div
-                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 p-1 pleft-6 fs-8 mt-9 text_align-center"> <p class="ml-20p" th:text="'Lượt đánh giá ' + '(' + ${countEvaList.get(4*i+j)} + ')'"></p>
-                               </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-<!--        Right-->
-
+        <!--Right-->
                 <div class="container w-25 mt-2_8 p-0">
                     <div class="container cmt-slider">
-
                         <div class="container bg-grey radius-1 p-2 my-6" th:each="index:${#numbers.sequence(0,5)}" th:if="${index<evaluationList.size()}">
                             <div class="container d-flex my-1">
                                 <img th:src="@{${evaluationList.get(index).getMaTK().getAnhDaiDien()}}" class="radius-1 me-1 w-1_8 h-1_8" alt="">
@@ -99,7 +70,7 @@
                 </div>
         </div>
 
-    <!-- Chuyển trang -->
+    <!-- Chuyển trang danh gia (co dang nhap)-->
 <button class="green_light-color no-text-decoration fw-semibold fst-italic fs-4 float-end mtrb-4rem no-border bg-white btn-evaluation-Act" th:attr="data-value=${account!=null?account.getId():null}">
         Đánh giá hoạt động...</button>
 
@@ -109,11 +80,11 @@
     <div class="modal__overlay">
 
     </div>
-    <div class="modal__body box-shadow position-relative">
+    <div class="modal__body modal-dialog-centered box-shadow position-relative">
         <!--Form chi tiet danh gia-->
         <div class="container w-45 p-0">
             <div class="container w-100 h-2_7 bg-green-dark d-flex py-2 justify-content-between align-items-center btr-radius">
-<!--                Ten hoat dong-->
+            <!--  Ten hoat dong-->
                 <h3 class="fs-6 white-color text-center m-0 col-11 modal-nameAct"></h3>
                 <div class="btn btn-close col-1 btn-close-detail"></div>
             </div>
@@ -123,65 +94,21 @@
                     <img class="w-2_5 h-2_5 ml-0_1 radius-1_8 avatar" src="" alt="">
                     <div class="container ml-0_1">
                         <h4 class="green-color fs-6 my-1 mt-1 name-host-act"></h4>
-<!--                        Thời gian xét duyệt-->
+                    <!-- Thời gian xét duyệt-->
                         <p class="m-0 fs-10 fst-italic green-color time-post-act"></p>
                     </div>
                 </div>
 
-<!--                Mo ta-->
+                <!-- Mo ta-->
                 <p class="m-0 p-3 fs-7 modal-Description"></p>
 
                 <div class="container d-flex m-1 justify-content-center images-Activity">
-<!--                    <img src="../static/images/anh2.jpg" alt="" class="height-10rem flex-1 p-1">-->
-<!--                    <img src="../static/images/anh2.jpg" alt="" class="height-10rem flex-1 p-1">-->
-<!--                    <img src="../static/images/anh2.jpg" alt="" class="height-10rem flex-1 p-1">-->
-                </div>
+                <!-- Anh da tong ket hoat dong-->
+               </div>
                 <!-- Header comment -->
                 <div class="container border_top-solid border_bottom-solid p-2 fs-9 fst-italic modal-number-evaluation"></div>
                 <div class="container modal-comment">
-<!--                    -->
-<!--                    <div class="container d-flex justify-content-sm-end p-2 criteria-evaluation">-->
-<!--                        <h4 class="fs-9 green-color fst-italic me-4 text-center">Hoạt động<br>hữu ích</h4>-->
-<!--                        <h4 class="fs-9 green-color fst-italic me-4 text-center">Cần tổ chức<br>thường xuyên</h4>-->
-<!--                        <h4 class="fs-9 green-color fst-italic me-4 text-center">Cần tổ chức<br>rộng rãi</h4>-->
-<!--                    </div>-->
-<!--                     Comment -->
-<!--                    <div class="container d-flex mb-3" th:if="evaluationOfAct!=null" th:each="eval:${evaluationOfAct}">-->
-<!--                        &lt;!&ndash; Text comment &ndash;&gt;-->
-<!--                        <div class="container radius-1 bg-green">-->
-<!--                            <div class="container p-1">-->
-<!--                                <img src="../static/images/av3.png" class="w-2_5 h-2_5 p-1 radius-1_8 modal-avatar" alt="">-->
-<!--                                <h7 class="green-color fs-11 fst-italic fw-medium" th:text="${eval.maTK.tenDN}"></h7>-->
-<!--                            </div>-->
-<!--                            <p class="fs-10 fst-italic m-0 px-3 modal-comment" th:text="${eval.binhLuan}"></p>-->
-<!--                            <p class="green_light-color fst-italic fs-10 my-1 mx-3 modal-timeEval" th:text="${eval.thoiGianBL}"></p>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash; Check comment &ndash;&gt;-->
-<!--                        <div class="container d-flex align-items-center justify-content-center">-->
-<!--                            <i class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i>-->
-<!--                            <i class="bi bi-x-lg green_light-color flex-1 p-5 fs-6 fw-bold"></i>-->
-<!--                            <i class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="container d-flex mb-3">-->
-<!--                        &lt;!&ndash; Text comment &ndash;&gt;-->
-<!--                        <div class="container radius-1 bg-green">-->
-<!--                            <div class="container p-1">-->
-<!--                                <img src="../static/images/av3.png" class="w-2_5 h-2_5 p-1 radius-1_8" alt="">-->
-<!--                                <h7 class="green-color fs-11 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>-->
-<!--                            </div>-->
-<!--                            <p class="fs-10 fst-italic m-0 px-3">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải-->
-<!--                                nghiệm thật khó quên. Cảm ơn ban tổ chức!</p>-->
-<!--                            <p class="green_light-color fst-italic fs-10 my-1 mx-3">20 ngày trước</p>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash; Check comment &ndash;&gt;-->
-<!--                        <div class="container d-flex align-items-center justify-content-center">-->
-<!--                            <i class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i><i-->
-<!--                                class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i>-->
-<!--                            <i class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                <!-- Danh gia cua thanh vien doi voi TC va HD -->
                 </div>
             </div>
         </div>

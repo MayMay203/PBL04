@@ -1,10 +1,9 @@
 package com.example.pbl04.service;
 
 import com.example.pbl04.dao.MemberRepository;
-import com.example.pbl04.entity.Dangky;
-import com.example.pbl04.entity.Thanhvien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.example.pbl04.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,11 +1,8 @@
 package com.example.pbl04.service;
 
-import com.example.pbl04.entity.Danhgia;
-import com.example.pbl04.entity.Hoatdong;
-import com.example.pbl04.entity.Thanhvien;
-
 import java.time.Instant;
 import java.util.List;
+import com.example.pbl04.entity.*;
 
 public interface EvaluationService {
     public List<Danhgia> getAllEvaluation();
