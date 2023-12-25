@@ -25,6 +25,7 @@
     <script  defer th:src="@{/js/TrangCaNhan.js}"></script>
     <script  defer th:src="@{/js/ThemHoatDong.js}"></script>
     <script  defer th:src="@{/js/ThemTongKet.js}"></script>
+    <script  defer th:src="@{/js/DanhGia.js}"></script>
 </head>
 <body>
 <!--    <div id="iframe-container" class="sticky-top" style="top: -87px">-->
@@ -123,9 +124,11 @@
                 <div class="mt-3 lineHorizontal"></div>
             </div>
             <div class="pb-1 pt-1 section__padding d-flex align-items-center justify-content-center">
-                <button id="btnEvaluate"><i  class="bi bi-chat-square-heart"></i> Đánh giá</button>
-                <button class="buttonSummary btnSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#confirmAddSummaryModal" th:if="${listSummaryIsHostActi.get(index.index)} == -1"><i class="bi bi-send-check"></i> Tổng kết</button>
-                <button class="buttonSummary btnSummary" th:if="${listSummaryIsHostActi.get(index.index)} > 0"><i class="bi bi-send-check"></i> <a th:href="@{/View-Summary(id=${activity.getId()})}" style="text-decoration: none; color: #136b1d">Tổng kết</a></button>
+<!--                -->
+                <button id="btnEvaluate"><i  class="bi bi-chat-square-heart" th:if="${activity.getTinhTrangHD()==2}" th:attr="data-value=${activity.getId()}"></i> Đánh giá</button>
+                <button class="buttonSummary btnSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#confirmAddSummaryModal" th:if="${listSummaryIsHostActi.get(index.index)} == -1 and ${activity.getTinhTrangHD()==2}"><i class="bi bi-send-check"></i> Tổng kết</button>
+                <button class="buttonSummary btnSummary" data-bs-toggle="modal" data-bs-target="#notifySummaryModal" th:if="${listSummaryIsHostActi.get(index.index)} == -1 and ${activity.getTinhTrangHD()<2}"><i class="bi bi-send-check"></i> Tổng kết</button>
+                <button class="buttonSummary btnSummary" th:if="${listSummaryIsHostActi.get(index.index)} > 0"><i class="bi bi-send-check"></i> <a th:href="@{/View-Summary(id=${activity.getId()})}" style="text-decoration: none; color: #136b1d" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xem tổng kết">Tổng kết</a></button>
 <!--                <button class="buttonSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.id},data-account=${account.id}"><i class="bi bi-send-check"></i> Tổng kết</button>-->
             </div>
         </div>
@@ -522,7 +525,7 @@
         </div>
     </div>
 </div>
-<!-- Modal Thông báo xác nhận thêm tổng kết-->
+<!-- Modal Thông báo về việc thêm tổng kết-->
 <div class="modal fade" id="confirmAddSummaryModal" tabindex="-1" role="dialog" aria-labelledby="confirmAddSummaryModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="align-items: center">
@@ -532,16 +535,128 @@
                     <span aria-hidden="true" >&times;</span>
                 </button>
             </div>
-            <div class="modal-body" style="font-size: 1.1rem">
+            <div class="modal-body" style="font-size: 1.1rem; margin: 0">
                 Hoạt động này chưa được tổng kết<br>
                 Bạn có muốn tổng kết hoạt động này?
             </div>
             <div class="modal-footer">
-                <button type="button" class="close closeModalLogout btn btn-secondary" data-dismiss="modal" >Hủy</button>
+                <button type="button" class="close closeModalLogout btn btn-secondary" data-bs-dismiss="modal" data-dismiss="modal" >Hủy</button>
                 <button type="submit" class="btn" style="background-color: #136b1d; color: #ffffff; width: 6rem; margin-left: 2rem" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.id},data-account=${account.id}">Đồng ý</button>
             </div>
         </div>
     </div>
+</div>
+<div class="modal fade" id="notifySummaryModal" tabindex="-1" role="dialog" aria-labelledby="notifySummaryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="align-items: center">
+            <div class="modal-header" >
+                <h5 class="modal-title" id="notifySummaryModalLabel" style="margin-left: 11rem">Thông báo</h5>
+                <button type="button" class="closeModalLogout" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 10rem">
+                    <span aria-hidden="true" >&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="font-size: 1.1rem; margin: 0">
+                Hoạt động này chưa kết thúc<br>
+                Hãy quay lại tổng kết sau!
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-bs-dismiss="modal" class="btn" style="background-color: #136b1d; color: #ffffff; width: 6rem; margin-left: 22rem">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal chung-->
+<div class="modal_ box-shadow no-display">
+    <div class="modal__overlay">
+
+    </div>
+    <div class="modal__body position-relative">
+        <!--Form chi tiet danh gia-->
+        <div class="container w-45 p-0">
+            <div class="container w-100 h-2_7 bg-green-dark d-flex justify-content-between align-items-center btr-radius">
+                <!--                Ten hoat dong-->
+                <h3 class="fs-5 white-color text-center m-0 flex-3 modal-nameAct"></h3>
+                <div class="btn btn-close btn-close-detail"></div>
+            </div>
+            <!-- Content -->
+            <div class="container max_height-36rem overflow-y-auto overflow-x-hidden scr-Act content-evaluate ">
+                <div class="container d-flex align-items-center mt-2">
+                    <img class="w-2_5 h-2_5 ml-0_1 radius-1_8 avatar avatar-host" src="" alt="">
+                    <div class="container ml-0_1">
+                        <h4 class="green-color fs-6 my-1 mt-1 name-host-act"></h4>
+                        <!--                        Thời gian xét duyệt-->
+                        <p class="m-0 fs-10 fst-italic green-color time-post-act"></p>
+                    </div>
+                </div>
+                <!--                Mo ta-->
+                <p class="m-0 p-3 fs-7 modal-Description"></p>
+
+                <div class="container d-flex m-1 justify-content-center images-Activity">
+                    <!--                    <img src="../static/images/anh2.jpg" alt="" class="height-10rem flex-1 p-1">-->
+                    <!--                    <img src="../static/images/anh2.jpg" alt="" class="height-10rem flex-1 p-1">-->
+                    <!--                    <img src="../static/images/anh2.jpg" alt="" class="height-10rem flex-1 p-1">-->
+                </div>
+                <div class="container border_top-solid border_bottom-solid d-flex px-0">
+                    <div class="container p-2 fs-9 fst-italic modal-number-evaluation"></div>
+                    <div class="container p-0 no-display view-organized">
+                        <div class="container d-flex justify-content-end px-0">
+                            <div class="container pl-1_35rem pt-0_6rem fs-11 fst-italic green-cb cursor-pointer fw-medium btn-view-evaluation">Xem lượt
+                                đánh giá</div>
+                            <div class="container pl-1_35rem pt-0_6rem fs-11 fst-italic cursor-pointer fw-medium btn-evaluate-member"><p class="text_align-center">Đánh giá thành
+                                viên</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content comment -->
+                <div class="container no-display view-comment">
+                    <!--View ra comment của thành viên-->
+                </div>
+                <!-- Evaluate -->
+                <div class="container evaluation no-display">
+                    <div class="container d-flex flex-wrap m-2 justify-content-start members-activity">
+                        <!--   Thanh vien cua hoat dong va form danh gia tung nguoi                     -->
+                    </div>
+                </div>
+            </div>
+            <!-- Form write comment -->
+            <div class="container position-absolute bottom-0 start-0 end-0 p-0 m-0 no-display write-comment">
+                <div class="container  start-0 end-0 w-100 bg-white box-shadow p-2 d-flex bdr-radius">
+                    <img th:src="${account.getAnhDaiDien()}" th:attr="data-value=${account.getId()}" class="w-2_5 h-2_5 p-1 radius-1_8 member-infor" alt="">
+                    <div class="container bg-grey radius-1_8 p-2">
+                        <div class="container px-2 m-0">
+                            <div class="container d-flex flex-1">
+                                <p class="fs-9 dark_grey-color fst-italic m-1 flex-1">Điểm ban tổ chức:
+                                <div class="container d-flex flex-5 ml--2">
+                                    <i class="bi bi-star-fill white-light-color fs-7 py-1 px-1 btn-star"></i>
+                                    <i class="bi bi-star-fill white-light-color fs-7 py-1 px-1 btn-star"></i>
+                                    <i class="bi bi-star-fill white-light-color fs-7 py-1 px-1 btn-star"></i>
+                                    <i class="bi bi-star-fill white-light-color fs-7 py-1 px-1 btn-star"></i>
+                                    <i class="bi bi-star-fill white-light-color fs-7 py-1 px-1 btn-star"></i>
+                                </div>
+                            </div>
+                            <div class="container mt-1 d-flex">
+                                <p class="fs-9 dark_grey-color fst-italic m-0  ">Hoạt động: </p>
+                                <p class="fs-9 dark_grey-color fst-italic m-0 ms-5">Hữu ích <input class="check-survey"  type="checkbox"></p>
+                                <p class="fs-9 dark_grey-color fst-italic m-0  ms-5">Nên tổ chức thường xuyên <input class="check-survey" type="checkbox">
+                                </p>
+                                <p class="fs-9 dark_grey-color fst-italic m-0  ms-5">Nên tổ chức rộng rãi <input class="check-survey" type="checkbox">
+                                </p>
+                            </div>
+                        </div>
+                        <div class="container d-flex">
+                <textarea type="text" placeholder="Viết đánh giá..."
+                          class="w-100 bg-grey no-outline no-border fs-9 mt-1 ms-2 p-0 no-resize text-comment" rows="2"></textarea>
+
+                            <i class="bi bi-send green-color mt-4 fs-6 p-2 cursor-pointer btn-send-cmt"></i>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 <div style="margin-bottom: 4rem"></div>
 <div id="myFooter" th:include="Footer :: html" ></div>
