@@ -159,7 +159,7 @@ $(document).ready(function () {
                     if (data.success) {
                         console.log("them thanh cong");
                         $('#TongKetModal').modal('hide');
-                        //location.reload();
+                        location.reload();
                        //window.location.href = '/trang-ca-nhan?id=${maTK}';
                     } else {
                         console.error('Đã có lỗi xảy ra:', data.message);
