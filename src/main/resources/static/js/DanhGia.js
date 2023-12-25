@@ -37,8 +37,7 @@ async function Evaluation(e)  {
         endActTime = activity.thoiGianKT;
         modal.classList.add('display-flex')
         view_comment.classList.remove('no-display')
-        // body.classList.add('overflow-hidden')
-        body.classList.add('disable-scrollbar')
+        body.classList.add('overflow-hidden')
 
 
        if(accEval===null){
@@ -237,8 +236,7 @@ async function EvaluationMember(e) {
         modal.classList.add('display-flex')
         edit_content.classList.remove('max_height-27rem')
         view_comment.classList.remove('no-display')
-        // body.classList.add('overflow-hidden')
-        body.classList.add('disable-scrollbar')
+        body.classList.add('overflow-hidden')
 
         view_organized.classList.remove('no-display')
 
@@ -361,8 +359,7 @@ function closeFormEvaluation(e) {
     btn_evaluate_mb.classList.remove("green-cb")
     modal_comment.innerHTML='';
     modal.classList.remove('display-flex')
-    // body.classList.remove('overflow-hidden')
-    body.classList.remove('disable-scrollbar')
+    body.classList.remove('overflow-hidden')
     view_comment.classList.add('no-display')
     write_comment.classList.add('no-display')
     evaluation.classList.add('no-display')

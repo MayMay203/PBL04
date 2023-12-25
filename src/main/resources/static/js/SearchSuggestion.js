@@ -31,7 +31,7 @@ search_input.addEventListener("keyup",  async e => {
                             container.className = "fs-9 display-flex act-title";
                             //const moTa = sugg.moTa.length > 150 ? sugg.moTa.substring(0, 150) + "..." : sugg.moTa
                             const activityDiv = document.createElement("div");
-                            activityDiv.className = "container px-5 activity";
+                            activityDiv.className = "container px-5 flex-5";
                             const time = new Intl.DateTimeFormat("vi-VN", {
                                 day: '2-digit',
                                 month: '2-digit',
@@ -51,17 +51,17 @@ search_input.addEventListener("keyup",  async e => {
                         </div>
                         `
                             const iconAct = document.createElement("div")
-                            iconAct.className = "container d-flex flex-1 justify-content-end align-items-center icon-act"
+                            iconAct.className = "container p-0 d-flex flex-1 align-items-center icon-act"
                             iconAct.innerHTML =
                                 `
-                      <button  class="no-border bg-white p-0 mx-4 cursor-pointer btn-activity-detail">
+                      <button  class="no-border bg-white p-0 mx-4 cursor-pointer btn-activity-detail col-4">
                         <i data-location="${suggestionList[index].viTri}" data-countAct="${countAct[index]}" class="bi bi-calendar4-week position-relative mb-1 h-1 green-color calendar cursor-pointer fs-5 ">
                         <p class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-calendar no-display number-sugg-name-title"
                         >${countAct[index]} hoạt động đã tổ chức tại đây</p>
                         </i>
                       </button>
 
-                      <button class="no-border bg-white p-0 mx-3 cursor-pointer btn-organize-here">
+                      <button class="no-border bg-white p-0 cursor-pointer btn-organize-here col-5">
                         <i data-name="${suggestionList[index].maChuDe.tenChuDe}" data-location="${suggestionList[index].viTri}" data-account="${account != null ? account.id : null}" class="bi bi-broadcast-pin position-relative mb-1 h-1 green-color broadcast cursor-pointer fs-5">
                         <p class="bg-green position-absolute b-100  grey_dark-color fw-medium p-0 m-0 w-10rem text-center radius-1 fs-7 notice-broadcast no-display">
                           Tổ chức tại đây</p>

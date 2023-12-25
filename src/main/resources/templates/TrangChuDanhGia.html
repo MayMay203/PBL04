@@ -19,60 +19,60 @@
         <i class="bi bi-search p-2 grey-color"></i>
         <input type="text" class="border-0 grey-color p-md-1 no-outline w-85 search-input"
                placeholder="Tìm kiếm hoạt động" />
- </div>
+    </div>
 </div>
 
-    <!--Content-->
+<!--Content-->
 <div class="container px-5"> <h2 class="fs-3 px-3 mb-4">HOẠT ĐỘNG GẦN ĐÂY</h2></div>
-    <div class="container d-flex">
-        <!--Left-->
-            <div class="container w-75 surround-left">
-                <div class="container p-5 pt-0 fs-6 mx--2 act-slider">
-                    <div class="container-item" th:each="i : ${#numbers.sequence(0, activityList.size() div 4 + ((activityList.size()%4 > 0) ? 1 : 0) - 1)}" th:if="${not #lists.isEmpty(activityList)}">
-                        <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<activityList.size()}">
-                            <img th:src="@{${activityList.get(4*i+j).getAnh()}}" class="float-start h-80 col-2" alt="" />
-                            <div class="card border-0 col-10">
-                                <div class="card-body fs-7">
-                                    <div class="card-title fs-6 fw-bolder green-color" th:text="${activityList.get((4*i)+j).getTenhd()}"></div>
-                                    <div class="card-text my-0" th:text="${#strings.length(activityList.get(4*i+j).getMoTa()) > 200 ? activityList.get(4*i+j).getMoTa().substring(0, 200) + '...' : activityList.get(4*i+j).getMoTa()}"></div>
-                                    <div class="card-text mx-2 my-1">
-                                        <i class="bi bi-calendar2 m-1 green-color" th:text="'   ' + ${#temporals.format(activityList.get(4*i+j).getThoiGianBD(),'dd/MM/yyyy')} + ' - ' + ${#temporals.format(activityList.get(4*i+j).getThoiGianKT(),'dd/MM/yyyy')}"></i>
-                                    </div>
-                                    <div class="card-link p-0">
-                                        <button
-                                                class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail" th:attr="data-value=${activityList.get(4*i+j).getId()}" >Xem
-                                            chi tiết...</button>
-                                    </div>
-                                    <div
-                                            class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 p-1 pleft-6 fs-8 mt-9 text_align-center"> <p class="ml-20p" th:text="'Lượt đánh giá ' + '(' + ${countEvaList.get(4*i+j)} + ')'"></p>
-                                    </div>
-                                </div>
+<div class="container d-flex">
+    <!--Left-->
+    <div class="container w-75 surround-left">
+        <div class="container p-5 pt-0 fs-6 mx--2 act-slider">
+            <div class="container-item" th:each="i : ${#numbers.sequence(0, activityList.size() div 4 + ((activityList.size()%4 > 0) ? 1 : 0) - 1)}" th:if="${not #lists.isEmpty(activityList)}">
+                <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<activityList.size()}">
+                    <img th:src="@{${activityList.get(4*i+j).getAnh()}}" class="float-start h-80 col-2" alt="" />
+                    <div class="card border-0 col-10">
+                        <div class="card-body fs-7">
+                            <div class="card-title fs-6 fw-bolder green-color" th:text="${activityList.get((4*i)+j).getTenhd()}"></div>
+                            <div class="card-text my-0" th:text="${#strings.length(activityList.get(4*i+j).getMoTa()) > 200 ? activityList.get(4*i+j).getMoTa().substring(0, 200) + '...' : activityList.get(4*i+j).getMoTa()}"></div>
+                            <div class="card-text mx-2 my-1">
+                                <i class="bi bi-calendar2 m-1 green-color" th:text="'   ' + ${#temporals.format(activityList.get(4*i+j).getThoiGianBD(),'dd/MM/yyyy')} + ' - ' + ${#temporals.format(activityList.get(4*i+j).getThoiGianKT(),'dd/MM/yyyy')}"></i>
+                            </div>
+                            <div class="card-link p-0">
+                                <button
+                                        class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail" th:attr="data-value=${activityList.get(4*i+j).getId()}" >Xem
+                                    chi tiết...</button>
+                            </div>
+                            <div
+                                    class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 p-1 pleft-6 fs-8 mt-9 text_align-center"> <p class="ml-20p" th:text="'Lượt đánh giá ' + '(' + ${countEvaList.get(4*i+j)} + ')'"></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        <!--Right-->
-                <div class="container w-25 mt-2_8 p-0">
-                    <div class="container cmt-slider">
-                        <div class="container bg-grey radius-1 p-2 my-6" th:each="index:${#numbers.sequence(0,5)}" th:if="${index<evaluationList.size()}">
-                            <div class="container d-flex my-1">
-                                <img th:src="@{${evaluationList.get(index).getMaTK().getAnhDaiDien()}}" class="radius-1 me-1 w-1_8 h-1_8" alt="">
-                                <h7 class="green-color fs-9 fst-italic fw-medium" th:text="${evaluationList.get(index).getMaTK().getTenDN()}"></h7>
-                            </div>
-                            <div class="container d-flex align-items-center mx-1">
-                                <p class="fs-10 fst-italic m-0" th:text="${evaluationList.get(index).getBinhLuan()}">
-                                </p>
-                            </div>
-                            <p class="green_light-color fst-italic fs-10 my-0 mx-3" th:text="${#dates.format(evaluationList.get(index).getThoiGianBL(),'dd/MM/yyyy')}"></p>
-                        </div>
-                    </div>
-                </div>
         </div>
+    </div>
+    <!--Right-->
+    <div class="container w-25 mt-2_8 p-0">
+        <div class="container cmt-slider">
+            <div class="container bg-grey radius-1 p-2 my-6" th:each="index:${#numbers.sequence(0,5)}" th:if="${index<evaluationList.size()}">
+                <div class="container d-flex my-1">
+                    <img th:src="@{${evaluationList.get(index).getMaTK().getAnhDaiDien()}}" class="radius-1 me-1 w-1_8 h-1_8" alt="">
+                    <h7 class="green-color fs-9 fst-italic fw-medium" th:text="${evaluationList.get(index).getMaTK().getTenDN()}"></h7>
+                </div>
+                <div class="container d-flex align-items-center mx-1">
+                    <p class="fs-10 fst-italic m-0" th:text="${evaluationList.get(index).getBinhLuan()}">
+                    </p>
+                </div>
+                <p class="green_light-color fst-italic fs-10 my-0 mx-3" th:text="${#dates.format(evaluationList.get(index).getThoiGianBL(),'dd/MM/yyyy')}"></p>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <!-- Chuyển trang danh gia (co dang nhap)-->
+<!-- Chuyển trang danh gia (co dang nhap)-->
 <button class="green_light-color no-text-decoration fw-semibold fst-italic fs-4 float-end mtrb-4rem no-border bg-white btn-evaluation-Act" th:attr="data-value=${account!=null?account.getId():null}">
-        Đánh giá hoạt động...</button>
+    Đánh giá hoạt động...</button>
 
 
 <!-- Modal -->
@@ -84,7 +84,7 @@
         <!--Form chi tiet danh gia-->
         <div class="container w-45 p-0">
             <div class="container w-100 h-2_7 bg-green-dark d-flex py-2 justify-content-between align-items-center btr-radius">
-            <!--  Ten hoat dong-->
+                <!--  Ten hoat dong-->
                 <h3 class="fs-6 white-color text-center m-0 col-11 modal-nameAct"></h3>
                 <div class="btn btn-close col-1 btn-close-detail"></div>
             </div>
@@ -94,7 +94,7 @@
                     <img class="w-2_5 h-2_5 ml-0_1 radius-1_8 avatar" src="" alt="">
                     <div class="container ml-0_1">
                         <h4 class="green-color fs-6 my-1 mt-1 name-host-act"></h4>
-                    <!-- Thời gian xét duyệt-->
+                        <!-- Thời gian xét duyệt-->
                         <p class="m-0 fs-10 fst-italic green-color time-post-act"></p>
                     </div>
                 </div>
@@ -103,12 +103,12 @@
                 <p class="m-0 p-3 fs-7 modal-Description"></p>
 
                 <div class="container d-flex m-1 justify-content-center images-Activity">
-                <!-- Anh da tong ket hoat dong-->
-               </div>
+                    <!-- Anh da tong ket hoat dong-->
+                </div>
                 <!-- Header comment -->
                 <div class="container border_top-solid border_bottom-solid p-2 fs-9 fst-italic modal-number-evaluation"></div>
                 <div class="container modal-comment">
-                <!-- Danh gia cua thanh vien doi voi TC va HD -->
+                    <!-- Danh gia cua thanh vien doi voi TC va HD -->
                 </div>
             </div>
         </div>
