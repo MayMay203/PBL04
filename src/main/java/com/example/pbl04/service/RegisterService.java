@@ -12,4 +12,5 @@ public interface RegisterService {
 
     Dangky getRegisterIsMember(Integer maHD, Integer maTK);
 //    List<Thanhvien> getAllMyParticipants(Integer maTK);
+    Thanhvien getInforOfHostActi(Taikhoan tk);
 }

@@ -80,11 +80,18 @@ public class PersonalityController {
 
         List<Hoatdong> actListIsMember = activityService.getAllActivityIsMember(id);
         model.addAttribute("actListIsMember", actListIsMember);
+        List<Thanhvien> listInforOfHostActi = new ArrayList<>();
+        List<Dangky> listInforOfActiJoin = new ArrayList<>();
         List<Dangky> listRegisIsMemberActi = new ArrayList<>();
         List<Integer> listSummaryIsMemberActi = new ArrayList<>();
         for(Hoatdong hd : actListIsMember){
+            //lấy thông tin của tổ chức hoạt động
+            listInforOfHostActi.add(registerService.getInforOfHostActi(activityService.getRegisterInfo(hd.getId()).getMaTK()));
             //lấy đăng ký:
+            listInforOfActiJoin.add(activityService.getRegisterInfo(hd.getId()));
+            //lấy từ đăng ký thông tin người vai trò là tham gia
             listRegisIsMemberActi.add(registerService.getRegisterIsMember(hd.getId(), id));
+            System.out.println("Trạng thái Đăng ký member:"+ registerService.getRegisterIsMember(hd.getId(), id).getTrangThai());
             //lấy tổng kết
             if(summaryService.getSummaryByID(hd.getId()) != null){
                 listSummaryIsMemberActi.add(summaryService.getSummaryByID(hd.getId()).getId());
@@ -94,6 +101,8 @@ public class PersonalityController {
                 listSummaryIsMemberActi.add(-1);
             }
         }
+        model.addAttribute("listInforOfHostActi", listInforOfHostActi);
+        model.addAttribute("listInforOfActiJoin", listInforOfActiJoin);
         model.addAttribute("listRegisIsMemberActi", listRegisIsMemberActi);
         model.addAttribute("listSummaryIsMemberActi", listSummaryIsMemberActi);
 
