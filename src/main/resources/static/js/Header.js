@@ -127,14 +127,13 @@ $('#modal-sign-up').on('show.bs.modal', function () {
 $('#modal-sign-up').on('shown.bs.modal', function () {
     var header = document.getElementById("myHeader");
     header.classList.remove("sticky");
-
 });
 
 $('#modal-sign-up').on('hidden.bs.modal', function () {
     // Giảm biến đếm mỗi khi modal được đóng
     backdropCount--;
-    var header = document.getElementById("myHeader");
-    header.classList.add("sticky");
+    // var header = document.getElementById("myHeader");
+    // header.classList.add("sticky");
 });
 $('.modal').on('show.bs.modal', function () {
 
@@ -146,17 +145,19 @@ $('.modal').on('show.bs.modal', function () {
         $('.modal-backdrop').not(':last').remove();
     }
 });
+$('.modal').on('hidden.bs.modal', function () {
+    backdropCount--;
+    //mỗi khi modal được đóng
+    // var header = document.getElementById("myHeader");
+    // header.classList.add("sticky");
+});
 //
 $('#DangNhapModal').on('hidden.bs.modal', function () {
     //mỗi khi modal được đóng
-    var header = document.getElementById("myHeader");
-    header.classList.add("sticky");
+    // var header = document.getElementById("myHeader");
+    // header.classList.add("sticky");
 });
-$('.modal').on('hidden.bs.modal', function () {
-    //mỗi khi modal được đóng
-    var header = document.getElementById("myHeader");
-    header.classList.add("sticky");
-});
+
 $('#DangNhapModal').on('show.bs.modal', function () {
     console.log("Có chạy mà =======");
     // Đặt độ trễ để đảm bảo việc xóa class "sticky" được thực hiện sau khi modal hiển thị

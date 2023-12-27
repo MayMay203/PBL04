@@ -41,8 +41,10 @@
     <div class="sectionAvatar">
         <img class="sectionAvatar__img-back dimmed" th:src="@{${user.getMaTK().getAnhDaiDien()}}" alt="">
         <img class="sectionAvatar__img-front" th:src="@{${user.getMaTK().getAnhDaiDien()}}" alt="">
-        <span class="sectionAvatar__name" th:text="${user.getHoTen()}"></span>
-        <i id="icon-edit" class="sectionAvatar__edit bi bi-pencil-square" ></i>
+        <div style="display: flex">
+            <span class="sectionAvatar__name" th:text="${user.getHoTen()}"></span>
+            <i style="margin-left: 2rem" id="icon-edit" class="sectionAvatar__edit bi bi-pencil-square" ></i>
+        </div>
     </div>
     <div class="container__section">
         <img style="margin-bottom: 0.2rem" class="img-avatar-small" th:src="@{${user.getMaTK().getAnhDaiDien()}}" alt="">
