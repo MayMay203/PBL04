@@ -66,7 +66,7 @@
             <div id="container__sectionMember" >
                 <h2 class="section__heading">TÌNH NGUYỆN VIÊN</h2>
                 <div class="sectionMember__aboutContent"  >
-                    <div class="member-item" th:each="member, iterStat: ${memberList}" th:if="${iterStat.index >= activitiesList.size() - 8}">
+                    <div class="member-item" th:each="member, iterStat: ${memberList}" th:if="${iterStat.index >= memberList.size() - 16}">
                         <img th:src="@{${member.getMaTK().getAnhDaiDien()}}" alt="" class="member-img">
 
                         <p class="member-name" th:text="${member.getHoTen()}"></p>
