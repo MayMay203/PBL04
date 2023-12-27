@@ -1,11 +1,8 @@
 package com.example.pbl04.service;
-
+import com.example.pbl04.entity.*;
 import com.example.pbl04.dao.AccountRepository;
 import com.example.pbl04.dao.ActivityRepository;
 import com.example.pbl04.dao.RegisRepository;
-import com.example.pbl04.entity.Dangky;
-import com.example.pbl04.entity.Hoatdong;
-import com.example.pbl04.entity.Taikhoan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;

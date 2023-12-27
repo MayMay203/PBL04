@@ -64,9 +64,6 @@ public class Hoatdong {
     public String getTenhd() {
         return tenhd;
     }
-    public String getTenHD() {
-        return tenhd;
-    }
 
     public void setTenhd(String tenhd) {
         this.tenhd = tenhd;
