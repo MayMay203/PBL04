@@ -27,6 +27,8 @@ public interface ActivityService {
     //Danh gia
     List<Hoatdong> getActivityByMember(Integer id);
     List<Hoatdong> getActivityByHost(Integer id);
+    List<Hoatdong> getAllActivityIsMember(Integer id);
+    List<Hoatdong> getAllActivityIsHost(Integer id);
 
     Dangky getRegisterInfo(Integer IdAct);
 //    Instant getTimeResgister(Integer IdAct);

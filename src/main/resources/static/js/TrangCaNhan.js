@@ -184,7 +184,6 @@ $(document).ready(function() {
             enctype: 'multipart/form-data',
             success: function(response) {
                 if (response.success) {
-                    console.log("-------------------có chạy nề-----------------------")
                     // Thành công, load lại trang hiện tại
                     // if(location.pathname=="/trang-ca-nhan"){
                     //     location.href="/trang-chu";
@@ -202,5 +201,18 @@ $(document).ready(function() {
                 console.error('Error updating profile:', error);
             }
         });
+    });
+});
+
+//---------- hiển thị hđ tổ chức hay tham gia------------
+document.addEventListener("DOMContentLoaded", function () {
+    $('#btnCreateAct').on('click', function () {
+        $('.sectionActIsHost').removeClass("no-display");
+        $('.sectionActIsJoin').addClass("no-display");
+    });
+
+    $('#btnJoinAct').on('click', function () {
+        $('.sectionActIsHost').addClass("no-display");
+        $('.sectionActIsJoin').removeClass("no-display");
     });
 });

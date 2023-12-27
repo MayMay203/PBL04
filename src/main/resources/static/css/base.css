@@ -167,6 +167,10 @@ body::-webkit-scrollbar-thumb {
     max-height: 90%;
 }
 
+.bg-rgba{
+    background: rgba(255, 255, 255, 0.9)!important; /* Màu nền với độ trong suốt */
+}
+
 .calendar:hover .notice-calendar{
     display: block!important;
 }
@@ -406,6 +410,10 @@ body::-webkit-scrollbar-thumb {
     max-height: 36.5rem !important;
 }
 
+.min_height-35rem{
+    max-height: 36.5rem !important;
+}
+
 .max_height-33rem{
     max-height: 33rem !important;
 }
@@ -430,6 +438,9 @@ body::-webkit-scrollbar-thumb {
     width: 4rem !important;
 }
 
+.h-28rem{
+    height: 28rem!important;
+}
 
 .width-25rem{
     width: 25rem !important;

@@ -175,8 +175,8 @@ async function saveEvaluation(e) {
         }
         const responseData = await response.json();
         const membersList = responseData.membersList;
-        console.log("Thanh vien list: ",membersList)
         const scores = responseData.scores;
+        // members_activity.classList.add('min_height-35rem');
         members_activity.innerHTML = '';
         var i = 0;
         membersList.forEach(member => {
@@ -583,6 +583,7 @@ $(document).ready(function () {
         })
     }
     $('.closeModalLogout').on('click', function () {
+        $('#noSummaryModal').modal('hide');
         $('#noSummaryModal').modal('hide');
     });
 })
