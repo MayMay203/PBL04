@@ -63,6 +63,16 @@ public class ActivityServiceImpl implements ActivityService {
         return activityRepository.getActivityByHost(id);
     }
 
+    @Override
+    public List<Hoatdong> getAllActivityIsMember(Integer id) {
+        return activityRepository.getAllActivityIsMember(id);
+    }
+
+    @Override
+    public List<Hoatdong> getAllActivityIsHost(Integer id) {
+        return activityRepository.getAllActivityIsHost(id);
+    }
+
     public Dangky getRegisterInfo(Integer IdAct) {
         return activityRepository.registerInfor(IdAct);
     }

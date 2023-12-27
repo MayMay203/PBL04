@@ -6,6 +6,7 @@ import com.example.pbl04.dao.RegisRepository;
 import com.example.pbl04.entity.Dangky;
 import com.example.pbl04.entity.Hoatdong;
 import com.example.pbl04.entity.Taikhoan;
+import com.example.pbl04.entity.Thanhvien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
@@ -39,6 +40,16 @@ public class RegisterServiceImple implements RegisterService {
         regisRepository.save(dangky);
     }
     public Dangky getDangKyByHDTK(Integer maTK, Integer maHD) {return regisRepository.getDangKyByHDTK(maTK,maHD);}
+
+    @Override
+    public Dangky getRegisterIsMember(Integer maHD, Integer maTK) {
+        return regisRepository.getRegisterIsMember(maHD, maTK);
+    }
+
+    @Override
+    public Thanhvien getInforOfHostActi(Taikhoan tk) {
+        return regisRepository.getInforOfHostActi(tk);
+    }
 
     @Override
     public List<Dangky> getRegisterInforByIDAct(Integer IdAct) {
