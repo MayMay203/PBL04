@@ -1,7 +1,5 @@
 package com.example.pbl04.controller;
-
-import com.example.pbl04.entity.Chude;
-import com.example.pbl04.entity.Taikhoan;
+import com.example.pbl04.entity.*;
 import com.example.pbl04.service.AccountService;
 import com.example.pbl04.service.MemberService;
 import com.example.pbl04.service.SessionService;
@@ -18,7 +16,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.example.pbl04.entity.*;
+
 @Controller
 public class HeaderController {
     public static final String SESSION_ATTR_ACCOUNT = "account";
