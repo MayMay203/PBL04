@@ -27,7 +27,7 @@
     text-align: center;
 }
 
-#title-top{
+.title-top{
     color:#174407;
     font-weight: bold;
     font-size: 25px;
@@ -37,7 +37,7 @@
     font-size: 1rem;
     margin-bottom: 0.6rem;
 }
-#checkShowPass{
+.checkShowPass{
     margin-left: 0.8rem;
 }
 

@@ -42,8 +42,10 @@
     <div class="sectionAvatar">
         <img class="sectionAvatar__img-back dimmed" th:src="@{${user.getMaTK().getAnhDaiDien()}}" alt="">
         <img class="sectionAvatar__img-front" th:src="@{${user.getMaTK().getAnhDaiDien()}}" alt="">
-        <span class="sectionAvatar__name" th:text="${user.getHoTen()}"></span>
-        <i id="icon-edit" class="sectionAvatar__edit bi bi-pencil-square" ></i>
+        <div style="display: flex">
+            <span class="sectionAvatar__name" th:text="${user.getHoTen()}"></span>
+            <i style="margin-left: 2rem" id="icon-edit" class="sectionAvatar__edit bi bi-pencil-square" ></i>
+        </div>
     </div>
     <div class="container__section">
         <img style="margin-bottom: 0.2rem" class="img-avatar-small" th:src="@{${user.getMaTK().getAnhDaiDien()}}" alt="">
@@ -76,7 +78,7 @@
     </div>
 <!--mục hoạt động tổ chức-->
 <!--        <div class="container__sectionAct" th:each="activity, index:${actListIsHost}" th:id="${activity.getTinhTrangDuyet()==0 ? 'gray-overlay' : ''}" >-->
-    <div id="sectionActIsHost" class="container__sectionAct sectionActIsHost" th:each="activity, index:${actListIsHost}" th:style="${activity.getTinhTrangDuyet()==0 ? 'opacity: 0.7; background-color: rgba(128, 128, 128, 0.5); pointer-events: none;' : ' background-color: rgba(217, 249, 249, 0.6);'}" >
+    <div id="sectionActIsHost" class="container__sectionAct sectionActIsHost" th:each="activity, index:${actListIsHost}" th:style="${activity.getTinhTrangDuyet()==0 ? 'opacity: 0.7; background-color: rgb(222 222 222 / 50%); pointer-events: none;' : ' background-color: rgba(217, 249, 249, 0.6);'}" >
     <!--            <div class="gray-overlay" th:if="${activity.getTinhTrangDuyet()==0}">-->
         <div class="d-flex section__padding">
             <img class="img-avatar-small" th:src="@{${user.getMaTK().getAnhDaiDien()}}" alt="">
@@ -134,12 +136,12 @@
             <button class="btnEvaluate" th:if="${activity.getTinhTrangHD()!=2}" data-bs-toggle="modal" data-bs-target="#notifyEvaluateModal"><i  class="bi bi-chat-square-heart" ></i> Đánh giá</button>
             <button class="buttonSummary btnSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#confirmAddSummaryModal" th:if="${listSummaryIsHostActi.get(index.index)} == -1 and ${activity.getTinhTrangHD()==2}"><i class="bi bi-send-check"></i> Tổng kết</button>
             <button class="buttonSummary btnSummary" data-bs-toggle="modal" data-bs-target="#notifySummaryModal" th:if="${listSummaryIsHostActi.get(index.index)} == -1 and ${activity.getTinhTrangHD()<2}"><i class="bi bi-send-check"></i> Tổng kết</button>
-            <button class="buttonSummary btnSummary" th:if="${listSummaryIsHostActi.get(index.index)} > 0"><i class="bi bi-send-check"></i> <a th:href="@{/View-Summary(id=${activity.getId()})}" style="text-decoration: none; color: #136b1d" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xem tổng kết">Tổng kết</a></button>
+            <button th:href="@{/View-Summary(id=${activity.getId()})}" class="buttonSummary btnSummary" th:if="${listSummaryIsHostActi.get(index.index)} > 0"><i class="bi bi-send-check"></i> <a  style="text-decoration: none; color: #136b1d" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xem tổng kết">Tổng kết</a></button>
             <!--                <button class="buttonSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.id},data-account=${account.id}"><i class="bi bi-send-check"></i> Tổng kết</button>-->
         </div>
     </div>
 <!--mục hoạt động tham gia-->
-    <div id="sectionActIsJoin" class="container__sectionAct sectionActIsJoin no-display" th:each="activity, index:${actListIsMember}" th:style="${listRegisIsMemberActi.get(index.index).getTrangThai()==false ? 'opacity: 0.7; background-color: rgba(128, 128, 128, 0.5); pointer-events: none;' : ' background-color: rgba(217, 249, 249, 0.6);'}" >
+    <div id="sectionActIsJoin" class="container__sectionAct sectionActIsJoin no-display" th:each="activity, index:${actListIsMember}" th:style="${listRegisIsMemberActi.get(index.index).getTrangThai()==false ? 'opacity: 0.7; background-color: rgb(222 222 222 / 50%); pointer-events: none;' : ' background-color: rgba(217, 249, 249, 0.6);'}" >
         <!--            <div class="gray-overlay" th:if="${activity.getTinhTrangDuyet()==0}">-->
         <div class="d-flex section__padding">
             <img class="img-avatar-small" th:src="@{${listInforOfHostActi.get(index.index).getMaTK().getAnhDaiDien()}}" alt="">

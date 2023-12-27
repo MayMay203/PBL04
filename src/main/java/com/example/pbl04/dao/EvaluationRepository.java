@@ -15,7 +15,7 @@ public interface EvaluationRepository extends JpaRepository<Danhgia,Integer> {
     @Query("select count(*) from Danhgia dg where dg.maHD.id = :IdAct and (dg.binhLuan is not null or dg.diemTC is not null)")
     Integer countEvaluation(Integer IdAct);
 
-    @Query("select dg from Danhgia dg where dg.maHD.id = :IdAct and (dg.binhLuan IS NOT NULL or dg.diemTC IS NOT NULL)")
+    @Query("select dg from Danhgia dg where dg.maHD.id = :IdAct and (dg.binhLuan IS NOT NULL or dg.diemTC IS NOT NULL) order by dg.thoiGianBL desc")
     List<Danhgia> getEvaluationByIdAct(Integer IdAct);
 
     @Query("select dg from Danhgia  dg where dg.maHD.id = :IdAct and dg.maTK.id = :IdAcc")

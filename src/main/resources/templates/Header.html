@@ -52,7 +52,7 @@
                             Bạn có chắc chắn muốn đăng xuất không?
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="closeModalLogout btn btn-secondary" data-dismiss="modal" >Hủy</button>
+                            <button type="button" class="close closeModalLogout btn btn-secondary" data-bs-dismiss="modal" >Hủy</button>
                             <button type="submit" class="btn btn-danger" id="confirmLogout" >Đồng ý</button>
                         </div>
                     </div>
@@ -68,7 +68,10 @@
                   <label class="user-name" th:text="${user.getHoTen()}"></label>
               </div>
                 <li><a class="dropdown-item" th:href="@{/trang-ca-nhan(id=${account.getId()})}">Xem trang cá nhân</a></li>
-                <li><a class="dropdown-item" href="#">Thay đổi mật khẩu</a></li>
+                <li>
+<!--                    <button data-bs-toggle="modal" data-bs-target="#ChangePasswordModal"><a class="dropdown-item"  href="#">Thay đổi mật khẩu</a>-->
+                   <a class="dropdown-item"  href="#">Thay đổi mật khẩu</a>
+               </li>
                 <li><a class="dropdown-item" href="#">Cài đặt</a></li>
             </ul>
 
@@ -91,68 +94,7 @@
 <!--        </div>-->
 
 
-        <div class="modal fade" id="DangNhapModal" tabindex="-1" aria-labelledby="modalLogin" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-dangnhap">
-                <div class="modal-content modal-content-dangnhap">
-                    <div class="modal-header modal-header-dangnhap">
-                        <button type="button" class="btn-close btnClose" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                    </div>
 
-<!--                    <form id="formLogin" class="modal-body modal-body-dangnhap " th:action="@{/check-login}" method="post" th:object="${account}">-->
-                    <div class="modal-body modal-body-dangnhap ">
-                        <div class="header_login">
-                            <p id="title-top">ĐĂNG NHẬP</p>
-                        </div>
-
-                        <div class="body_login">
-                        <form id="formLogin" th:action="@{/check-login}" method="post" th:object="${account}">
-                            <div class="body_login-content">
-                                <input class="body_login_input" id="username" type="text" placeholder="    Tên đăng nhập" th:field="*{tenDN}" required>
-                                <button class="btndelete_input" type="button" onclick="clearInput('username')">
-                                    <i class="bi bi-x delete_input"></i>
-                                </button>
-                            </div>
-                            <div class="body_login-content">
-                                <input class="body_login_input" id="password" type="password" placeholder="    Mật khẩu" th:field="*{matKhau}" required minlength="6" maxlength="20">
-                                <button class="btndelete_input" type="button" onclick="clearInput('password')">
-                                    <i class="bi bi-x delete_input"></i>
-                                </button>
-                            </div>
-
-                            <div class="showPass">
-                                <input class="form-check-input" type="checkbox" name="checkShowPass" id="checkShowPass"> Hiện mật khẩu
-
-                            </div>
-                            <!-- Hiển thị thông báo lỗi nếu có -->
-                            <div id="error-message">
-<!--                                <p class="notify-error"></p>-->
-                            </div>
-                            <input type="submit" name="btn1" id="btnLogin" value="ĐĂNG NHẬP" >
-                        </form>
-                            <div class="footer_login-status">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="remember"> Ghi nhớ mật khẩu
-                                </label>
-                                <span id="status_forget">Quên mật khẩu?</span>
-                            </div>
-                            <div class="footer_login-another">
-                                <span class="login_or">HOẶC</span>
-                                <div class="login_another">
-                                    <img th:src="@{/images/fb.png}" alt="">
-                                    <img th:src="@{/images/gg.png}" alt="">
-                                </div>
-                            </div>
-                            <div class="regis">
-                                <span class="regis-not">Bạn chưa có tài khoản?</span>
-                                <input type="button" id="btn-sign-up"  value="Đăng ký" data-bs-toggle="modal" data-bs-target="#modal-sign-up">
-                            </div>
-                        </div>
-                    </div>
-<!--                    </form>-->
-                </div>
-            </div>
-        </div>
     </div>
     <nav class="navbar navbar-expand-sm header__navbar sticky-top z-1">
         <div class="container-fluid">
@@ -360,9 +302,119 @@
     </div>
 </div>
 
+<!--modal đăng nhập-->
+<div class="modal fade" id="DangNhapModal" tabindex="-1" aria-labelledby="modalLogin" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-dangnhap">
+        <div class="modal-content modal-content-dangnhap">
+            <div class="modal-header modal-header-dangnhap">
+                <button type="button" class="btn-close btnClose" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+
+            <!--                    <form id="formLogin" class="modal-body modal-body-dangnhap " th:action="@{/check-login}" method="post" th:object="${account}">-->
+            <div class="modal-body modal-body-dangnhap ">
+                <div class="header_login">
+                    <p class="title-top">ĐĂNG NHẬP</p>
+                </div>
+
+                <div class="body_login">
+                    <form id="formLogin" th:action="@{/check-login}" method="post" th:object="${account}">
+                        <div class="body_login-content">
+                            <input class="body_login_input" id="username" type="text" placeholder="    Tên đăng nhập" th:field="*{tenDN}" required>
+                            <button class="btndelete_input" type="button" onclick="clearInput('username')">
+                                <i class="bi bi-x delete_input"></i>
+                            </button>
+                        </div>
+                        <div class="body_login-content">
+                            <input class="body_login_input" id="password" type="password" placeholder="    Mật khẩu"  required minlength="6" maxlength="20">
+                            <button class="btndelete_input" type="button" onclick="clearInput('password')">
+                                <i class="bi bi-x delete_input"></i>
+                            </button>
+                        </div>
+
+                        <div class="showPass">
+                            <input class="form-check-input checkShowPass" type="checkbox" name="checkShowPass" id="checkShowPass"> Hiện mật khẩu
+
+                        </div>
+                        <!-- Hiển thị thông báo lỗi nếu có -->
+                        <div class="error-message">
+                            <!--                                <p class="notify-error"></p>-->
+                        </div>
+                        <input type="submit" name="btn1" id="btnLogin" value="ĐĂNG NHẬP" >
+                    </form>
+                    <div class="footer_login-status">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="remember"> Ghi nhớ mật khẩu
+                        </label>
+                        <span id="status_forget">Quên mật khẩu?</span>
+                    </div>
+                    <div class="footer_login-another">
+                        <span class="login_or">HOẶC</span>
+                        <div class="login_another">
+                            <img th:src="@{/images/fb.png}" alt="">
+                            <img th:src="@{/images/gg.png}" alt="">
+                        </div>
+                    </div>
+                    <div class="regis">
+                        <span class="regis-not">Bạn chưa có tài khoản?</span>
+                        <input type="button" id="btn-sign-up"  value="Đăng ký" data-bs-toggle="modal" data-bs-target="#modal-sign-up">
+                    </div>
+                </div>
+            </div>
+            <!--                    </form>-->
+        </div>
+    </div>
+</div>
 
 
+<!--modal thay đổi mật khẩu-->
+<!--<div class="modal fade" id="ChangePasswordModal" tabindex="-1" aria-labelledby="modalChangePassword" aria-hidden="true">-->
+<!--    <div class="modal-dialog modal-dialog-changePassword">-->
+<!--        <div class="modal-content modal-content-changePassword">-->
+<!--            <div class="modal-header modal-header-login">-->
+<!--                <button type="button" class="btn-close btnClose" data-bs-dismiss="modal"-->
+<!--                        aria-label="Close"></button>-->
+<!--            </div>-->
+<!--            <div class="modal-body modal-body-changePassword ">-->
+<!--                <div class="header_login">-->
+<!--                    <p class="title-top">ĐỔI MẬT KHẨU</p>-->
+<!--                </div>-->
 
+<!--                <div class="body_changePassword">-->
+<!--                    <form id="formChangePassword" th:action="@{/change-password}" method="post" th:object="${account}">-->
+<!--                        <div class="body_login-content">-->
+<!--                            <input class="body_login_input" name="username" type="text" placeholder="    Tên đăng nhập"    required>-->
+<!--                            <button class="btndelete_input" type="button" onclick="clearInput('username')">-->
+<!--                                <i class="bi bi-x delete_input"></i>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                        <div class="body_login-content">-->
+<!--                            <input class="body_login_input" name="password" type="password" placeholder="    Mật khẩu"  required minlength="6" maxlength="20">-->
+<!--                            <button class="btndelete_input" type="button" onclick="clearInput('password')">-->
+<!--                                <i class="bi bi-x delete_input"></i>-->
+<!--                            </button>-->
+<!--                        </div>-->
+
+<!--                        <div class="showPass">-->
+<!--                            <input class="form-check-input checkShowPass" type="checkbox" name="checkShowPass" > Hiện mật khẩu-->
+
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Hiển thị thông báo lỗi nếu có &ndash;&gt;-->
+<!--                        <div class="error-message">-->
+<!--                            &lt;!&ndash;                                <p class="notify-error"></p>&ndash;&gt;-->
+<!--                        </div>-->
+<!--                        <input type="submit" name="btn1" id="btnChangePassword" value="ĐỔI MẬT KHẨU" >-->
+<!--                    </form>-->
+<!--                    <div class="footer_login-status">-->
+<!--                        <label class="form-check-label">-->
+<!--                            <input class="form-check-input" type="checkbox" name="remember"> Ghi nhớ mật khẩu-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 
 
