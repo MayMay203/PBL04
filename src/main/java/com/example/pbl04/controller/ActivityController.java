@@ -52,7 +52,6 @@ public class ActivityController {
     {
         Integer numberParticipants= activityService.getParticipants();
         Integer numberActivitys= activityService.getNumActivity();
-//        List<Hoatdong> actiListUpcomming1 =activityService.getActivityUpcomming();
         List<Dangky> actiListUpcomming =activityService.getActivityUpcomming();
         List<Hoatdong> actiList = activityService.getActivityOccured();
         List<Hoatdong> actiListHappening= activityService.getActivityHappening();
@@ -61,7 +60,6 @@ public class ActivityController {
         model.addAttribute("actiListHappening",actiListHappening);
         model.addAttribute(("actiListUpcomming"),actiListUpcomming);
         model.addAttribute("numberParticipants",numberParticipants);
-        // Kiểm tra xem người dùng đã đăng nhập chưa
         sessionService.createSessionModel(model, session);
         return "TrangChuHoatDong";
     }
@@ -90,15 +88,8 @@ public class ActivityController {
         model.addAttribute("thanhvienList",thanhvienList);
         model.addAttribute("checkDangky",checkDangky);
         model.addAttribute("pointList",pointList);
-//        model.addAttribute("")
         return "ChiTietHoatDong";
     }
-//    @GetMapping("/them-hoat-dong")
-//    public String showModalThemHoatDong(Model model, HttpSession session){
-//        model.addAttribute("activity", new Hoatdong());
-//        sessionService.createSessionModel(model, session);
-//        return  "ThemHoatDong";
-//    }
 
     @PostMapping("/addActivity")
     @ResponseBody
@@ -245,10 +236,5 @@ public class ActivityController {
         List<Hoatdong> activityList = activityService.getActByLocation(location);
         return ResponseEntity.ok(activityList);
     }
-//    @Transactional
-//    public void updateTrangThaiForExpiredEntities() {
-//        Date currentDate = new Date();
-//        activityService.updateTrangThaiByNgayAndTrangThai(currentDate);
-//    }
 }
 

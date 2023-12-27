@@ -24,7 +24,7 @@
 <div id="myHeader" style="top: -87px" th:include="Header :: html"></div>
 <div class="HoatDongContent">
     <div class="slider">
-        <div class="container-fluid">
+        <div class="container-fluid container-activity">
             <div id="carouselExampleCaptions" class="carousel slide">
                 <div class="carousel-inner" th:each="activity, iterStat : ${actiListHappening}">
                     <div class="carousel-item" th:classappend="${iterStat.index == 0} ? 'active' : ''">
@@ -95,12 +95,15 @@
                             <div th:each="activity : ${actiList}">
                             <div class="card custom-margin" style="width: 13rem;">
                                 <img class="card-img-top" th:src="@{${activity.getAnh()}}" alt="Card image cap">
-                                <div class="card-img-overlay">
-                                    <h5 class="card-title truncate-text"><a href=""  th:text="${activity.getTenHD()}"></a>
-                                    </h5>
-                                    <p class="card-text" th:text="${#strings.length(activity.getMoTa()) > 100 ? activity.getMoTa().substring(0, 100) + '...' : activity.getMoTa()}"></p>
-                                    <a th:href="@{/Join(id=${activity.id})}" class="xemttiep">Xem tiếp</a>
+                                <div class="parent-img-overlay">
+                                    <div class="card-img-overlay center-overlay">
+                                        <h5 class="card-title truncate-text"><a href=""  th:text="${activity.getTenHD()}"></a>
+                                        </h5>
+                                        <p class="card-text" th:text="${#strings.length(activity.getMoTa()) > 100 ? activity.getMoTa().substring(0, 100) + '...' : activity.getMoTa()}"></p>
+                                        <a th:href="@{/Join(id=${activity.id})}" class="xemttiep">Xem tiếp</a>
+                                    </div>
                                 </div>
+
                             </div>
                                 <br>
                             </div>
