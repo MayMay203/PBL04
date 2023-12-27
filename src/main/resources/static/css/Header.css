@@ -148,3 +148,46 @@
     height: 30px;
     margin-bottom: 10px;
 }
+
+/*.modal_{*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    right: 0;*/
+/*    left: 0;*/
+/*    bottom: 0;*/
+/*    display: flex;*/
+/*    animation: fadeIn ease-in-out 0.25s;*/
+/*    z-index: 1050;*/
+/*}*/
+
+/*.modal__overlay {*/
+/*    position: absolute;*/
+/*    background-color: rgba(0, 0, 0, 0.6);*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    !*z-index: 9999;*!*/
+/*}*/
+
+/*.modal__body {*/
+/*    background-color: var(--white-color);*/
+/*    position: relative;*/
+/*    margin: 1rem auto 1rem;*/
+/*    border-radius: 0.5rem;*/
+/*    !*z-index: 10000;*!*/
+/*    !*z-index: 2000!important;*!*/
+/*}*/
+
+/*.display-flex{*/
+/*    display: flex!important;*/
+/*}*/
+
+/*.max_height-27rem {*/
+/*    max-height: 27rem !important;*/
+/*}*/
+
+/*.overflow-hidden {*/
+/*    overflow: hidden;*/
+/*}*/
+
+
+

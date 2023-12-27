@@ -220,8 +220,10 @@ async function saveEvaluation(e) {
 }
 async function EvaluationMember(e) {
     try{
+        console.log("Vo đây ok rồi nhe")
         const IdAct =+e.target.dataset.value;
         maHDTC = IdAct;
+        console.log(IdAct);
         const response =await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${IdAct}`);
         if(!response.ok){
             throw new Error(`Lỗi HTTP. Trạng thái: ${response.status}`)
