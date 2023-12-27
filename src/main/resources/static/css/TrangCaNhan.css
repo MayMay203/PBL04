@@ -230,10 +230,20 @@ img.dimmed{
     border-radius: 5px;
     /* padding: 1.5rem 4rem 0; */
     /* margin: 0.5rem 0; */
-    background-color: rgba(217, 249, 249, 0.6);
+
     margin-bottom: 0.6rem;
     /* opacity: 0.7;  */
 }
+#gray-overlay {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(128, 128, 128, 0.5); /* Màu xám với độ trong suốt */
+    z-index: 10;
+}
+
 .section__padding{
     padding: 1rem 4rem 0;
     align-items: center;
@@ -337,7 +347,7 @@ img.dimmed{
     height: 1.5rem; /* Chiều cao của thanh tiến trình */
 }
 
-#btnEvaluate, #btnSummary{
+.btnEvaluate, .btnSummary{
     border: none;
     border-radius: 3px;
     text-align: center;
@@ -345,6 +355,6 @@ img.dimmed{
     padding: 0.5rem 5rem;
     margin: 0 0.3rem;
 }
-#btnEvaluate:hover, #btnSummary:hover{
+.btnEvaluate:hover, .btnSummary:hover{
     background-color: rgb(166, 246, 175,1);
 }

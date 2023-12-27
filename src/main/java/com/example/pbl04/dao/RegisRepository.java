@@ -3,6 +3,7 @@ package com.example.pbl04.dao;
 import com.example.pbl04.entity.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -10,6 +11,12 @@ import java.util.List;
 public interface RegisRepository extends JpaRepository<Dangky,Integer> {
     @Query("select dk from Dangky dk where dk.maHD.id = :IdAct and dk.phanQuyen=false ")
     List<Dangky> getRegisterInforByIDAct(Integer IdAct);
+
+    @Query("SELECT tv FROM Thanhvien tv WHERE tv.maTK = :tk")
+    Thanhvien getInforOfHostActi(Taikhoan tk);
+
+    @Query("select dk from Dangky dk where dk.maHD.id = :IdAct and dk.phanQuyen=false and dk.maTK.id = :maTK")
+    Dangky getRegisterIsMember(Integer IdAct, Integer maTK);
     @Query("select dk from Dangky dk where dk.maTK.id =:idTK and dk.maHD.id =:idHD")
     Dangky getDangKyByHDTK(Integer idTK, Integer idHD);
 }

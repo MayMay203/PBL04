@@ -1,5 +1,6 @@
 package com.example.pbl04.controller;
 
+import com.example.pbl04.entity.*;
 import com.example.pbl04.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.*;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -35,16 +38,20 @@ public class PersonalityController {
     private final AccountService accountService;
 
     private final TopicService topicService;
+    private final SummaryService summaryService;
+    private final RegisterService registerService;
 
     @Autowired
     public PersonalityController(SessionService sessionService, ActivityService activityService,
-                                 MemberService memberService, ImageProcessorService imageProcessorService, AccountService accountService, TopicService topicService) {
+                                 MemberService memberService, ImageProcessorService imageProcessorService, AccountService accountService, TopicService topicService, SummaryService summaryService, RegisterService registerService) {
         this.sessionService = sessionService;
         this.activityService = activityService;
         this.memberService = memberService;
         this.imageProcessorService = imageProcessorService;
         this.accountService = accountService;
         this.topicService = topicService;
+        this.summaryService = summaryService;
+        this.registerService = registerService;
     }
 
     @GetMapping("/trang-ca-nhan")
@@ -52,8 +59,53 @@ public class PersonalityController {
                        @RequestParam(name="id") Integer id,
                        @ModelAttribute("message") String message,
                        HttpSession session) {
-        List<Hoatdong> actListByHost = activityService.getActivityByHost(id);
-        model.addAttribute("actListByHost", actListByHost);
+        List<Hoatdong> actListIsHost = activityService.getAllActivityIsHost(id);
+        model.addAttribute("actListIsHost", actListIsHost);
+        List<Dangky> listRegisIsHostActi = new ArrayList<>();
+        List<Integer> listSummaryIsHostActi = new ArrayList<>();
+        for(Hoatdong hd : actListIsHost){
+            //lấy đăng ký:
+            listRegisIsHostActi.add(activityService.getRegisterInfo(hd.getId()));
+            //lấy tổng kết
+           if(summaryService.getSummaryByID(hd.getId()) != null){
+               listSummaryIsHostActi.add(summaryService.getSummaryByID(hd.getId()).getId());
+               System.out.println("Tổng kết host:"+ summaryService.getSummaryByID(hd.getId()).getId() +"---"+summaryService.getSummaryByID(hd.getId()).getMaHD().getTenhd());
+           }
+           else{
+               listSummaryIsHostActi.add(-1);
+           }
+        }
+        model.addAttribute("listRegisIsHostActi",listRegisIsHostActi);
+        model.addAttribute("listSummaryIsHostActi", listSummaryIsHostActi);
+
+        List<Hoatdong> actListIsMember = activityService.getAllActivityIsMember(id);
+        model.addAttribute("actListIsMember", actListIsMember);
+        List<Thanhvien> listInforOfHostActi = new ArrayList<>();
+        List<Dangky> listInforOfActiJoin = new ArrayList<>();
+        List<Dangky> listRegisIsMemberActi = new ArrayList<>();
+        List<Integer> listSummaryIsMemberActi = new ArrayList<>();
+        for(Hoatdong hd : actListIsMember){
+            //lấy thông tin của tổ chức hoạt động
+            listInforOfHostActi.add(registerService.getInforOfHostActi(activityService.getRegisterInfo(hd.getId()).getMaTK()));
+            //lấy đăng ký:
+            listInforOfActiJoin.add(activityService.getRegisterInfo(hd.getId()));
+            //lấy từ đăng ký thông tin người vai trò là tham gia
+            listRegisIsMemberActi.add(registerService.getRegisterIsMember(hd.getId(), id));
+            System.out.println("Trạng thái Đăng ký member:"+ registerService.getRegisterIsMember(hd.getId(), id).getTrangThai());
+            //lấy tổng kết
+            if(summaryService.getSummaryByID(hd.getId()) != null){
+                listSummaryIsMemberActi.add(summaryService.getSummaryByID(hd.getId()).getId());
+                System.out.println("Tổng kết member:"+ summaryService.getSummaryByID(hd.getId()).getId() +"---"+summaryService.getSummaryByID(hd.getId()).getMaHD().getTenhd());
+            }
+            else{
+                listSummaryIsMemberActi.add(-1);
+            }
+        }
+        model.addAttribute("listInforOfHostActi", listInforOfHostActi);
+        model.addAttribute("listInforOfActiJoin", listInforOfActiJoin);
+        model.addAttribute("listRegisIsMemberActi", listRegisIsMemberActi);
+        model.addAttribute("listSummaryIsMemberActi", listSummaryIsMemberActi);
+
         model.addAttribute("activity", new Hoatdong());
 //        Dangky getRegisterInfo = activityService.getRegisterInfo(id)
         List<Chude> listTopics = topicService.getAllTopics();
