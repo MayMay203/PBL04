@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.pbl04.entity.*;
-
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -32,15 +30,12 @@ public class NotificationController {
     public ResponseEntity<Void> addNoticeOfSugg(@RequestParam(name="maTK",required = false) Integer maTK,
                                                 @RequestParam("noiDung") String noiDung,
                                                 @RequestParam("loaiTB") Integer loaiTB,
-                                                @RequestParam("ma") Integer ma,
-                                                @RequestParam("thoiGianTB") String thoiGianTB) {
+                                                @RequestParam("ma") Integer ma){
         Thongbao tb = new Thongbao();
        if(maTK!=null){
            Taikhoan tk = accountService.getTaiKhoanByID(maTK);
            tb.setMaTK(tk);
        }
-        tb.setThoiGianTB(new Date(thoiGianTB).toInstant());
-        System.out.println("Thời gian đề xuất " + new Date(thoiGianTB).toInstant());
         tb.setNoiDung(noiDung);
         tb.setLoaiTB(loaiTB);
         tb.setMa(ma);
