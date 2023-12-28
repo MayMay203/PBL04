@@ -20,10 +20,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
@@ -36,15 +33,17 @@ public class ActivityController {
     private final RegisterService registerService;
     private final AccountService accountService;
     private final EvaluationService evaluationService;
+    private final NotificationService notificationService;
 
     @Autowired
-    public ActivityController(ActivityService activityService, TopicService topicService, SessionService sessionService, RegisterService registerService, AccountService accountService, EvaluationService evaluationService){
+    public ActivityController(ActivityService activityService, TopicService topicService, SessionService sessionService, RegisterService registerService, AccountService accountService, EvaluationService evaluationService, NotificationService notificationService){
         this.activityService=activityService;
         this.topicService = topicService;
         this.sessionService = sessionService;
         this.registerService = registerService;
         this.accountService = accountService;
         this.evaluationService = evaluationService;
+        this.notificationService = notificationService;
     }
 
    @GetMapping("/trang-chu-hoat-dong")
@@ -61,6 +60,14 @@ public class ActivityController {
         model.addAttribute(("actiListUpcomming"),actiListUpcomming);
         model.addAttribute("numberParticipants",numberParticipants);
         sessionService.createSessionModel(model, session);
+
+        Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
+        if(myAcc!=null){
+            List<Thongbao> listNotice = new ArrayList<>();
+            listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
+            model.addAttribute("listNotice",listNotice);
+        }
+
         return "TrangChuHoatDong";
     }
     @RequestMapping(value ="/Join")

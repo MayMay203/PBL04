@@ -1,6 +1,7 @@
 package com.example.pbl04.service;
 
 import com.example.pbl04.dao.NotificationRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +22,11 @@ public class NotificationServiceImple implements NotificationService{
     @Override
     public List<Thongbao> getNotifiByIdAcc(Integer IdAcc) {
         return notificationRepository.getNotiByIdAcc(IdAcc);
+    }
+
+    @Override
+    @Transactional
+    public void updateStatusOfNotice(Integer idNotice, Integer idAcc) {
+        notificationRepository.updateStatusOfNotice(idNotice,idAcc);
     }
 }

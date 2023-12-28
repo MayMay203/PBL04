@@ -26,14 +26,16 @@ public class ConfirmController {
     private final MemberService memberService;
     private final SuggestionService suggestionService;
     private final EvaluationService evaluationService;
+    private  final NotificationService notificationService;
     @Autowired
-    public ConfirmController(ActivityService activityService, SessionService sessionService, RegisterService registerService, MemberService memberService, SuggestionService suggestionService, EvaluationService evaluationService) {
+    public ConfirmController(ActivityService activityService, SessionService sessionService, RegisterService registerService, MemberService memberService, SuggestionService suggestionService, EvaluationService evaluationService,NotificationService notificationService) {
         this.activityService = activityService;
         this.sessionService = sessionService;
         this.registerService = registerService;
         this.memberService = memberService;
         this.suggestionService = suggestionService;
         this.evaluationService = evaluationService;
+        this.notificationService = notificationService;
     }
         @GetMapping("xet-duyet")
         public String showConfirmActivity(Model model, HttpSession session)
@@ -78,6 +80,13 @@ public class ConfirmController {
                 model.addAttribute("countConfirmed",countConfirmed);
                 model.addAttribute("listCancelActivity",listCancelActivity);
                 model.addAttribute("listActivityParticipate",listActivityParticipate);
+            }
+
+            Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
+            if(myAcc!=null){
+                List<Thongbao> listNotice = new ArrayList<>();
+                listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
+                model.addAttribute("listNotice",listNotice);
             }
             return "XetDuyet";
         }

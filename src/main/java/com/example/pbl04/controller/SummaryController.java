@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,12 +19,14 @@ public class SummaryController {
     private final SessionService sessionService;
     private final RegisterService registerService;
     private final EvaluationService evaluationService;
-    public SummaryController(SummaryService summaryService, ActivityService activityService, RegisterService registerService, SessionService sessionService, EvaluationService evaluationService) {
+    private final  NotificationService notificationService;
+    public SummaryController(SummaryService summaryService, ActivityService activityService, RegisterService registerService, SessionService sessionService, EvaluationService evaluationService,NotificationService notificationService) {
         this.summaryService=summaryService;
         this.activityService=activityService;
         this.sessionService = sessionService;
         this.registerService = registerService;
         this.evaluationService = evaluationService;
+        this.notificationService = notificationService;
     }
     @GetMapping("/trang-chu-tong-ket")
     public String showSummaryList(Model model, HttpSession session)
@@ -34,6 +37,14 @@ public class SummaryController {
         List<Tongket> summaryList = summaryService.getSummaryList();
         model.addAttribute("summaryList",summaryList);
         model.addAttribute("myActivities",myActivities);
+
+        //Nội dung thông báo
+        Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
+        if(myAcc!=null){
+            List<Thongbao> listNotice = new ArrayList<>();
+            listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
+            model.addAttribute("listNotice",listNotice);
+        }
 
         return "TrangChuTongKet";
     }

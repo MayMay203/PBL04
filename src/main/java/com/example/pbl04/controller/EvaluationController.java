@@ -30,13 +30,15 @@ public class EvaluationController {
     private final RegisterService registerService;
     private final MemberService memberService;
     private final AccountService accountService;
+    private final NotificationService notificationService;
 
     @Autowired
     public EvaluationController(EvaluationService evaluationService, ActivityService activityService,
                                 SessionService sessionService,SummaryRepository summaryRepository,
                                 RegisterService registerService,MemberService memberService,
                                 SummaryService summaryService,
-                                AccountService accountService){
+                                AccountService accountService,
+                                NotificationService notificationService){
         this.evaluationService = evaluationService;
         this.activityService = activityService;
         this.sessionService = sessionService;
@@ -44,6 +46,7 @@ public class EvaluationController {
         this.registerService = registerService;
         this.memberService = memberService;
         this.accountService = accountService;
+        this.notificationService = notificationService;
     }
 
     @GetMapping("/trang-chu-danh-gia")
@@ -56,6 +59,12 @@ public class EvaluationController {
         model.addAttribute("countEvaList",countEvaList);
         // Kiểm tra xem người dùng đã đăng nhập chưa
         sessionService.createSessionModel(model, session);
+        Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
+        if(myAcc!=null){
+            List<Thongbao> listNotice = new ArrayList<>();
+            listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
+            model.addAttribute("listNotice",listNotice);
+        }
             return "TrangChuDanhGia";
     }
 
@@ -68,6 +77,12 @@ public class EvaluationController {
         List<Hoatdong> actListOfHost = activityService.getActivityByHost(id);
         model.addAttribute("actListOfHost",actListOfHost);
         sessionService.createSessionModel(model, session);
+        Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
+        if(myAcc!=null){
+            List<Thongbao> listNotice = new ArrayList<>();
+            listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
+            model.addAttribute("listNotice",listNotice);
+        }
         return "DanhGia";
     }
 

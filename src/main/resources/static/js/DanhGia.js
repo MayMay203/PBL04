@@ -19,6 +19,7 @@ var maHD;
 var maHDTC;
 var scoreMb;
 var endActTime;
+var maNTC;
 const member_infor = document.querySelector(".member-infor");
 
 //Danh gia hoat dong
@@ -43,10 +44,12 @@ async function Evaluation(e)  {
        if(accEval===null){
            edit_content.classList.add('max_height-27rem')
            write_comment.classList.remove('no-display')
+           const sendComment = document.querySelector(".btn-send-cmt");
        }
         document.querySelector(".modal-nameAct").innerText = responseData.activity.tenhd;
         document.querySelector(".modal-Description").innerText = responseData.activity.moTa;
         document.querySelector(".name-host-act").innerText = responseData.registerInfor.maTK.tenDN;
+        maNTC = responseData.registerInfor.maTK.id;
         document.querySelector(".avatar-host").src = responseData.registerInfor.maTK.anhDaiDien;
         const date = new Date(responseData.registerInfor.thoiGianDK);
         const datePart = date.toLocaleDateString("vi-VN", {
@@ -165,8 +168,19 @@ async function saveEvaluation(e) {
     var response = await fetch(url, {
         method: "POST"
     })
+    // Them thong bao danh gia diem
+    const noiDung = "Người tổ chức vừa đánh giá điểm hoạt động của bạn."
+    const loaiTB = 0
+    const ma = maHDTC;
+    var noticeURL = `/them-thong-bao?maTK=${maTKDG}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`
+    var noticeRes = await fetch(noticeURL, {
+        method: "POST"
+    })
+    if(!noticeRes.ok){
+        console.log("Lỗi thêm thông báo đánh giá thành viên. Trạng thái "+noticeRes.status);
+    }
     if (!response.ok) {
-        console.log("Lỗi HTTP! Trạng thái " + response.status)
+        console.log("Lỗi đánh giá thành viên! Trạng thái " + response.status)
     } else {
         //Cap nhat lai diem
         const response = await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${maHDTC}`);
@@ -220,7 +234,6 @@ async function saveEvaluation(e) {
 }
 async function EvaluationMember(e) {
     try{
-        console.log("Vo đây ok rồi nhe")
         const IdAct =+e.target.dataset.value;
         maHDTC = IdAct;
         console.log(IdAct);
@@ -476,6 +489,20 @@ btn_send_cmt.addEventListener("click", async function (e) {
     const response = await fetch(url, {
         method: 'POST'
     })
+
+    // Them thong bao danh gia hoat dong
+    const noiDung = "Một thành viên vừa đánh giá hoạt động của bạn."
+    const loaiTB = 0
+    const ma = maHD;
+    var noticeURL = `/them-thong-bao?maTK=${maNTC}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`
+    var noticeRes = await fetch(noticeURL, {
+        method: "POST"
+    })
+
+    if(!noticeRes.ok){
+        console.log("Lỗi thêm thông báo đánh giá hoạt động. Trạng thái "+noticeRes.status);
+    }
+
     if(!response.ok){
         console.log("HTTP lỗi. Trạng thái " + response.status)
     }
@@ -488,7 +515,7 @@ btn_send_cmt.addEventListener("click", async function (e) {
             check.checked = false;
         }
         //Cap nhat lai modal binh luan
-        const response =await fetch(`/hoat-dong/xem-chi-tiet/${maHD}`);
+        const response =await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${maHD}`);
         if(!response.ok){
             throw new Error(`Lỗi HTTP. Trạng thái: ${response.status}`)
         }
