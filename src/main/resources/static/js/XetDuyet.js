@@ -704,12 +704,25 @@ async function confirmSugg(){
         }
         //Thêm thông báo xét duyệt đề xuất
         const confirmedSugg = await response.json();
-        console.log(confirmedSugg);
         const maTK = confirmedSugg.maTK.id;
         const noiDung = "Đề xuất của bạn đã được duyệt thành công."
         const loaiTB = 0;
         const ma = confirmedSugg.id;
-        const addURL = await fetch(`/them-thong-bao?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`, {
+
+        const thoiGian = new Date();
+        const thoiGianTB = thoiGian.getTime();
+        // Tạo đối tượng Date từ giá trị milliseconds
+        const dateObject = new Date(thoiGianTB);
+        // Định dạng ngày tháng năm giờ phút giây
+        const formattedDate = new Intl.DateTimeFormat('en-GB', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        }).format(dateObject);
+        const addURL = await fetch(`/them-thong-bao?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}&thoiGianTB=${formattedDate}`, {
             method: 'POST'
         });
         if(!addURL.ok){
@@ -754,12 +767,24 @@ $(document).on('click', '#btn-cancel-sugg',async function (){
         }
         //Thêm thông báo xét duyệt đề xuất
         const canceledSugg = await response.json();
-        console.log(canceledSugg);
         const maTK = canceledSugg.maTK.id;
         const noiDung = "Đề xuất của bạn đã bị hủy."
         const loaiTB = 0;
         const ma = canceledSugg.id;
-        const addURL = await fetch(`/them-thong-bao?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`, {
+        const thoiGian = new Date();
+        const thoiGianTB = thoiGian.getTime();
+        // Tạo đối tượng Date từ giá trị milliseconds
+        const dateObject = new Date(thoiGianTB);
+        // Định dạng ngày tháng năm giờ phút giây
+        const formattedDate = new Intl.DateTimeFormat('en-GB', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        }).format(dateObject);
+        const addURL = await fetch(`/them-thong-bao?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}&thoiGianTB=${formattedDate}`, {
             method: 'POST'
         });
         if(!addURL.ok){

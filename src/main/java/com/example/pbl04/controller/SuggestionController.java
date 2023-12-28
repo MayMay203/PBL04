@@ -75,6 +75,7 @@ public class SuggestionController {
         dexuat.setMaChuDe(topicService.getTopicByID(maChuDe));
         dexuat.setMoTa(moTa);
         suggestionService.Save(dexuat);
+        System.out.println("Đề xuất mới nè " + dexuat.getId());
 //        redirectAttributes.addFlashAttribute("successeMessage","Thêm đề xuất thành công!");
         return "redirect:de-xuat";
     }
