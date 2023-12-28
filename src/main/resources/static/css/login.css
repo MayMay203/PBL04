@@ -81,7 +81,7 @@
     color: #CC0000;
     font-size: 13px;
 }
-#btnLogin, #btnConfirmOTP{
+#btnLogin, #btnConfirmOTP, #btnChangePassword{
     width: 17rem;
     height: 2.5rem;
     background: linear-gradient(91deg, #0E5416 8.46%, #48E56B 114.48%);
@@ -89,6 +89,9 @@
     border-radius: 20px;
     margin-top:7px;
     border: 0.5px solid #174407;
+}
+.body_forgetPass-content{
+    margin-bottom: 1rem;
 }
 .body_forgetPass-content input:not([type="button"]):not([type="submit"]){
     width: 17rem;
@@ -151,7 +154,7 @@
 .footer_login-status{
     width: 15rem;
     font-size: 0.8rem;
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
     display: flex;
     justify-content: space-between;
     color:#174407;

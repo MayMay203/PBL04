@@ -21,7 +21,7 @@
 ////
 ////        System.out.println("Mail send successfully.......");
 ////    }
-//    private final JavaMailSender javaMailSender;
+
 //
 //    public EmailService(JavaMailSender javaMailSender) {
 //        this.javaMailSender = javaMailSender;

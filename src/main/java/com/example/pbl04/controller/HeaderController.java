@@ -124,6 +124,28 @@ public Map<String, Object> login(@RequestParam String tenDN, @RequestParam Strin
 
     return response;
 }
+@PostMapping("/change-password")
+@ResponseBody
+public Map<String, Object> login(@RequestParam String tenDN, @RequestParam String matKhau,@RequestParam String matKhauMoi, HttpSession session) {
+    Map<String, Object> response = new HashMap<>();
+
+    Taikhoan account = accountService.CheckLogin(tenDN, matKhau);
+    System.out.println("Chạy COntroller");
+    if (account != null) {
+        // Đăng nhập thành công, lưu thông tin tài khoản vào session
+        {
+            account.setMatKhau(matKhauMoi);
+            account.setId(account.getId());
+            accountService.changePassword(account);
+        }
+        // Thêm mã JavaScript để load lại trang sau khi đăng nhập
+        response.put("reloadPage", true);
+    } else {
+        response.put("error", "Tên đăng nhập hoặc mật khẩu cũ không đúng");
+    }
+
+    return response;
+}
 
     @GetMapping("/header")
     public String createSession(Model model, HttpSession session){

@@ -39,4 +39,8 @@ public class AccountServiceImple implements AccountService{
     public Taikhoan addAccount(Taikhoan taikhoan) {
         return accountRepository.save(taikhoan);
     }
+
+    public Taikhoan changePassword(Taikhoan tk) {
+        return accountRepository.save(tk);
+    }
 }

@@ -16,4 +16,7 @@ public interface AccountRepository extends JpaRepository<Taikhoan,Integer>{
     @Modifying
     @Query("update Taikhoan t set t.anhDaiDien = :avatarUrl where t.id = :accountId")
     void updateAvatar(@Param("avatarUrl") String avatarUrl, @Param("accountId") Integer accountId);
+    @Modifying
+    @Query("update Taikhoan t set t.matKhau = :mk where t.id = :accountId")
+    boolean changePassword(@Param("mk") String mk, @Param("accountId") Integer accountId);
 }

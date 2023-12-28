@@ -93,6 +93,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+
 //
 // $(document).ready(function() {
 //     $('#DangNhapModal').on('hidden.bs.modal', function () {
@@ -172,6 +174,15 @@ document.addEventListener('DOMContentLoaded', function() {
         var password = document.getElementById("password");
         var checkBox = document.getElementById("checkShowPass");
         password.type = checkBox.checked ? "text" : "password";
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('checkShowTwoPass').addEventListener('change', function (event) {
+        var oldpassword = document.getElementById("old-password");
+        var newpassword = document.getElementById("new-password");
+        var checkBox = document.getElementById("checkShowTwoPass");
+        oldpassword.type = checkBox.checked ? "text" : "password";
+        newpassword.type = checkBox.checked ? "text" : "password";
     });
 });
 //load lại trang
@@ -313,37 +324,73 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('btn-send-otp').addEventListener('click', function (e) {
         e.preventDefault();
         // Lấy giá trị từ form
-        var email = $('#emailReceiveOTP').val();
+        var email = $('#emailReceiveOTP').val().toString();
+        if(!email){
+
+        }
+        else{
+            console.log("CÓ CHạy");
+            // Lấy giá trị từ form
+            var email = $('#emailReceiveOTP').val().toString();
+            // Gọi AJAX đến endpoint xử lý đăng nhập
+            console.log("CÓ CHạy email:" + email);
+            $.ajax({
+                type: 'POST',
+                url: '/send-otp',
+
+                data: { 'email': email},
+                success: function (data) {
+                    console.log('data:', data);
+                    if (!data.error) {
+                        //thành công
+                        $('#ChangePasswordModal').modal('hide');
+                        $('#notifyChangePassModal').modal('show');
+
+                    } else {
+                        //thất bại, hiển thị thông báo lỗi
+                        $('#error-notify').text(data.error);
+                        $('#ChangePasswordModal').modal('show');
+                    }
+                },
+                error: function (error) {
+                    console.error('Đã có lỗi xảy ra:', error);
+                }
+            });
+        }
+    });
+});
+// -----thay đổi mật khẩu----
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('btn-change-password').addEventListener('click', function (e) {
+        console.log("--hiện modal thay đổi mật khẩu--");
+        $('#ChangePasswordModal').modal('show');
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('formChangePassword').addEventListener('submit', function (e) {
+        e.preventDefault();
+        console.log("CÓ CHạy");
+        // Lấy giá trị từ form
+        var username = $('#txt_username').val();
+        var oldpassword = $('#old-password').val();
+        var newpassword = $('#new-password').val();
         // Gọi AJAX đến endpoint xử lý đăng nhập
         $.ajax({
             type: 'POST',
-            url: '/send-otp',
+            url: '/change-password',
 
-            data: { 'email': email},
+            data: { 'tenDN': username, 'matKhau': oldpassword, 'matKhauMoi': newpassword },
             success: function (data) {
-                // console.log('data:', data);
-                // var reloadPage = data.reloadPage;/* Đọc giá trị từ response hoặc từ nơi khác */;
-                //
-                if (data.reloadPage) {
-                    // Thực hiện load lại trang
-
-                    // $('#btn_userProfile').show();
-                    // $('.modal-backdrop').remove();
-                }
-
-
+                console.log('data:', data);
                 if (!data.error) {
-                    // Gửi otp thành công
-                    // $('#DangNhapModal').modal('hide');
-                    // $('#btnLoginModal').hide();
-                    // $('#btn_userProfile').show();
-                    // $('.modal-backdrop').remove();
-                    alert("đã gửi email thành công");
-                }
-                else {
-                //     // Đăng nhập thất bại, hiển thị thông báo lỗi
-                //     $('#error-message').text(data.error);
-                //     $('#DangNhapModal').modal('show');
+                    //thành công
+                    $('#ChangePasswordModal').modal('hide');
+                    $('#notifyChangePassModal').modal('show');
+
+                } else {
+                    //thất bại, hiển thị thông báo lỗi
+                    $('#error-notify').text(data.error);
+                    $('#ChangePasswordModal').modal('show');
                 }
             },
             error: function (error) {
@@ -352,7 +399,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-
 //===============================modal chung xem đánh giá của hoạt động=============================
 async function handleViewDetail(e){
     e.preventDefault(); // Ngăn chặn sự kiện mặc định

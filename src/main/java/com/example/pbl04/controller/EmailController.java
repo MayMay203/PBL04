@@ -17,7 +17,6 @@
 //public class EmailController {
 //
 //    @Autowired
-//    private final EmailService emailService;
 //
 //    // Sending a simple Email
 //    @PostMapping("/sendMail")
