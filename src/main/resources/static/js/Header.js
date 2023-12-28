@@ -137,22 +137,24 @@ $('#modal-sign-up').on('hidden.bs.modal', function () {
     // var header = document.getElementById("myHeader");
     // header.classList.add("sticky");
 });
-$('.modal').on('show.bs.modal', function () {
-
-    // Tăng biến đếm mỗi khi modal sắp hiển thị
-    backdropCount++;
-
-    // Nếu có nhiều hơn một backdrop, xóa đi các backdrop thừa
-    if (backdropCount > 1) {
-        $('.modal-backdrop').not(':last').remove();
-    }
-});
-$('.modal').on('hidden.bs.modal', function () {
-    backdropCount--;
-    //mỗi khi modal được đóng
-    // var header = document.getElementById("myHeader");
-    // header.classList.add("sticky");
-});
+// =================================================================
+// $('.modal').on('show.bs.modal', function () {
+//
+//     // Tăng biến đếm mỗi khi modal sắp hiển thị
+//     backdropCount++;
+//
+//     // Nếu có nhiều hơn một backdrop, xóa đi các backdrop thừa
+//     if (backdropCount > 1) {
+//         $('.modal-backdrop').not(':last').remove();
+//     }
+// });
+// $('.modal').on('hidden.bs.modal', function () {
+//     backdropCount--;
+//     //mỗi khi modal được đóng
+//     // var header = document.getElementById("myHeader");
+//     // header.classList.add("sticky");
+// });
+// ===============================================================
 //
 $('#DangNhapModal').on('hidden.bs.modal', function () {
     //mỗi khi modal được đóng
@@ -251,40 +253,6 @@ $(document).ready(function() {
 
 // main.js
 
-
-
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     // Gọi AJAX đến endpoint xử lý đăng nhập
-//     $.ajax({
-//         type: 'POST',
-//         url: '/check-login',
-//         dataType: 'json',
-//         data: { 'tenDN': 'your_username', 'matKhau': 'your_password' },  // Thay đổi thành giá trị thực tế
-//         success: function (data) {
-//             var isLogin = data.loginState;
-//             if (isLogin) {
-//                 if (data.reloadPage) {
-//                     // Load lại trang và ẩn modal đăng nhập, hiển thị nút btn_userProfile
-//                     // location.reload();
-//                     $('#btnLoginModal').hide();
-//                     $('#btn_userProfile').show();
-//                 } else {
-//                     // Đăng nhập thành công, ẩn modal đăng nhập, hiển thị nút btn_userProfile
-//                     $('#btnLoginModal').show();
-//                     $('#btn_userProfile').hide();
-//                 }
-//             } else {
-//                 // ... (xử lý đăng nhập không thành công)
-//             }
-//         },
-//         error: function (xhr, status, error) {
-//             console.error('Mã trạng thái:', xhr.status);
-//             console.error('Thông báo lỗi:', xhr.responseText);
-//             console.error('Đã có lỗi xảy ra:', status, error);
-//         }
-//     });
-// });
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('formRegisterAccount').addEventListener('submit', function (e) {
         e.preventDefault();
@@ -320,36 +288,40 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 // -----gửi OTP----
+var otp_email = "";
+var email_receiveOTP = "";
+var otp_input = "";
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('btn-send-otp').addEventListener('click', function (e) {
         e.preventDefault();
         // Lấy giá trị từ form
-        var email = $('#emailReceiveOTP').val().toString();
-        if(!email){
+        email_receiveOTP = $('#emailReceiveOTP').val().toString();
+        if(!email_receiveOTP){
 
         }
         else{
             console.log("CÓ CHạy");
             // Lấy giá trị từ form
-            var email = $('#emailReceiveOTP').val().toString();
+            // var email = $('#emailReceiveOTP').val().toString();
             // Gọi AJAX đến endpoint xử lý đăng nhập
-            console.log("CÓ CHạy email:" + email);
+            console.log("CÓ Chạy email:" + email_receiveOTP);
             $.ajax({
                 type: 'POST',
                 url: '/send-otp',
 
-                data: { 'email': email},
+                data: { 'email': email_receiveOTP},
                 success: function (data) {
                     console.log('data:', data);
-                    if (!data.error) {
+                    if (data.success) {
+                        otp_email = data.otp;
+                        // email = data.email;
                         //thành công
-                        $('#ChangePasswordModal').modal('hide');
-                        $('#notifyChangePassModal').modal('show');
+                        console.log("CÓ Chạy tiếp:" + otp_email + "----" + email_receiveOTP);
 
                     } else {
                         //thất bại, hiển thị thông báo lỗi
-                        $('#error-notify').text(data.error);
-                        $('#ChangePasswordModal').modal('show');
+                        // $('#error-notify').text(data.error);
+                        // $('#ChangePasswordModal').modal('show');
                     }
                 },
                 error: function (error) {
@@ -357,6 +329,37 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('btn-confirm-otp').addEventListener('click', function (e) {
+        e.preventDefault();
+        otp_input = $('#inputOTP').val();
+        $.ajax({
+            type: 'POST',
+            url: '/confirm-otp',
+            data: {"otp_input": otp_input, "otp_email": otp_email, "email": email_receiveOTP},
+            success: function (data) {
+                console.log('ok');
+                if (data.success) {
+                    //thành công
+                    $('#ForgetPasswordModal').modal('hide');
+                    $('#confirmOTP').text(data.success);
+                    $('#notifyOTPModal').modal('show');
+                } else {
+                    //thất bại, hiển thị thông báo lỗi
+                    $('#ForgetPasswordModal').modal('show');
+                    $('#confirmOTP').text(data.fail);
+                    // $('#confirmOTP').css('color', 'red');
+                    // $('#ChangePasswordModal').modal('show');
+                    $('#notifyOTPModal').modal('show');
+                }
+
+            },
+            error: function (error1) {
+                console.error('Đã có lỗi xảy ra:', error1);
+            }
+        });
     });
 });
 // -----thay đổi mật khẩu----

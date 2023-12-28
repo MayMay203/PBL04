@@ -77,8 +77,9 @@
         </div> -->
     </div>
 <!--mục hoạt động tổ chức-->
+    <div th:each="activity, index:${actListIsHost}">
 <!--        <div class="container__sectionAct" th:each="activity, index:${actListIsHost}" th:id="${activity.getTinhTrangDuyet()==0 ? 'gray-overlay' : ''}" >-->
-    <div id="sectionActIsHost" class="container__sectionAct sectionActIsHost" th:each="activity, index:${actListIsHost}" th:style="${activity.getTinhTrangDuyet()==0 ? 'opacity: 0.7; background-color: rgb(222 222 222 / 50%); pointer-events: none;' : ' background-color: rgba(217, 249, 249, 0.6);'}" >
+    <div id="sectionActIsHost" class="container__sectionAct sectionActIsHost"  th:style="${activity.getTinhTrangDuyet()==0 ? 'opacity: 0.7; background-color: rgb(222 222 222 / 50%); pointer-events: none;' : ' background-color: rgba(217, 249, 249, 0.6);'}" >
     <!--            <div class="gray-overlay" th:if="${activity.getTinhTrangDuyet()==0}">-->
         <div class="d-flex section__padding">
             <img class="img-avatar-small" th:src="@{${user.getMaTK().getAnhDaiDien()}}" alt="">
@@ -138,7 +139,30 @@
             <button class="buttonSummary btnSummary" data-bs-toggle="modal" data-bs-target="#notifySummaryModal" th:if="${listSummaryIsHostActi.get(index.index)} == -1 and ${activity.getTinhTrangHD()<2}"><i class="bi bi-send-check"></i> Tổng kết</button>
             <button class="buttonSummary btnSummary" th:if="${listSummaryIsHostActi.get(index.index)} > 0"><i class="bi bi-send-check"></i> <a th:href="@{/View-Summary(id=${activity.getId()})}"  style="text-decoration: none; color: #136b1d" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xem tổng kết">Tổng kết</a></button>
             <!--                <button class="buttonSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.id},data-account=${account.id}"><i class="bi bi-send-check"></i> Tổng kết</button>-->
+
         </div>
+        <!-- Modal Thông báo về việc thêm tổng kết-->
+        <div class="modal fade" id="confirmAddSummaryModal" tabindex="-1" role="dialog" aria-labelledby="confirmAddSummaryModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="align-items: center;">
+                    <div class="modal-header" >
+                        <h5 class="modal-title" id="confirmAddSummaryModalLabel" style="margin-left: 11rem">Xác nhận</h5>
+                        <button type="button" class="closeModalLogout" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 10rem">
+                            <span aria-hidden="true" >&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="font-size: 1.1rem; margin: 0">
+                        Hoạt động này chưa được tổng kết<br>
+                        Bạn có muốn tổng kết hoạt động này?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="closeModalLogout btn btn-secondary" data-bs-dismiss="modal" style="background-color: #136b1d !important; color: #ffffff; width: 6rem;">Hủy</button>
+                        <button type="submit" class="btn btn_Summary" style="background-color: #136b1d; color: #ffffff; width: 6rem; margin-left: 2rem" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.id},data-account=${account.id}">Đồng ý</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 <!--mục hoạt động tham gia-->
     <div id="sectionActIsJoin" class="container__sectionAct sectionActIsJoin no-display" th:each="activity, index:${actListIsMember}" th:style="${listRegisIsMemberActi.get(index.index).getTrangThai()==false ? 'opacity: 0.7; background-color: rgb(222 222 222 / 50%); pointer-events: none;' : ' background-color: rgba(217, 249, 249, 0.6);'}" >
@@ -205,7 +229,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- Modal sửa thông tin cá nhân-->
 <div class="modal fade" id="modalChangeInform" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
@@ -496,27 +519,7 @@
         </div>
     </div>
 </div>
-<!-- Modal Thông báo về việc thêm tổng kết-->
-<div class="modal fade" id="confirmAddSummaryModal" tabindex="-1" role="dialog" aria-labelledby="confirmAddSummaryModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" style="align-items: center">
-            <div class="modal-header" >
-                <h5 class="modal-title" id="confirmAddSummaryModalLabel" style="margin-left: 11rem">Xác nhận</h5>
-                <button type="button" class="closeModalLogout" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 10rem">
-                    <span aria-hidden="true" >&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" style="font-size: 1.1rem; margin: 0">
-                Hoạt động này chưa được tổng kết<br>
-                Bạn có muốn tổng kết hoạt động này?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="closeModalLogout btn btn-secondary" data-bs-dismiss="modal" style="background-color: #136b1d !important; color: #ffffff; width: 6rem;">Hủy</button>
-                <button type="submit" class="btn" style="background-color: #136b1d; color: #ffffff; width: 6rem; margin-left: 2rem" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.id},data-account=${account.id}">Đồng ý</button>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="modal fade" id="notifySummaryModal" tabindex="-1" role="dialog" aria-labelledby="notifySummaryModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="align-items: center">

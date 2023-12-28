@@ -37,16 +37,26 @@ public class AccountServiceImple implements AccountService{
     }
 
     @Override
-    public Taikhoan addAccount(Taikhoan taikhoan) {
-        return accountRepository.save(taikhoan);
-    }
-
-    public Taikhoan changePassword(Taikhoan tk) {
-        return accountRepository.save(tk);
+    public void addAccount(Taikhoan taikhoan) {
+        accountRepository.save(taikhoan);
     }
 
     @Override
     public List<Taikhoan> getAccountAd() {
         return accountRepository.getAccountAd();
+    }
+    @Override
+    public void changePassword(Taikhoan tk) {
+        accountRepository.save(tk);
+    }
+
+    @Override
+    public void changePasswordByOTP(Taikhoan tk, String mkMoi) {
+        accountRepository.changePasswordByOTP(tk, mkMoi);
+    }
+
+    @Override
+    public Thanhvien findMemberByEmail(String email) {
+        return accountRepository.findMemberByEmail(email);
     }
 }

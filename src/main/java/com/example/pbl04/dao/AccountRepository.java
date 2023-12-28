@@ -1,5 +1,6 @@
 package com.example.pbl04.dao;
 import com.example.pbl04.entity.*;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,7 +19,14 @@ public interface AccountRepository extends JpaRepository<Taikhoan,Integer>{
     @Modifying
     @Query("update Taikhoan t set t.anhDaiDien = :avatarUrl where t.id = :accountId")
     void updateAvatar(@Param("avatarUrl") String avatarUrl, @Param("accountId") Integer accountId);
+    @Transactional
+    @Modifying
+    @Query("UPDATE Taikhoan tk SET tk.matKhau = :matKhau WHERE tk = :tk")
+    void changePasswordByOTP( Taikhoan tk, String matKhau);
 
+
+    @Query("select tv from Thanhvien tv where tv.email = :email")
+    Thanhvien findMemberByEmail(String email);
     @Query("select taikhoan from Taikhoan taikhoan where :username = taikhoan.tenDN")
     Taikhoan findByUsername(String username);
     @Modifying
