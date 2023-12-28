@@ -285,7 +285,7 @@ img.dimmed{
 .icon-more:hover{
     cursor: pointer;
 }
-.dropdown-item:hover{
+.item-icon-more:hover{
     background-color: var(--main-color) !important;
     color: #ffffff !important;
 }

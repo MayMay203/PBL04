@@ -137,6 +137,28 @@ $('#modal-sign-up').on('hidden.bs.modal', function () {
     // var header = document.getElementById("myHeader");
     // header.classList.add("sticky");
 });
+$('#notifyOTPModal').on('shown.bs.modal', function () {
+    var header = document.getElementById("myHeader");
+    header.classList.remove("sticky");
+});
+$('#notifyOTPModal').on('show.bs.modal', function () {
+    // var header = document.getElementById("myHeader");
+    // header.classList.add("sticky");
+    $('.modal-backdrop').remove();
+    // Tăng biến đếm mỗi khi modal sắp hiển thị
+    // backdropCount++;
+    // // Nếu có nhiều hơn một backdrop, xóa đi các backdrop thừa
+    // if (backdropCount > 1) {
+    //     $('.modal-backdrop').not(':last').remove();
+    // }
+
+});
+$('#notifyOTPModal').on('hidden.bs.modal', function () {
+    backdropCount--;
+    //mỗi khi modal được đóng
+    // var header = document.getElementById("myHeader");
+    // header.classList.add("sticky");
+});
 // =================================================================
 // $('.modal').on('show.bs.modal', function () {
 //
@@ -341,15 +363,15 @@ document.addEventListener('DOMContentLoaded', function() {
             data: {"otp_input": otp_input, "otp_email": otp_email, "email": email_receiveOTP},
             success: function (data) {
                 console.log('ok');
-                if (data.success) {
+                if (!data.error) {
                     //thành công
                     $('#ForgetPasswordModal').modal('hide');
                     $('#confirmOTP').text(data.success);
                     $('#notifyOTPModal').modal('show');
                 } else {
                     //thất bại, hiển thị thông báo lỗi
-                    $('#ForgetPasswordModal').modal('show');
-                    $('#confirmOTP').text(data.fail);
+                    $('#ForgetPasswordModal').modal('hide');
+                    $('#confirmOTP').text(data.error);
                     // $('#confirmOTP').css('color', 'red');
                     // $('#ChangePasswordModal').modal('show');
                     $('#notifyOTPModal').modal('show');
