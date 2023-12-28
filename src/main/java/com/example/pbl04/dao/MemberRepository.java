@@ -12,8 +12,10 @@ import java.util.List;
 public interface MemberRepository extends JpaRepository<Thanhvien,Integer> {
     @Query("SELECT h FROM Thanhvien h WHERE h.maTK.id = :maTK")
     Thanhvien findMemberByID(int maTK);
-    @Query("select tv from Dangky dk, Hoatdong hd,Thanhvien tv where dk.maHD.id= hd.id and hd.id=:maHD and dk.maTK.id= tv.maTK.id and dk.trangThai=false and dk.phanQuyen=false")
+    @Query("select tv from Dangky dk,Thanhvien tv where dk.maHD.id=:maHD and dk.maTK.id= tv.maTK.id and dk.trangThai=false and dk.phanQuyen=false order by dk.maTK.id")
     List<Thanhvien> getMemberNeedConfirmByIDHD(Integer maHD);
+    @Query("select tv from Dangky dk,Taikhoan tv where dk.maHD.id=:maHD and dk.maTK= tv and dk.trangThai=false and dk.phanQuyen=false order by tv.id")
+    List<Taikhoan> getAccountNeedConfirmByIDHD(Integer maHD);
     @Transactional
     @Modifying
     @Query("update Dangky dk set dk.trangThai=true where dk.maHD.id=:maHD and dk.maTK.id=:maTK")
