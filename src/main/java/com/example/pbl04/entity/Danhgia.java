@@ -37,7 +37,7 @@ public class Danhgia {
     private String binhLuan;
 
     @Column(name = "thoiGianBL")
-    private Instant thoiGianBL = Instant.now();
+    private Instant thoiGianBL;
 
     @Column(name = "diemTNV")
     private Integer diemTNV;

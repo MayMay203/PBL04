@@ -5,6 +5,7 @@ import com.example.pbl04.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,6 +39,11 @@ public class AccountServiceImple implements AccountService{
     @Override
     public Taikhoan addAccount(Taikhoan taikhoan) {
         return accountRepository.save(taikhoan);
+    }
+
+    @Override
+    public List<Taikhoan> getAccountAd() {
+        return accountRepository.getAccountAd();
     }
 
     public Taikhoan changePassword(Taikhoan tk) {

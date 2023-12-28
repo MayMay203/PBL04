@@ -17,6 +17,7 @@
 <body>
 <div id="placeholder" style="height: 87px; display: none;"></div>
 <div id="myHeader" style="top: -87px" th:include="Header :: html"></div>
+<div class="ChiTietHoatDong">
 <div class="container">
   <!-- titel hoạt động -->
   <div class="row p-5">
@@ -92,7 +93,7 @@
               >Tham gia</button>
      </button>
         <div id="notification" class="notification">
-          <p>Vui lòng đăng nhập với username và password của bạn hoặc đăng ký tại Hopefully</p>
+          <p style="color: #0E5416; font-size: 0.8rem">Vui lòng đăng nhập hoặc đăng ký tại Hopefully</p>
           <button id="login">Đăng nhập</button>
           <button id="cancel">Hủy</button>
         </div>
@@ -120,7 +121,7 @@
                       Bạn có chắc chắn muốn tham gia ?
                     </div>
                     <div class="modal-footer">
-                      <button type="submit" class="btn btn-danger"  id="btnJoin"   th:attr="data-hoatdong-id=${hoatdong.id}, data-account-id=${account.id}" >Tham gia</button>
+                      <button type="submit" class="btn btn-danger"  id="btnJoin"   th:attr="data-hoatdong-id=${hoatdong.id}, data-account-id=${account.id}, data-organize-id=${taikhoan.id}" >Tham gia</button>
                       <button type="button" class="close closeModalLogout btn btn-secondary" data-dismiss="modal" >Hủy</button>
                     </div>
                   </div>
@@ -209,20 +210,21 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body modal-body-member">
-        <div class="modal-member"  th:each="thanhvien : ${thanhvienList}">
-           <span>
-             <img class="modal-member-ava" src="../static/images/ava1.jpg" alt="">
-             <span class="modal-member-name" th:text="${thanhvien.getHoTen()}"></span>
-          </span>
+        <div class="modal-member" th:each="thanhvien, iterStat : ${thanhvienList}">
+             <span>
+                    <img class="modal-member-ava" th:src="@{${thanhvien.getMaTK().getAnhDaiDien()}}" alt="">
+                    <span class="modal-member-name" th:text="${thanhvien.getHoTen()}"></span>
+             </span>
           <span class="modal-member-rate">
-            <i class="rate-detail" >5</i>
-            <i class="bi bi-star-fill icon-star"></i>
+              <i class="rate-detail" th:text="${pointList[iterStat.index]}"></i>
+              <i class="bi bi-star-fill icon-star"></i>
           </span>
         </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 <div style="margin-bottom: 2rem"></div>
 <div id="myFooter" th:include="Footer :: html" ></div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

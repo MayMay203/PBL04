@@ -1,12 +1,9 @@
 package com.example.pbl04.service;
-
+import com.example.pbl04.entity.*;
 import com.example.pbl04.dao.EvaluationRepository;
-import com.example.pbl04.entity.Danhgia;
-import com.example.pbl04.entity.Hoatdong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.example.pbl04.entity.*;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -123,6 +120,19 @@ public class EvaluationServiceImple implements EvaluationService {
     public void insertEvaluateMemb(Integer maTK, Integer maHD, Integer diemTNV) {
         evaluationRepo.insertEvaluateMemb(maTK,maHD,diemTNV);
     }
+    public List<Integer> getPointOfMember(List<Taikhoan> thanhvienList)
+    {
+        List<Integer> pointList = new ArrayList<>();
+        for(Taikhoan thanhvien : thanhvienList){
+            Integer point = evaluationRepo.sumPointByIDTK(thanhvien.getId());
+            if(point==null){
+                pointList.add(0);
+            }else{
+                pointList.add(point);
+            }
 
+        }
+        return  pointList;
+    }
 
 }

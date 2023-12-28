@@ -26,4 +26,5 @@ public interface EvaluationService {
 
     void evaluateMember(Danhgia evaluation);
     void insertEvaluateMemb(Integer maTK, Integer maHD, Integer diemTNV);
+    List<Integer> getPointOfMember(List<Taikhoan> thanhvienList);
 }

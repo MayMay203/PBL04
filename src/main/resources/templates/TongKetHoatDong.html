@@ -143,16 +143,16 @@
                                     <h7 class="green-color fs-11 fst-italic fw-medium" th:text="${eval.maTK.tenDN}"></h7>
                                 </div>
                                 <p class="fs-10 fst-italic m-0 px-3 modal-comment" th:text="${eval.binhLuan}"></p>
-                                <p class="green_light-color fst-italic fs-10 my-1 mx-3 modal-timeEval" th:text="${eval.thoiGianBL}"></p>
+                                <p class="green_light-color fst-italic fs-10 my-1 mx-3 modal-timeEval"  th:text="${#temporals.format(eval.thoiGianBL, ' HH:mm dd-MM-yyyy')}"></p>
                             </div>
                             <!-- Check comment -->
                             <div class="container d-flex align-items-center justify-content-center icon-container-div">
                                 <div th:if="${eval.tieuChi1==true}"  class="icon-container"><i class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i></div>
-                                 <div th:if="${eval.tieuChi1==false}"  class="icon-container">  <i class="bi bi-x-lg green_light-color flex-1 p-5 fs-6 fw-bold"></i></div>
+                                 <div th:if="${eval.tieuChi1==false}"  class="icon-container">  <i class="bi bi-x-lg green_light-color flex-1 p-4 fs-6 fw-bold"></i></div>
                                 <div th:if="${eval.tieuChi2==true}"  class="icon-container"><i class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i></div>
-                                <div th:if="${eval.tieuChi2==false}"  class="icon-container">  <i class="bi bi-x-lg green_light-color flex-1 p-5 fs-6 fw-bold"></i></div>
+                                <div th:if="${eval.tieuChi2==false}"  class="icon-container">  <i class="bi bi-x-lg green_light-color flex-1 p-4 fs-6 fw-bold"></i></div>
                                 <div th:if="${eval.tieuChi3==true}" class="icon-container"><i class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i></div>
-                                <div th:if="${eval.tieuChi3==false}" class="icon-container">  <i class="bi bi-x-lg green_light-color flex-1 p-5 fs-6 fw-bold"></i></div>
+                                <div th:if="${eval.tieuChi3==false}" class="icon-container">  <i class="bi bi-x-lg green_light-color flex-1 p-4 fs-6 fw-bold"></i></div>
                             </div>
                         </div>
                     </div>
@@ -189,13 +189,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body modal-body-member">
-                <div class="modal-member"  th:each="member: ${memberList}">
+                <div class="modal-member"  th:each="member, iterStat : ${memberList}">
                         <span>
                             <img class="modal-member-ava" th:src="@{${member.getMaTK().getAnhDaiDien()}}" alt="">
                             <span class="modal-member-name" th:text="${member.getHoTen()}"></span>
                         </span>
                     <span class="modal-member-rate">
-                            <i class="rate-detail">5</i>
+                            <i class="rate-detail" th:text="${pointList[iterStat.index]}"></i>
                             <i class="bi bi-star-fill icon-star"></i>
                         </span>
                 </div>

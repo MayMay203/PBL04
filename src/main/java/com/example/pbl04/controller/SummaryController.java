@@ -56,7 +56,9 @@ public class SummaryController {
         if (summary != null) {
             List<Tongket> summaryList = summaryService.getSummaryList();
             Taikhoan taikhoan = summaryService.getOrganizator(id);
-            List<Thanhvien> memberList = summaryService.getMemberList(id);
+            List<Thanhvien> memberList = activityService.getMemberList(id);
+            List<Taikhoan> taikhoanList = activityService.getAccountList(id);
+            List<Integer> pointList = evaluationService.getPointOfMember(taikhoanList);
             List<Anhtongket> imgSummaryList = summaryService.getimgSummaryList(summary.getId());
             Thanhvien member  = summaryService.getMemberByID(taikhoan.getId());
             List<Danhgia> evaluationOfAct = evaluationService.getEvaluationByIdAct(id);
@@ -68,6 +70,8 @@ public class SummaryController {
             model.addAttribute("summaryList",summaryList);
             model.addAttribute("evaluationOfAct",evaluationOfAct);
             model.addAttribute("registerInfor",registerInfor);
+            model.addAttribute("taikhoanList",taikhoanList);
+            model.addAttribute("pointList",pointList);
             sessionService.createSessionModel(model, session);
             return "TongKetHoatDong";
         } else {

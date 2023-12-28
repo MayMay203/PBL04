@@ -10,6 +10,7 @@ public interface MemberService {
     void updateInfor(Thanhvien thanhvien);
     void addMember(Thanhvien thanhvien);
     List<Thanhvien> getMemberNeedConfirmByIDHD(Integer maHD);
+    List<Taikhoan> getAccountNeedConfirmByIDHD(Integer maHD);
 
     void ConfirmMember(Integer maHD,Integer maTK);
     void CancelMember(Integer maHD,Integer maTK);

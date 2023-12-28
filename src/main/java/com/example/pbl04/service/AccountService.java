@@ -2,6 +2,8 @@ package com.example.pbl04.service;
 
 import com.example.pbl04.entity.*;
 
+import java.util.List;
+
 public interface AccountService {
     Danhgia GetAccountByID(Integer ID);
     Taikhoan CheckLogin(String tenDN, String matKhau);
@@ -10,4 +12,6 @@ public interface AccountService {
     Taikhoan addAccount(Taikhoan taikhoan);
 
     Taikhoan changePassword(Taikhoan tk);
+
+    List<Taikhoan> getAccountAd();
 }

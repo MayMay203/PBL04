@@ -35,6 +35,7 @@ $(document).ready(function () {
         joinActivity(maHD, maTK);
     });
     var modalContentUpdated = false;
+    var checkRegis = false;
     function joinActivity(maHD, maTK) {
 
         // Gửi AJAX request đến controller
@@ -44,7 +45,7 @@ $(document).ready(function () {
             data: { 'maHD': maHD, 'maTK': maTK },
             success: function (data) {
                 console.log('Success:', data);
-
+                //checkRegis=true;
                 // Assuming the submission is successful, update modal content and hide buttons
                 updateModalContent("Yêu cầu của bạn đang được xét duyệt.");
                 hideButtons();
@@ -75,7 +76,26 @@ $(document).ready(function () {
             location.reload();
         }
     });
+    if(checkRegis){
+        sendNoti();
+    }
+    function sendNoti()
+    {
+        var maOr = $(this).data('organize-id');
+        var noidung ="Một thành viên đang chờ phê duyệt tham gia hoạt động của bạn";
 
+        $.ajax({
+            type: 'POST',
+            url: '/them-thong-bao',
+            data: {  'maTK': maOr ,'maHD': maHD, 'noiDung': noidung},
+            success: function (data) {
+                console.log('Success:', data);
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
+    }
 });
 
 $(document).ready(function () {

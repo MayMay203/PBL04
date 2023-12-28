@@ -2,7 +2,6 @@ package com.example.pbl04.controller;
 
 import com.example.pbl04.entity.*;
 import com.example.pbl04.service.*;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.example.pbl04.entity.*;
+
 @Controller
 public class ConfirmController {
     private final ActivityService activityService;
@@ -26,13 +25,15 @@ public class ConfirmController {
     private final RegisterService registerService;
     private final MemberService memberService;
     private final SuggestionService suggestionService;
+    private final EvaluationService evaluationService;
     @Autowired
-    public ConfirmController(ActivityService activityService, SessionService sessionService, RegisterService registerService, MemberService memberService,SuggestionService suggestionService) {
+    public ConfirmController(ActivityService activityService, SessionService sessionService, RegisterService registerService, MemberService memberService, SuggestionService suggestionService, EvaluationService evaluationService) {
         this.activityService = activityService;
         this.sessionService = sessionService;
         this.registerService = registerService;
         this.memberService = memberService;
         this.suggestionService = suggestionService;
+        this.evaluationService = evaluationService;
     }
         @GetMapping("xet-duyet")
         public String showConfirmActivity(Model model, HttpSession session)
@@ -96,12 +97,17 @@ public class ConfirmController {
     }
     @GetMapping("/get-member-need-confirm")
     @ResponseBody
-    public ResponseEntity<List<Thanhvien>> viewMemberNeedConfirm(@RequestParam("maHD") Integer maHD)
+    public ResponseEntity<Map<String, Object>> viewMemberNeedConfirm(@RequestParam("maHD") Integer maHD)
     {
         try {
             List<Thanhvien> listMemberNeedConfirm = memberService.getMemberNeedConfirmByIDHD(maHD);
+            List<Taikhoan> taikhoanList= memberService.getAccountNeedConfirmByIDHD(maHD);
+            List<Integer> pointList = evaluationService.getPointOfMember(taikhoanList);
             System.out.println(listMemberNeedConfirm);
-            return ResponseEntity.ok(listMemberNeedConfirm);
+            Map<String, Object> responseMap = new HashMap<>();
+            responseMap.put("listMemberNeedConfirm", listMemberNeedConfirm);
+            responseMap.put("pointList", pointList);
+            return ResponseEntity.ok(responseMap);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -118,12 +124,17 @@ public class ConfirmController {
     }
     @GetMapping("/get-member-confirmed")
     @ResponseBody
-    public ResponseEntity<List<Thanhvien>> viewMemberConfirmed(@RequestParam("maHD") Integer maHD)
+    public ResponseEntity<Map<String, Object>> viewMemberConfirmed(@RequestParam("maHD") Integer maHD)
     {
         try {
             List<Thanhvien> listMemberConfirmed = activityService.getMemberList(maHD);
+            List<Taikhoan> taikhoanList = activityService.getAccountList(maHD);
+            List<Integer> pointList = evaluationService.getPointOfMember(taikhoanList);
             System.out.println(listMemberConfirmed);
-            return ResponseEntity.ok(listMemberConfirmed);
+            Map<String, Object> responseMap = new HashMap<>();
+            responseMap.put("listMemberConfirmed", listMemberConfirmed);
+            responseMap.put("pointList", pointList);
+            return ResponseEntity.ok(responseMap);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -179,16 +190,18 @@ public class ConfirmController {
 
     @PostMapping("/confirm-suggestion")
     @ResponseBody
-    public ResponseEntity<Void> confirmSugg(@RequestParam("idSugg") Integer idSugg) {
+    public ResponseEntity<Dexuat> confirmSugg(@RequestParam("idSugg") Integer idSugg) {
+            Dexuat confirmedSugg = suggestionService.getSuggById(idSugg);
             suggestionService.confirmSugg(idSugg);
-            return ResponseEntity.status(HttpStatus.OK).build();
+            return ResponseEntity.ok(confirmedSugg);
         }
 
     @PostMapping("/cancel-suggestion")
     @ResponseBody
-    public ResponseEntity<Void>  cancelSugg(@RequestParam("idSugg") Integer idSugg) {
+    public ResponseEntity<Dexuat>  cancelSugg(@RequestParam("idSugg") Integer idSugg) {
+        Dexuat canceledSugg = suggestionService.getSuggById(idSugg);
         suggestionService.cancelSugg(idSugg);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.ok(canceledSugg);
     }
 
     @GetMapping("/de-xuat-chua-duyet")

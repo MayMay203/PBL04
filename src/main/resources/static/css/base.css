@@ -124,6 +124,19 @@ body::-webkit-scrollbar-thumb {
     }
 }
 
+ /*CSS thông báo*/
+
+.notify-container{
+    position: relative;
+}
+.dropdown-notify{
+    position: absolute;
+    top: 100%;
+    right:0;
+    left: auto
+}
+
+
  /*Modal */
 .modal_{
     position: fixed;
@@ -633,6 +646,9 @@ body::-webkit-scrollbar-thumb {
     width: 2.5rem!important;
 }
 
+.mr-6rem{
+    margin-right: 6rem!important;
+}
 .h-1_8{
     height: 1.8rem !important;
 }

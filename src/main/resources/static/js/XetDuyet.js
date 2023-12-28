@@ -296,7 +296,9 @@ $(document).ready(function () {
                 console.log("error:", response.status);
 
             } else{
-                var listMember = await response.json();
+                var responseData = await response.json();
+                var listMember = responseData.listMemberNeedConfirm;
+                var pointList = responseData.pointList;
                 console.log(listMember);
                 console.log('ok');
                 // $('#MemberModal .modal-content').empty();
@@ -304,14 +306,14 @@ $(document).ready(function () {
                 $('#MemberModal .modal-body-member').empty();
                 $('#MemberModal .modal-footer').empty();
                 // $(targetModal + ' .modal-body-member').empty();
-                listMember.forEach(function (thanhvien) {
+                listMember.forEach(function (thanhvien,index) {
                     var modalContent = '<div class="modal-member">\
                                <span>\
                                  <img class="modal-member-ava" src="' + thanhvien.anh + '" alt="">\
                                  <span class="modal-member-name">' + thanhvien.hoTen + '</span>\
                                </span>\
                                <span class="modal-member-rate">\
-                                 <i class="rate-detail">5</i>\
+                                 <i class="rate-detail" >' + pointList[index] + '</i>\
                                  <i class="bi bi-star-fill icon-star"></i>\
                                  <input type="checkbox" value="'+thanhvien.id+'">\
                                </span>\
@@ -411,21 +413,23 @@ $(document).ready(function () {
                 console.log("error:", response.status);
 
             } else{
-                var listMember = await response.json();
+                var responseData = await response.json();
+                var listMember = responseData.listMemberConfirmed;
+                var pointList = responseData.pointList;
                 console.log(listMember);
                 console.log('ok');
                 $('#MemberModal').modal('show');
                 $('#MemberModal .modal-footer').empty();
                 $('#MemberModal .modal-body-member').empty();
                 // $(targetModal + ' .modal-body-member').empty();
-                listMember.forEach(function (thanhvien) {
+                listMember.forEach(function (thanhvien,index) {
                     var modalContent = '<div class="modal-member">\
                                <span>\
                                  <img class="modal-member-ava" src="' + thanhvien.anh + '" alt="">\
                                  <span class="modal-member-name">' + thanhvien.hoTen + '</span>\
                                </span>\
                                <span class="modal-member-rate">\
-                                 <i class="rate-detail">5</i>\
+                                 <i class="rate-detail">' + pointList[index] + '</i>\
                                  <i class="bi bi-star-fill icon-star"></i>\
                                  <input type="checkbox" value="'+thanhvien.id+'">\
                                </span>\
@@ -695,9 +699,25 @@ function reloadSugg(suggList){
 async function confirmSugg(){
     try{
         const idSugg = $(this).data("id")
-        const response =  fetch(`/confirm-suggestion?idSugg=${idSugg}`,{
+        const response =  await fetch(`/confirm-suggestion?idSugg=${idSugg}`,{
             method: 'POST'
         })
+        if(!response.ok){
+            console.log("Lỗi HTTP. Trạng thái " + response.status);
+            return;
+        }
+        //Thêm thông báo xét duyệt đề xuất
+        const confirmedSugg = await response.json();
+        const maTK = confirmedSugg.maTK.id;
+        const noiDung = "Đề xuất của bạn đã được duyệt thành công."
+        const loaiTB = 0;
+        const ma = confirmedSugg.id;
+        const addURL = await fetch(`/them-thong-bao?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`, {
+            method: 'POST'
+        });
+        if(!addURL.ok){
+            console.log("Lỗi thêm thông báo đề xuất. Trạng thái " + addURL.status);
+        }
         function customAlert(message){
             Swal.fire({
                 icon: 'success',
@@ -709,6 +729,7 @@ async function confirmSugg(){
             })
         }
         customAlert("Duyệt đề xuất thành công!")
+        //Load lại đề xuất chưa duyệt
         const res = await fetch(`de-xuat-chua-duyet`)
         if(!res.ok){
             console.log("Lỗi HTTP. Trạng thái " + res.status)
@@ -727,9 +748,25 @@ $(document).on('click', '#btn-confirm-sugg',confirmSugg)
 $(document).on('click', '#btn-cancel-sugg',async function (){
     try {
         const idSugg = $(this).data('id');
-        const response = fetch(`/cancel-suggestion?idSugg=${idSugg}`, {
+        const response = await fetch(`/cancel-suggestion?idSugg=${idSugg}`, {
             method: 'POST'
         });
+        if(!response.ok){
+            console.log("Lỗi HTTP. Trạng thái " + response.status);
+            return;
+        }
+        //Thêm thông báo xét duyệt đề xuất
+        const canceledSugg = await response.json();
+        const maTK = canceledSugg.maTK.id;
+        const noiDung = "Đề xuất của bạn đã bị hủy."
+        const loaiTB = 0;
+        const ma = canceledSugg.id;
+        const addURL = await fetch(`/them-thong-bao?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`, {
+            method: 'POST'
+        });
+        if(!addURL.ok){
+            console.log("Lỗi thêm thông báo đề xuất. Trạng thái " + addURL.status);
+        }
             function customAlert(message) {
                 Swal.fire({
                     icon: 'success',

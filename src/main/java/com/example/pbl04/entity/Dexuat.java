@@ -1,8 +1,10 @@
 package com.example.pbl04.entity;
 
+import com.example.pbl04.entity.Chude;
+import com.example.pbl04.entity.Taikhoan;
 import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
 
+import java.time.Instant;
 import java.time.LocalDate;
 
 @Entity
@@ -34,6 +36,9 @@ public class Dexuat {
 
     @Column(name = "tinhTrangDuyet", nullable = false)
     private Boolean tinhTrangDuyet = false;
+
+    @Column(name = "coXoa", nullable = false)
+    private Boolean coXoa = false;
 
     public Integer getId() {
         return id;
@@ -89,6 +94,14 @@ public class Dexuat {
 
     public void setTinhTrangDuyet(Boolean tinhTrangDuyet) {
         this.tinhTrangDuyet = tinhTrangDuyet;
+    }
+
+    public Boolean getCoXoa() {
+        return coXoa;
+    }
+
+    public void setCoXoa(Boolean coXoa) {
+        this.coXoa = coXoa;
     }
 
 }

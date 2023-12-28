@@ -220,8 +220,10 @@ async function saveEvaluation(e) {
 }
 async function EvaluationMember(e) {
     try{
+        console.log("Vo đây ok rồi nhe")
         const IdAct =+e.target.dataset.value;
         maHDTC = IdAct;
+        console.log(IdAct);
         const response =await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${IdAct}`);
         if(!response.ok){
             throw new Error(`Lỗi HTTP. Trạng thái: ${response.status}`)
@@ -272,7 +274,7 @@ async function EvaluationMember(e) {
                 const criteriaDiv = document.createElement("div");
                 criteriaDiv.classList.add("container", "d-flex", "justify-content-sm-end","p-2", "criteria-evaluation")
                 criteriaDiv.innerHTML=
-                    `    <h4 class="fs-9 green-color fst-italic me-4 text-center">Hoạt động<br>hữu ích</h4>
+                    `<h4 class="fs-9 green-color fst-italic me-4 text-center">Hoạt động<br>hữu ích</h4>
                     <h4 class="fs-9 green-color fst-italic me-4 text-center">Cần tổ chức<br>thường xuyên</h4>
                     <h4 class="fs-9 green-color fst-italic me-4 text-center">Cần tổ chức<br>rộng rãi</h4>
                 `
@@ -304,7 +306,6 @@ async function EvaluationMember(e) {
             //Members of activity
             members_activity.innerHTML = '';
             var i=0;
-            console.log("Thanh vien: ",membersList);
             membersList.forEach(member=>{
                 members_activity.innerHTML += `
                      <div class="container p-2 col-6 radius-1_8 position-relative member-evaluate">

@@ -14,5 +14,6 @@ public interface SuggestionService {
     void confirmSugg(Integer idSugg);
 
     void cancelSugg(Integer idSugg);
+    Dexuat getSuggById(Integer idSugg);
 
 }
