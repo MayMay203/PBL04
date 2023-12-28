@@ -19,12 +19,12 @@ public interface AccountRepository extends JpaRepository<Taikhoan,Integer>{
     @Query("update Taikhoan t set t.anhDaiDien = :avatarUrl where t.id = :accountId")
     void updateAvatar(@Param("avatarUrl") String avatarUrl, @Param("accountId") Integer accountId);
 
-    @Query("select tk from Taikhoan tk where tk.loaiTK = true")
-    List<Taikhoan> getAccountAd();
-
     @Query("select taikhoan from Taikhoan taikhoan where :username = taikhoan.tenDN")
     Taikhoan findByUsername(String username);
     @Modifying
     @Query("update Taikhoan t set t.matKhau = :password where t.id = :accountId")
     void TransAccount(Integer accountId, String password);
+
+    @Query("select tk from Taikhoan tk where tk.loaiTK = true")
+    List<Taikhoan> getAccountAd();
 }

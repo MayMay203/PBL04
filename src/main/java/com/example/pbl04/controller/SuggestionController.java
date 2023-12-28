@@ -18,16 +18,19 @@ public class SuggestionController {
     private final TopicService topicService;
     private final AccountService accountService;
     private final ActivityService    activityService;
+    private final NotificationService notificationService;
 
     @Autowired
     public SuggestionController(SuggestionService suggestionService, SessionService sessionService,
                                 TopicService topicService,AccountService accountService,
-                                ActivityService activityService) {
+                                ActivityService activityService,
+                                NotificationService notificationService) {
         this.suggestionService = suggestionService;
         this.sessionService = sessionService;
         this.topicService = topicService;
         this.accountService = accountService;
         this.activityService = activityService;
+        this.notificationService = notificationService;
     }
 
     @GetMapping("/de-xuat")
@@ -75,8 +78,15 @@ public class SuggestionController {
         dexuat.setMaChuDe(topicService.getTopicByID(maChuDe));
         dexuat.setMoTa(moTa);
         suggestionService.Save(dexuat);
-        System.out.println("Đề xuất mới nè " + dexuat.getId());
-//        redirectAttributes.addFlashAttribute("successeMessage","Thêm đề xuất thành công!");
+        Thongbao tb = new Thongbao();
+        tb.setNoiDung("Một đề xuất mới đang chờ duyệt");
+        tb.setLoaiTB(0);
+        tb.setMa(dexuat.getId());
+        List<Taikhoan> accList = accountService.getAccountAd();
+        for(Taikhoan acc : accList){
+            tb.setMaTK(acc);
+            notificationService.addNotification(tb);
+        }
         return "redirect:de-xuat";
     }
 
