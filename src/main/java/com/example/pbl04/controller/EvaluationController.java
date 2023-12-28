@@ -26,26 +26,24 @@ public class EvaluationController {
     private final EvaluationService evaluationService;
     private final ActivityService activityService;
     private final SessionService sessionService;
-    private final SummaryRepository summaryRepository;
+    private final SummaryService summaryService;
     private final RegisterService registerService;
     private final MemberService memberService;
-    private final EvaluationRepository evaluationRepository;
-    private final AccountRepository accountRepository;
+    private final AccountService accountService;
 
     @Autowired
     public EvaluationController(EvaluationService evaluationService, ActivityService activityService,
                                 SessionService sessionService,SummaryRepository summaryRepository,
                                 RegisterService registerService,MemberService memberService,
-                                EvaluationRepository evaluationRepository,
-                                AccountRepository accountRepository){
+                                SummaryService summaryService,
+                                AccountService accountService){
         this.evaluationService = evaluationService;
         this.activityService = activityService;
         this.sessionService = sessionService;
-        this.summaryRepository = summaryRepository;
+        this.summaryService = summaryService;
         this.registerService = registerService;
         this.memberService = memberService;
-        this.evaluationRepository = evaluationRepository;
-        this.accountRepository = accountRepository;
+        this.accountService = accountService;
     }
 
     @GetMapping("/trang-chu-danh-gia")
@@ -89,11 +87,11 @@ public class EvaluationController {
         int numberEvaluation = evaluationService.countEvaByIdAct(IdAct);
         List<Danhgia> evaluationOfAct = evaluationService.getEvaluationByIdAct(IdAct);
         Dangky registerInfor = activityService.getRegisterInfo(IdAct);
-        Tongket summary = summaryRepository.getSummaryByID(IdAct);
+        Tongket summary = summaryService.getSummaryByID(IdAct);
         List<Anhtongket> imagesList = new ArrayList<>();
         if(summary!=null)
         {
-          imagesList  = summaryRepository.getimgSummaryList(summary.getId());
+          imagesList  = summaryService.getimgSummaryList(summary.getId());
         }
         List<Dangky> registerList = registerService.getRegisterInforByIDAct(IdAct);
         List<Thanhvien> membersList = memberService.getMembersByRegis(registerList);
@@ -128,7 +126,7 @@ public class EvaluationController {
         Danhgia evaluation = evaluationService.getEvaluationByIDHDTK(maHD,maTK);
         if(evaluation==null){
             Danhgia newEvaluation = new Danhgia();
-            Taikhoan account= accountRepository.getAccountByID(maTK);
+            Taikhoan account= accountService.getTaiKhoanByID(maTK);
             Hoatdong activity = activityService.getActivityByID(maHD);
             newEvaluation.setMaHD(activity);
             newEvaluation.setMaTK(account);
@@ -156,7 +154,7 @@ public class EvaluationController {
         Danhgia evaluation = evaluationService.getEvaluationByIDHDTK(maHD,maTK);
         if(evaluation==null){
             Danhgia newEvaluation = new Danhgia();
-            Taikhoan account= accountRepository.getAccountByID(maTK);
+            Taikhoan account= accountService.getTaiKhoanByID(maTK);
             Hoatdong activity = activityService.getActivityByID(maHD);
             newEvaluation.setMaHD(activity);
             newEvaluation.setMaTK(account);
@@ -168,5 +166,6 @@ public class EvaluationController {
         }
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
 
 }

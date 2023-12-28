@@ -32,9 +32,11 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
      Taikhoan getOrganizator(Integer id);
     @Query("SELECT tt from Taikhoan tk , Thanhvien tt where tk = tt.maTK and tk.id=:id ")
     Thanhvien getMemberByID(Integer id);
-    @Query("select tv from Taikhoan tk,Thanhvien tv, Dangky dk where dk.maHD.id =:id and dk.maTK =tk and tk= tv.maTK and dk.phanQuyen=false and dk.trangThai=true")
+    @Query("select tv from Taikhoan tk,Thanhvien tv, Dangky dk where dk.maHD.id =:id and dk.maTK =tk and tk= tv.maTK and dk.phanQuyen=false and dk.trangThai=true order by tk.id")
     List<Thanhvien> getMemberList(Integer id);
    //Lấy List hoạt động đã tham gia bằng id tài khoản
+   @Query("select tk from Taikhoan tk, Dangky dk where dk.maHD.id =:id and dk.maTK =tk and dk.phanQuyen=false and dk.trangThai=true order by tk.id")
+    List<Taikhoan> getAccountList(Integer id);
    @Query("select hd from Hoatdong hd, Dangky dk where dk.maTK.id= :myID and hd.id = dk.maHD.id and hd.tinhTrangHD=2 and hd.tinhTrangDuyet=2 and dk.phanQuyen=false")
    List<Hoatdong> getListActivityByMyID(Integer myID);
     @Query("select h from Hoatdong h,Dangky dk where dk.phanQuyen=false and h.id = dk.maHD.id and dk.maTK.id=:id order by dk.thoiGianDK desc")
@@ -110,9 +112,9 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     @Modifying
     @Query("UPDATE Hoatdong e SET e.tinhTrangHD = 1 WHERE e.id=:maHD")
     void TransActivityToHappening(Integer maHD);
-    @Query("select hd from Hoatdong hd where hd.tenhd like %:nameAct% and hd.tinhTrangHD=0 and hd.tinhTrangDuyet=2")
+    @Query("select hd from Hoatdong hd where hd.tenhd like %:nameAct% and hd.tinhTrangHD=0 and hd.tinhTrangDuyet=1")
     List<Hoatdong> getActivityByNameAct(String nameAct);
-    @Query("select h from Hoatdong h where h.tinhTrangHD = 0 and h.tinhTrangDuyet=2")
+    @Query("select h from Hoatdong h where h.tinhTrangHD = 0 and h.tinhTrangDuyet=1")
     List<Hoatdong> getAllActivityNotOccured();
     @Transactional
     @Modifying

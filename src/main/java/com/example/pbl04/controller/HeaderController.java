@@ -1,11 +1,6 @@
 package com.example.pbl04.controller;
-
-import com.example.pbl04.entity.Chude;
-import com.example.pbl04.entity.Taikhoan;
-import com.example.pbl04.service.AccountService;
-import com.example.pbl04.service.MemberService;
-import com.example.pbl04.service.SessionService;
-import com.example.pbl04.service.TopicService;
+import com.example.pbl04.entity.*;
+import com.example.pbl04.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +13,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.example.pbl04.entity.*;
+
 @Controller
 public class HeaderController {
     public static final String SESSION_ATTR_ACCOUNT = "account";
@@ -26,13 +21,17 @@ public class HeaderController {
     private final AccountService accountService;
     private final MemberService memberService;
     private final SessionService sessionService;
+    private final AuthenticationService authenticationService;
+    private final PasswordEncoderService passwordEncoderService;
     @Autowired
     public HeaderController (TopicService topicService, AccountService accountService,
-                             MemberService memberService, SessionService sessionService) {
+                             MemberService memberService, SessionService sessionService, AuthenticationService authenticationService, PasswordEncoderService passwordEncoderService) {
         this.topicService = topicService;
         this.accountService = accountService;
         this.memberService = memberService;
         this.sessionService = sessionService;
+        this.authenticationService = authenticationService;
+        this.passwordEncoderService = passwordEncoderService;
     }
     @GetMapping("/footer")
     public String show(Model model, HttpSession session){
@@ -104,9 +103,11 @@ public class HeaderController {
 @ResponseBody
 public Map<String, Object> login(@RequestParam String tenDN, @RequestParam String matKhau, HttpSession session) {
     Map<String, Object> response = new HashMap<>();
-
-    Taikhoan account = accountService.CheckLogin(tenDN, matKhau);
+    System.out.println("O ngoai");
+    Taikhoan account= authenticationService.authenticateAccount(tenDN,matKhau);
+//    Taikhoan account = accountService.CheckLogin(tenDN, matKhau);
     if (account != null) {
+        System.out.println("THANH CONG");
         // Đăng nhập thành công, lưu thông tin tài khoản vào session
         session.setAttribute(SESSION_ATTR_ACCOUNT, account);
         response.put("account", account);
@@ -115,13 +116,13 @@ public Map<String, Object> login(@RequestParam String tenDN, @RequestParam Strin
         // Thêm mã JavaScript để load lại trang sau khi đăng nhập
         response.put("reloadPage", true);
     } else {
+        System.out.println("KHong co tai khoan");
         response.put("error", "Tên đăng nhập hoặc mật khẩu không đúng");
         session.setAttribute(SESSION_ATTR_ACCOUNT, new Taikhoan());
         response.put("account", new Taikhoan());
         response.put("loginState", false);
         response.put("isLogin", false);
     }
-
     return response;
 }
 @PostMapping("/change-password")
@@ -200,7 +201,8 @@ public ResponseEntity<Map<String, Object>> addAccount(@RequestParam(name = "tenD
     Taikhoan taikhoan = new Taikhoan();
     String anhDaiDien = "/images/avatar-mac-dinh.png";
     taikhoan.setAnhDaiDien(anhDaiDien);
-    taikhoan.setMatKhau(matKhau);
+    String md5matkhau = passwordEncoderService.encodePassword(matKhau);
+    taikhoan.setMatKhau(md5matkhau);
     taikhoan.setTenDN(tenDN);
     taikhoan.setLoaiTK(false);
     System.out.println("Account:" + taikhoan.getMatKhau() + taikhoan.getTenDN() + taikhoan.getLoaiTK());

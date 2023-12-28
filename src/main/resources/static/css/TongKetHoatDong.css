@@ -283,7 +283,9 @@
 }
 
 .icon-container {
-    margin-right: 2rem; /* Adjust the value according to your desired spacing */
+    /*margin-right: 2rem; !* Adjust the value according to your desired spacing *!*/
+    margin-right: 0.3rem;
+    margin-left: 1.7rem;
 
 }
 .icon-container-div{
@@ -498,9 +500,17 @@
 .ml-3{
     margin-left: 3rem;
 }
-
+.ml-5{
+    margin-left: 5rem;
+}
+.ml-6{
+    margin-left: 6rem;
+}
 .px-4_5{
     padding: 0 3.5rem!important;
+}
+.p-4_5{
+    padding: 4.5rem 4.5rem !important;
 }
 
 .justify-content-end{
@@ -652,6 +662,9 @@
 
 .pt-1_2{
     padding-top: 1.2rem;
+}
+.pl-1{
+    padding-left: 1rem;
 }
 
 @media (min-width: 463px) and (max-width: 997px) {

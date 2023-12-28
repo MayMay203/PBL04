@@ -3,7 +3,6 @@ package com.example.pbl04.controller;
 import com.example.pbl04.entity.*;
 import com.example.pbl04.service.*;
 import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,7 +27,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
-import com.example.pbl04.entity.*;
+
 @Controller
 public class ActivityController {
     private final ActivityService activityService;
@@ -36,14 +35,16 @@ public class ActivityController {
     private final TopicService topicService;
     private final RegisterService registerService;
     private final AccountService accountService;
+    private final EvaluationService evaluationService;
 
     @Autowired
-    public ActivityController(ActivityService activityService, TopicService topicService, SessionService sessionService, RegisterService registerService, AccountService accountService){
+    public ActivityController(ActivityService activityService, TopicService topicService, SessionService sessionService, RegisterService registerService, AccountService accountService, EvaluationService evaluationService){
         this.activityService=activityService;
         this.topicService = topicService;
         this.sessionService = sessionService;
         this.registerService = registerService;
         this.accountService = accountService;
+        this.evaluationService = evaluationService;
     }
 
    @GetMapping("/trang-chu-hoat-dong")
@@ -51,7 +52,6 @@ public class ActivityController {
     {
         Integer numberParticipants= activityService.getParticipants();
         Integer numberActivitys= activityService.getNumActivity();
-//        List<Hoatdong> actiListUpcomming1 =activityService.getActivityUpcomming();
         List<Dangky> actiListUpcomming =activityService.getActivityUpcomming();
         List<Hoatdong> actiList = activityService.getActivityOccured();
         List<Hoatdong> actiListHappening= activityService.getActivityHappening();
@@ -60,7 +60,6 @@ public class ActivityController {
         model.addAttribute("actiListHappening",actiListHappening);
         model.addAttribute(("actiListUpcomming"),actiListUpcomming);
         model.addAttribute("numberParticipants",numberParticipants);
-        // Kiểm tra xem người dùng đã đăng nhập chưa
         sessionService.createSessionModel(model, session);
         return "TrangChuHoatDong";
     }
@@ -79,6 +78,8 @@ public class ActivityController {
         Dangky checkDangky = registerService.getDangKyByHDTK(myaccount.getId(), id);
         Taikhoan taikhoan =activityService.getOrganizator(id);
         List<Thanhvien> thanhvienList =activityService.getMemberList(id);
+        List<Taikhoan> taikhoanTV= activityService.getAccountList(id);
+        List<Integer> pointList=evaluationService.getPointOfMember(taikhoanTV);
         Thanhvien  thanhvien=activityService.getMemberByID(taikhoan.getId());
         Hoatdong hoatdong = activityService.getActivityByID(id);
         model.addAttribute("hoatdong",hoatdong);
@@ -86,14 +87,10 @@ public class ActivityController {
         model.addAttribute("thanhvien",thanhvien);
         model.addAttribute("thanhvienList",thanhvienList);
         model.addAttribute("checkDangky",checkDangky);
+        model.addAttribute("pointList",pointList);
+        model.addAttribute("taikhoan",taikhoan);
         return "ChiTietHoatDong";
     }
-//    @GetMapping("/them-hoat-dong")
-//    public String showModalThemHoatDong(Model model, HttpSession session){
-//        model.addAttribute("activity", new Hoatdong());
-//        sessionService.createSessionModel(model, session);
-//        return  "ThemHoatDong";
-//    }
 
     @PostMapping("/addActivity")
     @ResponseBody
@@ -240,10 +237,5 @@ public class ActivityController {
         List<Hoatdong> activityList = activityService.getActByLocation(location);
         return ResponseEntity.ok(activityList);
     }
-//    @Transactional
-//    public void updateTrangThaiForExpiredEntities() {
-//        Date currentDate = new Date();
-//        activityService.updateTrangThaiByNgayAndTrangThai(currentDate);
-//    }
 }
 
