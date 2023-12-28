@@ -41,14 +41,14 @@ public class NotificationController {
        if(maTK!=null){
            Taikhoan tk = accountService.getTaiKhoanByID(maTK);
            tb.setMaTK(tk);
-           notificationService.addNoticeOfSugg(tb);
+           notificationService.addNotification(tb);
        }
     //  Thêm thông báo cho admin
         else{
             List<Taikhoan> adList = accountService.getAccountAd();
             for(Taikhoan acc : adList){
                 tb.setMaTK(acc);
-                notificationService.addNoticeOfSugg(tb);
+                notificationService.addNotification(tb);
            }
        }
         return ResponseEntity.status(HttpStatus.OK).build();

@@ -103,9 +103,11 @@ public class HeaderController {
 @ResponseBody
 public Map<String, Object> login(@RequestParam String tenDN, @RequestParam String matKhau, HttpSession session) {
     Map<String, Object> response = new HashMap<>();
+    System.out.println("O ngoai");
     Taikhoan account= authenticationService.authenticateAccount(tenDN,matKhau);
 //    Taikhoan account = accountService.CheckLogin(tenDN, matKhau);
     if (account != null) {
+        System.out.println("THANH CONG");
         // Đăng nhập thành công, lưu thông tin tài khoản vào session
         session.setAttribute(SESSION_ATTR_ACCOUNT, account);
         response.put("account", account);
@@ -114,6 +116,7 @@ public Map<String, Object> login(@RequestParam String tenDN, @RequestParam Strin
         // Thêm mã JavaScript để load lại trang sau khi đăng nhập
         response.put("reloadPage", true);
     } else {
+        System.out.println("KHong co tai khoan");
         response.put("error", "Tên đăng nhập hoặc mật khẩu không đúng");
         session.setAttribute(SESSION_ATTR_ACCOUNT, new Taikhoan());
         response.put("account", new Taikhoan());
