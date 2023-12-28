@@ -35,20 +35,22 @@
         <!-- Left -->
         <div class="container p-5 pt-0 fs-6 mx--2 flex-3 mh-90">
             <h2 class="mx-0 fs-4 mb-sm-3 green-color" >TỔNG KẾT HOẠT ĐỘNG</h2>
-            <div class="act-slider">
-                <div class="container-item" th:each="i : ${#numbers.sequence(0, summaryList.size() div 4 + ((summaryList.size()%4 > 0) ? 1 : 0) - 1)}">
-                    <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<summaryList.size()}">
-                        <img th:src="@{${summaryList.get((4*i)+j).getMaHD().getAnh()}}" alt="" class="float-start w-15 h-80 act-image"/>
-                        <div class="card border-0">
-                            <div class="card-body fs-7">
-                                <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1" th:text="${summaryList.get((4*i)+j).getMaHD().getTenhd()}"></div>
-                                <div class="card-text" th:text="${#strings.length(summaryList.get((4*i)+j).getLoiKet()) > 300 ? summaryList.get((4*i)+j).getLoiKet().substring(0, 300) + '...' : summaryList.get((4*i)+j).getLoiKet()}"></div>
-                                <div class="card-text">
-                                    <i class="bi bi-calendar2 m-1 green-color"></i><span th:text="${#temporals.format(summaryList.get((4*i)+j).getMaHD().getThoiGianBD(), 'dd/MM/yyyy')} + ' - ' + ${#temporals.format(summaryList.get((4*i)+j).getMaHD().getThoiGianKT(), 'dd/MM/yyyy')}"></span>
-                                </div>
-                                <br>
-                                <div class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 p-1 pleft-6 fs-8 mt-9 text_align-center "><a class="btn-summary" th:href="@{/View-Summary(id=${summaryList.get((4*i)+j).getMaHD().getId()})}">Xem tổng kết</a></div>
-                            </div>
+            <div class="surround-left">
+                <div class="act-slider">
+                    <div class="container-item" th:each="i : ${#numbers.sequence(0, summaryList.size() div 4 + ((summaryList.size()%4 > 0) ? 1 : 0) - 1)}">
+                        <div class="container d-flex align-items-center float-start p-0 pb-2 border_bottom-solid cursor-pointer" th:each="j:${#numbers.sequence(0,3)}" th:if="${(4*i+j)<summaryList.size()}">
+                                    <img  th:src="@{${summaryList.get((4*i)+j).getMaHD().getAnh()}}" alt="" class="float-start w-15 h-80 act-image col-2"/>
+                                    <div class="card border-0 col-10">
+                                        <div class="card-body fs-7">
+                                            <div class="card-title fs-6 fw-bolder green-color lh-1 max-line-1" th:text="${summaryList.get((4*i)+j).getMaHD().getTenhd()}"></div>
+                                            <div class="card-text" th:text="${#strings.length(summaryList.get((4*i)+j).getLoiKet()) > 300 ? summaryList.get((4*i)+j).getLoiKet().substring(0, 300) + '...' : summaryList.get((4*i)+j).getLoiKet()}"></div>
+                                            <div class="card-text">
+                                                <i class="bi bi-calendar2 m-1 green-color"></i><span th:text="${#temporals.format(summaryList.get((4*i)+j).getMaHD().getThoiGianBD(), 'dd/MM/yyyy')} + ' - ' + ${#temporals.format(summaryList.get((4*i)+j).getMaHD().getThoiGianKT(), 'dd/MM/yyyy')}"></span>
+                                            </div>
+                                            <br>
+                                            <div class="card-text bg-btn height-2rem radius-lghalf mt-7 white-color fs-9 p-1 pleft-6 fs-8 mt-9 text_align-center "><a class="btn-summary" th:href="@{/View-Summary(id=${summaryList.get((4*i)+j).getMaHD().getId()})}">Xem tổng kết</a></div>
+                                        </div>
+                                    </div>
                         </div>
                     </div>
                 </div>

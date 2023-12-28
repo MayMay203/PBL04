@@ -61,6 +61,16 @@
     font-size: 2rem;
     cursor: pointer;
 }
+.container-activity{
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: 0 !important;
+    padding-left:0 !important;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 
 .position-abs{
     position: absolute !important;
