@@ -53,5 +53,10 @@ public class SuggestionServiceImple implements SuggestionService {
         Dexuat sugg = suggestionRepo.getSuggByID(idSugg);
         suggestionRepo.delete(sugg);
     }
+
+    @Override
+    public Dexuat getSuggById(Integer idSugg) {
+        return suggestionRepo.getSuggByID(idSugg);
+    }
 }
 

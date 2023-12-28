@@ -179,16 +179,18 @@ public class ConfirmController {
 
     @PostMapping("/confirm-suggestion")
     @ResponseBody
-    public ResponseEntity<Void> confirmSugg(@RequestParam("idSugg") Integer idSugg) {
+    public ResponseEntity<Dexuat> confirmSugg(@RequestParam("idSugg") Integer idSugg) {
+            Dexuat confirmedSugg = suggestionService.getSuggById(idSugg);
             suggestionService.confirmSugg(idSugg);
-            return ResponseEntity.status(HttpStatus.OK).build();
+            return ResponseEntity.ok(confirmedSugg);
         }
 
     @PostMapping("/cancel-suggestion")
     @ResponseBody
-    public ResponseEntity<Void>  cancelSugg(@RequestParam("idSugg") Integer idSugg) {
+    public ResponseEntity<Dexuat>  cancelSugg(@RequestParam("idSugg") Integer idSugg) {
+        Dexuat canceledSugg = suggestionService.getSuggById(idSugg);
         suggestionService.cancelSugg(idSugg);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.ok(canceledSugg);
     }
 
     @GetMapping("/de-xuat-chua-duyet")

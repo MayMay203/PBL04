@@ -695,9 +695,26 @@ function reloadSugg(suggList){
 async function confirmSugg(){
     try{
         const idSugg = $(this).data("id")
-        const response =  fetch(`/confirm-suggestion?idSugg=${idSugg}`,{
+        const response =  await fetch(`/confirm-suggestion?idSugg=${idSugg}`,{
             method: 'POST'
         })
+        if(!response.ok){
+            console.log("Lỗi HTTP. Trạng thái " + response.status);
+            return;
+        }
+        //Thêm thông báo xét duyệt đề xuất
+        const confirmedSugg = await response.json();
+        console.log(confirmedSugg);
+        const maTK = confirmedSugg.maTK.id;
+        const noiDung = "Đề xuất của bạn đã được duyệt thành công."
+        const loaiTB = 0;
+        const ma = confirmedSugg.id;
+        const addURL = await fetch(`/them-thong-bao-de-xuat?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`, {
+            method: 'POST'
+        });
+        if(!addURL.ok){
+            console.log("Lỗi thêm thông báo đề xuất. Trạng thái " + addURL.status);
+        }
         function customAlert(message){
             Swal.fire({
                 icon: 'success',
@@ -709,6 +726,7 @@ async function confirmSugg(){
             })
         }
         customAlert("Duyệt đề xuất thành công!")
+        //Load lại đề xuất chưa duyệt
         const res = await fetch(`de-xuat-chua-duyet`)
         if(!res.ok){
             console.log("Lỗi HTTP. Trạng thái " + res.status)
@@ -727,9 +745,26 @@ $(document).on('click', '#btn-confirm-sugg',confirmSugg)
 $(document).on('click', '#btn-cancel-sugg',async function (){
     try {
         const idSugg = $(this).data('id');
-        const response = fetch(`/cancel-suggestion?idSugg=${idSugg}`, {
+        const response = await fetch(`/cancel-suggestion?idSugg=${idSugg}`, {
             method: 'POST'
         });
+        if(!response.ok){
+            console.log("Lỗi HTTP. Trạng thái " + response.status);
+            return;
+        }
+        //Thêm thông báo xét duyệt đề xuất
+        const canceledSugg = await response.json();
+        console.log(canceledSugg);
+        const maTK = canceledSugg.maTK.id;
+        const noiDung = "Đề xuất của bạn đã bị hủy."
+        const loaiTB = 0;
+        const ma = canceledSugg.id;
+        const addURL = await fetch(`/them-thong-bao-de-xuat?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`, {
+            method: 'POST'
+        });
+        if(!addURL.ok){
+            console.log("Lỗi thêm thông báo đề xuất. Trạng thái " + addURL.status);
+        }
             function customAlert(message) {
                 Swal.fire({
                     icon: 'success',

@@ -35,6 +35,8 @@
                Đăng nhập
            </button>
        </div>
+
+
             <!-- Thông tin người dùng và các chức năng khác -->
         <div class="dropdown dropstart user-profile col" th:if="${isLogin}">
             <button id="btnLogout"  class="float-end"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Đăng xuất"><i class="bi bi-box-arrow-right"></i></button>
@@ -59,9 +61,33 @@
                 </div>
             </div>
 
+            <!-- Thông báo cho người dùng      -->
+            <div th:if="${isLogin}" class="notify-container">
+                <button id="btn_notify" class="float-end no-border bg-white mt-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-bell p-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Thông báo"></i>
+                </button>
+                <!-- Thông tin thông báo -->
+                <ul class="p-3 dropdown-menu dropdown-notify">
+                    <div class="dropdown-item cursor-pointer">
+                       <p class="p-0 m-0 fs-8"> <b>Đề xuất</b> của bạn đã được duyệt thành công.</p>
+                        <p class="p-0 m-0 fs-9 green_light-color fst-italic fw-bold">12:00:00 28/12/2023</p>
+                    </div>
+                    <div class="dropdown-item cursor-pointer">
+                        <p class="p-0 m-0 fs-8"> <b>Đề xuất</b> của bạn đã được duyệt thành công.</p>
+                        <p class="p-0 m-0 fs-9 green_light-color fst-italic fw-bold">12:00:00 28/12/2023</p>
+                    </div>
+                    <div class="dropdown-item cursor-pointer">
+                        <p class="p-0 m-0 fs-8"> <b>Đề xuất</b> của bạn đã được duyệt thành công.</p>
+                        <p class="p-0 m-0 fs-9 green_light-color fst-italic fw-bold">12:00:00 28/12/2023</p>
+                    </div>
+
+                </ul>
+            </div>
+
             <button id="btn_userProfile" class="float-end" data-bs-toggle="dropdown"  aria-haspopup="true" aria-expanded="false"  >
                 <img data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tài khoản" class="img-avartar-login" th:src="@{${user.getMaTK().getAnhDaiDien()}}" alt="ảnh đại diện" >
             </button>
+
             <ul class="p-3 dropdown-menu">
               <div>
                   <img class="img-avatar-small" th:src="@{${user.getMaTK().getAnhDaiDien()}}" alt="">
@@ -76,6 +102,7 @@
             </ul>
 
         </div>
+
 
 <!--        </div>-->
 
