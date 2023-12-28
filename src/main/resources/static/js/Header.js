@@ -308,7 +308,50 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+// -----gửi OTP----
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('btn-send-otp').addEventListener('click', function (e) {
+        e.preventDefault();
+        // Lấy giá trị từ form
+        var email = $('#emailReceiveOTP').val();
+        // Gọi AJAX đến endpoint xử lý đăng nhập
+        $.ajax({
+            type: 'POST',
+            url: '/send-otp',
 
+            data: { 'email': email},
+            success: function (data) {
+                // console.log('data:', data);
+                // var reloadPage = data.reloadPage;/* Đọc giá trị từ response hoặc từ nơi khác */;
+                //
+                if (data.reloadPage) {
+                    // Thực hiện load lại trang
+
+                    // $('#btn_userProfile').show();
+                    // $('.modal-backdrop').remove();
+                }
+
+
+                if (!data.error) {
+                    // Gửi otp thành công
+                    // $('#DangNhapModal').modal('hide');
+                    // $('#btnLoginModal').hide();
+                    // $('#btn_userProfile').show();
+                    // $('.modal-backdrop').remove();
+                    alert("đã gửi email thành công");
+                }
+                else {
+                //     // Đăng nhập thất bại, hiển thị thông báo lỗi
+                //     $('#error-message').text(data.error);
+                //     $('#DangNhapModal').modal('show');
+                }
+            },
+            error: function (error) {
+                console.error('Đã có lỗi xảy ra:', error);
+            }
+        });
+    });
+});
 
 //===============================modal chung xem đánh giá của hoạt động=============================
 async function handleViewDetail(e){

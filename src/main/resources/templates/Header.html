@@ -346,7 +346,7 @@
                         <label class="form-check-label">
                             <input class="form-check-input" type="checkbox" name="remember"> Ghi nhớ mật khẩu
                         </label>
-                        <span id="status_forget">Quên mật khẩu?</span>
+                        <input type="button" class="status_forget" data-bs-toggle="modal" data-bs-target="#ForgetPasswordModal" value="Quên mật khẩu?">
                     </div>
                     <div class="footer_login-another">
                         <span class="login_or">HOẶC</span>
@@ -366,55 +366,99 @@
     </div>
 </div>
 
+<!--quên mật khẩu-gửi OTP-->
+<div class="modal fade" id="ForgetPasswordModal" tabindex="-1" aria-labelledby="modalForgetPassword" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-dangnhap" style="top: 12%">
+        <div class="modal-content modal-content-forgetPass">
+            <div class="modal-header modal-header-dangnhap">
+                <button type="button" class="btn-close btnClose" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body modal-body-dangnhap ">
+                <div class="header_login">
+                    <p class="title-top">CẤP LẠI MẬT KHẨU</p>
+                </div>
+                <div class="body_login">
+                    <form id="formForgetPassword" th:action="@{/forget-password}" method="post">
+                        <div class="body_forgetPass-content">
+                            <label class="lblEmail float-start" for="emailReceiveOTP">Gửi OTP đến email:</label>
+                            <div style="position: relative">
+                               <input class="body_login_input" id="emailReceiveOTP" name="email" type="email" required>
+                               <button style="top:71%" class="btndelete_input" type="button" onclick="clearInput('emailReceiveOTP')">
+                                   <i class="bi bi-x delete_input"></i>
+                               </button>
+                            </div>
+                            <div>
+                                <input type="button" class="float-start btn-send-again" value="Gửi lại mã OTP?" >
+                                <input type="button" class="float-end btn-send-otp" value="GỬI OTP" id="btn-send-otp">
+                            </div>
+                        </div>
+                        <div class="body_forgetPass-content" >
+                           <label class="lblEmail float-start" for="inputOTP" style="margin-top: 1rem">Nhập mã OTP để xác nhận:</label>
+                            <div style="position: relative; ">
+                                <input style="margin-top: 0.85rem" type="submit" class="float-end btn-send-otp" value="XÁC NHẬN" >
+                                <input style="width: 8rem; margin-right: 2rem" class="body_login_input float-end" id="inputOTP" name="maOTP" type="text" required >
+<!--                                <button style="top:82%;" class="btndelete_input" type="button" onclick="clearInput('inputOTP')">-->
+<!--                                    <i class="bi bi-x delete_input"></i>-->
+<!--                                </button>-->
+                            </div>
+                        </div>
+<!--                        <input type="submit" name="btn1" id="btnConfirmOTP" value="XÁC NHẬN OTP" >-->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--modal thay đổi mật khẩu-->
-<!--<div class="modal fade" id="ChangePasswordModal" tabindex="-1" aria-labelledby="modalChangePassword" aria-hidden="true">-->
-<!--    <div class="modal-dialog modal-dialog-changePassword">-->
-<!--        <div class="modal-content modal-content-changePassword">-->
-<!--            <div class="modal-header modal-header-login">-->
-<!--                <button type="button" class="btn-close btnClose" data-bs-dismiss="modal"-->
-<!--                        aria-label="Close"></button>-->
-<!--            </div>-->
-<!--            <div class="modal-body modal-body-changePassword ">-->
-<!--                <div class="header_login">-->
-<!--                    <p class="title-top">ĐỔI MẬT KHẨU</p>-->
-<!--                </div>-->
+<div class="modal fade" id="ChangePasswordModal" tabindex="-1" aria-labelledby="modalChangePassword" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-changePassword">
+        <div class="modal-content modal-content-changePassword">
+            <div class="modal-header modal-header-login">
+                <button type="button" class="btn-close btnClose" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body modal-body-changePassword ">
+                <div class="header_login">
+                    <p class="title-top">ĐỔI MẬT KHẨU</p>
+                </div>
 
-<!--                <div class="body_changePassword">-->
-<!--                    <form id="formChangePassword" th:action="@{/change-password}" method="post" th:object="${account}">-->
-<!--                        <div class="body_login-content">-->
-<!--                            <input class="body_login_input" name="username" type="text" placeholder="    Tên đăng nhập"    required>-->
-<!--                            <button class="btndelete_input" type="button" onclick="clearInput('username')">-->
-<!--                                <i class="bi bi-x delete_input"></i>-->
-<!--                            </button>-->
-<!--                        </div>-->
-<!--                        <div class="body_login-content">-->
-<!--                            <input class="body_login_input" name="password" type="password" placeholder="    Mật khẩu"  required minlength="6" maxlength="20">-->
-<!--                            <button class="btndelete_input" type="button" onclick="clearInput('password')">-->
-<!--                                <i class="bi bi-x delete_input"></i>-->
-<!--                            </button>-->
-<!--                        </div>-->
+                <div class="body_changePassword">
+                    <form id="formChangePassword" th:action="@{/change-password}" method="post" th:object="${account}">
+                        <div class="body_login-content">
+                            <input class="body_login_input" name="username" type="text" placeholder="    Tên đăng nhập"    required>
+                            <button class="btndelete_input" type="button" onclick="clearInput('username')">
+                                <i class="bi bi-x delete_input"></i>
+                            </button>
+                        </div>
+                        <div class="body_login-content">
+                            <input class="body_login_input" name="password" type="password" placeholder="    Mật khẩu"  required minlength="6" maxlength="20">
+                            <button class="btndelete_input" type="button" onclick="clearInput('password')">
+                                <i class="bi bi-x delete_input"></i>
+                            </button>
+                        </div>
 
-<!--                        <div class="showPass">-->
-<!--                            <input class="form-check-input checkShowPass" type="checkbox" name="checkShowPass" > Hiện mật khẩu-->
+                        <div class="showPass">
+                            <input class="form-check-input checkShowPass" type="checkbox" name="checkShowPass" > Hiện mật khẩu
 
-<!--                        </div>-->
-<!--                        &lt;!&ndash; Hiển thị thông báo lỗi nếu có &ndash;&gt;-->
-<!--                        <div class="error-message">-->
-<!--                            &lt;!&ndash;                                <p class="notify-error"></p>&ndash;&gt;-->
-<!--                        </div>-->
-<!--                        <input type="submit" name="btn1" id="btnChangePassword" value="ĐỔI MẬT KHẨU" >-->
-<!--                    </form>-->
-<!--                    <div class="footer_login-status">-->
-<!--                        <label class="form-check-label">-->
-<!--                            <input class="form-check-input" type="checkbox" name="remember"> Ghi nhớ mật khẩu-->
-<!--                        </label>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+                        </div>
+                        <!-- Hiển thị thông báo lỗi nếu có -->
+                        <div class="error-message">
+                            <!--                                <p class="notify-error"></p>-->
+                        </div>
+                        <input type="submit" name="btn1" id="btnChangePassword" value="ĐỔI MẬT KHẨU" >
+                    </form>
+                    <div class="footer_login-status">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="remember"> Ghi nhớ mật khẩu
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

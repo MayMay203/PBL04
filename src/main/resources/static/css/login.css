@@ -81,7 +81,7 @@
     color: #CC0000;
     font-size: 13px;
 }
-#btnLogin{
+#btnLogin, #btnConfirmOTP{
     width: 17rem;
     height: 2.5rem;
     background: linear-gradient(91deg, #0E5416 8.46%, #48E56B 114.48%);
@@ -89,7 +89,60 @@
     border-radius: 20px;
     margin-top:7px;
     border: 0.5px solid #174407;
-
+}
+.body_forgetPass-content input:not([type="button"]):not([type="submit"]){
+    width: 17rem;
+    height: 2.5rem;
+    border-radius: 8px;
+    background: #ccfdce;
+    border: 0.5px solid #174407;
+    outline: none;
+    padding: 0 1.3rem;
+    color: #065401;
+    margin-top: 0.6rem;
+}
+.modal-content-forgetPass{
+    /*background-image: url("../images/nen_quen_mk.png");*/
+    /*background: linear-gradient(271deg, #91dc78 0%, rgba(94, 178, 52, 0.93) 199.87%);*/
+    /*background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url("../images/nen_quenmk.png");*/
+    background: linear-gradient(rgba(254, 254, 254 , 0.32), rgba(255, 255, 255, 0)), url(../images/nen_quenmk.png);
+    background-size: cover;
+    width:25rem;
+    height: 30.5rem;
+    align-content: center;
+    background-position: bottom ;
+}
+.lblEmail{
+    color: #185b00;
+    margin-left: 4.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.btn-send-again{
+    margin-left: 4rem;
+    background: none;
+    color: #000000;
+    border: none;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.2rem 0.5rem;
+}
+.btn-send-again:hover{
+    font-weight: 500;
+}
+.btn-send-otp{
+    width: 7rem;
+    height: 2rem;
+    background: linear-gradient(91deg, #0f6919 8.46%, #12862c 114.48%);
+    color: white;
+    border-radius: 20px;
+    margin-top: 0.5rem;
+    border: 0.5px solid #174407;
+    margin-right: 4rem;
+    margin-bottom: 1rem
+}
+.btn-send-otp:hover{
+    background: linear-gradient(91deg, #03440c 8.46%, #006e21 114.48%);
 }
 ::placeholder{
     color:#174407;
@@ -139,6 +192,18 @@
     font-size: 0.9rem;
     color:#174407;
     font-weight: 400;
+}
+
+.status_forget{
+    border: none;
+    width: fit-content;
+    background-color: #ffffff;
+    color: #174407;
+    font-size: 14px;
+}
+.status_forget:hover{
+    font-weight: 500;
+    color: #113305;
 }
 /* Theme Anhr */
 

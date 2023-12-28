@@ -135,7 +135,7 @@
             <button class="btnEvaluate" th:if="${activity.getTinhTrangHD()!=2}" data-bs-toggle="modal" data-bs-target="#notifyEvaluateModal"><i  class="bi bi-chat-square-heart" ></i> Đánh giá</button>
             <button class="buttonSummary btnSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#confirmAddSummaryModal" th:if="${listSummaryIsHostActi.get(index.index)} == -1 and ${activity.getTinhTrangHD()==2}"><i class="bi bi-send-check"></i> Tổng kết</button>
             <button class="buttonSummary btnSummary" data-bs-toggle="modal" data-bs-target="#notifySummaryModal" th:if="${listSummaryIsHostActi.get(index.index)} == -1 and ${activity.getTinhTrangHD()<2}"><i class="bi bi-send-check"></i> Tổng kết</button>
-            <button th:href="@{/View-Summary(id=${activity.getId()})}" class="buttonSummary btnSummary" th:if="${listSummaryIsHostActi.get(index.index)} > 0"><i class="bi bi-send-check"></i> <a  style="text-decoration: none; color: #136b1d" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xem tổng kết">Tổng kết</a></button>
+            <button class="buttonSummary btnSummary" th:if="${listSummaryIsHostActi.get(index.index)} > 0"><i class="bi bi-send-check"></i> <a th:href="@{/View-Summary(id=${activity.getId()})}"  style="text-decoration: none; color: #136b1d" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xem tổng kết">Tổng kết</a></button>
             <!--                <button class="buttonSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.id},data-account=${account.id}"><i class="bi bi-send-check"></i> Tổng kết</button>-->
         </div>
     </div>
