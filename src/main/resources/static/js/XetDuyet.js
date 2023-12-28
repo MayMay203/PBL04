@@ -709,7 +709,7 @@ async function confirmSugg(){
         const noiDung = "Đề xuất của bạn đã được duyệt thành công."
         const loaiTB = 0;
         const ma = confirmedSugg.id;
-        const addURL = await fetch(`/them-thong-bao-de-xuat?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`, {
+        const addURL = await fetch(`/them-thong-bao?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`, {
             method: 'POST'
         });
         if(!addURL.ok){
@@ -759,7 +759,7 @@ $(document).on('click', '#btn-cancel-sugg',async function (){
         const noiDung = "Đề xuất của bạn đã bị hủy."
         const loaiTB = 0;
         const ma = canceledSugg.id;
-        const addURL = await fetch(`/them-thong-bao-de-xuat?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`, {
+        const addURL = await fetch(`/them-thong-bao?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`, {
             method: 'POST'
         });
         if(!addURL.ok){

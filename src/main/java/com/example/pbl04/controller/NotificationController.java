@@ -1,10 +1,8 @@
 package com.example.pbl04.controller;
 
 import com.example.pbl04.entity.Taikhoan;
-import com.example.pbl04.entity.Thongbao;
 import com.example.pbl04.service.AccountService;
 import com.example.pbl04.service.NotificationService;
-import com.example.pbl04.service.SuggestionService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.example.pbl04.entity.*;
 
 import java.util.List;
 
@@ -26,15 +25,18 @@ public class NotificationController {
         this.notificationService= notificationService;
         this.accountService = accountService;
     }
-    @PostMapping("/them-thong-bao-de-xuat")
+    //Them thong bao cho nguoi dung va ca admin(neu maTK null)
+    @PostMapping("/them-thong-bao")
     @ResponseBody
-    public ResponseEntity<Void> addNoticeOfSugg(@RequestParam("maTK") Integer maTK,
+    public ResponseEntity<Void> addNoticeOfSugg(@RequestParam(name="maTK",required = false) Integer maTK,
                                                 @RequestParam("noiDung") String noiDung,
                                                 @RequestParam("loaiTB") Integer loaiTB,
                                                 @RequestParam("ma") Integer ma) {
         Thongbao tb = new Thongbao();
-        Taikhoan tk = accountService.getTaiKhoanByID(maTK);
-        tb.setMaTK(tk);
+       if(maTK!=null){
+           Taikhoan tk = accountService.getTaiKhoanByID(maTK);
+           tb.setMaTK(tk);
+       }
         tb.setNoiDung(noiDung);
         tb.setLoaiTB(loaiTB);
         tb.setMa(ma);
@@ -49,6 +51,8 @@ public class NotificationController {
         List<Thongbao> notificationList = notificationService.getNotifiByIdAcc(acc.getId());
         return ResponseEntity.ok(notificationList);
     }
+
+
 
 }
 

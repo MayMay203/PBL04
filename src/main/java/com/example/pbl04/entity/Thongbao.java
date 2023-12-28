@@ -2,7 +2,6 @@ package com.example.pbl04.entity;
 
 import com.example.pbl04.entity.Taikhoan;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 
 import java.time.Instant;
 
@@ -30,6 +29,9 @@ public class Thongbao {
 
     @Column(name = "ma", nullable = false)
     private Integer ma;
+
+    @Column(name = "trangThai", nullable = false)
+    private Boolean trangThai = false;
 
     public Integer getId() {
         return id;
@@ -77,6 +79,14 @@ public class Thongbao {
 
     public void setMa(Integer ma) {
         this.ma = ma;
+    }
+
+    public Boolean getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(Boolean trangThai) {
+        this.trangThai = trangThai;
     }
 
 }

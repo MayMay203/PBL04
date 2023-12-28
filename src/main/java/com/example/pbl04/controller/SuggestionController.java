@@ -71,7 +71,7 @@ public class SuggestionController {
         Taikhoan account =(Taikhoan)model.getAttribute("account");
         Taikhoan accUser = accountService.getTaiKhoanByID(account.getId());
         dexuat.setMaTK(accUser);
-        dexuat.setViTri(thonPhuong + quanHuyen + tinhThanhPho);
+        dexuat.setViTri(thonPhuong + " " +  quanHuyen + " " + tinhThanhPho);
         dexuat.setMaChuDe(topicService.getTopicByID(maChuDe));
         dexuat.setMoTa(moTa);
         suggestionService.Save(dexuat);

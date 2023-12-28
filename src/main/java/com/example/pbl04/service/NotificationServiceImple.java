@@ -1,12 +1,11 @@
 package com.example.pbl04.service;
 
 import com.example.pbl04.dao.NotificationRepository;
-import com.example.pbl04.entity.Thongbao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+import com.example.pbl04.entity.*;
 @Service
 public class NotificationServiceImple implements NotificationService{
     private final NotificationRepository notificationRepository;

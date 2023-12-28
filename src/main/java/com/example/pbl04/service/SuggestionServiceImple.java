@@ -50,8 +50,7 @@ public class SuggestionServiceImple implements SuggestionService {
     @Override
     @Transactional
     public void cancelSugg(Integer idSugg) {
-        Dexuat sugg = suggestionRepo.getSuggByID(idSugg);
-        suggestionRepo.delete(sugg);
+        suggestionRepo.cancelSugg(idSugg);
     }
 
     @Override
