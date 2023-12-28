@@ -33,7 +33,7 @@ btn_add_sug.addEventListener("click", () => {
     }
     else{
         modal.classList.add("display-flex")
-       body.classList.add("overflow-hidden")
+        body.classList.add("overflow-hidden")
         suggesstionForm.classList.remove("no-display");
     }
 })

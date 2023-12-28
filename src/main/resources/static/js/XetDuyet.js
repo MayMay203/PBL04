@@ -712,21 +712,7 @@ async function confirmSugg(){
         const noiDung = "Đề xuất của bạn đã được duyệt thành công."
         const loaiTB = 0;
         const ma = confirmedSugg.id;
-
-        const thoiGian = new Date();
-        const thoiGianTB = thoiGian.getTime();
-        // Tạo đối tượng Date từ giá trị milliseconds
-        const dateObject = new Date(thoiGianTB);
-        // Định dạng ngày tháng năm giờ phút giây
-        const formattedDate = new Intl.DateTimeFormat('en-GB', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        }).format(dateObject);
-        const addURL = await fetch(`/them-thong-bao?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}&thoiGianTB=${formattedDate}`, {
+        const addURL = await fetch(`/them-thong-bao?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`, {
             method: 'POST'
         });
         if(!addURL.ok){
@@ -775,20 +761,7 @@ $(document).on('click', '#btn-cancel-sugg',async function (){
         const noiDung = "Đề xuất của bạn đã bị hủy."
         const loaiTB = 0;
         const ma = canceledSugg.id;
-        const thoiGian = new Date();
-        const thoiGianTB = thoiGian.getTime();
-        // Tạo đối tượng Date từ giá trị milliseconds
-        const dateObject = new Date(thoiGianTB);
-        // Định dạng ngày tháng năm giờ phút giây
-        const formattedDate = new Intl.DateTimeFormat('en-GB', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
-        }).format(dateObject);
-        const addURL = await fetch(`/them-thong-bao?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}&thoiGianTB=${formattedDate}`, {
+        const addURL = await fetch(`/them-thong-bao?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`, {
             method: 'POST'
         });
         if(!addURL.ok){

@@ -32,19 +32,25 @@ public class NotificationController {
     public ResponseEntity<Void> addNoticeOfSugg(@RequestParam(name="maTK",required = false) Integer maTK,
                                                 @RequestParam("noiDung") String noiDung,
                                                 @RequestParam("loaiTB") Integer loaiTB,
-                                                @RequestParam("ma") Integer ma,
-                                                @RequestParam("thoiGianTB") String thoiGianTB) {
+                                                @RequestParam("ma") Integer ma) {
         Thongbao tb = new Thongbao();
-       if(maTK!=null){
-           Taikhoan tk = accountService.getTaiKhoanByID(maTK);
-           tb.setMaTK(tk);
-       }
-        tb.setThoiGianTB(new Date(thoiGianTB).toInstant());
-        System.out.println("Thời gian đề xuất " + new Date(thoiGianTB).toInstant());
         tb.setNoiDung(noiDung);
         tb.setLoaiTB(loaiTB);
         tb.setMa(ma);
-        notificationService.addNoticeOfSugg(tb);
+    //  Thêm thông bao cho nguoi dung
+       if(maTK!=null){
+           Taikhoan tk = accountService.getTaiKhoanByID(maTK);
+           tb.setMaTK(tk);
+           notificationService.addNoticeOfSugg(tb);
+       }
+    //  Thêm thông báo cho admin
+        else{
+            List<Taikhoan> adList = accountService.getAccountAd();
+            for(Taikhoan acc : adList){
+                tb.setMaTK(acc);
+                notificationService.addNoticeOfSugg(tb);
+           }
+       }
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
