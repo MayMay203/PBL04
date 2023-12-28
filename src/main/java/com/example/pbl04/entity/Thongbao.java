@@ -4,6 +4,8 @@ import com.example.pbl04.entity.Taikhoan;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "thongbao")
@@ -22,7 +24,17 @@ public class Thongbao {
     private String noiDung;
 
     @Column(name = "thoiGianTB", nullable = false)
-    private Instant thoiGianTB = Instant.now();
+    private Instant thoiGianTB = createInstantWithTimeZone();
+
+    // Getter và setter
+
+    private Instant createInstantWithTimeZone() {
+        // Lấy thời gian hiện tại theo múi giờ UTC+7
+        ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of("UTC+7"));
+
+        // Chuyển đổi thành Instant
+        return zonedDateTime.toInstant();
+    }
 
     @Column(name = "loaiTB", nullable = false)
     private Integer loaiTB;
