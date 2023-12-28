@@ -210,4 +210,23 @@ public class ConfirmController {
         List<Dexuat> suggestionList = suggestionService.getSuggestionNConf();
         return ResponseEntity.ok(suggestionList);
     }
+    @PostMapping("/get-organizator")
+    @ResponseBody
+    public Integer getOrganizator(@RequestParam("maHD") Integer maHD)
+    {
+       return activityService.getIDOrganizator(maHD);
+    }
+    @PostMapping("/get-member")
+    @ResponseBody
+    public List<Integer> getMemberOfActivity(@RequestParam("maHD") Integer maHD)
+    {
+        List<Integer> idList= new ArrayList<>();
+        List<Taikhoan> taikhoanList = activityService.getAccountList(maHD);
+        for(Taikhoan tk : taikhoanList)
+        {
+            idList.add(tk.getId());
+        }
+        return idList;
+    }
+
 }

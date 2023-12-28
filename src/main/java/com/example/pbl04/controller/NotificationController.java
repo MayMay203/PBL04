@@ -1,6 +1,7 @@
 package com.example.pbl04.controller;
 
 import com.example.pbl04.entity.Taikhoan;
+import com.example.pbl04.entity.Thongbao;
 import com.example.pbl04.service.AccountService;
 import com.example.pbl04.service.NotificationService;
 import jakarta.servlet.http.HttpSession;
@@ -12,9 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.example.pbl04.entity.*;
 
-import java.util.Date;
 import java.util.List;
 
 @Controller
