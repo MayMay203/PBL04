@@ -36,6 +36,7 @@ public class PersonalityController {
     private final MemberService memberService;
     private final ImageProcessorService imageProcessorService;
     private final AccountService accountService;
+    private final NotificationService notificationService;
 
     private final TopicService topicService;
     private final SummaryService summaryService;
@@ -43,7 +44,7 @@ public class PersonalityController {
 
     @Autowired
     public PersonalityController(SessionService sessionService, ActivityService activityService,
-                                 MemberService memberService, ImageProcessorService imageProcessorService, AccountService accountService, TopicService topicService, SummaryService summaryService, RegisterService registerService) {
+                                 MemberService memberService, ImageProcessorService imageProcessorService, AccountService accountService, TopicService topicService, SummaryService summaryService, RegisterService registerService,NotificationService notificationService) {
         this.sessionService = sessionService;
         this.activityService = activityService;
         this.memberService = memberService;
@@ -52,6 +53,7 @@ public class PersonalityController {
         this.topicService = topicService;
         this.summaryService = summaryService;
         this.registerService = registerService;
+        this.notificationService = notificationService;
     }
 
     @GetMapping("/trang-ca-nhan")
@@ -114,6 +116,14 @@ public class PersonalityController {
         sessionService.createSessionModel(model, session);
         // Truyền thông điệp từ RedirectAttributes đến model
         model.addAttribute("message", message);
+
+        //Hiển thị nội dung thông báo
+        Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
+        if(myAcc!=null){
+            List<Thongbao> listNotice = new ArrayList<>();
+            listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
+            model.addAttribute("listNotice",listNotice);
+        }
         return "TrangCaNhan";
     }
 

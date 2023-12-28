@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.pbl04.entity.*;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class NotificationController {
         tb.setLoaiTB(loaiTB);
         tb.setMa(ma);
         tb.setTrangThai(false);
+        tb.setThoiGianTB(Instant.now());
     //  Thêm thông bao cho nguoi dung
        if(maTK!=null){
            Taikhoan tk = accountService.getTaiKhoanByID(maTK);
@@ -55,12 +57,23 @@ public class NotificationController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @GetMapping("/nhan-danh-sach-thong-bao")
+//    @GetMapping("/nhan-danh-sach-thong-bao")
+//    @ResponseBody
+//    public ResponseEntity<List<Thongbao>> getNotificationList(HttpSession session){
+//        Taikhoan acc = (Taikhoan)session.getAttribute("account");
+//        List<Thongbao> notificationList = notificationService.getNotifiByIdAcc(acc.getId());
+//        return ResponseEntity.ok(notificationList);
+//    }
+
+    @PostMapping("/cap-nhat-trang-thai-doc-thong-bao")
     @ResponseBody
-    public ResponseEntity<List<Thongbao>> getNotificationList(HttpSession session){
+    public ResponseEntity<Void> updateStatusOfNotice(@RequestParam("idList") List<Integer> idList,
+                                                     HttpSession session){
         Taikhoan acc = (Taikhoan)session.getAttribute("account");
-        List<Thongbao> notificationList = notificationService.getNotifiByIdAcc(acc.getId());
-        return ResponseEntity.ok(notificationList);
+        for(Integer id:idList){
+            notificationService.updateStatusOfNotice(id,acc.getId());
+        }
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 

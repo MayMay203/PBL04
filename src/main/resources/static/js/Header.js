@@ -511,3 +511,34 @@ function showAlert(message) {
         document.body.removeChild(alertDiv);
     }, 3000);  // 3000 milliseconds = 3 seconds
 }
+
+//button read ở thông báo
+const notice_item = document.querySelectorAll(".notification-item")
+$(document).ready(function (){
+    $("#btn-read").click(async function (e){
+        e.stopPropagation(); //Ngăn chặn sự kiện lan toả lên menu
+        var idList = [];
+        for(notice of notice_item){
+            if(notice.dataset.status==='false'){
+                notice.classList.remove("bg-grey")
+                const id=+notice.dataset.id;
+                idList.push(id);
+            }
+        }
+        console.log(idList);
+        //Cập nhật trạng thái thông báo
+        if(idList.length > 0) {
+            const response = await fetch(`cap-nhat-trang-thai-doc-thong-bao?idList=${idList}`,{
+                method: 'POST'
+            });
+            if (!response.ok) {
+                console.log("Lỗi cập nhật trạng thái thông báo. Trạng thái " + response.status);
+                return;
+            }
+        }
+    })
+})
+
+function handleItemClick(event, item) {
+    event.stopPropagation();
+}

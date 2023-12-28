@@ -46,7 +46,6 @@ public Map<String, Object> login(@RequestParam String tenDN, @RequestParam Strin
     Taikhoan account= authenticationService.authenticateAccount(tenDN,matKhau);
 //    Taikhoan account = accountService.CheckLogin(tenDN, matKhau);
     if (account != null) {
-        System.out.println("THANH CONG");
         // Đăng nhập thành công, lưu thông tin tài khoản vào session
         session.setAttribute(SESSION_ATTR_ACCOUNT, account);
         response.put("account", account);
@@ -68,7 +67,6 @@ public Map<String, Object> login(@RequestParam String tenDN, @RequestParam Strin
 @ResponseBody
 public Map<String, Object> login(@RequestParam String tenDN, @RequestParam String matKhau,@RequestParam String matKhauMoi, HttpSession session) {
     Map<String, Object> response = new HashMap<>();
-
     Taikhoan account = accountService.CheckLogin(tenDN, matKhau);
     System.out.println("Chạy Controller");
     if (account != null) {

@@ -19,14 +19,16 @@ public class HomePageController {
     private final AboutUsService aboutUsService;
     private final SummaryService summaryService;
     private final SessionService sessionService;
+    private final NotificationService notificationService;
     @Autowired
-    public HomePageController(MemberService memberService, EvaluationService evaluationService, ActivityService activityService, AboutUsService aboutUsService, SummaryService summaryService, SessionService sessionService){
+    public HomePageController(MemberService memberService, EvaluationService evaluationService, ActivityService activityService, AboutUsService aboutUsService, SummaryService summaryService, SessionService sessionService,NotificationService notificationService){
         this.memberService = memberService;
         this.evaluationService = evaluationService;
         this.activityService = activityService;
         this.aboutUsService = aboutUsService;
         this.summaryService = summaryService;
         this.sessionService = sessionService;
+        this.notificationService = notificationService;
     }
 //    @GetMapping("/trang-chu")
 //    public String showMember(Model model){
@@ -56,6 +58,7 @@ public class HomePageController {
 
         List<Hoatdong> listActiSummarried = new ArrayList<>();
         List<String> listImgSummarried = new ArrayList<>();
+
 //        String imgdefault = "/images/imgsdt.png";
         List<Anhtongket> imgSummarried = new ArrayList<>();
         for (Tongket tk : summaryList) {
@@ -100,6 +103,13 @@ public class HomePageController {
 //        List<Danhgia> evaluationOfAct = evaluationService.getEvaluationByIdAct(id);
 
         sessionService.createSessionModel(model, session);
+
+        Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
+        if(myAcc!=null){
+            List<Thongbao> listNotice = new ArrayList<>();
+            listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
+            model.addAttribute("listNotice",listNotice);
+        }
 
         return "TrangChu";
     }

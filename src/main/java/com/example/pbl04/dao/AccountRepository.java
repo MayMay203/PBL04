@@ -35,4 +35,7 @@ public interface AccountRepository extends JpaRepository<Taikhoan,Integer>{
 
     @Query("select tk from Taikhoan tk where tk.loaiTK = true")
     List<Taikhoan> getAccountAd();
+    @Modifying
+    @Query("update Taikhoan t set t.matKhau = :mk where t.id = :accountId")
+    boolean changePassword(@Param("mk") String mk, @Param("accountId") Integer accountId);
 }

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.pbl04.entity.*;
@@ -48,6 +49,13 @@ public class SuggestionController {
         model.addAttribute("listTopics",listTopics);
         // Kiểm tra xem người dùng đã đăng nhập chưa
         sessionService.createSessionModel(model, session);
+        //Nội dung thông báo
+        Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
+        if(myAcc!=null){
+            List<Thongbao> listNotice = new ArrayList<>();
+            listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
+            model.addAttribute("listNotice",listNotice);
+        }
         return "DeXuat";
     }
 
@@ -78,13 +86,15 @@ public class SuggestionController {
         dexuat.setMaChuDe(topicService.getTopicByID(maChuDe));
         dexuat.setMoTa(moTa);
         suggestionService.Save(dexuat);
-        Thongbao tb = new Thongbao();
-        tb.setNoiDung("Một đề xuất mới đang chờ duyệt");
-        tb.setLoaiTB(0);
-        tb.setMa(dexuat.getId());
         List<Taikhoan> accList = accountService.getAccountAd();
+        Instant thoiGianTB = Instant.now();
         for(Taikhoan acc : accList){
+            Thongbao tb = new Thongbao();
+            tb.setNoiDung("Một đề xuất mới đang chờ duyệt");
+            tb.setLoaiTB(0);
+            tb.setMa(dexuat.getId());
             tb.setMaTK(acc);
+            tb.setThoiGianTB(thoiGianTB);
             notificationService.addNotification(tb);
         }
         return "redirect:de-xuat";
