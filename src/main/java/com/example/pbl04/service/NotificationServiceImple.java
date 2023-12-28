@@ -14,7 +14,7 @@ public class NotificationServiceImple implements NotificationService{
         this.notificationRepository = notificationRepository;
     }
     @Override
-    public void addNoticeOfSugg(Thongbao tb) {
+    public void addNotification(Thongbao tb) {
         notificationRepository.save(tb);
     }
 

@@ -29,7 +29,7 @@ public class NotificationController {
     //Them thong bao cho nguoi dung va ca admin(neu maTK null)
     @PostMapping("/them-thong-bao")
     @ResponseBody
-    public ResponseEntity<Void> addNoticeOfSugg(@RequestParam(name="maTK",required = false) Integer maTK,
+    public ResponseEntity<Void> addNotification(@RequestParam(name="maTK",required = false) Integer maTK,
                                                 @RequestParam("noiDung") String noiDung,
                                                 @RequestParam("loaiTB") Integer loaiTB,
                                                 @RequestParam("ma") Integer ma) {
@@ -37,18 +37,19 @@ public class NotificationController {
         tb.setNoiDung(noiDung);
         tb.setLoaiTB(loaiTB);
         tb.setMa(ma);
+        tb.setTrangThai(false);
     //  Thêm thông bao cho nguoi dung
        if(maTK!=null){
            Taikhoan tk = accountService.getTaiKhoanByID(maTK);
            tb.setMaTK(tk);
-           notificationService.addNoticeOfSugg(tb);
+           notificationService.addNotification(tb);
        }
     //  Thêm thông báo cho admin
         else{
             List<Taikhoan> adList = accountService.getAccountAd();
             for(Taikhoan acc : adList){
                 tb.setMaTK(acc);
-                notificationService.addNoticeOfSugg(tb);
+                notificationService.addNotification(tb);
            }
        }
         return ResponseEntity.status(HttpStatus.OK).build();

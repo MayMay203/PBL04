@@ -88,6 +88,7 @@ public class ActivityController {
         model.addAttribute("thanhvienList",thanhvienList);
         model.addAttribute("checkDangky",checkDangky);
         model.addAttribute("pointList",pointList);
+        model.addAttribute("taikhoan",taikhoan);
         return "ChiTietHoatDong";
     }
 
