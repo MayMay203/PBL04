@@ -67,6 +67,12 @@
 /*.header__navbar a.active{*/
 /*    color: var(--main-color);*/
 /*}*/
+#btn_notify{
+    border-radius: 50%;
+    /*background-color: #0E5416!important;*/
+    padding: 0.5rem;
+    margin-right: 0.6rem
+}
 .btnDangNhap{
     margin-top: -3.3rem;
     margin-right: 10rem;

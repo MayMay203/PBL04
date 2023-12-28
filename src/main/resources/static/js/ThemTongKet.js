@@ -110,7 +110,7 @@ $(document).ready(function () {
 
 var maHD;var maTK;
 $(document).ready(function () {
-    var btnSummary = document.getElementsByClassName("buttonSummary");
+    var btnSummary = document.getElementsByClassName("btn_Summary");
     for(btn of btnSummary){
         btn.addEventListener("click" ,async (e) =>{
             var mahoatdong= e.target.dataset.value;

@@ -61,28 +61,6 @@
                 </div>
             </div>
 
-            <!-- Thông báo cho người dùng      -->
-            <div th:if="${isLogin}" class="notify-container">
-                <button id="btn_notify" class="float-end no-border bg-white mt-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="bi bi-bell p-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Thông báo"></i>
-                </button>
-                <!-- Thông tin thông báo -->
-                <ul class="p-3 dropdown-menu dropdown-notify">
-                    <div class="dropdown-item cursor-pointer">
-                       <p class="p-0 m-0 fs-8"> <b>Đề xuất</b> của bạn đã được duyệt thành công.</p>
-                        <p class="p-0 m-0 fs-9 green_light-color fst-italic fw-bold">12:00:00 28/12/2023</p>
-                    </div>
-                    <div class="dropdown-item cursor-pointer">
-                        <p class="p-0 m-0 fs-8"> <b>Đề xuất</b> của bạn đã được duyệt thành công.</p>
-                        <p class="p-0 m-0 fs-9 green_light-color fst-italic fw-bold">12:00:00 28/12/2023</p>
-                    </div>
-                    <div class="dropdown-item cursor-pointer">
-                        <p class="p-0 m-0 fs-8"> <b>Đề xuất</b> của bạn đã được duyệt thành công.</p>
-                        <p class="p-0 m-0 fs-9 green_light-color fst-italic fw-bold">12:00:00 28/12/2023</p>
-                    </div>
-
-                </ul>
-            </div>
 
             <button id="btn_userProfile" class="float-end" data-bs-toggle="dropdown"  aria-haspopup="true" aria-expanded="false"  >
                 <img data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tài khoản" class="img-avartar-login" th:src="@{${user.getMaTK().getAnhDaiDien()}}" alt="ảnh đại diện" >
@@ -100,6 +78,30 @@
                </li>
                 <li><a class="dropdown-item" href="#">Cài đặt</a></li>
             </ul>
+
+
+            <!-- Thông báo cho người dùng      -->
+            <div th:if="${isLogin}" class="notify-container" >
+                <button id="btn_notify" class="float-end no-border bg-white" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="">
+                    <i class="bi bi-bell p-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Thông báo"></i>
+                </button>
+                <!-- Thông tin thông báo -->
+                <ul class="p-3 dropdown-menu dropdown-notify">
+                    <div class="dropdown-item cursor-pointer">
+                        <p class="p-0 m-0 fs-8"> <b>Đề xuất</b> của bạn đã được duyệt thành công.</p>
+                        <p class="p-0 m-0 fs-9 green_light-color fst-italic fw-bold">12:00:00 28/12/2023</p>
+                    </div>
+                    <div class="dropdown-item cursor-pointer">
+                        <p class="p-0 m-0 fs-8"> <b>Đề xuất</b> của bạn đã được duyệt thành công.</p>
+                        <p class="p-0 m-0 fs-9 green_light-color fst-italic fw-bold">12:00:00 28/12/2023</p>
+                    </div>
+                    <div class="dropdown-item cursor-pointer">
+                        <p class="p-0 m-0 fs-8"> <b>Đề xuất</b> của bạn đã được duyệt thành công.</p>
+                        <p class="p-0 m-0 fs-9 green_light-color fst-italic fw-bold">12:00:00 28/12/2023</p>
+                    </div>
+
+                </ul>
+            </div>
 
         </div>
 
@@ -437,7 +439,25 @@
         </div>
     </div>
 </div>
+<!-----modal thông báo sau khi nhập otp -->
+<div class="modal fade" id="notifyOTPModal" tabindex="-1" role="dialog" aria-labelledby="notifyOTPModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="align-items: center">
+            <div class="modal-header" style="padding: 0.5rem" >
+                <h5 class="modal-title" style="margin-left: 1rem;color: #136b1d;font-size: 1.5rem;">Thông báo việc xác nhận OTP</h5>
+                <button type="button" class="closeModalLogout" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 7rem">
+                    <span aria-hidden="true" >&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="confirmOTP" style="font-size: 1.1rem; margin: 0">
 
+            </div>
+            <div class="modal-footer"  style="padding: 0.5rem">
+                <button type="button" data-bs-dismiss="modal" class="btn" style="background-color: #136b1d; color: #ffffff; width: 6rem; margin-left: 22rem">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!--modal thay đổi mật khẩu-->
 <div class="modal fade" id="ChangePasswordModal" tabindex="-1" aria-labelledby="modalChangePassword" aria-hidden="true">
     <div class="modal-dialog modal-dialog-dangnhap">

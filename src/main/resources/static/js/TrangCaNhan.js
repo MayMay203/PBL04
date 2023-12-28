@@ -203,7 +203,33 @@ $(document).ready(function() {
         });
     });
 });
-
+// --tổng kết hoạt dộng
+// document.addEventListener("DOMContentLoaded", function () {
+//     $('#btnSummary').on('click', function () {
+//
+//         $('#confirmAddSummaryModal').modal("show");
+//     });
+//     // $('#confirmAddSummaryModal').on('shown.bs.modal', function () {
+//     //     var header = document.getElementById("myHeader");
+//     //     header.classList.remove("sticky");
+//     // });
+//     $('#confirmAddSummaryModal').on('show.bs.modal', function () {
+//     //
+//     //     // Tăng biến đếm mỗi khi modal sắp hiển thị
+//         backdropCount++;
+//
+//         // Nếu có nhiều hơn một backdrop, xóa đi các backdrop thừa
+//         if (backdropCount > 1) {
+//             $('.modal-backdrop').not(':last').remove();
+//         }
+//     });
+//     $('#confirmAddSummaryModal').on('hidden.bs.modal', function () {
+//         backdropCount--;
+//         //mỗi khi modal được đóng
+//         // var header = document.getElementById("myHeader");
+//         // header.classList.add("sticky");
+//     });
+// });
 //---------- hiển thị hđ tổ chức hay tham gia------------
 document.addEventListener("DOMContentLoaded", function () {
     $('#btnCreateAct').on('click', function () {

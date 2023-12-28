@@ -9,9 +9,13 @@ public interface AccountService {
     Taikhoan CheckLogin(String tenDN, String matKhau);
     Taikhoan getTaiKhoanByID(Integer id);
     void updateAvatar(String urlNew, Integer id);
-    Taikhoan addAccount(Taikhoan taikhoan);
+    void addAccount(Taikhoan taikhoan);
 
-    Taikhoan changePassword(Taikhoan tk);
+    void changePassword(Taikhoan tk);
+
+    void changePasswordByOTP( Taikhoan tk, String mkMoi);
+
+    Thanhvien findMemberByEmail(String email);
 
     List<Taikhoan> getAccountAd();
 }
