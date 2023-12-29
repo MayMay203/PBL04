@@ -295,9 +295,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     $('.modal-backdrop').remove();
                     // location.reload();
                     alert("Đăng ký thành công!");
-                    // $('#DangNhapModal').modal('show');
-                    // $('.modal-login').css('display', 'block');
-                    // $('.modal-backdrop').remove();
                 } else {
                     // Hiển thị thông báo lỗi
                     alert(response.message);
@@ -309,6 +306,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+// function sendNotification(maHD,maOr)
+// {
+//     var contentNotification ="Chúc m";
+//     console.log("maOR:",maOr);
+//     $.ajax({
+//         type: 'POST',
+//         url: '/them-thong-bao',
+//         data: {  'maTK': maOr ,'noiDung': noidung, 'loaiTB':1, 'ma':maHD,},
+//         success: function (data) {
+//             console.log('Success:', data);
+//             console.log("thanh cong");
+//         },
+//         error: function (error) {
+//             console.error('Error:', error);
+//         }
+//     });
+// }
 // -----gửi OTP----
 var otp_email = "";
 var email_receiveOTP = "";
