@@ -237,7 +237,13 @@ public class ActivityController {
         Hoatdong hd = activityService.getActivityByID(maHD);
         return hd;
     }
-
+    @GetMapping("/get-member-by-id")
+    @ResponseBody
+    public Thanhvien getMemberByID(@RequestParam("maTK") Integer maHD)
+    {
+        Thanhvien tv = activityService.getMemberByID(maHD);
+        return tv;
+    }
     @GetMapping("/hoat-dong-theo-vi-tri")
     @ResponseBody
     public ResponseEntity<List<Hoatdong>> getActByLocation(@RequestParam(name = "location") String location) {
