@@ -67,11 +67,13 @@ public Map<String, Object> login(@RequestParam String tenDN, @RequestParam Strin
 @ResponseBody
 public Map<String, Object> login(@RequestParam String tenDN, @RequestParam String matKhau,@RequestParam String matKhauMoi, HttpSession session) {
     Map<String, Object> response = new HashMap<>();
-    Taikhoan account = accountService.CheckLogin(tenDN, matKhau);
+    String matKhauCuEncode= passwordEncoderService.encodePassword(matKhau);
+    Taikhoan account = accountService.CheckLogin(tenDN, matKhauCuEncode);
     System.out.println("Chạy Controller");
     if (account != null) {
         {
-            account.setMatKhau(matKhauMoi);
+            String matKhauMoiEncode = passwordEncoderService.encodePassword(matKhauMoi);
+            account.setMatKhau(matKhauMoiEncode);
             account.setId(account.getId());
             accountService.changePassword(account);
         }
