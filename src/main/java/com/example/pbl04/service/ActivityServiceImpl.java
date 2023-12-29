@@ -1,5 +1,6 @@
 package com.example.pbl04.service;
 
+import com.example.pbl04.entity.Thanhvien;
 import com.example.pbl04.dao.ActivityRepository;
 import com.example.pbl04.dao.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,7 @@ public class ActivityServiceImpl implements ActivityService {
     public Dangky  getDateRegis(Integer mahd){return activityRepository.getDateRegis();}
     public Integer getParticipants() {return activityRepository.getParticipants();}
     public Taikhoan getOrganizator(Integer id){ return activityRepository.getOrganizator(id);}
+    public Integer getIDOrganizator(Integer id) {return activityRepository.getIDOrganizator(id);}
     public Thanhvien getMemberByID(Integer id){return activityRepository.getMemberByID(id);}
     public List<Thanhvien> getMemberList(Integer id){return activityRepository.getMemberList(id);}
     public List<Taikhoan> getAccountList(Integer id) {return activityRepository.getAccountList(id);}

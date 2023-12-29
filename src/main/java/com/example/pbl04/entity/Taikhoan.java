@@ -13,7 +13,7 @@ public class Taikhoan {
     @Column(name = "tenDN", nullable = false, length = 50)
     private String tenDN;
 
-    @Column(name = "matKhau", nullable = false, length = 20)
+    @Column(name = "matKhau", nullable = false, length = 100)
     private String matKhau;
 
     @Column(name = "loaiTK", nullable = false)

@@ -146,13 +146,49 @@ $(document).ready(function () {
         $('#confirmStage0').modal("hide");
     }
 });
-
+var mataikhoan ;
+function getOrganizator(maHD)
+{
+    $.ajax({
+        type: 'POST',
+        url: '/get-organizator',
+        data: {  'maHD': maHD },
+        success: function (data) {
+            console.log('Success:', data);
+            mataikhoan= parseInt(data);
+            console.log("thanh cong");
+            console.log("mataikhoan:",mataikhoan);
+        },
+        error: function (error) {
+            console.error('Error:', error);
+        }
+    });
+}
 //------------------------------------ Duyệt bài đăng--------------------------//
 $(document).ready(function () {
     $(".btnConfirmActivityStage0").on("click", function() {
         console.log("maHD:", maDuyetBai);
+        getOrganizator(maDuyetBai);
         confirmPost(maDuyetBai);
     });
+
+    function sendNotiConfirmPost(maHD)
+    {
+        var noidung ="Bài đăng của bạn đã được xét duyệt";
+        console.log("maOR:",mataikhoan);
+        $.ajax({
+            type: 'POST',
+            url: '/them-thong-bao',
+            data: {  'maTK': mataikhoan ,'noiDung': noidung, 'loaiTB':1, 'ma':maHD,},
+            success: function (data) {
+                console.log('Success:', data);
+                console.log("thanh cong");
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
+    }
 
     var modalContentUpdated = false;
     function confirmPost(maHD) {
@@ -164,6 +200,7 @@ $(document).ready(function () {
             data: { 'maHD': maHD },
             success: function (data) {
                 console.log('Success:', data);
+                sendNotiConfirmPost(maHD);
                 // Assuming the submission is successful, update modal content and hide buttons
                 updateModalContent("Xét duyệt bài đăng thành công.");
                 hideButtons();
@@ -243,8 +280,26 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('.btnConfirmActivityStage1').on('click', function () {
         console.log("maHD:", maDuyetHD);
+        getOrganizator(maDuyetHD);
         confirmPost(maDuyetHD);
     });
+    function sendNotiConfirmPost(maHD)
+    {
+        var noidung ="Hoạt động của bạn đã được xét duyệt";
+        console.log("maOR:",mataikhoan);
+        $.ajax({
+            type: 'POST',
+            url: '/them-thong-bao',
+            data: {  'maTK': mataikhoan ,'noiDung': noidung, 'loaiTB':1, 'ma':maHD,},
+            success: function (data) {
+                console.log('Success:', data);
+                console.log("thanh cong");
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
+    }
     var modalContentUpdated = false;
     function confirmPost(maHD) {
 
@@ -258,6 +313,7 @@ $(document).ready(function () {
                 // Assuming the submission is successful, update modal content and hide buttons
                 updateModalContent("Xét duyệt hoạt động thành công.");
                 hideButtons();
+                sendNotiConfirmPost(maHD);
                 modalContentUpdated =true;
             },
             error: function (error) {
@@ -285,12 +341,33 @@ $(document).ready(function () {
 
 //----------------------------------Show modal duyet thành vien------------------------//
 var maHD;
+var matkhoan;
 $(document).ready(function () {
+
+    // function getOrganizator(maHD)
+    // {
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '/get-organizator',
+    //         data: {  'maHD': maHD },
+    //         success: function (data) {
+    //             console.log('Success:', data);
+    //             matkhoan= parseInt(data);
+    //             console.log("thanh cong");
+    //             console.log("mataikhoan:",matkhoan);
+    //         },
+    //         error: function (error) {
+    //             console.error('Error:', error);
+    //         }
+    //     });
+    // }
     var btnViewPartici = document.getElementsByClassName('viewParticipant');
     for(const btn of btnViewPartici){
         btn.addEventListener("click", async (e) => {
             console.log('maHD: ', e.target.dataset.value);
             maHD = e.target.dataset.value;
+            // getOrganizator(maHD);
+            // console.log('mataikhoan:',matkhoan);
             var response = await fetch(`/get-member-need-confirm?maHD=${maHD}`)
             if(!response.ok){
                 console.log("error:", response.status);
@@ -301,6 +378,7 @@ $(document).ready(function () {
                 var pointList = responseData.pointList;
                 console.log(listMember);
                 console.log('ok');
+
                 // $('#MemberModal .modal-content').empty();
                 $('#MemberModal').modal('show');
                 $('#MemberModal .modal-body-member').empty();
@@ -345,14 +423,38 @@ $(document).ready(function () {
     });
 })
 //-----------------------------------Duyet thanh vien-----------------------//
-$(document).on('click', '#btnConfirmPartici', function () {
-    console.log('Button clicked!');
+$(document).ready(function () {
+    function sendNotiMemberNeedConfirm(maHD,idString)
+    {
+        var noidung ="Yêu cầu tham gia hoạt động của bạn đã được xét duyệt";
+        for (var i = 0; i < idString.length; i++) {
+            var id = idString[i];
+            $.ajax({
+                type: 'POST',
+                url: '/them-thong-bao',
+                data: {  'maTK': id ,'noiDung': noidung, 'loaiTB':1, 'ma':maHD,},
+                success: function (data) {
+                    console.log('Success:', data);
+                    console.log("thanh cong");
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+        // console.log("maOR:",mataikhoan);
+
+    }
+
+    $(document).on('click', '#btnConfirmPartici', function () {
+        console.log('Button clicked!');
         var selectedIds = [];
         $('#MemberModal .modal-body-member input[type="checkbox"]:checked').each(function () {
             selectedIds.push($(this).val());
         });
         console.log('maHD:', maHD);
         console.log('ids: ', selectedIds);
+
         const idsString = selectedIds.join(",");
         const formData = new FormData();
         formData.append('maHD', maHD);
@@ -363,7 +465,7 @@ $(document).on('click', '#btnConfirmPartici', function () {
             type: 'POST',
             url: '/Confirm-participants',
             // contentType: 'application/json',
-            data:formData,
+            data: formData,
             processData: false,  // Đặt giá trị này thành false
             contentType: false,
             // data: JSON.stringify({maHD: maHD, ids: selectedIds}),
@@ -371,6 +473,7 @@ $(document).on('click', '#btnConfirmPartici', function () {
                 // Xử lý phản hồi từ server nếu cần
                 console.log(response);
                 console.log('Data sent:', formData);
+                sendNotiMemberNeedConfirm(maHD,idsString);
                 console.log('xác nhận thành viên ok');
                 $('#MemberModal').modal('hide');
                 switchToMemberTabAndReload();
@@ -380,15 +483,17 @@ $(document).on('click', '#btnConfirmPartici', function () {
             }
         });
     });
+})
+
 function switchToMemberTabAndReload() {
     // location.reload(true);
     $('.tabs .tab-item').removeClass('active');
     $('.tabs .tab-item:nth-child(2)').addClass('active');
     $('.tab-content .tab-pane').removeClass('active');
     $('#subTab3').addClass('active');
-     // True để force reload từ server
+    // True để force reload từ server
     setTimeout(function () {
-       location.reload(true); // True để force reload từ server
+        location.reload(true); // True để force reload từ server
     }, 500);
 }
 // window.location.reload();
@@ -398,6 +503,7 @@ function switchToMemberTabAndReload() {
 // $('.tab-content .tab-pane').removeClass('active');
 // $('#subTab3').addClass('active');
 //-------------------------------show modal thanh vien da duoc duyetj----------------//
+
 $(document).ready(function () {
 
     var btnViewMember = document.getElementsByClassName('viewParticipanted');
@@ -450,42 +556,87 @@ $(document).ready(function () {
     }
 })
 //-----------------------------xoa duyet thanh vien---------------------//
-$(document).on('click', '#btnCancelPartici', function () {
-    var selectedIdCancel = [];
-    $('#MemberModal .modal-body-member input[type="checkbox"]:checked').each(function () {
-        selectedIdCancel.push($(this).val());
-    });
-    console.log('maHD:', maHD);
-    console.log('ids: ', selectedIdCancel);
-    const idsString = selectedIdCancel.join(",");
-    const formData = new FormData();
-    formData.append('maHD', maHD);
-    formData.append('ids', idsString);
-
-    // Gửi danh sách ID tới controller
-    $.ajax({
-        type: 'POST',
-        url: '/Cancel-participants',
-        // contentType: 'application/json',
-        data:formData,
-        processData: false,  // Đặt giá trị này thành false
-        contentType: false,
-        // data: JSON.stringify({maHD: maHD, ids: selectedIds}),
-        success: function (response) {
-            // Xử lý phản hồi từ server nếu cần
-            console.log(response);
-            console.log('Hủy duyệt thành viên ok');
-            $('#MemberModal').modal('hide');
-            switchToMemberTabAndReload();
-        },
-        error: function (error) {
-            console.error('Error:', error);
+$(document).ready(function () {
+    function sendNotiMemberConfirm(maHD, idString) {
+        var noidung = "Yêu cầu tham gia hoạt động của bạn đã bị hủy bỏ";
+        for (var i = 0; i < idString.length; i++) {
+            var id = idString[i];
+            $.ajax({
+                type: 'POST',
+                url: '/them-thong-bao',
+                data: {'maTK': id, 'noiDung': noidung, 'loaiTB': 1, 'ma': maHD,},
+                success: function (data) {
+                    console.log('Success:', data);
+                    console.log("thanh cong");
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
         }
+        // console.log("maOR:",mataikhoan);
+
+    }
+
+    $(document).on('click', '#btnCancelPartici', function () {
+        var selectedIdCancel = [];
+        $('#MemberModal .modal-body-member input[type="checkbox"]:checked').each(function () {
+            selectedIdCancel.push($(this).val());
+        });
+        console.log('maHD:', maHD);
+        console.log('ids: ', selectedIdCancel);
+        const idsString = selectedIdCancel.join(",");
+        const formData = new FormData();
+        formData.append('maHD', maHD);
+        formData.append('ids', idsString);
+
+        // Gửi danh sách ID tới controller
+        $.ajax({
+            type: 'POST',
+            url: '/Cancel-participants',
+            // contentType: 'application/json',
+            data: formData,
+            processData: false,  // Đặt giá trị này thành false
+            contentType: false,
+            // data: JSON.stringify({maHD: maHD, ids: selectedIds}),
+            success: function (response) {
+                // Xử lý phản hồi từ server nếu cần
+                console.log(response);
+                sendNotiMemberConfirm(maHD,idsString);
+                console.log('Hủy duyệt thành viên ok');
+                $('#MemberModal').modal('hide');
+                switchToMemberTabAndReload();
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
     });
-});
+})
 //--------------------------Show modal Hủy bài viết - hoạt động----------------------//
 var idHD;
+var ids=[];
 $(document).ready(function() {
+    function getMember(maHD)
+    {
+        $.ajax({
+            type: 'POST',
+            url: '/get-member',
+            data: {  'maHD': maHD },
+            success: function (data) {
+                console.log('Success:', data);
+                ids = data.map(function (id) {
+                    return parseInt(id);
+                });
+                // mataikhoan= parseInt(data);
+                console.log("thanh cong");
+                console.log("mataikhoan:",mataikhoan);
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
+    }
     const activityCancelButtons = document.querySelectorAll('.btnCancelPost, .btnCancelActivity');
     const handleCancelClick = async (e) => {
         console.log("button click");
@@ -504,6 +655,8 @@ $(document).ready(function() {
                 $("#txt_LydoHuy").val(""); // Leave txt_mota empty for the user to input
                 // Show the modal
                 $('#HuyHoatDongModal').modal('show');
+                getOrganizator(idHD);
+                getMember(idHD);
             },
             error: function (error) {
                 console.log(error);
@@ -517,6 +670,25 @@ $(document).ready(function() {
 //-----------------------Huy bai viet- Hoat dong---------------------------//
 var check=false;
 $(document).ready(function() {
+    function sendNotiCancelActivity(maHD)
+    {
+        var noidung ="Hoạt động mà bạn tham gia đã bị hủy";
+        for (var i = 0; i < ids.length; i++) {
+            var id = ids[i];
+            $.ajax({
+                type: 'POST',
+                url: '/them-thong-bao',
+                data: {'maTK': id, 'noiDung': noidung, 'loaiTB': 1, 'ma': maHD,},
+                success: function (data) {
+                    console.log('Success:', data);
+                    console.log("thanh cong");
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
+    }
     $(".btnSave").on("click", function() {
         // Get the value from the txt_mota textarea
         var txtMotaValue = $("#txt_LydoHuy").val();
@@ -539,6 +711,7 @@ $(document).ready(function() {
                     updateModalContent("Hủy bài đăng thành công");
                     check = true;
                     hideButtons();
+                    sendNotiCancelActivity(idHD);
                     console.log("Huy bai dang thanh cong");
                     location.reload();
                 },

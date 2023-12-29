@@ -30,13 +30,32 @@ $(document).ready(function () {
     $('#btnJoin').on('click', function () {
         var maHD = $(this).data('hoatdong-id');
         var maTK = $(this).data('account-id');
+        var maOr = $(this).data('organize-id');
         console.log("maHD:", maHD);
         console.log("maTK:", maTK);
-        joinActivity(maHD, maTK);
+        joinActivity(maHD, maTK,maOr);
     });
+    function sendNoti(maHD,maOr)
+    {
+
+        var noidung ="Một thành viên đang chờ phê duyệt tham gia hoạt động của bạn";
+        console.log("maOR:",maOr);
+        $.ajax({
+            type: 'POST',
+            url: '/them-thong-bao',
+            data: {  'maTK': maOr ,'noiDung': noidung, 'loaiTB':1, 'ma':maHD,},
+            success: function (data) {
+                console.log('Success:', data);
+                console.log("thanh cong");
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
+    }
     var modalContentUpdated = false;
     var checkRegis = false;
-    function joinActivity(maHD, maTK) {
+    function joinActivity(maHD, maTK,maOr) {
 
         // Gửi AJAX request đến controller
         $.ajax({
@@ -45,10 +64,11 @@ $(document).ready(function () {
             data: { 'maHD': maHD, 'maTK': maTK },
             success: function (data) {
                 console.log('Success:', data);
-                //checkRegis=true;
+                checkRegis=true;
                 // Assuming the submission is successful, update modal content and hide buttons
                 updateModalContent("Yêu cầu của bạn đang được xét duyệt.");
                 hideButtons();
+                sendNoti(maHD,maOr);
                 modalContentUpdated =true;
                 // location.reload();
             },
@@ -76,26 +96,7 @@ $(document).ready(function () {
             location.reload();
         }
     });
-    if(checkRegis){
-        sendNoti();
-    }
-    function sendNoti()
-    {
-        var maOr = $(this).data('organize-id');
-        var noidung ="Một thành viên đang chờ phê duyệt tham gia hoạt động của bạn";
 
-        $.ajax({
-            type: 'POST',
-            url: '/them-thong-bao',
-            data: {  'maTK': maOr ,'maHD': maHD, 'noiDung': noidung},
-            success: function (data) {
-                console.log('Success:', data);
-            },
-            error: function (error) {
-                console.error('Error:', error);
-            }
-        });
-    }
 });
 
 $(document).ready(function () {

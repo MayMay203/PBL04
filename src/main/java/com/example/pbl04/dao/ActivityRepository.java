@@ -30,6 +30,8 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
      Integer getParticipants();
      @Query("SELECT d.maTK from Dangky d,Hoatdong h where d.phanQuyen=true and d.maHD = h and h.id= :id")
      Taikhoan getOrganizator(Integer id);
+    @Query("SELECT d.maTK.id from Dangky d,Hoatdong h where d.phanQuyen=true and d.maHD = h and h.id= :id")
+     Integer getIDOrganizator(Integer id);
     @Query("SELECT tt from Taikhoan tk , Thanhvien tt where tk = tt.maTK and tk.id=:id ")
     Thanhvien getMemberByID(Integer id);
     @Query("select tv from Taikhoan tk,Thanhvien tv, Dangky dk where dk.maHD.id =:id and dk.maTK =tk and tk= tv.maTK and dk.phanQuyen=false and dk.trangThai=true order by tk.id")
