@@ -74,7 +74,7 @@ public class EmailController {
         }
         else{
             System.out.println("Sai otp");
-            response.put("fail", "OTP xác nhận không đúng!");
+            response.put("error", "OTP xác nhận không đúng!");
         }
         // Gửi JSON response
 

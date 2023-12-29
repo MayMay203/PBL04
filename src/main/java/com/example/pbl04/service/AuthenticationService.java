@@ -11,7 +11,7 @@ public class AuthenticationService {
     private PasswordEncoderService passwordEncoderService;
     @Autowired
     private AccountRepository accountRepository;
-    public Taikhoan authenticateAccount(String username,String password){
+    public Taikhoan authenticateAccount(String username, String password){
         Taikhoan user = accountRepository.findByUsername(username);
         if(user!=null){
             String encodeedPassword= user.getMatKhau();

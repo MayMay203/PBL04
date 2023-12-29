@@ -19,6 +19,7 @@ public interface ActivityService {
     Integer getNumActivity();
     Integer getParticipants();
     Taikhoan getOrganizator(Integer id);
+    Integer getIDOrganizator(Integer id);
     Thanhvien getMemberByID(Integer id);
     List<Thanhvien> getMemberList(Integer id);
 //    List<Hoatdong> getActivityByMyID(Integer myID);
@@ -59,5 +60,6 @@ public interface ActivityService {
      List<Hoatdong> getActByLocation(String location);
      List<Hoatdong> getAllActivityNotOccured();
      List<Hoatdong> getActivityByNameAct(String nameAct);
+
 
 }

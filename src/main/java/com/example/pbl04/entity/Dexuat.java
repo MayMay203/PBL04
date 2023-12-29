@@ -1,10 +1,7 @@
 package com.example.pbl04.entity;
 
-import com.example.pbl04.entity.Chude;
-import com.example.pbl04.entity.Taikhoan;
 import jakarta.persistence.*;
 
-import java.time.Instant;
 import java.time.LocalDate;
 
 @Entity
@@ -32,7 +29,7 @@ public class Dexuat {
     private String moTa;
 
     @Column(name = "thoiGianDeXuat")
-    private LocalDate thoiGianDeXuat = LocalDate.now();
+    private LocalDate thoiGianDeXuat;
 
     @Column(name = "tinhTrangDuyet", nullable = false)
     private Boolean tinhTrangDuyet = false;
