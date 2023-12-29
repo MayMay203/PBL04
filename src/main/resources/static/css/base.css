@@ -6,7 +6,7 @@
     --btn-color: #4CAF4F;
     --bg-color: rgba(166, 246, 175, 0.5);
     --header-color: #174407;
-    --green-light: #3B9D39;
+    --green-lightt: #3B9D39;
     --black-color: #000;
     --grey-color: #adafb1;
     --bg-footer: #263238;
@@ -343,7 +343,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .green_light-color{
-    color: var(--green-light)!important;
+    color: var(--green-lightt)!important;
 }
 
 .green-color {

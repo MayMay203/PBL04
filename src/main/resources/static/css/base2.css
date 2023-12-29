@@ -11,10 +11,11 @@
     --subhead-size: 1.125rem;
     --smallhead-size: 0.9375rem;
     --content-size: 0.8125rem;
-    --green-light: #3B9D39;
+    --green-lightt-light: #3B9D39;
     --black-color: #000;
     --white-color: #fff;
     --btn-color: #4CAF4F;
+    --green: #084B0B;
 }
 *{
     box-sizing: border-box;
@@ -60,7 +61,11 @@ body {
 }
 
 .green_light-color{
-    color: var(--green-light)!important;
+    color: var(--green-lightt-light)!important;
+}
+
+.green {
+    color: var(--green) !important;
 }
 
 .no-border{

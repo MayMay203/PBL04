@@ -144,5 +144,4 @@ if (suggSlider.children.length > 0) {
             vertical: false,
             speed: 100
         });
-    console.log("Tao slider dau tien thanh cong!")
 }
