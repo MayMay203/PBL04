@@ -26,7 +26,8 @@ public class NotificationServiceImple implements NotificationService{
 
     @Override
     @Transactional
-    public void updateStatusOfNotice(Integer idNotice, Integer idAcc) {
-        notificationRepository.updateStatusOfNotice(idNotice,idAcc);
+    public void updateStatusOfNotice(Integer idNotice) {
+        notificationRepository.updateStatusOfNotice(idNotice);
     }
+
 }
