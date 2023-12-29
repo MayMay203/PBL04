@@ -190,6 +190,20 @@ public class ActivityController {
             sessionService.createSessionModel(model, session);
             response.put("message", "Thông báo: Thông tin đã được cập nhật thành công!");
             response.put("success", true);
+
+            //Them thong bao
+            List<Taikhoan> accList = accountService.getAccountAd();
+            Instant thoiGianTB = Instant.now();
+            for(Taikhoan acc : accList){
+                Thongbao tb = new Thongbao();
+                tb.setNoiDung("Một hoạt động mới đang chờ duyệt");
+                tb.setLoaiTB(1);
+                tb.setMa(hoatDong.getId());
+                tb.setMaTK(acc);
+                tb.setThoiGianTB(thoiGianTB);
+                notificationService.addNotification(tb);
+            }
+
             return response;
         } catch (Exception e) {
             // Xử lý lỗi nếu có

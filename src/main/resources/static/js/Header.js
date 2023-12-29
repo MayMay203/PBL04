@@ -160,22 +160,27 @@ $('#notifyOTPModal').on('hidden.bs.modal', function () {
     // header.classList.add("sticky");
 });
 // =================================================================
-// $('.modal').on('show.bs.modal', function () {
-//
-//     // Tăng biến đếm mỗi khi modal sắp hiển thị
-//     backdropCount++;
-//
-//     // Nếu có nhiều hơn một backdrop, xóa đi các backdrop thừa
-//     if (backdropCount > 1) {
-//         $('.modal-backdrop').not(':last').remove();
-//     }
-// });
-// $('.modal').on('hidden.bs.modal', function () {
-//     backdropCount--;
-//     //mỗi khi modal được đóng
-//     // var header = document.getElementById("myHeader");
-//     // header.classList.add("sticky");
-// });
+$('.modal').on('show.bs.modal', function () {
+
+    // Tăng biến đếm mỗi khi modal sắp hiển thị
+    backdropCount++;
+
+    // Nếu có nhiều hơn một backdrop, xóa đi các backdrop thừa
+    if (backdropCount > 1) {
+        $('.modal-backdrop').not(':last').remove();
+    }
+});
+$('.modal').on('shown.bs.modal', function () {
+
+    var header = document.getElementById("myHeader");
+    header.classList.add("sticky");
+});
+$('.modal').on('hidden.bs.modal', function () {
+    backdropCount--;
+    //mỗi khi modal được đóng
+    // var header = document.getElementById("myHeader");
+    // header.classList.add("sticky");
+});
 // ===============================================================
 //
 $('#DangNhapModal').on('hidden.bs.modal', function () {
@@ -294,7 +299,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     $('#modal-sign-up').modal('hide');
                     $('.modal-backdrop').remove();
                     // location.reload();
-                    alert("Đăng ký thành công!");
+                    // alert("Đăng ký thành công!");
+                    sendNotify(response.maTK);
                 } else {
                     // Hiển thị thông báo lỗi
                     alert(response.message);
@@ -306,23 +312,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-// function sendNotification(maHD,maOr)
-// {
-//     var contentNotification ="Chúc m";
-//     console.log("maOR:",maOr);
-//     $.ajax({
-//         type: 'POST',
-//         url: '/them-thong-bao',
-//         data: {  'maTK': maOr ,'noiDung': noidung, 'loaiTB':1, 'ma':maHD,},
-//         success: function (data) {
-//             console.log('Success:', data);
-//             console.log("thanh cong");
-//         },
-//         error: function (error) {
-//             console.error('Error:', error);
-//         }
-//     });
-// }
+function sendNotify(maTK)
+{
+    var contentNotify ="Chúc mừng bạn đã là thành viên của Hopefully";
+    console.log("maTK:",maTK);
+    $.ajax({
+        type: 'POST',
+        url: '/them-thong-bao',
+        data: {  'maTK': maTK ,'noiDung': contentNotify, 'loaiTB':3, 'ma':maTK},
+        success: function (data) {
+            console.log('Success:', data);
+            console.log("thanh cong");
+        },
+        error: function (error) {
+            console.error('Error:', error);
+        }
+    });
+}
 // -----gửi OTP----
 var otp_email = "";
 var email_receiveOTP = "";
@@ -548,6 +554,15 @@ function showAlert(message) {
     }, 3000);  // 3000 milliseconds = 3 seconds
 }
 
+$('#notice-detail').on('shown.bs.modal', function () {
+    console.log("Có chạy mà =======");
+    // Đặt độ trễ để đảm bảo việc xóa class "sticky" được thực hiện sau khi modal hiển thị
+    setTimeout(function() {
+        var header = document.getElementById("myHeader");
+        header.classList.remove("sticky");
+    }, 10);
+});
+
 //button read ở thông báo
 const notice_item = document.querySelectorAll(".notification-item")
 $(document).ready(function (){
@@ -623,11 +638,24 @@ $(document).ready(function (){
                     console.log("Lỗi nhận dữ liệu. Trạng thái "+resData.status);
                     return;
                 }
+                $('.imageNotify').attr('src', '/images/tbHD.png');
                 $('.name').text(activity.tenhd)
                 const moTa = activity.moTa.length > 300 ? activity.moTa.substring(0, 300) + "..." : activity.moTa;
                 $('.description').text(moTa);
                 $('.location').text(activity.diaDiem)
                 $('.time').text(" Ngày hoạt động diễn ra: " + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianBD)) + ' - ' + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianKT)))
+            }
+            else if(type ==='3'){
+                //Lấy dữ liệu của cái cần thông báo (về hoạt động liên quan đến tài khoản)
+                console.log("chạy")
+                const res = await fetch(`nhan-du-lieu-tai-khoan?id=${ma}`)
+                const thanhvien = await res.json();
+                $('.imageNotify').attr('src', '/images/tbTK.png');
+                $('.name').text("Chào" + thanhvien.maTK.hoTen + ",");
+                $('.description').html("Chúc mừng bạn đã đăng ký thành công tài khoản trên Hopefully.<br>Hãy cùng tham gia và chia sẻ những hoạt động ý nghĩa với chúng tôi nhé!!");
+                $('.bi.bi-geo-alt-fill').css('display', 'none');
+                $('.bi.bi-alarm-fill').css('display', 'none');
+
             }
             $('#notice-detail').modal('show')
         })

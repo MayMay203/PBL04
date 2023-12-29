@@ -126,7 +126,7 @@ public ResponseEntity<Map<String, Object>> addAccount(@RequestParam(name = "tenD
     thanhvien.setMaTK(taikhoan);
     System.out.println("User:" + thanhvien.getMaTK().getId() + thanhvien.getHoTen() + thanhvien.getEmail() + thanhvien.getHoTen()+thanhvien.getDiaChi()+thanhvien.getNgaySinh()+thanhvien.getSoDienThoai());
     memberService.addMember(thanhvien);
-
+    response.put("maTK", taikhoan.getId());
     response.put("message", "Thông báo: Thông tin đã được cập nhật thành công!");
     response.put("success", true);
     return ResponseEntity.ok(response);

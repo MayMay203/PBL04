@@ -95,7 +95,7 @@
                         <!-- Chưa đọc-->
                         <div th:if="${listNotice.size()>0}" th:each="notice:${listNotice}">
                             <div class="mt-2 p-2 dropdown-item cursor-pointer d-flex align-item-center bg-grey notification-item" th:if="${notice.getTrangThai==false}" th:attr="data-id=${notice.getId()},data-type=${notice.getLoaiTB}, data-status=${notice.getTrangThai()},data-ma=${notice.getMa()}">
-                                <img th:src="@{/images/logoweb.png}" class="radius-1 me-3 w-2_5 h-2_5" alt="">
+                                <img th:src="@{/images/logoweb.png}" class="radius-1 me-3 w-2_5 h-2_5 imageNotify" alt="">
                                 <div>
                                     <p class="p-0 m-0 fs-9 black-color notification-text" th:text="${notice.getNoiDung()}"></p>
                                     <p class="p-0 m-0 fs-9 green_light-color fst-italic" th:text="${#temporals.format(notice.getThoiGianTB,'dd/MM/yyyy hh:MM:ss')}"></p>
