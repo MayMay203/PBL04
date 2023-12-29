@@ -620,7 +620,8 @@ $(document).ready(function (){
     })
 })
 
-$('#close-notice').on("click",function (){
+$('#close-notice').on("click",function (event){
+    event.stopPropagation()
     for(item of notice_item){
         item.classList.remove("selected-notice");
     }
