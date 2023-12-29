@@ -1,6 +1,7 @@
 package com.example.pbl04.controller;
 import com.example.pbl04.entity.Thanhvien;
 import com.example.pbl04.service.AccountService;
+import com.example.pbl04.service.PasswordEncoderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -16,10 +17,12 @@ public class EmailController {
 
     private final JavaMailSender javaMailSender;
     private final AccountService accountService;
+    private final PasswordEncoderService passwordEncoderService;
     @Autowired
-    public EmailController(JavaMailSender javaMailSender, AccountService accountService) {
+    public EmailController(JavaMailSender javaMailSender, AccountService accountService, PasswordEncoderService passwordEncoderService) {
         this.javaMailSender = javaMailSender;
         this.accountService = accountService;
+        this.passwordEncoderService = passwordEncoderService;
     }
 
 
@@ -68,8 +71,8 @@ public class EmailController {
             System.out.println("Đúng otp");
             Thanhvien thanhvien = accountService.findMemberByEmail(email);
             String newPass = "TK1000" + thanhvien.getMaTK().getId().toString();
-              accountService.changePasswordByOTP(thanhvien.getMaTK(), newPass);
-//            accountService.
+            String encodePass = passwordEncoderService.encodePassword(newPass);
+              accountService.changePasswordByOTP(thanhvien.getMaTK(), encodePass);
             response.put("success", "Mật khẩu của bạn đã được reset\n Mật khẩu mới:" + newPass);
         }
         else{
