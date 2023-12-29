@@ -1,6 +1,7 @@
 package com.example.pbl04.controller;
 
 import com.example.pbl04.entity.Taikhoan;
+import com.example.pbl04.entity.Thongbao;
 import com.example.pbl04.service.AccountService;
 import com.example.pbl04.service.NotificationService;
 import jakarta.servlet.http.HttpSession;

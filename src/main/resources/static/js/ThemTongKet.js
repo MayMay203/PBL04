@@ -109,8 +109,31 @@ $(document).ready(function () {
   }
 
 var maHD;var maTK;
+// var idList;
 $(document).ready(function () {
     var btnSummary = document.getElementsByClassName("btn_Summary");
+    // function getMember(maHD)
+    // {
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '/get-member',
+    //         data: {  'maHD': maHD },
+    //         success: function (data) {
+    //             console.log('Success:', data);
+    //             idList = data.map(function (id) {
+    //                 return parseInt(id);
+    //             });
+    //             // mataikhoan= parseInt(data);
+    //             console.log("thanh cong");
+    //             console.log("mataikhoan:",mataikhoan);
+    //         },
+    //         error: function (error) {
+    //             console.error('Error:', error);
+    //         }
+    //     });
+    // }
+
+    var btnSummary = document.getElementsByClassName("buttonSummary");
     for(btn of btnSummary){
         btn.addEventListener("click" ,async (e) =>{
             var mahoatdong= e.target.dataset.value;
@@ -123,6 +146,7 @@ $(document).ready(function () {
                 if (data.summaryExists) {
                     window.location.href = '/View-Summary?id=' + mahoatdong;
                 } else {
+                    // getMember(maHD);
                     await showModalSummary();
                 }
             } catch (error) {
@@ -174,6 +198,25 @@ async function showModalSummary() {
 
 
 $(document).ready(function () {
+    // function sendNotiSummary(maHD)
+    // {
+    //     var noidung ="Một bài viết tổng kết về hoạt động bạn tham gia vừa được đăng. Hãy kiểm tra ngay để cập nhật thông tin chi tiết và chia sẻ cảm nhận của bạn";
+    //     for (var i = 0; i < idList.length; i++) {
+    //         var id = idList[i];
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: '/them-thong-bao',
+    //             data: {'maTK': id, 'noiDung': noidung, 'loaiTB': 1, 'ma': maHD,},
+    //             success: function (data) {
+    //                 console.log('Success:', data);
+    //                 console.log("thanh cong");
+    //             },
+    //             error: function (error) {
+    //                 console.error('Error:', error);
+    //             }
+    //         });
+    //     }
+    // }
     var btnSave = document.getElementsByClassName("btnSave");
     for(btn of btnSave){
         btn.addEventListener("click", async (e)=> {
@@ -203,6 +246,7 @@ $(document).ready(function () {
                 success: function (response) {
                     if(response.success)
                     {
+                        // sendNotiSummary(maHD);
                         console.log(response);
                         location.reload();
                     }else{
