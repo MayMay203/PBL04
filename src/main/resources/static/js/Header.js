@@ -565,15 +565,18 @@ $(document).ready(function (){
     $(".notification-item").each(function (){
         $(this).on("click",async function (e){
             e.stopPropagation();
+            //Đổi bg khi click
+            $(this).addClass('selected-notice');
             const ids = []
-            console.log(this)
             const id = +this.dataset.id;
             ids.push(id);
             const status = this.dataset.status;
             const type = this.dataset.type;
             const ma=this.dataset.ma;
             if(status==='false'){
-                this.target.classList.remove("bg-grey")
+                    // Xoa bg-grey
+                $(this).removeClass('bg-grey');
+                    // Cap nhat lai trang thai trong csdl
                     const response = await fetch(`cap-nhat-trang-thai-doc-thong-bao?idList=${ids}`,{
                         method: 'POST'
                     });
@@ -586,7 +589,6 @@ $(document).ready(function (){
                 //Lấy dữ liệu của cái cần thông báo (hoạt động, đề xuất)
                 const res = await fetch(`nhan-du-lieu-de-xuat?id=${ma}`)
                 const suggestion =await res.json();
-                console.log(suggestion)
                 if(!res.ok){
                     console.log("Lỗi nhận dữ liệu. Trạng thái "+resData.status);
                     return;
@@ -599,7 +601,7 @@ $(document).ready(function (){
             }
             else if(type ==='1'){
                 //Lấy dữ liệu của cái cần thông báo (hoạt động, đề xuất)
-                const res = await fetch(`/hoat-dong/xem-chi-tiet?id=${ma}`)
+                const res = await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${ma}`)
                 const resData = await res.json();
                 const activity = resData.activity;
                 console.log(activity)
@@ -608,12 +610,19 @@ $(document).ready(function (){
                     return;
                 }
                 $('.name').text(activity.tenhd)
-                $('.description').text(activity.moTa)
-                // $(this).removeClass('.location');
+                const moTa = activity.moTa.length > 300 ? activity.moTa.substring(0, 300) + "..." : activity.moTa;
+                $('.description').text(moTa);
+                $('.location').text(activity.diaDiem)
                 $('.time').text(" Ngày hoạt động diễn ra: " + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianBD)) + ' - ' + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianKT)))
             }
-
             $('#notice-detail').modal('show')
         })
     })
+})
+
+$('#close-notice').on("click",function (event){
+    event.stopPropagation()
+    for(item of notice_item){
+        item.classList.remove("selected-notice");
+    }
 })

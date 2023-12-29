@@ -111,7 +111,7 @@ $(document).ready(function () {
 var maHD;var maTK;
 // var idList;
 $(document).ready(function () {
-    var btnSummary = document.getElementsByClassName("btn_Summary");
+   // var btnSummary = document.getElementsByClassName("btn_Summary");
     // function getMember(maHD)
     // {
     //     $.ajax({
@@ -133,6 +133,7 @@ $(document).ready(function () {
     //     });
     // }
 
+    var btnSummary = document.getElementsByClassName("buttonSummary");
     for(btn of btnSummary){
         btn.addEventListener("click" ,async (e) =>{
             var mahoatdong= e.target.dataset.value;
