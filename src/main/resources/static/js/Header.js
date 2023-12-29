@@ -539,6 +539,57 @@ $(document).ready(function (){
     })
 })
 
-function handleItemClick(event, item) {
-    event.stopPropagation();
-}
+$(document).ready(function (){
+    $(".notification-item").each(function (){
+        $(this).on("click",async function (e){
+            e.stopPropagation();
+            const ids = []
+            console.log(this)
+            const id = +this.dataset.id;
+            ids.push(id);
+            const status = this.dataset.status;
+            const type = this.dataset.type;
+            const ma=this.dataset.ma;
+            if(status==='false'){
+                this.target.classList.remove("bg-grey")
+                    const response = await fetch(`cap-nhat-trang-thai-doc-thong-bao?idList=${ids}`,{
+                        method: 'POST'
+                    });
+                    if (!response.ok) {
+                        console.log("Lỗi cập nhật trạng thái thông báo. Trạng thái " + response.status);
+                        return;
+                    }
+            }
+            if(type==='0'){
+                //Lấy dữ liệu của cái cần thông báo (hoạt động, đề xuất)
+                const res = await fetch(`nhan-du-lieu-de-xuat?id=${ma}`)
+                const suggestion =await res.json();
+                console.log(suggestion)
+                if(!res.ok){
+                    console.log("Lỗi nhận dữ liệu. Trạng thái "+resData.status);
+                    return;
+                }
+                $('.name').text(suggestion.maChuDe.tenChuDe)
+                $('.description').text(suggestion.moTa)
+                var time = new Intl.DateTimeFormat("vi-VN",{ day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(suggestion.thoiGianDeXuat))
+                $('.time').text(time);
+            }
+            else if(type ==='1'){
+                //Lấy dữ liệu của cái cần thông báo (hoạt động, đề xuất)
+                const res = await fetch(`/hoat-dong/xem-chi-tiet?id=${ma}`)
+                const resData = await res.json();
+                const activity = resData.activity;
+                console.log(activity)
+                if(!res.ok){
+                    console.log("Lỗi nhận dữ liệu. Trạng thái "+resData.status);
+                    return;
+                }
+                $('.name').text(activity.tenhd)
+                $('.description').text(activity.moTa)
+                $('.time').text(new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianBD)) + ' - ' + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianKT)))
+            }
+
+            $('#notice-detail').modal('show')
+        })
+    })
+})

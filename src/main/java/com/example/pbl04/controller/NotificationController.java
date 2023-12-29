@@ -67,14 +67,14 @@ public class NotificationController {
 
     @PostMapping("/cap-nhat-trang-thai-doc-thong-bao")
     @ResponseBody
-    public ResponseEntity<Void> updateStatusOfNotice(@RequestParam("idList") List<Integer> idList,
-                                                     HttpSession session){
-        Taikhoan acc = (Taikhoan)session.getAttribute("account");
+    public ResponseEntity<Void> updateStatusOfNotice(@RequestParam("idList") List<Integer> idList){
         for(Integer id:idList){
-            notificationService.updateStatusOfNotice(id,acc.getId());
+            notificationService.updateStatusOfNotice(id);
         }
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
+
 
 
 
