@@ -95,17 +95,19 @@
                         <!-- Chưa đọc-->
                         <div th:if="${listNotice.size()>0}" th:each="notice:${listNotice}">
                             <div class="mt-2 p-2 dropdown-item cursor-pointer d-flex align-item-center bg-grey notification-item" th:if="${notice.getTrangThai==false}" th:attr="data-id=${notice.getId()},data-type=${notice.getLoaiTB}, data-status=${notice.getTrangThai()},data-ma=${notice.getMa()}">
-                                <img th:src="@{/images/logoweb.png}" class="radius-1 me-3 w-2_5 h-2_5" alt="">
-                                <div>
-                                    <p class="p-0 m-0 fs-9 black-color notification-text" th:text="${notice.getNoiDung()}"></p>
+                                <img th:if="${notice.getLoaiTB()==0}" th:src="@{/images/logoweb.png}" class="radius-1 me-3 w-2_5 h-2_5" alt="">
+                                <img th:if="${notice.getLoaiTB()==1}" th:src="@{/images/logoHD.png}" class="radius-1 me-3 w-2_5 h-2_5" alt="">
+                                <div class="max-width-400">
+                                    <p class="p-0 m-0 fs-9 black-color notification-text" th:text="${#strings.length(notice.getNoiDung()) > 85 ? #strings.substring(notice.getNoiDung(), 0, 85) + '...' : notice.getNoiDung()}"></p>
                                     <p class="p-0 m-0 fs-9 green_light-color fst-italic" th:text="${#temporals.format(notice.getThoiGianTB,'dd/MM/yyyy hh:MM:ss')}"></p>
                                 </div>
                             </div>
                             <!-- Đã đọc không có bg-grey-->
                             <div class="mt-2 p-2 dropdown-item cursor-pointer d-flex align-item-center notification-item" th:if="${notice.getTrangThai==true}" th:attr="data-id=${notice.getId()},data-type=${notice.getLoaiTB},data-status=${notice.getTrangThai()},data-ma=${notice.getMa()}">
-                                <img th:src="@{/images/logoweb.png}" class="radius-1 me-3 w-2_5 h-2_5" alt="">
-                                <div>
-                                    <p class="p-0 m-0 fs-9 black-color notification-text" th:text="${notice.getNoiDung()}"></p>
+                                <img th:if="${notice.getLoaiTB()==0}" th:src="@{/images/logoweb.png}" class="radius-1 me-3 w-2_5 h-2_5" alt="">
+                                <img th:if="${notice.getLoaiTB()==1}" th:src="@{/images/logoHD.png}" class="radius-1 me-3 w-2_5 h-3" alt="">
+                                <div class="max-width-400">
+                                    <p class="p-0 m-0 fs-9 black-color notification-text" th:text="${#strings.length(notice.getNoiDung()) > 85 ? #strings.substring(notice.getNoiDung(), 0, 85) + '...' : notice.getNoiDung()}"></p>
                                     <p class="p-0 m-0 fs-9 green_light-color fst-italic" th:text="${#temporals.format(notice.getThoiGianTB,'dd/MM/yyyy hh:MM:ss')}"></p>
                                 </div>
                             </div>
