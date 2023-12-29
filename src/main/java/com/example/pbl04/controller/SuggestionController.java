@@ -89,6 +89,7 @@ public class SuggestionController {
         suggestionService.Save(dexuat);
         List<Taikhoan> accList = accountService.getAccountAd();
         Instant thoiGianTB = Instant.now();
+        //Them thong bao cho de xuat
         for(Taikhoan acc : accList){
             Thongbao tb = new Thongbao();
             tb.setNoiDung("Một đề xuất mới đang chờ duyệt");

@@ -571,8 +571,9 @@ $(document).ready(function (){
                 }
                 $('.name').text(suggestion.maChuDe.tenChuDe)
                 $('.description').text(suggestion.moTa)
+                $('.location').text(" Vị trí: " + suggestion.viTri)
                 var time = new Intl.DateTimeFormat("vi-VN",{ day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(suggestion.thoiGianDeXuat))
-                $('.time').text(time);
+                $('.time').text(" Ngày đề xuất: " + time);
             }
             else if(type ==='1'){
                 //Lấy dữ liệu của cái cần thông báo (hoạt động, đề xuất)
@@ -586,7 +587,8 @@ $(document).ready(function (){
                 }
                 $('.name').text(activity.tenhd)
                 $('.description').text(activity.moTa)
-                $('.time').text(new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianBD)) + ' - ' + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianKT)))
+                // $(this).removeClass('.location');
+                $('.time').text(" Ngày hoạt động diễn ra: " + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianBD)) + ' - ' + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianKT)))
             }
 
             $('#notice-detail').modal('show')
