@@ -133,7 +133,6 @@ $(document).ready(function () {
     //     });
     // }
 
-    var btnSummary = document.getElementsByClassName("buttonSummary");
     for(btn of btnSummary){
         btn.addEventListener("click" ,async (e) =>{
             var mahoatdong= e.target.dataset.value;
