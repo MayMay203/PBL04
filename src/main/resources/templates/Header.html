@@ -82,7 +82,7 @@
 
             <!-- Thông báo cho người dùng      -->
             <div th:if="${isLogin}" class="notify-container">
-                <button id="btn_notify" class="float-end no-border bg-white mt-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button id="btn_notify" class="float-end no-border bg-white" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="bi bi-bell p-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Thông báo"></i>
                 </button>
                 <!-- Thông tin thông báo -->
@@ -94,7 +94,7 @@
                     </div>
                         <!-- Chưa đọc-->
                         <div th:if="${listNotice.size()>0}" th:each="notice:${listNotice}">
-                            <div class="mt-2 p-2 dropdown-item cursor-pointer d-flex align-item-center bg-grey notification-item" th:if="${notice.getTrangThai==false}" th:attr="data-id=${notice.getId()},data-type=${notice.getLoaiTB}, data-status=${notice.getTrangThai()},data-ma=${motice.getMa()}">
+                            <div class="mt-2 p-2 dropdown-item cursor-pointer d-flex align-item-center bg-grey notification-item" th:if="${notice.getTrangThai==false}" th:attr="data-id=${notice.getId()},data-type=${notice.getLoaiTB}, data-status=${notice.getTrangThai()},data-ma=${notice.getMa()}">
                                 <img th:src="@{/images/logoweb.png}" class="radius-1 me-3 w-2_5 h-2_5" alt="">
                                 <div>
                                     <p class="p-0 m-0 fs-9 black-color notification-text" th:text="${notice.getNoiDung()}"></p>
