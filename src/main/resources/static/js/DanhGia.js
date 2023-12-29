@@ -170,7 +170,7 @@ async function saveEvaluation(e) {
     })
     // Them thong bao danh gia diem
     const noiDung = "Người tổ chức vừa đánh giá điểm hoạt động của bạn."
-    const loaiTB = 0
+    const loaiTB = 2
     const ma = maHDTC;
     var noticeURL = `/them-thong-bao?maTK=${maTKDG}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`
     var noticeRes = await fetch(noticeURL, {

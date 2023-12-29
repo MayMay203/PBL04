@@ -105,6 +105,10 @@
     background-color: #f3e2d2;
 }
 
+.red-color {
+    color: red;
+}
+
 .fs-7{
     font-size: 0.85rem!important;
 }

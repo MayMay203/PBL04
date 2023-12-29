@@ -586,7 +586,7 @@ $(document).ready(function (){
                     }
             }
             if(type==='0'){
-                //Lấy dữ liệu của cái cần thông báo (hoạt động, đề xuất)
+                //Lấy dữ liệu của đề xuất  cần thông báo
                 const res = await fetch(`nhan-du-lieu-de-xuat?id=${ma}`)
                 const suggestion =await res.json();
                 if(!res.ok){
@@ -600,11 +600,10 @@ $(document).ready(function (){
                 $('.time').text(" Ngày đề xuất: " + time);
             }
             else if(type ==='1'){
-                //Lấy dữ liệu của cái cần thông báo (hoạt động, đề xuất)
+                //Lấy dữ liệu của hoạt động cần thông báo
                 const res = await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${ma}`)
                 const resData = await res.json();
                 const activity = resData.activity;
-                console.log(activity)
                 if(!res.ok){
                     console.log("Lỗi nhận dữ liệu. Trạng thái "+resData.status);
                     return;
@@ -614,6 +613,38 @@ $(document).ready(function (){
                 $('.description').text(moTa);
                 $('.location').text(activity.diaDiem)
                 $('.time').text(" Ngày hoạt động diễn ra: " + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianBD)) + ' - ' + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianKT)))
+            }
+            else if(type==='2'){
+                //Lấy dữ liệu của hoạt động cần thông báo
+                const res = await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${ma}`)
+                const resData = await res.json();
+                const activity = resData.activity;
+                if(!activity){
+                    console.log("Dữ liệu hoạt động không hợp lệ.");
+                    return;
+                }
+                const resEva = await fetch(`/nhan-danh-gia?IdAct=${ma}`)
+                if(!resEva.ok){
+                    console.log("Lỗi nhận dữ liệu đánh giá. Trạng thái "+resData.status);
+                    return;
+                }
+                const evaluation = await resEva.json();
+                $('.name').text(activity.tenhd)
+                const moTa = activity.moTa.length > 300 ? activity.moTa.substring(0, 300) + "..." : activity.moTa;
+                $('.description').text(moTa);
+                $('.location').text(activity.diaDiem)
+                $('.time').text(" Ngày hoạt động diễn ra: " + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianBD)) + ' - ' + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianKT)))
+                const score = evaluation.diemTNV;
+                let eval = "";
+                switch(score){
+                    case 1: eval = "Không tích cực"
+                            break
+                    case 4: eval = "Tích cực"
+                            break;
+                    case 5: eval = "Rất tích cực"
+                            break;
+                }
+                $('.score').text("Đánh giá của người tổ chức : " + eval)
             }
             $('#notice-detail').modal('show')
         })

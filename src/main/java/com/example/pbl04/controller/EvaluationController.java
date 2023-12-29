@@ -182,5 +182,17 @@ public class EvaluationController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @GetMapping("/nhan-danh-gia")
+    @ResponseBody
+    public ResponseEntity<Danhgia> getEvaluation(@RequestParam("IdAct") Integer idAct, HttpSession session) {
+        Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
+        Danhgia evaluation = evaluationService.getEvaluationByIDHDTK(idAct, myAcc.getId());
+        // Trả về giá trị đặc biệt nếu evaluation là null
+        if (evaluation == null) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+        }
+        return ResponseEntity.ok(evaluation);
+    }
+
 
 }
