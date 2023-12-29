@@ -81,13 +81,12 @@
 
 
             <!-- Thông báo cho người dùng      -->
-            <div th:if="${isLogin}" class="notify-container" >
-                <button id="btn_notify" class="float-end no-border bg-white" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="">
+            <div th:if="${isLogin}" class="notify-container">
+                <button id="btn_notify" class="float-end no-border bg-white mt-2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="bi bi-bell p-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Thông báo"></i>
                 </button>
                 <!-- Thông tin thông báo -->
                 <ul class="p-3 dropdown-menu dropdown-notify">
-
                     <div class="d-flex justify-content-between">
                         <p class="fw-bold fs-5 black-color">Thông báo</p>
                         <button id="btn-read" class="btn white-color bg-btn no-border no-outline radius-half px-2 fs-9 py-0 h-2">Đánh dấu đã đọc</button>
@@ -95,7 +94,7 @@
                     </div>
                         <!-- Chưa đọc-->
                         <div th:if="${listNotice.size()>0}" th:each="notice:${listNotice}">
-                            <div class="mt-2 p-2 dropdown-item cursor-pointer d-flex align-item-center bg-grey notification-item" th:if="${notice.getTrangThai==false}" th:attr="data-id=${notice.getId()},data-status=${notice.getTrangThai()}" onclick="handleItemClick(event, this)">
+                            <div class="mt-2 p-2 dropdown-item cursor-pointer d-flex align-item-center bg-grey notification-item" th:if="${notice.getTrangThai==false}" th:attr="data-id=${notice.getId()},data-type=${notice.getLoaiTB}, data-status=${notice.getTrangThai()},data-ma=${motice.getMa()}">
                                 <img th:src="@{/images/logoweb.png}" class="radius-1 me-3 w-2_5 h-2_5" alt="">
                                 <div>
                                     <p class="p-0 m-0 fs-9 black-color notification-text" th:text="${notice.getNoiDung()}"></p>
@@ -103,7 +102,7 @@
                                 </div>
                             </div>
                             <!-- Đã đọc không có bg-grey-->
-                            <div class="mt-2 p-2 dropdown-item cursor-pointer d-flex align-item-center notification-item" th:if="${notice.getTrangThai==true}" th:attr="data-id=${notice.getId()},data-status=${notice.getTrangThai()}" onclick="handleItemClick(event, this)">
+                            <div class="mt-2 p-2 dropdown-item cursor-pointer d-flex align-item-center notification-item" th:if="${notice.getTrangThai==true}" th:attr="data-id=${notice.getId()},data-type=${notice.getLoaiTB},data-status=${notice.getTrangThai()},data-ma=${notice.getMa()}">
                                 <img th:src="@{/images/logoweb.png}" class="radius-1 me-3 w-2_5 h-2_5" alt="">
                                 <div>
                                     <p class="p-0 m-0 fs-9 black-color notification-text" th:text="${notice.getNoiDung()}"></p>
@@ -112,11 +111,48 @@
                             </div>
                         </div>
 
+<!--                        <div class="mt-2 p-2 dropdown-item cursor-pointer display-flex align-item-center bg-grey notification-item">-->
+<!--                            <img th:src="@{/images/logoweb.png}" class="radius-1 me-3 w-2_5 h-2_5" alt="">-->
+<!--                            <div class="max-width-420">-->
+<!--                                <p class="p-0 m-0 fs-9 notification-text"> <b>Đề xuất</b> của bạn đã được duyệt thành công.</p>-->
+<!--                                <p class="p-0 m-0 fs-9 green_light-color fst-italic">12:00:00 28/12/2023</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                    <div class="dropdown-item cursor-pointer">-->
+<!--                        <p class="p-0 m-0 fs-8"> <b>Đề xuất</b> của bạn đã được duyệt thành công.</p>-->
+<!--                        <p class="p-0 m-0 fs-9 green_light-color fst-italic fw-bold">12:00:00 28/12/2023</p>-->
+<!--                    </div>-->
+<!--                    <div class="dropdown-item cursor-pointer">-->
+<!--                        <p class="p-0 m-0 fs-8"> <b>Đề xuất</b> của bạn đã được duyệt thành công.</p>-->
+<!--                        <p class="p-0 m-0 fs-9 green_light-color fst-italic fw-bold">12:00:00 28/12/2023</p>-->
+<!--                    </div>-->
+
                 </ul>
             </div>
 
         </div>
 
+        <!-- Modal chi tiết thông báo -->
+        <div class="modal fade" id="notice-detail" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered " role="document">
+                <div class="modal-content">
+                    <div class="modal-header d-flex p-2">
+                        <h5 class="modal-title col-11 text_align-center">Chi tiết thông báo</h5>
+                        <button type="button" class="btn-close btnClose col-1 px-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <h3 class="green-color fs-4 name p-0"></h3>
+                            <p class="mb-0 fs-6 description"></p>
+                            <p class="fs-7 fst-italic my-1"><i class="bi bi-geo-alt-fill green location"></i></p>
+                            <p class="fs-7 fst-italic my-1">
+                                <i class="bi bi-alarm-fill green fst-italic time"></i></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 <!--        </div>-->
 

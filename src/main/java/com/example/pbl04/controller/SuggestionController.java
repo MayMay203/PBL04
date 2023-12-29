@@ -3,6 +3,7 @@ package com.example.pbl04.controller;
 import com.example.pbl04.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -88,6 +89,7 @@ public class SuggestionController {
         suggestionService.Save(dexuat);
         List<Taikhoan> accList = accountService.getAccountAd();
         Instant thoiGianTB = Instant.now();
+        //Them thong bao cho de xuat
         for(Taikhoan acc : accList){
             Thongbao tb = new Thongbao();
             tb.setNoiDung("Một đề xuất mới đang chờ duyệt");
@@ -99,6 +101,15 @@ public class SuggestionController {
         }
         return "redirect:de-xuat";
     }
+
+    @GetMapping("/nhan-du-lieu-de-xuat")
+    @ResponseBody
+    public ResponseEntity<Dexuat> getNotificationList(@RequestParam("id") Integer id){
+        Dexuat suggestion  = suggestionService.getSuggById(id);
+        return ResponseEntity.ok(suggestion);
+    }
+
+
 
 
 
