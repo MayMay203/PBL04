@@ -767,6 +767,7 @@
 
 .custom-btn{
     width: 50rem;
+    margin-top: -0.5rem !important;
 }
 .pt-0-5 {
     margin-top: -1.7rem !important;
