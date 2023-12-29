@@ -160,4 +160,5 @@ public class ActivityServiceImpl implements ActivityService {
 
     public List<Hoatdong> getAllActivityNotOccured() {return  activityRepository.getAllActivityNotOccured();}
     public List<Hoatdong> getActivityByNameAct(String nameAct) {return activityRepository.getActivityByNameAct(nameAct);}
+    public List<Hoatdong> getActivityByTopic(Integer maCD) {return activityRepository.getActivityByTopic(maCD);}
 }
