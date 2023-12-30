@@ -53,18 +53,6 @@
 body {
     overflow-x: hidden;
 }
-/*Thanh cuon body*/
-body::-webkit-scrollbar {
-    width: 12px;
-}
-
-body::-webkit-scrollbar-thumb {
-    background-color: darkgray;
-}
-/*body::-webkit-scrollbar-track {*/
-/*    background-color: #f1f1f1;*/
-/*    border-radius: 10px;*/
-/*}*/
 
 /*custom-alert*/
 .custom-alert-popup {
