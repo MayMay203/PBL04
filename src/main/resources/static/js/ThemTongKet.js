@@ -111,28 +111,6 @@ $(document).ready(function () {
 var maHD;var maTK;
 // var idList;
 $(document).ready(function () {
-    var btnSummary = document.getElementsByClassName("btn_Summary");
-    // function getMember(maHD)
-    // {
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: '/get-member',
-    //         data: {  'maHD': maHD },
-    //         success: function (data) {
-    //             console.log('Success:', data);
-    //             idList = data.map(function (id) {
-    //                 return parseInt(id);
-    //             });
-    //             // mataikhoan= parseInt(data);
-    //             console.log("thanh cong");
-    //             console.log("mataikhoan:",mataikhoan);
-    //         },
-    //         error: function (error) {
-    //             console.error('Error:', error);
-    //         }
-    //     });
-    // }
-
     var btnSummary = document.getElementsByClassName("buttonSummary");
     for(btn of btnSummary){
         btn.addEventListener("click" ,async (e) =>{

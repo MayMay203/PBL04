@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/layout.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/TongKetHoatDong.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/XetDuyet.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/ThemHoatDong.css}">
     <script  defer th:src="@{/js/Header.js}"></script>
 </head>
@@ -115,7 +116,7 @@
                                                   class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail viewDetailActivity" th:attr="data-value=${listPost.get(4*i+j).getId()}" >Xem chi tiết...</button>
                                       </div>
                                      </div>
-                                      <div class="custom-btn pt-2">
+                                      <div class="custom-btn">
                                           <button class="custom-btnConfirm buttonConfirmPostStage0"  th:attr="data-hoatdong-id=${listPost.get(4*i+j).id}">Duyệt bài đăng</button>
                                           <button class="custom-btnConfirm btnCancelPost" id="buttonCancelPostStage0" th:attr="data-value=${listPost.get(4*i+j).id}">Hủy bài đăng</button>
                                       </div>
@@ -160,7 +161,7 @@
                                         <button class="btn text-decoration-none green_light-color fw-medium fst-italic float-sm-end me-md-3 mb-md-1 no-border fs-7 view-detail btnViewActivityConfirm"  th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).getId()}" >Xem chi tiết...</button>
                                     </div>
                                    </div>
-                                    <div class="custom-btn pt-2">
+                                    <div class="custom-btn">
                                         <button class="custom-btnConfirm buttonConfirmPostStage1"  th:attr="data-hoatdong-id=${listmyAcitivityNeedConfirm.get(4*i+j).id}">Duyệt hoạt động</button>
                                         <button class="custom-btnConfirm btnCancelActivity" th:attr="data-value=${listmyAcitivityNeedConfirm.get(4*i+j).id}">Hủy hoạt động</button>
                                     </div>
@@ -260,7 +261,7 @@
                                     <div class="modal-dialog modal-member-member">
                                         <div class="modal-content modal-content-member">
                                             <div class="modal-header modal-header-member">
-                                                <h5 class="modal-title modal-title-member" id="exampleModalLabel">TÌNH NGUYỆN VIÊN</h5>
+                                                <h5 class="modal-title modal-title-member white-color" id="exampleModalLabel">TÌNH NGUYỆN VIÊN</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body modal-body-member">
@@ -445,7 +446,94 @@
         </div>
     </div>
 </div>
+<!--Modal THông tin cá nhân của tình nguyện viên-->
+<div class="modal fade" id="modelMemberDetail" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content custom-modal-color">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EditModalLabel">THÔNG TIN TÌNH NGUYỆN VIÊN</h5>
+                <button id="closeButton" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="div__avatar">
+                        <div class="d-flex justify-content-center"><img class="img-avatar" id="anhDaiDien" src="" alt="" ></div>
+<!--                        <div>-->
+<!--                            <input class="custom-file-input choose-file" type="file" accept="image/png, image/jpeg, image/gif" name="imageInput" id="input-file">-->
+<!--                        </div>-->
+                    </div>
+                    <div class="div__inform">
 
+                        <div class="div__inform-form">
+                            <div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <i class="bi bi-person-vcard"></i>
+                                    <label for="name" class="form-label">Họ tên: </label>
+                                    <input type="text" class="form-control" id="name" name="hoTen" readonly>
+                                </div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <i class="bi bi-gender-ambiguous"></i>
+                                    <label class="form-label">Giới tính:</label>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input form-check-gender" id="radio1" name="gioiTinh" value="0" disabled>
+                                        <label class="form-check-label" for="radio1">Nam</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input form-check-gender" id="radio2" name="gioiTinh" value="1" disabled>
+                                        <label class="form-check-label" for="radio2">Nữ</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input form-check-gender" id="radio3" name="gioiTinh" value="2" disabled>
+                                        <label class="form-check-label" for="radio3">Khác</label>
+                                    </div>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <i class="bi bi-cake2"></i>
+                                    <label for="birthday" class="form-label">Ngày sinh: </label>
+                                    <input type="date" class="form-control date-show" id="birthday" name="ngaySinh" readonly>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <label for="address" class="form-label">Địa chỉ:</label>
+                                    <input type="text" class="form-control" id="address" name="diaChi" readonly>
+                                    <div class="form-address">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="div__contact">
+                        <div class="div__contact-form">
+                            <div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <i class="bi bi-telephone"></i>
+                                    <label class="form-label" for="phone">Số điện thoại:</label>
+                                    <input type="tel" class="form-control" id="phone" name="soDienThoai"  readonly>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                                <div class="mb-3 d-flex align-items-center">
+                                    <i class="bi bi-envelope"></i>
+                                    <label class="form-label" for="email">Địa chỉ email:</label>
+                                    <input type="email" class="form-control" id="email" name="email" readonly>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <div style="margin-bottom: 5rem"></div>
 <div id="myFooter" th:include="Footer :: html" ></div>
 </body>

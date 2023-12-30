@@ -524,9 +524,14 @@ body {
 .ml--0_2{
     margin-left: -0.2rem;
 }
-
+.mr--0_5{
+    margin-right: -0.8rem;
+}
 .ml-3{
     margin-left: 3rem;
+}
+.mb--0_2{
+    margin-bottom: -0.5rem !important;
 }
 
 .ml-4 {

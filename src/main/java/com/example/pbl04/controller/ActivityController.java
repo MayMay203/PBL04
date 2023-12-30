@@ -49,11 +49,13 @@ public class ActivityController {
    @GetMapping("/trang-chu-hoat-dong")
     public String showActivityOccured(Model model, HttpSession session)
     {
+        List<Chude> topicList = topicService.getAllTopics();
         Integer numberParticipants= activityService.getParticipants();
         Integer numberActivitys= activityService.getNumActivity();
         List<Dangky> actiListUpcomming =activityService.getActivityUpcomming();
         List<Hoatdong> actiList = activityService.getActivityOccured();
         List<Hoatdong> actiListHappening= activityService.getActivityHappening();
+        model.addAttribute("topicList",topicList);
         model.addAttribute("numberActivitys",numberActivitys);
         model.addAttribute("actiList",actiList);
         model.addAttribute("actiListHappening",actiListHappening);
@@ -75,6 +77,12 @@ public class ActivityController {
                                    @RequestParam Map<String, String> params,
                                    HttpSession session)
     {
+        Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
+        if(myAcc!=null){
+            List<Thongbao> listNotice = new ArrayList<>();
+            listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
+            model.addAttribute("listNotice",listNotice);
+        }
         sessionService.createSessionModel(model, session);
         params = params.entrySet().stream()
                 .collect(Collectors.toMap(
@@ -243,12 +251,33 @@ public class ActivityController {
         Hoatdong hd = activityService.getActivityByID(maHD);
         return hd;
     }
+    @PostMapping("/get-activity-by-topic")
+    @ResponseBody
+    public List<Hoatdong> getActivityByTopic(@RequestParam("maCD") Integer maCD)
+    {
 
+        List<Hoatdong> activityList = new ArrayList<>();
+        if(maCD==0)
+        {
+            activityList= activityService.getActivityToRegis();
+        }else{
+            activityList= activityService.getActivityByTopic(maCD);
+        }
+        return activityList;
+    }
+    @GetMapping("/get-member-by-id")
+    @ResponseBody
+    public Thanhvien getMemberByID(@RequestParam("maTK") Integer maHD)
+    {
+        Thanhvien tv = activityService.getMemberByID(maHD);
+        return tv;
+    }
     @GetMapping("/hoat-dong-theo-vi-tri")
     @ResponseBody
     public ResponseEntity<List<Hoatdong>> getActByLocation(@RequestParam(name = "location") String location) {
         List<Hoatdong> activityList = activityService.getActByLocation(location);
         return ResponseEntity.ok(activityList);
     }
+
 }
 

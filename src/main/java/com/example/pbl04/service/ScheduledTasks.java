@@ -65,7 +65,7 @@ public class ScheduledTasks {
         for(Hoatdong activity : activities)
         {
             LocalDate currentDate = LocalDate.now();
-            if (currentDate.isAfter(activity.getThoiGianKT())) {
+            if (currentDate.isAfter(activity.getThoiGianKT()) || currentDate.isEqual(activity.getThoiGianBD())) {
                activityRepository.TransActivityToFinish(activity.getId());
             }
         }

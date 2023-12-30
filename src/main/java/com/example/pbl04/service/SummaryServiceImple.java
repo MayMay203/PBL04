@@ -19,7 +19,7 @@ public class SummaryServiceImple implements SummaryService{
     @Override
     public List<Tongket> getSummaryList() {return summaryRepository.findAll();}
     public Tongket getSummaryByID(Integer id) {return summaryRepository.getSummaryByID(id);}
-
+    public Tongket getSummaryByIDTK(Integer id) {return summaryRepository.getSummaryByIDTK(id);}
     @Override
     public Taikhoan getOrganizator(Integer id) {
         return summaryRepository.getOrganizator(id);

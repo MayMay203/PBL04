@@ -32,10 +32,20 @@ public class SessionService {
             // model.addAttribute("reloadPage", false);
         }else {
             // Người dùng đã đăng nhập, lưu thông tin tài khoản vào model (nếu cần)
+//            Taikhoan account = (Taikhoan) session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT);
+//            model.addAttribute("account", account);
+//            model.addAttribute("user", memberRepository.findMemberByID(account.getId()));
+//            model.addAttribute("isLogin", true);
             Taikhoan account = (Taikhoan) session.getAttribute(HeaderController.SESSION_ATTR_ACCOUNT);
             model.addAttribute("account", account);
-            model.addAttribute("user", memberRepository.findMemberByID(account.getId()));
-            model.addAttribute("isLogin", true);
+            Integer accountId = account.getId();
+            if (accountId != null) {
+                model.addAttribute("user", memberRepository.findMemberByID(accountId));
+                model.addAttribute("isLogin", true);
+            } else {
+                model.addAttribute("user", new Thanhvien());
+                model.addAttribute("isLogin", false);
+            }
         }
     }
 }
