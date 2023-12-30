@@ -598,6 +598,12 @@ $(document).ready(function (){
                 $('.location').text(" Vị trí: " + suggestion.viTri)
                 var time = new Intl.DateTimeFormat("vi-VN",{ day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(suggestion.thoiGianDeXuat))
                 $('.time').text(" Ngày đề xuất: " + time);
+                //Nếu là xét duyệt thì hiện button xét duyệt/hủy
+                if(suggestion.tinhTrangDuyet===false && suggestion.coXoa ===false){
+                    $('.confirm-div').removeClass('no-display')
+                    $('#btn-confirm-sugg').attr('data-id',suggestion.id);
+                    $('#btn-cancel-sugg').attr('data-id',suggestion.id);
+                }
             }
             else if(type ==='1'){
                 //Lấy dữ liệu của hoạt động cần thông báo
@@ -644,6 +650,7 @@ $(document).ready(function (){
                     case 5: eval = "Rất tích cực"
                             break;
                 }
+                $('.score').removeClass("no-display")
                 $('.score').text("Đánh giá của người tổ chức : " + eval)
             }
             $('#notice-detail').modal('show')
@@ -656,4 +663,6 @@ $('#close-notice').on("click",function (event){
     for(item of notice_item){
         item.classList.remove("selected-notice");
     }
+    $('.score').addClass("no-display")
+    $('.confirm-div').addClass("no-display")
 })

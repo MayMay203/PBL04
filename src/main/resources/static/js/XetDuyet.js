@@ -846,11 +846,12 @@ $(document).ready(function () {
 //Duyệt đề xuất
 function reloadSugg(suggList){
     const suggDiv = document.querySelector(".suggestion")
-    suggDiv.innerHTML = ''
-    suggList.forEach(sugg=>{
-        const suggTime = new Intl.DateTimeFormat("vi-VN",{ day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(sugg.thoiGianDeXuat))
-        suggDiv.innerHTML+=
-            `
+    if(suggDiv!=null){
+        suggDiv.innerHTML = ''
+        suggList.forEach(sugg=>{
+            const suggTime = new Intl.DateTimeFormat("vi-VN",{ day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(sugg.thoiGianDeXuat))
+            suggDiv.innerHTML+=
+                `
                     <div class="container d-flex align-items-center p-3 border_bottom-solid">
                         <div class="container flex-5 col-9">
                             <h3 class="green-color fs-4">${sugg.maChuDe.tenChuDe}</h3>
@@ -867,7 +868,8 @@ function reloadSugg(suggList){
                         </div>
                     </div>
            `
-    })
+        })
+    }
 }
 async function confirmSugg(){
     try{
@@ -917,8 +919,9 @@ async function confirmSugg(){
 }
 
 $(document).on('click', '#btn-confirm-sugg',confirmSugg)
+
 //Huy de xuat
-$(document).on('click', '#btn-cancel-sugg',async function (){
+async function cancelSugg (){
     try {
         const idSugg = $(this).data('id');
         const response = await fetch(`/cancel-suggestion?idSugg=${idSugg}`, {
@@ -940,17 +943,17 @@ $(document).on('click', '#btn-cancel-sugg',async function (){
         if(!addURL.ok){
             console.log("Lỗi thêm thông báo đề xuất. Trạng thái " + addURL.status);
         }
-            function customAlert(message) {
-                Swal.fire({
-                    icon: 'success',
-                    text: message,
-                    confirmButtonText: 'OK',
-                    customClass: {
-                        popup: 'custom-alert-popup'
-                    }
-                });
-            }
-            customAlert("Hủy đề xuất thành công!");
+        function customAlert(message) {
+            Swal.fire({
+                icon: 'success',
+                text: message,
+                confirmButtonText: 'OK',
+                customClass: {
+                    popup: 'custom-alert-popup'
+                }
+            });
+        }
+        customAlert("Hủy đề xuất thành công!");
         const res = await fetch(`de-xuat-chua-duyet`)
         if(!res.ok){
             console.log("Lỗi HTTP. Trạng thái " + res.status)
@@ -960,6 +963,7 @@ $(document).on('click', '#btn-cancel-sugg',async function (){
             reloadSugg(suggList);
         }
     } catch (error) {
-         console.error(error);
+        console.error(error);
     }
-});
+}
+$(document).on('click', '#btn-cancel-sugg',cancelSugg);

@@ -14,12 +14,7 @@ const btn_send_cmt = document.querySelector(".btn-send-cmt");
 const btn_star = document.querySelectorAll(".btn-star")
 const text_cmt = document.querySelector(".text-comment")
 const check_survey = document.querySelectorAll(".check-survey");
-var score = 0;
-var maHD;
-var maHDTC;
-var scoreMb;
-var endActTime;
-var maNTC;
+var score = 0, maHD, maHDTC, scoreMb, endActTime,maNTC;
 const member_infor = document.querySelector(".member-infor");
 
 //Danh gia hoat dong
@@ -40,7 +35,6 @@ async function Evaluation(e)  {
         view_comment.classList.remove('no-display')
         body.classList.add('overflow-hidden')
 
-
        if(accEval===null){
            edit_content.classList.add('max_height-27rem')
            write_comment.classList.remove('no-display')
@@ -57,7 +51,6 @@ async function Evaluation(e)  {
             month: '2-digit',
             year: 'numeric',
         });
-
         const timePart = date.toLocaleTimeString("vi-VN", {
             hour: '2-digit',
             minute: '2-digit',
@@ -117,13 +110,6 @@ for (var btn of btn_evaluate) {
 }
 
 //Danh gia thanh vien
-function hideFormEvaluation(e) {
-    const allForms = document.querySelectorAll(".form-evaluate");
-    for (let form of allForms) {
-        form.classList.remove("display-block");
-    }
-}
-
 // Ham luu va cap nhat lai thong tin danh gia
 async function saveEvaluation(e) {
     let endTime = new Date(endActTime);
@@ -236,7 +222,6 @@ async function EvaluationMember(e) {
     try{
         const IdAct =+e.target.dataset.value;
         maHDTC = IdAct;
-        console.log(IdAct);
         const response =await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${IdAct}`);
         if(!response.ok){
             throw new Error(`Lỗi HTTP. Trạng thái: ${response.status}`)
@@ -401,12 +386,6 @@ for (const member of member_evaluate) {
     member.addEventListener("click", formEvaluation)
 }
 
-//Chưa được
-
-// save
-
-
-
 //View evaluation
 const btn_view_evaluation = document.querySelector(".btn-view-evaluation");
 const btn_evaluate_mb = document.querySelector(".btn-evaluate-member");
@@ -523,7 +502,6 @@ btn_send_cmt.addEventListener("click", async function (e) {
             const responseData = await response.json();
             document.querySelector(".modal-number-evaluation").innerText = responseData.numberEvaluation + " lượt đánh giá"
             const evaluationOfAct = responseData.evaluationOfAct;
-            //    console.log(evaluationOfAct);
             const evaluationContainer = document.querySelector(".view-comment");
             evaluationContainer.innerHTML="";
             if (evaluationOfAct.length > 0) {
