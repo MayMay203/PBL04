@@ -117,6 +117,8 @@ function DelImg(el) {
   console.log(imagePaths);
 }
 var maTK;
+var mataikhoan;
+var manguoidung;
 $(document).ready(function () {
 
   $(".imgdf1").on("click", function() {
@@ -125,12 +127,16 @@ $(document).ready(function () {
   });
   $("#btnInsertImg").on("click", function() {
     maTK =  $(this).data("summary-id");
+    mataikhoan=  $(this).data("account-id");
+    manguoidung=  $(this).data("mauser-id");
     console.log("maTK:",maTK);
+    console.log("mataikhoan:",mataikhoan);
     const formData = new FormData();
     formData.append('maTK', maTK);
     for (var i = 0; i < imagePaths.length; i++) {
       formData.append('imagesPaths', imagePaths[i]);
     }
+
     console.log(formData);
     console.log("maTK:",maTK);
     $.ajax({
@@ -142,7 +148,9 @@ $(document).ready(function () {
       success: function (response) {
         if(response.success)
         {
-          // sendNotiSummary();
+          if(mataikhoan!==manguoidung){
+            sendNotiSummary(maTK,mataikhoan);
+          }
           console.log(response);
           // location.reload();
           updateModalContent("Thêm ảnh tổng kết thành công.");
@@ -177,6 +185,21 @@ $(document).ready(function () {
       imgElement.remove();
     });
   });
-
+  function sendNotiSummary(maTK,mataikhoan)
+  {
+    var noidung ="Một thành viên đã thêm ảnh vào mục Tổng kết hoạt động";
+      $.ajax({
+        type: 'POST',
+        url: '/them-thong-bao',
+        data: {'maTK': mataikhoan, 'noiDung': noidung, 'loaiTB': 4, 'ma': maTK,},
+        success: function (data) {
+          console.log('Success:', data);
+          console.log("thanh cong");
+        },
+        error: function (error) {
+          console.error('Error:', error);
+        }
+      });
+    }
 
 })
