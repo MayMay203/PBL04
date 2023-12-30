@@ -21,6 +21,9 @@ public interface EvaluationRepository extends JpaRepository<Danhgia,Integer> {
     @Query("select dg from Danhgia  dg where dg.maHD.id = :IdAct and dg.maTK.id = :IdAcc")
     Danhgia getEvaluationByIDHDTK(Integer IdAct,Integer IdAcc);
 
+    @Query("select dg.diemTNV from Danhgia  dg where dg.maHD.id = :IdAct and dg.maTK.id = :IdAcc")
+    Integer getRateEvaluationByIDHDTK(Integer IdAct,Integer IdAcc);
+
     @Modifying
     @Query("update Danhgia dg set dg.diemTC=:diemTC,dg.tieuChi1=:tieuChi1,dg.tieuChi2 = :tieuChi2,dg.tieuChi3=:tieuChi3,dg.binhLuan=:binhLuan,dg.thoiGianBL=:thoiGianBL where dg.maTK.id=:maTK and dg.maHD.id=:maHD")
     void insertEvaluateAct(Integer maTK, Integer maHD, Integer diemTC, Boolean tieuChi1, Boolean tieuChi2, Boolean tieuChi3, String binhLuan, Instant thoiGianBL);

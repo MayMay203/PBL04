@@ -75,6 +75,15 @@ public class ActivityServiceImpl implements ActivityService {
         return activityRepository.getAllActivityIsHost(id);
     }
 
+    @Override
+    public List<Hoatdong> getAllActivityForFilter(Integer maTK, Boolean phanQuyen, Integer tthd, Integer ttduyet) {
+        return activityRepository.getAllActivityForFilter(maTK, phanQuyen, tthd, ttduyet);
+    }
+    @Override
+    public List<Hoatdong> getAllActivityForFilters(Integer maTK, Boolean phanQuyen, Integer tthd, Integer ttduyet) {
+        return activityRepository.getAllActivityForFilters(maTK, phanQuyen, tthd, ttduyet);
+    }
+
     public Dangky getRegisterInfo(Integer IdAct) {
         return activityRepository.registerInfor(IdAct);
     }

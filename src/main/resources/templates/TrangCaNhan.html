@@ -74,7 +74,7 @@
         </div> -->
     </div>
     <!--mục hoạt động tổ chức-->
-    <div th:each="activity, index:${actListIsHost}">
+    <div th:each="activity, index:${actListIsHost}" class="activity-container" th:data-activityIsHost="${activity}">
         <!--        <div class="container__sectionAct" th:each="activity, index:${actListIsHost}" th:id="${activity.getTinhTrangDuyet()==0 ? 'gray-overlay' : ''}" >-->
         <div id="sectionActIsHost" class="container__sectionAct sectionActIsHost"  th:style="${activity.getTinhTrangDuyet()==0 ? 'opacity: 0.7; background-color: rgb(222 222 222 / 50%); pointer-events: none;' : ' background-color: rgba(217, 249, 249, 0.6);'}" >
             <!--            <div class="gray-overlay" th:if="${activity.getTinhTrangDuyet()==0}">-->
@@ -90,13 +90,10 @@
                 </div>
                 <div class="dropdown ms-auto">
                     <i class="bi bi-three-dots icon-more" data-bs-toggle="dropdown"></i>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Duyệt thành viên</a></li>
-                        <li><a class="dropdown-item" href="#">Tổng kết hoạt động</a></li>
-                        <li><a class="dropdown-item" href="#">Đánh giá thành viên</a></li>
-                        <li><a class="dropdown-item item-icon-more" href="#">Duyệt thành viên</a></li>
-                        <li><a class="dropdown-item item-icon-more" href="#">Tổng kết hoạt động</a></li>
-                        <li><a class="dropdown-item item-icon-more" href="#">Đánh giá thành viên</a></li>
+                    <ul class="dropdown-menu" th:if="${activity.getTinhTrangHD()==-1}">
+                        <li style="cursor: pointer" ><a id="a-view-reason-cancel" class="dropdown-item item-icon-more" data-bs-toggle="modal" data-bs-target="#reasonActiCancelModal">Lí do hủy của hoạt động</a></li>
+<!--&lt;!&ndash;                        <li><a class="dropdown-item item-icon-more" href="#">Tổng kết hoạt động</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <li><a class="dropdown-item item-icon-more" href="#">Đánh giá thành viên</a></li>&ndash;&gt;-->
                     </ul>
                 </div>
             </div>
@@ -115,17 +112,21 @@
                     <img class="img-activity" th:src="@{${activity.getAnh()}}" alt="">
                 </div>
                 <div class="lineHorizontal"></div>
-                <div class="row progress-activity">
+                <div class="row progress-activity" th:if="${activity.getTinhTrangHD()!=-1}">
                     <div class="col-sm-3">Chờ duyệt</div>
                     <div class="col-sm-3">Chưa diễn ra</div>
                     <div class="col-sm-3">Đang diễn ra</div>
                     <div class="col-sm-3">Đã diễn ra</div>
                 </div>
+                <div class="row progress-activity" th:if="${activity.getTinhTrangHD()==-1}">
+                    <div class="col-sm-12" style="text-align: center">Đã hủy</div>
+                </div>
                 <div class="progress">
                     <div class="progress-bar custom-progress" style="width:10%; background-color: #a2efb3 !important;" th:if="${activity.getTinhTrangDuyet()==0}"> </div>
-                    <div class="progress-bar custom-progress" style="width:40%; background-color: #54c46e !important;" th:if="${activity.getTinhTrangDuyet()==1 and activity.getTinhTrangHD()==0}"> </div>
+                    <div class="progress-bar custom-progress" style="width:40%; background-color: #54c46e !important;" th:if="${activity.getTinhTrangDuyet()>=1 and activity.getTinhTrangHD()==0}"> </div>
                     <div class="progress-bar custom-progress" style="width:70%; background-color: #1b7731 !important;" th:if="${activity.getTinhTrangDuyet()==1 and activity.getTinhTrangHD()==1}"> </div>
                     <div class="progress-bar custom-progress" style="width:100%; background-color: #014b13 !important;" th:if="${activity.getTinhTrangDuyet()==2 and activity.getTinhTrangHD()==2}"> </div>
+                    <div class="progress-bar custom-progress" style="width:100%; background-color: #cb5757 !important;" th:if="${activity.getTinhTrangDuyet()==-1 and activity.getTinhTrangHD()==-1}"> </div>
                 </div>
                 <div class="mt-3 lineHorizontal"></div>
             </div>
@@ -138,7 +139,7 @@
                 <button class="buttonSummary btnSummary" th:if="${listSummaryIsHostActi.get(index.index)} > 0"><i class="bi bi-send-check"></i> <a th:href="@{/View-Summary(id=${activity.getId()})}"  style="text-decoration: none; color: #136b1d" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xem tổng kết">Tổng kết</a></button>
                 <!--                <button class="buttonSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.id},data-account=${account.id}"><i class="bi bi-send-check"></i> Tổng kết</button>-->
             </div>
-            <!-- Modal Thông báo về việc thêm tổng kết-->
+            <!-- Modal xác nhận thêm tổng kết-->
             <div class="modal fade" id="confirmAddSummaryModal" tabindex="-1" role="dialog" aria-labelledby="confirmAddSummaryModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content" style="align-items: center;">
@@ -160,6 +161,31 @@
                 </div>
             </div>
         </div>
+        <!--modal lí do hủy-->
+        <div class="modal fade" id="reasonActiCancelModal" tabindex="-1" role="dialog" aria-labelledby="reasonActiCancelModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="align-items: center">
+                    <div class="modal-header" >
+                        <h5 class="modal-title" id="reasonActiCancelModalLabel" >Lí do hoạt động bị hủy</h5>
+                        <button type="button" class="closeModalLogout" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 4rem">
+                            <span aria-hidden="true" >&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="font-size: 1.1rem; margin: 0">
+                        <div class="container d-flex" style="margin-bottom: 1rem">
+                            <img class="w-2_5 h-2_5 ml-0_1 radius-1_8" style="margin-right: 1rem" th:src="@{${activity.getAnh()}}" alt="">
+                            <h5  class="green-color my-1 mt-1 " th:text="${activity.getTenhd()}"></h5>
+                        </div>
+                        <div>
+                            <div style="margin-left: 1rem" th:text="${activity.getLiDoHuy()}"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-bs-dismiss="modal" class="btn" style="background-color: #136b1d; color: #ffffff; width: 5rem; margin-left: 22rem">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!--mục hoạt động tham gia-->
     <div id="sectionActIsJoin" class="container__sectionAct sectionActIsJoin no-display" th:each="activity, index:${actListIsMember}" th:style="${listRegisIsMemberActi.get(index.index).getTrangThai()==false ? 'opacity: 0.7; background-color: rgb(222 222 222 / 50%); pointer-events: none;' : ' background-color: rgba(217, 249, 249, 0.6);'}" >
@@ -174,17 +200,23 @@
                     <span th:text="${listInforOfActiJoin.get(index.index).getThoiGianDK()}"></span>
                 </div>
             </div>
-            <div class="dropdown ms-auto">
+            <div class="dropdown ms-auto" >
                 <i class="bi bi-three-dots icon-more" data-bs-toggle="dropdown"></i>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" th:if="${activity.getTinhTrangHD()==2}">
                     <!--                    <li><a class="dropdown-item" href="#">Duyệt thành viên</a></li>-->
                     <!--                    <li><a class="dropdown-item" href="#">Tổng kết hoạt động</a></li>-->
-                    <li><a class="dropdown-item" href="#">Đánh giá hoạt động</a></li>
+<!--                    <li><a class="dropdown-item" href="#">Đánh giá hoạt động</a></li>-->
                     <!--                    <li><a class="dropdown-item item-icon-more" href="#">Duyệt thành viên</a></li>-->
                     <!--                    <li><a class="dropdown-item item-icon-more" href="#">Tổng kết hoạt động</a></li>-->
-                    <li><a class="dropdown-item item-icon-more" href="#">Đánh giá hoạt động</a></li>
+
+                    <li th:if="${listEvalueIsMemberActi.get(index.index)>0}"><a style="cursor: pointer" class="dropdown-item item-icon-more"  data-bs-toggle="modal" data-bs-target="#rateEvaluateForMemModal">Xem đánh giá dành cho bạn</a></li>
+                    <li th:if="${listEvalueIsMemberActi.get(index.index)<=0}"><a style="cursor: pointer" class="dropdown-item item-icon-more"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Người tổ chức chưa đánh giá">Xem đánh giá dành cho bạn</a></li>
+                </ul>
+                <ul class="dropdown-menu" th:if="${activity.getTinhTrangHD()==-1}">
+                    <li ><a style="cursor: pointer" class="dropdown-item item-icon-more"  data-bs-toggle="modal" data-bs-target="#reasonCancelActiModal">Xem lí do hoạt động hủy</a></li>
                 </ul>
             </div>
+
         </div>
         <div class="d-flex section__padding ">
             <p class="title-activity" th:text="${activity.getTenhd()}"></p>
@@ -224,6 +256,64 @@
             <button class="buttonSummary btnSummary" th:if="${listSummaryIsMemberActi.get(index.index)} > 0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xem tổng kết"><i class="bi bi-send-check"></i> <a th:href="@{/View-Summary(id=${activity.getId()})}" style="text-decoration: none; color: #136b1d" >Tổng kết</a></button>
             <button class="buttonSummary btnSummary" th:if="${listSummaryIsMemberActi.get(index.index)} <= 0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hoạt động chưa có tổng kết"><i class="bi bi-send-check"></i> <a style="text-decoration: none; color: #136b1d" >Tổng kết</a></button>
             <!--                <button class="buttonSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.id},data-account=${account.id}"><i class="bi bi-send-check"></i> Tổng kết</button>-->
+        </div>
+
+        <!--modal điểm đánh giá-->
+        <div class="modal fade" id="rateEvaluateForMemModal" tabindex="-1" role="dialog" aria-labelledby="rateEvaluateForMemModalLabel" aria-hidden="true" th:if="${activity.getTinhTrangHD()==2}">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="align-items: center">
+                    <div class="modal-header" >
+                        <h5 class="modal-title" id="rateEvaluateForMemModalLabel" >Điểm người tổ chức đánh giá cho bạn</h5>
+                        <button type="button" class="closeModalLogout" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 4rem">
+                            <span aria-hidden="true" >&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="font-size: 1.1rem; margin: 0">
+                        <div class="container d-flex" style="margin-bottom: 1rem">
+                            <img class="w-2_5 h-2_5 ml-0_1 radius-1_8" style="margin-right: 1rem" th:src="@{${account.getAnhDaiDien()}}" alt="">
+                            <h5 class="green-color my-1 mt-1 " th:text="${user.getHoTen()}"></h5>
+                            <h6 style="margin-left: 1rem" class="fs-7 p-2" th:if="${listEvalueIsMemberActi.get(index.index) > 0}">
+                                <span th:text="${listEvalueIsMemberActi.get(index.index)}"></span>/5
+                                <i class="bi bi-star-fill yellow-color fs-7 py-1"></i>
+                            </h6>
+
+                        </div>
+                        <div class="container" style="display: block; margin-left: 4rem">
+                            <div><input style="margin-right: 1rem" type="checkbox" id="checkVeryGood"th:checked="${listEvalueIsMemberActi.get(index.index) == 5}">Rất tích cực</div>
+                            <div><input style="margin-right: 1rem" type="checkbox" id="checkGood" th:checked="${listEvalueIsMemberActi.get(index.index) == 4}">Tích cực </div>
+                            <div><input style="margin-right: 1rem" type="checkbox" id="checkNotGood" th:checked="${listEvalueIsMemberActi.get(index.index) < 4}">Không tích cực </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-bs-dismiss="modal" class="btn" style="background-color: #136b1d; color: #ffffff; width: 5rem; margin-left: 22rem">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--modal lí do hủy-->
+        <div class="modal fade" id="reasonCancelActiModal" tabindex="-1" role="dialog" aria-labelledby="reasonCancelActiModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="align-items: center">
+                    <div class="modal-header" >
+                        <h5 class="modal-title" id="reasonCancelActiModalLabel" >Lí do hoạt động bị hủy</h5>
+                        <button type="button" class="closeModalLogout" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 4rem">
+                            <span aria-hidden="true" >&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="font-size: 1.1rem; margin: 0">
+                        <div class="container d-flex" style="margin-bottom: 1rem">
+                            <img id="imgActiCancel" class="w-2_5 h-2_5 ml-0_1 radius-1_8" style="margin-right: 1rem" th:src="@{${activity.getAnh()}}" alt="">
+                            <h5 id="nameActiCancel" class="green-color my-1 mt-1 " th:text="${activity.getTenhd()}"></h5>
+                        </div>
+                        <div>
+                            <div style="margin-left: 1rem" th:text="${activity.getLiDoHuy()}"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-bs-dismiss="modal" class="btn" style="background-color: #136b1d; color: #ffffff; width: 5rem; margin-left: 22rem">OK</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -359,7 +449,7 @@
         </div>
     </div>
 </div>
-<!------------------------Modal Thêm tổng kết-------------------------->
+<!----Modal Thêm tổng kết-------------------------->
 <div class="modal fade" id="TongKetModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-tongket">
         <div class="modal-content modal-content-tongket">
@@ -433,6 +523,7 @@
 <div class="modal" id="modalFilter">
     <div class="modal-dialog">
         <div class="modal-content" style="align-items: center">
+            <form id="formFilter">
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title titleFilter"  style="margin-left: 0">Bộ lọc hoạt động</h4>
@@ -440,70 +531,114 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="#" id="formFilter">
+
                     <!-- mục hoạt động tổ chức -->
+                    <input type="hidden" id="accountID" name="maTK" th:value="${account.getId()}" />
                     <div>
                         <div class="row align-items-center">
-                            <div class="col-md-6">
-                                <p>Duyệt thành viên</p>
-                            </div>
-                            <div class="col-md-6" style="margin-bottom: 0.5rem">
-                                <select class="form-select form-select-sm mt-3 optEvaluate">
-                                    <option>Tất cả</option>
-                                    <option>Thành viên đăng ký tham gia</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row align-items-center">
-                            <div class="col-md-6">
+                            <div class="col-md-6" style="padding:0;">
                                 <p>Trạng thái hoạt động</p>
                             </div>
                             <div class="col-md-6" style="margin-bottom: 0.5rem">
-                                <select class="form-select form-select-sm mt-3 optState">
-                                    <option>Tất cả</option>
-                                    <option>Chờ duyệt</option>
-                                    <option>Chưa diễn ra</option>
-                                    <option>Đang diễn ra</option>
-                                    <option>Đã diễn ra</option>
+                                <select class="form-select form-select-sm mt-3 " id="optState">
+                                    <option value="-3">Tất cả</option>
+                                    <option value="-2">Chờ duyệt</option>
+                                    <option value="0">Chưa diễn ra</option>
+                                    <option value="1">Đang diễn ra</option>
+                                    <option value="2">Đã diễn ra</option>
+                                    <option value="-1">Đã hủy</option>
                                 </select>
                             </div>
                         </div>
+<!--                        <div class="row align-items-center" th:if="${acc}">-->
+<!--                            <div class="col-md-6" style="padding:0;">-->
+<!--                                <p>Duyệt thành viên</p>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6" style="margin-bottom: 0.5rem">-->
+<!--                                <select class="form-select form-select-sm mt-3 optEvaluate">-->
+<!--                                    <option>Tất cả</option>-->
+<!--                                    <option>Đã duyệt</option>-->
+<!--                                    <option>Chưa duyệt</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row align-items-center">-->
+<!--                            <div class="col-md-6" style="padding:0;">-->
+<!--                                <p>Duyệt hoạt động sẽ tổ chức</p>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6" style="margin-bottom: 0.5rem">-->
+<!--                                <select class="form-select form-select-sm mt-3 optEvaluate">-->
+<!--                                    <option>Tất cả</option>-->
+<!--                                    <option>Đã duyệt</option>-->
+<!--                                    <option>Chưa duyệt</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row align-items-center">-->
+<!--                            <div class="col-md-6" style="padding:0;">-->
+<!--                                <p>Duyệt hoạt động đăng bài</p>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6" style="margin-bottom: 0.5rem">-->
+<!--                                <select class="form-select form-select-sm mt-3 optEvaluate">-->
+<!--                                    <option>Tất cả</option>-->
+<!--                                    <option>Đã duyệt</option>-->
+<!--                                    <option>Chưa duyệt</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row align-items-center">-->
+<!--                            <div class="col-md-6" style="padding:0;">-->
+<!--                                <p>Duyệt đề xuất</p>-->
+<!--                            </div>-->
+<!--                            <div class="col-md-6" style="margin-bottom: 0.5rem">-->
+<!--                                <select class="form-select form-select-sm mt-3 optEvaluate">-->
+<!--                                    <option>Tất cả</option>-->
+<!--                                    <option>Đã duyệt</option>-->
+<!--                                    <option>Chưa duyệt</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
                         <div class="row align-items-center">
-                            <div class="col-md-6">
+                            <div class="col-md-6" style="padding:0;">
                                 <p>Tổng kết</p>
                             </div>
                             <div class="col-md-6" style="margin-bottom: 0.5rem">
-                                <select class="form-select form-select-sm mt-3 optSummary">
-                                    <option>Tất cả</option>
-                                    <option>Đã tổng kết</option>
-                                    <option>Chưa tổng kết</option>
+                                <select class="form-select form-select-sm mt-3 " id="optSummary">
+                                    <option value="-3">Tất cả</option>
+                                    <option value="12">Đã tổng kết</option>
+                                    <option value="13">Chưa tổng kết</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row align-items-center">
-                            <div class="col-md-6">
-                                <p>Đánh giá</p>
+                            <div class="col-md-6" style="padding:0;">
+                                <p id="selEvaluateActi">Đánh giá hoạt động</p>
+                                <p id="selEvaluateMember">Đánh giá thành viên</p>
                             </div>
                             <div class="col-md-6" style="margin-bottom: 0.5rem">
-                                <select class="form-select form-select-sm mt-3 optEvaluate">
-                                    <option>Tất cả</option>
-                                    <option>Đã đánh giá</option>
-                                    <option>Chưa đánh giá</option>
+                                <select class="form-select form-select-sm mt-3 " id="optEvaluate">
+                                    <option value="-3">Tất cả</option>
+                                    <option value="22">Đã đánh giá</option>
+                                    <option value="23">Chưa đánh giá</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <!-- mục hoạt động tham gia -->
-                </form>
+                    <!-- Modal footer -->
+<!--                    <div class="modal-footer">-->
+                        <button type="reset" class="btnReset btn-secondary" id="btnResetFilter" style="background-color: #136b1d">Hủy thay đổi</button>
+                        <button type="submit" class=" btn-primary" id="btnSaveFilter" style="background-color: #136b1d; width: 130px; margin-left: 1rem">Lưu thay đổi</button>
+<!--                    </div>-->
+
             </div>
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="reset" class="btnReset btn-secondary" id="btnResetFilter" style="background-color: #136b1d">Hủy thay đổi</button>
-                <button type="button" class="btnSave btn-primary" style="background-color: #136b1d; width: 130px; margin-left: 1rem">Lưu thay đổi</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>
+
+<!--modal thông báo chưa tổng kết-->
 <div class="modal fade" id="notifySummaryModal" tabindex="-1" role="dialog" aria-labelledby="notifySummaryModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="align-items: center">

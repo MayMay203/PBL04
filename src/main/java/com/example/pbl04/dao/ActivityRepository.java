@@ -41,11 +41,18 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     List<Taikhoan> getAccountList(Integer id);
    @Query("select hd from Hoatdong hd, Dangky dk where dk.maTK.id= :myID and hd.id = dk.maHD.id and hd.tinhTrangHD=2 and hd.tinhTrangDuyet=2 and dk.phanQuyen=false")
    List<Hoatdong> getListActivityByMyID(Integer myID);
-    @Query("select h from Hoatdong h,Dangky dk where dk.phanQuyen=false and h.id = dk.maHD.id and dk.maTK.id=:id order by dk.thoiGianDK desc")
+    @Query("select h from Hoatdong h, Dangky dk where dk.phanQuyen=false and h.id = dk.maHD.id and dk.maTK.id = :id and h.tinhTrangHD != -1 order by dk.thoiGianDK desc")
     List<Hoatdong> getAllActivityIsMember(Integer id);
 
-    @Query("select h from Hoatdong h, Dangky dk where dk.phanQuyen=true and h.id = dk.maHD.id and dk.maTK.id = :id order by dk.thoiGianDK desc ")
+    @Query("select h from Hoatdong h, Dangky dk where dk.phanQuyen=true and h.id = dk.maHD.id and dk.maTK.id = :id and h.tinhTrangHD != -1 order by dk.thoiGianDK desc ")
     List<Hoatdong> getAllActivityIsHost(Integer id);
+
+    @Query("select h from Hoatdong h, Dangky dk where dk.phanQuyen=:phanQuyen and h.id = dk.maHD.id and dk.maTK.id = :maTK and h.tinhTrangHD=:tthd and h.tinhTrangDuyet=:ttduyet order by dk.thoiGianDK desc ")
+    List<Hoatdong> getAllActivityForFilter(Integer maTK, Boolean phanQuyen, Integer tthd, Integer ttduyet);
+    @Query("select h from Hoatdong h, Dangky dk where dk.phanQuyen=:phanQuyen and h.id = dk.maHD.id and dk.maTK.id = :maTK and h.tinhTrangHD=:tthd and h.tinhTrangDuyet >= :ttduyet order by dk.thoiGianDK desc ")
+    List<Hoatdong> getAllActivityForFilters(Integer maTK, Boolean phanQuyen, Integer tthd, Integer ttduyet);
+
+
     //Danh gia
     @Query("select h from Hoatdong h,Dangky dk where dk.phanQuyen=false and h.id = dk.maHD.id and dk.maTK.id=:id and h.tinhTrangHD=2 and h.tinhTrangDuyet=2")
     List<Hoatdong> getActivityByMember(Integer id);
@@ -122,4 +129,6 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     @Modifying
     @Query("UPDATE Hoatdong e SET e.tinhTrangHD = 2 WHERE e.id=:maHD")
     void TransActivityToFinish(Integer maHD);
+
+
 }

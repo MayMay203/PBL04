@@ -9,6 +9,8 @@ import java.util.List;
 public interface SummaryRepository extends JpaRepository<Tongket,Integer> {
     @Query("SELECT tk from Tongket tk where tk.maHD.id= :id")
     Tongket getSummaryByID(Integer id);
+    @Query("SELECT tk from Tongket tk where tk.id= :id")
+    Tongket getSummaryByIDSum(Integer id);
 
     @Query("SELECT d.maTK from Dangky d,Hoatdong h where d.phanQuyen=true and d.maHD = h and h.id= :id")
     Taikhoan getOrganizator(Integer id);

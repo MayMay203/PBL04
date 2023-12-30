@@ -14,4 +14,6 @@ public interface MemberService {
 
     void ConfirmMember(Integer maHD,Integer maTK);
     void CancelMember(Integer maHD,Integer maTK);
+
+    List<Taikhoan> getAllMemberOfActi(Integer maHD);
 }

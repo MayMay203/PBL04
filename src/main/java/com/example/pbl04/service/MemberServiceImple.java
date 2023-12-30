@@ -60,6 +60,11 @@ public class MemberServiceImple implements MemberService{
     }
 
     @Override
+    public List<Taikhoan> getAllMemberOfActi(Integer maHD) {
+        return memberRepository.getAllMemberOfActi(maHD);
+    }
+
+    @Override
     public void addMember(Thanhvien thanhvien) {
         memberRepository.save(thanhvien);
     }

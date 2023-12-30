@@ -70,6 +70,14 @@ img.dimmed{
     border: none;
     margin-top: 1rem;
 }
+#btnSaveFilter{
+    font-size: 1rem;
+    color: #fff;
+    background-color: #3B9D39;
+    padding: 0.4rem 1.25rem;
+    border-radius: 0.3rem;
+    border: none;
+}
 .btnReset:hover, .btnSave:hover{
     background-color: #2c832b;
 }

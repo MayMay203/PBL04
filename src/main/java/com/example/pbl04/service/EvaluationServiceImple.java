@@ -84,6 +84,11 @@ public class EvaluationServiceImple implements EvaluationService {
     }
 
     @Override
+    public Integer getRateEvaluationByIDHDTK(Integer IdAct, Integer IdAcc) {
+        return evaluationRepo.getRateEvaluationByIDHDTK(IdAct,IdAcc);
+    }
+
+    @Override
     public void evaluateActivity(Danhgia evaluation) {
         evaluationRepo.save(evaluation);
     }

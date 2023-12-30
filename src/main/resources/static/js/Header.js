@@ -41,6 +41,35 @@ document.addEventListener('DOMContentLoaded', function () {
 //         });
 //     });
 // });
+document.addEventListener("DOMContentLoaded", function () {
+    var navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+
+    navLinks.forEach(function(navLink) {
+        navLink.addEventListener('click', function() {
+            // Loại bỏ class 'selected' từ tất cả các li
+            document.querySelectorAll('.navbar-nav .nav-item').forEach(function(li) {
+                li.classList.remove('selected');
+            });
+
+            // Thêm class 'selected' cho li chứa thẻ a được click
+            this.parentNode.classList.add('selected');
+
+            // Lưu trạng thái vào sessionStorage
+            sessionStorage.setItem('selectedNavItem', this.parentNode.id);
+        });
+    });
+
+    // Khôi phục trạng thái đã lưu từ sessionStorage (nếu có)
+    var selectedNavItem = sessionStorage.getItem('selectedNavItem');
+    if (selectedNavItem) {
+        document.getElementById(selectedNavItem).classList.add('selected');
+    }
+    if (window.location.pathname === '/trang-ca-nhan') {
+        document.getElementById(selectedNavItem).classList.remove('selected');
+    }
+});
+
+
 
 //xóa input của trang login
 function clearInput(inputId) {
@@ -130,6 +159,9 @@ $('#modal-sign-up').on('shown.bs.modal', function () {
     var header = document.getElementById("myHeader");
     header.classList.remove("sticky");
 });
+$('#DangNhapModal').on('shown.bs.modal', function () {
+    $(this).css('display', 'block');
+});
 
 $('#modal-sign-up').on('hidden.bs.modal', function () {
     // Giảm biến đếm mỗi khi modal được đóng
@@ -170,11 +202,11 @@ $('.modal').on('show.bs.modal', function () {
         $('.modal-backdrop').not(':last').remove();
     }
 });
-$('.modal').on('shown.bs.modal', function () {
-
-    var header = document.getElementById("myHeader");
-    header.classList.add("sticky");
-});
+// $('.modal').on('shown.bs.modal', function () {
+//
+//     var header = document.getElementById("myHeader");
+//     header.classList.add("sticky");
+// });
 $('.modal').on('hidden.bs.modal', function () {
     backdropCount--;
     //mỗi khi modal được đóng
@@ -622,6 +654,7 @@ $(document).ready(function (){
                     console.log("Lỗi nhận dữ liệu. Trạng thái "+resData.status);
                     return;
                 }
+                $('.imageNotify').attr('src', '/images/logoweb.png');
                 $('.name').text(suggestion.maChuDe.tenChuDe)
                 $('.description').text(suggestion.moTa)
                 $('.location').text(" Vị trí: " + suggestion.viTri)
@@ -645,17 +678,35 @@ $(document).ready(function (){
                 $('.location').text(activity.diaDiem)
                 $('.time').text(" Ngày hoạt động diễn ra: " + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianBD)) + ' - ' + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianKT)))
             }
+
+
             else if(type ==='3'){
                 //Lấy dữ liệu của cái cần thông báo (về hoạt động liên quan đến tài khoản)
                 console.log("chạy")
                 const res = await fetch(`nhan-du-lieu-tai-khoan?id=${ma}`)
-                const thanhvien = await res.json();
+                const thanhvienNoti = await res.json();
+
                 $('.imageNotify').attr('src', '/images/tbTK.png');
-                $('.name').text("Chào" + thanhvien.maTK.hoTen + ",");
+                $('.name').text("Chào " + thanhvienNoti.hoTen + ",");
                 $('.description').html("Chúc mừng bạn đã đăng ký thành công tài khoản trên Hopefully.<br>Hãy cùng tham gia và chia sẻ những hoạt động ý nghĩa với chúng tôi nhé!!");
                 $('.bi.bi-geo-alt-fill').css('display', 'none');
                 $('.bi.bi-alarm-fill').css('display', 'none');
 
+            }
+            else if(type ==='4'){
+                //Lấy dữ liệu của cái cần thông báo (tổng kết)
+                const res = await fetch(`nhan-du-lieu-tong-ket?id=${ma}`)
+                const summaryNoti = await res.json();
+                if(!res.ok){
+                    console.log("Lỗi nhận dữ liệu. Trạng thái "+resData.status);
+                    return;
+                }
+                $('.imageNotify').attr('src', '/images/tbTongKet.png');
+                $('.name').text(summaryNoti.maHD.tenhd)
+                var loiket = summaryNoti.loiKet.length > 300 ? summaryNoti.loiKet.substring(0, 300) + "..." : summaryNoti.loiKet;
+                $('.description').text(loiket);
+                $('.location').text(summaryNoti.maHD.diaDiem)
+                $('.time').text(" Ngày hoạt động diễn ra: " + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(summaryNoti.maHD.thoiGianBD)) + ' - ' + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(summaryNoti.maHD.thoiGianKT)))
             }
             $('#notice-detail').modal('show')
         })
@@ -668,3 +719,41 @@ $('#close-notice').on("click",function (event){
         item.classList.remove("selected-notice");
     }
 })
+
+//kiểm tra tính hợp lệ của thêm hoạt động:
+document.addEventListener('DOMContentLoaded', function () {
+    var txt_tnvtt = document.getElementById('txt_tnvtt');
+    var txt_tnvtd = document.getElementById('txt_tnvtd');
+
+    txt_tnvtt.addEventListener('blur', validateRange);
+    txt_tnvtd.addEventListener('blur', validateRange);
+    function validateRange() {
+        var min = parseInt(txt_tnvtt.value);
+        var max = parseInt(txt_tnvtd.value);
+
+        if (min <= 0 || max <= min) {
+            $('#error-input').text("Vui lòng nhập giá trị hợp lệ: 0 < Số TNV tối thiểu < Số TNV tối đa !");
+        }
+        else{
+            $('#error-input').text("");
+        }
+    }
+});
+
+$(document).ready(function () {
+    var today = new Date().toISOString().split('T')[0];
+
+    $('#txt_dateBD, #txt_dateKT').on('change', function () {
+        var startDate = $('#txt_dateBD').val();
+        var endDate = $('#txt_dateKT').val();
+
+        // Kiểm tra điều kiện
+        if (startDate && endDate && startDate <= endDate && startDate > today) {
+            console.log('Ngày hợp lệ');
+            $('#error-input-date').text("");
+        } else {
+            console.log('Ngày không hợp lệ');
+            $('#error-input-date').text("Vui lòng nhập giá trị hợp lệ: Ngày hôm nay < Ngày bắt đầu <= Ngày kết thúc !");
+        }
+    });
+});

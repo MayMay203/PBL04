@@ -9,10 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -28,7 +25,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.example.pbl04.entity.*;
+
 @Controller
 public class PersonalityController {
     private final SessionService sessionService;
@@ -41,10 +38,11 @@ public class PersonalityController {
     private final TopicService topicService;
     private final SummaryService summaryService;
     private final RegisterService registerService;
+    private final EvaluationService evaluationService;
 
     @Autowired
     public PersonalityController(SessionService sessionService, ActivityService activityService,
-                                 MemberService memberService, ImageProcessorService imageProcessorService, AccountService accountService, TopicService topicService, SummaryService summaryService, RegisterService registerService,NotificationService notificationService) {
+                                 MemberService memberService, ImageProcessorService imageProcessorService, AccountService accountService, TopicService topicService, SummaryService summaryService, RegisterService registerService, NotificationService notificationService, EvaluationService evaluationService) {
         this.sessionService = sessionService;
         this.activityService = activityService;
         this.memberService = memberService;
@@ -54,14 +52,66 @@ public class PersonalityController {
         this.summaryService = summaryService;
         this.registerService = registerService;
         this.notificationService = notificationService;
+        this.evaluationService = evaluationService;
     }
+    private List<Hoatdong> actListIsHost = new ArrayList<>();
+    private List<Hoatdong> actListIsMember = new ArrayList<>();
 
+    @PostMapping("/bo-loc-hoat-dong")
+    @ResponseBody
+        public Map<String, Object> showHaveFilter(@RequestParam(required = false) Integer selectedValue,
+//                                                  @RequestParam(required = false) Integer selSumValue,
+//                                                  @RequestParam(required = false) Integer selEvaValue,
+                                                  @RequestParam Integer accountID){
+        Map<String, Object> response = new HashMap<>();
+        //tình trạng hoạt động
+        switch (selectedValue){
+            case -3:
+                actListIsHost = activityService.getAllActivityIsHost(accountID);
+                actListIsMember = activityService.getAllActivityIsMember(accountID);
+                break;
+            case -2:
+                actListIsHost = activityService.getAllActivityForFilter(accountID, true, 0, 0);
+                actListIsMember = activityService.getAllActivityForFilter(accountID, false, 0, 0);
+                break;
+            case -1:
+                actListIsHost = activityService.getAllActivityForFilter(accountID, true, -1, -1);
+                actListIsMember = activityService.getAllActivityForFilter(accountID, false, -1, -1);
+                break;
+            case 0:
+                actListIsHost = activityService.getAllActivityForFilters(accountID, true, 0, 1);
+                actListIsMember = activityService.getAllActivityForFilters(accountID, false, 0, 1);
+                break;
+            case 1:
+                actListIsHost = activityService.getAllActivityForFilter(accountID, true, 1, 2);
+                actListIsMember = activityService.getAllActivityForFilter(accountID, false, 1, 2);
+                break;
+            case 2:
+                actListIsHost = activityService.getAllActivityForFilter(accountID, true, 2, 2);
+                actListIsMember = activityService.getAllActivityForFilter(accountID, false, 2, 2);
+                break;
+        }
+//        tình trạng tổng kết
+//        switch (selSumValue){
+//            case 12:
+//                break;
+//            case 13:
+//                break;
+//        }
+        //tình trạng đánh giá
+        response.put("actListIsHost", "actListIsHost");
+        response.put("actListIsMember", "actListIsMember");
+        response.put("success", "Lọc thành công");
+        return response;
+    }
     @GetMapping("/trang-ca-nhan")
     public String show(Model model,
                        @RequestParam(name="id") Integer id,
                        @ModelAttribute("message") String message,
                        HttpSession session) {
-        List<Hoatdong> actListIsHost = activityService.getAllActivityIsHost(id);
+        actListIsHost = activityService.getAllActivityIsHost(id);
+
+
         model.addAttribute("actListIsHost", actListIsHost);
         List<Dangky> listRegisIsHostActi = new ArrayList<>();
         List<Integer> listSummaryIsHostActi = new ArrayList<>();
@@ -80,11 +130,12 @@ public class PersonalityController {
         model.addAttribute("listRegisIsHostActi",listRegisIsHostActi);
         model.addAttribute("listSummaryIsHostActi", listSummaryIsHostActi);
 
-        List<Hoatdong> actListIsMember = activityService.getAllActivityIsMember(id);
+        actListIsMember = activityService.getAllActivityIsMember(id);
         model.addAttribute("actListIsMember", actListIsMember);
         List<Thanhvien> listInforOfHostActi = new ArrayList<>();
         List<Dangky> listInforOfActiJoin = new ArrayList<>();
         List<Dangky> listRegisIsMemberActi = new ArrayList<>();
+        List<Integer> listEvalueIsMemberActi = new ArrayList<>();
         List<Integer> listSummaryIsMemberActi = new ArrayList<>();
         for(Hoatdong hd : actListIsMember){
             //lấy thông tin của tổ chức hoạt động
@@ -93,6 +144,14 @@ public class PersonalityController {
             listInforOfActiJoin.add(activityService.getRegisterInfo(hd.getId()));
             //lấy từ đăng ký thông tin người vai trò là tham gia
             listRegisIsMemberActi.add(registerService.getRegisterIsMember(hd.getId(), id));
+
+            if(evaluationService.getEvaluationByIDHDTK(hd.getId(), id) != null){
+                listEvalueIsMemberActi.add(evaluationService.getRateEvaluationByIDHDTK(hd.getId(), id));
+                System.out.println("Điểm đánh gi member:" + evaluationService.getEvaluationByIDHDTK(hd.getId(), id));
+            }
+            else{
+                listEvalueIsMemberActi.add(-1);
+            }
             System.out.println("Trạng thái Đăng ký member:"+ registerService.getRegisterIsMember(hd.getId(), id).getTrangThai());
             //lấy tổng kết
             if(summaryService.getSummaryByID(hd.getId()) != null){
@@ -102,10 +161,12 @@ public class PersonalityController {
             else{
                 listSummaryIsMemberActi.add(-1);
             }
+
         }
         model.addAttribute("listInforOfHostActi", listInforOfHostActi);
         model.addAttribute("listInforOfActiJoin", listInforOfActiJoin);
         model.addAttribute("listRegisIsMemberActi", listRegisIsMemberActi);
+        model.addAttribute("listEvalueIsMemberActi",listEvalueIsMemberActi);
         model.addAttribute("listSummaryIsMemberActi", listSummaryIsMemberActi);
 
         model.addAttribute("activity", new Hoatdong());

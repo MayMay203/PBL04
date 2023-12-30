@@ -1,6 +1,10 @@
 .no-display{
     display: none;
 }
+.selected {
+    background-color: #438045;
+    color: #0d4612;
+}
 
 .logo{
     margin-left: 15rem;
@@ -123,8 +127,8 @@
 /*    background-color: #0E5416!important;*/
 /*}*/
 #btnLogout{
-    margin-left: 2rem;
-    margin-top: 0.5rem;
+    /*margin-left: 2rem;*/
+    /*margin-top: 0.5rem;*/
 }
 .modal-header button.closeModalLogout{
     border: none;

@@ -19,6 +19,7 @@ public interface EvaluationService {
 
 
     Danhgia getEvaluationByIDHDTK(Integer IdAct,Integer IdAcc);
+    Integer getRateEvaluationByIDHDTK(Integer IdAct,Integer IdAcc);
     void evaluateActivity(Danhgia evaluation);
     void insertEvaluateAct(Integer maTK, Integer maHD, Integer diemTC, Boolean tieuChi1, Boolean tieuChi2, Boolean tieuChi3, String binhLuan, Instant thoiGianBL);
 

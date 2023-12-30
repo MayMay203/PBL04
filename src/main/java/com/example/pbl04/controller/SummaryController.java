@@ -3,10 +3,12 @@ package com.example.pbl04.controller;
 import com.example.pbl04.entity.*;
 import com.example.pbl04.service.*;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,16 +19,19 @@ public class SummaryController {
     private final SummaryService summaryService;
     private final ActivityService activityService;
     private final SessionService sessionService;
-    private final RegisterService registerService;
+    private final AccountService accountService;
     private final EvaluationService evaluationService;
     private final  NotificationService notificationService;
-    public SummaryController(SummaryService summaryService, ActivityService activityService, RegisterService registerService, SessionService sessionService, EvaluationService evaluationService,NotificationService notificationService) {
+
+    private final MemberService memberService;
+    public SummaryController(SummaryService summaryService, ActivityService activityService, SessionService sessionService, AccountService accountService, EvaluationService evaluationService, NotificationService notificationService, MemberService memberService) {
         this.summaryService=summaryService;
         this.activityService=activityService;
         this.sessionService = sessionService;
-        this.registerService = registerService;
+        this.accountService = accountService;
         this.evaluationService = evaluationService;
         this.notificationService = notificationService;
+        this.memberService = memberService;
     }
     @GetMapping("/trang-chu-tong-ket")
     public String showSummaryList(Model model, HttpSession session)
@@ -118,6 +123,23 @@ public class SummaryController {
             response.put("message", "Thêm thành công");
             response.put("success", true);
 
+            //Them thong bao
+            System.out.println("========THONG BAO========" );
+            List<Taikhoan> accList = activityService.getAccountList(maHD);
+            for(Taikhoan tkk: accList){
+                System.out.println("Danh sách thành viên:" + tkk.getId() + tkk.getTenDN());
+            }
+            Instant thoiGianTB = Instant.now();
+            for(Taikhoan acc : accList){
+                Thongbao tb = new Thongbao();
+                tb.setNoiDung("Một hoạt động mà bạn tham gia vừa được tổng kết");
+                tb.setLoaiTB(4);
+                tb.setMa(maTongKet.getId());
+                tb.setMaTK(acc);
+                tb.setThoiGianTB(thoiGianTB);
+                notificationService.addNotification(tb);
+            }
+
             return response;
         } catch (Exception e) {
             response.put("success", false);
@@ -125,6 +147,13 @@ public class SummaryController {
             return response;
         }
 
+    }
+    @GetMapping("/nhan-du-lieu-tong-ket")
+    @ResponseBody
+    public ResponseEntity<Tongket> getDataSummary(@RequestParam("id") Integer id){
+        Tongket summaryNoti  = summaryService.getSummaryByIDSum(id);
+//        Hoatdong acti = activityService.getActivityByID(id)
+        return ResponseEntity.ok(summaryNoti);
     }
 //    @PostMapping("/addSummary")
 //    @ResponseBody

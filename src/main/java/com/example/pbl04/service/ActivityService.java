@@ -30,6 +30,8 @@ public interface ActivityService {
     List<Hoatdong> getActivityByHost(Integer id);
     List<Hoatdong> getAllActivityIsMember(Integer id);
     List<Hoatdong> getAllActivityIsHost(Integer id);
+    List<Hoatdong> getAllActivityForFilter(Integer maTK, Boolean phanQuyen, Integer tthd, Integer ttduyet);
+    List<Hoatdong> getAllActivityForFilters(Integer maTK, Boolean phanQuyen, Integer tthd, Integer ttduyet);
 
     Dangky getRegisterInfo(Integer IdAct);
 //    Instant getTimeResgister(Integer IdAct);

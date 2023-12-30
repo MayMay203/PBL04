@@ -217,11 +217,10 @@
 
 /*Logout*/
 #btnLogout{
-    border: none;
-
-    margin-left: 1rem;
-    font-size: 1.5rem;
-    background-color: #fff;
+    /*border: none;*/
+    /*margin-left: 1rem;*/
+    /*font-size: 1.5rem;*/
+    /*background-color: #fff;*/
 }
 
 /*----- modal đăng ký------*/

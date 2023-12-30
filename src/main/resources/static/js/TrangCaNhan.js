@@ -231,14 +231,216 @@ $(document).ready(function() {
     });
 // });
 //---------- hiển thị hđ tổ chức hay tham gia------------
+
+
 document.addEventListener("DOMContentLoaded", function () {
     $('#btnCreateAct').on('click', function () {
         $('.sectionActIsHost').removeClass("no-display");
         $('.sectionActIsJoin').addClass("no-display");
-    });
 
+    });
+    if ($('#btnCreateAct').hasClass('active')) {
+        $('#selEvaluateActi').addClass("no-display");
+        $('#selEvaluateMember').removeClass("no-display");
+    }
     $('#btnJoinAct').on('click', function () {
         $('.sectionActIsHost').addClass("no-display");
         $('.sectionActIsJoin').removeClass("no-display");
     });
+    if ($('#btnJoinAct').hasClass('active')) {
+        $('#selEvaluateMember').addClass("no-display");
+        $('#selEvaluateActi').removeClass("no-display");
+    }
 });
+// ========bộ lọc
+// Hàm để đặt giá trị "Tất cả" cho các select khác
+var selectedValue = -3;
+function setAllOptionsToDefault(selectedSelect) {
+    // Lấy danh sách tất cả các select trong form
+    var allSelects = document.querySelectorAll('#formFilter select');
+
+    // Lặp qua từng select
+    allSelects.forEach(function(select) {
+        // Nếu không phải là select được chọn, đặt giá trị thành "Tất cả"
+        if (select !== selectedSelect) {
+            select.value = '-3';
+        }
+        else{
+            selectedValue = select.value;
+        }
+    });
+}
+
+// Gọi hàm khi select thay đổi giá trị
+document.querySelectorAll('#formFilter select').forEach(function(select) {
+    select.addEventListener('change', function() {
+        setAllOptionsToDefault(this);
+    });
+});
+
+// Gọi hàm khi nút "Lưu thay đổi" được nhấn
+document.getElementById('btnSaveFilter').addEventListener('click', function() {
+    // Lấy giá trị của các select
+    var optStateValue =  $('#optState option:selected').val();
+    var optSummaryValue =  $('#optSummary option:selected').val();
+    var optEvaluateValue = $('#optEvaluate option:selected').val();
+
+    // Gọi hàm để thực hiện lọc nội dung
+    // filterContent({
+    //     optState: optStateValue,
+    //     optSummary: optSummaryValue,
+    //     optEvaluate: optEvaluateValue
+    // });
+});
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     document.getElementById('optState').addEventListener('change', function() {
+//         var selectedValue = this.value;
+//         var activityContainers = document.getElementsByClassName('activity-container');
+//
+//         for (var i = 0; i < activityContainers.length; i++) {
+//             var activityContainer = activityContainers[i];
+//             var activity = /*[[${actListIsHost.get(i)}]]*/ {}; // Thay đổi cú pháp Thymeleaf thành cú pháp JavaScript
+//
+//             if (selectedValue == -3) {
+//                 activityContainer.classList.remove('hidden');
+//             }
+//             // Thêm điều kiện th:if vào mỗi div dựa trên giá trị được chọn
+//             else if (selectedValue == -2 && activity.getTinhTrangHD == 0 && activity.getTinhTrangDuyet == 0) {
+//                 activityContainer.classList.remove('hidden');
+//             }
+//             else if (selectedValue == -1 && activity.getTinhTrangHD == -1 ) {
+//                 activityContainer.classList.remove('hidden');
+//             }
+//             else if (selectedValue == 0 && activity.getTinhTrangHD == 0 && activity.getTinhTrangDuyet >= 1) {
+//                 activityContainer.classList.remove('hidden');
+//             } else if (selectedValue == 1 && activity.trangThaiHoatDong == 1) {
+//                 activityContainer.classList.remove('hidden');
+//             }
+//             else if (selectedValue == 2 && activity.trangThaiHoatDong == 2) {
+//                 activityContainer.classList.remove('hidden');
+//             }
+//             else {
+//                 activityContainer.classList.add('hidden');
+//             }
+//         }
+//     });
+// });
+// Hàm xử lý khi form được submit hoặc trang được load
+function handleAction() {
+    // Lấy giá trị từ form
+    // var selectedValue = parseInt($('#optState').val());
+    // var selEvaValue = parseInt($('#optEvaluate').val());
+    // var selSumValue = parseInt($('#optSummary').val());
+    var accountID = parseInt($('#accountID').val());
+
+    console.log("Value select: " + selectedValue);
+    console.log("Value accountID: " + accountID);
+
+    // Gọi AJAX đến endpoint xử lý đăng nhập
+    $.ajax({
+        type: 'POST',
+        url: '/bo-loc-hoat-dong',
+        data: {
+            'selectedValue': selectedValue,
+            // 'selEvaValue': selEvaValue,
+            // 'selSumValue': selSumValue,
+            'accountID': accountID
+        },
+        success: function (data) {
+            if (data.reloadPage) {
+                location.reload();
+            }
+            if (data.success) {
+                // location.reload();
+                // $('#modalFilter').modal("hide");
+                // $('#activity-container').reload();
+            } else {
+                // Xử lý trường hợp không thành công
+            }
+        },
+        error: function (error) {
+            console.error('Đã có lỗi xảy ra:', error);
+        }
+    });
+}
+document.addEventListener('DOMContentLoaded', function() {
+// Sự kiện khi modal được submit
+$('#formFilter').on('submit', function (e) {
+    e.preventDefault();
+    // Gọi hàm xử lý khi modal được đóng (submit)
+    var accountID = parseInt($('#accountID').val());
+
+    console.log("Value select: " + selectedValue);
+    console.log("Value accountID: " + accountID);
+
+    // Gọi AJAX đến endpoint xử lý đăng nhập
+    $.ajax({
+        type: 'POST',
+        url: '/bo-loc-hoat-dong',
+        data: {
+            'selectedValue': selectedValue,
+            // 'selEvaValue': selEvaValue,
+            // 'selSumValue': selSumValue,
+            'accountID': accountID
+        },
+        success: function (data) {
+            if (data.reloadPage) {
+                location.reload();
+            }
+            if (data.success) {
+                // location.reload();
+                $('#modalFilter').modal("hide");
+                // $('#activity-container').reload();
+            } else {
+                // Xử lý trường hợp không thành công
+            }
+        },
+        error: function (error) {
+            console.error('Đã có lỗi xảy ra:', error);
+        }
+    });
+});});
+// $('#btn-view-personal-page').on('click', function (e) {
+//     e.preventDefault();
+//     // Gọi hàm xử lý khi modal được đóng (submit)
+//     // handleAction();
+// });
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     document.getElementById('formFilter').addEventListener('submit', function (e) {
+//         e.preventDefault();
+//         // Lấy giá trị từ form
+//         var selectedValue = parseInt($('#optState').val());
+//         var selEvaValue = parseInt($('#optEvaluate').val());
+//         var selSumValue = parseInt($('#optSummary').val());
+//         var accountID = parseInt($('#accountID').val());
+//
+//         console.log("Value select: " + selectedValue);
+//         console.log("Value accountID: " + accountID);
+//         // Gọi AJAX đến endpoint xử lý đăng nhập
+//         $.ajax({
+//             type: 'POST',
+//             url: '/bo-loc-hoat-dong',
+//
+//             data: { 'selectedValue': selectedValue,
+//                 'selEvaValue': selEvaValue,
+//                 'selSumValue': selSumValue,
+//                     'accountID': accountID},
+//             success: function (data) {
+//                 if (data.reloadPage) {
+//                     location.reload();
+//                 }
+//                 if (data.success) {
+//                     location.reload();
+//                     // $('#modalFilter').modal("hide");
+//                 } else {
+//
+//                 }
+//             },
+//             error: function (error) {
+//                 console.error('Đã có lỗi xảy ra:', error);
+//             }
+//         });
+//     });
+// });

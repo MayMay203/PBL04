@@ -39,7 +39,7 @@
 
             <!-- Thông tin người dùng và các chức năng khác -->
         <div class="dropdown dropstart user-profile col" th:if="${isLogin}">
-            <button id="btnLogout"  class="float-end"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Đăng xuất"><i class="bi bi-box-arrow-right"></i></button>
+<!--            <button id="btnLogout"  class="float-end"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Đăng xuất"><i class="bi bi-box-arrow-right"></i></button>-->
             <!-- Modal Thông báo -->
             <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -67,16 +67,19 @@
             </button>
 
             <ul class="p-3 dropdown-menu">
-              <div>
-                  <img class="img-avatar-small" th:src="@{${user.getMaTK().getAnhDaiDien()}}" alt="">
-                  <label class="user-name" th:text="${user.getHoTen()}"></label>
-              </div>
-                <li><a class="dropdown-item" th:href="@{/trang-ca-nhan(id=${account.getId()})}">Xem trang cá nhân</a></li>
+                <div>
+                    <img class="img-avatar-small" th:src="@{${user.getMaTK().getAnhDaiDien()}}" alt="">
+                    <label class="user-name" th:text="${user.getHoTen()}"></label>
+                </div>
+                <li><a class="dropdown-item" id="btn-view-personal-page" th:href="@{/trang-ca-nhan(id=${account.getId()})}">Xem trang cá nhân</a></li>
                 <li>
-<!--                    <button data-bs-toggle="modal" data-bs-target="#ChangePasswordModal"><a class="dropdown-item"  href="#">Thay đổi mật khẩu</a>-->
-                   <a class="dropdown-item" id="btn-change-password" href="#">Thay đổi mật khẩu</a>
-               </li>
+                    <!--                    <button data-bs-toggle="modal" data-bs-target="#ChangePasswordModal"><a class="dropdown-item"  href="#">Thay đổi mật khẩu</a>-->
+                    <a class="dropdown-item" id="btn-change-password" href="#">Thay đổi mật khẩu</a>
+                </li>
                 <li><a class="dropdown-item" href="#">Cài đặt</a></li>
+                <li>
+                    <a class="dropdown-item" id="btnLogout" >Đăng xuất</a>
+                </li>
             </ul>
 
 
@@ -95,7 +98,10 @@
                         <!-- Chưa đọc-->
                         <div th:if="${listNotice.size()>0}" th:each="notice:${listNotice}">
                             <div class="mt-2 p-2 dropdown-item cursor-pointer d-flex align-item-center bg-grey notification-item" th:if="${notice.getTrangThai==false}" th:attr="data-id=${notice.getId()},data-type=${notice.getLoaiTB}, data-status=${notice.getTrangThai()},data-ma=${notice.getMa()}">
-                                <img th:src="@{/images/logoweb.png}" class="radius-1 me-3 w-2_5 h-2_5 imageNotify" alt="">
+
+                                <img th:src="@{/images/tbTK.png}" class="radius-1 me-3 w-2_5 h-2_5 imageNotify" alt="" th:if="${notice.getLoaiTB==3}">
+                                <img th:src="@{/images/tbTongKet.png}" class="radius-1 me-3 w-2_5 h-2_5 imageNotify" alt="" th:if="${notice.getLoaiTB==4}">
+<!--                                <img class="radius-1 me-3 w-2_5 h-2_5 imageNotify" alt="">-->
                                 <div>
                                     <p class="p-0 m-0 fs-9 black-color notification-text" th:text="${notice.getNoiDung()}"></p>
                                     <p class="p-0 m-0 fs-9 green_light-color fst-italic" th:text="${#temporals.format(notice.getThoiGianTB,'dd/MM/yyyy hh:MM:ss')}"></p>
@@ -103,7 +109,9 @@
                             </div>
                             <!-- Đã đọc không có bg-grey-->
                             <div class="mt-2 p-2 dropdown-item cursor-pointer d-flex align-item-center notification-item" th:if="${notice.getTrangThai==true}" th:attr="data-id=${notice.getId()},data-type=${notice.getLoaiTB},data-status=${notice.getTrangThai()},data-ma=${notice.getMa()}">
-                                <img th:src="@{/images/logoweb.png}" class="radius-1 me-3 w-2_5 h-2_5" alt="">
+<!--                                <img  class="radius-1 me-3 w-2_5 h-2_5 imageNotify" alt="">-->
+                                <img th:src="@{/images/tbTK.png}" class="radius-1 me-3 w-2_5 h-2_5 imageNotify" alt="" th:if="${notice.getLoaiTB==3}">
+                                <img th:src="@{/images/tbTongKet.png}" class="radius-1 me-3 w-2_5 h-2_5 imageNotify" alt="" th:if="${notice.getLoaiTB==4}">
                                 <div>
                                     <p class="p-0 m-0 fs-9 black-color notification-text" th:text="${notice.getNoiDung()}"></p>
                                     <p class="p-0 m-0 fs-9 green_light-color fst-italic" th:text="${#temporals.format(notice.getThoiGianTB,'dd/MM/yyyy hh:MM:ss')}"></p>
@@ -176,25 +184,25 @@
     <nav class="navbar navbar-expand-sm header__navbar sticky-top z-1">
         <div class="container-fluid">
             <ul class="navbar-nav">
-                <li class="nav-item">
+                <li class="nav-item" id="TrangChuLi">
                     <a class="nav-link" th:href="@{/trang-chu}">Trang chủ</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="HoatDongLi">
                     <a class="nav-link" th:href="@{/trang-chu-hoat-dong}">Hoạt động</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="DanhGiaLi">
                     <a class="nav-link" th:href="@{/trang-chu-danh-gia}">Đánh giá</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="TongKetLi">
                     <a class="nav-link" th:href="@{/trang-chu-tong-ket}">Tổng kết</a>
                 </li>
-                <li class="nav-item" th:if="${isLogin}">
+                <li class="nav-item" th:if="${isLogin}" id="XetDuyetLi">
                     <a class="nav-link" th:href="@{xet-duyet}">Xét duyệt</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="DeXuatLi">
                     <a class="nav-link" th:href="@{/de-xuat}">Đề xuất</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="LienHeLi">
                     <a class="nav-link" href="#">Liên hệ</a>
                 </li>
             </ul>
@@ -286,7 +294,6 @@
                 </div>
                 <div class="modal-body modal-body-themhd">
                     <div class="container modal-body-detail">
-
                         <div class="row">
                             <div class="col-md-3"><label class="lbHD" for="txt_NameTopic"><i class="bi bi-pencil-square"></i>CHỦ
                                 ĐỀ</label></div>
@@ -306,6 +313,7 @@
                                 ĐỘNG</label></div>
                             <div class="col-md-9"> <input class="textfieldHD form-control" type="text" name="tenhd"
                                                           id="txt_NameActi" required></div>
+                            <div class="valid-feedback">Valid.</div>
                             <div class="invalid-feedback">Vui lòng nhập tên hoạt động</div>
                         </div>
                         <br>
@@ -321,31 +329,21 @@
                             <div class="col-md-3">
                                 <label class="lbHD" for="txt_dateBD"><i class="bi bi-calendar-minus"></i>THỜI GIAN BẮT ĐẦU</label>
                             </div>
-                            <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="thoiGianBD" id="txt_dateBD"
-
-                                                         required></div>
-                            <div class="invalid-feedback">Vui lòng chọn thời gian bắt đầu</div>
+                            <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="thoiGianBD" id="txt_dateBD" required></div>
                             <div class="col-md-3">
                                 <label class="lbHD" for="txt_dateKT"><i class="bi bi-calendar-minus"></i>THỜI GIAN KẾT THÚC</label>
                             </div>
-                            <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="thoiGianKT" id="txt_dateKT"
-
-                                                         required></div>
-                            <div class="invalid-feedback">Vui lòng chọn thời gian kết thúc</div>
+                            <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="thoiGianKT" id="txt_dateKT" required></div>
                         </div>
+                        <div id="error-input-date" style="color: red; font-size: 14px; margin-left: 12rem; margin-top: 0.8rem "></div>
                         <br>
                         <div class="row">
                             <div class="col-md-3 lbHD"><i class="bi bi-people-fill"></i>SỐ TNV TỐI THIỂU</div>
-                            <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="soTNVToiThieu" id="txt_tnvtt"
-
-                                                         required></div>
-                            <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>
+                            <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="soTNVToiThieu" id="txt_tnvtt" required></div>
                             <div class="col-md-3 lbHD"><i class="bi bi-person-dash"></i>SỐ TNV TỐI ĐA</div>
-                            <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="soTNVToiDa" id="txt_tnvtd"
-
-                                                         required></div>
-                            <div class="invalid-feedback">Vui lòng nhập số tình nguyện viên tối đa</div>
+                            <div class="col-md-3"><input class="txt-tnv form-control" type="text" name="soTNVToiDa" id="txt_tnvtd" required></div>
                         </div>
+                        <div id="error-input" style="color: red; font-size: 14px; margin-left: 12rem; margin-top: 0.8rem "></div>
                         <br>
                         <div class="row">
                             <div class="col-md-3 lbHD"><i class="bi bi-menu-up"></i>MÔ TẢ</div>

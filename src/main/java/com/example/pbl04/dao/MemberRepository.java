@@ -24,4 +24,7 @@ public interface MemberRepository extends JpaRepository<Thanhvien,Integer> {
     @Modifying
     @Query("update Dangky dk set dk.trangThai=false where dk.maHD.id=:maHD and dk.maTK.id=:maTK")
     void CancelMember(Integer maHD, Integer maTK);
+
+    @Query("select tk from Dangky dk,Taikhoan tk where dk.maHD.id=:maHD and dk.maTK= tk and dk.phanQuyen=false")
+    List<Taikhoan> getAllMemberOfActi(Integer maHD);
 }
