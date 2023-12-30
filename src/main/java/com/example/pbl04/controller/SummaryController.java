@@ -100,45 +100,6 @@ public class SummaryController {
             return "error";
         }
     }
-//    @RequestMapping(value ="/View-Summary")
-//    public String showDetailSummary(Model model,@RequestParam("id") Integer id, HttpSession session)
-//    {
-//        Tongket summary = summaryService.getSummaryByID(id);
-//        if (summary != null) {
-//            List<Tongket> summaryList = summaryService.getSummaryList();
-//            Taikhoan taikhoan = summaryService.getOrganizator(id);
-//            List<Thanhvien> memberList = activityService.getMemberList(id);
-//            List<Taikhoan> taikhoanList = activityService.getAccountList(id);
-//            List<Integer> pointList = evaluationService.getPointOfMember(taikhoanList);
-//            List<Anhtongket> imgSummaryList = summaryService.getimgSummaryList(summary.getId());
-//            Thanhvien member  = summaryService.getMemberByID(taikhoan.getId());
-//            List<Danhgia> evaluationOfAct = evaluationService.getEvaluationByIdAct(id);
-//            Dangky registerInfor = activityService.getRegisterInfo(id);
-//            model.addAttribute("summary", summary);
-//            model.addAttribute("memberList", memberList);
-//            model.addAttribute("member", member);
-//            model.addAttribute("imgSummaryList",imgSummaryList);
-//            model.addAttribute("summaryList",summaryList);
-//            model.addAttribute("evaluationOfAct",evaluationOfAct);
-//            model.addAttribute("registerInfor",registerInfor);
-//            model.addAttribute("taikhoanList",taikhoanList);
-//            model.addAttribute("pointList",pointList);
-//            model.addAttribute("taikhoan",taikhoan);
-//            sessionService.createSessionModel(model, session);
-//            Taikhoan myaccount = (Taikhoan) model.getAttribute("account");
-//            model.addAttribute("account",myaccount);
-//            //Xem thong bao theo tai khoan
-//            Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
-//            if(myAcc!=null){
-//                List<Thongbao> listNotice = new ArrayList<>();
-//                listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
-//                model.addAttribute("listNotice",listNotice);
-//            }
-//            return "TongKetHoatDong";
-//        } else {
-//            return "error";
-//        }
-//    }
     @PostMapping("/addSummary")
     @ResponseBody
     public  Map<String, Object> addSummary(@RequestParam("maHD") Integer maHD,
