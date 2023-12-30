@@ -86,7 +86,7 @@
                     <div class="time-activity">
                         <i class="bi bi-clock"></i>
                         <!--                        chỗ ni phải lấy thời gian đăng ký-->
-                        <span th:text="${listRegisIsHostActi.get(index.index).getThoiGianDK()}"></span>
+                        <span th:text="${#temporals.format(listRegisIsHostActi.get(index.index).getThoiGianDK(),'dd/MM/yyyy HH:mm:ss', 'Asia/Ho_Chi_Minh')}"></span>
                     </div>
                 </div>
                 <div class="dropdown ms-auto">
@@ -198,7 +198,7 @@
                 <div class="time-activity">
                     <i class="bi bi-clock"></i>
                     <!--                        chỗ ni phải lấy thời gian đăng ký-->
-                    <span th:text="${listInforOfActiJoin.get(index.index).getThoiGianDK()}"></span>
+                    <span th:text="${#temporals.format(listInforOfActiJoin.get(index.index).getThoiGianDK(),'dd/MM/yyyy HH:mm:ss', 'Asia/Ho_Chi_Minh')}"></span>
                 </div>
             </div>
             <div class="dropdown ms-auto" >
