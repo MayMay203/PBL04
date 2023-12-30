@@ -6,6 +6,7 @@ public interface SummaryService  {
     List<Tongket> getSummaryList();
     Tongket getSummaryByID(Integer id);
     Tongket getSummaryByIDSum(Integer id);
+    Tongket getSummaryByIDTK(Integer id);
     Taikhoan getOrganizator(Integer id);
     Thanhvien getMemberByID(Integer id);
 //    List<Thanhvien> getMemberList(Integer id);

@@ -62,6 +62,5 @@ public interface ActivityService {
      List<Hoatdong> getActByLocation(String location);
      List<Hoatdong> getAllActivityNotOccured();
      List<Hoatdong> getActivityByNameAct(String nameAct);
-
-
+     List<Hoatdong> getActivityByTopic(Integer maCD);
 }

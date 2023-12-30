@@ -68,8 +68,10 @@ public class SummaryController {
     @RequestMapping(value ="/View-Summary")
     public String showDetailSummary(Model model,@RequestParam("id") Integer id, HttpSession session)
     {
+
         Tongket summary = summaryService.getSummaryByID(id);
         if (summary != null) {
+
             List<Tongket> summaryList = summaryService.getSummaryList();
             Taikhoan taikhoan = summaryService.getOrganizator(id);
             List<Thanhvien> memberList = activityService.getMemberList(id);
@@ -88,7 +90,16 @@ public class SummaryController {
             model.addAttribute("registerInfor",registerInfor);
             model.addAttribute("taikhoanList",taikhoanList);
             model.addAttribute("pointList",pointList);
+            model.addAttribute("taikhoan",taikhoan);
             sessionService.createSessionModel(model, session);
+            Taikhoan myaccount = (Taikhoan) model.getAttribute("account");
+            model.addAttribute("account",myaccount);
+            Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
+            if(myAcc!=null){
+                List<Thongbao> listNotice = new ArrayList<>();
+                listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
+                model.addAttribute("listNotice",listNotice);
+            }
             return "TongKetHoatDong";
         } else {
             return "error";
@@ -155,33 +166,36 @@ public class SummaryController {
 //        Hoatdong acti = activityService.getActivityByID(id)
         return ResponseEntity.ok(summaryNoti);
     }
-//    @PostMapping("/addSummary")
-//    @ResponseBody
-//    public void addSummary(@RequestParam("maHD") Integer maHD,
-//                                           @RequestParam("bangTongKet") String bangTongKet,
-//                                           @RequestParam("loiKet") String loiKet,
-//                                           @RequestParam("imagesPaths") List<String> imagesPaths)
-//    {
-//
-//            Tongket tongket = new Tongket();
-//            Hoatdong hoatdong = activityService.getActivityByID(maHD);
-//            tongket.setMaHD(hoatdong);
-//            tongket.setBangTongKet(bangTongKet);
-//            tongket.setLoiKet(loiKet);
-//            Tongket maTongKet= summaryService.addSummary(tongket);
-//            if(imagesPaths!=null)
-//            {
-//                for(String imagesPath : imagesPaths)
-//                {
-//                    Anhtongket anhTongKet = new Anhtongket();
-//                    anhTongKet.setMaTongKet(maTongKet);
-//                    anhTongKet.setAnh(imagesPath);
-//                    summaryService.addImages(anhTongKet);
-//                }
-//            }
-//
-//    }
+    @PostMapping("/addImgSummary")
+    @ResponseBody
+    public  Map<String, Object> addImgSummary(@RequestParam("maTK") Integer maTK,
+                                           @RequestParam("imagesPaths") List<String> imagesPaths)
+    {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Tongket tongket = summaryService.getSummaryByIDTK(maTK);
+            if(imagesPaths !=null)
+            {
+                for(String imagesPath : imagesPaths)
+                {
+                    Anhtongket anhTongKet = new Anhtongket();
+                    anhTongKet.setMaTongKet(tongket);
+                    anhTongKet.setAnh(imagesPath);
+                    summaryService.addImages(anhTongKet);
+                }
+            }
 
+            response.put("message", "Thêm thành công");
+            response.put("success", true);
+
+            return response;
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", "Đã có lỗi xảy ra: " + e.getMessage());
+            return response;
+        }
+
+    }
 
 
 }

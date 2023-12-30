@@ -420,6 +420,7 @@ $(document).ready(function () {
                                  <i class="rate-detail" >' + pointList[index] + '</i>\
                                  <i class="bi bi-star-fill icon-star"></i>\
                                  <input type="checkbox" value="'+thanhvien.id+'">\
+                                    \<i class="bi bi-info-circle mr--0_5 show-member-detail" data-member-id="' + thanhvien.id + '"></i>\
                                </span>\
                              </div>\
                             </div>';
@@ -563,7 +564,8 @@ $(document).ready(function () {
                                <span class="modal-member-rate">\
                                  <i class="rate-detail">' + pointList[index] + '</i>\
                                  <i class="bi bi-star-fill icon-star"></i>\
-                                 <input type="checkbox" value="'+thanhvien.id+'">\
+                                 <input class="mb--0_2" type="checkbox" value="'+thanhvien.id+'">\
+                                    \<i class="bi bi-info-circle mr--0_5 show-member-detail" data-member-id="' + thanhvien.id + '"></i>\
                                </span>\
                              </div>';
                     $('#MemberModal .modal-body-member').append(modalContent);
@@ -581,6 +583,58 @@ $(document).ready(function () {
         });
     }
 })
+$(document).ready(function () {
+    // var btnMemberDetail = document.getElementsByClassName('show-member-detail');
+    // for (btn of btnMemberDetail) {
+    //     btn.addEventListener('click', async (e) => {
+    //         var maThanhVien = e.target.dataset.memberId;
+    //         console.log("mathanhvien:", maThanhVien);
+    //         console.log("Showing modal");
+    //         $('#modelMemberDetail').modal('show');
+    //
+    //         // $('#modelMemberDetail').modal('show');
+    //     });
+    // }
+    $('#MemberModal .modal-body-member').on('click', '.show-member-detail', function (e) {
+        $('#MemberModal').modal('hide');
+        var maThanhVien = $(this).data('memberId');
+        console.log("mathanhvien:", maThanhVien);
+        console.log("Showing modal");
+        $.ajax({
+            url: '/get-member-by-id',
+            type: 'GET',
+            data: {'maTK' :maThanhVien},
+            success: function (data) {
+                console.log(data);
+                // Populate modal with activity information
+               // $("#anhDaiDien").val(data.maTK.anhDaiDien);
+                $("#anhDaiDien").attr('src', data.maTK.anhDaiDien);
+                $("#name").val(data.hoTen);
+                $("#birthday").val(data.ngaySinh);
+                $("#address").val(data.diaChi);
+                $("#phone").val(data.soDienThoai);
+                $("#email").val(data.email);
+                $("input[name='gioiTinh']").filter(`[value='${data.gioiTinh}']`).prop('checked', true);
+                // $('.form-check-gender').prop('disabled', true);
+                // Show the modal
+                $('#modelMemberDetail').modal('show');
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+
+    });
+});
+$(document).ready(function () {
+    $('#modelMemberDetail #closeButton').click(function () {
+        console.log('Button close clicked');
+        $('#modelMemberDetail').modal('hide');
+        $('#MemberModal').modal('show');
+
+    });
+});
+
 //-----------------------------xoa duyet thanh vien---------------------//
 $(document).ready(function () {
     function sendNotiMemberConfirm(maHD, idString) {
@@ -676,9 +730,9 @@ $(document).ready(function() {
             success: function (data) {
                 console.log(data);
                 // Populate modal with activity information
-                $("#txt_TenChuDe").val(data.maChuDe.tenChuDe); // Replace 'data.txt_NameTopic' with the actual field from your controller
-                $("#txt_TenHoatDong").val(data.tenHD); // Replace 'data.txt_NameActi' with the actual field from your controller
-                $("#txt_LydoHuy").val(""); // Leave txt_mota empty for the user to input
+                $("#txt_TenChuDe").val(data.maChuDe.tenChuDe);
+                $("#txt_TenHoatDong").val(data.tenHD);
+                $("#txt_LydoHuy").val("");
                 // Show the modal
                 $('#HuyHoatDongModal').modal('show');
                 getOrganizator(idHD);

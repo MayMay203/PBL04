@@ -129,6 +129,6 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     @Modifying
     @Query("UPDATE Hoatdong e SET e.tinhTrangHD = 2 WHERE e.id=:maHD")
     void TransActivityToFinish(Integer maHD);
-
-
+    @Query("select h from Hoatdong h,Chude cd where h.maChuDe= cd and cd.id=:maCD and h.tinhTrangDuyet=1 and h.tinhTrangHD=0")
+    List<Hoatdong> getActivityByTopic(Integer maCD);
 }

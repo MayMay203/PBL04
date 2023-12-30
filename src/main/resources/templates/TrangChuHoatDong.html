@@ -55,7 +55,49 @@
                 <div class="row">
                     <!-- Nội dung bên trái -->
                     <div class="col-md-9 bg-var(--white) m-0" style="max-height: 90rem;">
-                        <h3 class="Content_left-title my-5">HOẠT ĐỘNG</h3>
+                        <div class="Content_left_header row d-flex align-items-center">
+                            <h3 class="Content_left-title my-5 col-md-3">HOẠT ĐỘNG</h3>
+                            <div class="col-md-6"></div>
+                            <div class="col-md-3 row">
+                                <button class="ms-auto col-md-6 mr--0_5" id="btnFilter" name="btnFilter">Bộ lọc <i class="bi bi-filter"></i></button>
+                                <div class="col-md-6"></div>
+                            </div>
+                        </div>
+                        <div class="modal" id="modalFilter">
+                            <div class="modal-dialog">
+                                <div class="modal-content" style="align-items: center">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title titleFilter"  style="margin-left: 0">Bộ lọc hoạt động</h4>
+                                        <button id="btn-closeFilter" type="button" class="btn-close" data-dismiss="modal" aria-label="Close" style="margin-left: 3rem"></button>
+                                    </div>
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <form action="#" id="formFilter">
+                                            <div>
+                                                <div class="row align-items-center">
+                                                    <div class="col-md-5">
+                                                        <p class="black-color">Chủ đề</p>
+                                                    </div>
+                                                    <div class="col-md-7" style="margin-bottom: 1rem">
+                                                        <select class="form-select form-select-sm mt-3 optState">
+                                                            <option th:attr="data-value=0">Tất cả</option>
+                                                            <option th:each="topic: ${topicList}" th:attr="data-value=${topic.id}" th:text="${topic.tenChuDe}"></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="reset" class="btnReset btn-secondary" id="btnResetFilter" style="background-color: #136b1d">Hủy thay đổi</button>
+                                        <button type="button" class="btnSave btn-primary" id="btnSearch" style="background-color: #136b1d; width: 130px; margin-left: 1rem">Lưu thay đổi</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="Content_left-item surround-left">
                             <div class="act-slider">
                                 <div class="container-item" th:if="${not #lists.isEmpty(actiListUpcomming)}" th:each="i : ${#numbers.sequence(0, actiListUpcomming.size() div 4 + ((actiListUpcomming.size()%4 > 0) ? 1 : 0) - 1)}">

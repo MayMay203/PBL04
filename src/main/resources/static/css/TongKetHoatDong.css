@@ -256,6 +256,160 @@
 .tab-sub-pane.active {
     display: block;
 }
+
+.tongket-reviews, .tongket-reviews_1{
+    position: relative;
+}
+.tongket-reviews .form_upload{
+    width:9rem;
+    position: relative;
+    height: 3rem;
+    background-color:white ;
+    color:var(--sear);
+    box-sizing: border-box;
+    padding: 1rem;
+    border-radius: 20px;
+    border: 1px solid var(--sear);
+}
+.tongket-reviews_1 .form_upload_1{
+    width:9rem;
+    position: relative;
+    height: 3rem;
+    background-color:white ;
+    color:var(--sear);
+    box-sizing: border-box;
+    padding: 0.5rem;
+    border-radius: 20px;
+    border: 1px solid var(--sear);
+}
+.imgdf1{
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top:-0.2rem;
+}
+#imgdf{
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top:-0.2rem;
+}
+.tongket-reviews .form_upload>label{
+    height: 3rem;
+    height: 7rem;
+    display: block;
+    cursor: pointer;
+}
+.tongket-reviews_1 .form_upload_1>label{
+    height: 3rem;
+    height: 7rem;
+    display: block;
+    cursor: pointer;
+}
+.tongket-reviews .form_upload label span{
+    display: inline-block;
+    /*background: url(../images/av3.png) no-repeat;*/
+    background-size: 5rem 3rem;
+    /* margin: 0.5rem 0 0 0.9rem; */
+}
+.tongket-reviews_1 .form_upload_1 label span{
+    display: inline-block;
+    /*background: url(../images/av3.png) no-repeat;*/
+    background-size: 5rem 3rem;
+    /* margin: 0.5rem 0 0 0.9rem; */
+}
+.list_attach{
+    display: block;
+    margin-top: 2rem;
+    margin-left: 2rem;
+}
+ul.tongket_attach_view{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+ul.tongket_attach_view li{
+    float: left;
+    width: 7rem;
+    margin: 0 1rem 1rem 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    overflow: inherit;
+    clear:none;
+}
+ul.tongket_attach_view .img-wrap{
+    position: relative;
+}
+ul.tongket_attach_view .img-wrap .close{
+    position: absolute;
+    right: -0.3rem;
+    top:-0.4rem;
+    background: var(--sear);
+    color: white !important;
+    border-radius: 50%;
+    z-index: 2;
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    font-size: 0.8rem;
+    text-align: center;
+    line-height: 1rem;
+    cursor: pointer !important;
+    opacity: 1 !important;
+    text-shadow: none;
+}
+ul.tongket_attach_view li.li_file_hide{
+    opacity: 0;
+    visibility: visible;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden;
+    margin:0 !important;
+}
+ul.tongket_attach_view .img-wrap-box{
+    position: relative;
+    overflow: hidden;
+    padding-top: 100%;
+    height: auto;
+    background-position: 50% 50%;
+    background-size: cover;
+}
+.img-wrap-box img{
+    right:0;
+    width: 100% !important;
+    height: 100% !important;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    position: absolute;
+    object-position: 50% 50%;
+    object-fit: cover;
+    transition: all .5s linear;
+    -moz-transition:  all .5s linear;
+    -webkit-transition: all .5s linear;
+    -ms-transition: all .5s linear;
+}
+ul li, ol li{
+    list-style-position: inside;
+}
+.list_attach span.tongket_insert_attach{
+    width: 7rem;
+    height: 7rem;
+    text-align: center;
+    display: inline-block;
+    border: 2px solid #ccc;
+    line-height: 5rem;
+    font-size: 3rem;
+    color: #ccc;
+    display: none;
+    cursor: pointer;
+}
+.list_attach.show-btn span.tongket_insert_attach{
+    display: block;
+    margin: 0 0 1rem !important;
+}
+
+ul.tongket_attach_view li input{
+    display: none;
+}
 .tongket-title{
     color:var(--sear);
     font-weight: 700;
@@ -306,7 +460,7 @@
 }
 
 .image-container img {
-    max-width: 11.76rem;
+    width: 11.76rem;
     height: 10rem;
     margin: 0.1rem;
 }
