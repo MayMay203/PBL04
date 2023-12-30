@@ -68,7 +68,6 @@ search_input.addEventListener("keyup",  async e => {
                 const IdAcc = search_input.dataset.account;
                 const currentLocation = document.location.href;
                 let checkLocation = false;
-                console.log(location);
                 if(currentLocation.includes("/trang-chu-danh-gia")){
                     //hoat dong da dien ra
                     const response = await fetch(`/search/evaluation-home?nameAct=${nameAct}`)

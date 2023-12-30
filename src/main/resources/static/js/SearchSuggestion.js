@@ -28,7 +28,7 @@ search_input.addEventListener("keyup",  async e => {
                         const index = 5 * i + j;
                         if (index < suggestionList.length) {
                             const container = document.createElement("div");
-                            container.className = "fs-9 display-flex act-title";
+                            container.className = "fs-9 display-flex border_bottom-solid act-title";
                             //const moTa = sugg.moTa.length > 150 ? sugg.moTa.substring(0, 150) + "..." : sugg.moTa
                             const activityDiv = document.createElement("div");
                             activityDiv.className = "container px-5 flex-5";
@@ -39,7 +39,7 @@ search_input.addEventListener("keyup",  async e => {
                             }).format(new Date(suggestionList[index].thoiGianDeXuat))
                             activityDiv.innerHTML =
                                 `
-                        <div class="container d-flex align-items-center p-3 border_bottom-solid">
+                        <div class="container d-flex align-items-center p-3">
                         <div class="container flex-5">
                             <h3 class="green-color fs-4">${suggestionList[index].maChuDe.tenChuDe}</h3>
                             <p class="mb-0 fs-6">${suggestionList[index].moTa}</p>
@@ -90,7 +90,6 @@ search_input.addEventListener("keyup",  async e => {
             }
 
             if (sugg_slider.children.length > 0) {
-                console.log(sugg_slider)
                 $(".sugg-slider").slick({
                     dots: true,
                     slidesToShow: 1,

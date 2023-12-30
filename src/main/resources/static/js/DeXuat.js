@@ -94,8 +94,6 @@ for(btn of  btn_actDetail){
 function organizeHere(e){
    try{
        const acc = +e.target.dataset.account;
-       console.log(acc)
-       console.log(e.target)
        if(!isNaN(acc)){
            const title = e.target.dataset.name;
            const location = e.target.dataset.location;
@@ -117,18 +115,6 @@ function organizeHere(e){
    }catch(error){
        console.error(error);
    }
-   //  console.log("Outside if-else");
-   //  const acc = e.target.getAttribute("data-account")
-   //  console.log(e.target)
-   //  console.log("Data-account value: " + acc);
-   //
-   //  if (acc !== null) {
-   //      console.log("Inside if");
-   //      // Các dòng code xử lý trong if
-   //  } else {
-   //      console.log("Inside else");
-   //      // Các dòng code xử lý trong else
-   //  }
 }
 //btn ToChucTaiDay
 for(btn of btn_organizeHere){

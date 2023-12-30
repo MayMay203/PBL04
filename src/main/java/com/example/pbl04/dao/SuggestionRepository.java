@@ -28,7 +28,7 @@ public interface SuggestionRepository extends JpaRepository<Dexuat,Integer> {
     @Query("update Dexuat d set d.coXoa = true where d.id = :idSugg")
     void cancelSugg(Integer idSugg);
 
-    @Query("select d from Dexuat d where d.id = :idSugg and d.coXoa=false")
+    @Query("select d from Dexuat d where d.id = :idSugg")
     Dexuat getSuggByID(Integer idSugg);
 
 }

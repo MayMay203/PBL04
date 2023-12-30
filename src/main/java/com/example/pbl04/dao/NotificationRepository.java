@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface NotificationRepository extends JpaRepository<Thongbao,Integer>{
-    @Query("select tb from Thongbao tb where tb.maTK.id = :idAcc")
+    @Query("select tb from Thongbao tb where tb.maTK.id = :idAcc order by tb.id desc ")
     List<Thongbao> getNotiByIdAcc(Integer idAcc);
 
     @Modifying

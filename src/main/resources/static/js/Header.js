@@ -622,6 +622,98 @@ $(document).ready(function (){
     })
 })
 
+async function confirmSugg(e){
+    try{
+        e.stopPropagation();
+        const idSugg = +e.target.dataset.id;
+        const response =  await fetch(`/confirm-suggestion?idSugg=${idSugg}`,{
+            method: 'POST'
+        })
+        if(!response.ok){
+            console.log("Lỗi HTTP. Trạng thái " + response.status);
+            return;
+        }
+        //Thêm thông báo xét duyệt đề xuất
+        const confirmedSugg = await response.json();
+        const maTK = confirmedSugg.maTK.id;
+        const noiDung = "Đề xuất của bạn đã được duyệt thành công."
+        const loaiTB = 0;
+        const ma = confirmedSugg.id;
+        const addURL = await fetch(`/them-thong-bao?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`, {
+            method: 'POST'
+        });
+        if(!addURL.ok){
+            console.log("Lỗi thêm thông báo đề xuất. Trạng thái " + addURL.status);
+        }
+        function customAlert(message){
+            Swal.fire({
+                icon: 'success',
+                text: message,
+                confirmButtonText: 'OK',
+                customClass:{
+                    popup: 'custom-alert-popup'
+                }
+            })
+        }
+        customAlert("Duyệt đề xuất thành công!")
+        $('.swal2-confirm').on('click', function (e) {
+            e.stopPropagation();
+            $("#notice-detail").modal("hide");
+            for(item of notice_item){
+                item.classList.remove("selected-notice");
+            }
+            $('.confirm-div').removeClass('no-display')
+        });
+    }catch(error){
+        console.error(error)
+    }
+}
+async function cancelSugg (e){
+    try {
+        e.stopPropagation();
+        const idSugg = +e.target.dataset.id;
+        const response = await fetch(`/cancel-suggestion?idSugg=${idSugg}`, {
+            method: 'POST'
+        });
+        if(!response.ok){
+            console.log("Lỗi HTTP. Trạng thái " + response.status);
+            return;
+        }
+        //Thêm thông báo xét duyệt đề xuất
+        const canceledSugg = await response.json();
+        const maTK = canceledSugg.maTK.id;
+        const noiDung = "Đề xuất của bạn đã bị hủy."
+        const loaiTB = 0;
+        const ma = canceledSugg.id;
+        const addURL = await fetch(`/them-thong-bao?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`, {
+            method: 'POST'
+        });
+        if(!addURL.ok){
+            console.log("Lỗi thêm thông báo đề xuất. Trạng thái " + addURL.status);
+        }
+        function customAlert(message) {
+            Swal.fire({
+                icon: 'success',
+                text: message,
+                confirmButtonText: 'OK',
+                customClass: {
+                    popup: 'custom-alert-popup'
+                }
+            });
+        }
+        customAlert("Hủy đề xuất thành công!");
+        $('.swal2-confirm').on('click', function (e) {
+            e.stopPropagation();
+            $('#notice-detail').modal('hide')
+            for(item of notice_item){
+                item.classList.remove("selected-notice");
+            }
+            $('.confirm-div').removeClass('no-display')
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
 $(document).ready(function (){
     $(".notification-item").each(function (){
         $(this).on("click",async function (e){
@@ -647,7 +739,7 @@ $(document).ready(function (){
                     }
             }
             if(type==='0'){
-                //Lấy dữ liệu của cái cần thông báo (hoạt động, đề xuất)
+                //Lấy dữ liệu của đề xuất  cần thông báo
                 const res = await fetch(`nhan-du-lieu-de-xuat?id=${ma}`)
                 const suggestion =await res.json();
                 if(!res.ok){
@@ -660,13 +752,24 @@ $(document).ready(function (){
                 $('.location').text(" Vị trí: " + suggestion.viTri)
                 var time = new Intl.DateTimeFormat("vi-VN",{ day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(suggestion.thoiGianDeXuat))
                 $('.time').text(" Ngày đề xuất: " + time);
+                //Nếu là xét duyệt thì hiện button xét duyệt/hủy
+                if(suggestion.tinhTrangDuyet===false && suggestion.coXoa ===false){
+                    $('.confirm-div').removeClass('no-display')
+                    $('#btn-confirm-sugg').attr('data-id',suggestion.id);
+                    $('#btn-cancel-sugg').attr('data-id',suggestion.id);
+                    $('#btn-confirm-sugg').on('click',function (e){
+                        confirmSugg(e);
+                    })
+                    $('#btn-cancel-sugg').on('click',function (e){
+                        cancelSugg(e);
+                    })
+                }
             }
             else if(type ==='1'){
-                //Lấy dữ liệu của cái cần thông báo (hoạt động, đề xuất)
+                //Lấy dữ liệu của hoạt động cần thông báo
                 const res = await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${ma}`)
                 const resData = await res.json();
                 const activity = resData.activity;
-                console.log(activity)
                 if(!res.ok){
                     console.log("Lỗi nhận dữ liệu. Trạng thái "+resData.status);
                     return;
@@ -677,6 +780,39 @@ $(document).ready(function (){
                 $('.description').text(moTa);
                 $('.location').text(activity.diaDiem)
                 $('.time').text(" Ngày hoạt động diễn ra: " + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianBD)) + ' - ' + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianKT)))
+            }
+            else if(type==='2'){
+                //Lấy dữ liệu của hoạt động cần thông báo
+                const res = await fetch(`/hoat-dong/xem-chi-tiet?IdAct=${ma}`)
+                const resData = await res.json();
+                const activity = resData.activity;
+                if(!activity){
+                    console.log("Dữ liệu hoạt động không hợp lệ.");
+                    return;
+                }
+                const resEva = await fetch(`/nhan-danh-gia?IdAct=${ma}`)
+                if(!resEva.ok){
+                    console.log("Lỗi nhận dữ liệu đánh giá. Trạng thái "+resData.status);
+                    return;
+                }
+                const evaluation = await resEva.json();
+                $('.name').text(activity.tenhd)
+                const moTa = activity.moTa.length > 300 ? activity.moTa.substring(0, 300) + "..." : activity.moTa;
+                $('.description').text(moTa);
+                $('.location').text(activity.diaDiem)
+                $('.time').text(" Ngày hoạt động diễn ra: " + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianBD)) + ' - ' + new Intl.DateTimeFormat("vi-VN","dd/MM/yyyy").format(new Date(activity.thoiGianKT)))
+                const score = evaluation.diemTNV;
+                let eval = "";
+                switch(score){
+                    case 1: eval = "Không tích cực"
+                            break
+                    case 4: eval = "Tích cực"
+                            break;
+                    case 5: eval = "Rất tích cực"
+                            break;
+                }
+                $('.score').removeClass("no-display")
+                $('.score').text("Đánh giá của người tổ chức : " + eval)
             }
 
 
@@ -718,7 +854,10 @@ $('#close-notice').on("click",function (event){
     for(item of notice_item){
         item.classList.remove("selected-notice");
     }
+    $('.score').addClass("no-display")
+    $('.confirm-div').addClass("no-display")
 })
+
 
 //kiểm tra tính hợp lệ của thêm hoạt động:
 document.addEventListener('DOMContentLoaded', function () {

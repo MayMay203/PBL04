@@ -191,8 +191,7 @@ public class ActivityController {
             dangky.setPhanQuyen(true);
             dangky.setMaHD(hoatDong);
             dangky.setTrangThai(true);
-            dangky.setThoiGianDK(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
-//            dangky.setThoiGianDK(Instant.now());
+            dangky.setThoiGianDK(Instant.now());
             dangky.setMaTK(taikhoan);
             activityService.addActivity(hoatDong, dangky);
             sessionService.createSessionModel(model, session);

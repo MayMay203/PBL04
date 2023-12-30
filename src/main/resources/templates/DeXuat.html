@@ -44,9 +44,9 @@
 <div class="container px-5 surround">
     <div class="sugg-slider">
         <div th:if="${not #lists.isEmpty(suggestionList)}" th:each="i : ${#numbers.sequence(0, suggestionList.size() div 5 + ((suggestionList.size()%5 > 0) ? 1 : 0) - 1)}" class="show-suggestion">
-            <div class="fs-9 display-flex act-title" th:each="j:${#numbers.sequence(0,4)}" th:if="${(5*i+j)<suggestionList.size()}">
+            <div class="fs-9 display-flex border_bottom-solid act-title" th:each="j:${#numbers.sequence(0,4)}" th:if="${(5*i+j)<suggestionList.size()}">
                 <div class="container px-5 flex-5">
-                    <div class="container d-flex align-items-center p-3 border_bottom-solid">
+                    <div class="container d-flex align-items-center p-3">
                         <div class="container">
                             <h3 class="green-color fs-4" th:text="${suggestionList[5*i+j].getMaChuDe().getTenChuDe()}"></h3>
                             <p class="mb-0 fs-6" th:text="${suggestionList[5*i+j].getMoTa()}"></p>

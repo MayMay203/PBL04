@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.time.Instant;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.pbl04.entity.*;
@@ -75,8 +75,7 @@ public class SuggestionController {
                                 @RequestParam ("tinhThanhPho")String tinhThanhPho,
                                 @RequestParam("chuDe")Integer maChuDe,
                                 @RequestParam("moTa")String moTa,
-                                Model model, HttpSession session,
-                                RedirectAttributes redirectAttributes){
+                                Model model, HttpSession session){
         Dexuat dexuat = new Dexuat();
         sessionService.createSessionModel(model,session);
         //Lay ra tk da dang nhap
@@ -86,8 +85,10 @@ public class SuggestionController {
         dexuat.setViTri(thonPhuong + " " +  quanHuyen + " " + tinhThanhPho);
         dexuat.setMaChuDe(topicService.getTopicByID(maChuDe));
         dexuat.setMoTa(moTa);
+        dexuat.setThoiGianDeXuat(LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")));
         suggestionService.Save(dexuat);
         List<Taikhoan> accList = accountService.getAccountAd();
+
         Instant thoiGianTB = Instant.now();
         //Them thong bao cho de xuat
         for(Taikhoan acc : accList){

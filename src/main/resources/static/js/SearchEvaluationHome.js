@@ -8,8 +8,6 @@ search_input.addEventListener("keyup",  async e => {
  if(e.key==="Enter"){
      try {
          const nameAct = search_input.value.trim()
-         // const valueURL = convertToSlug(value);
-         // console.log(valueURL)
          const response = await fetch(`/search/evaluation-home?nameAct=${nameAct}`)
          if (!response.ok) {
              console.error("Lỗi HTTP! Trạng thái " + response.status)
