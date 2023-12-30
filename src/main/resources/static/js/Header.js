@@ -603,6 +603,14 @@ $(document).ready(function (){
                     $('.confirm-div').removeClass('no-display')
                     $('#btn-confirm-sugg').attr('data-id',suggestion.id);
                     $('#btn-cancel-sugg').attr('data-id',suggestion.id);
+                    $('#btn-confirm-sugg').on('click',function (e){
+                        console.log('confirm', $('#btn-confirm-sugg').data('id')); // Log the data-id
+                        confirmSugg(e);
+                    })
+                    $('#btn-cancel-sugg').on('click',function (e){
+                        console.log('cancel', $('#btn-cancel-sugg').data('id')); // Log the data-id
+                        cancelSugg(e);
+                    })
                 }
             }
             else if(type ==='1'){

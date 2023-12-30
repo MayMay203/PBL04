@@ -871,9 +871,16 @@ function reloadSugg(suggList){
         })
     }
 }
-async function confirmSugg(){
+async function confirmSugg(e){
     try{
-        const idSugg = $(this).data("id")
+        e.stopPropagation();
+        var idSugg;
+        if(e.target.dataset.id!=null){
+            idSugg = +e.target.dataset.id;
+        }
+        if($(this).data("id")!=null){
+            idSugg = $(this).data("id");
+        }
         const response =  await fetch(`/confirm-suggestion?idSugg=${idSugg}`,{
             method: 'POST'
         })
@@ -904,6 +911,9 @@ async function confirmSugg(){
             })
         }
         customAlert("Duyệt đề xuất thành công!")
+        $('.swal2-confirm').on('click', function (e) {
+            e.stopPropagation();
+        });
         //Load lại đề xuất chưa duyệt
         const res = await fetch(`de-xuat-chua-duyet`)
         if(!res.ok){
@@ -921,9 +931,16 @@ async function confirmSugg(){
 $(document).on('click', '#btn-confirm-sugg',confirmSugg)
 
 //Huy de xuat
-async function cancelSugg (){
+async function cancelSugg (e){
     try {
-        const idSugg = $(this).data('id');
+        e.stopPropagation();
+        var idSugg;
+        if(e.target.dataset.id!=null){
+            idSugg = +e.target.dataset.id;
+        }
+        if($(this).data("id")!=null){
+            idSugg = $(this).data("id");
+        }
         const response = await fetch(`/cancel-suggestion?idSugg=${idSugg}`, {
             method: 'POST'
         });
@@ -954,6 +971,9 @@ async function cancelSugg (){
             });
         }
         customAlert("Hủy đề xuất thành công!");
+        $('.swal2-confirm').on('click', function (e) {
+            e.stopPropagation();
+        });
         const res = await fetch(`de-xuat-chua-duyet`)
         if(!res.ok){
             console.log("Lỗi HTTP. Trạng thái " + res.status)

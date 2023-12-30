@@ -84,6 +84,13 @@ public class SummaryController {
             model.addAttribute("taikhoanList",taikhoanList);
             model.addAttribute("pointList",pointList);
             sessionService.createSessionModel(model, session);
+            //Xem thong bao theo tai khoan
+            Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
+            if(myAcc!=null){
+                List<Thongbao> listNotice = new ArrayList<>();
+                listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
+                model.addAttribute("listNotice",listNotice);
+            }
             return "TongKetHoatDong";
         } else {
             return "error";
