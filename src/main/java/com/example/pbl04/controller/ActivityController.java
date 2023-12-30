@@ -104,13 +104,6 @@ public class ActivityController {
         model.addAttribute("checkDangky",checkDangky);
         model.addAttribute("pointList",pointList);
         model.addAttribute("taikhoan",taikhoan);
-        //Hiện thông báo theo tài khoản
-        Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
-        if(myAcc!=null){
-            List<Thongbao> listNotice = new ArrayList<>();
-            listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
-            model.addAttribute("listNotice",listNotice);
-        }
         return "ChiTietHoatDong";
     }
 

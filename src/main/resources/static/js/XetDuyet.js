@@ -951,16 +951,9 @@ function reloadSugg(suggList){
         })
     }
 }
-async function confirmSugg(e){
+async function confirmSugg(){
     try{
-        e.stopPropagation();
-        var idSugg;
-        if(e.target.dataset.id!=null){
-            idSugg = +e.target.dataset.id;
-        }
-        if($(this).data("id")!=null){
             idSugg = $(this).data("id");
-        }
         const response =  await fetch(`/confirm-suggestion?idSugg=${idSugg}`,{
             method: 'POST'
         })
@@ -1011,16 +1004,9 @@ async function confirmSugg(e){
 $(document).on('click', '#btn-confirm-sugg',confirmSugg)
 
 //Huy de xuat
-async function cancelSugg (e){
+async function cancelSugg (){
     try {
-        e.stopPropagation();
-        var idSugg;
-        if(e.target.dataset.id!=null){
-            idSugg = +e.target.dataset.id;
-        }
-        if($(this).data("id")!=null){
-            idSugg = $(this).data("id");
-        }
+        const idSugg = $(this).data("id");
         const response = await fetch(`/cancel-suggestion?idSugg=${idSugg}`, {
             method: 'POST'
         });

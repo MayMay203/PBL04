@@ -35,6 +35,7 @@ btn_evaluaion_Act.addEventListener("click",(e)=> {
     }
 })
 
+
 $(document).ready(function () {
     $('.cmt-slider').slick({
         autoplay: true,

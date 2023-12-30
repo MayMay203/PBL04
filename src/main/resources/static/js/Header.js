@@ -561,6 +561,98 @@ $(document).ready(function (){
     })
 })
 
+async function confirmSugg(e){
+    try{
+        e.stopPropagation();
+        const idSugg = +e.target.dataset.id;
+        const response =  await fetch(`/confirm-suggestion?idSugg=${idSugg}`,{
+            method: 'POST'
+        })
+        if(!response.ok){
+            console.log("Lỗi HTTP. Trạng thái " + response.status);
+            return;
+        }
+        //Thêm thông báo xét duyệt đề xuất
+        const confirmedSugg = await response.json();
+        const maTK = confirmedSugg.maTK.id;
+        const noiDung = "Đề xuất của bạn đã được duyệt thành công."
+        const loaiTB = 0;
+        const ma = confirmedSugg.id;
+        const addURL = await fetch(`/them-thong-bao?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`, {
+            method: 'POST'
+        });
+        if(!addURL.ok){
+            console.log("Lỗi thêm thông báo đề xuất. Trạng thái " + addURL.status);
+        }
+        function customAlert(message){
+            Swal.fire({
+                icon: 'success',
+                text: message,
+                confirmButtonText: 'OK',
+                customClass:{
+                    popup: 'custom-alert-popup'
+                }
+            })
+        }
+        customAlert("Duyệt đề xuất thành công!")
+        $('.swal2-confirm').on('click', function (e) {
+            e.stopPropagation();
+            $("#notice-detail").modal("hide");
+            for(item of notice_item){
+                item.classList.remove("selected-notice");
+            }
+            $('.confirm-div').removeClass('no-display')
+        });
+    }catch(error){
+        console.error(error)
+    }
+}
+async function cancelSugg (e){
+    try {
+        e.stopPropagation();
+        const idSugg = +e.target.dataset.id;
+        const response = await fetch(`/cancel-suggestion?idSugg=${idSugg}`, {
+            method: 'POST'
+        });
+        if(!response.ok){
+            console.log("Lỗi HTTP. Trạng thái " + response.status);
+            return;
+        }
+        //Thêm thông báo xét duyệt đề xuất
+        const canceledSugg = await response.json();
+        const maTK = canceledSugg.maTK.id;
+        const noiDung = "Đề xuất của bạn đã bị hủy."
+        const loaiTB = 0;
+        const ma = canceledSugg.id;
+        const addURL = await fetch(`/them-thong-bao?maTK=${maTK}&noiDung=${noiDung}&loaiTB=${loaiTB}&ma=${ma}`, {
+            method: 'POST'
+        });
+        if(!addURL.ok){
+            console.log("Lỗi thêm thông báo đề xuất. Trạng thái " + addURL.status);
+        }
+        function customAlert(message) {
+            Swal.fire({
+                icon: 'success',
+                text: message,
+                confirmButtonText: 'OK',
+                customClass: {
+                    popup: 'custom-alert-popup'
+                }
+            });
+        }
+        customAlert("Hủy đề xuất thành công!");
+        $('.swal2-confirm').on('click', function (e) {
+            e.stopPropagation();
+            $('#notice-detail').modal('hide')
+            for(item of notice_item){
+                item.classList.remove("selected-notice");
+            }
+            $('.confirm-div').removeClass('no-display')
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
 $(document).ready(function (){
     $(".notification-item").each(function (){
         $(this).on("click",async function (e){
@@ -604,11 +696,9 @@ $(document).ready(function (){
                     $('#btn-confirm-sugg').attr('data-id',suggestion.id);
                     $('#btn-cancel-sugg').attr('data-id',suggestion.id);
                     $('#btn-confirm-sugg').on('click',function (e){
-                        console.log('confirm', $('#btn-confirm-sugg').data('id')); // Log the data-id
                         confirmSugg(e);
                     })
                     $('#btn-cancel-sugg').on('click',function (e){
-                        console.log('cancel', $('#btn-cancel-sugg').data('id')); // Log the data-id
                         cancelSugg(e);
                     })
                 }
