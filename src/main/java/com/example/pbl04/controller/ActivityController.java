@@ -77,6 +77,12 @@ public class ActivityController {
                                    @RequestParam Map<String, String> params,
                                    HttpSession session)
     {
+        Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
+        if(myAcc!=null){
+            List<Thongbao> listNotice = new ArrayList<>();
+            listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
+            model.addAttribute("listNotice",listNotice);
+        }
         sessionService.createSessionModel(model, session);
         params = params.entrySet().stream()
                 .collect(Collectors.toMap(
