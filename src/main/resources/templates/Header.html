@@ -96,13 +96,16 @@
                         <p class="fw-bold fs-5 black-color">Thông báo</p>
                         <button id="btn-read" class="btn white-color bg-btn no-border no-outline radius-half px-2 fs-9 py-0 h-2">Đánh dấu đã đọc</button>
                     </div>
+
+                    <!-- Dong thong bao -->
+                    <div class="dropdown-notice-list p-0">
                         <!-- Chưa đọc-->
                         <div th:if="${listNotice.size()>0}" th:each="notice:${listNotice}">
                             <div class="mt-2 p-2 dropdown-item cursor-pointer d-flex align-item-center bg-grey notification-item" th:if="${notice.getTrangThai==false}" th:attr="data-id=${notice.getId()},data-type=${notice.getLoaiTB}, data-status=${notice.getTrangThai()},data-ma=${notice.getMa()}">
-                                <img th:src="@{/images/tbTK.png}" class="radius-1 me-3 w-2_5 h-2_5 imageNotify" alt="" th:if="${notice.getLoaiTB==3}">
-                                <img th:src="@{/images/tbTongKet.png}" class="radius-1 me-3 w-2_5 h-2_5 imageNotify" alt="" th:if="${notice.getLoaiTB==4}">
                                 <img th:if="${notice.getLoaiTB()==0}" th:src="@{/images/logoweb.png}" class="radius-1 me-3 w-2_5 h-2_5" alt="">
                                 <img th:if="${notice.getLoaiTB() == 1 or notice.getLoaiTB() == 2}" th:src="@{/images/logoHD.png}" class="radius-1 me-3 w-2_5 h-3" alt="">
+                                <img th:src="@{/images/tbTK.png}" class="radius-1 me-3 w-2_5 h-2_5 imageNotify" alt="" th:if="${notice.getLoaiTB==3}">
+                                <img th:src="@{/images/tbTongKet.png}" class="radius-1 me-3 w-2_5 h-2_5 imageNotify" alt="" th:if="${notice.getLoaiTB==4}">
                                 <div class="max-width-400">
                                     <p class="p-0 m-0 fs-9 black-color notification-text" th:text="${#strings.length(notice.getNoiDung()) > 85 ? #strings.substring(notice.getNoiDung(), 0, 85) + '...' : notice.getNoiDung()}"></p>
                                     <p class="p-0 m-0 fs-9 green_light-color fst-italic" th:text="${#temporals.format(notice.thoiGianTB,'dd/MM/yyyy HH:mm:ss', 'Asia/Ho_Chi_Minh')}"></p>
@@ -110,17 +113,17 @@
                             </div>
                             <!-- Đã đọc không có bg-grey-->
                             <div class="mt-2 p-2 dropdown-item cursor-pointer d-flex align-item-center notification-item" th:if="${notice.getTrangThai==true}" th:attr="data-id=${notice.getId()},data-type=${notice.getLoaiTB},data-status=${notice.getTrangThai()},data-ma=${notice.getMa()}">
-                                <img th:src="@{/images/tbTK.png}" class="radius-1 me-3 w-2_5 h-2_5 imageNotify" alt="" th:if="${notice.getLoaiTB==3}">
-                                <img th:src="@{/images/tbTongKet.png}" class="radius-1 me-3 w-2_5 h-2_5 imageNotify" alt="" th:if="${notice.getLoaiTB==4}">
                                 <img th:if="${notice.getLoaiTB()==0}" th:src="@{/images/logoweb.png}" class="radius-1 me-3 w-2_5 h-2_5" alt="">
                                 <img th:if="${notice.getLoaiTB() == 1 or notice.getLoaiTB() == 2}" th:src="@{/images/logoHD.png}" class="radius-1 me-3 w-2_5 h-3" alt="">
+                                <img th:src="@{/images/tbTK.png}" class="radius-1 me-3 w-2_5 h-2_5 imageNotify" alt="" th:if="${notice.getLoaiTB==3}">
+                                <img th:src="@{/images/tbTongKet.png}" class="radius-1 me-3 w-2_5 h-2_5 imageNotify" alt="" th:if="${notice.getLoaiTB==4}">
                                 <div class="max-width-400">
                                     <p class="p-0 m-0 fs-9 black-color notification-text" th:text="${#strings.length(notice.getNoiDung()) > 85 ? #strings.substring(notice.getNoiDung(), 0, 85) + '...' : notice.getNoiDung()}"></p>
                                     <p class="p-0 m-0 fs-9 green_light-color fst-italic" th:text="${#temporals.format(notice.thoiGianTB,'dd/MM/yyyy HH:mm:ss', 'Asia/Ho_Chi_Minh')}"></p>
                                 </div>
                             </div>
                         </div>
-
+                    </div>
                 </ul>
             </div>
 
