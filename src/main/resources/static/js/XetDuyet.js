@@ -369,24 +369,6 @@ $(document).ready(function () {
 var maHD;
 var matkhoan;
 $(document).ready(function () {
-
-    // function getOrganizator(maHD)
-    // {
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: '/get-organizator',
-    //         data: {  'maHD': maHD },
-    //         success: function (data) {
-    //             console.log('Success:', data);
-    //             matkhoan= parseInt(data);
-    //             console.log("thanh cong");
-    //             console.log("mataikhoan:",matkhoan);
-    //         },
-    //         error: function (error) {
-    //             console.error('Error:', error);
-    //         }
-    //     });
-    // }
     var btnViewPartici = document.getElementsByClassName('viewParticipant');
     for(const btn of btnViewPartici){
         btn.addEventListener("click", async (e) => {
@@ -419,8 +401,8 @@ $(document).ready(function () {
                                <span class="modal-member-rate">\
                                  <i class="rate-detail" >' + pointList[index] + '</i>\
                                  <i class="bi bi-star-fill icon-star"></i>\
-                                 <input type="checkbox" value="'+thanhvien.id+'">\
-                                    \<i class="bi bi-info-circle mr--0_5 show-member-detail" data-member-id="' + thanhvien.id + '"></i>\
+                                 <input type="checkbox" value="'+thanhvien.maTK.id+'">\
+                                    \<i class="bi bi-info-circle mr--0_5 show-member-detail" data-member-id="' + thanhvien.maTK.id + '"></i>\
                                </span>\
                              </div>\
                             </div>';
@@ -518,17 +500,10 @@ function switchToMemberTabAndReload() {
     $('.tabs .tab-item:nth-child(2)').addClass('active');
     $('.tab-content .tab-pane').removeClass('active');
     $('#subTab3').addClass('active');
-    // True để force reload từ server
     setTimeout(function () {
-        location.reload(true); // True để force reload từ server
+        location.reload(true);
     }, 500);
 }
-// window.location.reload();
-// // Chuyển về tab "Xét duyệt thành viên"
-// $('.tabs .tab-item').removeClass('active');
-// $('.tabs .tab-item:nth-child(2)').addClass('active');
-// $('.tab-content .tab-pane').removeClass('active');
-// $('#subTab3').addClass('active');
 //-------------------------------show modal thanh vien da duoc duyetj----------------//
 
 $(document).ready(function () {
@@ -564,12 +539,11 @@ $(document).ready(function () {
                                <span class="modal-member-rate">\
                                  <i class="rate-detail">' + pointList[index] + '</i>\
                                  <i class="bi bi-star-fill icon-star"></i>\
-                                 <input class="mb--0_2" type="checkbox" value="'+thanhvien.id+'">\
-                                    \<i class="bi bi-info-circle mr--0_5 show-member-detail" data-member-id="' + thanhvien.id + '"></i>\
+                                 <input class="mb--0_2" type="checkbox" value="'+thanhvien.maTK.id+'">\
+                                    \<i class="bi bi-info-circle mr--0_5 show-member-detail" data-member-id="' + thanhvien.maTK.id + '"></i>\
                                </span>\
                              </div>';
                     $('#MemberModal .modal-body-member').append(modalContent);
-                    // $(targetModal + ' .modal-body-member').append(modalContent);
                 });
 
                 var modalFooter = `
@@ -584,17 +558,7 @@ $(document).ready(function () {
     }
 })
 $(document).ready(function () {
-    // var btnMemberDetail = document.getElementsByClassName('show-member-detail');
-    // for (btn of btnMemberDetail) {
-    //     btn.addEventListener('click', async (e) => {
-    //         var maThanhVien = e.target.dataset.memberId;
-    //         console.log("mathanhvien:", maThanhVien);
-    //         console.log("Showing modal");
-    //         $('#modelMemberDetail').modal('show');
-    //
-    //         // $('#modelMemberDetail').modal('show');
-    //     });
-    // }
+
     $('#MemberModal .modal-body-member').on('click', '.show-member-detail', function (e) {
         $('#MemberModal').modal('hide');
         var maThanhVien = $(this).data('memberId');
@@ -606,8 +570,6 @@ $(document).ready(function () {
             data: {'maTK' :maThanhVien},
             success: function (data) {
                 console.log(data);
-                // Populate modal with activity information
-               // $("#anhDaiDien").val(data.maTK.anhDaiDien);
                 $("#anhDaiDien").attr('src', data.maTK.anhDaiDien);
                 $("#name").val(data.hoTen);
                 $("#birthday").val(data.ngaySinh);
@@ -654,7 +616,6 @@ $(document).ready(function () {
                 }
             });
         }
-        // console.log("maOR:",mataikhoan);
 
     }
 
@@ -670,17 +631,13 @@ $(document).ready(function () {
         formData.append('maHD', maHD);
         formData.append('ids', idsString);
 
-        // Gửi danh sách ID tới controller
         $.ajax({
             type: 'POST',
             url: '/Cancel-participants',
-            // contentType: 'application/json',
             data: formData,
-            processData: false,  // Đặt giá trị này thành false
+            processData: false,
             contentType: false,
-            // data: JSON.stringify({maHD: maHD, ids: selectedIds}),
             success: function (response) {
-                // Xử lý phản hồi từ server nếu cần
                 console.log(response);
                 sendNotiMemberConfirm(maHD,idsString);
                 console.log('Hủy duyệt thành viên ok');
@@ -722,7 +679,6 @@ $(document).ready(function() {
         console.log("button click");
          idHD =  e.target.dataset.value;
         console.log('mahd:', idHD);
-        // Make an AJAX request to the controller to get activity information
         $.ajax({
             url: '/get-activity-by-id',
             type: 'GET',
@@ -786,7 +742,6 @@ $(document).ready(function() {
                     'maHD': idHD, txtHuy: txtMotaValue,
                 },
                 success: function (response) {
-                    // Handle success
                     console.log(response);
                     updateModalContent("Hủy bài đăng thành công");
                     check = true;
@@ -803,14 +758,11 @@ $(document).ready(function() {
     });
 
     function updateModalContent(newContent) {
-        // Update the modal body content
         $('.modal-body-themhd').html(newContent);
     }
     function hideButtons() {
-        // Hide the buttons in the modal footer
         $('#HuyHoatDongModal .modal-footer').hide();
     }
-    // Add an event listener for the Cancel button inside the modal
     $(".btnCancel").on("click", function() {
         // Close the modal without saving
         $('#HuyHoatDongModal').modal('hide');
@@ -870,8 +822,6 @@ $(document).ready(function () {
     var btnViewActivityConfirm =document.getElementsByClassName("btnViewActivityConfirm");
     for(btn of btnViewActivityConfirm){
         btn.addEventListener("click",async (e)=>{
-            //var id = btnViewActivityConfirm.getAttribute('data-value');
-            //var id = $(this).data('value');
             var id= e.target.dataset.value;
             console.log("id:",id);
             var response = await fetch(`/check-activity?maHD=${id}`)
@@ -892,14 +842,9 @@ $(document).ready(function () {
 
 
     function displayModal(hoatdong) {
-        // Get the modal element by ID
-        //var modal = document.getElementById('ViewHoaDongModal');
         console.log(" view hoat dong");
-        // Show the modal
         $('#ViewHoaDongModal').modal("show");
 
-        // Populate modal fields with hoatdong information
-        // Assuming there are elements with IDs like 'txt_NameTopic', 'txt_NameActi', etc.
         document.getElementById('txt_Chude').value = hoatdong.maChuDe.tenChuDe;
         document.getElementById('txt_TenHD').value = hoatdong.tenhd;
         document.getElementById('txt_DiaDiem').value = hoatdong.diaDiem;
@@ -913,7 +858,7 @@ $(document).ready(function () {
         if (hoatdong.anh) {
             userImage.src = hoatdong.anh;
         } else {
-            userImage.src = '/images/default.webp'; // Default image if no image provided
+            userImage.src = '/images/default.webp';
         }
     }
     var closeButton = document.querySelector('.btnClose');
