@@ -32,7 +32,7 @@
 }
 
 .dropdown-notice-list::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 .dropdown-notice-list::-webkit-scrollbar-thumb {

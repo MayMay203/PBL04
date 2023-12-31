@@ -98,7 +98,7 @@
                     </div>
 
                     <!-- Dong thong bao -->
-                    <div class="dropdown-notice-list p-0">
+                    <div class="dropdown-notice-list p-2">
                         <!-- Chưa đọc-->
                         <div th:if="${listNotice.size()>0}" th:each="notice:${listNotice}">
                             <div class="mt-2 p-2 dropdown-item cursor-pointer d-flex align-item-center bg-grey notification-item" th:if="${notice.getTrangThai==false}" th:attr="data-id=${notice.getId()},data-type=${notice.getLoaiTB}, data-status=${notice.getTrangThai()},data-ma=${notice.getMa()}">
