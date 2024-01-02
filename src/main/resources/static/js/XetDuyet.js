@@ -134,9 +134,9 @@ $(document).ready(function () {
     }
 
 
-    confirmStage0Modal.addEventListener("click", function () {
-        closeConfirmModal();
-    });
+    // confirmStage0Modal.addEventListener("click", function () {
+    //     closeConfirmModal();
+    // });
     function showConfirmModal() {
         // Hiển thị modal
         $('#confirmStage0').modal("show");
@@ -263,9 +263,9 @@ $(document).ready(function () {
         });
     }
 
-    confirmStage0Modal.addEventListener("click", function () {
-        closeConfirmModal();
-    });
+    // confirmStage0Modal.addEventListener("click", function () {
+    //     closeConfirmModal();
+    // });
     function showConfirmModal() {
         // Hiển thị modal
         $('#confirmStage1').modal("show");
