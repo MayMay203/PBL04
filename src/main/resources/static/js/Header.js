@@ -618,6 +618,15 @@ $(document).ready(function (){
                 console.log("Lỗi cập nhật trạng thái thông báo. Trạng thái " + response.status);
                 return;
             }
+            //Update lại số lượng thông báo chưa đọc
+            const numOfNotice = await response.json();
+            const notice_container = document.querySelector("#notification_count_container")
+            notice_container.innerHTML = "";
+            if(numOfNotice!==0){
+                notice_container.innerHTML = `
+                   <span id="notification_count" class="badge bg-danger radius-1">${numOfNotice}</span>
+            `
+            }
         }
     })
 })
@@ -737,6 +746,15 @@ $(document).ready(function (){
                         console.log("Lỗi cập nhật trạng thái thông báo. Trạng thái " + response.status);
                         return;
                     }
+                //Update lại số lượng thông báo chưa đọc
+                const numOfNotice = await response.json();
+                const notice_container = document.querySelector("#notification_count_container")
+                notice_container.innerHTML = "";
+                if(numOfNotice!==0){
+                    notice_container.innerHTML = `
+                   <span id="notification_count" class="badge bg-danger radius-1">${numOfNotice}</span>
+            `
+                }
             }
             if(type==='0'){
                 //Lấy dữ liệu của đề xuất  cần thông báo

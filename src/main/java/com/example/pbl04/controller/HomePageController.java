@@ -109,8 +109,10 @@ public class HomePageController {
             List<Thongbao> listNotice = new ArrayList<>();
             listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
             model.addAttribute("listNotice",listNotice);
+            //Đếm thông báo chưa đọc
+            Integer numOfNotice = notificationService.countNotice(myAcc.getId());
+            model.addAttribute("numOfNotice",numOfNotice);
         }
-
         return "TrangChu";
     }
 }

@@ -1,5 +1,6 @@
 package com.example.pbl04.controller;
 
+import com.example.pbl04.dao.AccountRepository;
 import com.example.pbl04.entity.*;
 import com.example.pbl04.service.*;
 import jakarta.servlet.http.HttpSession;
@@ -13,10 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ConfirmController {
@@ -27,8 +25,11 @@ public class ConfirmController {
     private final SuggestionService suggestionService;
     private final EvaluationService evaluationService;
     private  final NotificationService notificationService;
+    private final AccountService accountService;
+
     @Autowired
-    public ConfirmController(ActivityService activityService, SessionService sessionService, RegisterService registerService, MemberService memberService, SuggestionService suggestionService, EvaluationService evaluationService,NotificationService notificationService) {
+    public ConfirmController(ActivityService activityService, SessionService sessionService, RegisterService registerService, MemberService memberService, SuggestionService suggestionService, EvaluationService evaluationService,NotificationService notificationService,
+                             AccountService accountService) {
         this.activityService = activityService;
         this.sessionService = sessionService;
         this.registerService = registerService;
@@ -36,8 +37,9 @@ public class ConfirmController {
         this.suggestionService = suggestionService;
         this.evaluationService = evaluationService;
         this.notificationService = notificationService;
+        this.accountService = accountService;
     }
-        @GetMapping("xet-duyet")
+        @GetMapping("/xet-duyet")
         public String showConfirmActivity(Model model, HttpSession session)
         {
             sessionService.createSessionModel(model, session);
@@ -81,12 +83,13 @@ public class ConfirmController {
                 model.addAttribute("listCancelActivity",listCancelActivity);
                 model.addAttribute("listActivityParticipate",listActivityParticipate);
             }
-
-            Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
-            if(myAcc!=null){
+            if(myaccount!=null){
                 List<Thongbao> listNotice = new ArrayList<>();
-                listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
+                listNotice = notificationService.getNotifiByIdAcc(myaccount.getId());
                 model.addAttribute("listNotice",listNotice);
+                //Đếm thông báo chưa đọc
+                Integer numOfNotice = notificationService.countNotice(myaccount.getId());
+                model.addAttribute("numOfNotice",numOfNotice);
             }
             return "XetDuyet";
         }

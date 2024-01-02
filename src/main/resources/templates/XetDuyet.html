@@ -23,7 +23,7 @@
         <div class="tabs">
             <div class="tab-item active"> Xét duyệt hoạt động</div>
             <div class="tab-item"> Xét duyệt thành viên</div>
-            <div class="tab-item"> Xét duyệt đề xuất</div>
+            <div class="tab-item" th:if="${account.getLoaiTK()}"> Xét duyệt đề xuất</div>
             <div class="line"></div>
         </div>
 
@@ -288,7 +288,7 @@
                 </div>
             </div>
             <!--Xet duyet de xuat-->
-            <div class="tab-pane" id="confirm-sugg">
+            <div th:if="${account.getLoaiTK()}" class="tab-pane" id="confirm-sugg">
                 <div class="container px-5 suggestion">
                     <div class="container d-flex align-items-center p-3 border_bottom-solid" th:if="suggestionList!=null" th:each="sugg:${suggestionList}">
                         <div class="container flex-5 col-9">
