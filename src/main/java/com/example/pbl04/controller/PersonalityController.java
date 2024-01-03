@@ -135,7 +135,6 @@ public class PersonalityController {
             //lấy tổng kết
             if(summaryService.getSummaryByID(hd.getId()) != null){
                 listSummaryIsHostActi.add(summaryService.getSummaryByID(hd.getId()).getId());
-                System.out.println("Tổng kết host:"+ summaryService.getSummaryByID(hd.getId()).getId() +"---"+summaryService.getSummaryByID(hd.getId()).getMaHD().getTenhd());
             }
             else{
                 listSummaryIsHostActi.add(-1);
@@ -171,16 +170,13 @@ public class PersonalityController {
 
             if(evaluationService.getEvaluationByIDHDTK(hd.getId(), id) != null){
                 listEvalueIsMemberActi.add(evaluationService.getRateEvaluationByIDHDTK(hd.getId(), id));
-                System.out.println("Điểm đánh gi member:" + evaluationService.getEvaluationByIDHDTK(hd.getId(), id));
             }
             else{
                 listEvalueIsMemberActi.add(-1);
             }
-            System.out.println("Trạng thái Đăng ký member:"+ registerService.getRegisterIsMember(hd.getId(), id).getTrangThai());
             //lấy tổng kết
             if(summaryService.getSummaryByID(hd.getId()) != null){
                 listSummaryIsMemberActi.add(summaryService.getSummaryByID(hd.getId()).getId());
-                System.out.println("Tổng kết member:"+ summaryService.getSummaryByID(hd.getId()).getId() +"---"+summaryService.getSummaryByID(hd.getId()).getMaHD().getTenhd());
             }
             else{
                 listSummaryIsMemberActi.add(-1);
@@ -274,9 +270,7 @@ public class PersonalityController {
                         System.out.println("Nội dung giống nhau, không cần lưu.");
                     }
                 }
-                System.out.println("Ten ...Controller:" + "/images/" + fileName);
                 urlImageInDB = "/images/" + fileName;
-                System.out.println("Ten file anh urlImageInDB:" + urlImageInDB);
                 thanhvien.getMaTK().setAnhDaiDien(urlImageInDB);
             }
             memberService.updateInfor(thanhvien);

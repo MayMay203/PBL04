@@ -55,7 +55,6 @@ public class HomePageController {
 
         List<Anhtongket> imgSummarried = new ArrayList<>();
         for (Tongket tk : summaryList) {
-            System.out.println("Tổng kết:" + tk.getId() + "--" + tk.getMaHD().getTenhd());
             listActiSummarried.add(tk.getMaHD());
             imgSummarried = summaryService.getimgSummaryList(tk.getId());
 
@@ -76,18 +75,6 @@ public class HomePageController {
 
         List<List<Danhgia>> evaluateListByIDList = evaluationService.getEvaluationByIdActList(listActiSummarried);
         model.addAttribute("evaluateListByIDList",evaluateListByIDList);
-        for (List<Danhgia> x : evaluateListByIDList) {
-
-            for (Danhgia xx : x) {
-                System.out.println(xx.getMaHD().getTenhd());
-                System.out.println(xx);
-                // In ra các thuộc tính của đối tượng Danhgia
-                System.out.println("Id: " + xx.getId());
-                System.out.println("BinhLuan: " + xx.getBinhLuan());
-                // Thêm các thuộc tính khác nếu cần
-                System.out.println("-------------------");
-            }
-        }
 
         sessionService.createSessionModel(model, session);
 
