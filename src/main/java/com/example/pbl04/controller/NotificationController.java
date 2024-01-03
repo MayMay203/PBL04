@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,11 +69,14 @@ public class NotificationController {
 
     @PostMapping("/cap-nhat-trang-thai-doc-thong-bao")
     @ResponseBody
-    public ResponseEntity<Void> updateStatusOfNotice(@RequestParam("idList") List<Integer> idList){
+    public ResponseEntity<Integer> updateStatusOfNotice(@RequestParam("idList") List<Integer> idList,HttpSession session){
         for(Integer id:idList){
             notificationService.updateStatusOfNotice(id);
         }
-        return ResponseEntity.status(HttpStatus.OK).build();
+        //Dem luot thong bao chua doc con lai
+        Taikhoan myAcc = (Taikhoan)session.getAttribute("account");
+        Integer numberOfNotice = notificationService.countNotice(myAcc.getId());
+        return ResponseEntity.ok(numberOfNotice);
     }
 
 

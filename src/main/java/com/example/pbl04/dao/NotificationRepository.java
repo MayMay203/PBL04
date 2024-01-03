@@ -14,4 +14,7 @@ public interface NotificationRepository extends JpaRepository<Thongbao,Integer>{
     @Query("update Thongbao tb set tb.trangThai = true where tb.id = :idNotice")
     void updateStatusOfNotice(Integer idNotice);
 
+    @Query("select count(*) from Thongbao tb where tb.maTK.id = :idAcc and tb.trangThai = false")
+    Integer countNotice(Integer idAcc);
+
 }

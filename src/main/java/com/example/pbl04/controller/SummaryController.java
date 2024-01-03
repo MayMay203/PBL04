@@ -44,11 +44,13 @@ public class SummaryController {
         model.addAttribute("myActivities",myActivities);
 
         //Nội dung thông báo
-        Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
-        if(myAcc!=null){
+        if(myaccount!=null){
             List<Thongbao> listNotice = new ArrayList<>();
-            listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
+            listNotice = notificationService.getNotifiByIdAcc(myaccount.getId());
             model.addAttribute("listNotice",listNotice);
+            //Đếm thông báo chưa đọc
+            Integer numOfNotice = notificationService.countNotice(myaccount.getId());
+            model.addAttribute("numOfNotice",numOfNotice);
         }
 
         return "TrangChuTongKet";
@@ -94,11 +96,13 @@ public class SummaryController {
             sessionService.createSessionModel(model, session);
             Taikhoan myaccount = (Taikhoan) model.getAttribute("account");
             model.addAttribute("account",myaccount);
-            Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
-            if(myAcc!=null){
+            if(myaccount!=null){
                 List<Thongbao> listNotice = new ArrayList<>();
-                listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
+                listNotice = notificationService.getNotifiByIdAcc(myaccount.getId());
                 model.addAttribute("listNotice",listNotice);
+                //Đếm thông báo chưa đọc
+                Integer numOfNotice = notificationService.countNotice(myaccount.getId());
+                model.addAttribute("numOfNotice",numOfNotice);
             }
             return "TongKetHoatDong";
         } else {

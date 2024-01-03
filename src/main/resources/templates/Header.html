@@ -86,11 +86,13 @@
                 </li>
             </ul>
 
-
             <!-- Thông báo cho người dùng      -->
             <div th:if="${isLogin}" class="notify-container">
-                <button id="btn_notify" class="float-end no-border bg-white" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="bi bi-bell p-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Thông báo"></i>
+                <button id="btn_notify" class="float-end no-border bg-white position-relative" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i id="bell_icon" class="bi bi-bell p-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Thông báo"></i>
+                    <div id="notification_count_container">
+                        <span id="notification_count" class="badge bg-danger radius-1" th:if="${numOfNotice!=0}" th:text="${numOfNotice}"></span>
+                    </div>
                 </button>
                 <!-- Thông tin thông báo -->
                 <ul class="p-2 dropdown-menu dropdown-notify">
@@ -100,7 +102,7 @@
                     </div>
 
                     <!-- Dong thong bao -->
-                    <div class="dropdown-notice-list p-0">
+                    <div class="dropdown-notice-list p-2">
                         <!-- Chưa đọc-->
                         <div th:if="${listNotice.size()>0}" th:each="notice:${listNotice}">
                             <div class="mt-2 p-2 dropdown-item cursor-pointer d-flex align-item-center bg-grey notification-item" th:if="${notice.getTrangThai==false}" th:attr="data-id=${notice.getId()},data-type=${notice.getLoaiTB}, data-status=${notice.getTrangThai()},data-ma=${notice.getMa()}">

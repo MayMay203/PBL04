@@ -32,7 +32,7 @@
 }
 
 .dropdown-notice-list::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 .dropdown-notice-list::-webkit-scrollbar-thumb {
@@ -124,5 +124,16 @@
 .no-display{
     display: none;
 }
+
+#notification_count_container {
+    position: absolute;
+    top: -2px;
+    right: 2px;
+}
+
+.position-relative{
+    position: relative;
+}
+
 
 

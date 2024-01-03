@@ -6,4 +6,5 @@ public interface NotificationService {
     public void addNotification(Thongbao tb);
     public List<Thongbao> getNotifiByIdAcc(Integer IdAcc);
     public void updateStatusOfNotice(Integer idNotice);
+    public Integer countNotice(Integer idAcc);
 }
