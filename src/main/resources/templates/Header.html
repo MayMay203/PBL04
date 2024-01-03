@@ -260,13 +260,17 @@
                                 <label class="col-4">Địa chỉ</label>
                                 <input class="form-control form-control-sm me-4" required type="text" name="diaChi">
                             </div>
-                            <div class="container d-flex mb-4">
+                            <div class="container d-flex ">
                                 <label class="col-4">Số điện thoại</label>
                                 <input class="form-control form-control-sm me-4" required type="tel" pattern="[0-9]{10}" title="Vui lòng nhập 10 số" name="soDienThoai">
                             </div>
-                            <div class="container d-flex mb-4">
+                            <div id="existedNumphone" class="mb-4" style="color: red; margin-left: 10rem">
+                            </div>
+                            <div class="container d-flex ">
                                 <label class="col-4">Email</label>
                                 <input class="form-control form-control-sm me-4" required type="email" name="email">
+                            </div>
+                            <div id="existedEmail" class="mb-4" style="color: red; margin-left: 13rem">
                             </div>
                             <div class="button mt-4 d-flex btn-footer-modal">
 <!--                                <span class="col-3"></span>-->
@@ -411,7 +415,6 @@
                         </div>
                         <!-- Hiển thị thông báo lỗi nếu có -->
                         <div id="error-message">
-<!--                                                            <p class="notify-error"></p>-->
                         </div>
                         <input type="submit" name="btn1" id="btnLogin" value="ĐĂNG NHẬP" >
                     </form>

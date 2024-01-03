@@ -115,8 +115,8 @@ public class PersonalityController {
                 actListIsMember = activityService.getAllActiForFilterSummaried(accountID, false, 2, 2);
                 break;
             case 13://chưa tổng kết:
-                actListIsHost = activityService.getAllActiForFilterNoSummary(accountID, true, 2, 2);
-                actListIsMember = activityService.getAllActiForFilterNoSummary(accountID, false, 2, 2);
+                actListIsHost = activityService.getAllActiForFilterNoSummary(accountID, true, 0, 1);
+                actListIsMember = activityService.getAllActiForFilterNoSummary(accountID, false, 0, 1);
                 break;
         }
 

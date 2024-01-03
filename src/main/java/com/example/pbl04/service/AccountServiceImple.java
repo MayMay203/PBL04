@@ -45,6 +45,16 @@ public class AccountServiceImple implements AccountService{
     public List<Taikhoan> getAccountAd() {
         return accountRepository.getAccountAd();
     }
+
+    @Override
+    public List<String> getAllEmail() {
+        return accountRepository.getAllEmail();
+    }
+    @Override
+    public List<String> getAllNumPhone() {
+        return accountRepository.getAllNumPhone();
+    }
+
     @Override
     public void changePassword(Taikhoan tk) {
         accountRepository.save(tk);

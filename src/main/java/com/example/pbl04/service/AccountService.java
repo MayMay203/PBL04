@@ -19,4 +19,7 @@ public interface AccountService {
 
     List<Taikhoan> getAccountAd();
 
+    List<String> getAllEmail();
+    List<String> getAllNumPhone();
+
 }

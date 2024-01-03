@@ -336,9 +336,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     // location.reload();
                     // alert("Đăng ký thành công!");
                     sendNotify(response.maTK);
-                } else {
+                } else if(response.existed==false && response.existedEmail){
                     // Hiển thị thông báo lỗi
-                    alert(response.message);
+                    $('#existedEmail').text(response.existedEmail);
+                }
+                else if(response.existed==false && response.existedNumphone){
+                    // Hiển thị thông báo lỗi
+                    $('#existedNumphone').text(response.existedNumphone);
+                }
+                else if(response.existed){
+                    // Hiển thị thông báo lỗi
+                    $('#existedNumphone').text(response.existedNumphone);
+                    $('#existedEmail').text(response.existedEmail);
                 }
             },
             error: function (error) {

@@ -124,16 +124,59 @@ public ResponseEntity<Map<String, Object>> addAccount(@RequestParam(name = "tenD
     taikhoan.setTenDN(tenDN);
     taikhoan.setLoaiTK(false);
     System.out.println("Account:" + taikhoan.getMatKhau() + taikhoan.getTenDN() + taikhoan.getLoaiTK());
-    accountService.addAccount(taikhoan);
-//    Thanhvien thanhvien = new Thanhvien();
     thanhvien.setMaTK(taikhoan);
-    System.out.println("User:" + thanhvien.getMaTK().getId() + thanhvien.getHoTen() + thanhvien.getEmail() + thanhvien.getHoTen()+thanhvien.getDiaChi()+thanhvien.getNgaySinh()+thanhvien.getSoDienThoai());
-    memberService.addMember(thanhvien);
-    response.put("maTK", taikhoan.getId());
-    response.put("message", "Thông báo: Thông tin đã được cập nhật thành công!");
-    response.put("success", true);
+    if(isExistEmailNumPhone(thanhvien.getEmail(), thanhvien.getSoDienThoai())==0){
+        accountService.addAccount(taikhoan);
+//    Thanhvien thanhvien = new Thanhvien();
+
+        System.out.println("User:" + thanhvien.getMaTK().getId() + thanhvien.getHoTen() + thanhvien.getEmail() + thanhvien.getHoTen()+thanhvien.getDiaChi()+thanhvien.getNgaySinh()+thanhvien.getSoDienThoai());
+
+        response.put("maTK", taikhoan.getId());
+        response.put("message", "Thông báo: Thông tin đã được cập nhật thành công!");
+        response.put("success", true);
+    }
+     if(isExistEmailNumPhone(thanhvien.getEmail(), thanhvien.getSoDienThoai())==1){
+        System.out.println("111111");
+        response.put("existedEmail", "Email đã tồn tại!");
+        response.put("success", false);
+         response.put("existed", false);
+    }
+     if(isExistEmailNumPhone(thanhvien.getEmail(), thanhvien.getSoDienThoai())==2){
+        System.out.println("22222222");
+        response.put("existedNumphone", "Số điện thoại đã tồn tại! ");
+        response.put("success", false);
+         response.put("existed", false);
+    }
+    if(isExistEmailNumPhone(thanhvien.getEmail(), thanhvien.getSoDienThoai())==3){
+        System.out.println("33333");
+        response.put("existed", true);
+        response.put("existedEmail", "Email đã tồn tại!");
+        response.put("existedNumphone", "Số điện thoại đã tồn tại! ");
+        response.put("success", false);
+    }
+
     return ResponseEntity.ok(response);
 }
 
+public Integer isExistEmailNumPhone(String email, String sdt){
+    List<String> listEmail = accountService.getAllEmail();
+    List<String> listNumphone = accountService.getAllNumPhone();
+    int result = 0;
+    for(String e : listEmail){
+        if (e.equals(email)) {
+            result = 1;
+            break;
+        }
+    }
+    for (String s : listNumphone){
+        if(s.equals(sdt)){
+            if (result == 1){
+                result = 3;
+            }
+            else result = 2;
+        }
 
+    }
+    return result;
+}
 }
