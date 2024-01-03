@@ -30,12 +30,6 @@ public class HomePageController {
         this.sessionService = sessionService;
         this.notificationService = notificationService;
     }
-//    @GetMapping("/trang-chu")
-//    public String showMember(Model model){
-//        List<Thanhvien> memberList = memberService.getAllMember();
-//        model.addAttribute("memberList", memberList);
-//        return "TrangChu";
-//    }
     @GetMapping("/trang-chu")
     public String show(Model model, HttpSession session)
     {
@@ -59,7 +53,6 @@ public class HomePageController {
         List<Hoatdong> listActiSummarried = new ArrayList<>();
         List<String> listImgSummarried = new ArrayList<>();
 
-//        String imgdefault = "/images/imgsdt.png";
         List<Anhtongket> imgSummarried = new ArrayList<>();
         for (Tongket tk : summaryList) {
             System.out.println("Tổng kết:" + tk.getId() + "--" + tk.getMaHD().getTenhd());
@@ -95,12 +88,6 @@ public class HomePageController {
                 System.out.println("-------------------");
             }
         }
-
-
-
-
-
-//        List<Danhgia> evaluationOfAct = evaluationService.getEvaluationByIdAct(id);
 
         sessionService.createSessionModel(model, session);
 

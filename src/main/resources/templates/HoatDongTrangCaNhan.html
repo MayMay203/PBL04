@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-<!--    <script  defer th:src="@{/js/TrangCaNhan.js}"></script>-->
+<!--    <script  defer th:src="@{/js/ThemTongKet.js}"></script>-->
 </head>
 <body>
 <div th:fragment="body">
@@ -69,33 +69,14 @@
                 <!--                -->
                 <button id="btnEvaluate" class="btnEvaluate btn_eva_member" th:if="${activity.getTinhTrangHD()==2}" th:attr="data-value=${activity.getId()}"><i  class="bi bi-chat-square-heart " ></i> Đánh giá</button>
                 <button class="btnEvaluate" th:if="${activity.getTinhTrangHD()!=2}" data-bs-toggle="modal" data-bs-target="#notifyEvaluateModal"><i  class="bi bi-chat-square-heart" ></i> Đánh giá</button>
-                <button class="buttonSummary btnSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#confirmAddSummaryModal" th:if="${listSummaryIsHostActi.get(index.index)} == -1 and ${activity.getTinhTrangHD()==2}"><i class="bi bi-send-check"></i> Tổng kết</button>
+                <button class="buttonSummary btnSummary btnAddSummary" id="btnSummary" th:attr="data-value=${activity.getId()}"  th:if="${listSummaryIsHostActi.get(index.index)} == -1 and ${activity.getTinhTrangHD()==2}"><i class="bi bi-send-check"></i> Tổng kết</button>
                 <button class="buttonSummary btnSummary" data-bs-toggle="modal" data-bs-target="#notifySummaryModal" th:if="${listSummaryIsHostActi.get(index.index)} == -1 and ${activity.getTinhTrangHD()<2}"><i class="bi bi-send-check"></i> Tổng kết</button>
                 <button class="buttonSummary btnSummary" th:if="${listSummaryIsHostActi.get(index.index)} > 0"><i class="bi bi-send-check"></i> <a th:href="@{/View-Summary(id=${activity.getId()})}"  style="text-decoration: none; color: #136b1d" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xem tổng kết">Tổng kết</a></button>
                 <!--                <button class="buttonSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.id},data-account=${account.id}"><i class="bi bi-send-check"></i> Tổng kết</button>-->
             </div>
-            <!-- Modal xác nhận thêm tổng kết-->
-            <div class="modal fade" id="confirmAddSummaryModal" tabindex="-1" role="dialog" aria-labelledby="confirmAddSummaryModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content" style="align-items: center;">
-                        <div class="modal-header" >
-                            <h5 class="modal-title" id="confirmAddSummaryModalLabel" style="margin-left: 11rem">Xác nhận</h5>
-                            <button type="button" class="closeModalLogout" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 10rem">
-                                <span aria-hidden="true" >&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body" style="font-size: 1.1rem; margin: 0">
-                            Hoạt động này chưa được tổng kết<br>
-                            Bạn có muốn tổng kết hoạt động này?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="closeModalLogout btn btn-secondary" data-bs-dismiss="modal" style="background-color: #136b1d !important; color: #ffffff; width: 6rem;">Hủy</button>
-                            <button type="submit" class="btn btn_Summary" style="background-color: #136b1d; color: #ffffff; width: 6rem; margin-left: 2rem" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.id},data-account=${account.id}">Đồng ý</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
+
         <!--modal lí do hủy-->
         <div class="modal fade" id="reasonActiCancelModal" tabindex="-1" role="dialog" aria-labelledby="reasonActiCancelModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -251,7 +232,32 @@
             </div>
         </div>
     </div>
-
+    <!-- Modal xác nhận thêm tổng kết-->
+    <div class="modal fade" id="confirmAddSummaryModal" tabindex="-1" role="dialog" aria-labelledby="confirmAddSummaryModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="align-items: center;">
+                <div class="modal-header" >
+                    <h5 class="modal-title" id="confirmAddSummaryModalLabel" style="margin-left: 11rem">Xác nhận</h5>
+                    <button type="button" class="closeModalLogout" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 10rem">
+                        <span aria-hidden="true" >&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="font-size: 1.1rem; margin: 0">
+                    Hoạt động này chưa được tổng kết<br>
+                    Bạn có muốn tổng kết hoạt động này?
+                </div>
+                <div>
+                    <input type="hidden" name="" id="idActiSummary">
+                    <input type="hidden" name="" id="idAccountSummary" th:value="${account.id}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="closeModalLogout btn btn-secondary" data-bs-dismiss="modal" style="background-color: #136b1d !important; color: #ffffff; width: 6rem;">Hủy</button>
+                    <!--                            <button type="submit" class="btn btn_Summary" style="background-color: #136b1d; color: #ffffff; width: 6rem; margin-left: 2rem" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.getId()},data-account=${account.id}">Đồng ý</button>-->
+                    <button type="submit" id="btn_Summary" class="btn btn_Summary" style="background-color: #136b1d; color: #ffffff; width: 6rem; margin-left: 2rem" data-bs-toggle="modal" >Đồng ý</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 </body>

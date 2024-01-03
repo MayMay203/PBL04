@@ -108,35 +108,34 @@ $(document).ready(function () {
     }
   }
 
-var maHD;var maTK;
+var maHD;var maTK;var mahoatdong;
 // var idList;
 $(document).ready(function () {
     var btnSummary = document.getElementsByClassName("btn_Summary");
-
-    for(btn of btnSummary){
-        btn.addEventListener("click" ,async (e) =>{
-            var mahoatdong= e.target.dataset.value;
-            maTK= e.target.dataset.account;
-            console.log("maHD:",mahoatdong);
+    var btnAddSummary = document.getElementsByClassName("btnAddSummary");
+    for(var b of btnAddSummary){
+        b.addEventListener("click",async (e) =>{
+            mahoatdong = e.target.dataset.value;
+            $('#idActiSummary').val(parseInt(mahoatdong));
+            maTK = parseInt($('#idAccountSummary').val());
+            console.log("-----mahd", mahoatdong);
+            maHD = mahoatdong;
+            console.log("-----MaHD", maHD);
             console.log("maTK",maTK);
-            maHD= mahoatdong;
+            $('#confirmAddSummaryModal').modal("show");
+        });
+    }
+        $('#btn_Summary').on("click" ,function (e){
             try {
-                // const data = await checkSummary(mahoatdong);
-                // if (data.summaryExists) {
-                //     window.location.href = '/View-Summary?id=' + mahoatdong;
-                // } else {
-                //     // getMember(maHD);
-                //     await showModalSummary();
-                // }
                 showModalSummary();
             } catch (error) {
                 console.error('Error:', error);
             }
 
-        })
-    }
+        });
 
-})
+
+});
 function checkSummary(mahoatdong) {
     return new Promise((resolve, reject) => {
         $.ajax({
