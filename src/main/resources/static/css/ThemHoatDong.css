@@ -201,13 +201,13 @@ ul.tongket_attach_view li input{
 .modal-footer-themhd{
     margin-right: 10rem;
 }
-.btnSave{
-    background-color: var(--btn);
-    color:white;
-    border: none;
-    padding:0.5rem;
-    margin-right: 1rem !important;
-}
+/*.btnSave{*/
+/*    background-color: var(--btn);*/
+/*    color:white;*/
+/*    border: none;*/
+/*    padding:0.5rem;*/
+/*    margin-right: 1rem !important;*/
+/*}*/
 .btnCancel{
     background-color: var(--btn);
     color:white;

@@ -39,6 +39,13 @@
 <!--                            <p>We had such a great time in LA!</p>-->
                         </div>
                     </div>
+                    <div class="slider__img carousel-item active">
+                        <img th:src="@{/images/slide2.png}" alt="" class="d-blocky" style="width: 100%;" >
+                        <div class="carousel-caption">
+                            <h3>TRAO HY VỌNG, GỬI YÊU THƯƠNG</h3>
+                            <!--                            <p>We had such a great time in LA!</p>-->
+                        </div>
+                    </div>
                     <div class="slider__img carousel-item">
                         <img th:src="@{/images/slider2.jpg}" alt="" class="d-blocky" style="width: 100%;" />
                         <div class="carousel-caption">
@@ -238,7 +245,7 @@
                         <div class="mission__image"><img class="mission__img" th:src="@{${aboutUs.getAnh()}}" alt=""></div>
                         <div class="mission__content">
                             <p class="content-header" th:text="${aboutUs.getTieuDe()}"></p>
-                            <div class="content-body" th:text="${aboutUs.getNoiDung()}" >
+                            <div style="white-space: pre-line;" class="content-body" th:text="${aboutUs.getNoiDung()}" >
                             </div>
                         </div>
                     </div>

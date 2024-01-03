@@ -52,6 +52,36 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     @Query("select h from Hoatdong h, Dangky dk where dk.phanQuyen=:phanQuyen and h.id = dk.maHD.id and dk.maTK.id = :maTK and h.tinhTrangHD=:tthd and h.tinhTrangDuyet >= :ttduyet order by dk.thoiGianDK desc ")
     List<Hoatdong> getAllActivityForFilters(Integer maTK, Boolean phanQuyen, Integer tthd, Integer ttduyet);
 
+    @Query("select h from Hoatdong h, Dangky dk, Tongket tk where dk.phanQuyen=:phanQuyen and h.id = dk.maHD.id and dk.maTK.id = :maTK and h.tinhTrangHD=:tthd and h.tinhTrangDuyet=:ttduyet and tk.maHD.id=h.id order by dk.thoiGianDK desc ")
+    List<Hoatdong> getAllActiForFilterSummaried(Integer maTK, Boolean phanQuyen, Integer tthd, Integer ttduyet);
+//    @Query("select h from Hoatdong h, Dangky dk, Tongket tk where dk.phanQuyen=:phanQuyen and h.id = dk.maHD.id and dk.maTK.id = :maTK and h.tinhTrangHD=:tthd and h.tinhTrangDuyet=:ttduyet and (tk.maHD.id=h.id and tk.maHD.id IS NULL ) order by dk.thoiGianDK desc ")
+//    @Query("SELECT h FROM Hoatdong h " +
+//        "JOIN Dangky dk ON h.id = dk.maHD.id " +
+//        "LEFT JOIN Tongket tk ON h.id = tk.maHD.id " +
+//        "WHERE dk.phanQuyen = :phanQuyen " +
+//        "AND dk.maTK.id = :maTK " +
+//        "AND h.tinhTrangHD = :tthd " +
+//        "AND h.tinhTrangDuyet = :ttduyet " +
+//        "ORDER BY dk.thoiGianDK DESC")
+    @Query("SELECT h FROM Hoatdong h, Dangky dk, Tongket tk \n" +
+            "WHERE dk.phanQuyen=:phanQuyen \n" +
+            "      AND h.id = dk.maHD.id \n" +
+            "      AND dk.maTK.id = :maTK \n" +
+            "      AND h.tinhTrangHD=:tthd \n" +
+            "      AND h.tinhTrangDuyet=:ttduyet \n" +
+            "ORDER BY dk.thoiGianDK DESC\n" +
+            "\n" +
+            "EXCEPT\n" +
+            "\n" +
+            "SELECT h FROM Hoatdong h, Dangky dk, Tongket tk \n" +
+            "WHERE dk.phanQuyen=:phanQuyen \n" +
+            "      AND h.id = dk.maHD.id \n" +
+            "      AND dk.maTK.id = :maTK \n" +
+            "      AND h.tinhTrangHD=:tthd \n" +
+            "      AND h.tinhTrangDuyet=:ttduyet \n" +
+            "      AND tk.maHD.id=h.id \n" +
+            "ORDER BY dk.thoiGianDK DESC\n")
+    List<Hoatdong> getAllActiForFilterNoSummary(Integer maTK, Boolean phanQuyen, Integer tthd, Integer ttduyet);
 
     //Danh gia
     @Query("select h from Hoatdong h,Dangky dk where dk.phanQuyen=false and h.id = dk.maHD.id and dk.maTK.id=:id and h.tinhTrangHD=2 and h.tinhTrangDuyet=2")

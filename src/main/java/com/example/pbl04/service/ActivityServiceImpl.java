@@ -84,6 +84,16 @@ public class ActivityServiceImpl implements ActivityService {
         return activityRepository.getAllActivityForFilters(maTK, phanQuyen, tthd, ttduyet);
     }
 
+    @Override
+    public List<Hoatdong> getAllActiForFilterSummaried(Integer maTK, Boolean phanQuyen, Integer tthd, Integer ttduyet) {
+        return activityRepository.getAllActiForFilterSummaried(maTK, phanQuyen, tthd, ttduyet);
+    }
+
+    @Override
+    public List<Hoatdong> getAllActiForFilterNoSummary(Integer maTK, Boolean phanQuyen, Integer tthd, Integer ttduyet) {
+        return activityRepository.getAllActiForFilterNoSummary(maTK, phanQuyen, tthd, ttduyet);
+    }
+
     public Dangky getRegisterInfo(Integer IdAct) {
         return activityRepository.registerInfor(IdAct);
     }

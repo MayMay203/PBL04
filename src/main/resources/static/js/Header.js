@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
                 if (!data.error) {
-                    // Đăng nhập thành công
+                        // Đăng nhập thành công
                     $('#DangNhapModal').modal('hide');
                     $('#btnLoginModal').hide();
                     $('#btn_userProfile').show();
@@ -160,6 +160,9 @@ $('#modal-sign-up').on('shown.bs.modal', function () {
     header.classList.remove("sticky");
 });
 $('#DangNhapModal').on('shown.bs.modal', function () {
+    $(this).css('display', 'block');
+});
+$('.modal').on('shown.bs.modal', function () {
     $(this).css('display', 'block');
 });
 
@@ -258,7 +261,7 @@ $(document).ready(function() {
                 // Xử lý JSON response
                 if (data.success) {
                     // Chuyển hướng đến trang đăng nhập hoặc trang chính
-                    if(location.pathname==="/trang-ca-nhan"){
+                    if(location.pathname==="/trang-ca-nhan" || location.pathname==="/xet-duyet"){
                         location.href="/trang-chu";
                     }
                     else location.reload();

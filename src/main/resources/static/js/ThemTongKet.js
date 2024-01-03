@@ -121,13 +121,14 @@ $(document).ready(function () {
             console.log("maTK",maTK);
             maHD= mahoatdong;
             try {
-                const data = await checkSummary(mahoatdong);
-                if (data.summaryExists) {
-                    window.location.href = '/View-Summary?id=' + mahoatdong;
-                } else {
-                    // getMember(maHD);
-                    await showModalSummary();
-                }
+                // const data = await checkSummary(mahoatdong);
+                // if (data.summaryExists) {
+                //     window.location.href = '/View-Summary?id=' + mahoatdong;
+                // } else {
+                //     // getMember(maHD);
+                //     await showModalSummary();
+                // }
+                showModalSummary();
             } catch (error) {
                 console.error('Error:', error);
             }
@@ -196,7 +197,7 @@ $(document).ready(function () {
     //         });
     //     }
     // }
-    var btnSave = document.getElementsByClassName("btnSave");
+    var btnSave = document.getElementsByClassName("btnSaveSummary");
     for(btn of btnSave){
         btn.addEventListener("click", async (e)=> {
             const formData = new FormData();
@@ -228,6 +229,10 @@ $(document).ready(function () {
                         // sendNotiSummary(maHD);
                         console.log(response);
                         location.reload();
+                        // section_activity.innerHTML = "";
+                        //
+                        // $.get('/hd-trang-ca-nhan?account_ID=' + accountID, function(newActivity) {
+                        //     section_activity.innerHTML = newActivity;});
                     }else{
                         alert(response.message)
                     }

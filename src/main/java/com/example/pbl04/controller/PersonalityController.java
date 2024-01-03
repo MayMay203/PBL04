@@ -10,9 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -54,16 +57,33 @@ public class PersonalityController {
         this.notificationService = notificationService;
         this.evaluationService = evaluationService;
     }
+    @Autowired
+    private SpringTemplateEngine thymeleafTemplateEngine;
+
     private List<Hoatdong> actListIsHost = new ArrayList<>();
     private List<Hoatdong> actListIsMember = new ArrayList<>();
+    private List<Integer> listSummaryIsHostActi = new ArrayList<>();
+    private List<Dangky> listRegisIsHostActi = new ArrayList<>();
+    private boolean isFilter = false;
+    @GetMapping("/hd-trang-ca-nhan")
+    public String createSession(Model model, HttpSession session,@ModelAttribute("message") String message,
+                                @RequestParam(name = "account_ID") Integer accountID){
+        List<Chude> listTopics = topicService.getAllTopics();
+        model.addAttribute("listTopics", listTopics);
+        sessionService.createSessionModel(model, session);
+        showTrangCaNhan(model, accountID, message, session);
+
+        return "HoatDongTrangCaNhan";
+    }
 
     @PostMapping("/bo-loc-hoat-dong")
     @ResponseBody
         public Map<String, Object> showHaveFilter(@RequestParam(required = false) Integer selectedValue,
-//                                                  @RequestParam(required = false) Integer selSumValue,
-//                                                  @RequestParam(required = false) Integer selEvaValue,
-                                                  @RequestParam Integer accountID){
+                                                  @ModelAttribute("message") String message,
+                                                  @RequestParam Integer accountID, RedirectAttributes redirectAttributes, Model model, HttpSession session){
         Map<String, Object> response = new HashMap<>();
+        isFilter = true;
+        Thanhvien user = memberService.findMemberByID(accountID);
         //tình trạng hoạt động
         switch (selectedValue){
             case -3:
@@ -90,47 +110,51 @@ public class PersonalityController {
                 actListIsHost = activityService.getAllActivityForFilter(accountID, true, 2, 2);
                 actListIsMember = activityService.getAllActivityForFilter(accountID, false, 2, 2);
                 break;
+            case 12:// đã tổng kết:
+                actListIsHost = activityService.getAllActiForFilterSummaried(accountID, true, 2, 2);
+                actListIsMember = activityService.getAllActiForFilterSummaried(accountID, false, 2, 2);
+                break;
+            case 13://chưa tổng kết:
+                actListIsHost = activityService.getAllActiForFilterNoSummary(accountID, true, 2, 2);
+                actListIsMember = activityService.getAllActiForFilterNoSummary(accountID, false, 2, 2);
+                break;
         }
-//        tình trạng tổng kết
-//        switch (selSumValue){
-//            case 12:
-//                break;
-//            case 13:
-//                break;
-//        }
-        //tình trạng đánh giá
-        response.put("actListIsHost", "actListIsHost");
-        response.put("actListIsMember", "actListIsMember");
-        response.put("success", "Lọc thành công");
+
+        redirectAttributes.addFlashAttribute("hideModal", true);
+        response.put("user", user);
+        response.put("success", true);
+        showTrangCaNhan(model, accountID, message, session);
         return response;
     }
-    @GetMapping("/trang-ca-nhan")
-    public String show(Model model,
-                       @RequestParam(name="id") Integer id,
-                       @ModelAttribute("message") String message,
-                       HttpSession session) {
-        actListIsHost = activityService.getAllActivityIsHost(id);
-
-
-        model.addAttribute("actListIsHost", actListIsHost);
-        List<Dangky> listRegisIsHostActi = new ArrayList<>();
-        List<Integer> listSummaryIsHostActi = new ArrayList<>();
-        for(Hoatdong hd : actListIsHost){
+    public void getListSummaryIsHostActi(List<Hoatdong> actList){
+        listSummaryIsHostActi.clear();
+        listRegisIsHostActi.clear();
+        for(Hoatdong hd : actList){
             //lấy đăng ký:
             listRegisIsHostActi.add(activityService.getRegisterInfo(hd.getId()));
             //lấy tổng kết
-           if(summaryService.getSummaryByID(hd.getId()) != null){
-               listSummaryIsHostActi.add(summaryService.getSummaryByID(hd.getId()).getId());
-               System.out.println("Tổng kết host:"+ summaryService.getSummaryByID(hd.getId()).getId() +"---"+summaryService.getSummaryByID(hd.getId()).getMaHD().getTenhd());
-           }
-           else{
-               listSummaryIsHostActi.add(-1);
-           }
+            if(summaryService.getSummaryByID(hd.getId()) != null){
+                listSummaryIsHostActi.add(summaryService.getSummaryByID(hd.getId()).getId());
+                System.out.println("Tổng kết host:"+ summaryService.getSummaryByID(hd.getId()).getId() +"---"+summaryService.getSummaryByID(hd.getId()).getMaHD().getTenhd());
+            }
+            else{
+                listSummaryIsHostActi.add(-1);
+            }
         }
+    }
+    public void showTrangCaNhan(Model model,
+                       @RequestParam(name="id") Integer id,
+                       @ModelAttribute("message") String message,
+                       HttpSession session) {
+//        actListIsHost = activityService.getAllActivityIsHost(id);
+        model.addAttribute("actListIsHost", actListIsHost);
+        getListSummaryIsHostActi(actListIsHost);
+
+
         model.addAttribute("listRegisIsHostActi",listRegisIsHostActi);
         model.addAttribute("listSummaryIsHostActi", listSummaryIsHostActi);
 
-        actListIsMember = activityService.getAllActivityIsMember(id);
+//        actListIsMember = activityService.getAllActivityIsMember(id);
         model.addAttribute("actListIsMember", actListIsMember);
         List<Thanhvien> listInforOfHostActi = new ArrayList<>();
         List<Dangky> listInforOfActiJoin = new ArrayList<>();
@@ -185,9 +209,21 @@ public class PersonalityController {
             listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
             model.addAttribute("listNotice",listNotice);
         }
+//        return "TrangCaNhan";
+    }
+    @GetMapping("/trang-ca-nhan")
+    public String show(Model model,
+                       @RequestParam(name="id") Integer id,
+                       @ModelAttribute("message") String message,
+                       HttpSession session) {
+//        isFilter = false;
+//        if(isFilter == false){
+            actListIsHost = activityService.getAllActivityIsHost(id);
+            actListIsMember = activityService.getAllActivityIsMember(id);
+//        }
+        showTrangCaNhan(model, id, message,  session);
         return "TrangCaNhan";
     }
-
 //    @PostMapping("/sua-thong-tin-ca-nhan")
 //    public String insertTable(@ModelAttribute(value="user") Thanhvien thanhvien,
 //                                           @RequestParam(name = "id", required = false) Integer id,

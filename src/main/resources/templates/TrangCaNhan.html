@@ -43,7 +43,7 @@
         <img class="sectionAvatar__img-front" th:src="@{${user.getMaTK().getAnhDaiDien()}}" alt="">
         <div style="display: flex">
             <span class="sectionAvatar__name" th:text="${user.getHoTen()}"></span>
-            <i style="margin-left: 2rem" id="icon-edit" class="sectionAvatar__edit bi bi-pencil-square" ></i>
+            <i style="margin-left: 5rem" id="icon-edit" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Chỉnh sửa trang cá nhân" class="sectionAvatar__edit bi bi-pencil-square" ></i>
         </div>
     </div>
     <div class="container__section">
@@ -74,248 +74,8 @@
             </div>
         </div> -->
     </div>
-    <!--mục hoạt động tổ chức-->
-    <div th:each="activity, index:${actListIsHost}" class="activity-container" th:data-activityIsHost="${activity}">
-        <!--        <div class="container__sectionAct" th:each="activity, index:${actListIsHost}" th:id="${activity.getTinhTrangDuyet()==0 ? 'gray-overlay' : ''}" >-->
-        <div id="sectionActIsHost" class="container__sectionAct sectionActIsHost"  th:style="${activity.getTinhTrangDuyet()==0 ? 'opacity: 0.7; background-color: rgb(222 222 222 / 50%); pointer-events: none;' : ' background-color: rgba(217, 249, 249, 0.6);'}" >
-            <!--            <div class="gray-overlay" th:if="${activity.getTinhTrangDuyet()==0}">-->
-            <div class="d-flex section__padding">
-                <img class="img-avatar-small" th:src="@{${user.getMaTK().getAnhDaiDien()}}" alt="">
-                <div class="header-activity">
-                    <label th:text="${user.getHoTen()}"></label>
-                    <div class="time-activity">
-                        <i class="bi bi-clock"></i>
-                        <!--                        chỗ ni phải lấy thời gian đăng ký-->
-                        <span th:text="${#temporals.format(listRegisIsHostActi.get(index.index).getThoiGianDK(),'dd/MM/yyyy HH:mm:ss', 'Asia/Ho_Chi_Minh')}"></span>
-                    </div>
-                </div>
-                <div class="dropdown ms-auto">
-                    <i class="bi bi-three-dots icon-more" data-bs-toggle="dropdown"></i>
-                    <ul class="dropdown-menu" th:if="${activity.getTinhTrangHD()==-1}">
-                        <li style="cursor: pointer" ><a id="a-view-reason-cancel" class="dropdown-item item-icon-more" data-bs-toggle="modal" data-bs-target="#reasonActiCancelModal">Lí do hủy của hoạt động</a></li>
-<!--&lt;!&ndash;                        <li><a class="dropdown-item item-icon-more" href="#">Tổng kết hoạt động</a></li>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <li><a class="dropdown-item item-icon-more" href="#">Đánh giá thành viên</a></li>&ndash;&gt;-->
-                    </ul>
-                </div>
-            </div>
-            <div class="d-flex section__padding ">
-                <p class="title-activity" th:text="${activity.getTenhd()}"></p>
-            </div>
-            <div class="d-flex section__padding p-0">
-                <i class="bi bi-geo-alt icon-address"></i>
-                <p class="address-activity" th:text="${activity.getDiaDiem()}"></p>
-            </div>
-            <div class="section__padding content-activity" th:text="${activity.getMoTa()}">
-            </div>
-            <div class="text-end"><a th:href="@{/Join(id=${activity.getId()})}" class="linkMore">Xem thêm...</a></div>
-            <div class="section__no-padding">
-                <div>
-                    <img class="img-activity" th:src="@{${activity.getAnh()}}" alt="">
-                </div>
-                <div class="lineHorizontal"></div>
-                <div class="row progress-activity" th:if="${activity.getTinhTrangHD()!=-1}">
-                    <div class="col-sm-3">Chờ duyệt</div>
-                    <div class="col-sm-3">Chưa diễn ra</div>
-                    <div class="col-sm-3">Đang diễn ra</div>
-                    <div class="col-sm-3">Đã diễn ra</div>
-                </div>
-                <div class="row progress-activity" th:if="${activity.getTinhTrangHD()==-1}">
-                    <div class="col-sm-12" style="text-align: center">Đã hủy</div>
-                </div>
-                <div class="progress">
-                    <div class="progress-bar custom-progress" style="width:10%; background-color: #a2efb3 !important;" th:if="${activity.getTinhTrangDuyet()==0}"> </div>
-                    <div class="progress-bar custom-progress" style="width:40%; background-color: #54c46e !important;" th:if="${activity.getTinhTrangDuyet()>=1 and activity.getTinhTrangHD()==0}"> </div>
-                    <div class="progress-bar custom-progress" style="width:70%; background-color: #1b7731 !important;" th:if="${activity.getTinhTrangDuyet()==1 and activity.getTinhTrangHD()==1}"> </div>
-                    <div class="progress-bar custom-progress" style="width:100%; background-color: #014b13 !important;" th:if="${activity.getTinhTrangDuyet()==2 and activity.getTinhTrangHD()==2}"> </div>
-                    <div class="progress-bar custom-progress" style="width:100%; background-color: #cb5757 !important;" th:if="${activity.getTinhTrangDuyet()==-1 and activity.getTinhTrangHD()==-1}"> </div>
-                </div>
-                <div class="mt-3 lineHorizontal"></div>
-            </div>
-            <div class="pb-1 pt-1 section__padding d-flex align-items-center justify-content-center">
-                <!--                -->
-                <button id="btnEvaluate" class="btnEvaluate btn_eva_member" th:if="${activity.getTinhTrangHD()==2}" th:attr="data-value=${activity.getId()}"><i  class="bi bi-chat-square-heart " ></i> Đánh giá</button>
-                <button class="btnEvaluate" th:if="${activity.getTinhTrangHD()!=2}" data-bs-toggle="modal" data-bs-target="#notifyEvaluateModal"><i  class="bi bi-chat-square-heart" ></i> Đánh giá</button>
-                <button class="buttonSummary btnSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#confirmAddSummaryModal" th:if="${listSummaryIsHostActi.get(index.index)} == -1 and ${activity.getTinhTrangHD()==2}"><i class="bi bi-send-check"></i> Tổng kết</button>
-                <button class="buttonSummary btnSummary" data-bs-toggle="modal" data-bs-target="#notifySummaryModal" th:if="${listSummaryIsHostActi.get(index.index)} == -1 and ${activity.getTinhTrangHD()<2}"><i class="bi bi-send-check"></i> Tổng kết</button>
-                <button class="buttonSummary btnSummary" th:if="${listSummaryIsHostActi.get(index.index)} > 0"><i class="bi bi-send-check"></i> <a th:href="@{/View-Summary(id=${activity.getId()})}"  style="text-decoration: none; color: #136b1d" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xem tổng kết">Tổng kết</a></button>
-                <!--                <button class="buttonSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.id},data-account=${account.id}"><i class="bi bi-send-check"></i> Tổng kết</button>-->
-            </div>
-            <!-- Modal xác nhận thêm tổng kết-->
-            <div class="modal fade" id="confirmAddSummaryModal" tabindex="-1" role="dialog" aria-labelledby="confirmAddSummaryModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content" style="align-items: center;">
-                        <div class="modal-header" >
-                            <h5 class="modal-title" id="confirmAddSummaryModalLabel" style="margin-left: 11rem">Xác nhận</h5>
-                            <button type="button" class="closeModalLogout" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 10rem">
-                                <span aria-hidden="true" >&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body" style="font-size: 1.1rem; margin: 0">
-                            Hoạt động này chưa được tổng kết<br>
-                            Bạn có muốn tổng kết hoạt động này?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="closeModalLogout btn btn-secondary" data-bs-dismiss="modal" style="background-color: #136b1d !important; color: #ffffff; width: 6rem;">Hủy</button>
-                            <button type="submit" class="btn btn_Summary" style="background-color: #136b1d; color: #ffffff; width: 6rem; margin-left: 2rem" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.id},data-account=${account.id}">Đồng ý</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--modal lí do hủy-->
-        <div class="modal fade" id="reasonActiCancelModal" tabindex="-1" role="dialog" aria-labelledby="reasonActiCancelModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content" style="align-items: center">
-                    <div class="modal-header" >
-                        <h5 class="modal-title" id="reasonActiCancelModalLabel" >Lí do hoạt động bị hủy</h5>
-                        <button type="button" class="closeModalLogout" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 4rem">
-                            <span aria-hidden="true" >&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" style="font-size: 1.1rem; margin: 0">
-                        <div class="container d-flex" style="margin-bottom: 1rem">
-                            <img class="w-2_5 h-2_5 ml-0_1 radius-1_8" style="margin-right: 1rem" th:src="@{${activity.getAnh()}}" alt="">
-                            <h5  class="green-color my-1 mt-1 " th:text="${activity.getTenhd()}"></h5>
-                        </div>
-                        <div>
-                            <div style="margin-left: 1rem" th:text="${activity.getLiDoHuy()}"></div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" data-bs-dismiss="modal" class="btn" style="background-color: #136b1d; color: #ffffff; width: 5rem; margin-left: 22rem">OK</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--mục hoạt động tham gia-->
-    <div id="sectionActIsJoin" class="container__sectionAct sectionActIsJoin no-display" th:each="activity, index:${actListIsMember}" th:style="${listRegisIsMemberActi.get(index.index).getTrangThai()==false ? 'opacity: 0.7; background-color: rgb(222 222 222 / 50%); pointer-events: none;' : ' background-color: rgba(217, 249, 249, 0.6);'}" >
-        <!--            <div class="gray-overlay" th:if="${activity.getTinhTrangDuyet()==0}">-->
-        <div class="d-flex section__padding">
-            <img class="img-avatar-small" th:src="@{${listInforOfHostActi.get(index.index).getMaTK().getAnhDaiDien()}}" alt="">
-            <div class="header-activity">
-                <label th:text="${listInforOfHostActi.get(index.index).getHoTen()}"></label>
-                <div class="time-activity">
-                    <i class="bi bi-clock"></i>
-                    <!--                        chỗ ni phải lấy thời gian đăng ký-->
-                    <span th:text="${#temporals.format(listInforOfActiJoin.get(index.index).getThoiGianDK(),'dd/MM/yyyy HH:mm:ss', 'Asia/Ho_Chi_Minh')}"></span>
-                </div>
-            </div>
-            <div class="dropdown ms-auto" >
-                <i class="bi bi-three-dots icon-more" data-bs-toggle="dropdown"></i>
-                <ul class="dropdown-menu" th:if="${activity.getTinhTrangHD()==2}">
-                    <!--                    <li><a class="dropdown-item" href="#">Duyệt thành viên</a></li>-->
-                    <!--                    <li><a class="dropdown-item" href="#">Tổng kết hoạt động</a></li>-->
-<!--                    <li><a class="dropdown-item" href="#">Đánh giá hoạt động</a></li>-->
-                    <!--                    <li><a class="dropdown-item item-icon-more" href="#">Duyệt thành viên</a></li>-->
-                    <!--                    <li><a class="dropdown-item item-icon-more" href="#">Tổng kết hoạt động</a></li>-->
-
-                    <li th:if="${listEvalueIsMemberActi.get(index.index)>0}"><a style="cursor: pointer" class="dropdown-item item-icon-more"  data-bs-toggle="modal" data-bs-target="#rateEvaluateForMemModal">Xem đánh giá dành cho bạn</a></li>
-                    <li th:if="${listEvalueIsMemberActi.get(index.index)<=0}"><a style="cursor: pointer" class="dropdown-item item-icon-more"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Người tổ chức chưa đánh giá">Xem đánh giá dành cho bạn</a></li>
-                </ul>
-                <ul class="dropdown-menu" th:if="${activity.getTinhTrangHD()==-1}">
-                    <li ><a style="cursor: pointer" class="dropdown-item item-icon-more"  data-bs-toggle="modal" data-bs-target="#reasonCancelActiModal">Xem lí do hoạt động hủy</a></li>
-                </ul>
-            </div>
-
-        </div>
-        <div class="d-flex section__padding ">
-            <p class="title-activity" th:text="${activity.getTenhd()}"></p>
-        </div>
-        <div class="d-flex section__padding p-0">
-            <i class="bi bi-geo-alt icon-address"></i>
-            <p class="address-activity" th:text="${activity.getDiaDiem()}"></p>
-        </div>
-        <div class="section__padding content-activity" th:text="${activity.getMoTa()}">
-        </div>
-        <div class="text-end"><a th:href="@{/Join(id=${activity.getId()})}" class="linkMore">Xem thêm...</a></div>
-        <div class="section__no-padding">
-            <div>
-                <img class="img-activity" th:src="@{${activity.getAnh()}}" alt="">
-            </div>
-            <div class="lineHorizontal"></div>
-            <div class="row progress-activity">
-                <div class="col-sm-3">Chờ duyệt</div>
-                <div class="col-sm-3">Chưa diễn ra</div>
-                <div class="col-sm-3">Đang diễn ra</div>
-                <div class="col-sm-3">Đã diễn ra</div>
-            </div>
-            <div class="progress">
-                <div class="progress-bar custom-progress" style="width:10%; background-color: #a2efb3 !important;" th:if="${activity.getTinhTrangDuyet()==0}"> </div>
-                <div class="progress-bar custom-progress" style="width:40%; background-color: #54c46e !important;" th:if="${activity.getTinhTrangDuyet()==1 and activity.getTinhTrangHD()==0}"> </div>
-                <div class="progress-bar custom-progress" style="width:70%; background-color: #1b7731 !important;" th:if="${activity.getTinhTrangDuyet()==1 and activity.getTinhTrangHD()==1}"> </div>
-                <div class="progress-bar custom-progress" style="width:100%; background-color: #014b13 !important;" th:if="${activity.getTinhTrangDuyet()==2 and activity.getTinhTrangHD()==2}"> </div>
-            </div>
-            <div class="mt-3 lineHorizontal"></div>
-        </div>
-        <div class="pb-1 pt-1 section__padding d-flex align-items-center justify-content-center">
-            <!--                -->
-            <button id="" class="btnEvaluate btn-evaluate" th:if="${activity.getTinhTrangHD()==2}" th:attr="data-value=${activity.getId()},data-account = ${account.getId()}"><i  class="bi bi-chat-square-heart " ></i> Đánh giá</button>
-            <button class="btnEvaluate"  th:if="${activity.getTinhTrangHD()!=2}" data-bs-toggle="modal" data-bs-target="#notifyEvaluateModal"><i  class="bi bi-chat-square-heart" ></i> Đánh giá</button>
-            <!--            <button class="buttonSummary btnSummary"  data-bs-toggle="modal" data-bs-target="#confirmAddSummaryModal" th:if="${listSummaryIsMemberActi.get(index.index)} == -1 and ${activity.getTinhTrangHD()==2}"><i class="bi bi-send-check"></i> Tổng kết</button>-->
-            <!--            <button class="buttonSummary btnSummary" data-bs-toggle="modal" data-bs-target="#notifySummaryModal" th:if="${listSummaryIsMemberActi.get(index.index)} == -1 and ${activity.getTinhTrangHD()<2}"><i class="bi bi-send-check"></i> Tổng kết</button>-->
-            <button class="buttonSummary btnSummary" th:if="${listSummaryIsMemberActi.get(index.index)} > 0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xem tổng kết"><i class="bi bi-send-check"></i> <a th:href="@{/View-Summary(id=${activity.getId()})}" style="text-decoration: none; color: #136b1d" >Tổng kết</a></button>
-            <button class="buttonSummary btnSummary" th:if="${listSummaryIsMemberActi.get(index.index)} <= 0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hoạt động chưa có tổng kết"><i class="bi bi-send-check"></i> <a style="text-decoration: none; color: #136b1d" >Tổng kết</a></button>
-            <!--                <button class="buttonSummary" id="btnSummary" data-bs-toggle="modal" data-bs-target="#TongKetModal" th:attr="data-value=${activity.id},data-account=${account.id}"><i class="bi bi-send-check"></i> Tổng kết</button>-->
-        </div>
-
-        <!--modal điểm đánh giá-->
-        <div class="modal fade" id="rateEvaluateForMemModal" tabindex="-1" role="dialog" aria-labelledby="rateEvaluateForMemModalLabel" aria-hidden="true" th:if="${activity.getTinhTrangHD()==2}">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content" style="align-items: center">
-                    <div class="modal-header" >
-                        <h5 class="modal-title" id="rateEvaluateForMemModalLabel" >Điểm người tổ chức đánh giá cho bạn</h5>
-                        <button type="button" class="closeModalLogout" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 4rem">
-                            <span aria-hidden="true" >&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" style="font-size: 1.1rem; margin: 0">
-                        <div class="container d-flex" style="margin-bottom: 1rem">
-                            <img class="w-2_5 h-2_5 ml-0_1 radius-1_8" style="margin-right: 1rem" th:src="@{${account.getAnhDaiDien()}}" alt="">
-                            <h5 class="green-color my-1 mt-1 " th:text="${user.getHoTen()}"></h5>
-                            <h6 style="margin-left: 1rem" class="fs-7 p-2" th:if="${listEvalueIsMemberActi.get(index.index) > 0}">
-                                <span th:text="${listEvalueIsMemberActi.get(index.index)}"></span>/5
-                                <i class="bi bi-star-fill yellow-color fs-7 py-1"></i>
-                            </h6>
-
-                        </div>
-                        <div class="container" style="display: block; margin-left: 4rem">
-                            <div><input style="margin-right: 1rem" type="checkbox" id="checkVeryGood"th:checked="${listEvalueIsMemberActi.get(index.index) == 5}">Rất tích cực</div>
-                            <div><input style="margin-right: 1rem" type="checkbox" id="checkGood" th:checked="${listEvalueIsMemberActi.get(index.index) == 4}">Tích cực </div>
-                            <div><input style="margin-right: 1rem" type="checkbox" id="checkNotGood" th:checked="${listEvalueIsMemberActi.get(index.index) < 4}">Không tích cực </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" data-bs-dismiss="modal" class="btn" style="background-color: #136b1d; color: #ffffff; width: 5rem; margin-left: 22rem">OK</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--modal lí do hủy-->
-        <div class="modal fade" id="reasonCancelActiModal" tabindex="-1" role="dialog" aria-labelledby="reasonCancelActiModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content" style="align-items: center">
-                    <div class="modal-header" >
-                        <h5 class="modal-title" id="reasonCancelActiModalLabel" >Lí do hoạt động bị hủy</h5>
-                        <button type="button" class="closeModalLogout" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 4rem">
-                            <span aria-hidden="true" >&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" style="font-size: 1.1rem; margin: 0">
-                        <div class="container d-flex" style="margin-bottom: 1rem">
-                            <img id="imgActiCancel" class="w-2_5 h-2_5 ml-0_1 radius-1_8" style="margin-right: 1rem" th:src="@{${activity.getAnh()}}" alt="">
-                            <h5 id="nameActiCancel" class="green-color my-1 mt-1 " th:text="${activity.getTenhd()}"></h5>
-                        </div>
-                        <div>
-                            <div style="margin-left: 1rem" th:text="${activity.getLiDoHuy()}"></div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" data-bs-dismiss="modal" class="btn" style="background-color: #136b1d; color: #ffffff; width: 5rem; margin-left: 22rem">OK</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="section_activity">
+        <div th:include="HoatDongTrangCaNhan :: html" ></div>
     </div>
 </div>
 <!-- Modal sửa thông tin cá nhân-->
@@ -441,9 +201,9 @@
                     <div class="line"></div>
                     <!--                    <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>-->
                 </div>
-                <div class="modal-footer">
-                    <button type="reset" class="btnReset btn-secondary" id="btnReset" >Hủy thay đổi</button>
-                    <button type="submit" class="btnSave btn-primary">Lưu thay đổi</button>
+                <div class="modal-footer" style="margin-right: 12rem">
+                    <button type="reset" class="btnReset btn-secondary" id="btnReset" style="margin: 0 5rem">Hủy thay đổi</button>
+                    <button type="submit" class="btnSave " style="background-color: #3B9D39; margin: 0 5rem 0 0; width: 129px">Lưu thay đổi</button>
                     <!-- data-dismiss="modal": đóng cửa sổ modal -->
                 </div>
             </form>
@@ -511,7 +271,7 @@
                     </div>
                 </div>
                 <div class="modal-footer modal-footer-themhd">
-                    <button type="button" class="btnSave"><i class="bi bi-floppy2"></i> Lưu thay đổi</button>
+                    <button type="button" class="btnSave btnSaveSummary"><i class="bi bi-floppy2"></i> Lưu thay đổi</button>
                     <button type="button" class="btnCancel" onclick="resetFormFields()"><i class="bi bi-x-circle-fill"></i> Hủy thay
                         đổi</button>
                 </div>
@@ -768,5 +528,11 @@
 </div>
 <div style="margin-bottom: 4rem"></div>
 <div id="myFooter" th:include="Footer :: html" ></div>
+<!-- Kiểm tra giá trị hideModal và ẩn modal nếu cần -->
+<div th:if="${hideModal}">
+    <script th:inline="javascript">
+        $('#modalFilter').modal('hide');
+    </script>
+</div>
 </body>
 </html>

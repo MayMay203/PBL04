@@ -74,13 +74,15 @@
                     <label class="user-name" th:text="${user.getHoTen()}"></label>
                 </div>
                 <li><a class="dropdown-item" id="btn-view-personal-page" th:href="@{/trang-ca-nhan(id=${account.getId()})}">Xem trang cá nhân</a></li>
+<!--                <li><a class="dropdown-item" id="btn-view-personal-page" data-accountid="${account.getId()}">Xem trang cá nhân</a></li>-->
+
                 <li>
                     <!--                    <button data-bs-toggle="modal" data-bs-target="#ChangePasswordModal"><a class="dropdown-item"  href="#">Thay đổi mật khẩu</a>-->
                     <a class="dropdown-item" id="btn-change-password" href="#">Thay đổi mật khẩu</a>
                 </li>
-                <li><a class="dropdown-item" href="#">Cài đặt</a></li>
+<!--                <li><a class="dropdown-item" href="#">Cài đặt</a></li>-->
                 <li>
-                    <a class="dropdown-item" id="btnLogout" >Đăng xuất</a>
+                    <a class="dropdown-item" id="btnLogout" style="cursor: pointer" >Đăng xuất</a>
                 </li>
             </ul>
 
@@ -283,7 +285,7 @@
             <form  th:action="@{/addActivity}" method="POST" class="needs-validation" id="formAddActivity" novalidate enctype="multipart/form-data">
                 <input type="hidden" id="userID" name="maTK" th:value="${account.getId()}" />
                 <div class="modal-header  modal-header-themhd ">
-                    <h5 class="modal-title modal-title-themhd " id="exampleModalLabel" >THÊM HOẠT ĐỘNG</h5>
+                    <h5 class="modal-title modal-title-themhd " id="exampleModalLabel" style="margin-left: 18rem" >THÊM HOẠT ĐỘNG</h5>
                     <button type="button" class="btn-close btnClose" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body modal-body-themhd">
@@ -327,7 +329,7 @@
                             <div class="col-md-3">
                                 <label class="lbHD" for="txt_dateKT"><i class="bi bi-calendar-minus"></i>THỜI GIAN KẾT THÚC</label>
                             </div>
-                            <div class="col-md-3"><input class="txt-tnv form-control" type="date" name="thoiGianKT" id="txt_dateKT" required></div>
+                            <div class="col-md-3"><input class="txt-tnv form-control" type="date"  name="thoiGianKT" id="txt_dateKT" required></div>
                         </div>
                         <div id="error-input-date" style="color: red; font-size: 14px; margin-left: 12rem; margin-top: 0.8rem "></div>
                         <br>
@@ -360,10 +362,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer modal-footer-themhd">
-                    <button type="reset" class="btnCancel"><i class="bi bi-x-circle-fill"></i> Hủy thay đổi</button>
+                <div class="modal-footer modal-footer-themhd float-start" style="margin-left: 17rem">
+                    <button type="reset" class="btnReset" style="margin-right: 5rem;"><i class="bi bi-x-circle-fill"></i> Hủy</button>
                     <button type="submit" class="btnSave" th:attr="data-account-id=${user.getMaTK().getId()}">
-                        <i class="bi bi-floppy2"></i> Lưu thay đổi
+                        <i class="bi bi-floppy2"></i> Lưu
                     </button>
                 </div>
             </form>
@@ -445,7 +447,7 @@
             </div>
             <div class="modal-body modal-body-dangnhap ">
                 <div class="header_login">
-                    <p class="title-top">CẤP LẠI MẬT KHẨU</p>
+                    <p class="title-top" style="background-color: #d2ebd3; margin: 0 2rem ">CẤP LẠI MẬT KHẨU</p>
                 </div>
                 <div class="body_login">
                     <form id="formForgetPassword" th:action="@{/forget-password}" method="post">
@@ -501,14 +503,14 @@
 <!--modal thay đổi mật khẩu-->
 <div class="modal fade" id="ChangePasswordModal" tabindex="-1" aria-labelledby="modalChangePassword" aria-hidden="true">
     <div class="modal-dialog modal-dialog-dangnhap">
-        <div class="modal-content modal-content-dangnhap">
+        <div class="modal-content modal-content-dangnhap modal-content-changePass">
             <div class="modal-header modal-header-dangnhap">
                 <button type="button" class="btn-close btnClose" data-bs-dismiss="modal"
                         aria-label="Close"></button>
             </div>
             <div class="modal-body modal-body-dangnhap ">
                 <div class="header_login">
-                    <p class="title-top">ĐỔI MẬT KHẨU</p>
+                    <p class="title-top" style="color: #000000">ĐỔI MẬT KHẨU</p>
                 </div>
 
                 <div class="body_login" style="top: 5.5rem">

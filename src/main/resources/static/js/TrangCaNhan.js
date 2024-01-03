@@ -327,6 +327,7 @@ document.getElementById('btnSaveFilter').addEventListener('click', function() {
 //     });
 // });
 // Hàm xử lý khi form được submit hoặc trang được load
+
 function handleAction() {
     // Lấy giá trị từ form
     // var selectedValue = parseInt($('#optState').val());
@@ -352,7 +353,7 @@ function handleAction() {
                 location.reload();
             }
             if (data.success) {
-                // location.reload();
+                location.reload();
                 // $('#modalFilter').modal("hide");
                 // $('#activity-container').reload();
             } else {
@@ -364,43 +365,110 @@ function handleAction() {
         }
     });
 }
-document.addEventListener('DOMContentLoaded', function() {
-// Sự kiện khi modal được submit
-$('#formFilter').on('submit', function (e) {
-    e.preventDefault();
-    // Gọi hàm xử lý khi modal được đóng (submit)
-    var accountID = parseInt($('#accountID').val());
+$(document).ready(function () {
+    $('#btn-view-personal-page').on('click', function (e) {
+        e.preventDefault(); // Ngăn chặn hành động mặc định của thẻ a
 
-    console.log("Value select: " + selectedValue);
-    console.log("Value accountID: " + accountID);
+        // Thực hiện sự kiện của bạn tại đây
+        var accountID = parseInt($(this).data('accountid'));
+        console.log("Value select: " + selectedValue);
+        console.log("Value accountID: " + accountID);
 
-    // Gọi AJAX đến endpoint xử lý đăng nhập
-    $.ajax({
-        type: 'POST',
-        url: '/bo-loc-hoat-dong',
-        data: {
-            'selectedValue': selectedValue,
-            // 'selEvaValue': selEvaValue,
-            // 'selSumValue': selSumValue,
-            'accountID': accountID
-        },
-        success: function (data) {
-            if (data.reloadPage) {
-                location.reload();
+        // Gọi AJAX đến endpoint xử lý đăng nhập
+        $.ajax({
+            type: 'POST',
+            url: '/bo-loc-hoat-dong',
+            data: {
+                'selectedValue': selectedValue,
+                'accountID': accountID
+            },
+            success: function (data) {
+                // Kiểm tra xem đã chuyển hướng hay chưa
+                if (data.success) {
+                    $('#modalFilter').modal("hide");
+                    location.reload();
+                    console.log("Modal đã được ẩn.");
+                } else {
+                    console.log("Không có dữ liệu để ẩn modal.");
+                }
+            },
+            error: function (error) {
+                console.error('Đã có lỗi xảy ra:', error);
             }
-            if (data.success) {
-                // location.reload();
-                $('#modalFilter').modal("hide");
-                // $('#activity-container').reload();
-            } else {
-                // Xử lý trường hợp không thành công
-            }
-        },
-        error: function (error) {
-            console.error('Đã có lỗi xảy ra:', error);
-        }
+        });
     });
-});});
+});
+const section_activity = document.getElementById('section_activity');
+const new_section_activity = section_activity.cloneNode(true);
+// var section_activity = document.getElementById('section_activity');
+
+$(document).ready(function() {
+    $('#formFilter').on('submit', function(e) {
+        e.preventDefault();
+        var accountID = parseInt($('#accountID').val());
+
+        $.ajax({
+            type: 'POST',
+            url: '/bo-loc-hoat-dong',
+            data: {
+                'selectedValue': selectedValue,
+                'accountID': accountID
+            },
+            success: function(data) {
+                if (data.reloadPage) {
+                    location.reload();
+                }
+                if (data.success) {
+                    $('#modalFilter').modal("hide");
+                    section_activity.innerHTML = "";
+
+                    $.get('/hd-trang-ca-nhan?account_ID=' + accountID, function(newActivity) {
+                        section_activity.innerHTML = newActivity;
+
+                        // Lắng nghe sự kiện load trang /hd-trang-ca-nhan
+                        // $(document).on('load', '#section_activity', function() {
+                            if ($('#btnCreateAct').hasClass('active')) {
+                                console.log("Có xử lý 1");
+                                if ($('.activity-container').hasClass('no-display')) {
+                                    console.log("Có xử lý 444");
+                                    $('.activity-container').removeClass("no-display");
+                                    $('.sectionActIsJoin').addClass("no-display");
+                                    $('#selEvaluateActi').addClass("no-display");
+                                    $('#selEvaluateMember').removeClass("no-display");
+                                } else {
+                                    console.log("Có xử lý 333");
+                                }
+                                console.log("Có xử lý 22");
+                            }
+                            if ($('#btnJoinAct').hasClass('active')) {
+                                console.log("Có xử lý 2");
+                                if ($('.activity-container').hasClass('no-display')) {
+                                    console.log("Có xử lý 222");
+                                } else {
+                                    console.log("Có xử lý 223");
+
+                                    $('.activity-container').addClass('no-display');
+                                    $('.sectionActIsJoin').removeClass('no-display');
+
+                                    $('#selEvaluateMember').addClass('no-display');
+                                    $('#selEvaluateActi').removeClass('no-display');
+                                }
+                                console.log("Có xử lý 22");
+                            }
+                        // });
+                    });
+
+                } else {
+                    // Xử lý trường hợp không thành công
+                }
+            },
+            error: function(error) {
+                console.error('Đã có lỗi xảy ra:', error);
+            }
+        });
+    });
+});
+
 // $('#btn-view-personal-page').on('click', function (e) {
 //     e.preventDefault();
 //     // Gọi hàm xử lý khi modal được đóng (submit)
