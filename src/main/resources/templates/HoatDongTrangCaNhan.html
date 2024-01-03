@@ -59,7 +59,7 @@
                 <div class="progress">
                     <div class="progress-bar custom-progress" style="width:10%; background-color: #a2efb3 !important;" th:if="${activity.getTinhTrangDuyet()==0}"> </div>
                     <div class="progress-bar custom-progress" style="width:40%; background-color: #54c46e !important;" th:if="${activity.getTinhTrangDuyet()>=1 and activity.getTinhTrangHD()==0}"> </div>
-                    <div class="progress-bar custom-progress" style="width:70%; background-color: #1b7731 !important;" th:if="${activity.getTinhTrangDuyet()==1 and activity.getTinhTrangHD()==1}"> </div>
+                    <div class="progress-bar custom-progress" style="width:70%; background-color: #1b7731 !important;" th:if="${activity.getTinhTrangDuyet()==2 and activity.getTinhTrangHD()==1}"> </div>
                     <div class="progress-bar custom-progress" style="width:100%; background-color: #014b13 !important;" th:if="${activity.getTinhTrangDuyet()==2 and activity.getTinhTrangHD()==2}"> </div>
                     <div class="progress-bar custom-progress" style="width:100%; background-color: #cb5757 !important;" th:if="${activity.getTinhTrangDuyet()==-1 and activity.getTinhTrangHD()==-1}"> </div>
                 </div>
@@ -157,9 +157,10 @@
             </div>
             <div class="progress">
                 <div class="progress-bar custom-progress" style="width:10%; background-color: #a2efb3 !important;" th:if="${activity.getTinhTrangDuyet()==0}"> </div>
-                <div class="progress-bar custom-progress" style="width:40%; background-color: #54c46e !important;" th:if="${activity.getTinhTrangDuyet()==1 and activity.getTinhTrangHD()==0}"> </div>
-                <div class="progress-bar custom-progress" style="width:70%; background-color: #1b7731 !important;" th:if="${activity.getTinhTrangDuyet()==1 and activity.getTinhTrangHD()==1}"> </div>
+                <div class="progress-bar custom-progress" style="width:40%; background-color: #54c46e !important;" th:if="${activity.getTinhTrangDuyet()>=1 and activity.getTinhTrangHD()==0}"> </div>
+                <div class="progress-bar custom-progress" style="width:70%; background-color: #1b7731 !important;" th:if="${activity.getTinhTrangDuyet()==2 and activity.getTinhTrangHD()==1}"> </div>
                 <div class="progress-bar custom-progress" style="width:100%; background-color: #014b13 !important;" th:if="${activity.getTinhTrangDuyet()==2 and activity.getTinhTrangHD()==2}"> </div>
+                <div class="progress-bar custom-progress" style="width:100%; background-color: #cb5757 !important;" th:if="${activity.getTinhTrangDuyet()==-1 and activity.getTinhTrangHD()==-1}"> </div>
             </div>
             <div class="mt-3 lineHorizontal"></div>
         </div>

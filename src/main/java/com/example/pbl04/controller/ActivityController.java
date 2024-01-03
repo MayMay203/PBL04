@@ -223,28 +223,7 @@ public class ActivityController {
             response.put("message", "Có lỗi xảy ra khi cập nhật thông tin thành viên.");
             response.put("success", false);
             return response;
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
-//        Chude chude = topicService.getChuDeByTen(tenChuDe);
-//        Integer machude = chude.getId();
-////            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh, userID);
-//        activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, userID);
-//        ========================================
-//        if(chude.getTenChuDe() !=null  )
-//        {
-//            Integer machude = chude.getId();
-////            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh, userID);
-//            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, userID);
-//        }else {
-//            topicService.addChude(chude);
-//            Integer machude = topicService.getMaChuDeByTen(tenChuDe);
-////            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, anh, userID);
-//            activityService.addActivity(machude, tenHD, diaDiem, thoiGianBD, thoiGianKT, sotnvtt, sotnvtd, moTa, userID);
-//        }
-//        sessionService.createSessionModel(model, session);
-//        response.put("message", "Hoạt động đã được thêm mới thành công");
-//        response.put("success", true);
-//        return response;
     }
     @PostMapping(value="/Regis-activity")
     @ResponseBody
