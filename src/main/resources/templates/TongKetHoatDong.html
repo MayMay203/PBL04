@@ -188,8 +188,10 @@
                 <h3 class="group_member-parti">THÀNH VIÊN</h3>
                 <div class="group_member-list">
                     <div class="member" th:each="member: ${memberList}">
-                        <img class="member-ava" th:src="@{${member.getMaTK().getAnhDaiDien()}}" alt="">
-                        <span class="member-name" th:text="${member.getHoTen()}"></span>
+                        <div class="d-flex">
+                            <img class="member-ava col-md-2" th:src="@{${member.getMaTK().getAnhDaiDien()}}" alt="">
+                            <span class="member-name col-md-10" th:text="${member.getHoTen()}"></span>
+                        </div>
                     </div>
                 </div>
                 <h6 class="member_more" data-bs-toggle="modal" data-bs-target="#MemberModal">XEM THÊM</h6>
