@@ -200,4 +200,7 @@ $(document).ready(function() {
       }
     });
   });
+  $('#btnResetFilter').on('click', function() {
+    location.reload();
+  })
 })
