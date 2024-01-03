@@ -162,7 +162,7 @@
   <!-- <span class="content_detail_title">NỘI DUNG</span> -->
   <div class="row bg-green-light" >
     <div class="col-md-8">
-      <div class="content_detail_body ">
+      <div class="content_detail_body py-5">
         <div class="text-content" th:text="${hoatdong.getMoTa()}">
         </div>
 
@@ -177,9 +177,11 @@
         <h3 class="group_member-parti">THÀNH VIÊN</h3>
         <div class="group_member-list">
           <div class="member" th:each="thanhvien: ${thanhvienList}">
+            <div class="d-flex">
+              <img class="member-ava col-md-2" th:src="@{${thanhvien.getMaTK().getAnhDaiDien()}}" alt="">
+              <span class="member-name col-md-10" th:text="${thanhvien.getHoTen()}"></span>
+            </div>
 
-            <img class="member-ava" th:src="@{${thanhvien.getMaTK().getAnhDaiDien()}}" alt="">
-            <span class="member-name" th:text="${thanhvien.getHoTen()}"></span>
           </div>
         </div>
         <h6 class="member_more" data-bs-toggle="modal" data-bs-target="#MemberModal">XEM THÊM</h6>
@@ -199,7 +201,7 @@
     <div class="plus_detail"><i class="bi bi-calendar3-week"></i><span> Thời gian: </span><span class="plus_detail_date"  th:text="${#temporals.format(hoatdong.getThoiGianBD(), 'dd/MM/yyyy')} + ' - ' + ${#temporals.format(hoatdong.getThoiGianKT(), 'dd/MM/yyyy')}"></span></div>
     <br>
     <h2 class="content_plus_title">SỐ TÌNH NGUYỆN VIÊN</h2>
-    <div class="plus_detail"><i class="bi bi-people-fill"></i><span> Số tình nguyện viên: </span><span class="plus_detail_date" th:text="${hoatdong.getSoTNVToiDa()}"></span></div>
+    <div class="plus_detail"><i class="bi bi-people-fill"></i><span> Số tình nguyện viên tối thiểu: </span><span class="plus_detail_date" th:text="${hoatdong.getSoTNVToiThieu()}"></span></div>
   </div>
 </div>
 <div class="modal fade" id="MemberModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
