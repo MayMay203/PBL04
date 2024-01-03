@@ -113,7 +113,7 @@ for (var btn of btn_evaluate) {
 // Ham luu va cap nhat lai thong tin danh gia
 async function saveEvaluation(e) {
     let endTime = new Date(endActTime);
-    endTime.setDate(endTime.getDate() + 7);
+    endTime.setDate(endTime.getDate() + 15);
     endTime.setHours(0, 0, 0, 0)
     let now = new Date();
     now.setHours(0, 0, 0, 0)
@@ -418,9 +418,9 @@ for (btn of btn_star) {
     });
 }
 btn_send_cmt.addEventListener("click", async function (e) {
-    //Sau 7 ngày không được đánh giá hoạt động nữa
+    //Sau 15 ngày không được đánh giá hoạt động nữa
     let endTime = new Date(endActTime);
-    endTime.setDate(endTime.getDate() + 7);
+    endTime.setDate(endTime.getDate() + 15);
     endTime.setHours(0, 0, 0, 0)
     let now = new Date();
     now.setHours(0, 0, 0, 0)
