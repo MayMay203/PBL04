@@ -31,95 +31,95 @@ document.addEventListener("DOMContentLoaded", function () {
 //chuyen tab
 document.addEventListener("DOMContentLoaded", function () {
     var btnConfirmStage0 = document.getElementById("btnConfirmStage0");
-    var btnActivityNeedConfirm = document.getElementById("btnActivityNeedConfirm");
+    // var btnActivityNeedConfirm = document.getElementById("btnActivityNeedConfirm");
     var btnNewButton = document.getElementById("btnConfirmStage1");
     var btnCancelStage1 = document.getElementById("btnCancelStage1");
-    var btnActivityParticipate = document.getElementById("btnActivityParticipate");
+    // var btnActivityParticipate = document.getElementById("btnActivityParticipate");
     var subTab1 = document.getElementById("subTab1");
-    var subTab2 = document.getElementById("subTab2");
+    // var subTab2 = document.getElementById("subTab2");
     var subTab3 = document.getElementById("subTab3");
     var subTab4 = document.getElementById("subTab4");
-    var subTab5 = document.getElementById("subTab5");
+    // var subTab5 = document.getElementById("subTab5");
     // Thêm lớp 'active' cho nút và subTab mặc định
-    btnActivityNeedConfirm.classList.add("active");
-    subTab2.classList.add("active");
+    btnNewButton.classList.add("active");
+    subTab3.classList.add("active");
     if(btnConfirmStage0)
     {
         btnConfirmStage0.addEventListener("click", function() {
             // Xóa lớp 'active' từ tất cả các nút và subTabs
             btnConfirmStage0.classList.add("active");
-            btnActivityNeedConfirm.classList.remove("active");
+            // btnActivityNeedConfirm.classList.remove("active");
             btnNewButton.classList.remove("active");
            if(btnCancelStage1) btnCancelStage1.classList.remove("active");
-            btnActivityParticipate.classList.remove("active");
+            // btnActivityParticipate.classList.remove("active");
             if(subTab1) subTab1.style.display = "block";
-            if(subTab2) subTab2.style.display = "none";
+            // if(subTab2) subTab2.style.display = "none";
             if(subTab3) subTab3.style.display = "none";
             if(subTab4) subTab4.style.display = "none";
-            if(subTab5) subTab5.style.display = "none";
+            // if(subTab5) subTab5.style.display = "none";
         });
     }
 
     // Thêm sự kiện click cho nút "Hoạt động đang chờ xét duyệt"
-    btnActivityNeedConfirm.addEventListener("click", function() {
-        // Xóa lớp 'active' từ tất cả các nút và subTabs
-        if(btnConfirmStage0) btnConfirmStage0.classList.remove("active");
-        btnActivityNeedConfirm.classList.add("active");
-        btnNewButton.classList.remove("active");
-       if(btnCancelStage1) btnCancelStage1.classList.remove("active");
-        btnActivityParticipate.classList.remove("active");
-       if(subTab2) subTab2.style.display = "block";
-       if(subTab1) subTab1.style.display = "none";
-       if(subTab3) subTab3.style.display = "none";
-        if(subTab4) subTab4.style.display = "none";
-        if(subTab5) subTab5.style.display = "none";
-    });
+    // btnActivityNeedConfirm.addEventListener("click", function() {
+    //     // Xóa lớp 'active' từ tất cả các nút và subTabs
+    //     if(btnConfirmStage0) btnConfirmStage0.classList.remove("active");
+    //     btnActivityNeedConfirm.classList.add("active");
+    //     btnNewButton.classList.remove("active");
+    //    if(btnCancelStage1) btnCancelStage1.classList.remove("active");
+    //     btnActivityParticipate.classList.remove("active");
+    //    // if(subTab2) subTab2.style.display = "block";
+    //    if(subTab1) subTab1.style.display = "none";
+    //    if(subTab3) subTab3.style.display = "none";
+    //     if(subTab4) subTab4.style.display = "none";
+    //     // if(subTab5) subTab5.style.display = "none";
+    // });
 
     // Thêm sự kiện click cho nút mới
     btnNewButton.addEventListener("click", function() {
         // Xóa lớp 'active' từ tất cả các nút và subTabs
        if(btnConfirmStage0) btnConfirmStage0.classList.remove("active");
-        btnActivityNeedConfirm.classList.remove("active");
+        // btnActivityNeedConfirm.classList.remove("active");
         btnNewButton.classList.add("active");
        if(btnCancelStage1) btnCancelStage1.classList.remove("active");
-        btnActivityParticipate.classList.remove("active");
+        // btnActivityParticipate.classList.remove("active");
        if(subTab3) subTab3.style.display = "block";
        if(subTab1) subTab1.style.display = "none";
-       if(subTab2) subTab2.style.display = "none";
+       // if(subTab2) subTab2.style.display = "none";
         if(subTab4) subTab4.style.display = "none";
-        if(subTab5) subTab5.style.display = "none";
+        // if(subTab5) subTab5.style.display = "none";
     });
     if(btnCancelStage1)
     {
         btnCancelStage1.addEventListener("click", function() {
             // Xóa lớp 'active' từ tất cả các nút và subTabs
             if(btnConfirmStage0) btnConfirmStage0.classList.remove("active");
-            btnActivityNeedConfirm.classList.remove("active");
+            // btnActivityNeedConfirm.classList.remove("active");
             btnNewButton.classList.remove("active");
             if(btnCancelStage1) btnCancelStage1.classList.add("active");
-            btnActivityParticipate.classList.remove("active");
+            // btnActivityParticipate.classList.remove("active");
             if(subTab4) subTab4.style.display = "block";
             if(subTab1) subTab1.style.display = "none";
-            if(subTab2) subTab2.style.display = "none";
+            // if(subTab2) subTab2.style.display = "none";
             if(subTab3) subTab3.style.display = "none";
-            if(subTab5) subTab5.style.display = "none";
+            // if(subTab5) subTab5.style.display = "none";
         });
     }
-    btnActivityParticipate.addEventListener("click", function () {
-        // Xóa lớp 'active' từ tất cả các nút và subTabs
-        if (btnConfirmStage0) btnConfirmStage0.classList.remove("active");
-        btnActivityNeedConfirm.classList.remove("active");
-        btnNewButton.classList.remove("active");
-        if (btnCancelStage1) btnCancelStage1.classList.remove("active");
-        btnActivityParticipate.classList.add("active");
-
-        // Xóa lớp 'active' từ tất cả các subTabs
-        if (subTab1) subTab1.style.display = "none";
-        if (subTab2) subTab2.style.display = "none";
-        if (subTab3) subTab3.style.display = "none";
-        if (subTab4) subTab4.style.display = "none";
-        if (subTab5) subTab5.style.display = "block";
-    });
+    // btnActivityParticipate.addEventListener("click", function () {
+    //     // Xóa lớp 'active' từ tất cả các nút và subTabs
+    //     if (btnConfirmStage0) btnConfirmStage0.classList.remove("active");
+    //     // btnActivityNeedConfirm.classList.remove("active");
+    //     btnNewButton.classList.remove("active");
+    //     if (btnCancelStage1) btnCancelStage1.classList.remove("active");
+    //     btnActivityParticipate.classList.add("active");
+    //
+    //     // Xóa lớp 'active' từ tất cả các subTabs
+    //     if (subTab1) subTab1.style.display = "none";
+    //     if (subTab2) subTab2.style.display = "none";
+    //     if (subTab3) subTab3.style.display = "none";
+    //     if (subTab4) subTab4.style.display = "none";
+    //     if (subTab5) subTab5.style.display = "block";
+    // });
 })
 
 //-----------------show modal duyet bai dang-------------------------//
