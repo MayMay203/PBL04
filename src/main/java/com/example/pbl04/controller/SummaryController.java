@@ -82,6 +82,7 @@ public class SummaryController {
             List<Anhtongket> imgSummaryList = summaryService.getimgSummaryList(summary.getId());
             Thanhvien member  = summaryService.getMemberByID(taikhoan.getId());
             List<Danhgia> evaluationOfAct = evaluationService.getEvaluationByIdAct(id);
+            Integer sotnv = activityService.countParticipantsByIDHD(id);
             Dangky registerInfor = activityService.getRegisterInfo(id);
             model.addAttribute("summary", summary);
             model.addAttribute("memberList", memberList);
@@ -93,6 +94,7 @@ public class SummaryController {
             model.addAttribute("taikhoanList",taikhoanList);
             model.addAttribute("pointList",pointList);
             model.addAttribute("taikhoan",taikhoan);
+            model.addAttribute("sotnv",sotnv);
             sessionService.createSessionModel(model, session);
             Taikhoan myaccount = (Taikhoan) model.getAttribute("account");
             model.addAttribute("account",myaccount);

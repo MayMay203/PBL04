@@ -117,7 +117,7 @@
                                       </div>
                                      </div>
                                       <div class="custom-btn">
-                                          <button class="custom-btnConfirm buttonConfirmPostStage0"  th:attr="data-hoatdong-id=${listPost.get(4*i+j).id}">Duyệt bài đăng</button>
+                                          <button class=" custom-btnConfirm buttonConfirmPostStage0"  th:attr="data-hoatdong-id=${listPost.get(4*i+j).id}">Duyệt bài đăng</button>
                                           <button class="custom-btnConfirm btnCancelPost" id="buttonCancelPostStage0" th:attr="data-value=${listPost.get(4*i+j).id}">Hủy bài đăng</button>
                                       </div>
                                       <div class="modal fade" id="confirmStage0" tabindex="-1" role="dialog" aria-labelledby="confirmStage0ModalLabel" aria-hidden="true">
@@ -130,10 +130,10 @@
                                                       </button>
                                                   </div>
                                                   <div class="modal-body"  id="modalBodyContent" style="font-size: 1rem">
-                                                      Xác nhận xét duyệt hoạt động ?
+                                                      Xác nhận xét duyệt bài đăng ?
                                                   </div>
                                                   <div class="modal-footer">
-                                                      <button type="button" class="btn btn-danger custom-btnConfirm btnConfirmActivityStage0"  th:attr="data-hoatdong-id=${listPost.get(4*i+j).id}">Duyệt bài</button>
+                                                      <button type="button" class="btn btn-danger btnConfirmActivityStage0"  th:attr="data-hoatdong-id=${listPost.get(4*i+j).id}">Duyệt bài</button>
                                                       <button type="button" class="close closeModalLogout btn btn-secondary" data-dismiss="modal" >Hủy</button>
                                                   </div>
                                               </div>

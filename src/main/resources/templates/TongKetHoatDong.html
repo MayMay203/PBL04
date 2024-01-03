@@ -113,7 +113,7 @@
                             </span><span class="plus_detail_date" th:text="${#temporals.format(summary.getMaHD().getThoiGianBD(), 'dd/MM/yyyy')} + ' - ' + ${#temporals.format(summary.getMaHD().getThoiGianKT(), 'dd/MM/yyyy')}"></span></div>
                     <h2 class="tongket-title">TÌNH NGUYỆN VIÊN</h2>
                     <div class="tongket-title-info"><i class="bi bi-people-fill"></i><span> Số tình nguyện viên:
-                            </span><span class="plus_detail_date">50</span></div>
+                            </span><span class="plus_detail_date" th:text="${sotnv}"></span></div>
                     <h2 class="tongket-title-1">TỔNG KẾT</h2>
                     <p class="tongket-board" th:text="${summary.getBangTongKet()}"></p>
                     <h2 class="tongket-title">LỜI KẾT</h2>
