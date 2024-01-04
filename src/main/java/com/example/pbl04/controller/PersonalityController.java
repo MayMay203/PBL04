@@ -145,7 +145,6 @@ public class PersonalityController {
                        @RequestParam(name="id") Integer id,
                        @ModelAttribute("message") String message,
                        HttpSession session) {
-//        actListIsHost = activityService.getAllActivityIsHost(id);
         model.addAttribute("actListIsHost", actListIsHost);
         getListSummaryIsHostActi(actListIsHost);
 
@@ -153,7 +152,6 @@ public class PersonalityController {
         model.addAttribute("listRegisIsHostActi",listRegisIsHostActi);
         model.addAttribute("listSummaryIsHostActi", listSummaryIsHostActi);
 
-//        actListIsMember = activityService.getAllActivityIsMember(id);
         model.addAttribute("actListIsMember", actListIsMember);
         List<Thanhvien> listInforOfHostActi = new ArrayList<>();
         List<Dangky> listInforOfActiJoin = new ArrayList<>();
@@ -161,11 +159,9 @@ public class PersonalityController {
         List<Integer> listEvalueIsMemberActi = new ArrayList<>();
         List<Integer> listSummaryIsMemberActi = new ArrayList<>();
         for(Hoatdong hd : actListIsMember){
-            //lấy thông tin của tổ chức hoạt động
             listInforOfHostActi.add(registerService.getInforOfHostActi(activityService.getRegisterInfo(hd.getId()).getMaTK()));
             //lấy đăng ký:
             listInforOfActiJoin.add(activityService.getRegisterInfo(hd.getId()));
-            //lấy từ đăng ký thông tin người vai trò là tham gia
             listRegisIsMemberActi.add(registerService.getRegisterIsMember(hd.getId(), id));
 
             if(evaluationService.getEvaluationByIDHDTK(hd.getId(), id) != null){
@@ -190,25 +186,20 @@ public class PersonalityController {
         model.addAttribute("listSummaryIsMemberActi", listSummaryIsMemberActi);
 
         model.addAttribute("activity", new Hoatdong());
-//        Dangky getRegisterInfo = activityService.getRegisterInfo(id)
         List<Chude> listTopics = topicService.getAllTopics();
         model.addAttribute("listTopics", listTopics);
 
         sessionService.createSessionModel(model, session);
-        // Truyền thông điệp từ RedirectAttributes đến model
         model.addAttribute("message", message);
 
-        //Hiển thị nội dung thông báo
         Taikhoan myAcc = (Taikhoan) session.getAttribute("account");
         if(myAcc!=null){
             List<Thongbao> listNotice = new ArrayList<>();
             listNotice = notificationService.getNotifiByIdAcc(myAcc.getId());
             model.addAttribute("listNotice",listNotice);
-            //Đếm thông báo chưa đọc
             Integer numOfNotice = notificationService.countNotice(myAcc.getId());
             model.addAttribute("numOfNotice",numOfNotice);
         }
-//        return "TrangCaNhan";
     }
     @GetMapping("/trang-ca-nhan")
     public String show(Model model,

@@ -26,42 +26,34 @@
         <div id="placeholder" style="height: 87px; display: none;"></div>
         <!-- Header -->
         <div id="myHeader" style="top: -87px" th:include="Header :: html" ></div>
-<!--        <script src="duongdan/loadContent.js"></script>-->
-        <!-- Container -->
         <div class="container-fluid">
             <div id="container__slider" class="carousel slide" data-bs-ride="carousel">
-                 <!-- The slideshow/carousel -->
                 <div class="carousel-inner">
                     <div class="slider__img carousel-item active">
                         <img th:src="@{/images/slider1.jpg}" alt="" class="d-blocky" style="width: 100%;" >
                         <div class="carousel-caption">
                             <h3>TRAO HY VỌNG, GỬI YÊU THƯƠNG</h3>
-<!--                            <p>We had such a great time in LA!</p>-->
                         </div>
                     </div>
                     <div class="slider__img carousel-item active">
                         <img th:src="@{/images/slide2.png}" alt="" class="d-blocky" style="width: 100%;" >
                         <div class="carousel-caption">
                             <h3>TRAO HY VỌNG, GỬI YÊU THƯƠNG</h3>
-                            <!--                            <p>We had such a great time in LA!</p>-->
                         </div>
                     </div>
                     <div class="slider__img carousel-item">
-                        <img th:src="@{/images/slider2.jpg}" alt="" class="d-blocky" style="width: 100%;" />
+                        <img th:src="@{/images/anh12.png}" alt="" class="d-blocky" style="width: 100%;" />
                         <div class="carousel-caption">
                             <h3>TRAO HY VỌNG, GỬI YÊU THƯƠNG</h3>
-<!--                            <p>Thank you, Chicago!</p>-->
                         </div>
                     </div>
                     <div class="slider__img carousel-item">
                         <img th:src="@{/images/slider3.jpg}" alt="" class="d-blocky" style="width: 100%;" >
                         <div class="carousel-caption">
                             <h3>TRAO HY VỌNG, GỬI YÊU THƯƠNG</h3>
-<!--                            <p>We love the Big Apple!</p>-->
                         </div>
                     </div>
                 </div>
-                <!-- Left and right controls/icons -->
                 <button class="carousel-control-prev" type="button" data-bs-target="#container__slider" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon"></span>
                 </button>
@@ -144,22 +136,15 @@
                                     </div>
 
                                     <div class="text-end">
-<!--                                        <button class="link-more-evaluate" th:attr="data-value=${summary.getMaHD().getId()}">-->
+
                                             <a class="linkMore link-more-evaluate" th:attr="data-value=${summary.getMaHD().getId()}">
                                                 Xem thêm...
                                             </a>
-<!--                                        </button>-->
                                     </div>
                                 </div>
                                 <div class="summary-content__image col-5 justify-content-end">
-<!--                                    <img class="img-rightback float-end dimmed" th:src="@{${summary.id.}}" alt="">-->
-<!--                                    <img class="img-rightfront " th:src="@{/images/activity1.png}" alt="">-->
                                     <img class="summary-image-back dimmed" th:src="@{${listImgSummarried.get(listImgSummarried.size()-1)}}">
                                     <img class="summary-image-front" th:src="@{${listImgSummarried.get(listImgSummarried.size()-1)}}">
-<!--                                         th:src="${listImgSummarried != null and listImgSummarried.size() > 0 ? listImgSummarried.get(listImgSummarried.size()-1) : '/images/imgstd.png'}"-->
-<!--                                         alt="">-->
-
-<!--                                    <img class="summary-image-front" th:src="${listImgSummarried != null and listImgSummarried.size() > 0 ? listImgSummarried.get(listImgSummarried.size()-1) : '/images/imgstd.png'}" alt="">-->
                                 </div>
                             </div>
                         </div>
@@ -175,8 +160,6 @@
                                 <div class="summary-content__image col-5 justify-content-start">
                                     <img class="summary-image-back dimmed" th:src="@{${listImgSummarried.get(listImgSummarried.size()-2)}}">
                                     <img class="summary-image-front" th:src="@{${listImgSummarried.get(listImgSummarried.size()-2)}}">
-<!--                                    <img class="img-leftback float-start dimmed" th:src="@{/images/activity1.png}" alt="">-->
-<!--                                    <img class="img-leftfront" th:src="@{/images/activity1.png}" alt="">-->
                                 </div>
                                 <div class="summary-content__inform col-3">
                                     <span class="head-inform">Nội dung</span>
@@ -295,49 +278,7 @@
                     <!-- Header comment -->
                     <div class="container border_top-solid border_bottom-solid p-2 fs-9 fst-italic modal-number-evaluation"></div>
                     <div class="container modal-comment">
-                        <!--                    -->
-                        <!--                    <div class="container d-flex justify-content-sm-end p-2 criteria-evaluation">-->
-                        <!--                        <h4 class="fs-9 green-color fst-italic me-4 text-center">Hoạt động<br>hữu ích</h4>-->
-                        <!--                        <h4 class="fs-9 green-color fst-italic me-4 text-center">Cần tổ chức<br>thường xuyên</h4>-->
-                        <!--                        <h4 class="fs-9 green-color fst-italic me-4 text-center">Cần tổ chức<br>rộng rãi</h4>-->
-                        <!--                    </div>-->
-                        <!--                     Comment -->
-                        <!--                    <div class="container d-flex mb-3" th:if="evaluationOfAct!=null" th:each="eval:${evaluationOfAct}">-->
-                        <!--                        &lt;!&ndash; Text comment &ndash;&gt;-->
-                        <!--                        <div class="container radius-1 bg-green">-->
-                        <!--                            <div class="container p-1">-->
-                        <!--                                <img src="../static/images/av3.png" class="w-2_5 h-2_5 p-1 radius-1_8 modal-avatar" alt="">-->
-                        <!--                                <h7 class="green-color fs-11 fst-italic fw-medium" th:text="${eval.maTK.tenDN}"></h7>-->
-                        <!--                            </div>-->
-                        <!--                            <p class="fs-10 fst-italic m-0 px-3 modal-comment" th:text="${eval.binhLuan}"></p>-->
-                        <!--                            <p class="green_light-color fst-italic fs-10 my-1 mx-3 modal-timeEval" th:text="${eval.thoiGianBL}"></p>-->
-                        <!--                        </div>-->
-                        <!--                        &lt;!&ndash; Check comment &ndash;&gt;-->
-                        <!--                        <div class="container d-flex align-items-center justify-content-center">-->
-                        <!--                            <i class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i>-->
-                        <!--                            <i class="bi bi-x-lg green_light-color flex-1 p-5 fs-6 fw-bold"></i>-->
-                        <!--                            <i class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i>-->
-                        <!--                        </div>-->
-                        <!--                    </div>-->
 
-                        <!--                    <div class="container d-flex mb-3">-->
-                        <!--                        &lt;!&ndash; Text comment &ndash;&gt;-->
-                        <!--                        <div class="container radius-1 bg-green">-->
-                        <!--                            <div class="container p-1">-->
-                        <!--                                <img src="../static/images/av3.png" class="w-2_5 h-2_5 p-1 radius-1_8" alt="">-->
-                        <!--                                <h7 class="green-color fs-11 fst-italic fw-medium">Huỳnh Ngọc Hiệp</h7>-->
-                        <!--                            </div>-->
-                        <!--                            <p class="fs-10 fst-italic m-0 px-3">Thật may mắn khi được tham gia và giúp sức mình cho cộng đồng. Trải-->
-                        <!--                                nghiệm thật khó quên. Cảm ơn ban tổ chức!</p>-->
-                        <!--                            <p class="green_light-color fst-italic fs-10 my-1 mx-3">20 ngày trước</p>-->
-                        <!--                        </div>-->
-                        <!--                        &lt;!&ndash; Check comment &ndash;&gt;-->
-                        <!--                        <div class="container d-flex align-items-center justify-content-center">-->
-                        <!--                            <i class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i><i-->
-                        <!--                                class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i>-->
-                        <!--                            <i class="bi bi-check-lg green_light-color flex-1 p-4 fs-3 fw-bold"></i>-->
-                        <!--                        </div>-->
-                        <!--                    </div>-->
                     </div>
                 </div>
             </div>
@@ -352,10 +293,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-    <!-- Your custom JavaScript -->
     <script defer th:src="@{/js/TrangChu.js}"></script>
 
-    <!-- Slick Carousel JS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </body>
 </html>

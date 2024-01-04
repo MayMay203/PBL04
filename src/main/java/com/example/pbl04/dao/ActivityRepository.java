@@ -16,7 +16,7 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     List<Hoatdong> getActivityToRegis();
      @Query("SELECT h from Hoatdong h where h.tinhTrangHD = 2 and h.tinhTrangDuyet=2 order by h.id desc")
     List<Hoatdong> getActivityOccured();
-     @Query("select dk from Hoatdong h,Dangky dk where h.tinhTrangHD = 0 and h.tinhTrangDuyet=1 and h = dk.maHD and dk.phanQuyen=true")
+     @Query("select dk from Hoatdong h,Dangky dk where h.tinhTrangHD = 0 and h.tinhTrangDuyet=1 and h = dk.maHD and dk.phanQuyen=true order by dk.thoiGianDK desc")
      List<Dangky> getActivityUpcomming();
      @Query("select h from Hoatdong h where h.tinhTrangHD = 0 and h.tinhTrangDuyet=2")
      List<Hoatdong> getAllActivityNotHappening();
@@ -96,8 +96,6 @@ public interface ActivityRepository extends JpaRepository<Hoatdong,Integer> {
     List<Hoatdong> getAllMyPostNeedConfirm(Integer myID);
     @Query("select dk from Dangky dk, Hoatdong hd where hd.id=dk.maHD.id  and dk.maTK.id=:myID and dk.phanQuyen=false ORDER BY dk.trangThai desc")
     List<Dangky> getListActivityParticipate(Integer myID);
-//    @Query("select hd from Dangky dk, Hoatdong hd where dk.maHD.id= hd.id and dk.maTK.id =:maTK") //Hoạt động chờ xét duệt được phân loại theo maTK
-//    List<Hoatdong> getMyActivityConfirm(Integer maTK);
     @Query("select hd from Hoatdong hd, Dangky dk where hd.id= dk.maHD.id and dk.maTK.id=:maTK and dk.phanQuyen=true and hd.tinhTrangHD=0 and hd.tinhTrangDuyet=2")
     List<Hoatdong> getMyActivityHappeningNeedMember(Integer maTK);
     @Transactional
